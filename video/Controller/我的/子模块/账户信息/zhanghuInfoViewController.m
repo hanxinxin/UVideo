@@ -1,70 +1,42 @@
 //
-//  MyViewController.m
+//  zhanghuInfoViewController.m
 //  video
 //
-//  Created by nian on 2021/3/10.
+//  Created by macbook on 2021/5/11.
 //
 
-#import "MyViewController.h"
-#import "topHeaderView.h"
-
-#import "safeViewController.h"
-#import "chongzhiListViewController.h"
 #import "zhanghuInfoViewController.h"
 
-@interface MyViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface zhanghuInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UIView*ZtopView;
 @property(nonatomic,strong)UITableView*downtableview;
 @property(nonatomic,strong)NSMutableArray*arrtitle;
-@property(nonatomic,strong)NSMutableArray*imagearray;
+@property(nonatomic,strong)NSMutableArray*Darray;
 @end
 
-@implementation MyViewController
-@synthesize ZtopView,arrtitle,imagearray;
+@implementation zhanghuInfoViewController
+@synthesize ZtopView,arrtitle,Darray;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 //    self.navBarColor=[UIColor whiteColor];
 //    self.hiddenLeftBtn=YES;
-    
-    [self InitUIView];
+    self.title=@"账户信息";
+    self.hiddenLeftBtn=YES;
+    self.statusBarTextIsWhite=NO;
+    self.statusBarBackgroundColor=[UIColor blackColor];
+    self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
     [self Addtableview];
-}
-
--(void)InitUIView
-{
-    ZtopView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 185)];
-    ZtopView.alpha = 1;
-
-    CAGradientLayer *gl = [CAGradientLayer layer];
-    gl.frame = ZtopView.frame;
-    gl.startPoint = CGPointMake(0.5, 0);
-    gl.endPoint = CGPointMake(0.5, 1);
-    gl.colors = @[(__bridge id)[UIColor colorWithRed:194/255.0 green:228/255.0 blue:249/255.0 alpha:1.0].CGColor,(__bridge id)[UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0].CGColor];
-    gl.locations = @[@(0),@(1.0f)];
-    [self.ZtopView.layer addSublayer:gl];
-    [self.view addSubview:self.ZtopView];
-    topHeaderView *view = [[[NSBundle mainBundle]loadNibNamed:@"topHeaderView" owner:self options:nil]objectAtIndex:0];
-    view.alpha=0.7;
-    view.frame=CGRectMake(20, 10, SCREEN_WIDTH-40, 180);
-    view.layer.cornerRadius=6;
-    view.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.20].CGColor;
-    view.layer.shadowOffset = CGSizeMake(0,3);
-    view.layer.shadowRadius = 6;
-    view.layer.shadowOpacity = 1;
-    view.txImage.layer.cornerRadius=30;
-    [self.ZtopView addSubview:view];
 }
 
 -(void)Addtableview
 {
     arrtitle=[NSMutableArray arrayWithCapacity:0];
-    [arrtitle addObject:[NSArray arrayWithObjects:@"播放记录",@"充值记录",@"账户信息",@"帮助中心",@"安全设置",@"清理缓存",@"退出登录", nil]];
-    imagearray=[NSMutableArray arrayWithCapacity:0];
-    [imagearray addObject:[NSArray arrayWithObjects:@"bofangjilu",@"chongzhijilu",@"zhanghu",@"bangzhu",@"setimage",@"qingli",@"signout", nil]];
-    
+    [arrtitle addObject:[NSArray arrayWithObjects:@"用户名",@"会员级别",@"VIP到期时间",@"电子邮箱", nil]];
+    Darray=[NSMutableArray arrayWithCapacity:0];
+    [Darray addObject:[NSArray arrayWithObjects:@"APDSDAPSOD",@"普通会员",@"2021-10-22",@"98989898@qq.com", nil]];
     self.downtableview=[[UITableView alloc] init];
-    self.downtableview.frame=CGRectMake(20, 200, SCREEN_WIDTH-40, SCREENH_HEIGHT-200-kNavBarAndStatusBarHeight);
+    self.downtableview.frame=CGRectMake(20, 0, SCREEN_WIDTH-40, SCREENH_HEIGHT);
     self.downtableview.backgroundColor=[UIColor clearColor];
     self.downtableview.delegate=self;
     self.downtableview.dataSource=self;
@@ -102,13 +74,14 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSArray  * titleT=arrtitle[0];
     cell.textLabel.text = [titleT objectAtIndex:indexPath.section];
-    NSArray  * titleI=imagearray[0];
-    cell.imageView.image=[UIImage imageNamed:[titleI objectAtIndex:indexPath.section]];
+    NSArray  * titleI=Darray[0];
+//    cell.imageView.image=[UIImage imageNamed:[titleI objectAtIndex:indexPath.section]];
+    cell.detailTextLabel.text=[titleI objectAtIndex:indexPath.section];
     NSLog(@"section==== %ld",(long)indexPath.section);
     
     cell.backgroundColor = [UIColor whiteColor];
 
-    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
+//    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
  
     cell.textLabel.textColor = [UIColor darkGrayColor];
     //    cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
@@ -154,18 +127,5 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"index == %ld",indexPath.section);
-    if(indexPath.section==1)
-    {
-        chongzhiListViewController * avc = [[chongzhiListViewController alloc] init];
-        [self.navigationController pushViewController:avc animated:YES];
-    }else if(indexPath.section==2)
-    {
-        zhanghuInfoViewController * avc = [[zhanghuInfoViewController alloc] init];
-        [self.navigationController pushViewController:avc animated:YES];
-    }else if(indexPath.section==4)
-    {
-        safeViewController * avc = [[safeViewController alloc] init];
-        [self.navigationController pushViewController:avc animated:YES];
-    }
 }
 @end

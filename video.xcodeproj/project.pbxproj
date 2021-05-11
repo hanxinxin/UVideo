@@ -281,6 +281,9 @@
 		FA75823326496DB300778A63 /* CZCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA75823126496DB300778A63 /* CZCollectionViewCell.xib */; };
 		FA75823726497CC400778A63 /* vipHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA75823626497CC400778A63 /* vipHeaderView.m */; };
 		FA75823926497CD500778A63 /* vipHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA75823826497CD500778A63 /* vipHeaderView.xib */; };
+		FA949CBD264AC76E00498EB6 /* safeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CBC264AC76E00498EB6 /* safeViewController.m */; };
+		FA949CC2264AC90800498EB6 /* chongzhiListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CC1264AC90800498EB6 /* chongzhiListViewController.m */; };
+		FA949CC5264AC92A00498EB6 /* zhanghuInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CC4264AC92A00498EB6 /* zhanghuInfoViewController.m */; };
 		FA9FBAA72647819700E4F27E /* memberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FBAA62647819700E4F27E /* memberViewController.m */; };
 		FA9FBAAC2647ADDB00E4F27E /* topHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FBAAB2647ADDB00E4F27E /* topHeaderView.m */; };
 		FA9FBAAE2647ADEB00E4F27E /* topHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9FBAAD2647ADEB00E4F27E /* topHeaderView.xib */; };
@@ -826,6 +829,12 @@
 		FA75823526497CC400778A63 /* vipHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vipHeaderView.h; sourceTree = "<group>"; };
 		FA75823626497CC400778A63 /* vipHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = vipHeaderView.m; sourceTree = "<group>"; };
 		FA75823826497CD500778A63 /* vipHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = vipHeaderView.xib; sourceTree = "<group>"; };
+		FA949CBB264AC76E00498EB6 /* safeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = safeViewController.h; sourceTree = "<group>"; };
+		FA949CBC264AC76E00498EB6 /* safeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = safeViewController.m; sourceTree = "<group>"; };
+		FA949CC0264AC90800498EB6 /* chongzhiListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chongzhiListViewController.h; sourceTree = "<group>"; };
+		FA949CC1264AC90800498EB6 /* chongzhiListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chongzhiListViewController.m; sourceTree = "<group>"; };
+		FA949CC3264AC92A00498EB6 /* zhanghuInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zhanghuInfoViewController.h; sourceTree = "<group>"; };
+		FA949CC4264AC92A00498EB6 /* zhanghuInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zhanghuInfoViewController.m; sourceTree = "<group>"; };
 		FA9FBAA52647819700E4F27E /* memberViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = memberViewController.h; sourceTree = "<group>"; };
 		FA9FBAA62647819700E4F27E /* memberViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = memberViewController.m; sourceTree = "<group>"; };
 		FA9FBAAA2647ADDB00E4F27E /* topHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = topHeaderView.h; sourceTree = "<group>"; };
@@ -1966,6 +1975,7 @@
 		8A9C550725F85D2400EFA410 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				FA949CB9264AC72500498EB6 /* 子模块 */,
 				FA9FBAA92647ADB800E4F27E /* tableviewCell */,
 				FA9FBAA82647ADB000E4F27E /* headerView */,
 				8A9C567D25F8A27500EFA410 /* MyViewController.h */,
@@ -2348,6 +2358,43 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		FA949CB9264AC72500498EB6 /* 子模块 */ = {
+			isa = PBXGroup;
+			children = (
+				FA949CBF264AC8EB00498EB6 /* 充值记录 */,
+				FA949CBE264AC8E400498EB6 /* 账户信息 */,
+				FA949CBA264AC73400498EB6 /* 安全设置 */,
+			);
+			path = "子模块";
+			sourceTree = "<group>";
+		};
+		FA949CBA264AC73400498EB6 /* 安全设置 */ = {
+			isa = PBXGroup;
+			children = (
+				FA949CBB264AC76E00498EB6 /* safeViewController.h */,
+				FA949CBC264AC76E00498EB6 /* safeViewController.m */,
+			);
+			path = "安全设置";
+			sourceTree = "<group>";
+		};
+		FA949CBE264AC8E400498EB6 /* 账户信息 */ = {
+			isa = PBXGroup;
+			children = (
+				FA949CC3264AC92A00498EB6 /* zhanghuInfoViewController.h */,
+				FA949CC4264AC92A00498EB6 /* zhanghuInfoViewController.m */,
+			);
+			path = "账户信息";
+			sourceTree = "<group>";
+		};
+		FA949CBF264AC8EB00498EB6 /* 充值记录 */ = {
+			isa = PBXGroup;
+			children = (
+				FA949CC0264AC90800498EB6 /* chongzhiListViewController.h */,
+				FA949CC1264AC90800498EB6 /* chongzhiListViewController.m */,
+			);
+			path = "充值记录";
+			sourceTree = "<group>";
+		};
 		FA9FBAA42647815200E4F27E /* 会员充值 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2708,6 +2755,7 @@
 				8A8BC39D25FC6F9E0028173C /* UIView+MHFrame.m in Sources */,
 				8A8BC3A225FC6F9E0028173C /* NSString+MHValid.m in Sources */,
 				8A39312025FCDED100E7331B /* MHCommentCell.m in Sources */,
+				FA949CC2264AC90800498EB6 /* chongzhiListViewController.m in Sources */,
 				8A8BC3A325FC6F9E0028173C /* NSAttributedString+MHSize.m in Sources */,
 				8A39306325FCD91A00E7331B /* CMHHTTPRequest.m in Sources */,
 				8A9C562125F8A10000EFA410 /* UIButton+Submitting.m in Sources */,
@@ -2804,6 +2852,7 @@
 				8A39306125FCD91A00E7331B /* CMHURLParameters.m in Sources */,
 				8ACAEAA92643F2390091EEFE /* YZYHorizListView.m in Sources */,
 				8A8BC2F825FC6ED10028173C /* MHYouKuAnthologyItem.m in Sources */,
+				FA949CC5264AC92A00498EB6 /* zhanghuInfoViewController.m in Sources */,
 				8A39306025FCD91A00E7331B /* CMHHTTPService.m in Sources */,
 				8A8BC17525F8F73F0028173C /* ColumnEditViewController.m in Sources */,
 				8A8BC39225FC6F9E0028173C /* MHExample.m in Sources */,
@@ -2835,6 +2884,7 @@
 				8A8BC39B25FC6F9E0028173C /* UIScrollView+MHRefresh.m in Sources */,
 				8A8BC2F925FC6ED10028173C /* MHYouKuItem.m in Sources */,
 				8A9C565E25F8A17B00EFA410 /* BezierCurveView.m in Sources */,
+				FA949CBD264AC76E00498EB6 /* safeViewController.m in Sources */,
 				8A8BC3A725FC6F9E0028173C /* Foundation+Log.m in Sources */,
 				8A05211F2649219D00E5188E /* BottomView.m in Sources */,
 				8A9C562F25F8A10000EFA410 /* UIImage+Capture.m in Sources */,

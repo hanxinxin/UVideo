@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="vipHeaderView">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="vipBG" translatesAutoresizingMaskIntoConstraints="NO" id="rLe-tJ-iNb">
+                    <rect key="frame" x="1" y="1" width="412" height="118"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="412" id="Dl0-ja-DZa"/>
+                        <constraint firstAttribute="height" constant="118" id="mPJ-nr-i7u"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMd-Ha-DBF">
+                    <rect key="frame" x="20" y="11" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="7UQ-ce-gbJ"/>
+                        <constraint firstAttribute="height" constant="40" id="pHJ-Av-nPU"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="image"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBf-p2-CUg">
+                    <rect key="frame" x="69" y="16" width="331" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="WTV-NQ-5rJ"/>
+                        <constraint firstAttribute="width" constant="331" id="vu6-fw-yhs"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="这是一个昵称">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zri-ay-9et">
+                    <rect key="frame" x="20" y="76" width="374" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="dcr-6H-Ulv"/>
+                        <constraint firstAttribute="width" constant="374" id="mye-rg-CcJ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <state key="normal" title="到期日期：2022年05月30日">
+                        <color key="titleColor" red="0.53028213980000005" green="0.28329336640000002" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Zri-ay-9et" secondAttribute="trailing" constant="20" id="1bX-C9-L44"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="rLe-tJ-iNb" secondAttribute="bottom" constant="1" id="7CC-uv-Dss"/>
+                <constraint firstItem="EBf-p2-CUg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="95q-IC-GOS"/>
+                <constraint firstItem="Zri-ay-9et" firstAttribute="top" secondItem="mMd-Ha-DBF" secondAttribute="bottom" constant="25" id="Lej-Ul-hyj"/>
+                <constraint firstItem="rLe-tJ-iNb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="1" id="YWm-fK-dWN"/>
+                <constraint firstAttribute="trailing" secondItem="EBf-p2-CUg" secondAttribute="trailing" constant="14" id="Zzw-nj-eba"/>
+                <constraint firstItem="mMd-Ha-DBF" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="dos-SX-qs9"/>
+                <constraint firstItem="mMd-Ha-DBF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="11" id="fOM-vV-ee1"/>
+                <constraint firstItem="rLe-tJ-iNb" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="1" id="gNS-U0-Daw"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rLe-tJ-iNb" secondAttribute="trailing" constant="1" id="wlj-nb-dr8"/>
+                <constraint firstItem="EBf-p2-CUg" firstAttribute="leading" secondItem="mMd-Ha-DBF" secondAttribute="trailing" constant="9" id="wzC-Ek-aHq"/>
+                <constraint firstItem="Zri-ay-9et" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="xci-Rb-0yR"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="bgImage" destination="rLe-tJ-iNb" id="APA-Ot-QHR"/>
+                <outlet property="dateBtn" destination="Zri-ay-9et" id="vzY-wg-DGd"/>
+                <outlet property="nameBtn" destination="EBf-p2-CUg" id="yUb-gG-dSh"/>
+                <outlet property="txImage" destination="mMd-Ha-DBF" id="ZFc-gH-UoI"/>
+            </connections>
+            <point key="canvasLocation" x="100.00000000000001" y="95.089285714285708"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="image" width="67.5" height="58"/>
+        <image name="vipBG" width="361" height="116"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

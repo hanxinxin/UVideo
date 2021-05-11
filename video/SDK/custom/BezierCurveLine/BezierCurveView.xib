@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="BezierCurveView">
+            <rect key="frame" x="0.0" y="0.0" width="362" height="235"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="311" y="264"/>
+        </view>
+        <view contentMode="scaleToFill" id="Irt-lv-1N0" customClass="leftView">
+            <rect key="frame" x="0.0" y="0.0" width="55" height="18"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slideLine" translatesAutoresizingMaskIntoConstraints="NO" id="DRc-ak-9jR">
+                    <rect key="frame" x="0.0" y="5.5" width="7" height="7"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="7" id="cfL-A9-fCU"/>
+                        <constraint firstAttribute="height" constant="7" id="xjj-ow-6dF"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="150.00m" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R63-ND-jhP">
+                    <rect key="frame" x="9" y="0.0" width="46" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="9"/>
+                    <color key="textColor" red="0.99942404029999998" green="0.98555368190000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="R63-ND-jhP" firstAttribute="leading" secondItem="DRc-ak-9jR" secondAttribute="trailing" constant="2" id="BXH-1j-aZM"/>
+                <constraint firstItem="DRc-ak-9jR" firstAttribute="leading" secondItem="Irt-lv-1N0" secondAttribute="leading" id="gdR-QK-v9i"/>
+                <constraint firstItem="DRc-ak-9jR" firstAttribute="centerY" secondItem="Irt-lv-1N0" secondAttribute="centerY" id="ouT-hu-osF"/>
+                <constraint firstItem="R63-ND-jhP" firstAttribute="top" secondItem="Irt-lv-1N0" secondAttribute="top" id="vP5-RZ-5tT"/>
+                <constraint firstAttribute="trailing" secondItem="R63-ND-jhP" secondAttribute="trailing" id="vke-8c-ZNJ"/>
+                <constraint firstAttribute="bottom" secondItem="R63-ND-jhP" secondAttribute="bottom" id="wWK-bN-CzM"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="titleLabel" destination="R63-ND-jhP" id="HPs-x0-pTE"/>
+            </connections>
+            <point key="canvasLocation" x="28.5" y="95"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="slideLine" width="7" height="7"/>
+    </resources>
+</document>

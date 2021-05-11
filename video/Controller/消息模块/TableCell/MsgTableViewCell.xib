@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="MsgTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SQc-Y3-Rbp">
+                        <rect key="frame" x="16" y="7.5" width="55" height="55"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="55" id="1H7-L5-vwy"/>
+                            <constraint firstAttribute="width" constant="55" id="1h4-gY-lW9"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这是一个系统消息" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mq6-Iz-Jdp">
+                        <rect key="frame" x="79" y="10" width="241" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="9Bz-oL-wwv"/>
+                            <constraint firstAttribute="width" constant="241" id="sID-YA-Mba"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" red="0.4078110754" green="0.40786188839999998" blue="0.40778768059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="这是一段简介啊简介啊简介阿简介啊简介啊简介简介简简简介介介" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VwG-I5-F8w">
+                        <rect key="frame" x="79" y="35" width="241" height="24"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="24" id="IOw-cS-yzB"/>
+                            <constraint firstAttribute="width" constant="241" id="uGk-jq-jHr"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" red="0.62341612580000005" green="0.62349426750000003" blue="0.63210105900000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="mq6-Iz-Jdp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="G6f-lF-3W8"/>
+                    <constraint firstItem="SQc-Y3-Rbp" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Jwc-JU-kJm"/>
+                    <constraint firstItem="VwG-I5-F8w" firstAttribute="top" secondItem="mq6-Iz-Jdp" secondAttribute="bottom" constant="1" id="O5y-cn-bWS"/>
+                    <constraint firstAttribute="trailing" secondItem="mq6-Iz-Jdp" secondAttribute="trailing" id="Pvr-a0-c2p"/>
+                    <constraint firstAttribute="trailing" secondItem="VwG-I5-F8w" secondAttribute="trailing" id="VlK-Zd-8m2"/>
+                    <constraint firstItem="mq6-Iz-Jdp" firstAttribute="leading" secondItem="SQc-Y3-Rbp" secondAttribute="trailing" constant="8" symbolic="YES" id="fAc-EY-feQ"/>
+                    <constraint firstItem="VwG-I5-F8w" firstAttribute="leading" secondItem="SQc-Y3-Rbp" secondAttribute="trailing" constant="8" symbolic="YES" id="jsM-fh-ehL"/>
+                    <constraint firstItem="SQc-Y3-Rbp" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="zOR-nB-OJx"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <connections>
+                <outlet property="leftImage" destination="SQc-Y3-Rbp" id="xNe-mQ-0DC"/>
+                <outlet property="miaoshuLabel" destination="VwG-I5-F8w" id="VyW-q1-3ma"/>
+                <outlet property="titleLabel" destination="mq6-Iz-Jdp" id="Dxo-oq-iMs"/>
+            </connections>
+            <point key="canvasLocation" x="140.57971014492756" y="77.678571428571431"/>
+        </tableViewCell>
+    </objects>
+</document>

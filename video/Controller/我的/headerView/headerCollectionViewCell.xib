@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="headerCollectionViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="54" height="73"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="54" height="73"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wgt-DP-sl9">
+                        <rect key="frame" x="4" y="0.0" width="46" height="46"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="46" id="Kjz-0m-P6F"/>
+                            <constraint firstAttribute="width" constant="46" id="Yt8-At-Nuc"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="收藏夹" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJp-0k-3K7">
+                        <rect key="frame" x="0.0" y="48" width="54" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="akQ-Kl-ru0"/>
+                            <constraint firstAttribute="width" constant="54" id="qg9-Dq-CMc"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="SEy-5g-ep8"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="DJp-0k-3K7" secondAttribute="bottom" id="8cp-sE-WU7"/>
+                <constraint firstItem="DJp-0k-3K7" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="L1F-KH-qNz"/>
+                <constraint firstAttribute="trailing" secondItem="DJp-0k-3K7" secondAttribute="trailing" id="RQK-EE-sqX"/>
+                <constraint firstItem="wgt-DP-sl9" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="4" id="TYr-Nb-Id7"/>
+                <constraint firstItem="wgt-DP-sl9" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="YQi-8P-iJz"/>
+                <constraint firstItem="DJp-0k-3K7" firstAttribute="top" secondItem="wgt-DP-sl9" secondAttribute="bottom" constant="2" id="qXc-fC-C4o"/>
+                <constraint firstAttribute="trailing" secondItem="wgt-DP-sl9" secondAttribute="trailing" constant="4" id="s8J-UP-Qkq"/>
+            </constraints>
+            <size key="customSize" width="54" height="73"/>
+            <connections>
+                <outlet property="image" destination="wgt-DP-sl9" id="PY6-mJ-wb7"/>
+                <outlet property="title" destination="DJp-0k-3K7" id="YWa-EE-99z"/>
+            </connections>
+            <point key="canvasLocation" x="66.666666666666671" y="70.647321428571431"/>
+        </collectionViewCell>
+    </objects>
+</document>

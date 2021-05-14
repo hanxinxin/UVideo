@@ -11,7 +11,7 @@
 #import "HXBaseNavgationController.h"
 
 //视图背景颜色
-#define GBackGroundColor [UIColor colorWithRed:0.960 green:1.000 blue:0.984 alpha:1.000]
+#define GBackGroundColor [UIColor colorWithRed:1.000 green:1.000 blue:1.000 alpha:1.000]
 
 //导航栏 属性 标题颜色 标题字体
 #define GNavTextColor [UIColor whiteColor]

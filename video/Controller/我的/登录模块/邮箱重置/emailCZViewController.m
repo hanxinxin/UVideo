@@ -44,7 +44,7 @@
     [self.topImageBg setImage:[UIImage imageNamed:@"loginBg"]];
     [self.view addSubview:self.topImageBg];
     self.centerView = [[UIView alloc] initWithFrame:CGRectMake(30, 252, self.view.width-60, 226)];
-    
+    [self addShadowToView:self.centerView withColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.8]];
     [self.view addSubview:self.centerView];
     self.emailTextfield = [[UITextField alloc] initWithFrame:CGRectMake(8, 50, self.centerView.width-16, 42)];
     self.emailTextfield.placeholder=@"请输入邮箱";
@@ -56,6 +56,7 @@
     [self.centerView addSubview:self.emailTextfield];
     self.passwordTextfield = [[UITextField alloc] initWithFrame:CGRectMake(8, 50+34+16, self.centerView.width-16, 42)];
     self.passwordTextfield.placeholder=@"请输入密码";
+    self.passwordTextfield.secureTextEntry = YES;
     self.passwordTextfield.keyboardType=UIKeyboardTypeEmailAddress;
     self.passwordTextfield.borderStyle=UITextBorderStyleRoundedRect;
     self.passwordTextfield.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
@@ -270,5 +271,20 @@
         layer.backgroundColor = color.CGColor;
         [view.layer addSublayer:layer];
     }
+}
+
+
+- (void)addShadowToView:(UIView *)theView withColor:(UIColor *)theColor {
+    
+    theView.layer.shadowColor = theColor.CGColor;
+    theView.layer.shadowOffset = CGSizeMake(0,0);
+    theView.layer.shadowOpacity = 0.5;
+    theView.layer.shadowRadius = 2;
+    
+    // 单边阴影 顶边
+        float shadowPathWidth = theView.layer.shadowRadius;
+        CGRect shadowRect = CGRectMake(0, theView.bounds.size.height, theView.bounds.size.width, shadowPathWidth);
+        UIBezierPath *path = [UIBezierPath bezierPathWithRect:shadowRect];
+        theView.layer.shadowPath = path.CGPath;
 }
 @end

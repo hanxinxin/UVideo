@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UIImageView * topImageBg;
 
 @property(nonatomic,strong)UIView * centerView;
-
+@property(nonatomic,strong)UIView * centerView2;
 @property(nonatomic,strong)UITextField *emailTextfield;
 @property(nonatomic,strong)UITextField *passwordTextfield;
 @property(nonatomic,strong)UIView *CodeView;

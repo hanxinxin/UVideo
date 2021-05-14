@@ -28,12 +28,15 @@
     self.statusBarBackgroundColor=[UIColor blackColor];
     self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
     self.emailTextfield.keyboardType=UIKeyboardTypeEmailAddress;
+    self.passwordTextfield.secureTextEntry = YES;
     self.passwordTextfield.keyboardType=UIKeyboardTypeEmailAddress;
-   
+    self.ZC_btn.layer.cornerRadius = 10;
+    self.DL_Btn.layer.cornerRadius = 10;
     dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
 
     dispatch_after(delayTime, dispatch_get_main_queue(), ^{
         [self addtopview];
+        [self addShadowToView:self.centerView withColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.8]];
     });
     
 }
@@ -97,11 +100,7 @@
     self.centerView.layer.masksToBounds = YES;
     self.centerView.layer.cornerRadius=6;
     [self setBorderWithView:self.centerView top:NO left:YES bottom:YES right:YES borderColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] borderWidth:0.5];
-    self.centerView.layer.shadowOpacity = 0.5;// 阴影透明度
-
-    self.centerView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.16].CGColor;// 阴影的颜色
-    self.centerView.layer.shadowRadius = 3;// 阴影扩散的范围控制
-    self.centerView.layer.shadowOffset  = CGSizeMake(1, 1);// 阴影的范围
+    [self addShadowToView:self.centerView withColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.8]];
     [self setBorderWithView:self.menuBtn1 top:NO left:NO bottom:YES right:NO borderColor:RGB(20, 155, 236) borderWidth:0.5];
     [self setBorderWithView:self.menuBtn2 top:NO left:NO bottom:YES right:NO borderColor:RGB(255, 255, 255) borderWidth:0.5];
     self.menuIndex = 1;
@@ -123,13 +122,7 @@
     self.centerView.layer.masksToBounds = YES;
     self.centerView.layer.cornerRadius=6;
     [self setBorderWithView:self.centerView top:NO left:YES bottom:YES right:YES borderColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] borderWidth:0.5];
-//    self.centerView.layer.borderWidth=0.5;
-//    self.centerView.layer.borderColor=[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0].CGColor;
-    self.centerView.layer.shadowOpacity = 0.5;// 阴影透明度
-
-    self.centerView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.16].CGColor;// 阴影的颜色
-    self.centerView.layer.shadowRadius = 3;// 阴影扩散的范围控制
-    self.centerView.layer.shadowOffset  = CGSizeMake(1, 1);// 阴影的范围
+    [self addShadowToView:self.centerView withColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.8]];
 
     
     [self setBorderWithView:self.menuBtn2 top:NO left:NO bottom:YES right:NO borderColor:RGB(20, 155, 236) borderWidth:0.5];
@@ -187,5 +180,19 @@
         layer.backgroundColor = color.CGColor;
         [view.layer addSublayer:layer];
     }
+}
+
+- (void)addShadowToView:(UIView *)theView withColor:(UIColor *)theColor {
+    
+    theView.layer.shadowColor = theColor.CGColor;
+    theView.layer.shadowOffset = CGSizeMake(0,0);
+    theView.layer.shadowOpacity = 0.5;
+    theView.layer.shadowRadius = 2;
+    
+    // 单边阴影 顶边
+        float shadowPathWidth = theView.layer.shadowRadius;
+        CGRect shadowRect = CGRectMake(0, theView.bounds.size.height, theView.bounds.size.width, shadowPathWidth);
+        UIBezierPath *path = [UIBezierPath bezierPathWithRect:shadowRect];
+        theView.layer.shadowPath = path.CGPath;
 }
 @end

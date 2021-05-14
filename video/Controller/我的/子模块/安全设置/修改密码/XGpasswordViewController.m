@@ -31,6 +31,7 @@
     [self.view addSubview:self.centerView];
     self.oldTextfield = [[UITextField alloc] initWithFrame:CGRectMake(8, 50, self.centerView.width-16, 42)];
     self.oldTextfield.placeholder=@"输入旧密码";
+    self.oldTextfield.secureTextEntry = YES;
     self.oldTextfield.keyboardType=UIKeyboardTypeEmailAddress;
     self.oldTextfield.borderStyle=UITextBorderStyleRoundedRect;
     self.oldTextfield.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
@@ -39,6 +40,7 @@
     [self.centerView addSubview:self.oldTextfield];
     self.onenewTextfield = [[UITextField alloc] initWithFrame:CGRectMake(8, self.oldTextfield.bottom+10, self.centerView.width-16, 42)];
     self.onenewTextfield.placeholder=@"输入新密码";
+    self.onenewTextfield.secureTextEntry = YES;
     self.onenewTextfield.keyboardType=UIKeyboardTypeEmailAddress;
     self.onenewTextfield.borderStyle=UITextBorderStyleRoundedRect;
     self.onenewTextfield.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
@@ -47,6 +49,7 @@
     [self.centerView addSubview:self.onenewTextfield];
     self.twonewTextfield = [[UITextField alloc] initWithFrame:CGRectMake(8, self.onenewTextfield.bottom+10, self.centerView.width-16, 42)];
     self.twonewTextfield.placeholder=@"重复新密码";
+    self.twonewTextfield.secureTextEntry = YES;
     self.twonewTextfield.keyboardType=UIKeyboardTypeEmailAddress;
     self.twonewTextfield.borderStyle=UITextBorderStyleRoundedRect;
     self.twonewTextfield.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;

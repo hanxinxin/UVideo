@@ -6,6 +6,8 @@
 //
 
 #import "safeViewController.h"
+#import "emailCZViewController.h"
+#import "XGpasswordViewController.h"
 
 @interface safeViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UIView*ZtopView;
@@ -126,5 +128,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"index == %ld",indexPath.section);
+    if(indexPath.section==0)
+    {
+        XGpasswordViewController *avc = [[XGpasswordViewController alloc] init];
+        [self.navigationController pushViewController:avc animated:YES];
+    }
+    else{
+        emailCZViewController *avc = [[emailCZViewController alloc] init];
+        [self.navigationController pushViewController:avc animated:YES];
+    }
 }
 @end

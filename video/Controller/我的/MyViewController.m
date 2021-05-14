@@ -11,9 +11,12 @@
 #import "safeViewController.h"
 #import "chongzhiListViewController.h"
 #import "zhanghuInfoViewController.h"
+#import "jiluViewController.h"
 
 @interface MyViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UIView*ZtopView;
+@property(nonatomic,strong)topHeaderView *Headerview;
+
 @property(nonatomic,strong)UITableView*downtableview;
 @property(nonatomic,strong)NSMutableArray*arrtitle;
 @property(nonatomic,strong)NSMutableArray*imagearray;
@@ -52,8 +55,24 @@
     view.layer.shadowOffset = CGSizeMake(0,3);
     view.layer.shadowRadius = 6;
     view.layer.shadowOpacity = 1;
-    view.txImage.layer.cornerRadius=30;
+    
+    view.txImage.layer.cornerRadius = 30;
+    view.txImage.layer.masksToBounds = YES;
     [self.ZtopView addSubview:view];
+    self.Headerview = view;
+    __weak __typeof(self)weakSelf = self;
+    self.Headerview.topHeaderBlock = ^(NSInteger touchIndex) {
+        NSLog(@"Touchindex= %ld",touchIndex);
+        if(touchIndex==1001)
+        {
+
+            LoginViewController * avc = [[UIStoryboard storyboardWithName: @"Main" bundle: nil] instantiateViewControllerWithIdentifier: @"LoginViewController"];
+            [weakSelf.navigationController pushViewController:avc animated:YES];
+        }
+    };
+    self.Headerview.cellindexBlock = ^(NSInteger CellIndex) {
+        NSLog(@"CellIndex= %ld",CellIndex);
+    };
 }
 
 -(void)Addtableview
@@ -154,7 +173,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"index == %ld",indexPath.section);
-    if(indexPath.section==1)
+    
+    if(indexPath.section==0){
+        
+        jiluViewController * avc = [[jiluViewController alloc] init];
+        [self.navigationController pushViewController:avc animated:YES];
+    }else if(indexPath.section==1)
     {
         chongzhiListViewController * avc = [[chongzhiListViewController alloc] init];
         [self.navigationController pushViewController:avc animated:YES];

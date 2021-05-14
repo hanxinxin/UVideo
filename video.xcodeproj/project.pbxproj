@@ -19,6 +19,9 @@
 		8A052173264A832E00E5188E /* MsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A052171264A832E00E5188E /* MsgTableViewCell.m */; };
 		8A052174264A832E00E5188E /* MsgTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A052172264A832E00E5188E /* MsgTableViewCell.xib */; };
 		8A05217B264A8AC400E5188E /* msgInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A05217A264A8AC400E5188E /* msgInfoViewController.m */; };
+		8A272474264D53A000B033BB /* ZCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A272473264D53A000B033BB /* ZCViewController.m */; };
+		8A27247E264E850E00B033BB /* emailCZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A27247D264E850E00B033BB /* emailCZViewController.m */; };
+		8A272485264E883500B033BB /* XGpasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A272484264E883500B033BB /* XGpasswordViewController.m */; };
 		8A39302C25FCD86A00E7331B /* MHObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A39301825FCD86A00E7331B /* MHObject.m */; };
 		8A39302D25FCD86A00E7331B /* MHBackButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A39301B25FCD86A00E7331B /* MHBackButton.m */; };
 		8A39302E25FCD86A00E7331B /* MHButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A39301C25FCD86A00E7331B /* MHButton.m */; };
@@ -270,6 +273,7 @@
 		8ACAEA972643E22C0091EEFE /* ZBCycleVerticalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACAEA932643E22C0091EEFE /* ZBCycleVerticalView.m */; };
 		8ACAEA982643E22C0091EEFE /* ZBCycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACAEA942643E22C0091EEFE /* ZBCycleView.m */; };
 		8ACAEAA92643F2390091EEFE /* YZYHorizListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACAEAA82643F2390091EEFE /* YZYHorizListView.m */; };
+		8ADF898F264D16F700029B05 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ADF898E264D16F700029B05 /* LoginViewController.m */; };
 		8AF2C84425FF0FDA0029AC13 /* HomeTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF2C84325FF0FDA0029AC13 /* HomeTitleView.m */; };
 		8AFDD3C525F8C890006B1384 /* HXBaseNavgationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFDD3BB25F8C890006B1384 /* HXBaseNavgationController.m */; };
 		8AFDD3C625F8C890006B1384 /* NSString+GetImageFromBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFDD3BD25F8C890006B1384 /* NSString+GetImageFromBundle.m */; };
@@ -334,6 +338,12 @@
 		8A052172264A832E00E5188E /* MsgTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MsgTableViewCell.xib; sourceTree = "<group>"; };
 		8A052179264A8AC400E5188E /* msgInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = msgInfoViewController.h; sourceTree = "<group>"; };
 		8A05217A264A8AC400E5188E /* msgInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = msgInfoViewController.m; sourceTree = "<group>"; };
+		8A272472264D53A000B033BB /* ZCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZCViewController.h; sourceTree = "<group>"; };
+		8A272473264D53A000B033BB /* ZCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZCViewController.m; sourceTree = "<group>"; };
+		8A27247C264E850E00B033BB /* emailCZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = emailCZViewController.h; sourceTree = "<group>"; };
+		8A27247D264E850E00B033BB /* emailCZViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = emailCZViewController.m; sourceTree = "<group>"; };
+		8A272483264E883500B033BB /* XGpasswordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XGpasswordViewController.h; sourceTree = "<group>"; };
+		8A272484264E883500B033BB /* XGpasswordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XGpasswordViewController.m; sourceTree = "<group>"; };
 		8A39301825FCD86A00E7331B /* MHObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHObject.m; sourceTree = "<group>"; };
 		8A39301925FCD86A00E7331B /* MHObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHObject.h; sourceTree = "<group>"; };
 		8A39301B25FCD86A00E7331B /* MHBackButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHBackButton.m; sourceTree = "<group>"; };
@@ -805,6 +815,8 @@
 		8ACAEA962643E22C0091EEFE /* ZBCycleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBCycleView.h; sourceTree = "<group>"; };
 		8ACAEAA72643F2390091EEFE /* YZYHorizListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YZYHorizListView.h; sourceTree = "<group>"; };
 		8ACAEAA82643F2390091EEFE /* YZYHorizListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YZYHorizListView.m; sourceTree = "<group>"; };
+		8ADF898D264D16F700029B05 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		8ADF898E264D16F700029B05 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		8AF2C7A825FCE5F20029AC13 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		8AF2C84225FF0FDA0029AC13 /* HomeTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTitleView.h; sourceTree = "<group>"; };
 		8AF2C84325FF0FDA0029AC13 /* HomeTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTitleView.m; sourceTree = "<group>"; };
@@ -940,6 +952,24 @@
 				8A05217A264A8AC400E5188E /* msgInfoViewController.m */,
 			);
 			path = msgInfo;
+			sourceTree = "<group>";
+		};
+		8A27247B264E847800B033BB /* 邮箱重置 */ = {
+			isa = PBXGroup;
+			children = (
+				8A27247C264E850E00B033BB /* emailCZViewController.h */,
+				8A27247D264E850E00B033BB /* emailCZViewController.m */,
+			);
+			path = "邮箱重置";
+			sourceTree = "<group>";
+		};
+		8A272482264E878F00B033BB /* 修改密码 */ = {
+			isa = PBXGroup;
+			children = (
+				8A272483264E883500B033BB /* XGpasswordViewController.h */,
+				8A272484264E883500B033BB /* XGpasswordViewController.m */,
+			);
+			path = "修改密码";
 			sourceTree = "<group>";
 		};
 		8A39301625FCD86A00E7331B /* BaseClass */ = {
@@ -1975,8 +2005,8 @@
 		8A9C550725F85D2400EFA410 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				8ADF898A264D16C200029B05 /* 登录模块 */,
 				FA949CB9264AC72500498EB6 /* 子模块 */,
-				FA9FBAA92647ADB800E4F27E /* tableviewCell */,
 				FA9FBAA82647ADB000E4F27E /* headerView */,
 				8A9C567D25F8A27500EFA410 /* MyViewController.h */,
 				8A9C567E25F8A27500EFA410 /* MyViewController.m */,
@@ -2293,6 +2323,34 @@
 			path = YZYHorizListView;
 			sourceTree = "<group>";
 		};
+		8ADF898A264D16C200029B05 /* 登录模块 */ = {
+			isa = PBXGroup;
+			children = (
+				8A27247B264E847800B033BB /* 邮箱重置 */,
+				8ADF898C264D16D800029B05 /* 注册 */,
+				8ADF898B264D16D100029B05 /* 登录 */,
+			);
+			path = "登录模块";
+			sourceTree = "<group>";
+		};
+		8ADF898B264D16D100029B05 /* 登录 */ = {
+			isa = PBXGroup;
+			children = (
+				8ADF898D264D16F700029B05 /* LoginViewController.h */,
+				8ADF898E264D16F700029B05 /* LoginViewController.m */,
+			);
+			path = "登录";
+			sourceTree = "<group>";
+		};
+		8ADF898C264D16D800029B05 /* 注册 */ = {
+			isa = PBXGroup;
+			children = (
+				8A272472264D53A000B033BB /* ZCViewController.h */,
+				8A272473264D53A000B033BB /* ZCViewController.m */,
+			);
+			path = "注册";
+			sourceTree = "<group>";
+		};
 		8AF2C84125FF0FB60029AC13 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -2371,6 +2429,7 @@
 		FA949CBA264AC73400498EB6 /* 安全设置 */ = {
 			isa = PBXGroup;
 			children = (
+				8A272482264E878F00B033BB /* 修改密码 */,
 				FA949CBB264AC76E00498EB6 /* safeViewController.h */,
 				FA949CBC264AC76E00498EB6 /* safeViewController.m */,
 			);
@@ -2417,13 +2476,6 @@
 				FA9FBAB12647B77900E4F27E /* headerCollectionViewCell.xib */,
 			);
 			path = headerView;
-			sourceTree = "<group>";
-		};
-		FA9FBAA92647ADB800E4F27E /* tableviewCell */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = tableviewCell;
 			sourceTree = "<group>";
 		};
 		FA9FBAB42647C08A00E4F27E /* 自定义 */ = {
@@ -2789,6 +2841,7 @@
 				8A9C562225F8A10000EFA410 /* UIButton+TouchAreaInsets.m in Sources */,
 				8A39303025FCD86A00E7331B /* MHTitleLeftButton.m in Sources */,
 				8A8BC39F25FC6F9E0028173C /* UIFont+MHExtension.m in Sources */,
+				8A272474264D53A000B033BB /* ZCViewController.m in Sources */,
 				8ACAEA982643E22C0091EEFE /* ZBCycleView.m in Sources */,
 				8A3930F625FCDB3900E7331B /* CMHTextField.m in Sources */,
 				8A39312125FCDED100E7331B /* MHTopicFooterView.m in Sources */,
@@ -2956,6 +3009,7 @@
 				8A8BC1E925FA203E0028173C /* HQCustomButton.m in Sources */,
 				8A9C562A25F8A10000EFA410 /* UIImage+Vector.m in Sources */,
 				8A9C562325F8A10000EFA410 /* UIButton+Indicator.m in Sources */,
+				8A27247E264E850E00B033BB /* emailCZViewController.m in Sources */,
 				8A9C55A025F8A0B300EFA410 /* DHGuidePageHUD.m in Sources */,
 				8A39314225FCDFCE00E7331B /* MHUser.m in Sources */,
 				8A39305C25FCD91A00E7331B /* UIScrollView+CMHRefresh.m in Sources */,
@@ -2965,8 +3019,10 @@
 				8A9C56B925F8A4D000EFA410 /* LocalStringObj.m in Sources */,
 				8A9C54A925F7837B00EFA410 /* SceneDelegate.m in Sources */,
 				8A8BC3A025FC6F9E0028173C /* NSError+MHExtension.m in Sources */,
+				8ADF898F264D16F700029B05 /* LoginViewController.m in Sources */,
 				8A39306425FCD91A00E7331B /* CMHControllerHelper.m in Sources */,
 				8A8BC19925F9C7500028173C /* LLSearchResultDoubleViewCell.m in Sources */,
+				8A272485264E883500B033BB /* XGpasswordViewController.m in Sources */,
 				8A9C563125F8A10000EFA410 /* UIImage+Alpha.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -70,6 +70,27 @@ static NSString * const headerCellReuseID = @"header";
     // 注册cell
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([headerCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:headerCellReuseID];
 }
+
+
+- (IBAction)tx_touch:(id)sender {
+    if (self.topHeaderBlock) {
+        self.topHeaderBlock(1001);
+    }
+}
+- (IBAction)jifen_touch:(id)sender {
+    //积分
+    if (self.topHeaderBlock) {
+        self.topHeaderBlock(1002);
+    }
+}
+- (IBAction)vip_touch:(id)sender {
+    //VIP
+    if (self.topHeaderBlock) {
+        self.topHeaderBlock(1003);
+    }
+}
+
+
 #pragma mark - <UICollectionViewDataSource>
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
@@ -90,7 +111,7 @@ static NSString * const headerCellReuseID = @"header";
     
     // 给cell传递模型
     [cell.image setImage:[UIImage imageNamed:self.imageArray[indexPath.row]]];
-    cell.title=self.titleArray[indexPath.row];
+    cell.title.text=self.titleArray[indexPath.row];
     
     // 返回cell
     return cell;
@@ -99,7 +120,9 @@ static NSString * const headerCellReuseID = @"header";
 {
     NSLog(@"选择第%ld素材",indexPath.item);
     
-    
+    if (self.cellindexBlock) {
+        self.cellindexBlock(1000+indexPath.item);
+    }
     
 }
 #pragma mark - WSLWaterFlowLayoutDelegate

@@ -16,6 +16,7 @@
 #import "hxViewController.h"
 
 
+#import "LoginViewController.h"
 
 
 ////////////   3.13日添加 头文件
@@ -86,6 +87,19 @@
 #import "MHInline.h"
 #import "MHConstant.h"
 ////////////   3.14日添加 头文件
+
+
+
+
+#ifdef DEBUG
+#define NSLog(...) NSLog(__VA_ARGS__)
+
+#define debugMethod() NSLog(@"%s", __func__)
+#else
+#define NSLog(...)
+
+#define debugMethod()
+#endif
 
 
 

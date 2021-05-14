@@ -312,7 +312,7 @@
     statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
 #endif
 
-    NSLog(@"statusBar.backgroundColor--->%@",statusBar.backgroundColor);
+//    NSLog(@"statusBar.backgroundColor--->%@",statusBar.backgroundColor);
     if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
         statusBar.backgroundColor = color;
     }

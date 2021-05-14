@@ -164,14 +164,14 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "71B36A16-B2A5-408E-9403-2E064B726E57 - 5edf5e8f560e5701"
+                  uuid = "71B36A16-B2A5-408E-9403-2E064B726E57 - fc5f1cdd19a50fc2"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "-[MHYouKuController _setupVideoBackgroundView]"
                   moduleName = "video"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tusm/Desktop/HX_video/video/video/Controller/%E9%A6%96%E9%A1%B5/%E8%AF%84%E8%AE%BA/MHYouKuController.m"
+                  urlString = "file:///Users/tusm/Desktop/HX_video/UVideo/video/Controller/%E9%A6%96%E9%A1%B5/%E8%AF%84%E8%AE%BA/MHYouKuController.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "335"
@@ -179,14 +179,14 @@
                   offsetFromSymbolStart = "210">
                </Location>
                <Location
-                  uuid = "71B36A16-B2A5-408E-9403-2E064B726E57 - 6221b2434df7d8b2"
+                  uuid = "71B36A16-B2A5-408E-9403-2E064B726E57 - c0a1f011025c8073"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "__46-[MHYouKuController _setupVideoBackgroundView]_block_invoke"
                   moduleName = "video"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tusm/Desktop/HX_video/video/video/Controller/%E9%A6%96%E9%A1%B5/%E8%AF%84%E8%AE%BA/MHYouKuController.m"
+                  urlString = "file:///Users/tusm/Desktop/HX_video/UVideo/video/Controller/%E9%A6%96%E9%A1%B5/%E8%AF%84%E8%AE%BA/MHYouKuController.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "336"

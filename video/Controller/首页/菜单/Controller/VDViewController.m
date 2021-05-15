@@ -350,8 +350,8 @@ static NSString * const shopCellReuseID = @"shop";
 {
     NSLog(@"选择第%ld素材",indexPath.item);
     
-    MHYouKuController *vc = [[MHYouKuController alloc] init];
-    [self.navigationController pushViewController:vc animated:YES];
+    MHYouKuController *avc = [[MHYouKuController alloc] init];
+    [self pushRootNav:avc animated:YES];
     
 }
 

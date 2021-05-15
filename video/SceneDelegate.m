@@ -16,8 +16,9 @@
 
 @end
 
-@implementation SceneDelegate
-
+@implementation SceneDelegate{
+    BaseWindow *_baseWindow;
+}
 
 - (void)scene:(UIScene *)scene willConnectToSession:(UISceneSession *)session options:(UISceneConnectionOptions *)connectionOptions {
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -25,25 +26,38 @@
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     
     if (@available(iOS 13.0, *)) {
+        
+        
+//        UIWindowScene *windowScene = (UIWindowScene *)scene;
+//        self.window = [[BaseWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+//         self.window.backgroundColor = [UIColor whiteColor];
+//        self.window.windowScene=windowScene;
+//         [self.window makeKeyAndVisible];
+        
+        
         UIWindowScene *windowScene = (UIWindowScene *)scene;
         self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
 //        self.window = [[UIWindow alloc] initWithWindowScene:windowScene];
         self.window.windowScene=windowScene;
-//        [self.window setWindowScene:windowScene];
-        
-//        HXBaseNavgationController * viewC = [self tabBarController];
-        [self.window setRootViewController:[self tabBarController]];
-        
+        self.nav = [self tabBarController];
+        [self.window setRootViewController:self.nav];
+//        [self.window setRootViewController:[self tabBarController]];
+
         [self.window makeKeyAndVisible];
     } else {
         // Fallback on earlier versions
+//        UIWindowScene *windowScene = (UIWindowScene *)scene;
+//        self.window = [[BaseWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+//         self.window.backgroundColor = [UIColor whiteColor];
+////        self.window.windowScene=windowScene;
+//         [self.window makeKeyAndVisible];
     }
               
     
     
     
 }
-- (UITabBarController *)tabBarController {
+- (HXBaseNavgationController *)tabBarController {
     if (@available(iOS 13.0, *)) {
     UITabBarController * tabBarC = [[UITabBarController alloc] init];
     
@@ -63,9 +77,10 @@
         
         tabBarC.viewControllers = @[[tabBarVC1 addNav],[tabBarVC2 addNav],[tabBarVC3 addNav],[tabBarVC4 addNav],[tabBarVC5 addNav]];
     
-//    UINavigationController * rootNav = [[UINavigationController alloc ] initWithRootViewController:tabBarC];
-//    [rootNav setNavigationBarHidden:YES];
-    return tabBarC;
+        HXBaseNavgationController * rootNav = [[HXBaseNavgationController alloc ] initWithRootViewController:tabBarC];
+        [rootNav setNavigationBarHidden:YES];
+        [rootNav.navigationController.navigationBar setHidden:YES];
+        return rootNav;
     }else{
         UITabBarController * tabBarC = [[UITabBarController alloc] init];
         
@@ -84,7 +99,10 @@
         [tabBarVC5 setTabBarItemWithTitle:@"我的" titleUnSelectStyle:nil titleSelectStyle:nil unselectImage:[UIImage imageNamed:@"meimage"] selectImage:[UIImage imageNamed:@"meimageselect"] imageSize:CGSizeMake(30, 30)];
         
         tabBarC.viewControllers = @[[tabBarVC1 addNav],[tabBarVC2 addNav],[tabBarVC3 addNav],[tabBarVC4 addNav],[tabBarVC5 addNav]];
-        return tabBarC;
+        HXBaseNavgationController * rootNav = [[HXBaseNavgationController alloc ] initWithRootViewController:tabBarC];
+        [rootNav setNavigationBarHidden:YES];
+        [rootNav.navigationController.navigationBar setHidden:YES];
+        return rootNav;
     }
     
 }

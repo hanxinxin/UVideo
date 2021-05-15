@@ -7,11 +7,12 @@
 
 #import <UIKit/UIKit.h>
 #import "MHAccount.h"
+#import "BaseWindow.h"
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-
+//@property (strong, nonatomic) BaseWindow *window;
 @property (strong, nonatomic) UIWindow *window;
-
+@property (strong, nonatomic) UINavigationController * nav;
 
 /**
  *  用户数据 只读

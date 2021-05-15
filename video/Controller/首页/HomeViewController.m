@@ -193,12 +193,12 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 -(void)TitleTouch:(UITapGestureRecognizer *)gesture
 {
     LLSearchViewController *seachVC = [[LLSearchViewController alloc] init];
-    [self.navigationController pushViewController:seachVC animated:NO];
+    [self pushRootNav:seachVC animated:YES];
 }
 -(void)btnTouch:(id)sender
 {
     SearchViewController *seachVC = [[SearchViewController alloc] init];
-    [self.navigationController pushViewController:seachVC animated:NO];
+    [self pushRootNav:seachVC animated:YES];
 }
 
 

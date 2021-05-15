@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title=@"";
+    
     [self addSearch];
     self.view.backgroundColor=[UIColor whiteColor];
 }
@@ -84,6 +84,7 @@
     NSLog(@"11111");
     
     MessageViewController *seachVC = [[MessageViewController alloc] init];
+    seachVC.hidesBottomBarWhenPushed=NO;
     [self.navigationController pushViewController:seachVC animated:NO];
 }
 -(void)MessageBtnEvent
@@ -98,6 +99,7 @@
 -(void)btnTouch:(id)sender
 {
     LLSearchViewController *seachVC = [[LLSearchViewController alloc] init];
+    seachVC.hidesBottomBarWhenPushed=NO;
     [self.navigationController pushViewController:seachVC animated:NO];
 }
 -(UIView*)convertToView{

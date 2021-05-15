@@ -213,7 +213,7 @@
     //导航左按钮
     leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
-
+    [leftBtn setTitle:@"" forState:(UIControlStateNormal)];
     [leftBtn setImage:[NSString getImageOfImageName:GNavBackImageName type:BaseNavController] forState:UIControlStateNormal];
     [leftBtn addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchUpInside];
 
@@ -683,8 +683,19 @@
 
 
 - (void)pushRootNav:(UIViewController *)viewController animated:(BOOL)animated {
+    id rootVC ;
+    if (@available(iOS 13.0, *)) {
+        NSArray *array =[[[UIApplication sharedApplication] connectedScenes] allObjects];
+        UIWindowScene *windowScene = (UIWindowScene *)array[0];
+        SceneDelegate *delegate =(SceneDelegate *)windowScene.delegate;
+        rootVC = delegate.window.rootViewController;
+    } else {
+        // Fallback on earlier versions
+        rootVC = [UIApplication sharedApplication].delegate.window.rootViewController;
+    }
+    
 
-    id rootVC = [UIApplication sharedApplication].delegate.window.rootViewController;
+    
     if ([rootVC isKindOfClass:[UINavigationController class]]) {
         UINavigationController * rootVCNav = rootVC;
         [rootVCNav pushViewController:viewController animated:animated];

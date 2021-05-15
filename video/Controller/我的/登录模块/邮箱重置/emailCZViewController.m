@@ -44,7 +44,13 @@
     [self.topImageBg setImage:[UIImage imageNamed:@"loginBg"]];
     [self.view addSubview:self.topImageBg];
     self.centerView = [[UIView alloc] initWithFrame:CGRectMake(30, 252, self.view.width-60, 226)];
-    [self addShadowToView:self.centerView withColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.8]];
+    self.centerView.layer.cornerRadius=6;
+    self.centerView.backgroundColor=[UIColor whiteColor];
+    self.centerView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.16].CGColor;
+    self.centerView.layer.shadowOffset = CGSizeMake(0,0);
+    self.centerView.layer.shadowRadius = 6;
+    self.centerView.layer.shadowOpacity = 0.9;
+    [self setyinying];
     [self.view addSubview:self.centerView];
     self.emailTextfield = [[UITextField alloc] initWithFrame:CGRectMake(8, 50, self.centerView.width-16, 42)];
     self.emailTextfield.placeholder=@"请输入邮箱";
@@ -68,13 +74,13 @@
     self.CodeView.layer.borderWidth = 1;
     self.CodeView.layer.cornerRadius = 6;
     [self.centerView addSubview:self.CodeView];;
-    self.CodeTextfield = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, self.CodeView.width-78, 42)];
+    self.CodeTextfield = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, self.CodeView.width-92, 42)];
     self.CodeTextfield.placeholder=@"请输入验证码";
     self.CodeTextfield.keyboardType=UIKeyboardTypeNumberPad;
     self.CodeTextfield.borderStyle=UITextBorderStyleNone;
     [self.CodeView addSubview:self.CodeTextfield];
     
-    self.getCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.CodeTextfield.right, 6, 70, 30)];
+    self.getCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.CodeTextfield.right-8, 6, 70, 30)];
     self.getCodeBtn.layer.cornerRadius = 4;
     self.getCodeBtn.backgroundColor=[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0];
     [self.getCodeBtn setTitle:@"验证码" forState:(UIControlStateNormal)];
@@ -160,7 +166,7 @@
     [topView addSubview:button2];
     self.menuBtn2=button2;
     self.menuBtn2.hidden=YES;///// 不需要这个按钮  屏蔽
-    [self touchOne:nil];
+    [self touchTwo:nil];
 }
 -(void)touchOne:(id)sender
 {
@@ -176,15 +182,9 @@
 //    self.centerView.backgroundColor=[UIColor orangeColor];
     
     self.centerView.frame = CGRectMake(30, 252, self.view.width-60, 210-40);
-    //首先保证你的imageVIew是正方形的，要不然效果不是圆的
-    self.centerView.layer.masksToBounds = YES;
-    self.centerView.layer.cornerRadius=6;
-    [self setBorderWithView:self.centerView top:NO left:YES bottom:YES right:YES borderColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] borderWidth:0.5];
-    self.centerView.layer.shadowOpacity = 0.5;// 阴影透明度
 
-    self.centerView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.16].CGColor;// 阴影的颜色
-    self.centerView.layer.shadowRadius = 3;// 阴影扩散的范围控制
-    self.centerView.layer.shadowOffset  = CGSizeMake(1, 1);// 阴影的范围
+    self.centerView.layer.cornerRadius=6;
+    [self setyinying];
 
 //    [self setBorderWithView:self.menuBtn1 top:NO left:NO bottom:YES right:NO borderColor:RGB(20, 155, 236) borderWidth:0.5];
 //    [self setBorderWithView:self.menuBtn2 top:NO left:NO bottom:YES right:NO borderColor:RGB(255, 255, 255) borderWidth:0.5];
@@ -204,14 +204,8 @@
     self.CodeView.hidden=NO;
     self.centerView.frame = CGRectMake(30, 252, self.view.width-60, 210);
 //    self.centerView.backgroundColor=[UIColor grayColor];
-    //首先保证你的imageVIew是正方形的，要不然效果不是圆的
-    self.centerView.layer.masksToBounds = YES;
     self.centerView.layer.cornerRadius=6;
-    [self setBorderWithView:self.centerView top:NO left:YES bottom:YES right:YES borderColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] borderWidth:1];
-    self.centerView.layer.shadowOpacity = 0.5;// 阴影透明度
-    self.centerView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.16].CGColor;// 阴影的颜色
-    self.centerView.layer.shadowRadius = 3;// 阴影扩散的范围控制
-    self.centerView.layer.shadowOffset  = CGSizeMake(1, 1);// 阴影的范围
+    [self setyinying];
     
     
     [self setBorderWithView:self.menuBtn2 top:NO left:NO bottom:YES right:NO borderColor:RGB(20, 155, 236) borderWidth:0.5];
@@ -243,8 +237,6 @@
     gl.locations = @[@(0),@(1.0f)];
     return gl;
 }
-
-
 - (void)setBorderWithView:(UIView *)view top:(BOOL)top left:(BOOL)left bottom:(BOOL)bottom right:(BOOL)right borderColor:(UIColor *)color borderWidth:(CGFloat)width
 {
     if (top) {
@@ -269,22 +261,22 @@
         CALayer *layer = [CALayer layer];
         layer.frame = CGRectMake(view.frame.size.width - width, 0, width, view.frame.size.height);
         layer.backgroundColor = color.CGColor;
+        
         [view.layer addSublayer:layer];
     }
 }
-
-
-- (void)addShadowToView:(UIView *)theView withColor:(UIColor *)theColor {
-    
-    theView.layer.shadowColor = theColor.CGColor;
-    theView.layer.shadowOffset = CGSizeMake(0,0);
-    theView.layer.shadowOpacity = 0.5;
-    theView.layer.shadowRadius = 2;
-    
-    // 单边阴影 顶边
-        float shadowPathWidth = theView.layer.shadowRadius;
-        CGRect shadowRect = CGRectMake(0, theView.bounds.size.height, theView.bounds.size.width, shadowPathWidth);
-        UIBezierPath *path = [UIBezierPath bezierPathWithRect:shadowRect];
-        theView.layer.shadowPath = path.CGPath;
+- (void)setyinying
+{
+    self.centerView.layer.masksToBounds = NO;
+    UIBezierPath *path = [[UIBezierPath alloc] init];
+    CGFloat shadowWidth = 6;
+       [path moveToPoint:CGPointMake(0, shadowWidth)];
+       [path addLineToPoint:CGPointMake(0, self.centerView.bounds.size.height)];
+       [path addLineToPoint:CGPointMake(self.centerView.width, self.centerView.height)];
+       [path addLineToPoint:CGPointMake(self.centerView.width, shadowWidth)];
+       
+       [path closePath];
+       
+    self.centerView.layer.shadowPath = path.CGPath;
 }
 @end

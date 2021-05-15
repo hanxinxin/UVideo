@@ -12,12 +12,15 @@
 #import "LocalStringObj.h"
 #import "VPKCUIViewExt.h"
 #import "HXBaseViewController.h"
+#import "HXBaseNavgationController.h"
 #import "MJRefresh.h"
 #import "hxViewController.h"
-
-
+#import "hxpushViewController.h"
+#import "ShapeView.h"
+#import "DHGuidePageHUD.h"
+#import "UHud.h"
 #import "LoginViewController.h"
-
+#import "SceneDelegate.h"
 
 ////////////   3.13日添加 头文件
 #import <MJRefresh/MJRefresh.h>
@@ -100,8 +103,9 @@
 
 #define debugMethod()
 #endif
-
-
+#define FontName    @"Arial"
+#define Font(a)      [UIFont fontWithName:FontName size:a]
+#define UTitleColor    [UIColor whiteColor]
 
 #define DqLocalizedString(s) [LocalStringObj LocalizedString:s]
 
@@ -120,6 +124,19 @@
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREENH_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define KHistorySearchPath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"PYSearchhistories.plist"]
+
+//字符串是否为空
+#define kStringIsEmpty(str) ([str isKindOfClass:[NSNull class]] || str == nil || [str length] < 1 ? YES : NO )
+//数组是否为空
+#define kArrayIsEmpty(array) (array == nil || [array isKindOfClass:[NSNull class]] || array.count == 0)
+//字典是否为空
+#define kDictIsEmpty(dic) (dic == nil || [dic isKindOfClass:[NSNull class]] || dic.allKeys == 0)
+
+//是否是空对象
+#define kObjectIsEmpty(_object) (_object == nil \
+|| [_object isKindOfClass:[NSNull class]] \
+|| ([_object respondsToSelector:@selector(length)] && [(NSData *)_object length] == 0) \
+|| ([_object respondsToSelector:@selector(count)] && [(NSArray *)_object count] == 0))
 
 //判断是否为iPad
 #define IS_IPAD ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"])

@@ -12,6 +12,8 @@
 #import "chongzhiListViewController.h"
 #import "zhanghuInfoViewController.h"
 #import "jiluViewController.h"
+#import "ZjiluViewController.h"
+#import "FAQViewController.h"
 
 @interface MyViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UIView*ZtopView;
@@ -32,6 +34,7 @@
     
     [self InitUIView];
     [self Addtableview];
+    [self setyinying];
 }
 
 -(void)InitUIView
@@ -67,14 +70,29 @@
         {
 
             LoginViewController * avc = [[UIStoryboard storyboardWithName: @"Main" bundle: nil] instantiateViewControllerWithIdentifier: @"LoginViewController"];
-            [weakSelf.navigationController pushViewController:avc animated:YES];
+            [weakSelf pushRootNav:avc animated:YES];
         }
     };
     self.Headerview.cellindexBlock = ^(NSInteger CellIndex) {
         NSLog(@"CellIndex= %ld",CellIndex);
     };
 }
-
+- (void)setyinying
+{
+    self.ZtopView.layer.masksToBounds = NO;
+    UIBezierPath *path = [[UIBezierPath alloc] init];
+    CGFloat shadowWidth = 3;
+    path.lineCapStyle = kCGLineCapRound; //线条拐角
+        path.lineJoinStyle = kCGLineJoinRound; //终点处理
+       [path moveToPoint:CGPointMake(0, shadowWidth)];
+       [path addLineToPoint:CGPointMake(0, self.ZtopView.bounds.size.height)];
+       [path addLineToPoint:CGPointMake(self.ZtopView.bounds.size.width, self.ZtopView.bounds.size.height)];
+       [path addLineToPoint:CGPointMake(self.ZtopView.bounds.size.width, 8)];
+       [path addLineToPoint:CGPointMake(self.ZtopView.bounds.size.width , self.ZtopView.bounds.size.height )];
+       [path closePath];
+       
+    self.ZtopView.layer.shadowPath = path.CGPath;
+}
 -(void)Addtableview
 {
     arrtitle=[NSMutableArray arrayWithCapacity:0];
@@ -175,21 +193,26 @@
     NSLog(@"index == %ld",indexPath.section);
     
     if(indexPath.section==0){
-        
-        jiluViewController * avc = [[jiluViewController alloc] init];
-        [self.navigationController pushViewController:avc animated:YES];
+
+        ZjiluViewController * avc = [[ZjiluViewController alloc] init];
+        [self pushRootNav:avc animated:YES];
     }else if(indexPath.section==1)
     {
         chongzhiListViewController * avc = [[chongzhiListViewController alloc] init];
-        [self.navigationController pushViewController:avc animated:YES];
+        [self pushRootNav:avc animated:YES];
     }else if(indexPath.section==2)
     {
         zhanghuInfoViewController * avc = [[zhanghuInfoViewController alloc] init];
-        [self.navigationController pushViewController:avc animated:YES];
+        [self pushRootNav:avc animated:YES];
+        
+    }else if(indexPath.section==3)
+    {
+        FAQViewController * avc = [[FAQViewController alloc] init];
+        [self pushRootNav:avc animated:YES];
     }else if(indexPath.section==4)
     {
         safeViewController * avc = [[safeViewController alloc] init];
-        [self.navigationController pushViewController:avc animated:YES];
+        [self pushRootNav:avc animated:YES];
     }
 }
 @end

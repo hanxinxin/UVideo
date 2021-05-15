@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,15 +13,43 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="editBg" translatesAutoresizingMaskIntoConstraints="NO" id="1Hk-3d-cET">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="414" id="Lbb-eF-GiH"/>
+                                    <constraint firstAttribute="height" constant="896" id="nnN-8y-TXg"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="kaunchlogo" translatesAutoresizingMaskIntoConstraints="NO" id="T9t-bL-eDD">
+                                <rect key="frame" x="87" y="256" width="240" height="128"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="Ugg-lc-kvq"/>
+                                    <constraint firstAttribute="height" constant="128" id="hjB-uL-zcI"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1Hk-3d-cET" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="4U2-ht-zI3"/>
+                            <constraint firstItem="1Hk-3d-cET" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QUi-rD-GfN"/>
+                            <constraint firstItem="T9t-bL-eDD" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Y3H-tW-p1g"/>
+                            <constraint firstItem="1Hk-3d-cET" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="gsh-d6-i0u"/>
+                            <constraint firstAttribute="bottom" secondItem="1Hk-3d-cET" secondAttribute="bottom" id="vtA-m6-jyt"/>
+                            <constraint firstItem="T9t-bL-eDD" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="212" id="zZy-3A-8Vl"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="editBg" width="750" height="1334"/>
+        <image name="kaunchlogo" width="199.5" height="76"/>
+    </resources>
 </document>

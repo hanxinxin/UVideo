@@ -12,12 +12,16 @@
 #import "MyViewController.h"
 #import "memberViewController.h"
 #import "jiluViewController.h"
+#import "BaseWindow.h"
+
 
 #import "CMHHTTPService.h"
 #import "IQKeyboardManager.h"
 #if defined(DEBUG)||defined(_DEBUG)
 #import "JPFPSStatus.h"
 #endif
+
+
 
 @interface AppDelegate ()
 /// 用户数据 只读
@@ -26,21 +30,30 @@
 
 @implementation AppDelegate
 
+- (void)reachabilityChanged:(NSNotification *)notification
+{
+
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    if (@available(iOS 13.0, *)) {
-        self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-//        HXBaseNavgationController * viewC = [self tabBarController];
-        [self.window setRootViewController:[self tabBarController]];
-        [self.window makeKeyAndVisible];
-        } else {
-        
-//            HXBaseNavgationController * viewC = [self tabBarController];
-            self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-            [self.window setRootViewController:[self tabBarController]];
-            [self.window makeKeyAndVisible];
-        }
+//    if (@available(iOS 13.0, *)) {
+//        self.window = [[BaseWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+//         self.window.backgroundColor = [UIColor whiteColor];
+//         [self.window makeKeyAndVisible];
+//        } else {
+//            self.window = [[BaseWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
+//             self.window.backgroundColor = [UIColor whiteColor];
+//             [self.window makeKeyAndVisible];
+//        }
+    
+           
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.nav = [self tabBarController];
+    [self.window setRootViewController:self.nav];
+    [self.window makeKeyAndVisible];
+    
+    
 //    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     //   使用NSUserDefaults来判断程序是否第一次启动
@@ -66,7 +79,7 @@
     
     return YES;
 }
-- (UITabBarController *)tabBarController {
+- (HXBaseNavgationController *)tabBarController {
     
     UITabBarController * tabBarC = [[UITabBarController alloc] init];
     
@@ -86,19 +99,20 @@
     
     tabBarC.viewControllers = @[[tabBarVC1 addNav],[tabBarVC2 addNav],[tabBarVC3 addNav],[tabBarVC4 addNav],[tabBarVC5 addNav]];
     
-//    HXBaseNavgationController * rootNav = [[HXBaseNavgationController alloc ] initWithRootViewController:tabBarC];
-//    [rootNav setNavigationBarHidden:YES];
-    return tabBarC;
+    HXBaseNavgationController * rootNav = [[HXBaseNavgationController alloc ] initWithRootViewController:tabBarC];
+    [rootNav setNavigationBarHidden:YES];
+    [rootNav.navigationController.navigationBar setHidden:YES];
+    return rootNav;
 }
 
 #pragma mark - UISceneSession lifecycle
 
 
-- (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options {
-    // Called when a new scene session is being created.
-    // Use this method to select a configuration to create the new scene with.
-    return [[UISceneConfiguration alloc] initWithName:@"Default Configuration" sessionRole:connectingSceneSession.role];
-}
+//- (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options {
+//    // Called when a new scene session is being created.
+//    // Use this method to select a configuration to create the new scene with.
+//    return [[UISceneConfiguration alloc] initWithName:@"Default Configuration" sessionRole:connectingSceneSession.role];
+//}
 
 
 - (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions {
@@ -106,6 +120,39 @@
     // If any sessions were discarded while the application was not running, this will be called shortly after application:didFinishLaunchingWithOptions.
     // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
 }
+
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+    UIApplication*   app = [UIApplication sharedApplication];
+    __block    UIBackgroundTaskIdentifier bgTask;
+    
+    bgTask = [app beginBackgroundTaskWithExpirationHandler:^
+              {
+                  dispatch_async(dispatch_get_main_queue(), ^
+                                 {
+                                     if (bgTask != UIBackgroundTaskInvalid)
+                                     {
+                                         bgTask = UIBackgroundTaskInvalid;
+                                     }
+                                 });
+              }];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^
+                   {
+                       dispatch_async(dispatch_get_main_queue(), ^
+                                      {
+                                          if (bgTask != UIBackgroundTaskInvalid)
+                                          {
+                                              bgTask = UIBackgroundTaskInvalid;
+                                          }
+                                      });
+                   });
+}
+
 
 #pragma mark- 获取appdelegate
 + (AppDelegate *)sharedDelegate{

@@ -32,11 +32,17 @@
     self.passwordTextfield.keyboardType=UIKeyboardTypeEmailAddress;
     self.ZC_btn.layer.cornerRadius = 10;
     self.DL_Btn.layer.cornerRadius = 10;
+    self.centerView.layer.cornerRadius=6;
+    self.centerView.backgroundColor=[UIColor whiteColor];
+    self.centerView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.16].CGColor;
+    self.centerView.layer.shadowOffset = CGSizeMake(0,0);
+    self.centerView.layer.shadowRadius = 6;
+    self.centerView.layer.shadowOpacity = 0.9;
     dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
 
     dispatch_after(delayTime, dispatch_get_main_queue(), ^{
         [self addtopview];
-        [self addShadowToView:self.centerView withColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.8]];
+        [self setyinying];
     });
     
 }
@@ -95,14 +101,12 @@
         [self.menuBtn1 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
         [self.menuBtn2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
     }
-    self.emailTextfield.placeholder=@"请输入邮箱";
-    //首先保证你的imageVIew是正方形的，要不然效果不是圆的
-    self.centerView.layer.masksToBounds = YES;
-    self.centerView.layer.cornerRadius=6;
-    [self setBorderWithView:self.centerView top:NO left:YES bottom:YES right:YES borderColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] borderWidth:0.5];
-    [self addShadowToView:self.centerView withColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.8]];
+    
+    [self setyinying];
+    
     [self setBorderWithView:self.menuBtn1 top:NO left:NO bottom:YES right:NO borderColor:RGB(20, 155, 236) borderWidth:0.5];
     [self setBorderWithView:self.menuBtn2 top:NO left:NO bottom:YES right:NO borderColor:RGB(255, 255, 255) borderWidth:0.5];
+    self.emailTextfield.placeholder=@"请输入手机号";
     self.menuIndex = 1;
     self.menuBtn1.selected=YES;
     self.menuBtn2.selected=NO;
@@ -118,16 +122,13 @@
         [self.menuBtn2 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
     }
     
-    //首先保证你的imageVIew是正方形的，要不然效果不是圆的
-    self.centerView.layer.masksToBounds = YES;
     self.centerView.layer.cornerRadius=6;
-    [self setBorderWithView:self.centerView top:NO left:YES bottom:YES right:YES borderColor:[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] borderWidth:0.5];
-    [self addShadowToView:self.centerView withColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.8]];
+    [self setyinying];
 
     
     [self setBorderWithView:self.menuBtn2 top:NO left:NO bottom:YES right:NO borderColor:RGB(20, 155, 236) borderWidth:0.5];
     [self setBorderWithView:self.menuBtn1 top:NO left:NO bottom:YES right:NO borderColor:RGB(255 ,255, 255) borderWidth:0.5];
-    self.emailTextfield.placeholder=@"请输入手机号";
+    self.emailTextfield.placeholder=@"请输入邮箱";
     self.menuIndex = 2;
     self.menuBtn1.selected=NO;
     self.menuBtn2.selected=YES;
@@ -194,5 +195,21 @@
         CGRect shadowRect = CGRectMake(0, theView.bounds.size.height, theView.bounds.size.width, shadowPathWidth);
         UIBezierPath *path = [UIBezierPath bezierPathWithRect:shadowRect];
         theView.layer.shadowPath = path.CGPath;
+}
+
+
+- (void)setyinying
+{
+    self.centerView.layer.masksToBounds = NO;
+    UIBezierPath *path = [[UIBezierPath alloc] init];
+    CGFloat shadowWidth = 6;
+       [path moveToPoint:CGPointMake(0, shadowWidth)];
+       [path addLineToPoint:CGPointMake(0, self.centerView.bounds.size.height)];
+       [path addLineToPoint:CGPointMake(self.centerView.width, self.centerView.height)];
+       [path addLineToPoint:CGPointMake(self.centerView.width, shadowWidth)];
+       
+       [path closePath];
+       
+    self.centerView.layer.shadowPath = path.CGPath;
 }
 @end

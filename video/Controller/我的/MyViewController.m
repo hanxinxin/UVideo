@@ -31,7 +31,7 @@
     // Do any additional setup after loading the view.
 //    self.navBarColor=[UIColor whiteColor];
 //    self.hiddenLeftBtn=YES;
-    
+    self.title=@"";
     [self InitUIView];
     [self Addtableview];
     [self setyinying];
@@ -75,6 +75,63 @@
     };
     self.Headerview.cellindexBlock = ^(NSInteger CellIndex) {
         NSLog(@"CellIndex= %ld",CellIndex);
+        if(CellIndex==1000)
+        {
+            // 这是从一个模态出来的页面跳到tabbar的某一个页面
+            if (@available(iOS 13.0, *)) {
+                NSArray *array =[[[UIApplication sharedApplication] connectedScenes] allObjects];
+                UIWindowScene *windowScene = (UIWindowScene *)array[0];
+                SceneDelegate *delegate =(SceneDelegate *)windowScene.delegate;
+//                UITabBarController* tabViewController=(UITabBarController *) delegate.window.rootViewController;
+//                tabViewController.selectedIndex = 1;
+                HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
+                NSArray * arraynav = nav.viewControllers;
+                UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
+                tabViewController.selectedIndex = 1;
+            } else {
+                // Fallback on earlier versions
+                AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//                UITabBarController *tabViewController = (UITabBarController *) delegate.window.rootViewController;
+//                [tabViewController setSelectedIndex:1];
+                
+                HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
+                NSArray * arraynav = nav.viewControllers;
+                UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
+                tabViewController.selectedIndex = 1;
+            }
+        }else if(CellIndex==1001)
+        {
+            
+        }else if(CellIndex==1002)
+        {
+            
+        }else if(CellIndex==1003)
+        {
+
+            // 这是从一个模态出来的页面跳到tabbar的某一个页面
+            if (@available(iOS 13.0, *)) {
+                NSArray *array =[[[UIApplication sharedApplication] connectedScenes] allObjects];
+                UIWindowScene *windowScene = (UIWindowScene *)array[0];
+                SceneDelegate *delegate =(SceneDelegate *)windowScene.delegate;
+//                UITabBarController* tabViewController=(UITabBarController *) delegate.window.rootViewController;
+//                tabViewController.selectedIndex = 2;
+                HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
+                NSArray * arraynav = nav.viewControllers;
+                UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
+                tabViewController.selectedIndex = 2;
+            } else {
+                // Fallback on earlier versions
+                AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//                UITabBarController *tabViewController = (UITabBarController *) delegate.window.rootViewController;
+//                [tabViewController setSelectedIndex:2];
+                
+                HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
+                NSArray * arraynav = nav.viewControllers;
+                UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
+                tabViewController.selectedIndex = 2;
+            }
+ 
+        }
     };
 }
 - (void)setyinying
@@ -194,8 +251,33 @@
     
     if(indexPath.section==0){
 
-        ZjiluViewController * avc = [[ZjiluViewController alloc] init];
-        [self pushRootNav:avc animated:YES];
+//        ZjiluViewController * avc = [[ZjiluViewController alloc] init];
+//        [self pushRootNav:avc animated:YES];
+        
+        // 这是从一个模态出来的页面跳到tabbar的某一个页面
+        if (@available(iOS 13.0, *)) {
+            NSArray *array =[[[UIApplication sharedApplication] connectedScenes] allObjects];
+            UIWindowScene *windowScene = (UIWindowScene *)array[0];
+            SceneDelegate *delegate =(SceneDelegate *)windowScene.delegate;
+//            UITabBarController* tabViewController=(UITabBarController *) delegate.window.rootViewController;
+//            tabViewController.selectedIndex = 1;
+            HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
+            NSArray * arraynav = nav.viewControllers;
+            UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
+            tabViewController.selectedIndex = 1;
+            
+        } else {
+            // Fallback on earlier versions
+            AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//            UITabBarController *tabViewController = (UITabBarController *) delegate.window.rootViewController;
+//            [tabViewController setSelectedIndex:1];
+            HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
+            NSArray * arraynav = nav.viewControllers;
+            UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
+            tabViewController.selectedIndex = 1;
+        }
+        
+        
     }else if(indexPath.section==1)
     {
         chongzhiListViewController * avc = [[chongzhiListViewController alloc] init];

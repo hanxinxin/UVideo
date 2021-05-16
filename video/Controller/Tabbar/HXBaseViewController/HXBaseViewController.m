@@ -199,7 +199,7 @@
     self.hiddenStatusBar = NO;
 
     //状态栏 字体颜色 黑色/白色 默认白色
-    self.statusBarTextIsWhite = YES;
+    self.statusBarTextIsWhite = NO;
     //导航透明 YES 透明
     self.navBarTranslucent = NO;
     //导航按钮初始化
@@ -213,7 +213,8 @@
     //导航左按钮
     leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
-    [leftBtn setTitle:@"" forState:(UIControlStateNormal)];
+    [leftBtn setTitle:@"返回" forState:(UIControlStateNormal)];
+    [leftBtn setTintColor:GNavTextColor];
     [leftBtn setImage:[NSString getImageOfImageName:GNavBackImageName type:BaseNavController] forState:UIControlStateNormal];
     [leftBtn addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchUpInside];
 

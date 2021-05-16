@@ -7,6 +7,7 @@
 
 #import "FAQViewController.h"
 #import "HYSlider.h"
+#import "lxkfViewController.h"
 
 #import "SCJTableViewCell.h"
 #import "SliderTableViewCell.h"
@@ -26,6 +27,14 @@
 @property(nonatomic,strong)UIButton *menuBtn1;
 @property(nonatomic,strong)UIButton *menuBtn2;
 @property(nonatomic,strong)UIButton *menuBtn3;
+
+@property(nonatomic,strong)CAGradientLayer *gl1n;
+@property(nonatomic,strong)CAGradientLayer *gl1y;
+@property(nonatomic,strong)CAGradientLayer *gl2n;
+@property(nonatomic,strong)CAGradientLayer *gl2y;
+@property(nonatomic,strong)CAGradientLayer *gl3n;
+@property(nonatomic,strong)CAGradientLayer *gl3y;
+
 ///无内容显示view
 @property (strong, nonatomic) UIView *nilView;
 @property (strong, nonatomic) UIImageView * nilImageView;
@@ -43,7 +52,15 @@
     self.statusBarTextIsWhite=NO;
     self.statusBarBackgroundColor=[UIColor blackColor];
     self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
-//    self.rightBtnV=[];
+    
+    //下载按钮
+    UIButton *rightItem = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64, 25)];
+    [rightItem setTitle:@"联系客服" forState:(UIControlStateNormal)];
+    [rightItem setTintColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0]];
+    [rightItem setImage:[UIImage imageNamed:@"helpimage"] forState:UIControlStateNormal];
+    [rightItem addTarget:self action:@selector(right_touch:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.rightBtnV=rightItem;
     
     [self addtopview];
     [self initnilView];
@@ -52,6 +69,11 @@
     [self Addtableview3];
     [self touchOne:nil];
 //    [self addnilView];
+}
+-(void)right_touch:(id)sender
+{
+    lxkfViewController * avc = [[UIStoryboard storyboardWithName: @"Main" bundle: nil] instantiateViewControllerWithIdentifier: @"lxkfViewController"];
+    [self pushRootNav:avc animated:YES];
 }
 ///// 加载无内容显示的view
 -(void)initnilView
@@ -94,10 +116,10 @@
     button1.layer.cornerRadius = 10;
     [button1 setTitle:@"注册登录" forState:(UIControlStateNormal)];
     [button1 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
-//    [button1 setTitle:@"收藏夹" forState:(UIControlStateNormal)];
-//    [button1 setTitle:@"收藏夹" forState:(UIControlStateSelected)];
-//    [button1 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-//    [button1 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
+    [button1 setTitle:@"注册登录" forState:(UIControlStateNormal)];
+    [button1 setTitle:@"注册登录" forState:(UIControlStateSelected)];
+    [button1 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+    [button1 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateSelected)];
     button1.selected=YES;
     [button1.layer insertSublayer:[self selectLayer:CGRectMake(0, 0, button1.width, button1.height)]atIndex:0];
     [button1 addTarget:self action:@selector(touchOne:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -110,41 +132,56 @@
     button2.layer.cornerRadius = 10;
     [button2 setTitle:@"充值到账" forState:(UIControlStateNormal)];
     [button2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-//    [button2 setTitle:@"播放记录" forState:(UIControlStateNormal)];
-//    [button2 setTitle:@"播放记录" forState:(UIControlStateSelected)];
-//    [button2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-//    [button2 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateSelected)];
+    [button2 setTitle:@"充值到账" forState:(UIControlStateNormal)];
+    [button2 setTitle:@"充值到账" forState:(UIControlStateSelected)];
+    [button2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+    [button2 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateSelected)];
     button2.selected=NO;
     [button2.layer insertSublayer:[self NormalLayer:CGRectMake(0, 0, button2.width, button2.height)]atIndex:0];
     [button2 addTarget:self action:@selector(touchTwo:) forControlEvents:(UIControlEventTouchUpInside)];
     [topView addSubview:button2];
+    self.menuBtn2=button2;
     UIButton *button3 = [[UIButton alloc] init];
     button3.frame = CGRectMake(button2.right+8,2,((SCREEN_WIDTH-40-16)/3),38);
     button3.alpha = 1;
     button3.layer.cornerRadius = 10;
     [button3 setTitle:@"金币任务" forState:(UIControlStateNormal)];
     [button3 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-//    [button2 setTitle:@"播放记录" forState:(UIControlStateNormal)];
-//    [button2 setTitle:@"播放记录" forState:(UIControlStateSelected)];
-//    [button2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-//    [button2 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateSelected)];
+    [button3 setTitle:@"金币任务" forState:(UIControlStateNormal)];
+    [button3 setTitle:@"金币任务" forState:(UIControlStateSelected)];
+    [button3 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+    [button3 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateSelected)];
     button3.selected=NO;
     [button3.layer insertSublayer:[self NormalLayer:CGRectMake(0, 0, button3.width, button3.height)]atIndex:0];
     [button3 addTarget:self action:@selector(touchThree:) forControlEvents:(UIControlEventTouchUpInside)];
     [topView addSubview:button3];
     self.menuBtn3=button3;
+    
+    
+    self.gl1n = [self NormalLayer:CGRectMake(0, 0, self.menuBtn1.width, self.menuBtn1.height)];
+    self.gl1y = [self selectLayer:CGRectMake(0, 0, self.menuBtn1.width, self.menuBtn1.height)];
+    self.gl2n = [self NormalLayer:CGRectMake(0, 0, self.menuBtn2.width, self.menuBtn2.height)];
+    self.gl2y = [self selectLayer:CGRectMake(0, 0, self.menuBtn2.width, self.menuBtn2.height)];
+    self.gl3n = [self NormalLayer:CGRectMake(0, 0, self.menuBtn3.width, self.menuBtn3.height)];
+    self.gl3y = [self selectLayer:CGRectMake(0, 0, self.menuBtn3.width, self.menuBtn3.height)];
+    [self.menuBtn1.layer addSublayer:_gl1n];
+    [self.menuBtn1.layer addSublayer:_gl1y];
+    [self.menuBtn1.layer insertSublayer:_gl1y above:_gl1n];
+    [self.menuBtn2.layer addSublayer:_gl2n];
+    [self.menuBtn2.layer addSublayer:_gl2y];
+    [self.menuBtn2.layer insertSublayer:_gl2n above:_gl2y];
+    [self.menuBtn3.layer addSublayer:_gl3n];
+    [self.menuBtn3.layer addSublayer:_gl3y];
+    [self.menuBtn3.layer insertSublayer:_gl3n above:_gl3y];
 }
 -(void)touchOne:(id)sender
 {
     
     if(self.menuBtn1.selected==NO)
     {
-        [self.menuBtn1.layer insertSublayer:[self selectLayer:CGRectMake(0, 0, self.menuBtn1.width, self.menuBtn1.height)]atIndex:0];
-        [self.menuBtn2.layer insertSublayer:[self NormalLayer:CGRectMake(0, 0, self.menuBtn2.width, self.menuBtn2.height)]atIndex:0];
-        [self.menuBtn3.layer insertSublayer:[self NormalLayer:CGRectMake(0, 0, self.menuBtn3.width, self.menuBtn3.height)]atIndex:0];
-        [self.menuBtn1 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
-        [self.menuBtn2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-        [self.menuBtn3 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+        [self.menuBtn1.layer insertSublayer:_gl1y above:_gl1n];
+        [self.menuBtn2.layer insertSublayer:_gl2n above:_gl2y];
+        [self.menuBtn3.layer insertSublayer:_gl3n above:_gl3y];
     }
     self.downtableview1.hidden=NO;
     self.downtableview2.hidden=YES;
@@ -157,13 +194,9 @@
 {
     if(self.menuBtn2.selected==NO)
     {
-        [self.menuBtn1.layer insertSublayer:[self NormalLayer:CGRectMake(0, 0, self.menuBtn1.width, self.menuBtn1.height)]atIndex:0];
-        [self.menuBtn2.layer insertSublayer:[self selectLayer:CGRectMake(0, 0, self.menuBtn2.width, self.menuBtn2.height)]atIndex:0];
-        [self.menuBtn3.layer insertSublayer:[self NormalLayer:CGRectMake(0, 0, self.menuBtn3.width, self.menuBtn3.height)]atIndex:0];
-        
-        [self.menuBtn1 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-        [self.menuBtn2 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
-        [self.menuBtn3 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+        [self.menuBtn1.layer insertSublayer:_gl1n above:_gl1y];
+        [self.menuBtn2.layer insertSublayer:_gl2y above:_gl2n];
+        [self.menuBtn3.layer insertSublayer:_gl3n above:_gl3y];
     }
     self.downtableview1.hidden=YES;
     self.downtableview2.hidden=NO;
@@ -177,13 +210,9 @@
 {
     if(self.menuBtn3.selected==NO)
     {
-        [self.menuBtn1.layer insertSublayer:[self NormalLayer:CGRectMake(0, 0, self.menuBtn1.width, self.menuBtn1.height)]atIndex:0];
-        [self.menuBtn2.layer insertSublayer:[self NormalLayer:CGRectMake(0, 0, self.menuBtn2.width, self.menuBtn2.height)]atIndex:0];
-        [self.menuBtn3.layer insertSublayer:[self selectLayer:CGRectMake(0, 0, self.menuBtn3.width, self.menuBtn3.height)]atIndex:0];
-        
-        [self.menuBtn1 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-        [self.menuBtn2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-        [self.menuBtn3 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
+        [self.menuBtn1.layer insertSublayer:_gl1n above:_gl1y];
+        [self.menuBtn2.layer insertSublayer:_gl2n above:_gl2y];
+        [self.menuBtn3.layer insertSublayer:_gl3y above:_gl3n];
     }
     self.downtableview1.hidden=YES;
     self.downtableview2.hidden=YES;
@@ -225,7 +254,7 @@
     [Listarray1 addObject:@"安全设置"];
     [Listarray1 addObject:@"清理缓存"];
     self.downtableview1=[[UITableView alloc] init];
-    self.downtableview1.frame=CGRectMake(20, 40, SCREEN_WIDTH-40, SCREENH_HEIGHT-40-kNavBarAndStatusBarHeight);
+    self.downtableview1.frame=CGRectMake(20, 50, SCREEN_WIDTH-40, SCREENH_HEIGHT-50-kNavBarAndStatusBarHeight);
     self.downtableview1.backgroundColor=[UIColor whiteColor];
     self.downtableview1.delegate=self;
     self.downtableview1.dataSource=self;
@@ -248,7 +277,7 @@
     [Listarray2 addObject:@"安全设置"];
     [Listarray2 addObject:@"清理缓存"];
     self.downtableview2=[[UITableView alloc] init];
-    self.downtableview2.frame=CGRectMake(20, 40, SCREEN_WIDTH-40, SCREENH_HEIGHT-40-kNavBarAndStatusBarHeight);
+    self.downtableview2.frame=CGRectMake(20, 50, SCREEN_WIDTH-40, SCREENH_HEIGHT-50-kNavBarAndStatusBarHeight);
     self.downtableview2.backgroundColor=[UIColor whiteColor];
     self.downtableview2.delegate=self;
     self.downtableview2.dataSource=self;
@@ -271,7 +300,7 @@
     [Listarray3 addObject:@"安全设置"];
     [Listarray3 addObject:@"清理缓存"];
     self.downtableview3=[[UITableView alloc] init];
-    self.downtableview3.frame=CGRectMake(20, 40, SCREEN_WIDTH-40, SCREENH_HEIGHT-40-kNavBarAndStatusBarHeight);
+    self.downtableview3.frame=CGRectMake(20, 50, SCREEN_WIDTH-40, SCREENH_HEIGHT-50-kNavBarAndStatusBarHeight);
     self.downtableview3.backgroundColor=[UIColor whiteColor];
     self.downtableview3.delegate=self;
     self.downtableview3.dataSource=self;

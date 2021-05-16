@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pBi-dW-q20">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pBi-dW-q20">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -173,9 +173,80 @@
             </objects>
             <point key="canvasLocation" x="-1031.2" y="844.22788605697156"/>
         </scene>
+        <!--Lxkf View Controller-->
+        <scene sceneID="kGL-0v-Gtt">
+            <objects>
+                <viewController storyboardIdentifier="lxkfViewController" id="FKA-j6-9qp" customClass="lxkfViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kaH-SH-DM2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lxkfbg" translatesAutoresizingMaskIntoConstraints="NO" id="kv7-yt-E5e">
+                                <rect key="frame" x="16" y="95" width="343" height="210"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="210" id="ivT-Gn-135"/>
+                                    <constraint firstAttribute="width" constant="343" id="tRY-Ak-LlQ"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="image" translatesAutoresizingMaskIntoConstraints="NO" id="7fQ-0F-0JE">
+                                <rect key="frame" x="97.5" y="243.5" width="180" height="180"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="BKt-i9-3Wq"/>
+                                    <constraint firstAttribute="height" constant="180" id="dPg-wi-pOS"/>
+                                </constraints>
+                            </imageView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="buw-Fa-obh">
+                                <rect key="frame" x="0.0" y="333" width="375" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="7AJ-bp-O9x"/>
+                                    <constraint firstAttribute="height" constant="1" id="V8R-Zi-OCe"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="截图微信扫码联系客服" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VUU-w1-xcy">
+                                <rect key="frame" x="16" y="432" width="343" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="62P-7Y-o7M"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.1960526407" green="0.19609326120000001" blue="0.1960500479" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="pBD-ik-mRy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="7fQ-0F-0JE" firstAttribute="centerY" secondItem="kaH-SH-DM2" secondAttribute="centerY" id="4kL-6S-1cz"/>
+                            <constraint firstItem="buw-Fa-obh" firstAttribute="centerY" secondItem="kaH-SH-DM2" secondAttribute="centerY" id="7DT-z2-Fmj"/>
+                            <constraint firstItem="buw-Fa-obh" firstAttribute="top" secondItem="kv7-yt-E5e" secondAttribute="bottom" constant="28" id="MOM-Pk-aHP"/>
+                            <constraint firstItem="VUU-w1-xcy" firstAttribute="leading" secondItem="pBD-ik-mRy" secondAttribute="leading" constant="16" id="Tt8-s2-p2b"/>
+                            <constraint firstItem="pBD-ik-mRy" firstAttribute="trailing" secondItem="VUU-w1-xcy" secondAttribute="trailing" constant="16" id="VUv-xZ-XZJ"/>
+                            <constraint firstItem="7fQ-0F-0JE" firstAttribute="centerX" secondItem="kaH-SH-DM2" secondAttribute="centerX" id="fgD-1X-RsX"/>
+                            <constraint firstItem="buw-Fa-obh" firstAttribute="leading" secondItem="kaH-SH-DM2" secondAttribute="leading" id="jXg-Od-PBA"/>
+                            <constraint firstItem="pBD-ik-mRy" firstAttribute="trailing" secondItem="kv7-yt-E5e" secondAttribute="trailing" constant="16" id="m8N-Zc-bU4"/>
+                            <constraint firstAttribute="trailing" secondItem="buw-Fa-obh" secondAttribute="trailing" id="neW-Dk-6p8"/>
+                            <constraint firstItem="kv7-yt-E5e" firstAttribute="leading" secondItem="pBD-ik-mRy" secondAttribute="leading" constant="16" id="oVr-VJ-pcS"/>
+                            <constraint firstItem="buw-Fa-obh" firstAttribute="centerX" secondItem="kaH-SH-DM2" secondAttribute="centerX" id="usP-Z5-6Jc"/>
+                            <constraint firstItem="VUU-w1-xcy" firstAttribute="top" secondItem="7fQ-0F-0JE" secondAttribute="bottom" constant="8.5" id="yJa-02-0x0"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="bgView" destination="kv7-yt-E5e" id="QMz-6z-EKx"/>
+                        <outlet property="erweimaView" destination="7fQ-0F-0JE" id="auT-Nz-hnz"/>
+                        <outlet property="titleLabel" destination="VUU-w1-xcy" id="F9f-Ke-PgH"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6HX-fX-isZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-229.59999999999999" y="844.22788605697156"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="image" width="67.5" height="58"/>
         <image name="loginBg" width="323" height="226.5"/>
+        <image name="lxkfbg" width="358.5" height="210"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

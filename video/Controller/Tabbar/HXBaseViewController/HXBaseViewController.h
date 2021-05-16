@@ -14,7 +14,7 @@
 #define GBackGroundColor [UIColor colorWithRed:1.000 green:1.000 blue:1.000 alpha:1.000]
 
 //导航栏 属性 标题颜色 标题字体
-#define GNavTextColor [UIColor whiteColor]
+#define GNavTextColor [UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0]
 static int fontSize = 18; ///<导航栏标题文字 字体大小
 #define GNavTextFont (GFONT(fontSize))
 
@@ -24,7 +24,7 @@ static int fontSize = 18; ///<导航栏标题文字 字体大小
 #define GNavBtnTitleColorSelect [UIColor colorWithWhite:0.806 alpha:1.000]
 
 //导航栏 颜色
-#define GNavBgColor [UIColor colorWithRed:0.213 green:0.551 blue:1.000 alpha:0.000]
+#define GNavBgColor [UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1]
 
 //默认导航 返回 按钮图标 名称
 #define GNavBackImageName @"nav_btn_back_def" //修改返回图标，通过 backImage

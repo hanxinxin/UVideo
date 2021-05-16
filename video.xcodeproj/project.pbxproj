@@ -310,6 +310,7 @@
 		FA949CBD264AC76E00498EB6 /* safeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CBC264AC76E00498EB6 /* safeViewController.m */; };
 		FA949CC2264AC90800498EB6 /* chongzhiListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CC1264AC90800498EB6 /* chongzhiListViewController.m */; };
 		FA949CC5264AC92A00498EB6 /* zhanghuInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CC4264AC92A00498EB6 /* zhanghuInfoViewController.m */; };
+		FA9CFEF926515BAC00A116A3 /* lxkfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9CFEF826515BAC00A116A3 /* lxkfViewController.m */; };
 		FA9FBAA72647819700E4F27E /* memberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FBAA62647819700E4F27E /* memberViewController.m */; };
 		FA9FBAAC2647ADDB00E4F27E /* topHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FBAAB2647ADDB00E4F27E /* topHeaderView.m */; };
 		FA9FBAAE2647ADEB00E4F27E /* topHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9FBAAD2647ADEB00E4F27E /* topHeaderView.xib */; };
@@ -911,6 +912,8 @@
 		FA949CC1264AC90800498EB6 /* chongzhiListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chongzhiListViewController.m; sourceTree = "<group>"; };
 		FA949CC3264AC92A00498EB6 /* zhanghuInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zhanghuInfoViewController.h; sourceTree = "<group>"; };
 		FA949CC4264AC92A00498EB6 /* zhanghuInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zhanghuInfoViewController.m; sourceTree = "<group>"; };
+		FA9CFEF726515BAC00A116A3 /* lxkfViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lxkfViewController.h; sourceTree = "<group>"; };
+		FA9CFEF826515BAC00A116A3 /* lxkfViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = lxkfViewController.m; sourceTree = "<group>"; };
 		FA9FBAA52647819700E4F27E /* memberViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = memberViewController.h; sourceTree = "<group>"; };
 		FA9FBAA62647819700E4F27E /* memberViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = memberViewController.m; sourceTree = "<group>"; };
 		FA9FBAAA2647ADDB00E4F27E /* topHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = topHeaderView.h; sourceTree = "<group>"; };
@@ -1545,6 +1548,7 @@
 		8A82F15E264FCB5D004AAF40 /* 常见问题 */ = {
 			isa = PBXGroup;
 			children = (
+				FA9CFEF626515B8F00A116A3 /* 联系客服 */,
 				8A82F168264FCE42004AAF40 /* cell */,
 				8A82F15F264FCBE4004AAF40 /* FAQViewController.h */,
 				8A82F160264FCBE4004AAF40 /* FAQViewController.m */,
@@ -2653,6 +2657,15 @@
 			path = "充值记录";
 			sourceTree = "<group>";
 		};
+		FA9CFEF626515B8F00A116A3 /* 联系客服 */ = {
+			isa = PBXGroup;
+			children = (
+				FA9CFEF726515BAC00A116A3 /* lxkfViewController.h */,
+				FA9CFEF826515BAC00A116A3 /* lxkfViewController.m */,
+			);
+			path = "联系客服";
+			sourceTree = "<group>";
+		};
 		FA9FBAA42647815200E4F27E /* 会员充值 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3138,6 +3151,7 @@
 				8A39308F25FCDAED00E7331B /* CMHTableViewController.m in Sources */,
 				8A82F16C264FCEBA004AAF40 /* FAQTableViewCell.m in Sources */,
 				8A8BC19A25F9C7500028173C /* LLSearchSuggestionVC.m in Sources */,
+				FA9CFEF926515BAC00A116A3 /* lxkfViewController.m in Sources */,
 				8A3930F525FCDB3800E7331B /* UIView+CMHEmptyView.m in Sources */,
 				8A8BC1C125FA135A0028173C /* JRWaterFallLayout.m in Sources */,
 				8A8BC23F25FB3F770028173C /* MSCollectionViewCell.m in Sources */,

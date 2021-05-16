@@ -53,6 +53,8 @@
     [self.window setRootViewController:self.nav];
     [self.window makeKeyAndVisible];
     
+//    [self.window setRootViewController:[self tabBarController]];
+//    [self.window makeKeyAndVisible];
     
 //    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
@@ -98,7 +100,7 @@
     [tabBarVC5 setTabBarItemWithTitle:@"我的" titleUnSelectStyle:nil titleSelectStyle:nil unselectImage:[UIImage imageNamed:@"meimage"] selectImage:[UIImage imageNamed:@"meimageselect"] imageSize:CGSizeMake(30, 30)];
     
     tabBarC.viewControllers = @[[tabBarVC1 addNav],[tabBarVC2 addNav],[tabBarVC3 addNav],[tabBarVC4 addNav],[tabBarVC5 addNav]];
-    
+//    return tabBarC;
     HXBaseNavgationController * rootNav = [[HXBaseNavgationController alloc ] initWithRootViewController:tabBarC];
     [rootNav setNavigationBarHidden:YES];
     [rootNav.navigationController.navigationBar setHidden:YES];

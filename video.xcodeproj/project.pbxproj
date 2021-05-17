@@ -307,6 +307,11 @@
 		FA75823326496DB300778A63 /* CZCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA75823126496DB300778A63 /* CZCollectionViewCell.xib */; };
 		FA75823726497CC400778A63 /* vipHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA75823626497CC400778A63 /* vipHeaderView.m */; };
 		FA75823926497CD500778A63 /* vipHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA75823826497CD500778A63 /* vipHeaderView.xib */; };
+		FA8E71822652A3D50058F02F /* ClarityView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8E71812652A3D50058F02F /* ClarityView.m */; };
+		FA8E71862652A46A0058F02F /* clarityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8E71842652A46A0058F02F /* clarityCollectionViewCell.m */; };
+		FA8E71872652A46A0058F02F /* clarityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8E71852652A46A0058F02F /* clarityCollectionViewCell.xib */; };
+		FA8E718D2652BF450058F02F /* ZqwHorizontalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8E718C2652BF450058F02F /* ZqwHorizontalTableView.m */; };
+		FA8E71902652C0830058F02F /* ZqwTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8E718E2652C0830058F02F /* ZqwTableViewCell.m */; };
 		FA949CBD264AC76E00498EB6 /* safeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CBC264AC76E00498EB6 /* safeViewController.m */; };
 		FA949CC2264AC90800498EB6 /* chongzhiListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CC1264AC90800498EB6 /* chongzhiListViewController.m */; };
 		FA949CC5264AC92A00498EB6 /* zhanghuInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CC4264AC92A00498EB6 /* zhanghuInfoViewController.m */; };
@@ -906,6 +911,17 @@
 		FA75823526497CC400778A63 /* vipHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vipHeaderView.h; sourceTree = "<group>"; };
 		FA75823626497CC400778A63 /* vipHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = vipHeaderView.m; sourceTree = "<group>"; };
 		FA75823826497CD500778A63 /* vipHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = vipHeaderView.xib; sourceTree = "<group>"; };
+		FA8E71802652A3D50058F02F /* ClarityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClarityView.h; sourceTree = "<group>"; };
+		FA8E71812652A3D50058F02F /* ClarityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClarityView.m; sourceTree = "<group>"; };
+		FA8E71832652A46A0058F02F /* clarityCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = clarityCollectionViewCell.h; sourceTree = "<group>"; };
+		FA8E71842652A46A0058F02F /* clarityCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = clarityCollectionViewCell.m; sourceTree = "<group>"; };
+		FA8E71852652A46A0058F02F /* clarityCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = clarityCollectionViewCell.xib; sourceTree = "<group>"; };
+		FA8E71892652BF440058F02F /* ZqwTableViewDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZqwTableViewDataSource.h; sourceTree = "<group>"; };
+		FA8E718A2652BF440058F02F /* ZqwTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZqwTableViewDelegate.h; sourceTree = "<group>"; };
+		FA8E718B2652BF450058F02F /* ZqwHorizontalTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZqwHorizontalTableView.h; sourceTree = "<group>"; };
+		FA8E718C2652BF450058F02F /* ZqwHorizontalTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZqwHorizontalTableView.m; sourceTree = "<group>"; };
+		FA8E718E2652C0830058F02F /* ZqwTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZqwTableViewCell.m; sourceTree = "<group>"; };
+		FA8E718F2652C0830058F02F /* ZqwTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZqwTableViewCell.h; sourceTree = "<group>"; };
 		FA949CBB264AC76E00498EB6 /* safeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = safeViewController.h; sourceTree = "<group>"; };
 		FA949CBC264AC76E00498EB6 /* safeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = safeViewController.m; sourceTree = "<group>"; };
 		FA949CC0264AC90800498EB6 /* chongzhiListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chongzhiListViewController.h; sourceTree = "<group>"; };
@@ -1698,9 +1714,10 @@
 			path = MSCycleScrollView;
 			sourceTree = "<group>";
 		};
-		8A8BC2BF25FC6D790028173C /* 评论 */ = {
+		8A8BC2BF25FC6D790028173C /* 视频播放界面 */ = {
 			isa = PBXGroup;
 			children = (
+				FA8E717F2652A35E0058F02F /* Palyview */,
 				8A39312725FCDF0300E7331B /* Base */,
 				8A39311625FCDED100E7331B /* OneTableView */,
 				8A8BC2CB25FC6ECF0028173C /* MHYouKuController.h */,
@@ -1709,7 +1726,7 @@
 				8A8BC2E025FC6ED00028173C /* Model */,
 				8A8BC2CD25FC6ED00028173C /* View */,
 			);
-			path = "评论";
+			path = "视频播放界面";
 			sourceTree = "<group>";
 		};
 		8A8BC2C025FC6ECF0028173C /* Controller */ = {
@@ -2174,7 +2191,7 @@
 			children = (
 				8ACAEA912643E2180091EEFE /* 首页消息跑马灯 */,
 				8A8BC2FD25FC6F880028173C /* main */,
-				8A8BC2BF25FC6D790028173C /* 评论 */,
+				8A8BC2BF25FC6D790028173C /* 视频播放界面 */,
 				8A8BC18925F9C7370028173C /* 搜索框 */,
 				8AFDD40425F8D1D2006B1384 /* 菜单 */,
 				8A9C566B25F8A21B00EFA410 /* HomeViewController.h */,
@@ -2618,6 +2635,32 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		FA8E717F2652A35E0058F02F /* Palyview */ = {
+			isa = PBXGroup;
+			children = (
+				FA8E71882652BF030058F02F /* 横向tableview */,
+				FA8E71802652A3D50058F02F /* ClarityView.h */,
+				FA8E71812652A3D50058F02F /* ClarityView.m */,
+				FA8E71832652A46A0058F02F /* clarityCollectionViewCell.h */,
+				FA8E71842652A46A0058F02F /* clarityCollectionViewCell.m */,
+				FA8E71852652A46A0058F02F /* clarityCollectionViewCell.xib */,
+			);
+			path = Palyview;
+			sourceTree = "<group>";
+		};
+		FA8E71882652BF030058F02F /* 横向tableview */ = {
+			isa = PBXGroup;
+			children = (
+				FA8E718F2652C0830058F02F /* ZqwTableViewCell.h */,
+				FA8E718E2652C0830058F02F /* ZqwTableViewCell.m */,
+				FA8E718B2652BF450058F02F /* ZqwHorizontalTableView.h */,
+				FA8E718C2652BF450058F02F /* ZqwHorizontalTableView.m */,
+				FA8E71892652BF440058F02F /* ZqwTableViewDataSource.h */,
+				FA8E718A2652BF440058F02F /* ZqwTableViewDelegate.h */,
+			);
+			path = "横向tableview";
+			sourceTree = "<group>";
+		};
 		FA949CB9264AC72500498EB6 /* 子模块 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2849,6 +2892,7 @@
 				8A3930DB25FCDB3800E7331B /* cmh_default_goods_detail@3x.png in Resources */,
 				8A8BC17A25F8F73F0028173C /* ColumnEditViewController.xib in Resources */,
 				8A3930F425FCDB3800E7331B /* cmh_default_service_error@2x.png in Resources */,
+				FA8E71872652A46A0058F02F /* clarityCollectionViewCell.xib in Resources */,
 				FA75823326496DB300778A63 /* CZCollectionViewCell.xib in Resources */,
 				8A8BC38A25FC6F9E0028173C /* MBProgressHUD.bundle in Resources */,
 				8A82F102264F9A86004AAF40 /* LaunchViewController.xib in Resources */,
@@ -3030,6 +3074,7 @@
 				8A39306325FCD91A00E7331B /* CMHHTTPRequest.m in Sources */,
 				8A9C562125F8A10000EFA410 /* UIButton+Submitting.m in Sources */,
 				8A9C561A25F8A10000EFA410 /* UIColor+Web.m in Sources */,
+				FA8E71822652A3D50058F02F /* ClarityView.m in Sources */,
 				8A39313E25FCDFCE00E7331B /* MHCommentReply.m in Sources */,
 				8A82F0F1264F7FA6004AAF40 /* BaseWindow.m in Sources */,
 				8A9C567925F8A24E00EFA410 /* OfflineViewController.m in Sources */,
@@ -3205,6 +3250,7 @@
 				8A9C562025F8A10000EFA410 /* UIButton+MiddleAligning.m in Sources */,
 				8A9C562625F8A10000EFA410 /* UIImage+GIF.m in Sources */,
 				8A8BC1AC25FA0E6B0028173C /* VideoTableViewCell.m in Sources */,
+				FA8E71902652C0830058F02F /* ZqwTableViewCell.m in Sources */,
 				8A8BC38025FC6F9E0028173C /* YYThreadSafeDictionary.m in Sources */,
 				8A82F161264FCBE4004AAF40 /* FAQViewController.m in Sources */,
 				8A8BC3AC25FC6F9E0028173C /* NSDateFormatter+Extension.m in Sources */,
@@ -3240,6 +3286,7 @@
 				8A9C560A25F8A10000EFA410 /* UIView+ViewController.m in Sources */,
 				8A9C561D25F8A10000EFA410 /* UIButton+BackgroundColor.m in Sources */,
 				8A39302C25FCD86A00E7331B /* MHObject.m in Sources */,
+				FA8E718D2652BF450058F02F /* ZqwHorizontalTableView.m in Sources */,
 				8A9C567F25F8A27500EFA410 /* MyViewController.m in Sources */,
 				8A8BC38325FC6F9E0028173C /* YYFileHash.m in Sources */,
 				FA9FBAB72647C0A400E4F27E /* hxViewController.m in Sources */,
@@ -3262,6 +3309,7 @@
 				8A8BC19925F9C7500028173C /* LLSearchResultDoubleViewCell.m in Sources */,
 				8A272485264E883500B033BB /* XGpasswordViewController.m in Sources */,
 				8A9C563125F8A10000EFA410 /* UIImage+Alpha.m in Sources */,
+				FA8E71862652A46A0058F02F /* clarityCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

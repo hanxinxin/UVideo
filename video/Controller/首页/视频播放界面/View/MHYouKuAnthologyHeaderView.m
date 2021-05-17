@@ -10,6 +10,11 @@
 #import "MHTitleLeftButton.h"
 #import "MHYouKuAnthologyItem.h"
 
+
+#import "ZqwHorizontalTableView.h"
+#import "ZqwTableViewCell.h"
+
+
 static NSString * const reuseIdentifier = @"AnthologyCell";
 
 @interface JLAnthologyCell : UICollectionViewCell
@@ -115,7 +120,7 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
 @end
 
 
-@interface MHYouKuAnthologyHeaderView ()<UICollectionViewDataSource,UICollectionViewDelegate , UICollectionViewDelegateFlowLayout>
+@interface MHYouKuAnthologyHeaderView ()<UICollectionViewDataSource,UICollectionViewDelegate , UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource,ZqwTableViewDataSource,ZqwTableViewDelegate,UIScrollViewDelegate>
 
 /** titleView */
 @property (nonatomic , weak) UIView *titleView;
@@ -138,6 +143,17 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
 /** 分割线 */
 @property (nonatomic , weak) MHDivider *bottomSeparate ;
 
+
+
+
+
+
+/** tableView */
+@property (nonatomic , strong) ZqwHorizontalTableView *tableView;
+@property (nonatomic , strong) NSMutableArray *topArray;
+
+
+
 @end
 
 
@@ -149,7 +165,13 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
     return [[self alloc] init];
 }
 
-
+- (NSMutableArray *)topArray
+{
+    if (_topArray == nil) {
+        _topArray = [NSMutableArray array];
+    }
+    return _topArray;
+}
 + (instancetype)headerViewWithTableView:(UITableView *)tableView
 {
     static NSString *ID = @"AnthologyHeader";
@@ -230,9 +252,22 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
     [titleView addSubview:moreBtn];
     self.moreBtn = moreBtn;
     
+    
+    [_topArray addObject:@"1-20"];
+    [_topArray addObject:@"21-40"];
+    [_topArray addObject:@"41-60"];
+    
+    [self.contentView addSubview:self.tableView];
+    
+    
+    
+    
+    
+    
+    
     //
     UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     collectionView.dataSource = self;
@@ -254,47 +289,103 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
 }
 
 
+- (ZqwHorizontalTableView *)tableView{
+    if (nil == _tableView) {
+        _tableView = [[ZqwHorizontalTableView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.width, 40)];
+        _tableView.backgroundColor = [UIColor whiteColor];
+        _tableView.dataSource = self;
+        _tableView.actionDelegate = self;
+        _tableView.delegate = self;
+        _tableView.pagingEnabled = YES;
+    }
+    return _tableView;
+}
+#pragma mark -------- Tableview -------
+- (NSInteger)numberOfColumnsInZqwTableView:(ZqwHorizontalTableView *)tableView{
+    return _topArray.count;
+}
+
+- (ZqwTableViewCell *)zqwTableView:(ZqwHorizontalTableView *)tableView cellAtColumn:(NSInteger)column{
+    static NSString* const cellIdentifiy = @"detifail";
+    ZqwTableViewCell* cell = (ZqwTableViewCell*)[tableView dequeueZqwTalbeViewCellForIdentifiy:cellIdentifiy];
+    UILabel *label = nil;
+    if (!cell) {
+        cell = [[ZqwTableViewCell alloc] initWithIdentifiy:cellIdentifiy];
+        label = [[UILabel alloc] initWithFrame:cell.bounds];
+        label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        label.backgroundColor = [UIColor clearColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [label.font fontWithSize:20];
+        label.tag = 1;
+        [cell addSubview:label];
+    }
+        cell.backgroundColor = RGB(255,255,255);
+    label = (UILabel *)[cell viewWithTag:1];
+//    label.text = [NSString stringWithFormat:@"%ld",column];
+    label.text = self.topArray[column];
+
+    return cell;
+}
+
+- (CGFloat)zqwTableView:(ZqwHorizontalTableView *)tableView cellWidthAtColumn:(NSInteger)column{
+    return 100;
+}
+
+#pragma mark -
+#pragma mark delegate
+
+- (void)zqwTableView:(ZqwHorizontalTableView *)tableView didTapAtColumn:(NSInteger)column{
+    NSLog(@"%td",column);
+}
+
+
+
 #pragma mark - 布局子控件
 - (void)_makeSubViewsConstraints
 {
     // 布局titleView
-    [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.left.top.and.right.equalTo(self.contentView);
-        make.height.mas_equalTo(MHRecommendTitleViewHeight);
+//    [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.left.top.and.right.equalTo(self.contentView);
+//        make.height.mas_equalTo(MHRecommendTitleViewHeight);
+//    }];
+    
+    
+//    // 布局flagView
+//    [self.flagView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.titleView).with.offset(MHGlobalViewLeftInset);
+//        make.width.mas_equalTo(2);
+//        make.height.mas_equalTo(16.0f);
+//        make.centerY.equalTo(self.titleView);
+//    }];
+    
+//    // 布局选集
+//    [self.anthologyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.flagView.mas_right).with.offset(6);
+//        make.top.and.bottom.equalTo(self.titleView);
+//        make.right.equalTo(self.moreBtn.mas_left);
+//    }];
+//
+//    // 布局更多
+//    [self.moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.right.equalTo(self.titleView.mas_right);
+//        make.height.equalTo(self.anthologyLabel.mas_height);
+//        make.width.mas_equalTo(50.0f);
+//        make.centerY.equalTo(self.titleView.mas_centerY);
+//
+//    }];
+    
+    // 布局toptableView
+    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.top.equalTo(self.contentView);
+        make.height.mas_equalTo(40);
     }];
-    
-    
-    // 布局flagView
-    [self.flagView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleView).with.offset(MHGlobalViewLeftInset);
-        make.width.mas_equalTo(2);
-        make.height.mas_equalTo(16.0f);
-        make.centerY.equalTo(self.titleView);
-    }];
-    
-    // 布局选集
-    [self.anthologyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.flagView.mas_right).with.offset(6);
-        make.top.and.bottom.equalTo(self.titleView);
-        make.right.equalTo(self.moreBtn.mas_left);
-    }];
-    
-    // 布局更多
-    [self.moreBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self.titleView.mas_right);
-        make.height.equalTo(self.anthologyLabel.mas_height);
-        make.width.mas_equalTo(50.0f);
-        make.centerY.equalTo(self.titleView.mas_centerY);
-        
-    }];
-
-    
     // 布局collectionView
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.and.right.equalTo(self.contentView);
-        make.height.mas_equalTo(MHRecommendAnthologyViewHeight);
+//        make.height.mas_equalTo(MHRecommendAnthologyViewHeight);
+        make.height.mas_equalTo(MHRecommendAnthologyHeaderViewHeight-40);
         make.bottom.equalTo(self.bottomSeparate.mas_top).with.offset(-5.0f);
     }];
     
@@ -409,21 +500,22 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
 //设置水平之间的间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 3;
+    return 10;
 }
 
 //设置垂直之间的间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 0;
+    return 9;
 }
 
 
 //设置元素大小
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGFloat width = MHRecommendAnthologyViewHeight;
-    return CGSizeMake(width, width);
+//    CGFloat width = MHRecommendAnthologyViewHeight;
+    CGFloat width = (self.width-32-40)/5;
+    return CGSizeMake(width, 34);
 }
 
 @end

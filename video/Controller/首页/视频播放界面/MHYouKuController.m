@@ -27,6 +27,9 @@
 #import "MHYouKuInputPanelView.h"
 #import "MHYouKuTopicDetailController.h"
 
+#import "ClarityView.h"
+
+
 @interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource , MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate>
 
 /** 顶部容器View   **/
@@ -78,6 +81,12 @@
 
 /** 选集 */
 @property (nonatomic , weak) MHYouKuAnthologyHeaderView *anthologyHeaderView;
+
+
+/** 清晰度 */
+@property (nonatomic , weak) ClarityView *Clarity ;
+
+
 
 /** inputPanelView */
 @property (nonatomic , weak) MHYouKuInputPanelView *inputPanelView;
@@ -276,7 +285,7 @@
 #pragma mark - 设置导航栏
 - (void)_setupNavigationItem
 {
-    self.title = @"仿优酷视频的评论回复";
+    self.title = @"我们的世界";
 }
 
 #pragma mark - 设置子控件
@@ -442,20 +451,30 @@
         make.left.bottom.and.right.equalTo(self.bottomContainer);
     }];
     
+//    // 视频简介 tableViewHeader
+//    MHYouKuMediaSummary *summary = [MHYouKuMediaSummary summary];
+//    summary.backgroundColor = [UIColor whiteColor];
+//    self.summary = summary;
+//    summary.mh_height = 70.0f;
+//    tableView.tableHeaderView = summary;
+//
+//    // 详情点击事件
+//    __weak typeof(self) weakSelf = self;
+//    [summary setDetailCallBack:^(MHYouKuMediaSummary *s) {
+//        //
+//        [weakSelf _showMediaDetail];
+//    }];
     // 视频简介 tableViewHeader
-    MHYouKuMediaSummary *summary = [MHYouKuMediaSummary summary];
-    summary.backgroundColor = [UIColor whiteColor];
-    self.summary = summary;
-    summary.mh_height = 70.0f;
-    tableView.tableHeaderView = summary;
-    
+    ClarityView *clarity = [[ClarityView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 95)];
+    clarity.backgroundColor = [UIColor whiteColor];
+    self.Clarity=clarity;
+    tableView.tableHeaderView = clarity;
+
     // 详情点击事件
-    __weak typeof(self) weakSelf = self;
-    [summary setDetailCallBack:^(MHYouKuMediaSummary *s) {
-        //
-        [weakSelf _showMediaDetail];
+//    __weak typeof(self) weakSelf = self;
+    [self.Clarity setClarityCallBack:^(NSInteger index) {
+        
     }];
-    
     
     
 }
@@ -859,6 +878,10 @@
         return MHRecommendCommentHeaderViewHeight;
     }
     
+    if ([model isKindOfClass:[ClarityView class]]) {
+        // 清晰度
+        return 85.f;
+    }
     return .1f;
     
 }

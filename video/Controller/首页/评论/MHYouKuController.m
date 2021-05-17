@@ -318,7 +318,7 @@
 {
     [self.view addSubview:self.topContainer];
     [self.topContainer mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.view).with.offset(20);
+        make.top.equalTo(self.view).with.offset(0);
         make.left.right.equalTo(self.view);
         make.height.mas_equalTo(self.topContainer.mas_width).multipliedBy(9.0f/16.0f);
     }];
@@ -1020,6 +1020,15 @@
             MHLog(@"++ 下载 ++");
         }
             break;
+            
+        case MHYouKuBottomToolBarTypetitle:
+        {
+            // 详情
+            MHLog(@"++ 详情 ++");
+            
+            // 详情点击事件
+            [self _showMediaDetail];
+        }
         default:
             break;
     }

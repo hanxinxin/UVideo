@@ -16,7 +16,9 @@ typedef NS_ENUM(NSUInteger, MHYouKuBottomToolBarType) {
     MHYouKuBottomToolBarTypeComment,   // 评论
     MHYouKuBottomToolBarTypeCollect,   // 收藏
     MHYouKuBottomToolBarTypeDownload,  // 下载
-    MHYouKuBottomToolBarTypeShare      // 分享
+    MHYouKuBottomToolBarTypeShare,      // 分享
+    MHYouKuBottomToolBarTypetitle      // 标题
+    
 };
 
 

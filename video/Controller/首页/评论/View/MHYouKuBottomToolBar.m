@@ -12,19 +12,21 @@
 
 @interface MHYouKuBottomToolBar ()
 
+/** 名字 **/
+@property (nonatomic , strong) MHYouKuVerticalSeparateButton *NameBtn;
 
 
 /** 点赞 */
 @property (nonatomic , weak) MHYouKuVerticalSeparateButton * thumbBtn;
 
 /** 评论 **/
-@property (nonatomic , weak) MHYouKuVerticalSeparateButton *commentBtn;
+//@property (nonatomic , weak) MHYouKuVerticalSeparateButton *commentBtn;
 
 /** 收藏 */
 @property (nonatomic , weak) MHYouKuVerticalSeparateButton * collectBtn;
 
 /** 下载 **/
-@property (nonatomic , weak) MHYouKuVerticalSeparateButton *downloadBtn;
+//@property (nonatomic , weak) MHYouKuVerticalSeparateButton *downloadBtn;
 
 /** 分享 */
 @property (nonatomic , weak) MHYouKuVerticalSeparateButton * shareBtn;
@@ -49,7 +51,7 @@
     [self.thumbBtn setTitle:media.thumbNumsString forState:UIControlStateNormal];
     
     
-    [self.commentBtn setTitle:media.commentNumsString forState:UIControlStateNormal];
+//    [self.commentBtn setTitle:media.commentNumsString forState:UIControlStateNormal];
     
 }
 
@@ -76,11 +78,15 @@
         // 初始化
         [self _setup];
         
-        // 初始化子控件
-        [self _setupSubViews];
-        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            // 初始化子控件
+            [self _setupSubViews];
         // 布局子控件
         [self _makeSubViewsConstraints];
+            });
+        
+        
+       
 
     }
     return self;
@@ -94,30 +100,39 @@
 
 - (void)_setupSubViews
 {
-    // 分享按钮
-    self.thumbBtn = [self _setupButtonWithTitle:@"0" imageName:@"mh_thumb" selectedImageName:@"mh_thumb_sel" type:MHYouKuBottomToolBarTypeThumb];
-    [self.thumbBtn showRightSeparate];
+
+
     
+    // 分享按钮
+    self.NameBtn = [self _setupButtonWithTitle:@"主演/导演/简介" imageName:@"xialaimage" selectedImageName:@"xialaimage" type:MHYouKuBottomToolBarTypetitle];
+    [self.NameBtn showRightSeparate];
+
+    // 点赞按钮
+    self.thumbBtn = [self _setupButtonWithTitle:@"0" imageName:@"dianzan" selectedImageName:@"dianzan" type:MHYouKuBottomToolBarTypeThumb];
+    [self.thumbBtn showRightSeparate];
+
     // 评论
-    self.commentBtn = [self _setupButtonWithTitle:@"0" imageName:@"mh_comment" selectedImageName:nil type:MHYouKuBottomToolBarTypeComment];
-    [self.commentBtn showRightSeparate];
+//    self.commentBtn = [self _setupButtonWithTitle:@"0" imageName:@"mh_comment" selectedImageName:nil type:MHYouKuBottomToolBarTypeComment];
+//    [self.commentBtn showRightSeparate];
     
     // 收藏
-    self.collectBtn = [self _setupButtonWithTitle:nil imageName:@"player_collection" selectedImageName:nil type:MHYouKuBottomToolBarTypeCollect];
+    self.collectBtn = [self _setupButtonWithTitle:nil imageName:@"zanxin" selectedImageName:nil type:MHYouKuBottomToolBarTypeCollect];
     [self.collectBtn showRightSeparate];
-    
+
     // 下载
-    self.downloadBtn = [self _setupButtonWithTitle:nil imageName:@"mh_download" selectedImageName:nil type:MHYouKuBottomToolBarTypeDownload];
-    [self.downloadBtn showRightSeparate];
+//    self.downloadBtn = [self _setupButtonWithTitle:nil imageName:@"mh_download" selectedImageName:nil type:MHYouKuBottomToolBarTypeDownload];
+//    [self.downloadBtn showRightSeparate];
     
     // 分享
-    self.shareBtn = [self _setupButtonWithTitle:nil imageName:@"mh_share" selectedImageName:nil type:MHYouKuBottomToolBarTypeShare];
-    
+    self.shareBtn = [self _setupButtonWithTitle:nil imageName:@"fenxiang" selectedImageName:nil type:MHYouKuBottomToolBarTypeShare];
+
     // 分割线
     MHImageView *separate = [MHImageView imageView];
     separate.backgroundColor = MHGlobalBottomLineColor;
     [self addSubview:separate];
     self.separate = separate;
+   
+
 }
 
 
@@ -131,7 +146,7 @@
     for (NSInteger i = 0; i < buttonsCount; i++) {
         
         UIButton *button = self.buttons[i];
-        
+        CGFloat wid = ((self.width/5)*2/(buttonsCount-1));
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.and.bottom.equalTo(self);
         }];
@@ -140,15 +155,16 @@
             
             [button mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(lastButton.mas_right);
-                make.width.equalTo(lastButton.mas_width);
+//                make.width.equalTo(lastButton.mas_width);
+                make.width.mas_equalTo(@(wid));
             }];
             
         }else{
             
             // 第一个按钮
             [button mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.equalTo(self);
-                
+                make.left.mas_equalTo(@(0));
+                make.width.mas_equalTo(@(self.width/5*3));
             }];
             
         }
@@ -180,7 +196,7 @@
 {
     MHYouKuVerticalSeparateButton *button = [[MHYouKuVerticalSeparateButton alloc] init];
     
-    button.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+    
     
     if (MHStringIsNotEmpty(title)) {
         
@@ -198,7 +214,12 @@
     {
         [button setImage:[UIImage imageNamed:selectedImageName] forState:UIControlStateSelected];
     }
-    
+    if(type==MHYouKuBottomToolBarTypetitle)
+    {
+        [self setOpenVipBtnTitle:title btn:button];
+    }else{
+        button.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
+    }
     // 添加事件
     [button addTarget:self action:@selector(_buttonDidClicked:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -225,4 +246,15 @@
     
 }
 
+
+
+- (void)setOpenVipBtnTitle:(NSString *)title btn:(UIButton*)button
+{
+//    button.titleLabel.textAlignment = NSTextAlignmentLeft;
+    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [button setTitle:title forState:UIControlStateNormal];
+    CGFloat leftlab = [title sizeWithAttributes:@{NSFontAttributeName : button.titleLabel.font}].width;
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, leftlab + 70, 0, 0)];
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+}
 @end

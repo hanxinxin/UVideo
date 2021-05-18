@@ -34,7 +34,7 @@
 /**
  *  全局黑色字体
  */
-#define MHGlobalBlackTextColor      [UIColor colorFromHexString:@"#323232"]
+#define MHGlobalBlackTextColor      RGBA(51, 51, 51, 1)
 /**
  *  全局浅黑色字体
  */
@@ -53,7 +53,7 @@
 /**
  *  全局橙色
  */
-#define MHGlobalOrangeTextColor      [UIColor colorFromHexString:@"#FF9500"]
+#define MHGlobalOrangeTextColor    RGBA(20, 155, 236, 1)
 
 /**
  *  全局细线高度 .75f

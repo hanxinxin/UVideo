@@ -13,9 +13,11 @@
 
 #import "ZqwHorizontalTableView.h"
 #import "ZqwTableViewCell.h"
-
+#import "VtitleCollectionViewCell.h"
 
 static NSString * const reuseIdentifier = @"AnthologyCell";
+
+static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
 
 @interface JLAnthologyCell : UICollectionViewCell
 
@@ -148,11 +150,12 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
 
 
 
+/** 选集 */
+@property (nonatomic , weak) UICollectionView *XJcollectionView;
 /** tableView */
-@property (nonatomic , strong) ZqwHorizontalTableView *tableView;
+//@property (nonatomic , strong) ZqwHorizontalTableView *tableView;
 @property (nonatomic , strong) NSMutableArray *topArray;
-
-
+@property (nonatomic , assign) NSInteger xuanjiSelect;
 
 @end
 
@@ -252,17 +255,40 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
     [titleView addSubview:moreBtn];
     self.moreBtn = moreBtn;
     
-    
+    _topArray=[NSMutableArray array];
     [_topArray addObject:@"1-20"];
     [_topArray addObject:@"21-40"];
     [_topArray addObject:@"41-60"];
+    self.xuanjiSelect = 0;
+//    _tableView = [[ZqwHorizontalTableView alloc] initWithFrame:CGRectMake(0, 0, self.width, 40)];
+////    _tableView.backgroundColor = [UIColor whiteColor];
+//    _tableView.dataSource = self;
+//    _tableView.actionDelegate = self;
+//    _tableView.delegate = self;
+//    _tableView.pagingEnabled = YES;
+//    _tableView.backgroundColor = [UIColor colorWithRed:232/255.0 green:232/255.0 blue:232/255.0 alpha:1.0];
+//    _tableView.layer.cornerRadius = 3;
+//    [self.contentView addSubview:self.tableView];
+//    [self.tableView reloadData];
+
+    UICollectionViewFlowLayout *flowLayout2 = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout2 setScrollDirection:UICollectionViewScrollDirectionHorizontal];
     
-    [self.contentView addSubview:self.tableView];
+    UICollectionView *collectionView2 = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout2];
+    collectionView2.dataSource = self;
+    collectionView2.delegate = self;
+    collectionView2.tag=2000;
+    collectionView2.showsHorizontalScrollIndicator = NO;
+    collectionView2.showsVerticalScrollIndicator = NO;
+//    collectionView2.backgroundColor = [UIColor whiteColor];
+    collectionView2.backgroundColor = [UIColor colorWithRed:232/255.0 green:232/255.0 blue:232/255.0 alpha:1.0];
+    collectionView2.layer.cornerRadius = 3;
+    self.XJcollectionView = collectionView2;
+    [self.contentView addSubview:collectionView2];
     
-    
-    
-    
-    
+    //1.注册一定要注册，不注册会崩溃
+    [collectionView2 registerNib:[UINib nibWithNibName:NSStringFromClass([VtitleCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:CollcetionCellID];
+    [self.XJcollectionView reloadData];
     
     
     //
@@ -272,6 +298,7 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
     collectionView.dataSource = self;
     collectionView.delegate = self;
+    collectionView.tag=1000;
     collectionView.showsHorizontalScrollIndicator = NO;
     collectionView.showsVerticalScrollIndicator = NO;
     collectionView.backgroundColor = [UIColor whiteColor];
@@ -286,56 +313,6 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
     bottomSeparate.backgroundColor = MHColorFromHexString(@"#eeeeee");
     self.bottomSeparate = bottomSeparate;
     [self addSubview:bottomSeparate];
-}
-
-
-- (ZqwHorizontalTableView *)tableView{
-    if (nil == _tableView) {
-        _tableView = [[ZqwHorizontalTableView alloc] initWithFrame:CGRectMake(0, 0, self.contentView.width, 40)];
-        _tableView.backgroundColor = [UIColor whiteColor];
-        _tableView.dataSource = self;
-        _tableView.actionDelegate = self;
-        _tableView.delegate = self;
-        _tableView.pagingEnabled = YES;
-    }
-    return _tableView;
-}
-#pragma mark -------- Tableview -------
-- (NSInteger)numberOfColumnsInZqwTableView:(ZqwHorizontalTableView *)tableView{
-    return _topArray.count;
-}
-
-- (ZqwTableViewCell *)zqwTableView:(ZqwHorizontalTableView *)tableView cellAtColumn:(NSInteger)column{
-    static NSString* const cellIdentifiy = @"detifail";
-    ZqwTableViewCell* cell = (ZqwTableViewCell*)[tableView dequeueZqwTalbeViewCellForIdentifiy:cellIdentifiy];
-    UILabel *label = nil;
-    if (!cell) {
-        cell = [[ZqwTableViewCell alloc] initWithIdentifiy:cellIdentifiy];
-        label = [[UILabel alloc] initWithFrame:cell.bounds];
-        label.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        label.backgroundColor = [UIColor clearColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.font = [label.font fontWithSize:20];
-        label.tag = 1;
-        [cell addSubview:label];
-    }
-        cell.backgroundColor = RGB(255,255,255);
-    label = (UILabel *)[cell viewWithTag:1];
-//    label.text = [NSString stringWithFormat:@"%ld",column];
-    label.text = self.topArray[column];
-
-    return cell;
-}
-
-- (CGFloat)zqwTableView:(ZqwHorizontalTableView *)tableView cellWidthAtColumn:(NSInteger)column{
-    return 100;
-}
-
-#pragma mark -
-#pragma mark delegate
-
-- (void)zqwTableView:(ZqwHorizontalTableView *)tableView didTapAtColumn:(NSInteger)column{
-    NSLog(@"%td",column);
 }
 
 
@@ -376,16 +353,16 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
 //    }];
     
     // 布局toptableView
-    [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.XJcollectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.top.equalTo(self.contentView);
-        make.height.mas_equalTo(40);
+        make.height.mas_equalTo(35);
     }];
     // 布局collectionView
     [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.and.right.equalTo(self.contentView);
-//        make.height.mas_equalTo(MHRecommendAnthologyViewHeight);
-        make.height.mas_equalTo(MHRecommendAnthologyHeaderViewHeight-40);
+        make.top.equalTo(self.XJcollectionView.mas_bottom).offset(5);
+        make.height.mas_equalTo(MHRecommendAnthologyHeaderViewHeight-45);
         make.bottom.equalTo(self.bottomSeparate.mas_top).with.offset(-5.0f);
     }];
     
@@ -427,20 +404,58 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
 //每个分区上的元素个数
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.anthologyItem.anthologys.count;
+    if(collectionView.tag==1000)
+    {
+        return self.anthologyItem.anthologys.count;
+    }else if(collectionView.tag==2000)
+    {
+        return self.topArray.count;
+    }
+    return 0;
 }
 
 //设置元素内容
 - (UICollectionViewCell *)collectionView:(UICollectionView*)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(collectionView.tag==1000)
+    {
+        
     JLAnthologyCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     cell.anthology = self.anthologyItem.anthologys[indexPath.item];
+        if(cell.selected==YES)
+        {
+            cell.layer.borderWidth = 1;
+            cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+            cell.layer.cornerRadius = 4;
+            
+        }else{
+            cell.layer.borderWidth = 1;
+            cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+            cell.layer.cornerRadius = 4;
+        }
     return cell;
+        
+    }else if(collectionView.tag==2000)
+    {
+        VtitleCollectionViewCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:CollcetionCellID forIndexPath:indexPath];
+        cell.titleL.text = self.topArray[indexPath.item];
+        if(self.xuanjiSelect==indexPath.item)
+        {
+            cell.titleL.textColor=RGBA(20, 155, 236, 1);
+        }else{
+            cell.titleL.textColor=RGBA(51, 51, 51, 1);
+        }
+        return cell;
+    }
+    return nil;
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(collectionView.tag==1000)
+    {
+       
     // 记录选中的Item
     self.anthologyItem.item = indexPath.item;
     
@@ -461,6 +476,12 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
             
         }
     }
+        
+    }else if(collectionView.tag==2000)
+    {
+        self.xuanjiSelect=indexPath.item;
+        [self.XJcollectionView reloadData];
+    }
 }
 
 
@@ -468,6 +489,8 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
        willDisplayCell:(UICollectionViewCell *)cell
     forItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(collectionView.tag==1000)
+    {
     // 第一次加载滚动到指定位置
     if (self.isFirstLoad) {
         
@@ -484,6 +507,12 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
     }else{
         cell.selected = NO;
     }
+    
+    
+    }else if(collectionView.tag==2000)
+    {
+        
+    }
 }
 
 
@@ -493,29 +522,68 @@ static NSString * const reuseIdentifier = @"AnthologyCell";
 //设置元素的的大小框
 -(UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
+    if(collectionView.tag==1000)
+    {
+       
     UIEdgeInsets top = UIEdgeInsetsMake(0, 3, 0, 3);
     return top;
+        
+    }else if(collectionView.tag==2000)
+    {
+        UIEdgeInsets top = UIEdgeInsetsMake(0, 5, 0, 5);
+        return top;
+    }
+    return  UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
 //设置水平之间的间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
+    if(collectionView.tag==1000)
+    {
+       
+        return 10;
+        
+    }else if(collectionView.tag==2000)
+    {
+        return 5;
+    }
     return 10;
 }
 
 //设置垂直之间的间距
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
 {
-    return 9;
+    if(collectionView.tag==1000)
+    {
+       
+        return 10;
+        
+    }else if(collectionView.tag==2000)
+    {
+        return 10;
+    }
+    return 10;
+    
 }
 
 
 //设置元素大小
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(collectionView.tag==1000)
+    {
 //    CGFloat width = MHRecommendAnthologyViewHeight;
     CGFloat width = (self.width-32-40)/5;
     return CGSizeMake(width, 34);
+       
+        
+    }else if(collectionView.tag==2000)
+    {
+        CGFloat width = 60;
+        return CGSizeMake(width, 35);
+    }
+    return CGSizeMake(0, 0);
 }
 
 @end

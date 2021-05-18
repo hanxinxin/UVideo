@@ -126,7 +126,7 @@ CGFloat const MHRecommendTitleViewHeight = 32.0f;
 CGFloat const MHRecommendAnthologyViewHeight = 44.0f;
 /** 选集纯文本HeaderView高度 */
 //CGFloat const MHRecommendAnthologyHeaderViewHeight = 91.0f;
-CGFloat const MHRecommendAnthologyHeaderViewHeight = 210.0f;
+CGFloat const MHRecommendAnthologyHeaderViewHeight = 225.0f;
 /** 评论高度 */
 CGFloat const MHRecommendCommentHeaderViewHeight = 100.0f;
 

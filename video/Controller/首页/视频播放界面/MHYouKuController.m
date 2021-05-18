@@ -368,7 +368,10 @@
     // 布局
     [self.bottomContainer mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.topContainer.mas_bottom);
-        make.left.bottom.and.right.equalTo(self.view);
+//        make.left.bottom.and.right.equalTo(self.view);
+        make.left.mas_offset(16);
+        make.right.equalTo(self.view).offset(-16);
+        make.bottom.equalTo(self.view);
     }];
     
     // 创建底部工具条

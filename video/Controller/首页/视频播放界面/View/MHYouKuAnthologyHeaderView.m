@@ -78,13 +78,15 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
     self.layer.cornerRadius = 5.0f;
     self.clipsToBounds = YES;
     
-    UIView *backgroundView = [[UIView alloc] init];
-    backgroundView.backgroundColor = MHColor(233, 238, 243);
-    self.backgroundView = backgroundView;
-    
-    UIView *selectedBackgroundView = [[UIView alloc] init];
-    selectedBackgroundView.backgroundColor = MHColor(239, 240, 242);
-    self.selectedBackgroundView = selectedBackgroundView;
+//    UIView *backgroundView = [[UIView alloc] init];
+////    backgroundView.backgroundColor = MHColor(233, 238, 243);
+//    backgroundView.backgroundColor = MHColor(255, 255, 255);
+//    self.backgroundView = backgroundView;
+//
+//    UIView *selectedBackgroundView = [[UIView alloc] init];
+////    selectedBackgroundView.backgroundColor = MHColor(239, 240, 242);
+//    selectedBackgroundView.backgroundColor = MHColor(255, 255, 255);
+//    self.selectedBackgroundView = selectedBackgroundView;
 }
 
 #pragma mark - 创建自控制器
@@ -96,7 +98,7 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
     numLabel.textColor = MHGlobalBlackTextColor;
     numLabel.font = MHFont(MHPxConvertPt(15.0f), NO);
     self.numLabel = numLabel;
-    [self.contentView addSubview:numLabel];
+    [self addSubview:numLabel];
 }
 
 
@@ -422,16 +424,16 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
         
     JLAnthologyCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     cell.anthology = self.anthologyItem.anthologys[indexPath.item];
-        if(cell.selected==YES)
+        if(self.lastSelectedIndexPath.item==indexPath.item)
         {
-            cell.layer.borderWidth = 1;
-            cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
-            cell.layer.cornerRadius = 4;
-            
+            cell.numLabel.layer.borderWidth = 1;
+            cell.numLabel.layer.cornerRadius = 4;
+            cell.numLabel.layer.borderColor = RGBA(20, 155, 236, 1).CGColor;
+
         }else{
-            cell.layer.borderWidth = 1;
-            cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
-            cell.layer.cornerRadius = 4;
+            cell.numLabel.layer.borderWidth = 1;
+            cell.numLabel.layer.borderColor = RGBA(203, 203, 203, 1).CGColor;
+            cell.numLabel.layer.cornerRadius = 4;
         }
     return cell;
         
@@ -475,8 +477,9 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
             [self.delegate anthologyHeaderView:self mediaBaseId:anthology.mediabase_id];
             
         }
-    }
         
+    }
+        [self.collectionView reloadData];
     }else if(collectionView.tag==2000)
     {
         self.xuanjiSelect=indexPath.item;

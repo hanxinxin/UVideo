@@ -30,7 +30,7 @@
 #import "ClarityView.h"
 
 
-@interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource , MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate>
+@interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate , MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate>
 
 /** 顶部容器View   **/
 @property (nonatomic , strong) UIView *topContainer;
@@ -47,11 +47,15 @@
 /** 返回按钮 **/
 @property (nonatomic , strong) MHBackButton *backBtn;
 
+/** 广告View */
+@property (nonatomic , weak)UIImageView * GGimageview;
+
 /** tableView */
 @property (nonatomic , weak) UITableView *tableView;
 
 /** 视频toolBar **/
 @property (nonatomic , weak) MHYouKuBottomToolBar *bottomToolBar;
+
 
 /** 话题控制器 **/
 @property (nonatomic , weak) MHYouKuTopicController *topic;
@@ -165,7 +169,7 @@
 {
     if (_bottomContainer == nil) {
         _bottomContainer = [[UIView alloc] init];
-        _bottomContainer.backgroundColor = [UIColor redColor];
+        _bottomContainer.backgroundColor = [UIColor whiteColor];
     }
     return _bottomContainer;
 }
@@ -226,7 +230,7 @@
         _anthologyItem.mediabase_id = self.mediabase_id;
         _anthologyItem.displayType = MHYouKuAnthologyDisplayTypeTextPlain;
         // 98757
-        for (NSInteger i = 89750; i<89800; i++) {
+        for (NSInteger i = 89750; i<89770; i++) {
             
             MHYouKuAnthology *anthology = [[MHYouKuAnthology alloc] init];
             anthology.albums_sort = (i-89749);
@@ -391,6 +395,16 @@
 // 创建底部工具条
 - (void)_setupBottomToolBar
 {
+    UIImageView * iamgeview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    [iamgeview setImage:[UIImage imageNamed:@"Videoguanggao"]];
+    self.GGimageview=iamgeview;
+    [self.bottomContainer addSubview:iamgeview];
+    // 布局工具条
+    [iamgeview mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.and.right.equalTo(self.bottomContainer);
+        make.top.mas_equalTo(5);
+        make.height.mas_equalTo(66.0f);
+    }];
     // 底部工具条
     MHYouKuBottomToolBar *bottomToolBar = [[MHYouKuBottomToolBar alloc] init];
     bottomToolBar.backgroundColor = [UIColor whiteColor];
@@ -400,7 +414,8 @@
     
     // 布局工具条
     [bottomToolBar mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.top.and.right.equalTo(self.bottomContainer);
+        make.left.and.right.equalTo(self.bottomContainer);
+        make.top.equalTo(self.GGimageview.mas_bottom).offset(5);
         make.height.mas_equalTo(36.0f);
     }];
     
@@ -445,6 +460,7 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.delegate = self;
     tableView.dataSource = self;
+//    tableView
     tableView.backgroundColor = [UIColor whiteColor];
     [self.bottomContainer addSubview:tableView];
     self.tableView = tableView;
@@ -808,7 +824,18 @@
     self.inputPanelView = inputPanelView;
 }
 
-
+//去掉UItableview headerview黏性  ，table滑动到最上端时，header view消失掉。
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    if (scrollView == self.tableView)
+    {
+        CGFloat sectionHeaderHeight = 66+36.0;
+        if (scrollView.contentOffset.y<=sectionHeaderHeight&&scrollView.contentOffset.y>=0) {
+            scrollView.contentInset = UIEdgeInsetsMake(-scrollView.contentOffset.y, 0, 0, 0);
+        } else if (scrollView.contentOffset.y>=sectionHeaderHeight) {
+            scrollView.contentInset = UIEdgeInsetsMake(-sectionHeaderHeight, 0, 0, 0);
+        }
+    }
+}
 #pragma mark - UITableViewDelegate , UITableViewDataSource
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView

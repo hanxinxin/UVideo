@@ -312,6 +312,7 @@
 		FA8E71862652A46A0058F02F /* clarityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8E71842652A46A0058F02F /* clarityCollectionViewCell.m */; };
 		FA8E71872652A46A0058F02F /* clarityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8E71852652A46A0058F02F /* clarityCollectionViewCell.xib */; };
 		FA8E718D2652BF450058F02F /* ZqwHorizontalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8E718C2652BF450058F02F /* ZqwHorizontalTableView.m */; };
+		FA936FAA265944EA00067614 /* HJCornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = FA936FA9265944EA00067614 /* HJCornerRadius.m */; };
 		FA949CBD264AC76E00498EB6 /* safeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CBC264AC76E00498EB6 /* safeViewController.m */; };
 		FA949CC2264AC90800498EB6 /* chongzhiListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CC1264AC90800498EB6 /* chongzhiListViewController.m */; };
 		FA949CC5264AC92A00498EB6 /* zhanghuInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CC4264AC92A00498EB6 /* zhanghuInfoViewController.m */; };
@@ -925,6 +926,8 @@
 		FA8E718A2652BF440058F02F /* ZqwTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZqwTableViewDelegate.h; sourceTree = "<group>"; };
 		FA8E718B2652BF450058F02F /* ZqwHorizontalTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZqwHorizontalTableView.h; sourceTree = "<group>"; };
 		FA8E718C2652BF450058F02F /* ZqwHorizontalTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZqwHorizontalTableView.m; sourceTree = "<group>"; };
+		FA936FA8265944EA00067614 /* HJCornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJCornerRadius.h; sourceTree = "<group>"; };
+		FA936FA9265944EA00067614 /* HJCornerRadius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJCornerRadius.m; sourceTree = "<group>"; };
 		FA949CBB264AC76E00498EB6 /* safeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = safeViewController.h; sourceTree = "<group>"; };
 		FA949CBC264AC76E00498EB6 /* safeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = safeViewController.m; sourceTree = "<group>"; };
 		FA949CC0264AC90800498EB6 /* chongzhiListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chongzhiListViewController.h; sourceTree = "<group>"; };
@@ -2448,6 +2451,7 @@
 		8A9C563C25F8A17B00EFA410 /* custom */ = {
 			isa = PBXGroup;
 			children = (
+				FA936FA7265944EA00067614 /* HJCornerRadius */,
 				8A95C06B2658EFAE00A6D144 /* BadgeButton */,
 				8A82F137264FA128004AAF40 /* LBLaunchImageAd */,
 				8A82F124264FA07E004AAF40 /* SVProgressHUD */,
@@ -2678,6 +2682,15 @@
 				FA8E718A2652BF440058F02F /* ZqwTableViewDelegate.h */,
 			);
 			path = "横向tableview";
+			sourceTree = "<group>";
+		};
+		FA936FA7265944EA00067614 /* HJCornerRadius */ = {
+			isa = PBXGroup;
+			children = (
+				FA936FA8265944EA00067614 /* HJCornerRadius.h */,
+				FA936FA9265944EA00067614 /* HJCornerRadius.m */,
+			);
+			path = HJCornerRadius;
 			sourceTree = "<group>";
 		};
 		FA949CB9264AC72500498EB6 /* 子模块 */ = {
@@ -3279,6 +3292,7 @@
 				8A39314025FCDFCE00E7331B /* MHTopic.m in Sources */,
 				8A9C559225F89F0C00EFA410 /* CYLTabBar.m in Sources */,
 				8A3930CF25FCDB3800E7331B /* CMHExample.m in Sources */,
+				FA936FAA265944EA00067614 /* HJCornerRadius.m in Sources */,
 				8A9C562025F8A10000EFA410 /* UIButton+MiddleAligning.m in Sources */,
 				8A9C562625F8A10000EFA410 /* UIImage+GIF.m in Sources */,
 				8A8BC1AC25FA0E6B0028173C /* VideoTableViewCell.m in Sources */,

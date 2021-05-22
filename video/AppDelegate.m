@@ -88,7 +88,7 @@
     jiluViewController * tabBarVC2 = [[jiluViewController alloc] init];
     [tabBarVC2 setTabBarItemWithTitle:@"记录" titleUnSelectStyle:nil titleSelectStyle:nil unselectImage:[UIImage imageNamed:@"jilu"] selectImage:[UIImage imageNamed:@"jiluselect"] imageSize:CGSizeMake(30, 30)];
     memberViewController * tabBarVC3 = [[memberViewController alloc] init];
-    [tabBarVC3 setTabBarItemWithTitle:@"充值" titleUnSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil] titleSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil] unselectImage:[UIImage imageNamed:@"menber"] selectImage:[UIImage imageNamed:@"menber"] imageSize:CGSizeMake(45, 45)];
+    [tabBarVC3 setTabBarItemWithTitle:@"充值" titleUnSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil] titleSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil] unselectImage:[UIImage imageNamed:@"menber"] selectImage:[UIImage imageNamed:@"menber"] imageSize:CGSizeMake(55, 55)];
     
     OfflineViewController * tabBarVC4 = [[OfflineViewController alloc] init];
     [tabBarVC4 setTabBarItemWithTitle:@"离线" titleUnSelectStyle:nil titleSelectStyle:nil unselectImage:[UIImage imageNamed:@"lixianimage"] selectImage:[UIImage imageNamed:@"lixianimageselect"] imageSize:CGSizeMake(30, 30)];
@@ -97,6 +97,27 @@
     [tabBarVC5 setTabBarItemWithTitle:@"我的" titleUnSelectStyle:nil titleSelectStyle:nil unselectImage:[UIImage imageNamed:@"meimage"] selectImage:[UIImage imageNamed:@"meimageselect"] imageSize:CGSizeMake(30, 30)];
     
     tabBarC.viewControllers = @[[tabBarVC1 addNav],[tabBarVC2 addNav],[tabBarVC3 addNav],[tabBarVC4 addNav],[tabBarVC5 addNav]];
+    
+    //去掉tabBar顶部黑色线条
+
+    CGRect rect = CGRectMake(0, 0, ScreenWidth, SCREENH_HEIGHT);
+
+    UIGraphicsBeginImageContext(rect.size);
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+
+    CGContextSetFillColorWithColor(context, [[UIColor clearColor] CGColor]);
+
+    CGContextFillRect(context, rect);
+
+    UIImage *img = UIGraphicsGetImageFromCurrentImageContext();
+
+    UIGraphicsEndImageContext();
+
+    [tabBarC.tabBar setBackgroundImage:img];
+
+    [tabBarC.tabBar setShadowImage:img];
+    
     return tabBarC;
 }
 - (HXBaseNavgationController *)roottabbar {

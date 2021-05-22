@@ -84,8 +84,9 @@
     NSLog(@"11111");
     
     MessageViewController *seachVC = [[MessageViewController alloc] init];
-    seachVC.hidesBottomBarWhenPushed=NO;
-    [self.navigationController pushViewController:seachVC animated:NO];
+//    seachVC.hidesBottomBarWhenPushed=NO;
+//    [self.navigationController pushViewController:seachVC animated:NO];
+    [self pushRootNav:seachVC animated:YES];
 }
 -(void)MessageBtnEvent
 {

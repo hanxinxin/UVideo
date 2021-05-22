@@ -153,6 +153,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     [self.view addSubview:self.pageViewController.view];
     // layout Frame
     [self layoutViews];
+   
 }
 - (void)setupSlideBar {
     
@@ -253,7 +254,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     self.navigationItem.titleView = _titleView;
 
 
-        [self addLeft_RightButton];
+//        [self addLeft_RightButton];
 }
 
 -(UIView*)convertToView{
@@ -278,19 +279,43 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 -(void)addLeft_RightButton
 {
     //下载按钮
-    UIButton *Back = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64, 25)];
-    [Back setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
-    [Back addTarget:self action:@selector(historyBtnEvent) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * leftButton = [[UIBarButtonItem alloc] initWithCustomView:Back];
-    self.navigationItem.leftBarButtonItem = leftButton;
+//    UIButton *Back = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64, 25)];
+//    [Back setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
+//    [Back setTitle:@"" forState:(UIControlStateNormal)];
+//    [Back addTarget:self action:@selector(historyBtnEvent) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem * leftButton = [[UIBarButtonItem alloc] initWithCustomView:Back];
+//    self.navigationItem.leftBarButtonItem = leftButton;
+//
+//
+//    //下载按钮
+//    UIButton *historyBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+//    [historyBtn setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
+//    [historyBtn addTarget:self action:@selector(DownLoadBtnEvent) forControlEvents:UIControlEventTouchUpInside];
+//    UIBarButtonItem * rightButton = [[UIBarButtonItem alloc] initWithCustomView:historyBtn];
+//    self.navigationItem.rightBarButtonItem = rightButton;
     
-   
+    
+    //两个按钮的父类view
+    UIView *leftButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 64, 30)];
     //下载按钮
-    UIButton *historyBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    UIButton *Back = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64, 30)];
+    [Back setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
+    [Back setTitle:@"" forState:(UIControlStateNormal)];
+    [Back addTarget:self action:@selector(historyBtnEvent) forControlEvents:UIControlEventTouchUpInside];
+    [leftButtonView addSubview:Back];
+    self.leftBtnV=leftButtonView;
+    //两个按钮的父类view
+    UIView *rightButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 35, 30)];
+    //下载按钮
+    BadgeButton *historyBtn = [[BadgeButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    [rightButtonView addSubview:historyBtn];
+    historyBtn.badgeValue=1;
+    historyBtn.isRedBall=YES;
     [historyBtn setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
-    [historyBtn addTarget:self action:@selector(DownLoadBtnEvent) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * rightButton = [[UIBarButtonItem alloc] initWithCustomView:historyBtn];
-    self.navigationItem.rightBarButtonItem = rightButton;
+    [historyBtn addTarget:self action:@selector(MessageBtnEvent) forControlEvents:UIControlEventTouchUpInside];
+    self.rightBtnV=rightButtonView;
+    
+    
 }
 -(void)DownLoadBtnEvent
 {
@@ -334,7 +359,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     _horizListView = [[YZYHorizListView alloc] initWithFrame: CGRectMake(50, 0, _messageView.width-50 , 40)];
     _horizListView.listViewDelegate = self;
     [_horizListView.collectionView registerClass: [UICollectionViewCell class] forCellWithReuseIdentifier: kCellIdentifier];
-   
+    
     _horizListView.backgroundColor = [UIColor clearColor];
     
     _horizListView.autoScroll = YES;

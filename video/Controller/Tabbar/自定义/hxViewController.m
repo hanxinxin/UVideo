@@ -18,7 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+//    self.navigationController.title=@"";
     [self addSearch];
     self.view.backgroundColor=[UIColor whiteColor];
 }
@@ -65,7 +65,7 @@
 -(void)addLeft_RightButton
 {
     //下载按钮
-    UIButton *Back = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64, 25)];
+    UIButton *Back = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64, 30)];
     [Back setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
     [Back addTarget:self action:@selector(historyBtnEvent) forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem * leftButton = [[UIBarButtonItem alloc] initWithCustomView:Back];

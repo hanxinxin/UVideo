@@ -14,7 +14,9 @@
 #import "ZBCycleVerticalView.h"
 #import "YZYHorizListView.h"
 #import "SearchViewController.h"
+#import "MessageViewController.h"
 
+#import "BadgeButton.h"
 
 static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 @interface HomeViewController ()<UIScrollViewDelegate,UISearchBarDelegate,ColumnEditViewControllerDelegate,YZYHorizListViewDelegate>
@@ -71,8 +73,10 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 //    self.navBarColor=[UIColor clearColor];
     
     self.hiddenNavBar = NO;
+    
+    
 //    [self addSearch];
-//    [self addLeft_RightButton];
+    [self addLeft_RightButton];
 //
 }
 //-(void)addSearch
@@ -151,20 +155,25 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 
 -(void)addLeft_RightButton
 {
+    //两个按钮的父类view
+    UIView *leftButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 64, 30)];
     //下载按钮
-    UIButton *Back = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64, 25)];
+    UIButton *Back = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64, 30)];
     [Back setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
+    [Back setTitle:@"" forState:(UIControlStateNormal)];
     [Back addTarget:self action:@selector(historyBtnEvent) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * leftButton = [[UIBarButtonItem alloc] initWithCustomView:Back];
-    self.navigationItem.leftBarButtonItem = leftButton;
+    [leftButtonView addSubview:Back];
+    self.leftBtnV=leftButtonView;
     
     //两个按钮的父类view
-    UIView *rightButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 65, 30)];
+    UIView *rightButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     //下载按钮
-    UIButton *historyBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    BadgeButton *historyBtn = [[BadgeButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
     [rightButtonView addSubview:historyBtn];
+    historyBtn.badgeValue=1;
+    historyBtn.isRedBall=YES;
     [historyBtn setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
-    [historyBtn addTarget:self action:@selector(DownLoadBtnEvent) forControlEvents:UIControlEventTouchUpInside];
+    [historyBtn addTarget:self action:@selector(MessageBtnEvent) forControlEvents:UIControlEventTouchUpInside];
 
 //    #pragma mark >>>>>消息按钮
 //    UIButton *mainAndSearchBtn = [[UIButton alloc] initWithFrame:CGRectMake(35, 0, 30, 30)];
@@ -172,8 +181,8 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 //    [mainAndSearchBtn setImage:[UIImage imageNamed:@"cpselect"] forState:UIControlStateNormal];
 //    [mainAndSearchBtn addTarget:self action:@selector(MessageBtnEvent) forControlEvents:UIControlEventTouchUpInside];
 //    //把右侧的两个按钮添加到rightBarButtonItem
-//    UIBarButtonItem *rightCunstomButtonView = [[UIBarButtonItem alloc] initWithCustomView:rightButtonView];
-//    self.navigationItem.rightBarButtonItem = rightCunstomButtonView;
+    UIBarButtonItem *rightCunstomButtonView = [[UIBarButtonItem alloc] initWithCustomView:rightButtonView];
+    self.navigationItem.rightBarButtonItem = rightCunstomButtonView;
 }
 -(void)DownLoadBtnEvent
 {
@@ -182,6 +191,8 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 -(void)MessageBtnEvent
 {
     NSLog(@"22222");
+    MessageViewController *seachVC = [[MessageViewController alloc] init];
+    [self pushRootNav:seachVC animated:YES];
 }
 
 

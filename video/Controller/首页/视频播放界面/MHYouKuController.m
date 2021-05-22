@@ -493,6 +493,7 @@
 //    __weak typeof(self) weakSelf = self;
     [self.Clarity setClarityCallBack:^(NSInteger index) {
         
+        NSLog(@"清晰度选择 = %ld",index);
     }];
     
     

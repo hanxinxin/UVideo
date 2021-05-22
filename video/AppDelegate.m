@@ -23,9 +23,11 @@
 
 
 
-@interface AppDelegate ()
+@interface AppDelegate ()<UITabBarControllerDelegate>
 /// 用户数据 只读
 @property (nonatomic, readwrite, strong) MHAccount *account;
+
+
 @end
 
 @implementation AppDelegate
@@ -37,19 +39,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-//    if (@available(iOS 13.0, *)) {
-//        self.window = [[BaseWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-//         self.window.backgroundColor = [UIColor whiteColor];
-//         [self.window makeKeyAndVisible];
-//        } else {
-//            self.window = [[BaseWindow alloc]initWithFrame:[[UIScreen mainScreen] bounds]];
-//             self.window.backgroundColor = [UIColor whiteColor];
-//             [self.window makeKeyAndVisible];
-//        }
-    
+
+    [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:0.f], NSForegroundColorAttributeName: [UIColor clearColor]} forState:UIControlStateNormal];
            
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.nav = [self tabBarController];
+    self.tabBar=[self tabBarController];
+    self.tabBar.delegate=self;
+    self.nav = [self roottabbar];
     [self.window setRootViewController:self.nav];
     [self.window makeKeyAndVisible];
     
@@ -81,8 +77,9 @@
     
     return YES;
 }
-- (HXBaseNavgationController *)tabBarController {
-    
+
+-(UITabBarController *)tabBarController
+{
     UITabBarController * tabBarC = [[UITabBarController alloc] init];
     
     HomeViewController * tabBarVC1 = [[HomeViewController alloc] init];
@@ -91,7 +88,7 @@
     jiluViewController * tabBarVC2 = [[jiluViewController alloc] init];
     [tabBarVC2 setTabBarItemWithTitle:@"记录" titleUnSelectStyle:nil titleSelectStyle:nil unselectImage:[UIImage imageNamed:@"jilu"] selectImage:[UIImage imageNamed:@"jiluselect"] imageSize:CGSizeMake(30, 30)];
     memberViewController * tabBarVC3 = [[memberViewController alloc] init];
-    [tabBarVC3 setTabBarItemWithTitle:@"充值" titleUnSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], UITextAttributeTextColor,nil] titleSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], UITextAttributeTextColor,nil] unselectImage:[UIImage imageNamed:@"menber"] selectImage:[UIImage imageNamed:@"menber"] imageSize:CGSizeMake(45, 45)];
+    [tabBarVC3 setTabBarItemWithTitle:@"充值" titleUnSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil] titleSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil] unselectImage:[UIImage imageNamed:@"menber"] selectImage:[UIImage imageNamed:@"menber"] imageSize:CGSizeMake(45, 45)];
     
     OfflineViewController * tabBarVC4 = [[OfflineViewController alloc] init];
     [tabBarVC4 setTabBarItemWithTitle:@"离线" titleUnSelectStyle:nil titleSelectStyle:nil unselectImage:[UIImage imageNamed:@"lixianimage"] selectImage:[UIImage imageNamed:@"lixianimageselect"] imageSize:CGSizeMake(30, 30)];
@@ -100,8 +97,13 @@
     [tabBarVC5 setTabBarItemWithTitle:@"我的" titleUnSelectStyle:nil titleSelectStyle:nil unselectImage:[UIImage imageNamed:@"meimage"] selectImage:[UIImage imageNamed:@"meimageselect"] imageSize:CGSizeMake(30, 30)];
     
     tabBarC.viewControllers = @[[tabBarVC1 addNav],[tabBarVC2 addNav],[tabBarVC3 addNav],[tabBarVC4 addNav],[tabBarVC5 addNav]];
+    return tabBarC;
+}
+- (HXBaseNavgationController *)roottabbar {
+    
+   
 //    return tabBarC;
-    HXBaseNavgationController * rootNav = [[HXBaseNavgationController alloc ] initWithRootViewController:tabBarC];
+    HXBaseNavgationController * rootNav = [[HXBaseNavgationController alloc ] initWithRootViewController:self.tabBar];
     [rootNav setNavigationBarHidden:YES];
     [rootNav.navigationController.navigationBar setHidden:YES];
     return rootNav;
@@ -154,6 +156,94 @@
                                       });
                    });
 }
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+//    [self customizeTabBarAppearance:self.tabBar];
+//    NSInteger selectInt = tabBarController.selectedIndex;
+//    if (@available(iOS 13.0, *)) {
+//        
+//        if(selectInt==2)
+//        {
+//            // titColor就是选中的颜色
+//            tabBarController.tabBar.tintColor = [UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0];
+//        }else{
+//            // titColor就是选中的颜色
+//            tabBarController.tabBar.tintColor = RGBA(20, 155, 236, 1);
+//        }
+//        //如果需要设置默认颜色可以使用setUnselectedItemTintColor来设置未选中颜色
+//             [tabBarController.tabBar setUnselectedItemTintColor:RGBA(153, 153, 153, 1)];
+//        } else {
+//            
+//        }
+    
+}
+/**
+ *  更多TabBar自定义设置：比如：tabBarItem 的选中和不选中文字和背景图片属性、tabbar 背景图片属性等等
+ */
+- (void)customizeTabBarAppearance:(UITabBarController *)tabBarController {
+#warning CUSTOMIZE YOUR TABBAR APPEARANCE
+    // Customize UITabBar height
+    
+    // 适配iOS 13 tabbar 标题字体不显示以及返回变蓝色的为问题
+    if (@available(iOS 13.0, *)) {
+                          
+        //
+        [[UITabBar appearance] setUnselectedItemTintColor:RGB(155, 155, 155)];
+
+    }
+    // set the text color for unselected state
+    // 普通状态下的文字属性
+    NSMutableDictionary *normalAttrs = [NSMutableDictionary dictionary];
+    normalAttrs[NSForegroundColorAttributeName] = RGB(155, 155, 155);
+   
+    normalAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:20.f];;
+
+   
+    // set the text color for selected state
+    // 选中状态下的文字属性
+    NSMutableDictionary *selectedAttrs = [NSMutableDictionary dictionary];
+    selectedAttrs[NSForegroundColorAttributeName] = RGB(234, 83, 36);
+    
+    selectedAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:20.f];
+    
+    
+    
+
+    // set the text Attributes
+    // 设置文字属性
+    UITabBarItem *tabBar = [UITabBarItem appearance];
+    [tabBar setTitleTextAttributes:normalAttrs forState:UIControlStateNormal];
+    [tabBar setTitleTextAttributes:selectedAttrs forState:UIControlStateSelected];
+    
+    // Set the dark color to selected tab (the dimmed background)
+    // TabBarItem选中后的背景颜色
+    // [self customizeTabBarSelectionIndicatorImage];
+    // remove the comment '//'
+    // 如果你的App需要支持横竖屏，请使用该方法移除注释 '//'
+    [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
+    [[UITabBar appearance] setBackgroundColor:[UIColor whiteColor]];
+//    [[UITabBar appearance] setShadowImage:[UIImage imageNamed:@"tapbar_top_line"]];
+    
+    // set the bar background image
+    // 设置背景图片
+    // UITabBar *tabBarAppearance = [UITabBar appearance];
+    // [tabBarAppearance setBackgroundImage:[UIImage imageNamed:@"tabbar_background"]];
+    
+    // remove the bar system shadow image
+    // 去除 TabBar 自带的顶部阴影
+     [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
+    
+    
+    
+
+}
+
+
+
+
+
+
 
 
 #pragma mark- 获取appdelegate

@@ -203,7 +203,7 @@
     //导航透明 YES 透明
     self.navBarTranslucent = NO;
     //导航按钮初始化
-    [self navBtnInit];
+//    [self navBtnInit];
 
 }
 
@@ -212,7 +212,7 @@
 
     //导航左按钮
     leftBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
+//    [leftBtn setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
     [leftBtn setTitle:@"返回" forState:(UIControlStateNormal)];
     [leftBtn setTintColor:GNavTextColor];
     [leftBtn setImage:[NSString getImageOfImageName:GNavBackImageName type:BaseNavController] forState:UIControlStateNormal];
@@ -224,7 +224,7 @@
 
     UIBarButtonItem * leftButton = [[UIBarButtonItem alloc] initWithCustomView:leftBtn];
     self.navigationItem.leftBarButtonItem = leftButton;
-
+    
 }
 
 #pragma mark- 刷新当前页面 导航控制器 配置

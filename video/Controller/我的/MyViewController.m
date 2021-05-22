@@ -31,7 +31,7 @@
     // Do any additional setup after loading the view.
 //    self.navBarColor=[UIColor whiteColor];
 //    self.hiddenLeftBtn=YES;
-    self.title=@"";
+    
     [self InitUIView];
     [self Addtableview];
     [self setyinying];
@@ -82,8 +82,6 @@
                 NSArray *array =[[[UIApplication sharedApplication] connectedScenes] allObjects];
                 UIWindowScene *windowScene = (UIWindowScene *)array[0];
                 SceneDelegate *delegate =(SceneDelegate *)windowScene.delegate;
-//                UITabBarController* tabViewController=(UITabBarController *) delegate.window.rootViewController;
-//                tabViewController.selectedIndex = 1;
                 HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
                 NSArray * arraynav = nav.viewControllers;
                 UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
@@ -91,8 +89,6 @@
             } else {
                 // Fallback on earlier versions
                 AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//                UITabBarController *tabViewController = (UITabBarController *) delegate.window.rootViewController;
-//                [tabViewController setSelectedIndex:1];
                 
                 HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
                 NSArray * arraynav = nav.viewControllers;
@@ -113,8 +109,6 @@
                 NSArray *array =[[[UIApplication sharedApplication] connectedScenes] allObjects];
                 UIWindowScene *windowScene = (UIWindowScene *)array[0];
                 SceneDelegate *delegate =(SceneDelegate *)windowScene.delegate;
-//                UITabBarController* tabViewController=(UITabBarController *) delegate.window.rootViewController;
-//                tabViewController.selectedIndex = 2;
                 HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
                 NSArray * arraynav = nav.viewControllers;
                 UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
@@ -122,8 +116,6 @@
             } else {
                 // Fallback on earlier versions
                 AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-//                UITabBarController *tabViewController = (UITabBarController *) delegate.window.rootViewController;
-//                [tabViewController setSelectedIndex:2];
                 
                 HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
                 NSArray * arraynav = nav.viewControllers;

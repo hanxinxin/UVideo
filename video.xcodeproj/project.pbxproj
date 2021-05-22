@@ -217,6 +217,7 @@
 		8A8BC3AC25FC6F9E0028173C /* NSDateFormatter+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BC37525FC6F9D0028173C /* NSDateFormatter+Extension.m */; };
 		8A8BC3AD25FC6F9E0028173C /* MHConstant.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BC37825FC6F9D0028173C /* MHConstant.m */; };
 		8A8BC3AE25FC6F9E0028173C /* MHWebImageTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BC37D25FC6F9E0028173C /* MHWebImageTool.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		8A95C06E2658EFAE00A6D144 /* BadgeButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A95C06D2658EFAE00A6D144 /* BadgeButton.m */; };
 		8A9C54A625F7837B00EFA410 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C54A525F7837B00EFA410 /* AppDelegate.m */; };
 		8A9C54A925F7837B00EFA410 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C54A825F7837B00EFA410 /* SceneDelegate.m */; };
 		8A9C54AF25F7837B00EFA410 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A9C54AD25F7837B00EFA410 /* Main.storyboard */; };
@@ -731,6 +732,8 @@
 		8A8BC37A25FC6F9D0028173C /* MHConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHConstant.h; sourceTree = "<group>"; };
 		8A8BC37D25FC6F9E0028173C /* MHWebImageTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHWebImageTool.m; sourceTree = "<group>"; };
 		8A8BC37E25FC6F9E0028173C /* MHWebImageTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHWebImageTool.h; sourceTree = "<group>"; };
+		8A95C06C2658EFAE00A6D144 /* BadgeButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadgeButton.h; sourceTree = "<group>"; };
+		8A95C06D2658EFAE00A6D144 /* BadgeButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BadgeButton.m; sourceTree = "<group>"; };
 		8A9C54A125F7837B00EFA410 /* video.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = video.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9C54A425F7837B00EFA410 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8A9C54A525F7837B00EFA410 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -2129,6 +2132,15 @@
 			path = Http;
 			sourceTree = "<group>";
 		};
+		8A95C06B2658EFAE00A6D144 /* BadgeButton */ = {
+			isa = PBXGroup;
+			children = (
+				8A95C06C2658EFAE00A6D144 /* BadgeButton.h */,
+				8A95C06D2658EFAE00A6D144 /* BadgeButton.m */,
+			);
+			path = BadgeButton;
+			sourceTree = "<group>";
+		};
 		8A9C549825F7837B00EFA410 = {
 			isa = PBXGroup;
 			children = (
@@ -2436,6 +2448,7 @@
 		8A9C563C25F8A17B00EFA410 /* custom */ = {
 			isa = PBXGroup;
 			children = (
+				8A95C06B2658EFAE00A6D144 /* BadgeButton */,
 				8A82F137264FA128004AAF40 /* LBLaunchImageAd */,
 				8A82F124264FA07E004AAF40 /* SVProgressHUD */,
 				8A82F11A264FA000004AAF40 /* UHud */,
@@ -3244,6 +3257,7 @@
 				8A8BC39425FC6F9E0028173C /* FBKVOController+MHExtension.m in Sources */,
 				FA9FBAA72647819700E4F27E /* memberViewController.m in Sources */,
 				8A8BC3AE25FC6F9E0028173C /* MHWebImageTool.m in Sources */,
+				8A95C06E2658EFAE00A6D144 /* BadgeButton.m in Sources */,
 				8A8BC2F225FC6ED10028173C /* MHYouKuCommentHeaderView.m in Sources */,
 				8A8BC2F425FC6ED10028173C /* MHYouKuVerticalSeparateButton.m in Sources */,
 				8A0520F32648D56C00E5188E /* SliderTableViewCell.m in Sources */,

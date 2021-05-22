@@ -27,7 +27,7 @@ static int fontSize = 18; ///<导航栏标题文字 字体大小
 #define GNavBgColor [UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1]
 
 //默认导航 返回 按钮图标 名称
-#define GNavBackImageName @"nav_btn_back_def" //修改返回图标，通过 backImage
+#define GNavBackImageName @"leftImage_White" //修改返回图标，通过 backImage
 
 //不同设备的屏幕比例(当然倍数可以自己控制) plus 字体比 普通大 1.5倍
 #define GFONT_SIZE_SCALE (([UIScreen mainScreen].bounds.size.height > 667) ? 1 : 1)

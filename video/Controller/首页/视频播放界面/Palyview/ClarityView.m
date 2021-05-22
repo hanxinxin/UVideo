@@ -118,18 +118,38 @@
     clarityCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellID forIndexPath:indexPath];
     if(self.selectIndex==indexPath.item)
     {
-        [cell.downtitle setBackgroundColor:RGB(255, 136, 0)];
-        [cell.downtitle setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
-        cell.downtitle.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
-        cell.downtitle.layer.borderWidth = 1;
-        cell.downtitle.layer.cornerRadius = 4;
+        if(indexPath.item==0)
+        {
+            
+            [cell.downtitle setBackgroundColor:RGB(20, 155, 236)];
+            [cell.downtitle setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
+            cell.downtitle.layer.borderColor = RGB(20, 155, 236).CGColor;
+            cell.downtitle.layer.borderWidth = 1;
+            cell.downtitle.layer.cornerRadius = 4;
+        }else{
+            [cell.downtitle setBackgroundColor:RGB(255, 136, 0)];
+            [cell.downtitle setTitleColor:RGBA(255, 255, 255, 1) forState:UIControlStateNormal];
+            cell.downtitle.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
+            cell.downtitle.layer.borderWidth = 1;
+            cell.downtitle.layer.cornerRadius = 4;
+        }
     }else{
+        if(indexPath.item==0)
+        {
+            cell.downtitle.backgroundColor = RGB(255, 255, 255);
+            [cell.downtitle setTitleColor:RGBA(51, 51, 51, 1) forState:UIControlStateNormal];
+            cell.downtitle.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
+            cell.downtitle.layer.borderWidth = 1;
+            cell.downtitle.layer.cornerRadius = 4;
+        }else{
+            cell.downtitle.backgroundColor = RGB(255, 255, 255);
+            [cell.downtitle setTitleColor:RGBA(51, 51, 51, 1) forState:UIControlStateNormal];
+            cell.downtitle.layer.borderColor = RGBA(255, 136, 0, 1).CGColor;
+            cell.downtitle.layer.borderWidth = 1;
+            cell.downtitle.layer.cornerRadius = 4;
+            
         
-        cell.downtitle.backgroundColor = RGB(255, 255, 255);
-        [cell.downtitle setTitleColor:RGBA(51, 51, 51, 1) forState:UIControlStateNormal];
-        cell.downtitle.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
-        cell.downtitle.layer.borderWidth = 1;
-        cell.downtitle.layer.cornerRadius = 4;
+        }
     }
     [cell.downtitle setTitle:self.titlearray[indexPath.item] forState:(UIControlStateNormal)];
     if(indexPath.item==0)

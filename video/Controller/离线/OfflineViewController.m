@@ -37,7 +37,7 @@
         _btn.frame = CGRectMake(0, 0, 50, 44);
         [_btn setTitle:@"编辑" forState:UIControlStateNormal];
         [_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        
+        [_btn setTitleColor:RGB(68,68,68) forState:(UIControlStateNormal)];
         [_btn addTarget:self action:@selector(BianjiBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _btn;

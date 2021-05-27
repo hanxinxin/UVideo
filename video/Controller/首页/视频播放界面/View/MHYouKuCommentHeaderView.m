@@ -85,8 +85,8 @@
     
     self.commentLabel.text = commentItem.title;
     
-    self.commentNumsLabel.text = [NSString stringWithFormat:@"%zd" , commentItem.commentCount];
-    [self.commentBtn setTitle:[NSString stringWithFormat:@"已有%zd条评论，快来说说你的感想吧",commentItem.commentCount] forState:UIControlStateNormal];
+    self.commentNumsLabel.text = [NSString stringWithFormat:@"%lld" , commentItem.commentCount];
+    [self.commentBtn setTitle:[NSString stringWithFormat:@"已有%lld条评论，快来说说你的感想吧",commentItem.commentCount] forState:UIControlStateNormal];
 }
 
 
@@ -207,14 +207,18 @@
 {
     // 布局
     [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.and.top.equalTo(self.contentView);
+//        make.left.right.and.top.equalTo(self.contentView).offset(-15);
+        make.left.right.and.top.equalTo(self.contentView).offset(-15);
         make.height.mas_equalTo(50.0f);
     }];
     
     // 评论
     [self.commentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.titleView.mas_left).with.offset(MHGlobalViewLeftInset);
+//        make.right.equalTo(self.titleView);
+        make.right.equalTo(self.titleView.mas_right).with.offset(MHGlobalViewLeftInset);
         make.width.mas_equalTo([@"评论" mh_sizeWithFont:self.commentLabel.font].width+4);
+//        make.width.equalTo(self.titleView.mas_width).offset(-50);
         make.top.and.bottom.equalTo(self.titleView);
     }];
     

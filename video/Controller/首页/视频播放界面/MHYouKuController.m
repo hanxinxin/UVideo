@@ -44,7 +44,7 @@
 //@property(nonatomic,strong)KJBasePlayerView *basePlayerView;
 //@property(nonatomic,strong)NSArray *temps;
 
-
+@property (nonatomic ,strong) UIButton *btn;//缓存按钮
 
 /** 顶部容器View   **/
 @property (nonatomic , strong) UIView *topContainer;
@@ -468,7 +468,22 @@
     _mediabase_id = @"89757";
    
 }
-
+- (UIButton *)btn{
+    if (!_btn) {
+        self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _btn.frame = CGRectMake(0, 0, 50, 44);
+        [_btn setTitle:@"缓存" forState:UIControlStateNormal];
+        [_btn setImage:[UIImage imageNamed:@"huancun"] forState:UIControlStateNormal];
+        [_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_btn setTitleColor:RGB(68,68,68) forState:(UIControlStateNormal)];
+        [_btn addTarget:self action:@selector(huancunBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _btn;
+}
+-(void)huancunBtn:(UIButton*)sender
+{
+    
+}
 #pragma mark -  初始化数据
 
 - (void)_setupData
@@ -484,6 +499,13 @@
 - (void)_setupNavigationItem
 {
     self.title = @"我们的世界";
+//    self.statusBarBackgroundColor=RGB(68,68,68);
+    self.statusBarTextIsWhite=NO;
+    
+    UIBarButtonItem *rightitem = [[UIBarButtonItem alloc] initWithCustomView:self.btn];
+    
+    self.navigationItem.rightBarButtonItem = rightitem;
+    self.navigationController.navigationBar.tintColor = RGB(68,68,68);
 }
 
 #pragma mark - 设置子控件

@@ -93,7 +93,7 @@
 {
     [super viewDidLoad];
     self.hiddenLeftBtn = YES;
-    self.navBarColor=[UIColor whiteColor];
+//    self.navBarColor=[UIColor whiteColor];
     
     [self setBarButtonItem];
     self.view.backgroundColor = [UIColor whiteColor];

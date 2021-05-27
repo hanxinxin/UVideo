@@ -22,12 +22,7 @@
 
 
 
-@interface HXBaseViewController () {
-    UINavigationBar * navBar;
-    BOOL isVcBaseApper; ///< 导航的设置优先级
-
-    UIButton * leftBtn;
-}
+@interface HXBaseViewController () 
 
 @property (nonatomic, copy) GCusNavClickIndex cusNavClickIndex;
 /**
@@ -140,9 +135,7 @@
     UIColor * statuBarColor = [_statusBarBackgroundColor copy];
     self.statusBarBackgroundColor = statuBarColor;
     //导航栏 字体 字色 背景色
-    [navBar
-     setTitleTextAttributes:
-     navBar.titleTextAttributes];
+    [navBar setTitleTextAttributes: navBar.titleTextAttributes];
     //导航背景颜色
     UIColor * navBarColor = [_navBarColor copy];
     self.navBarColor = navBarColor;
@@ -190,6 +183,10 @@
        NSForegroundColorAttributeName:GNavTextColor,
        NSFontAttributeName:GNavTextFont,
        }];
+//
+    
+
+//    self.navigationController.navigationBar.tintColor=[UIColor blackColor];
     //导航背景颜色
     self.navBarColor = GNavBgColor;
 
@@ -289,6 +286,7 @@
     } else {
         [navBar setBarStyle:(isWhite)?UIBarStyleBlack:UIBarStyleDefault];
     }
+    
 
 
 }
@@ -296,27 +294,27 @@
 //设置状态栏颜色
 - (void)setStatusBarBackgroundColor:(UIColor *)color {
     _statusBarBackgroundColor = color;
-    UIView *statusBar = nil;
-
-#if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
-    if(@available(iOS 13.0,*))
-    {
-        UIStatusBarManager *statusBarManager = [UIApplication sharedApplication].keyWindow.windowScene.statusBarManager;
-        if ([statusBarManager respondsToSelector:@selector(createLocalStatusBar)]) {
-            UIView *_localStatusBar = [statusBarManager performSelector:@selector(createLocalStatusBar)];
-            if ([_localStatusBar respondsToSelector:@selector(statusBar)]) {
-                statusBar = [_localStatusBar performSelector:@selector(statusBar)];
-            }
-        }
-    }
-#else
-    statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
-#endif
-
-//    NSLog(@"statusBar.backgroundColor--->%@",statusBar.backgroundColor);
-    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
-        statusBar.backgroundColor = color;
-    }
+//    UIView *statusBar = nil;
+//
+//#if defined(__IPHONE_13_0) && __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_13_0
+//    if(@available(iOS 13.0,*))
+//    {
+//        UIStatusBarManager *statusBarManager = [UIApplication sharedApplication].keyWindow.windowScene.statusBarManager;
+//        if ([statusBarManager respondsToSelector:@selector(createLocalStatusBar)]) {
+//            UIView *_localStatusBar = [statusBarManager performSelector:@selector(createLocalStatusBar)];
+//            if ([_localStatusBar respondsToSelector:@selector(statusBar)]) {
+//                statusBar = [_localStatusBar performSelector:@selector(statusBar)];
+//            }
+//        }
+//    }
+//#else
+//    statusBar = [[[UIApplication sharedApplication] valueForKey:@"statusBarWindow"] valueForKey:@"statusBar"];
+//#endif
+//
+////    NSLog(@"statusBar.backgroundColor--->%@",statusBar.backgroundColor);
+//    if ([statusBar respondsToSelector:@selector(setBackgroundColor:)]) {
+//        statusBar.backgroundColor = color;
+//    }
 }
 
 #pragma mark- 导航栏颜色 透明否
@@ -329,6 +327,7 @@
     }else
     {
         [navBar setBarTintColor:navColor];
+//        [navBar setBarTintColor:RGB(68,68,68)];
     }
     _navBarColor = navColor;
 }

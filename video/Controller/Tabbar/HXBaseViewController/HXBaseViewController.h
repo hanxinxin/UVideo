@@ -43,7 +43,12 @@ typedef void(^GCusNavClickIndex)(NSInteger index);
  *  自定义导航栏
  */
 @interface HXBaseViewController : UIViewController
+{
+    UINavigationBar * navBar;
+    BOOL isVcBaseApper; ///< 导航的设置优先级
 
+    UIButton * leftBtn;
+}
 #warning 在vc内部设置才有效
 /**
  *  自定义视图 右侧按钮 左侧按钮 标题

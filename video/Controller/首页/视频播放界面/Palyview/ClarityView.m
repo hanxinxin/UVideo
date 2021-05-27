@@ -49,8 +49,10 @@
 //    layout.delegate = self;
     WSLWaterFlowLayout * layout = [[WSLWaterFlowLayout alloc] init];
     layout.delegate = self;
-    layout.flowLayoutStyle = WSLWaterFlowVerticalEqualHeight;
-    
+    layout.flowLayoutStyle = WSLWaterFlowHorizontalGrid;
+//     = UICollectionViewScrollDirectionHorizontal;
+    //水平滑动
+            
     // 创建瀑布流view
     UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:layout];
     // 设置数据源
@@ -59,42 +61,49 @@
     collectionView.backgroundColor = [UIColor whiteColor];
     collectionView.tag=2001;
     // 是否滚动//
-    collectionView.scrollEnabled = NO;
+    collectionView.scrollEnabled = YES;
+    /// 设置此属性为yes 不满一屏幕 也能滚动
+//    collectionView.alwaysBounceHorizontal = YES;
+//    collectionView.showsHorizontalScrollIndicator = NO;
     [self addSubview:collectionView];
     [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(@0);
-        make.width.mas_equalTo(self.width);
-        make.bottom.equalTo(self);
+        make.top.left.width.and.height.equalTo(self);
+//        make.top.equalTo(@0);
+//        make.width.mas_equalTo(self.width);
+//        make.bottom.equalTo(self);
     }];
     self.collectionView1 = collectionView;
     
     // 注册cell
     [self.collectionView1 registerNib:[UINib nibWithNibName:NSStringFromClass([clarityCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:CellID];
-   
-    // 为瀑布流控件添加下拉加载和上拉加载
-    self.collectionView1.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 模拟网络请求延迟
-            
-            [self updateCollection];
-        });
-    }];
-    // 第一次进入则自动加载
-    [self.collectionView1.mj_header beginRefreshing];
-    
-    
-    self.collectionView1.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 模拟网络请求延迟
-//            [self getDataList_footer1];
-            
-        });
-    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 模拟网络请求延迟
+        
+        [self updateCollection];
+    });
+//    // 为瀑布流控件添加下拉加载和上拉加载
+//    self.collectionView1.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 模拟网络请求延迟
+//
+//            [self updateCollection];
+//        });
+//    }];
+//    // 第一次进入则自动加载
+//    [self.collectionView1.mj_header beginRefreshing];
+//
+//
+//    self.collectionView1.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 模拟网络请求延迟
+////            [self getDataList_footer1];
+//
+//        });
+//    }];
 }
 -(void)updateCollection
 {
-    [self.titlearray addObject:@"普清·480P"];
-    [self.titlearray addObject:@"高清·720P"];
-    [self.titlearray addObject:@"超清·1080P"];
+    [self.titlearray addObject:@"标清·360"];
+    [self.titlearray addObject:@"高清·480P"];
+    [self.titlearray addObject:@"超清·720P"];
+    [self.titlearray addObject:@"蓝光·1080P"];
     [self.collectionView1.mj_header endRefreshing];
     [self.collectionView1 reloadData];
 }
@@ -118,7 +127,7 @@
     clarityCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellID forIndexPath:indexPath];
     if(self.selectIndex==indexPath.item)
     {
-        if(indexPath.item==0)
+        if(indexPath.item==0 || indexPath.item==1)
         {
             
             [cell.downtitle setBackgroundColor:RGB(20, 155, 236)];
@@ -134,7 +143,7 @@
             cell.downtitle.layer.cornerRadius = 4;
         }
     }else{
-        if(indexPath.item==0)
+        if(indexPath.item==0 || indexPath.item==1)
         {
             cell.downtitle.backgroundColor = RGB(255, 255, 255);
             [cell.downtitle setTitleColor:RGBA(51, 51, 51, 1) forState:UIControlStateNormal];
@@ -143,7 +152,7 @@
             cell.downtitle.layer.cornerRadius = 4;
         }else{
             cell.downtitle.backgroundColor = RGB(255, 255, 255);
-            [cell.downtitle setTitleColor:RGBA(51, 51, 51, 1) forState:UIControlStateNormal];
+            [cell.downtitle setTitleColor:RGB(255, 136, 0) forState:UIControlStateNormal];
             cell.downtitle.layer.borderColor = RGBA(255, 136, 0, 1).CGColor;
             cell.downtitle.layer.borderWidth = 1;
             cell.downtitle.layer.cornerRadius = 4;
@@ -154,7 +163,11 @@
     [cell.downtitle setTitle:self.titlearray[indexPath.item] forState:(UIControlStateNormal)];
     if(indexPath.item==0)
     {
-        cell.toptitle.text=@"游客/会员";
+        cell.toptitle.text=@"游客";
+        cell.toptitle.textColor=RGB(102, 102, 102);
+    }else if(indexPath.item==1)
+    {
+        cell.toptitle.text=@"注册会员";
         cell.toptitle.textColor=RGB(102, 102, 102);
     }else{
         cell.toptitle.text=@"VIP会员";
@@ -176,7 +189,7 @@
 //返回每个item大小
 - (CGSize)waterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-        return CGSizeMake(110, 85);
+        return CGSizeMake(100, 85);
 }
 /** 头视图Size */
 -(CGSize )waterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout sizeForHeaderViewInSection:(NSInteger)section{
@@ -201,7 +214,7 @@
     if (waterFlowLayout.flowLayoutStyle == (WSLWaterFlowLayoutStyle)3){
         return UIEdgeInsetsMake(20, 20, 20, 20);
     }
-    return UIEdgeInsetsMake(10, 10, 10, 10);
+    return UIEdgeInsetsMake(6, 6, 6, 6);
 }
 
 

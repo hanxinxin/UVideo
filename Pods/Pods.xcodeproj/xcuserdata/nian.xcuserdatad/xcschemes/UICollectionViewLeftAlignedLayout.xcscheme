@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CC855F6CF68A0E53B44765DF68F5A1BB"
-               BuildableName = "libUICollectionViewLeftAlignedLayout.a"
+               BuildableName = "UICollectionViewLeftAlignedLayout.framework"
                BlueprintName = "UICollectionViewLeftAlignedLayout"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

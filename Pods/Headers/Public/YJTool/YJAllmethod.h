@@ -1,1 +1,0 @@
-../../../YJTool/YJTool_Demo/YJ_Tool/Tool/YJAllmethod.h

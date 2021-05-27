@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "AF45D4A3E6639AABC0D813F5586E46AC"
-               BuildableName = "libBGFMDB.a"
+               BuildableName = "BGFMDB.framework"
                BlueprintName = "BGFMDB"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

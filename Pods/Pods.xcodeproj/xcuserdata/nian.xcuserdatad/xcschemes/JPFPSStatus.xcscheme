@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2781BD6EA713B984CF61D5F7AFC33501"
-               BuildableName = "libJPFPSStatus.a"
+               BuildableName = "JPFPSStatus.framework"
                BlueprintName = "JPFPSStatus"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

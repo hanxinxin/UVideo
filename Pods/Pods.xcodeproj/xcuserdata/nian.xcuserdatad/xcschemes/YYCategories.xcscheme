@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "4CF4590C80DA0BCFB23334523B614709"
-               BuildableName = "libYYCategories.a"
+               BuildableName = "YYCategories.framework"
                BlueprintName = "YYCategories"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

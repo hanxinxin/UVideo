@@ -11,6 +11,7 @@
 #import <Masonry/Masonry.h>
 #import "LocalStringObj.h"
 #import "VPKCUIViewExt.h"
+#import "BaseViewController.h"
 #import "HXBaseViewController.h"
 #import "HXBaseNavgationController.h"
 #import "MJRefresh.h"
@@ -27,6 +28,8 @@
 #import <MJRefresh/MJRefresh.h>
 #import <ReactiveObjC/ReactiveObjC.h>
 #import <HYBImageCliped/HYBImageCliped.h>
+#import "KJPlayerHeader.h"
+
 
 /// User Custom File
 /// 协议

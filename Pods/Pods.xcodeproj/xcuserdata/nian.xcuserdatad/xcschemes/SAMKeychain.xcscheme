@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "5572D14DECB5A676C1B31B30A3BA7F10"
-               BuildableName = "libSAMKeychain.a"
+               BuildableName = "SAMKeychain.framework"
                BlueprintName = "SAMKeychain"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

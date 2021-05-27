@@ -15,6 +15,8 @@
 #import "BaseWindow.h"
 
 
+
+
 #import "CMHHTTPService.h"
 #import "IQKeyboardManager.h"
 #if defined(DEBUG)||defined(_DEBUG)
@@ -23,11 +25,11 @@
 
 
 
-@interface AppDelegate ()<UITabBarControllerDelegate>
+@interface AppDelegate ()<UITabBarControllerDelegate,KJPlayerRotateAppDelegate>
 /// 用户数据 只读
 @property (nonatomic, readwrite, strong) MHAccount *account;
 
-
+@property(nonatomic,assign) UIInterfaceOrientationMask rotateOrientation;
 @end
 
 @implementation AppDelegate
@@ -37,9 +39,23 @@
 
 }
 
+/* 传递当前旋转方向 */
+- (void)kj_transmitCurrentRotateOrientation:(UIInterfaceOrientationMask)rotateOrientation{
+    self.rotateOrientation = rotateOrientation;
+}
+- (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window{
+    if (self.rotateOrientation) {
+        return self.rotateOrientation;
+    }else{
+        return UIInterfaceOrientationMaskPortrait;
+    }
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
+   
+    
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:0.f], NSForegroundColorAttributeName: [UIColor clearColor]} forState:UIControlStateNormal];
            
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "01F679070E8F160DA5DD9ED647DBCF9E"
-               BuildableName = "libYJTool.a"
+               BuildableName = "YJTool.framework"
                BlueprintName = "YJTool"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

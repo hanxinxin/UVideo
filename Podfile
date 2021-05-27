@@ -3,9 +3,10 @@
 # platform :ios, '9.0'
 platform :ios, '9.0' #增加的内容
 
-source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
+#source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 target 'video' do
+  use_frameworks!
 
 pod 'SDWebImage' , '~> 4.3.3'
 pod 'FLAnimatedImage'
@@ -21,20 +22,8 @@ pod 'Masonry'
 #pod 'GKPageSmoothView'
 pod 'MSPageControl'
 
-
-pod 'KJPlayer/KJPlayerView'
-
-##################加入代码##################
-# 使用第三方库xcode报错Cannot synthesize weak property because the current deployment target does not support weak references
-post_install do |installer|
-    installer.pods_project.targets.each do |target|
-        target.build_configurations.each do |config|
-            config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] ='8.0'
-        end
-    end
-end
-#  pod 'RealReachability/Ping' # 网络监测
-pod 'IJKMediaFramework' 
+# ijkplayer
+pod 'IJKMediaFramework'
 
 
 

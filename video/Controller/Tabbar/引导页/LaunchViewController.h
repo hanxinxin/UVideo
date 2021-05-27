@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseViewController.h"
+#import "BaseTabbarViewController.h"
 
-@interface LaunchViewController : BaseViewController
+@interface LaunchViewController : BaseTabbarViewController
 @end

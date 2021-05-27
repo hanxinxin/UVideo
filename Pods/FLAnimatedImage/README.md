@@ -38,6 +38,17 @@ If using [Carthage](https://github.com/Carthage/Carthage), add the following lin
 github "Flipboard/FLAnimatedImage"
 ```
 
+If using [Swift Package Manager](https://github.com/apple/swift-package-manager), add the following to your `Package.swift` or add via XCode:
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/Flipboard/FLAnimatedImage.git", .upToNextMajor(from: "1.0.16"))
+],
+targets: [
+    .target(name: "TestProject", dependencies: ["FLAnimatedImage""])
+]
+```
+
 In your code, `#import "FLAnimatedImage.h"`, create an image from an animated GIF, and setup the image view to display it:
 
 ```objective-c
@@ -48,7 +59,7 @@ imageView.frame = CGRectMake(0.0, 0.0, 100.0, 100.0);
 [self.view addSubview:imageView];
 ```
 
-It's flexible to integrate in your custom image loading stack and backwards compatible to iOS 6.
+It's flexible to integrate in your custom image loading stack and backwards compatible to iOS 9.
 
 It uses ARC and the Apple frameworks `QuartzCore`, `ImageIO`, `MobileCoreServices`, and `CoreGraphics`.
 

@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7B660118F2114920771136B1730E62B5"
-               BuildableName = "libHYBImageCliped.a"
+               BuildableName = "HYBImageCliped.framework"
                BlueprintName = "HYBImageCliped"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

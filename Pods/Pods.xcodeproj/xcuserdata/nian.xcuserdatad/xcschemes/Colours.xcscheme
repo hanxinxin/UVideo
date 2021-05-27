@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2194BB176C539E559DB8A48642253D85"
-               BuildableName = "libColours.a"
+               BuildableName = "Colours.framework"
                BlueprintName = "Colours"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>

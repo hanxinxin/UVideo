@@ -1,5 +1,7 @@
 ${PODS_ROOT}/Target Support Files/Pods-video/Pods-video-resources.sh
 ${PODS_ROOT}/IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle
+${PODS_ROOT}/KJPlayer/KJPlayerDemo/Core/DBPlayer.xcdatamodeld
+${PODS_ROOT}/KJPlayer/KJPlayerDemo/KJMidiPlayer/KJMidiSource.bundle
 ${PODS_ROOT}/MJRefresh/MJRefresh/MJRefresh.bundle
 ${PODS_ROOT}/SAMKeychain/Support/SAMKeychain.bundle
 ${PODS_ROOT}/TZImagePickerController/TZImagePickerController/TZImagePickerController/TZImagePickerController.bundle

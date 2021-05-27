@@ -44,16 +44,16 @@ PODS:
   - DACircularProgress (2.3.1)
   - DZNEmptyDataSet (1.8.1)
   - FDFullscreenPopGesture (1.1)
-  - FLAnimatedImage (1.0.15)
-  - HJCornerRadius (0.0.1)
+  - FLAnimatedImage (1.0.16)
   - HYBImageCliped (2.2.4)
+  - IJKMediaFramework (0.1.5)
   - IQKeyboardManager (6.0.3)
   - JPFPSStatus (0.1.1)
   - KVOController (1.2.0)
   - Masonry (1.1.0)
   - MBProgressHUD (1.0.0)
   - MJExtension (3.2.4)
-  - MJRefresh (3.5.0)
+  - MJRefresh (3.6.1)
   - MSPageControl (0.0.3)
   - MTBlockAlertView (0.1.1)
   - pop (1.0.10)
@@ -108,8 +108,8 @@ DEPENDENCIES:
   - DZNEmptyDataSet (= 1.8.1)
   - FDFullscreenPopGesture (= 1.1)
   - FLAnimatedImage
-  - HJCornerRadius (from `https://github.com/panghaijiao/HJCornerRadius.git`)
   - HYBImageCliped (= 2.2.4)
+  - IJKMediaFramework
   - IQKeyboardManager (= 6.0.3)
   - JPFPSStatus (= 0.1.1)
   - KVOController (= 1.2.0)
@@ -153,6 +153,7 @@ SPEC REPOS:
     - FDFullscreenPopGesture
     - FLAnimatedImage
     - HYBImageCliped
+    - IJKMediaFramework
     - IQKeyboardManager
     - JPFPSStatus
     - KVOController
@@ -181,15 +182,6 @@ SPEC REPOS:
     - YZDisplayViewController
     - ZYCornerRadius
 
-EXTERNAL SOURCES:
-  HJCornerRadius:
-    :git: https://github.com/panghaijiao/HJCornerRadius.git
-
-CHECKOUT OPTIONS:
-  HJCornerRadius:
-    :commit: 111c86bf419a214b0b06ceac1eb46f48ce71ebde
-    :git: https://github.com/panghaijiao/HJCornerRadius.git
-
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   BGFMDB: cd5e468218d4c7345862d814d313c0888db3a66a
@@ -199,16 +191,16 @@ SPEC CHECKSUMS:
   DACircularProgress: 4dd437c0fc3da5161cb289e07ac449493d41db71
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
-  FLAnimatedImage: dd3db277b17e909ec3c7fd41adfce79b321d960e
-  HJCornerRadius: 0af191386b5f2e9c4465739b5db22c0acc52923b
+  FLAnimatedImage: 8f3e854ebf9680b71f0b6e700939687fc4d82b4b
   HYBImageCliped: 22d14431324bc9d056353d6f1490a3bd03fc7dff
+  IJKMediaFramework: f1119f6324c96bc4654f3045a5beaa95ba0596c0
   IQKeyboardManager: c390e612f4b98c8fd748016470138537dc163ead
   JPFPSStatus: 03f32aa3d4d7d0c5bf56f6f3e7cf8b7280a5f52c
   KVOController: d72ace34afea42468329623b3379ab3cd1d286b6
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJExtension: 88e0900751b6cac8de1cf724ca9838a0b28d5acb
-  MJRefresh: 6afc955813966afb08305477dd7a0d9ad5e79a16
+  MJRefresh: d2c1970d1cf6e77fcfcdfe76c943dfab8dbfa5c1
   MSPageControl: d1b695ec3641f75baa74a29ed7dbc28a0aabfb61
   MTBlockAlertView: 6a37bcf0fc677da69e0c3457be41bb1eb2415484
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
@@ -230,6 +222,6 @@ SPEC CHECKSUMS:
   YZDisplayViewController: 621f737a9aa3dfbc95a901e89e5e7c4b2ea6ef79
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: 3b63178745c3c05a646183bb4dc674f7fc2f95e0
+PODFILE CHECKSUM: 414a5e72db9a4d8901fe5cae963a2c0c71e2a349
 
 COCOAPODS: 1.9.3

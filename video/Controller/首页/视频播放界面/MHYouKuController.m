@@ -29,8 +29,22 @@
 
 #import "ClarityView.h"
 
+@interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate , MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate,KJPlayerDelegate,KJPlayerBaseViewDelegate,KJPlayerBaseViewDelegate>
 
-@interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate , MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate>
+///// 播放器 Player
+
+
+@property(nonatomic,strong)KJBasePlayerView *playerView;
+@property(nonatomic,strong)KJAVPlayer *player;
+@property(nonatomic,strong)NSArray *temps;
+
+
+
+//@property(nonatomic,strong)KJIJKPlayer *player;
+//@property(nonatomic,strong)KJBasePlayerView *basePlayerView;
+//@property(nonatomic,strong)NSArray *temps;
+
+
 
 /** 顶部容器View   **/
 @property (nonatomic , strong) UIView *topContainer;
@@ -118,6 +132,14 @@
     [super viewWillDisappear:animated];
 
 }
+- (void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    if (_player) {
+        [self.player kj_stop];
+        _player = nil;
+    }
+}
+
 
 
 - (void)viewDidLoad
@@ -139,7 +161,179 @@
     // 初始化假数据
     [self _setupData];
     
+    ///设置 playerView
+    [self setPlayerView];
+    
 }
+
+
+-(void)setPlayerView
+{
+    
+    KJBasePlayerView *backview = [[KJBasePlayerView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, self.view.width*(9.f/16.f))];
+    [self.view addSubview:backview];
+//    [self.topContainer addSubview:backview];
+    self.playerView = backview;
+    backview.delegate = self;
+    backview.isHiddenBackButton=YES;
+    backview.gestureType = KJPlayerGestureTypeAll;
+    backview.smallScreenHiddenBackButton = NO;
+    backview.backButton.hidden=YES;
+    backview.autoHideTime = 3;
+    PLAYER_WEAKSELF;
+    backview.kVideoClickButtonBack = ^(KJBasePlayerView *view){
+        if (view.isFullScreen) {
+            view.isFullScreen = NO;
+        }else{
+            [weakself.player kj_stop];
+            [weakself.navigationController setNavigationBarHidden:NO animated:YES];
+            [weakself.navigationController popViewControllerAnimated:YES];
+        }
+    };
+    backview.kVideoChangeScreenState = ^(KJPlayerVideoScreenState state) {
+      
+        NSLog(@"pingmu == %ld",state);
+    };
+//
+    KJAVPlayer *player = [[KJAVPlayer alloc]init];
+    self.player = player;
+    player.delegate = self;
+    player.placeholder = [UIImage imageNamed:@"comment_loading_bgView"];
+    player.playerView = backview;
+//    player.videoURL = [NSURL URLWithString:@"https://mp4.vjshi.com/2018-03-30/1f36dd9819eeef0bc508414494d34ad9.mp4"];
+    
+//    KJBasePlayerView *backview = [[KJBasePlayerView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width*9/16.)];
+//    self.basePlayerView = backview;
+//    [self.view addSubview:backview];
+//    backview.delegate = self;
+//    backview.gestureType = KJPlayerGestureTypeAll;
+//    PLAYER_WEAKSELF;
+//    backview.kVideoClickButtonBack = ^(KJBasePlayerView *view){
+//        if (view.isFullScreen) {
+//            view.isFullScreen = NO;
+//        }else{
+//            [weakself.player kj_stop];
+//            [weakself.navigationController setNavigationBarHidden:NO animated:YES];
+//            [weakself.navigationController popViewControllerAnimated:YES];
+//        }
+//    };
+//    backview.kVideoChangeScreenState = ^(KJPlayerVideoScreenState state) {
+//        if (state == KJPlayerVideoScreenStateFullScreen) {
+//            [weakself.navigationController setNavigationBarHidden:YES animated:YES];
+//        }else{
+//            [weakself.navigationController setNavigationBarHidden:NO animated:YES];
+//        }
+//    };
+//
+//    KJIJKPlayer *player = [[KJIJKPlayer alloc]init];
+//    self.player = player;
+//    player.placeholder = [UIImage imageNamed:@"comment_loading_bgView"];
+//    player.playerView = backview;
+//    player.cacheTime = 5;
+//    player.delegate = self;
+//    player.kVideoTotalTime = ^(NSTimeInterval time) {
+////        slider.maximumValue = time;
+////        label3.text = kPlayerConvertTime(time);
+//    };
+//    player.kVideoSize = ^(CGSize size) {
+//        NSLog(@"%.2f,%.2f",size.width,size.height);
+//    };
+
+    
+    self.temps = @[@"https://mp4.vjshi.com/2018-03-30/1f36dd9819eeef0bc508414494d34ad9.mp4",
+                   @"https://mp4.vjshi.com/2021-01-13/d37b7bea25b063b4f9d4bdd98bc611e3.mp4",
+                   @"https://mp4.vjshi.com/2021-01-13/ac721f0590f0b0509092afea52d55a90.mp4",@"http://ivi.bupt.edu.cn/hls/hunanhd.m3u8"];
+    
+    
+//    self.player.videoURL = [NSURL URLWithString:self.temps[3]];
+    player.videoURL = [NSURL URLWithString:self.temps[0]];
+}
+- (void)tempsAction:(NSInteger)index{
+    self.player.videoURL = [NSURL URLWithString:self.temps[index]];
+}
+
+#pragma mark - KJPlayerDelegate
+/* 当前播放器状态 */
+- (void)kj_player:(KJBasePlayer*)player state:(KJPlayerState)state{
+    if (state == KJPlayerStateBuffering || state == KJPlayerStatePausing) {
+        [player kj_startAnimation];
+    }else if (state == KJPlayerStatePreparePlay || state == KJPlayerStatePlaying) {
+        [player kj_stopAnimation];
+    }else if (state == KJPlayerStatePlayFinished) {
+        [player kj_replay];
+    }
+}
+/* 播放进度 */
+- (void)kj_player:(KJBasePlayer*)player currentTime:(NSTimeInterval)time{
+    
+}
+/* 缓存进度 */
+- (void)kj_player:(KJBasePlayer*)player loadProgress:(CGFloat)progress{
+    
+}
+/* 播放错误 */
+- (void)kj_player:(KJBasePlayer*)player playFailed:(NSError*)failed{
+    
+}
+
+#pragma mark - KJPlayerBaseViewDelegate
+/* 单双击手势反馈 */
+- (void)kj_basePlayerView:(KJBasePlayerView*)view isSingleTap:(BOOL)tap{
+    if (tap) {
+        if (view.displayOperation) {
+            [view kj_hiddenOperationView];
+        }else{
+            [view kj_displayOperationView];
+        }
+    }else{
+        if ([self.player isPlaying]) {
+            [self.player kj_pause];
+            [self.player kj_startAnimation];
+        }else{
+            [self.player kj_resume];
+            [self.player kj_stopAnimation];
+        }
+    }
+}
+/* 长按手势反馈 */
+- (void)kj_basePlayerView:(KJBasePlayerView*)view longPress:(UILongPressGestureRecognizer*)longPress{
+    switch (longPress.state) {
+        case UIGestureRecognizerStateBegan: {
+            self.player.speed = 2.;
+            [self.player kj_displayHintText:@"长按快进播放中..." time:0 position:KJPlayerHintPositionTop];
+        }
+            break;
+        case UIGestureRecognizerStateChanged: {
+        }
+            break;
+        case UIGestureRecognizerStateEnded: {
+            self.player.speed = 1.0;
+            [self.player kj_hideHintText];
+        }
+        default:
+            break;
+    }
+}
+/* 进度手势反馈，是否替换自带UI，范围-1 ～ 1 */
+- (NSArray*)kj_basePlayerView:(KJBasePlayerView*)view progress:(float)progress end:(BOOL)end{
+    if (end) {
+        NSTimeInterval time = self.player.currentTime + progress * self.player.totalTime;
+        NSLog(@"---time:%.2f",time);
+        self.player.kVideoAdvanceAndReverse(time, nil);
+    }
+    return @[@(self.player.currentTime),@(self.player.totalTime)];
+}
+/* 音量手势反馈，是否替换自带UI，范围0 ～ 1 */
+- (BOOL)kj_basePlayerView:(KJBasePlayerView*)view volumeValue:(float)value{
+    NSLog(@"---voiceValue:%.2f",value);
+    return NO;
+}
+/* 亮度手势反馈，是否替换自带UI，范围0 ～ 1 */
+- (BOOL)kj_basePlayerView:(KJBasePlayerView*)view brightnessValue:(float)value{
+    NSLog(@"---lightValue:%.2f",value);
+    return NO;
+}
+
 #pragma mark - 公共方法
 
 
@@ -160,7 +354,7 @@
 {
     if (_topContainer == nil) {
         _topContainer = [[UIView alloc] init];
-        _topContainer.backgroundColor = [UIColor blackColor];
+        _topContainer.backgroundColor = [UIColor whiteColor];
     }
     return _topContainer;
 }
@@ -329,12 +523,17 @@
 // 初始化播放器View
 - (void)_setupTopContainerView
 {
+    
+    
     [self.view addSubview:self.topContainer];
     [self.topContainer mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.view).with.offset(0);
         make.left.right.equalTo(self.view);
-        make.height.mas_equalTo(self.topContainer.mas_width).multipliedBy(9.0f/16.0f);
+//        make.height.mas_equalTo(self.view.frame.size.width).multipliedBy(9.0f/16.0f);
+        make.height.mas_equalTo(self.view.width*(9.f/16.f));
     }];
+    
+    
 }
 
 
@@ -494,6 +693,7 @@
     [self.Clarity setClarityCallBack:^(NSInteger index) {
         
         NSLog(@"清晰度选择 = %ld",index);
+        [self tempsAction:index];
     }];
     
     

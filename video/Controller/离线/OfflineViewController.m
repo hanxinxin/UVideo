@@ -88,7 +88,7 @@
     [Listarray1 addObject:@"安全设置"];
     [Listarray1 addObject:@"清理缓存"];
     self.downtableview1=[[UITableView alloc] init];
-    self.downtableview1.frame=CGRectMake(20, 0, SCREEN_WIDTH-40, SCREENH_HEIGHT-kNavBarAndStatusBarHeight);
+    self.downtableview1.frame=CGRectMake(20, 0, SCREEN_WIDTH-40, SCREENH_HEIGHT-kNavBarAndStatusBarHeight-kTabBarHeight);
     self.downtableview1.backgroundColor=[UIColor whiteColor];
     self.downtableview1.delegate=self;
     self.downtableview1.dataSource=self;
@@ -145,7 +145,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(tableView.tag==10001)
     {
-        return 100;
+        return 163;
     }else if(tableView.tag==10002)
     {
         return 60;
@@ -268,7 +268,7 @@
         
             //添加底部视图
         CGRect frame = self.bottom_view.frame;
-            frame.origin.y -= 50;
+            frame.origin.y -= 45;
             [UIView animateWithDuration:0.5 animations:^{
                 self.bottom_view.frame = frame;
                 [self.view addSubview:self.bottom_view];
@@ -283,7 +283,7 @@
         
         [UIView animateWithDuration:0.5 animations:^{
             CGPoint point = self.bottom_view.center;
-            point.y      += 50;
+            point.y      += 45;
             self.bottom_view.center   = point;
             
         } completion:^(BOOL finished) {

@@ -12,7 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface LXTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *leftImage;
 @property (weak, nonatomic) IBOutlet UILabel *videoTime;
-@property (weak, nonatomic) IBOutlet UILabel *Videotitle;
+@property (weak, nonatomic) IBOutlet UIButton *titleBtn;
+
 @property (weak, nonatomic) IBOutlet UILabel *VideoSize;
 @property (weak, nonatomic) IBOutlet UILabel *VideoJindu;
 

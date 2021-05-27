@@ -372,6 +372,8 @@
 		FA9FBABB2647D94C00E4F27E /* jiluViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FBABA2647D94C00E4F27E /* jiluViewController.m */; };
 		FA9FBAC02648057B00E4F27E /* SCJTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FBABE2648057B00E4F27E /* SCJTableViewCell.m */; };
 		FA9FBAC12648057B00E4F27E /* SCJTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9FBABF2648057B00E4F27E /* SCJTableViewCell.xib */; };
+		FAB7829C265FEEB3002A5E6B /* promptbottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB7829B265FEEB3002A5E6B /* promptbottomView.m */; };
+		FAB7829E265FEFB8002A5E6B /* promptbottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAB7829D265FEFB8002A5E6B /* promptbottomView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1086,6 +1088,9 @@
 		FA9FBABD2648057B00E4F27E /* SCJTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SCJTableViewCell.h; sourceTree = "<group>"; };
 		FA9FBABE2648057B00E4F27E /* SCJTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SCJTableViewCell.m; sourceTree = "<group>"; };
 		FA9FBABF2648057B00E4F27E /* SCJTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SCJTableViewCell.xib; sourceTree = "<group>"; };
+		FAB7829A265FEEB3002A5E6B /* promptbottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = promptbottomView.h; sourceTree = "<group>"; };
+		FAB7829B265FEEB3002A5E6B /* promptbottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = promptbottomView.m; sourceTree = "<group>"; };
+		FAB7829D265FEFB8002A5E6B /* promptbottomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = promptbottomView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2584,6 +2589,7 @@
 		8A9C550725F85D2400EFA410 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				FAB78299265FEDB0002A5E6B /* View */,
 				8ADF898A264D16C200029B05 /* 登录模块 */,
 				FA949CB9264AC72500498EB6 /* 子模块 */,
 				FA9FBAA82647ADB000E4F27E /* headerView */,
@@ -3155,6 +3161,16 @@
 			path = tableview;
 			sourceTree = "<group>";
 		};
+		FAB78299265FEDB0002A5E6B /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FAB7829A265FEEB3002A5E6B /* promptbottomView.h */,
+				FAB7829B265FEEB3002A5E6B /* promptbottomView.m */,
+				FAB7829D265FEFB8002A5E6B /* promptbottomView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		FAD82157C934473BA2811BB7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -3291,6 +3307,7 @@
 				8A05210D264919BE00E5188E /* LXTableViewCell.xib in Resources */,
 				8A3930EB25FCDB3800E7331B /* cmh_default_collect_goods@2x.png in Resources */,
 				8A3930DF25FCDB3800E7331B /* cmh_default_no_wifi_1@3x.png in Resources */,
+				FAB7829E265FEFB8002A5E6B /* promptbottomView.xib in Resources */,
 				8A3930EF25FCDB3800E7331B /* cmh_default_no_custom_service@3x.png in Resources */,
 				8A8BC1D625FA13850028173C /* JRShopCell.xib in Resources */,
 				8A8BC18525F8F7CE0028173C /* Untitled1.json in Resources */,
@@ -3660,6 +3677,7 @@
 				8A052168264A809800E5188E /* MessageViewController.m in Sources */,
 				FA9FBABB2647D94C00E4F27E /* jiluViewController.m in Sources */,
 				8A9C560E25F8A10000EFA410 /* UIView+FDCollapsibleConstraints.m in Sources */,
+				FAB7829C265FEEB3002A5E6B /* promptbottomView.m in Sources */,
 				8A39309325FCDAED00E7331B /* CMHCollectionViewController.m in Sources */,
 				8A3930D525FCDB3800E7331B /* CAAnimation+CMHRefresh.m in Sources */,
 				8A8BC19825F9C7500028173C /* LLSearchResultViewController.m in Sources */,

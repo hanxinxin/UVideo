@@ -6,9 +6,9 @@
 //
 
 #import "XGpasswordViewController.h"
-
+#import "PWView.h"
 @interface XGpasswordViewController ()
-
+@property(nonatomic,assign)PWView*pwView;
 @end
 
 @implementation XGpasswordViewController
@@ -22,6 +22,52 @@
     self.statusBarBackgroundColor=[UIColor blackColor];
     self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
     [self InitUI];
+    [self addPWViewM];
+}
+-(void)addPWViewM{
+    PWView *view = [[[NSBundle mainBundle]loadNibNamed:@"PWView" owner:self options:nil]objectAtIndex:0];
+//    view.alpha=0.7;
+    view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
+    view.hidden=YES;
+    view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
+    view.bottomView.layer.cornerRadius=10;
+    view.okBtn.layer.cornerRadius=6;
+    [self.view addSubview:view];
+    self.pwView=view;
+    __weak XGpasswordViewController * weakSelf = self;
+    self.pwView.touchIndex = ^(NSInteger Index) {
+        
+        NSLog(@"prompt idnex ==== %ld",Index);
+        if(Index==0)
+        {
+            
+        }else{
+            
+        }
+        [weakSelf HidpwView];
+    };
+}
+
+-(void)showpwView
+{
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        self.pwView.bottomView.hidden=NO;
+        self.pwView.hidden=NO;
+        self.pwView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavBarAndStatusBarHeight);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+-(void)HidpwView
+{
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.pwView.bottomView.hidden=YES;
+        self.pwView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+    } completion:^(BOOL finished) {
+        self.pwView.hidden=YES;
+    }];
 }
 
 -(void)InitUI
@@ -71,6 +117,6 @@
 }
 -(void)XG_touch:(id)sender
 {
-    
+    [self showpwView];
 }
 @end

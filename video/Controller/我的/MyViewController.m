@@ -14,6 +14,7 @@
 #import "jiluViewController.h"
 #import "ZjiluViewController.h"
 #import "FAQViewController.h"
+#import "promptbottomView.h"
 
 @interface MyViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UIView*ZtopView;
@@ -22,6 +23,9 @@
 @property(nonatomic,strong)UITableView*downtableview;
 @property(nonatomic,strong)NSMutableArray*arrtitle;
 @property(nonatomic,strong)NSMutableArray*imagearray;
+
+@property(nonatomic,strong)promptbottomView*promptView;
+
 @end
 
 @implementation MyViewController
@@ -35,8 +39,32 @@
     [self InitUIView];
     [self Addtableview];
     [self setyinying];
+    [self addpromptViewM];
 }
-
+-(void)addpromptViewM{
+    promptbottomView *view = [[[NSBundle mainBundle]loadNibNamed:@"promptbottomView" owner:self options:nil]objectAtIndex:0];
+//    view.alpha=0.7;
+    view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
+    view.hidden=YES;
+    view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
+    view.bottomview.layer.cornerRadius=10;
+    view.okBtn.layer.cornerRadius=6;
+    view.cancelBtn.layer.cornerRadius=6;
+    [self.view addSubview:view];
+    self.promptView=view;
+    __weak MyViewController * weakSelf = self;
+    self.promptView.touchIndex = ^(NSInteger Index) {
+        
+        NSLog(@"prompt idnex ==== %ld",Index);
+        if(Index==0)
+        {
+            
+        }else{
+            
+        }
+        [weakSelf Hidprompt];
+    };
+}
 -(void)InitUIView
 {
     ZtopView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 185)];
@@ -240,7 +268,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"index == %ld",indexPath.section);
-    
+    NSArray * arr = arrtitle[0];
+ 
     if(indexPath.section==0){
 
 //        ZjiluViewController * avc = [[ZjiluViewController alloc] init];
@@ -287,6 +316,32 @@
     {
         safeViewController * avc = [[safeViewController alloc] init];
         [self pushRootNav:avc animated:YES];
+    }else if(indexPath.section==(arr.count-1))
+    {
+        [self showprompt];
     }
 }
+
+-(void)showprompt
+{
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        self.promptView.bottomview.hidden=NO;
+        self.promptView.hidden=NO;
+        self.promptView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+-(void)Hidprompt
+{
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.promptView.bottomview.hidden=YES;
+        self.promptView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+    } completion:^(BOOL finished) {
+        self.promptView.hidden=YES;
+    }];
+}
+
 @end

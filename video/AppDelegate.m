@@ -10,7 +10,7 @@
 #import "SearchViewController.h"
 #import "OfflineViewController.h"
 #import "MyViewController.h"
-#import "memberViewController.h"
+#import "menberViewController.h"
 #import "jiluViewController.h"
 #import "BaseWindow.h"
 
@@ -103,7 +103,7 @@
 
     jiluViewController * tabBarVC2 = [[jiluViewController alloc] init];
     [tabBarVC2 setTabBarItemWithTitle:@"记录" titleUnSelectStyle:nil titleSelectStyle:nil unselectImage:[UIImage imageNamed:@"jilu"] selectImage:[UIImage imageNamed:@"jiluselect"] imageSize:CGSizeMake(30, 30)];
-    memberViewController * tabBarVC3 = [[memberViewController alloc] init];
+    menberViewController * tabBarVC3 = [[menberViewController alloc] init];
     [tabBarVC3 setTabBarItemWithTitle:@"充值" titleUnSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil] titleSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil] unselectImage:[UIImage imageNamed:@"menber"] selectImage:[UIImage imageNamed:@"menber"] imageSize:CGSizeMake(55, 55)];
     
     OfflineViewController * tabBarVC4 = [[OfflineViewController alloc] init];

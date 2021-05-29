@@ -12,6 +12,8 @@
 #import "SCJTableViewCell.h"
 #import "SliderTableViewCell.h"
 #import "FAQTableViewCell.h"
+#import "KFView.h"
+
 
 #define cellID @"cellID"
 #define cellID2 @"SliderTableViewCell"
@@ -39,6 +41,10 @@
 @property (strong, nonatomic) UIView *nilView;
 @property (strong, nonatomic) UIImageView * nilImageView;
 @property (strong, nonatomic) UILabel * nilLabel;
+
+
+///客服view
+@property (strong, nonatomic) KFView*kfView;
 @end
 
 @implementation FAQViewController
@@ -64,6 +70,7 @@
     
     [self addtopview];
     [self initnilView];
+    [self addPWViewM];
     [self Addtableview1];
     [self Addtableview2];
     [self Addtableview3];
@@ -72,8 +79,9 @@
 }
 -(void)right_touch:(id)sender
 {
-    lxkfViewController * avc = [[UIStoryboard storyboardWithName: @"Main" bundle: nil] instantiateViewControllerWithIdentifier: @"lxkfViewController"];
-    [self pushRootNav:avc animated:YES];
+//    lxkfViewController * avc = [[UIStoryboard storyboardWithName: @"Main" bundle: nil] instantiateViewControllerWithIdentifier: @"lxkfViewController"];
+//    [self pushRootNav:avc animated:YES];
+    [self showkfView];
 }
 ///// 加载无内容显示的view
 -(void)initnilView
@@ -102,7 +110,50 @@
 //    [self.nilView removeFromSuperview];
 }
 
+-(void)addPWViewM{
+    KFView *view = [[[NSBundle mainBundle]loadNibNamed:@"KFView" owner:self options:nil]objectAtIndex:0];
+//    view.alpha=0.7;
+    view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
+    view.hidden=YES;
+    view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
+    view.bottomView.layer.cornerRadius=10;
+    [self.view addSubview:view];
+    self.kfView=view;
+    __weak FAQViewController * weakSelf = self;
+    self.kfView.touchIndex = ^(NSInteger Index) {
+        
+        NSLog(@"prompt idnex ==== %ld",Index);
+        if(Index==0)
+        {
+            
+        }else{
+            
+        }
+        [weakSelf HidkfView];
+    };
+}
 
+-(void)showkfView
+{
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        self.kfView.bottomView.hidden=NO;
+        self.kfView.hidden=NO;
+        self.kfView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavBarAndStatusBarHeight);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+-(void)HidkfView
+{
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.kfView.bottomView.hidden=YES;
+        self.kfView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+    } completion:^(BOOL finished) {
+        self.kfView.hidden=YES;
+    }];
+}
 
 
 -(void)addtopview

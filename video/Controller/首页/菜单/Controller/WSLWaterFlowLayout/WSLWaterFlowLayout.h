@@ -58,4 +58,6 @@ typedef enum {
 /** 瀑布流样式*/
 @property (nonatomic, assign) WSLWaterFlowLayoutStyle  flowLayoutStyle;
 
+@property (nonatomic, assign) NSInteger  tag;
+
 @end

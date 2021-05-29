@@ -1,14 +1,14 @@
 //
-//  promptbottomView.m
+//  PWView.m
 //  video
 //
-//  Created by macbook on 2021/5/27.
+//  Created by nian on 2021/5/29.
 //
 
-#import "promptbottomView.h"
-@interface promptbottomView ()
-@end
-@implementation promptbottomView
+#import "PWView.h"
+
+@implementation PWView
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame: frame]) {
         
@@ -45,16 +45,9 @@
         self.touchIndex(0);
     }
 }
-- (IBAction)cancel_touch:(id)sender {
-    
-//    [self removeFromSuperview];
-    //取消
-    if (self.touchIndex) {
-        self.touchIndex(0);
-    }
-}
 - (IBAction)ok_touch:(id)sender {
-    //确定
+    
+    //取消
     if (self.touchIndex) {
         self.touchIndex(1);
     }

@@ -1,5 +1,5 @@
 //
-//  memberViewController.h
+//  menberViewController.h
 //  video
 //
 //  Created by macbook on 2021/5/9.
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface memberViewController : hxViewController
+@interface menberViewController : hxViewController
 
 @end
 

@@ -1,14 +1,15 @@
 //
-//  promptbottomView.m
+//  KFView.m
 //  video
 //
-//  Created by macbook on 2021/5/27.
+//  Created by nian on 2021/5/29.
 //
 
-#import "promptbottomView.h"
-@interface promptbottomView ()
-@end
-@implementation promptbottomView
+#import "KFView.h"
+
+@implementation KFView
+
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame: frame]) {
         
@@ -46,17 +47,9 @@
     }
 }
 - (IBAction)cancel_touch:(id)sender {
-    
-//    [self removeFromSuperview];
     //取消
     if (self.touchIndex) {
         self.touchIndex(0);
-    }
-}
-- (IBAction)ok_touch:(id)sender {
-    //确定
-    if (self.touchIndex) {
-        self.touchIndex(1);
     }
 }
 

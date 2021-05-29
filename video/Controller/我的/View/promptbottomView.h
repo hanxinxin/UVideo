@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+typedef void(^promptindexBlock)(NSInteger Index); //0为取消  1为确定
 @interface promptbottomView : UIView
 @property (weak, nonatomic) IBOutlet UIView *bottomview;
 @property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
@@ -18,6 +18,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *okBtn;
 @property (weak, nonatomic) IBOutlet UIButton *cancelBtnT;
 
+
+@property (nonatomic,copy) promptindexBlock touchIndex;
 @end
 
 NS_ASSUME_NONNULL_END

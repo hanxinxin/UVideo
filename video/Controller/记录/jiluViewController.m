@@ -43,7 +43,7 @@
     [self initnilView];
     [self Addtableview1];
     [self Addtableview2];
-//    [self touchOne:nil];
+    [self touchOne:nil];
 //    [self addnilView];
 }
 ///// 加载无内容显示的view
@@ -192,7 +192,7 @@
     [Listarray1 addObject:@"安全设置"];
     [Listarray1 addObject:@"清理缓存"];
     self.downtableview1=[[UITableView alloc] init];
-    self.downtableview1.frame=CGRectMake(20, 50, SCREEN_WIDTH-40, SCREENH_HEIGHT-50-kNavBarAndStatusBarHeight);
+    self.downtableview1.frame=CGRectMake(20, 50, SCREEN_WIDTH-40, SCREENH_HEIGHT-50-kNavAndTabHeight);
     self.downtableview1.backgroundColor=[UIColor whiteColor];
     self.downtableview1.delegate=self;
     self.downtableview1.dataSource=self;
@@ -214,8 +214,16 @@
     [Listarray2 addObject:@"帮助中心"];
     [Listarray2 addObject:@"安全设置"];
     [Listarray2 addObject:@"清理缓存"];
+    [Listarray2 addObject:@"清理缓存"];
+    [Listarray2 addObject:@"清理缓存"];
+    [Listarray2 addObject:@"清理缓存"];
+    [Listarray2 addObject:@"清理缓存"];
+    [Listarray2 addObject:@"清理缓存"];
+    [Listarray2 addObject:@"清理缓存"];
+    [Listarray2 addObject:@"清理缓存"];
+    [Listarray2 addObject:@"清理缓存"];
     self.downtableview2=[[UITableView alloc] init];
-    self.downtableview2.frame=CGRectMake(20, 50, SCREEN_WIDTH-40, SCREENH_HEIGHT-50-kNavBarAndStatusBarHeight);
+    self.downtableview2.frame=CGRectMake(20, 50, SCREEN_WIDTH-40, SCREENH_HEIGHT-50-kNavAndTabHeight);
     self.downtableview2.backgroundColor=[UIColor whiteColor];
     self.downtableview2.delegate=self;
     self.downtableview2.dataSource=self;
@@ -259,8 +267,10 @@
         if (cell == nil) {
             cell = [[SCJTableViewCell alloc] init];
         }
+        
         //cell选中效果
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.shuomingBtn.titleLabel.lineBreakMode = 0;//这句话很重要，不加这句话加上换行符也没用
         [cell addBiaoqianLabel:@[@"打斗",@"科技",@"爱情"]];
         return cell;
     }else if(tableView.tag==10002)
@@ -294,7 +304,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(tableView.tag==10001)
     {
-        return 90;
+        return 144;
     }else if(tableView.tag==10002)
     {
         return 60;

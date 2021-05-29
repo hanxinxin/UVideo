@@ -15,9 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *movietitle;
 @property (weak, nonatomic) IBOutlet UIView *biaoqian;
 @property (weak, nonatomic) IBOutlet UILabel *liulanTime;
+@property (weak, nonatomic) IBOutlet UIButton *shuomingBtn;
 
 
--(void)addBiaoqianLabel:(NSMutableArray*)textArr;
+-(void)addBiaoqianLabel:(NSArray*)textArr;
 
 @end
 

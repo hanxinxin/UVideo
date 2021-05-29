@@ -15,7 +15,7 @@
     
 }
 
--(void)addBiaoqianLabel:(NSMutableArray*)textArr
+-(void)addBiaoqianLabel:(NSArray*)textArr
 {
     CGFloat y = 0;
     CGFloat letfWidth = 0;

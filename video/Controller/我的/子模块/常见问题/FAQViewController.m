@@ -116,7 +116,9 @@
     view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
     view.hidden=YES;
     view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
-    view.bottomView.layer.cornerRadius=10;
+//    view.bottomView.layer.cornerRadius=10;
+    UIRectCorner corners = UIRectCornerTopRight | UIRectCornerTopLeft;
+    [view.bottomView setBorderWithCornerRadius:10 borderWidth:1 borderColor:[UIColor whiteColor] type:corners];
     [self.view addSubview:view];
     self.kfView=view;
     __weak FAQViewController * weakSelf = self;

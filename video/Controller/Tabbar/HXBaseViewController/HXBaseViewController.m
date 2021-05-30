@@ -36,7 +36,7 @@
 @end
 
 @implementation HXBaseViewController
-
+@synthesize navBar;
 + (void)load {
 
     //导航栏按钮位置偏移的解决方案,兼容iOS7~iOS13,可自定义间距
@@ -52,6 +52,16 @@
 #pragma mark- Cycle Life
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if (@available(iOS 11.0, *)) {
+//      Scrollview.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+     
+    } else {
+                // Fallback on earlier versions
+      self.automaticallyAdjustsScrollViewInsets = NO;
+    }
+    
+    
     [UIApplication sharedApplication].keyWindow.backgroundColor = GBackGroundColor;
     // Do any additional setup after loading the view.
     self.view.backgroundColor = GBackGroundColor;
@@ -131,7 +141,7 @@
 }
 
 - (void)updateNavigationBarAppearance {
-    NSLog(@"");
+    NSLog(@"更新导航栏");
     UIColor * statuBarColor = [_statusBarBackgroundColor copy];
     self.statusBarBackgroundColor = statuBarColor;
     //导航栏 字体 字色 背景色
@@ -405,6 +415,12 @@
 
 - (void)setHiddenNavBar:(BOOL)hiddenNavBar {
     _hiddenNavBar = hiddenNavBar;
+
+        if (_hiddenNavBar) {
+            [self.navigationController setNavigationBarHidden:_hiddenNavBar animated:NO];
+        } else {
+            [self.navigationController setNavigationBarHidden:_hiddenNavBar animated:NO];
+        }
 }
 
 #pragma mark- 文字标题
@@ -684,15 +700,10 @@
 
 - (void)pushRootNav:(UIViewController *)viewController animated:(BOOL)animated {
     id rootVC ;
-    if (@available(iOS 13.0, *)) {
-        NSArray *array =[[[UIApplication sharedApplication] connectedScenes] allObjects];
-        UIWindowScene *windowScene = (UIWindowScene *)array[0];
-        SceneDelegate *delegate =(SceneDelegate *)windowScene.delegate;
-        rootVC = delegate.window.rootViewController;
-    } else {
+    
         // Fallback on earlier versions
         rootVC = [UIApplication sharedApplication].delegate.window.rootViewController;
-    }
+    
     
 
     

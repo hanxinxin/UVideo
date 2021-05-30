@@ -16,6 +16,7 @@
 #import "KJPlayerHintTextLayer.h"
 #import "KJPlayerOperationView.h"
 #import "KJPlayerButton.h"
+#import "HYSlider.h"
 
 NS_ASSUME_NONNULL_BEGIN
 /* 控件位置和大小发生改变信息通知 */
@@ -79,6 +80,8 @@ extern NSString *kPlayerBaseViewChangeKey;
 /* 播放按钮 */
 @property (nonatomic,strong) KJPlayerButton *centerPlayButton;
 
+/// 进度条
+@property (nonatomic,strong) HYSlider *bottomHYSlider;
 #pragma mark - method
 /* 隐藏操作面板，是否隐藏返回按钮 */
 - (void)kj_hiddenOperationView;

@@ -52,5 +52,53 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D075B340-4A48-41C2-92CF-FAB082668169"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "video/Controller/&#x9996;&#x9875;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x754c;&#x9762;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x5e93;/Core/KJRotateManager.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
+            landmarkName = "+topViewController"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D075B340-4A48-41C2-92CF-FAB082668169 - 310e828c063a7c2e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[KJRotateManager topViewController]"
+                  moduleName = "video"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/Video%E9%A1%B9%E7%9B%AE/UVideo/video/Controller/%E9%A6%96%E9%A1%B5/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E7%95%8C%E9%9D%A2/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%BA%93/Core/KJRotateManager.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "212"
+                  endingLineNumber = "212"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "D075B340-4A48-41C2-92CF-FAB082668169 - 310e828c063a7c2e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "+[KJRotateManager topViewController]"
+                  moduleName = "video"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/macbook/Desktop/Video%E9%A1%B9%E7%9B%AE/UVideo/video/Controller/%E9%A6%96%E9%A1%B5/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E7%95%8C%E9%9D%A2/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%BA%93/Core/KJRotateManager.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "212"
+                  endingLineNumber = "212"
+                  offsetFromSymbolStart = "296">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

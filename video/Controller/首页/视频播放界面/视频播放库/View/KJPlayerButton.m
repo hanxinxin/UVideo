@@ -53,6 +53,9 @@
         [baseView.delegate kj_basePlayerView:baseView PlayerButton:sender];
     }
 }
+
+
+
 /* 隐藏锁屏按钮 */
 - (void)kj_hiddenLockButton{
     self.hidden = NO;
@@ -72,10 +75,16 @@
 - (void)setType:(KJPlayerButtonType)type{
     _type = type;
     if (type == KJPlayerButtonTypeBack) {
-        self.layer.cornerRadius = self.frame.size.width/2;
-        self.backgroundColor = [UIColor.blackColor colorWithAlphaComponent:0.5];
-        [self setTitle:@"\U0000e697" forState:(UIControlStateNormal)];
-        self.titleLabel.font = [UIFont fontWithName:@"KJPlayerfont" size:self.frame.size.width/4*3];
+//        self.layer.cornerRadius = self.frame.size.width/2;
+        self.backgroundColor = [UIColor clearColor];
+//        [self setTitle:@"\U0000e697" forState:(UIControlStateNormal)];
+//        self.titleLabel.font = [UIFont fontWithName:@"KJPlayerfont" size:self.frame.size.width/4*3];
+        [self setImage:[UIImage imageNamed:@"whiteBack"] forState:(UIControlStateNormal)];
+        [self setTitle:@" 我们的世界第一集" forState:(UIControlStateNormal)];
+        [self setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+        self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//        [self setImage:[UIImage imageNamed:@"zanting"] forState:(UIControlStateSelected)];
+        self.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0);
     }else if (type == KJPlayerButtonTypeLock) {
         self.hidden = YES;
         self.layer.cornerRadius = self.frame.size.width/2;
@@ -86,9 +95,11 @@
         self.touchAreaInsets = UIEdgeInsetsMake(10, 10, 10, 10);
     }else if (type == KJPlayerButtonTypeCenterPlay) {
         self.hidden = YES;
-        [self setTitle:@"\U0000e719" forState:(UIControlStateNormal)];
-        [self setTitle:@"\U0000e71a" forState:(UIControlStateSelected)];
-        self.titleLabel.font = [UIFont fontWithName:@"KJPlayerfont" size:self.frame.size.width/5*3];
+//        [self setTitle:@"\U0000e719" forState:(UIControlStateNormal)];
+//        [self setTitle:@"\U0000e71a" forState:(UIControlStateSelected)];
+//        self.titleLabel.font = [UIFont fontWithName:@"KJPlayerfont" size:self.frame.size.width/5*3];Image("")
+        [self setImage:[UIImage imageNamed:@"zanting"] forState:(UIControlStateNormal)];
+        [self setImage:[UIImage imageNamed:@"zanting"] forState:(UIControlStateSelected)];
     }
 }
 

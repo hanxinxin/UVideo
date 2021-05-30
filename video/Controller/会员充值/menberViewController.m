@@ -11,6 +11,10 @@
 #import "vipHeaderView.h"
 #import "HXtitleLabelView.h"
 #import "KFView.h"
+#import "KMPlayView.h"
+#import "chongzhiView.h"
+#import "PlayWTView.h"
+
 #import "menberJSCollectionViewCell.h"
 
 #define CZCollectionViewCellID @"CZCollectionViewCell"
@@ -32,6 +36,12 @@
 
 ///客服view
 @property (strong, nonatomic) KFView*kfView;
+
+@property (strong, nonatomic) KMPlayView*kmPlayView;
+@property (strong, nonatomic) chongzhiView*czView;
+@property (strong, nonatomic) PlayWTView*playwtView;
+
+
 @end
 
 @implementation menberViewController
@@ -78,53 +88,12 @@
     [self Addtableview];
     [self setupCollectionViewMenber];
     
-    [self addPWViewM];
+    [self addkfViewM];
+    [self addKMViewM];
+    [self addCZViewM];
+    [self addplaywtViewM];
 }
 
--(void)addPWViewM{
-    KFView *view = [[[NSBundle mainBundle]loadNibNamed:@"KFView" owner:self options:nil]objectAtIndex:0];
-//    view.alpha=0.7;
-    view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
-    view.hidden=YES;
-    view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
-    view.bottomView.layer.cornerRadius=10;
-    [self.view addSubview:view];
-    self.kfView=view;
-    __weak menberViewController * weakSelf = self;
-    self.kfView.touchIndex = ^(NSInteger Index) {
-        
-        NSLog(@"prompt idnex ==== %ld",Index);
-        if(Index==0)
-        {
-            
-        }else{
-            
-        }
-        [weakSelf HidkfView];
-    };
-}
-
--(void)showkfView
-{
-    
-    [UIView animateWithDuration:0.7 animations:^{
-        self.kfView.bottomView.hidden=NO;
-        self.kfView.hidden=NO;
-        self.kfView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
-    } completion:^(BOOL finished) {
-        
-    }];
-}
--(void)HidkfView
-{
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        self.kfView.bottomView.hidden=YES;
-        self.kfView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
-    } completion:^(BOOL finished) {
-        self.kfView.hidden=YES;
-    }];
-}
 
 
 
@@ -424,7 +393,7 @@
     gl.endPoint = CGPointMake(0.8882775902748108, 0.9592784643173218);
     gl.colors = @[(__bridge id)[UIColor colorWithRed:255/255.0 green:185/255.0 blue:106/255.0 alpha:1.0].CGColor,(__bridge id)[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0].CGColor];
     gl.locations = @[@(0),@(1.0f)];
-//    [view.layer addSublayer:gl];
+    //    [view.layer addSublayer:gl];
     return gl;
 }
 
@@ -613,7 +582,16 @@
     {
         if(indexPath.section==1)
         {
-            
+            [self showkmPlay];
+        }else if(indexPath.section==2)
+        {
+            [self showczView:YES];
+        }else if(indexPath.section==3)
+        {
+            [self showczView:NO];
+        }else if(indexPath.section==4)
+        {
+            [self showplaywtView];
         }
         else if((arr.count-1)==indexPath.section)
         {
@@ -624,5 +602,211 @@
     }
     
 }
+
+
+
+
+#pragma mark  ---------------------    view 弹窗    -----------------
+
+-(void)addkfViewM{
+    KFView *view = [[[NSBundle mainBundle]loadNibNamed:@"KFView" owner:self options:nil]objectAtIndex:0];
+//    view.alpha=0.7;
+    view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
+    view.hidden=YES;
+    view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
+//    view.bottomView.layer.cornerRadius=10;
+    UIRectCorner corners = UIRectCornerTopRight | UIRectCornerTopLeft;
+    [view.bottomView setBorderWithCornerRadius:10 borderWidth:1 borderColor:[UIColor whiteColor] type:corners];
+    [self.view addSubview:view];
+    self.kfView=view;
+    __weak menberViewController * weakSelf = self;
+    self.kfView.touchIndex = ^(NSInteger Index) {
+        
+        NSLog(@"prompt idnex ==== %ld",Index);
+        if(Index==0)
+        {
+            
+        }else{
+            
+        }
+        [weakSelf HidkfView];
+    };
+}
+-(void)showkfView
+{
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        self.kfView.bottomView.hidden=NO;
+        self.kfView.hidden=NO;
+        self.kfView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+-(void)HidkfView
+{
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.kfView.bottomView.hidden=YES;
+        self.kfView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+    } completion:^(BOOL finished) {
+        self.kfView.hidden=YES;
+    }];
+}
+-(void)addKMViewM{
+    KMPlayView *view = [[[NSBundle mainBundle]loadNibNamed:@"KMPlayView" owner:self options:nil]objectAtIndex:0];
+//    view.alpha=0.7;
+    view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
+    view.hidden=YES;
+    view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
+//    view.bottomView.layer.cornerRadius=10;
+    UIRectCorner corners = UIRectCornerTopRight | UIRectCornerTopLeft;
+    [view.bottomView setBorderWithCornerRadius:10 borderWidth:1 borderColor:[UIColor whiteColor] type:corners];
+    [self.view addSubview:view];
+    self.kmPlayView=view;
+    __weak menberViewController * weakSelf = self;
+    self.kmPlayView.touchIndex = ^(NSInteger Index, NSString * _Nonnull pwStr) {
+        
+        NSLog(@"prompt idnex ==== %ld    pwStr=== %@",Index,pwStr);
+        if(Index==0)
+        {
+            
+        }else{
+            
+        }
+        [weakSelf HidkmPlay];
+        
+        
+    };
+}
+-(void)showkmPlay
+{
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        self.kmPlayView.bottomView.hidden=NO;
+        self.kmPlayView.hidden=NO;
+        self.kmPlayView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+-(void)HidkmPlay
+{
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.kmPlayView.bottomView.hidden=YES;
+        self.kmPlayView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+    } completion:^(BOOL finished) {
+        self.kmPlayView.hidden=YES;
+    }];
+}
+-(void)addCZViewM{
+    chongzhiView *view = [[[NSBundle mainBundle]loadNibNamed:@"chongzhiView" owner:self options:nil]objectAtIndex:0];
+//    view.alpha=0.7;
+    view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
+    view.hidden=YES;
+    view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
+    [view.titleBtn setBackgroundColor:[UIColor clearColor]];
+    [view.titleBtn setTitle:@"充值失败，请返回重试" forState:(UIControlStateNormal)];
+    [view.okBtn setTitle:@"返回重试" forState:(UIControlStateNormal)];
+    [view.titleBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+    [view.centerBtn setImage:[UIImage imageNamed:@"playSB"] forState:UIControlStateNormal];
+    [view.titleBtn setTitle:@"充值成功" forState:(UIControlStateSelected)];
+    [view.okBtn setTitle:@"确认" forState:(UIControlStateSelected)];
+    [view.titleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateSelected];
+    [view.centerBtn setImage:[UIImage imageNamed:@"playOK"] forState:UIControlStateSelected];
+//    view.bottomView.layer.cornerRadius=10;
+    UIRectCorner corners = UIRectCornerTopRight | UIRectCornerTopLeft;
+    [view.bottomView setBorderWithCornerRadius:10 borderWidth:1 borderColor:[UIColor whiteColor] type:corners];
+    [self.view addSubview:view];
+    self.czView=view;
+    __weak menberViewController * weakSelf = self;
+    self.czView.touchIndex = ^(NSInteger Index) {
+        
+        NSLog(@"prompt idnex ==== %ld",Index);
+        if(Index==0)
+        {
+            
+        }else{
+            
+        }
+        [weakSelf HidczView];
+    };
+}
+/// 充值提示
+/// @param selectbool 成功 YES 失败NO
+-(void)showczView:(BOOL)selectbool
+{
+    self.czView.titleBtn.selected=selectbool;
+    self.czView.centerBtn.selected=selectbool;
+    self.czView.okBtn.selected=selectbool;
+    [UIView animateWithDuration:0.7 animations:^{
+        self.czView.bottomView.hidden=NO;
+        self.czView.hidden=NO;
+        self.czView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+-(void)HidczView
+{
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.czView.bottomView.hidden=YES;
+        self.czView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+    } completion:^(BOOL finished) {
+        self.czView.hidden=YES;
+    }];
+}
+-(void)addplaywtViewM{
+    PlayWTView *view = [[[NSBundle mainBundle]loadNibNamed:@"PlayWTView" owner:self options:nil]objectAtIndex:0];
+//    view.alpha=0.7;
+    view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
+    view.hidden=YES;
+    view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
+//    view.bottomView.layer.cornerRadius=10;
+    UIRectCorner corners = UIRectCornerTopRight | UIRectCornerTopLeft;
+    [view.bottomView setBorderWithCornerRadius:10 borderWidth:1 borderColor:[UIColor whiteColor] type:corners];
+    [self.view addSubview:view];
+    self.playwtView=view;
+    __weak menberViewController * weakSelf = self;
+    self.playwtView.touchIndex = ^(NSInteger Index) {
+        
+        NSLog(@"prompt idnex ==== %ld",Index);
+        if(Index==0)
+        {
+            
+        }else{
+            
+        }
+        [weakSelf HidplaywtView];
+    };
+}
+
+-(void)showplaywtView
+{
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        self.playwtView.bottomView.hidden=NO;
+        self.playwtView.hidden=NO;
+        self.playwtView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+-(void)HidplaywtView
+{
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.playwtView.bottomView.hidden=YES;
+        self.playwtView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+    } completion:^(BOOL finished) {
+        self.playwtView.hidden=YES;
+    }];
+}
+
+
+
+
 
 @end

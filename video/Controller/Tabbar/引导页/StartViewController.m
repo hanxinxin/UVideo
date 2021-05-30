@@ -10,7 +10,6 @@
 #import "DHGuidePageHUD.h"
 #import "AppDelegate.h"
 #import "GlobalConfig.h"
-#import "SceneDelegate.h"
 @interface StartViewController ()
 
 @end

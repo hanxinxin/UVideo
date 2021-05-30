@@ -26,7 +26,9 @@
             UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(frame.size.width-height, 0, height, height)];
             self.fullButton = button;
             [button addTarget:self action:@selector(fullItemClick:) forControlEvents:UIControlEventTouchUpInside];
-            [button setTitle:@"\U0000e627" forState:(UIControlStateNormal)];
+            [button setImage:[UIImage imageNamed:@"xuanzhuanno"] forState:(UIControlStateNormal)];
+            [button setImage:[UIImage imageNamed:@"xuanzhuanno"] forState:(UIControlStateSelected)];
+//            [button setTitle:@"\U0000e627" forState:(UIControlStateNormal)];
 //            [button setImage:[UIImage imageNamed:@"IQButtonBarArrowLeft"] forState:(UIControlStateNormal)];
             [button setTitleColor:self.mainColor forState:(UIControlStateNormal)];
             button.titleLabel.font = [UIFont fontWithName:@"KJPlayerfont" size:height/5*2];
@@ -38,8 +40,11 @@
     return self;
 }
 - (void)fullItemClick:(UIButton*)sender{
+    
     KJBasePlayerView *view = (KJBasePlayerView*)self.superview;
+    [[NSNotificationCenter defaultCenter]postNotification:[NSNotification notificationWithName:@"fullItemClick" object:nil userInfo:@{@"full":@(!view.isFullScreen)}]];
     view.isFullScreen = !view.isFullScreen;
+   
 }
 - (void)layoutSubviews{
     [super layoutSubviews];

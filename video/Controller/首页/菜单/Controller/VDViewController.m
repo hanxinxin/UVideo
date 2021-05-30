@@ -197,6 +197,7 @@ static NSString * const shopCellReuseID = @"shop";
             
         });
     }];
+    
 }
 
 -(void)setupCollectionView2
@@ -247,6 +248,9 @@ static NSString * const shopCellReuseID = @"shop";
             
         });
     }];
+    
+    //更新 scrollview 滑动
+    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, self.collectionView2.bottom+kNavAndTabHeight+140) ;
 }
 
 

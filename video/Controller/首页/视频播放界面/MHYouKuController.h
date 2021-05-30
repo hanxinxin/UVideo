@@ -9,7 +9,8 @@
 
 #import "MHViewController.h"
 
-@interface MHYouKuController : hxpushViewController
+//@interface MHYouKuController : hxpushViewController
+@interface MHYouKuController : HXBaseViewController
 
 
 

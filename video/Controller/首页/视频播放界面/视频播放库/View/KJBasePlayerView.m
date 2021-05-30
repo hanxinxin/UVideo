@@ -12,7 +12,7 @@
 #define kCenterPlayWidth (60)
 NSString *kPlayerBaseViewChangeNotification = @"kPlayerBaseViewNotification";
 NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
-@interface KJBasePlayerView ()<UIGestureRecognizerDelegate>
+@interface KJBasePlayerView ()<UIGestureRecognizerDelegate,HYSliderDelegate>
 @property (nonatomic,assign) KJPlayerVideoScreenState screenState;
 @property (nonatomic,assign) NSInteger width,height;
 @property (nonatomic,assign) BOOL haveVolume;
@@ -55,6 +55,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     [self addSubview:self.bottomView];
     [self addSubview:self.lockButton];
     [self addSubview:self.centerPlayButton];
+    [self.bottomView addSubview:self.bottomHYSlider];
     self.smallScreenHiddenBackButton = YES;
     self.displayOperation = YES;
     [self kj_hiddenOperationView];
@@ -87,6 +88,8 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     self.bottomView.frame = CGRectMake(0, self.height-self.operationViewHeight, self.width, self.operationViewHeight);
     self.lockButton.frame = CGRectMake(10, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
     self.centerPlayButton.frame = CGRectMake((self.width-kCenterPlayWidth)/2, (self.height-kCenterPlayWidth)/2, kCenterPlayWidth, kCenterPlayWidth);
+    
+    self.bottomHYSlider.frame = CGRectMake(0, self.bottomView.height-10, self.bottomView.width, 10);
 }
 
 #pragma mark - getter
@@ -145,12 +148,16 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     if (isFullScreen) {
         [KJRotateManager kj_rotateFullScreenBasePlayerView:self];
         self.screenState = KJPlayerVideoScreenStateFullScreen;
-        self.backButton.hidden = self.fullScreenHiddenBackButton;
+//        self.backButton.hidden = self.fullScreenHiddenBackButton;
+//        self.backButton.hidden = YES;//默认不显示
+        self.fullScreenHiddenBackButton=YES;
+        self.smallScreenHiddenBackButton=YES;
         [self kj_displayOperationView];
     }else{
         [KJRotateManager kj_rotateSmallScreenBasePlayerView:self];
         self.screenState = KJPlayerVideoScreenStateSmallScreen;
-        self.backButton.hidden = self.smallScreenHiddenBackButton;
+//        self.backButton.hidden = self.smallScreenHiddenBackButton;
+        self.backButton.hidden = YES;//默认不显示
     }
     if (self.kVideoChangeScreenState) {
         self.kVideoChangeScreenState(self.screenState);
@@ -410,8 +417,8 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
 - (KJPlayerButton *)backButton{
     if (!_backButton) {
         CGFloat width = self.operationViewHeight - 20;
-        _backButton = [[KJPlayerButton alloc]initWithFrame:CGRectMake(10, 10, width, width)];
-        _backButton.mainColor = self.mainColor;
+        _backButton = [[KJPlayerButton alloc]initWithFrame:CGRectMake(10, 10, _topView.width-width, width)];
+//        _backButton.mainColor = self.mainColor;
         _backButton.type = KJPlayerButtonTypeBack;
     }
     return _backButton;
@@ -432,5 +439,20 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     }
     return _centerPlayButton;
 }
-
+-(HYSlider *)bottomHYSlider
+{
+    if(!_bottomHYSlider)
+    {
+        _bottomHYSlider = [[HYSlider alloc]initWithFrame:CGRectMake(0, _bottomView.height-10, _bottomView.width - 40, 10)];
+    _bottomHYSlider.currentValueColor = RGBA(20, 155, 236, 1);
+    _bottomHYSlider.maxValue = 255;
+    _bottomHYSlider.currentSliderValue = 200;
+    _bottomHYSlider.showTouchView = YES;
+    _bottomHYSlider.showTextColor = RGBA(20, 155, 236, 1);
+    _bottomHYSlider.touchViewColor = RGBA(20, 155, 236, 1);
+    _bottomHYSlider.delegate = self;
+    
+    }
+    return _bottomHYSlider;
+}
 @end

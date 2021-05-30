@@ -130,7 +130,12 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
-
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        NSLog(@"clicked navigationbar back button");
+        self.playerView.isFullScreen=NO;
+        //在页面消失的回调方法中移除通知。
+           [[NSNotificationCenter defaultCenter]removeObserver:self name:@"fullItemClick"object:nil];
+    }
 }
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
@@ -171,24 +176,30 @@
 {
     
     KJBasePlayerView *backview = [[KJBasePlayerView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, self.view.width*(9.f/16.f))];
+//    KJBasePlayerView *backview = [[KJBasePlayerView alloc]initWithFrame:CGRectMake(0, kStatusBarHeight, SCREEN_WIDTH, SCREENH_HEIGHT)];
     [self.view addSubview:backview];
 //    [self.topContainer addSubview:backview];
     self.playerView = backview;
     backview.delegate = self;
     backview.isHiddenBackButton=YES;
     backview.gestureType = KJPlayerGestureTypeAll;
-    backview.smallScreenHiddenBackButton = NO;
+    backview.smallScreenHiddenBackButton = YES;
     backview.backButton.hidden=YES;
     backview.autoHideTime = 3;
     PLAYER_WEAKSELF;
     backview.kVideoClickButtonBack = ^(KJBasePlayerView *view){
-        if (view.isFullScreen) {
-            view.isFullScreen = NO;
-        }else{
-            [weakself.player kj_stop];
-            [weakself.navigationController setNavigationBarHidden:NO animated:YES];
-            [weakself.navigationController popViewControllerAnimated:YES];
-        }
+//        if (view.isFullScreen) {
+           
+        view.isFullScreen = NO;
+        weakself.hiddenNavBar=NO;
+        weakself.playerView.isHiddenBackButton=YES;
+        weakself.playerView.smallScreenHiddenBackButton = YES;
+        weakself.playerView.backButton.hidden=YES;
+//        }else{
+//            [weakself.player kj_stop];
+//            [weakself.navigationController setNavigationBarHidden:NO animated:YES];
+//            [weakself.navigationController popViewControllerAnimated:YES];
+//        }
     };
     backview.kVideoChangeScreenState = ^(KJPlayerVideoScreenState state) {
       
@@ -201,52 +212,41 @@
     player.placeholder = [UIImage imageNamed:@"comment_loading_bgView"];
     player.playerView = backview;
 //    player.videoURL = [NSURL URLWithString:@"https://mp4.vjshi.com/2018-03-30/1f36dd9819eeef0bc508414494d34ad9.mp4"];
-    
-//    KJBasePlayerView *backview = [[KJBasePlayerView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.width*9/16.)];
-//    self.basePlayerView = backview;
-//    [self.view addSubview:backview];
-//    backview.delegate = self;
-//    backview.gestureType = KJPlayerGestureTypeAll;
-//    PLAYER_WEAKSELF;
-//    backview.kVideoClickButtonBack = ^(KJBasePlayerView *view){
-//        if (view.isFullScreen) {
-//            view.isFullScreen = NO;
-//        }else{
-//            [weakself.player kj_stop];
-//            [weakself.navigationController setNavigationBarHidden:NO animated:YES];
-//            [weakself.navigationController popViewControllerAnimated:YES];
-//        }
-//    };
-//    backview.kVideoChangeScreenState = ^(KJPlayerVideoScreenState state) {
-//        if (state == KJPlayerVideoScreenStateFullScreen) {
-//            [weakself.navigationController setNavigationBarHidden:YES animated:YES];
-//        }else{
-//            [weakself.navigationController setNavigationBarHidden:NO animated:YES];
-//        }
-//    };
-//
-//    KJIJKPlayer *player = [[KJIJKPlayer alloc]init];
-//    self.player = player;
-//    player.placeholder = [UIImage imageNamed:@"comment_loading_bgView"];
-//    player.playerView = backview;
-//    player.cacheTime = 5;
-//    player.delegate = self;
-//    player.kVideoTotalTime = ^(NSTimeInterval time) {
-////        slider.maximumValue = time;
-////        label3.text = kPlayerConvertTime(time);
-//    };
-//    player.kVideoSize = ^(CGSize size) {
-//        NSLog(@"%.2f,%.2f",size.width,size.height);
-//    };
 
     
-    self.temps = @[@"https://mp4.vjshi.com/2018-03-30/1f36dd9819eeef0bc508414494d34ad9.mp4",
-                   @"https://mp4.vjshi.com/2021-01-13/d37b7bea25b063b4f9d4bdd98bc611e3.mp4",
+    self.temps = @[@"https://mp4.vjshi.com/2021-01-13/d37b7bea25b063b4f9d4bdd98bc611e3.mp4",
+                   @"https://mp4.vjshi.com/2018-03-30/1f36dd9819eeef0bc508414494d34ad9.mp4",
                    @"https://mp4.vjshi.com/2021-01-13/ac721f0590f0b0509092afea52d55a90.mp4",@"http://ivi.bupt.edu.cn/hls/hunanhd.m3u8"];
     
     
 //    self.player.videoURL = [NSURL URLWithString:self.temps[3]];
     player.videoURL = [NSURL URLWithString:self.temps[0]];
+    
+    
+    //注册、接收通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatefullItemClick:)name:@"fullItemClick"object:nil];
+   
+    
+    
+}
+
+//接收通知后调用的方法
+
+- (void)updatefullItemClick:(NSNotification *)noti{
+    NSNumber * num= [noti.userInfo objectForKey:@"full"];
+    if([num boolValue])
+    {
+        self.hiddenNavBar=YES;
+        self.playerView.isHiddenBackButton=NO;
+        self.playerView.smallScreenHiddenBackButton = NO;
+        self.playerView.backButton.hidden=NO;
+    }else{
+        self.hiddenNavBar=NO;
+        self.playerView.isHiddenBackButton=YES;
+        self.playerView.smallScreenHiddenBackButton = YES;
+        self.playerView.backButton.hidden=YES;
+    }
+
 }
 - (void)tempsAction:(NSInteger)index{
     self.player.videoURL = [NSURL URLWithString:self.temps[index]];
@@ -288,10 +288,11 @@
     }else{
         if ([self.player isPlaying]) {
             [self.player kj_pause];
-            [self.player kj_startAnimation];
+//            [self.player kj_startAnimation];
+            
         }else{
             [self.player kj_resume];
-            [self.player kj_stopAnimation];
+//            [self.player kj_stopAnimation];
         }
     }
 }
@@ -499,13 +500,16 @@
 - (void)_setupNavigationItem
 {
     self.title = @"我们的世界";
-//    self.statusBarBackgroundColor=RGB(68,68,68);
+    self.hiddenLeftBtn=YES;
     self.statusBarTextIsWhite=NO;
-    
+    self.statusBarBackgroundColor=[UIColor blackColor];
+    self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
     UIBarButtonItem *rightitem = [[UIBarButtonItem alloc] initWithCustomView:self.btn];
     
     self.navigationItem.rightBarButtonItem = rightitem;
     self.navigationController.navigationBar.tintColor = RGB(68,68,68);
+//    self.hiddenNavBar=YES;
+//    [self updateNavigationBarAppearance];
 }
 
 #pragma mark - 设置子控件

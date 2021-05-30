@@ -65,6 +65,8 @@ window;})
         [delegate kj_transmitCurrentRotateOrientation:UIInterfaceOrientationMaskPortrait];
     }];
 }
+
+
 /* 切换到小屏 */
 + (void)kj_rotateSmallScreenBasePlayerView:(KJBasePlayerView *)baseView{
     [self.tempView removeFromSuperview];
@@ -136,9 +138,9 @@ window;})
         baseView.bottomView.hidden = NO;
         baseView.lockButton.hidden = NO;
         if (baseView.screenState == KJPlayerVideoScreenStateFullScreen) {
-            baseView.backButton.hidden = baseView.fullScreenHiddenBackButton;
-        }else if (baseView.smallScreenHiddenBackButton == NO) {
             baseView.backButton.hidden = NO;
+        }else if (baseView.smallScreenHiddenBackButton == NO) {
+            baseView.backButton.hidden = YES;
         }
     } completion:^(BOOL finished) {
         if (baseView.autoHideTime) {
@@ -161,7 +163,7 @@ window;})
         baseView.bottomView.hidden = YES;
         baseView.lockButton.hidden = YES;
         if (baseView.screenState == KJPlayerVideoScreenStateFullScreen) {
-            baseView.backButton.hidden = baseView.isHiddenBackButton;
+            baseView.backButton.hidden = YES;
         }else if (baseView.smallScreenHiddenBackButton) {
             baseView.backButton.hidden = YES;
         }

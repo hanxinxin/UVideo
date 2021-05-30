@@ -44,11 +44,13 @@ typedef void(^GCusNavClickIndex)(NSInteger index);
  */
 @interface HXBaseViewController : UIViewController
 {
-    UINavigationBar * navBar;
+   
     BOOL isVcBaseApper; ///< 导航的设置优先级
 
     UIButton * leftBtn;
 }
+@property (nonatomic, strong) UINavigationBar * navBar;
+
 #warning 在vc内部设置才有效
 /**
  *  自定义视图 右侧按钮 左侧按钮 标题
@@ -130,4 +132,6 @@ typedef void(^GCusNavClickIndex)(NSInteger index);
 //判断是否是根层级视图，普通视图
 - (void)pushRootNav:(UIViewController *)viewController animated:(BOOL)animated;
 
+
+- (void)updateNavigationBarAppearance ;
 @end

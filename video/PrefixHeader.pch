@@ -21,8 +21,8 @@
 #import "DHGuidePageHUD.h"
 #import "UHud.h"
 #import "LoginViewController.h"
-#import "SceneDelegate.h"
 #import "BadgeButton.h"
+#import "UIView+lcAnyCorners.h"
 
 ////////////   3.13日添加 头文件
 #import <MJRefresh/MJRefresh.h>

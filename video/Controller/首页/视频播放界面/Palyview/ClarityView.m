@@ -212,7 +212,7 @@
 /** 边缘之间的间距*/
 -(UIEdgeInsets)edgeInsetInWaterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout{
     if (waterFlowLayout.flowLayoutStyle == (WSLWaterFlowLayoutStyle)3){
-        return UIEdgeInsetsMake(20, 20, 20, 20);
+        return UIEdgeInsetsMake(20, 8, 20, 8);
     }
     return UIEdgeInsetsMake(6, 6, 6, 6);
 }

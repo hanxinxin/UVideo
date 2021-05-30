@@ -262,7 +262,6 @@
 		8A95C321265A5C7B00A6D144 /* KJPlayerOperationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A95C2F4265A5C7A00A6D144 /* KJPlayerOperationView.m */; };
 		8A95C336265A5F6700A6D144 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A95C335265A5F6700A6D144 /* BaseViewController.m */; };
 		8A9C54A625F7837B00EFA410 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C54A525F7837B00EFA410 /* AppDelegate.m */; };
-		8A9C54A925F7837B00EFA410 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C54A825F7837B00EFA410 /* SceneDelegate.m */; };
 		8A9C54AF25F7837B00EFA410 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A9C54AD25F7837B00EFA410 /* Main.storyboard */; };
 		8A9C54B125F7837E00EFA410 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A9C54B025F7837E00EFA410 /* Assets.xcassets */; };
 		8A9C54B425F7837E00EFA410 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A9C54B225F7837E00EFA410 /* LaunchScreen.storyboard */; };
@@ -367,6 +366,13 @@
 		FA949CBD264AC76E00498EB6 /* safeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CBC264AC76E00498EB6 /* safeViewController.m */; };
 		FA949CC2264AC90800498EB6 /* chongzhiListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CC1264AC90800498EB6 /* chongzhiListViewController.m */; };
 		FA949CC5264AC92A00498EB6 /* zhanghuInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CC4264AC92A00498EB6 /* zhanghuInfoViewController.m */; };
+		FA9662D726632CC700AF7B46 /* UIView+lcAnyCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9662D626632CC700AF7B46 /* UIView+lcAnyCorners.m */; };
+		FA9662DA2663354D00AF7B46 /* KMPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9662D92663354D00AF7B46 /* KMPlayView.m */; };
+		FA9662DC2663355B00AF7B46 /* KMPlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9662DB2663355B00AF7B46 /* KMPlayView.xib */; };
+		FA9662DF2663359200AF7B46 /* chongzhiView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9662DE2663359200AF7B46 /* chongzhiView.m */; };
+		FA9662E1266335A500AF7B46 /* chongzhiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9662E0266335A500AF7B46 /* chongzhiView.xib */; };
+		FA9662E42663360400AF7B46 /* PlayWTView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9662E32663360400AF7B46 /* PlayWTView.m */; };
+		FA9662E62663361500AF7B46 /* PlayWTView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9662E52663361500AF7B46 /* PlayWTView.xib */; };
 		FA997E8F265407AE00CB0DE0 /* ZqwTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997E8E265407AE00CB0DE0 /* ZqwTableViewCell.m */; };
 		FA997E9726540E2900CB0DE0 /* VtitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997E9526540E2900CB0DE0 /* VtitleCollectionViewCell.m */; };
 		FA997E9826540E2900CB0DE0 /* VtitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA997E9626540E2900CB0DE0 /* VtitleCollectionViewCell.xib */; };
@@ -881,8 +887,6 @@
 		8A9C54A125F7837B00EFA410 /* video.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = video.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A9C54A425F7837B00EFA410 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		8A9C54A525F7837B00EFA410 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		8A9C54A725F7837B00EFA410 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		8A9C54A825F7837B00EFA410 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		8A9C54AE25F7837B00EFA410 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8A9C54B025F7837E00EFA410 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8A9C54B325F7837E00EFA410 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -1086,6 +1090,17 @@
 		FA949CC1264AC90800498EB6 /* chongzhiListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chongzhiListViewController.m; sourceTree = "<group>"; };
 		FA949CC3264AC92A00498EB6 /* zhanghuInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zhanghuInfoViewController.h; sourceTree = "<group>"; };
 		FA949CC4264AC92A00498EB6 /* zhanghuInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zhanghuInfoViewController.m; sourceTree = "<group>"; };
+		FA9662D526632CC700AF7B46 /* UIView+lcAnyCorners.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+lcAnyCorners.h"; sourceTree = "<group>"; };
+		FA9662D626632CC700AF7B46 /* UIView+lcAnyCorners.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+lcAnyCorners.m"; sourceTree = "<group>"; };
+		FA9662D82663354D00AF7B46 /* KMPlayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KMPlayView.h; sourceTree = "<group>"; };
+		FA9662D92663354D00AF7B46 /* KMPlayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KMPlayView.m; sourceTree = "<group>"; };
+		FA9662DB2663355B00AF7B46 /* KMPlayView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KMPlayView.xib; sourceTree = "<group>"; };
+		FA9662DD2663359200AF7B46 /* chongzhiView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = chongzhiView.h; sourceTree = "<group>"; };
+		FA9662DE2663359200AF7B46 /* chongzhiView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chongzhiView.m; sourceTree = "<group>"; };
+		FA9662E0266335A500AF7B46 /* chongzhiView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = chongzhiView.xib; sourceTree = "<group>"; };
+		FA9662E22663360400AF7B46 /* PlayWTView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayWTView.h; sourceTree = "<group>"; };
+		FA9662E32663360400AF7B46 /* PlayWTView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayWTView.m; sourceTree = "<group>"; };
+		FA9662E52663361500AF7B46 /* PlayWTView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayWTView.xib; sourceTree = "<group>"; };
 		FA997E8D265407AE00CB0DE0 /* ZqwTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZqwTableViewCell.h; sourceTree = "<group>"; };
 		FA997E8E265407AE00CB0DE0 /* ZqwTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZqwTableViewCell.m; sourceTree = "<group>"; };
 		FA997E9426540E2900CB0DE0 /* VtitleCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VtitleCollectionViewCell.h; sourceTree = "<group>"; };
@@ -2508,13 +2523,6 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		8A95C328265A5CC900A6D144 /* IJKPlayer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = IJKPlayer;
-			sourceTree = "<group>";
-		};
 		8A9C549825F7837B00EFA410 = {
 			isa = PBXGroup;
 			children = (
@@ -2546,8 +2554,6 @@
 				8A9C558525F89EDF00EFA410 /* SDK */,
 				8A9C54A425F7837B00EFA410 /* AppDelegate.h */,
 				8A9C54A525F7837B00EFA410 /* AppDelegate.m */,
-				8A9C54A725F7837B00EFA410 /* SceneDelegate.h */,
-				8A9C54A825F7837B00EFA410 /* SceneDelegate.m */,
 				8A9C54AD25F7837B00EFA410 /* Main.storyboard */,
 				8A9C550A25F85ECA00EFA410 /* PrefixHeader.pch */,
 				8A9C56AE25F8A41100EFA410 /* GlobalConfig.h */,
@@ -2651,7 +2657,6 @@
 		8A9C558625F89EEF00EFA410 /* third */ = {
 			isa = PBXGroup;
 			children = (
-				8A95C328265A5CC900A6D144 /* IJKPlayer */,
 				8A8BC16625F8F73E0028173C /* XQPageViewController */,
 				8A9C559825F8A0B300EFA410 /* DHGuidePageHUD */,
 				8A9C558725F89F0C00EFA410 /* CYLTabBarController */,
@@ -2722,6 +2727,8 @@
 				8A9C55C425F8A0FF00EFA410 /* UIView+Animation.h */,
 				8A9C55C525F8A0FF00EFA410 /* UIView+Blank.m */,
 				8A9C55C625F8A0FF00EFA410 /* UIView+Screenshot.m */,
+				FA9662D526632CC700AF7B46 /* UIView+lcAnyCorners.h */,
+				FA9662D626632CC700AF7B46 /* UIView+lcAnyCorners.m */,
 			);
 			path = UIView;
 			sourceTree = "<group>";
@@ -3050,6 +3057,15 @@
 				8AE01B6E2661EBE00031C82F /* HXtitleLabelView.h */,
 				8AE01B6F2661EBE00031C82F /* HXtitleLabelView.m */,
 				8AE01B742661EBFC0031C82F /* HXtitleLabelView.xib */,
+				FA9662D82663354D00AF7B46 /* KMPlayView.h */,
+				FA9662D92663354D00AF7B46 /* KMPlayView.m */,
+				FA9662DB2663355B00AF7B46 /* KMPlayView.xib */,
+				FA9662DD2663359200AF7B46 /* chongzhiView.h */,
+				FA9662DE2663359200AF7B46 /* chongzhiView.m */,
+				FA9662E0266335A500AF7B46 /* chongzhiView.xib */,
+				FA9662E22663360400AF7B46 /* PlayWTView.h */,
+				FA9662E32663360400AF7B46 /* PlayWTView.m */,
+				FA9662E52663361500AF7B46 /* PlayWTView.xib */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -3366,6 +3382,7 @@
 				8A3930E125FCDB3800E7331B /* cmh_default_order_detail@2x.png in Resources */,
 				8A8BC1D425FA13850028173C /* 1.plist in Resources */,
 				8A95C300265A5C7B00A6D144 /* KJMidiSource.bundle in Resources */,
+				FA9662DC2663355B00AF7B46 /* KMPlayView.xib in Resources */,
 				8A95C30C265A5C7B00A6D144 /* KJMidiPlayerVC.xib in Resources */,
 				8A3930E325FCDB3800E7331B /* cmh_default_empty_data_1@2x.png in Resources */,
 				8AFDD3C825F8C890006B1384 /* HXBaseViewController.bundle in Resources */,
@@ -3375,6 +3392,8 @@
 				8A3930ED25FCDB3800E7331B /* cmh_default_my_address@2x.png in Resources */,
 				FA9FBAAE2647ADEB00E4F27E /* topHeaderView.xib in Resources */,
 				8A8BC1D525FA13850028173C /* 3.plist in Resources */,
+				FA9662E1266335A500AF7B46 /* chongzhiView.xib in Resources */,
+				FA9662E62663361500AF7B46 /* PlayWTView.xib in Resources */,
 				8A9C565D25F8A17B00EFA410 /* BezierCurveView.xib in Resources */,
 				8A3930DE25FCDB3800E7331B /* cmh_default_goods_detail@2x.png in Resources */,
 				8A3930F325FCDB3800E7331B /* cmh_default_empty_data_0@3x.png in Resources */,
@@ -3567,9 +3586,11 @@
 				8A8BC39525FC6F9E0028173C /* UIImage+MHCrop.m in Sources */,
 				8A39312225FCDED100E7331B /* MHTopicHeaderView.m in Sources */,
 				8A82F131264FA07E004AAF40 /* SVProgressHUD.m in Sources */,
+				FA9662DF2663359200AF7B46 /* chongzhiView.m in Sources */,
 				8A9C563225F8A10000EFA410 /* UIImage+animatedGIF.m in Sources */,
 				8A39305F25FCD91A00E7331B /* CMHHTTPResponse.m in Sources */,
 				8A95C2FE265A5C7B00A6D144 /* KJProxyManager.m in Sources */,
+				FA9662D726632CC700AF7B46 /* UIView+lcAnyCorners.m in Sources */,
 				8A8BC38225FC6F9E0028173C /* YYGestureRecognizer.m in Sources */,
 				8A9C561B25F8A10000EFA410 /* BaseColor.m in Sources */,
 				8A8BC2ED25FC6ED10028173C /* MHYouKuMediaSummary.m in Sources */,
@@ -3603,6 +3624,7 @@
 				8A8BC39A25FC6F9E0028173C /* UIImage+MHOrientation.m in Sources */,
 				8A82F15A264FC663004AAF40 /* ZjiluViewController.m in Sources */,
 				8A9C561225F8A10000EFA410 /* UIView+Visuals.m in Sources */,
+				FA9662E42663360400AF7B46 /* PlayWTView.m in Sources */,
 				8A95C2FB265A5C7B00A6D144 /* KJBasePlayer+KJPingTimer.m in Sources */,
 				FA75823726497CC400778A63 /* vipHeaderView.m in Sources */,
 				8A39314125FCDFCE00E7331B /* MHComment.m in Sources */,
@@ -3628,6 +3650,7 @@
 				8A9C563425F8A10000EFA410 /* UIImage+Resize.m in Sources */,
 				8A95C2F7265A5C7B00A6D144 /* KJRotateManager.m in Sources */,
 				8A82F0E2264F59FA004AAF40 /* ShapeView.m in Sources */,
+				FA9662DA2663354D00AF7B46 /* KMPlayView.m in Sources */,
 				8A8BC1E325FA1DC20028173C /* SHeaderView.m in Sources */,
 				8A8BC2EA25FC6ED10028173C /* MHYouKuTopicDetailController.m in Sources */,
 				8A39308B25FCDAED00E7331B /* MHReflection.m in Sources */,
@@ -3810,7 +3833,6 @@
 				8A8BC2F525FC6ED10028173C /* MHYouKuCommentToolBar.m in Sources */,
 				8A8BC17925F8F73F0028173C /* LXReorderableCollectionViewFlowLayout.m in Sources */,
 				8A9C56B925F8A4D000EFA410 /* LocalStringObj.m in Sources */,
-				8A9C54A925F7837B00EFA410 /* SceneDelegate.m in Sources */,
 				8A8BC3A025FC6F9E0028173C /* NSError+MHExtension.m in Sources */,
 				8ADF898F264D16F700029B05 /* LoginViewController.m in Sources */,
 				8A39306425FCD91A00E7331B /* CMHControllerHelper.m in Sources */,

@@ -1050,6 +1050,7 @@
 		8AE01BAE26625D550031C82F /* KFView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KFView.xib; sourceTree = "<group>"; };
 		8AE01BB626625E560031C82F /* KFView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFView.h; sourceTree = "<group>"; };
 		8AE01BB726625E560031C82F /* KFView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFView.m; sourceTree = "<group>"; };
+		8AE01BC226647ACF0031C82F /* interfaceHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = interfaceHeader.h; sourceTree = "<group>"; };
 		8AF2C7A825FCE5F20029AC13 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		8AF2C84225FF0FDA0029AC13 /* HomeTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTitleView.h; sourceTree = "<group>"; };
 		8AF2C84325FF0FDA0029AC13 /* HomeTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTitleView.m; sourceTree = "<group>"; };
@@ -1683,6 +1684,7 @@
 			children = (
 				8A82F10D264F9E00004AAF40 /* HttpManagement.h */,
 				8A82F10E264F9E01004AAF40 /* HttpManagement.m */,
+				8AE01BC226647ACF0031C82F /* interfaceHeader.h */,
 			);
 			path = AFNNetWork;
 			sourceTree = "<group>";

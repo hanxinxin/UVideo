@@ -7,7 +7,12 @@
 
 #import "ZCViewController.h"
 
-@interface ZCViewController ()
+//MARK:输入框和键盘之间的间距
+static CGFloat INTERVAL_KEYBOARD = 500;
+@interface ZCViewController ()<UITextFieldDelegate>
+{
+    NSDictionary *keyboardInfo;
+}
 @property(nonatomic,strong)UIView*topView;
 @property(nonatomic,strong)UIButton *menuBtn1;
 @property(nonatomic,strong)UIButton *menuBtn2;
@@ -34,7 +39,7 @@
     
 //    加载UI
     [self InitUI];
-    
+    [self addNoticeForKeyboard];
     dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC));
 
     dispatch_after(delayTime, dispatch_get_main_queue(), ^{
@@ -65,6 +70,7 @@
     self.emailTextfield.keyboardType=UIKeyboardTypeEmailAddress;
     self.emailTextfield.borderStyle=UITextBorderStyleRoundedRect;
     self.emailTextfield.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
+    self.emailTextfield.delegate=self;
     self.emailTextfield.layer.borderWidth = 1;
     self.emailTextfield.layer.cornerRadius = 6;
     [self.centerView addSubview:self.emailTextfield];
@@ -74,6 +80,7 @@
     self.passwordTextfield.keyboardType=UIKeyboardTypeEmailAddress;
     self.passwordTextfield.borderStyle=UITextBorderStyleRoundedRect;
     self.passwordTextfield.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
+    self.passwordTextfield.delegate=self;
     self.passwordTextfield.layer.borderWidth = 1;
     self.passwordTextfield.layer.cornerRadius = 6;
     [self.centerView addSubview:self.passwordTextfield];
@@ -86,6 +93,7 @@
     self.CodeTextfield.placeholder=@"请输入验证码";
     self.CodeTextfield.keyboardType=UIKeyboardTypeNumberPad;
     self.CodeTextfield.borderStyle=UITextBorderStyleNone;
+    self.CodeTextfield.delegate=self;
     [self.CodeView addSubview:self.CodeTextfield];
     
     self.getCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.CodeTextfield.right-8, 6, 70, 30)];
@@ -287,6 +295,125 @@
 
 
 
+#pragma mark - 键盘通知
+- (void)addNoticeForKeyboard {
+    
+    //注册键盘出现的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    //注册键盘消失的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+///键盘显示事件
+- (void) keyboardWillShow:(NSNotification *)notification {
+    //    获取键盘高度，在不同设备上，以及中英文下是不同的
+    CGFloat kbHeight = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+    
+    //计算出键盘顶端到inputTextView panel底端的距离(加上自定义的缓冲距离INTERVAL_KEYBOARD)
+    NSLog(@"%f      =    %f ",(self.ZCBtn.bottom+kbHeight+40),SCREENH_HEIGHT);
+    CGFloat offset = (self.ZCBtn.bottom+kbHeight+40) - (SCREENH_HEIGHT);
+    
+    // 取得键盘的动画时间，这样可以在视图上移的时候更连贯
+    double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    //将视图上移计算好的偏移
+    if(offset > 0) {
+        [UIView animateWithDuration:duration animations:^{
+            self.view.frame = CGRectMake(0.0f, -offset, self.view.frame.size.width, self.view.frame.size.height);
+//            self.view.frame = CGRectMake(0.0f, -offset, self.view.frame.size.height,self.view.frame.size.width);
+        }];
+    }
+}
+
+///键盘消失事件
+- (void) keyboardWillHide:(NSNotification *)notify {
+    // 键盘动画时间
+    double duration = [[notify.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    //视图下沉恢复原状
+    [UIView animateWithDuration:duration animations:^{
+        self.view.frame = [UIScreen mainScreen].bounds;
+    }];
+}
+
+
+
+- (void)animationWithkeybooard:(void (^)(void))animations{
+    NSTimeInterval duration = [[keyboardInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    UIViewAnimationCurve curve = [[keyboardInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:duration];
+    [UIView setAnimationCurve:curve];
+    animations();
+    [UIView commitAnimations];
+}
+- (UITextField *)isFirstTextFieldResponder{
+    if ([self.emailTextfield isFirstResponder]) {
+        return self.emailTextfield;
+    }else if ([self.passwordTextfield isFirstResponder]) {
+        return self.passwordTextfield;
+    }else
+    {
+        return self.emailTextfield;
+    }
+}
+#pragma UITextFieldDelegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    if (textField == self.emailTextfield) {
+        [self.emailTextfield becomeFirstResponder];
+    }else if (textField == self.passwordTextfield){
+        [self.passwordTextfield becomeFirstResponder];
+    }else{
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    NSString *text = textField.text;
+    text = [text stringByReplacingCharactersInRange:range withString:string];
+    NSString *trimText = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (textField == self.emailTextfield) {
+        if ([trimText length] > 60) {
+            return NO;
+        }
+    }else if (textField == self.passwordTextfield){
+        if ([trimText length] > 60) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    if (!keyboardInfo) {
+        return YES;
+    }
+    CGFloat kbHeight = [[keyboardInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+    CGFloat offset = (textField.frame.origin.y + textField.frame.size.height + INTERVAL_KEYBOARD) - (self.view.frame.size.height - kbHeight);
+    if (offset > 0) {
+        if (offset > kbHeight) {
+            offset = kbHeight-50;
+        }
+        [self animationWithkeybooard:^{
+            self.view.frame = CGRectMake(0, -offset, self.view.frame.size.width, self.view.frame.size.height);
+        }];
+    }else{
+        [self animationWithkeybooard:^{
+            self.view.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+        }];
+    }
+    return YES;
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self.view endEditing:YES];
+}
 
 @end
 

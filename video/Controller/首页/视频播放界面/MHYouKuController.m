@@ -246,25 +246,34 @@
         self.playerView.smallScreenHiddenBackButton = YES;
         self.playerView.backButton.hidden=YES;
     }
-
+    
 }
 - (void)tempsAction:(NSInteger)index{
     self.player.videoURL = [NSURL URLWithString:self.temps[index]];
+    
 }
 
 #pragma mark - KJPlayerDelegate
 /* 当前播放器状态 */
 - (void)kj_player:(KJBasePlayer*)player state:(KJPlayerState)state{
+    NSLog(@"播放状态 == %ld  ",(long)state);
     if (state == KJPlayerStateBuffering || state == KJPlayerStatePausing) {
         [player kj_startAnimation];
     }else if (state == KJPlayerStatePreparePlay || state == KJPlayerStatePlaying) {
         [player kj_stopAnimation];
+        //设置 滑竿 最大值
+        player.playerView.bottomHYSlider.maxValue=self.player.totalTime;
     }else if (state == KJPlayerStatePlayFinished) {
         [player kj_replay];
     }
 }
 /* 播放进度 */
 - (void)kj_player:(KJBasePlayer*)player currentTime:(NSTimeInterval)time{
+    NSLog(@"播放进度 == %f   self.player.totalTime= %d",fmod(time,60.0),(int)fmod(self.player.totalTime,60.0));
+    NSString * qstring = [NSString stringWithFormat:@"%d:%d",(int)time/60,(int)fmodl(time,60.0)];
+    NSString * hstring = [NSString stringWithFormat:@"%d:%d",(int)self.player.totalTime/60,(int)fmod(self.player.totalTime,60.0)];
+    player.playerView.TimeTotal.text=[NSString stringWithFormat:@"%@/%@",qstring,hstring];
+    player.playerView.bottomHYSlider.currentSliderValue=time;
     
 }
 /* 缓存进度 */

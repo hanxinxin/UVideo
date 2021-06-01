@@ -56,10 +56,13 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     [self addSubview:self.lockButton];
     [self addSubview:self.centerPlayButton];
     [self.bottomView addSubview:self.bottomHYSlider];
+    [self.bottomView addSubview:self.TimeTotal];
     self.smallScreenHiddenBackButton = YES;
     self.displayOperation = YES;
     [self kj_hiddenOperationView];
 }
+
+
 #pragma mark - NSNotification
 //屏幕旋转
 - (void)kj_orientationChange:(NSNotification*)notification{
@@ -86,10 +89,11 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     [self.hintTextLayer setValue:@(self.screenState) forKey:@"screenState"];
     self.topView.frame = CGRectMake(0, 0, self.width, self.operationViewHeight);
     self.bottomView.frame = CGRectMake(0, self.height-self.operationViewHeight, self.width, self.operationViewHeight);
-    self.lockButton.frame = CGRectMake(10, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
+    self.lockButton.frame = CGRectMake(15, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
     self.centerPlayButton.frame = CGRectMake((self.width-kCenterPlayWidth)/2, (self.height-kCenterPlayWidth)/2, kCenterPlayWidth, kCenterPlayWidth);
     
-    self.bottomHYSlider.frame = CGRectMake(0, self.bottomView.height-10, self.bottomView.width, 10);
+    self.bottomHYSlider.frame = CGRectMake(10, self.bottomView.height-15, self.bottomView.width-20, 5);
+    self.TimeTotal.frame = CGRectMake(10, self.bottomView.height-30, self.bottomView.width-20, 15);
 }
 
 #pragma mark - getter
@@ -443,16 +447,31 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
 {
     if(!_bottomHYSlider)
     {
-        _bottomHYSlider = [[HYSlider alloc]initWithFrame:CGRectMake(0, _bottomView.height-10, _bottomView.width - 40, 10)];
-    _bottomHYSlider.currentValueColor = RGBA(20, 155, 236, 1);
-    _bottomHYSlider.maxValue = 255;
-    _bottomHYSlider.currentSliderValue = 200;
-    _bottomHYSlider.showTouchView = YES;
-    _bottomHYSlider.showTextColor = RGBA(20, 155, 236, 1);
-    _bottomHYSlider.touchViewColor = RGBA(20, 155, 236, 1);
-    _bottomHYSlider.delegate = self;
+        _bottomHYSlider = [[HYSlider alloc]initWithFrame:CGRectMake(0, _bottomView.height-4, _bottomView.width, 5)];
+        _bottomHYSlider.currentValueColor = RGBA(20, 155, 236, 1);
+        _bottomHYSlider.maxValue = 100;
+        _bottomHYSlider.currentSliderValue = 0;
+        _bottomHYSlider.showTouchView = YES;
+        _bottomHYSlider.showScrollTextView=YES;
+        _bottomHYSlider.showTextColor = [UIColor clearColor];
+        _bottomHYSlider.touchViewColor = [UIColor clearColor];
+        _bottomHYSlider.delegate = self;
     
     }
     return _bottomHYSlider;
 }
+-(UILabel*)TimeTotal
+{
+    
+    if(!_TimeTotal)
+    {
+        _TimeTotal = [[UILabel alloc]initWithFrame:CGRectMake(5, _bottomView.height-19, _bottomView.width-5, 15)];
+        _TimeTotal.textColor=[UIColor whiteColor];
+        _TimeTotal.text = @"00:00";
+        _TimeTotal.textAlignment=NSTextAlignmentLeft;
+    }
+    return _TimeTotal;
+}
+
+
 @end

@@ -81,6 +81,9 @@ extern NSString *kPlayerBaseViewChangeKey;
 @property (nonatomic,strong) KJPlayerButton *centerPlayButton;
 
 /// 进度条
+@property (nonatomic,strong) UILabel *TimeTotal;
+
+/// 进度条
 @property (nonatomic,strong) HYSlider *bottomHYSlider;
 #pragma mark - method
 /* 隐藏操作面板，是否隐藏返回按钮 */

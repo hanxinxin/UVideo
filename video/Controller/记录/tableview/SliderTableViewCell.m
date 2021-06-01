@@ -23,6 +23,7 @@
 -(void)addslider
 {
     _Slider = [[HYSlider alloc]initWithFrame:CGRectMake(self.leftLabel.left, CGRectGetMaxY(self.leftLabel.frame)+5, self.frame.size.width - self.bfbLabel.width-10, 10)];
+    _Slider.layer.cornerRadius = self.frame.size.height/2;
     _Slider.currentValueColor = RGB(234, 158, 57);
     _Slider.maxValue = 255;
     _Slider.currentSliderValue = 200;

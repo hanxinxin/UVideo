@@ -50,7 +50,7 @@
     _textLabel.textColor = [UIColor whiteColor];
     _textLabel.font = [UIFont systemFontOfSize:9.0];
     [self.leftView addSubview:_textLabel];
-    self.textLabel.text = [NSString stringWithFormat:@"%.f",currentSliderValue];
+//    self.textLabel.text = [NSString stringWithFormat:@"%.f",currentSliderValue];
 }
 
 -(void)setShowTouchView:(BOOL)showTouchView{
@@ -98,7 +98,7 @@
 - (void)setup{
     
     
-    self.layer.cornerRadius = self.frame.size.height/2;
+//    self.layer.cornerRadius = self.frame.size.height/2;
     self.backgroundColor = [UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     
     

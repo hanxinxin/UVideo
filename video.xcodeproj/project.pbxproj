@@ -358,6 +358,9 @@
 		FA75823326496DB300778A63 /* CZCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA75823126496DB300778A63 /* CZCollectionViewCell.xib */; };
 		FA75823726497CC400778A63 /* vipHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA75823626497CC400778A63 /* vipHeaderView.m */; };
 		FA75823926497CD500778A63 /* vipHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA75823826497CD500778A63 /* vipHeaderView.xib */; };
+		FA8A03912667D0BE00B41281 /* iphoneClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8A03902667D0BE00B41281 /* iphoneClass.m */; };
+		FA8A03952667D78300B41281 /* menberViewTS.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8A03942667D78300B41281 /* menberViewTS.m */; };
+		FA8A03972667D79000B41281 /* menberViewTS.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8A03962667D79000B41281 /* menberViewTS.xib */; };
 		FA8E71822652A3D50058F02F /* ClarityView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8E71812652A3D50058F02F /* ClarityView.m */; };
 		FA8E71862652A46A0058F02F /* clarityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8E71842652A46A0058F02F /* clarityCollectionViewCell.m */; };
 		FA8E71872652A46A0058F02F /* clarityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8E71852652A46A0058F02F /* clarityCollectionViewCell.xib */; };
@@ -1074,6 +1077,11 @@
 		FA75823526497CC400778A63 /* vipHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vipHeaderView.h; sourceTree = "<group>"; };
 		FA75823626497CC400778A63 /* vipHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = vipHeaderView.m; sourceTree = "<group>"; };
 		FA75823826497CD500778A63 /* vipHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = vipHeaderView.xib; sourceTree = "<group>"; };
+		FA8A038F2667D0BE00B41281 /* iphoneClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iphoneClass.h; sourceTree = "<group>"; };
+		FA8A03902667D0BE00B41281 /* iphoneClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iphoneClass.m; sourceTree = "<group>"; };
+		FA8A03932667D78300B41281 /* menberViewTS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menberViewTS.h; sourceTree = "<group>"; };
+		FA8A03942667D78300B41281 /* menberViewTS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = menberViewTS.m; sourceTree = "<group>"; };
+		FA8A03962667D79000B41281 /* menberViewTS.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = menberViewTS.xib; sourceTree = "<group>"; };
 		FA8E71802652A3D50058F02F /* ClarityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClarityView.h; sourceTree = "<group>"; };
 		FA8E71812652A3D50058F02F /* ClarityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClarityView.m; sourceTree = "<group>"; };
 		FA8E71832652A46A0058F02F /* clarityCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = clarityCollectionViewCell.h; sourceTree = "<group>"; };
@@ -2831,6 +2839,7 @@
 		8A9C563C25F8A17B00EFA410 /* custom */ = {
 			isa = PBXGroup;
 			children = (
+				FA8A03922667D0C100B41281 /* iphoneClass */,
 				FA936FA7265944EA00067614 /* HJCornerRadius */,
 				8A95C06B2658EFAE00A6D144 /* BadgeButton */,
 				8A82F137264FA128004AAF40 /* LBLaunchImageAd */,
@@ -3068,8 +3077,20 @@
 				FA9662E22663360400AF7B46 /* PlayWTView.h */,
 				FA9662E32663360400AF7B46 /* PlayWTView.m */,
 				FA9662E52663361500AF7B46 /* PlayWTView.xib */,
+				FA8A03932667D78300B41281 /* menberViewTS.h */,
+				FA8A03942667D78300B41281 /* menberViewTS.m */,
+				FA8A03962667D79000B41281 /* menberViewTS.xib */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		FA8A03922667D0C100B41281 /* iphoneClass */ = {
+			isa = PBXGroup;
+			children = (
+				FA8A038F2667D0BE00B41281 /* iphoneClass.h */,
+				FA8A03902667D0BE00B41281 /* iphoneClass.m */,
+			);
+			path = iphoneClass;
 			sourceTree = "<group>";
 		};
 		FA8E717F2652A35E0058F02F /* Palyview */ = {
@@ -3410,6 +3431,7 @@
 				8A9C54B125F7837E00EFA410 /* Assets.xcassets in Resources */,
 				8A3930EE25FCDB3800E7331B /* cmh_default_collect_goods@3x.png in Resources */,
 				8A9C559E25F8A0B300EFA410 /* GuideImage.bundle in Resources */,
+				FA8A03972667D79000B41281 /* menberViewTS.xib in Resources */,
 				8A3930DA25FCDB3800E7331B /* cmh_default_no_wifi_1@2x.png in Resources */,
 				8A82F16D264FCEBA004AAF40 /* FAQTableViewCell.xib in Resources */,
 				8A3930EA25FCDB3800E7331B /* cmh_default_no_custom_service@2x.png in Resources */,
@@ -3652,6 +3674,7 @@
 				8A9C563425F8A10000EFA410 /* UIImage+Resize.m in Sources */,
 				8A95C2F7265A5C7B00A6D144 /* KJRotateManager.m in Sources */,
 				8A82F0E2264F59FA004AAF40 /* ShapeView.m in Sources */,
+				FA8A03952667D78300B41281 /* menberViewTS.m in Sources */,
 				FA9662DA2663354D00AF7B46 /* KMPlayView.m in Sources */,
 				8A8BC1E325FA1DC20028173C /* SHeaderView.m in Sources */,
 				8A8BC2EA25FC6ED10028173C /* MHYouKuTopicDetailController.m in Sources */,
@@ -3836,6 +3859,7 @@
 				8A8BC17925F8F73F0028173C /* LXReorderableCollectionViewFlowLayout.m in Sources */,
 				8A9C56B925F8A4D000EFA410 /* LocalStringObj.m in Sources */,
 				8A8BC3A025FC6F9E0028173C /* NSError+MHExtension.m in Sources */,
+				FA8A03912667D0BE00B41281 /* iphoneClass.m in Sources */,
 				8ADF898F264D16F700029B05 /* LoginViewController.m in Sources */,
 				8A39306425FCD91A00E7331B /* CMHControllerHelper.m in Sources */,
 				8A8BC19925F9C7500028173C /* LLSearchResultDoubleViewCell.m in Sources */,

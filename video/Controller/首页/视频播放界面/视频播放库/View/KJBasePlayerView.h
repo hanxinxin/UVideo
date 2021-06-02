@@ -80,7 +80,7 @@ extern NSString *kPlayerBaseViewChangeKey;
 /* 播放按钮 */
 @property (nonatomic,strong) KJPlayerButton *centerPlayButton;
 
-/// 进度条
+/// 进度Time
 @property (nonatomic,strong) UILabel *TimeTotal;
 
 /// 进度条

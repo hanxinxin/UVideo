@@ -51,6 +51,11 @@
     _textLabel.font = [UIFont systemFontOfSize:9.0];
     [self.leftView addSubview:_textLabel];
 //    self.textLabel.text = [NSString stringWithFormat:@"%.f",currentSliderValue];
+    
+    if(_showTouchView){
+        _touchView .frame = CGRectMake(0, 0, self.frame.size.height + 10, self.frame.size.height + 10);
+        _touchView.center = _textLabel.center;
+    }
 }
 
 -(void)setShowTouchView:(BOOL)showTouchView{
@@ -138,8 +143,8 @@
     _touchView.layer.cornerRadius = (self.frame.size.height + 10) /2;
     _touchView.layer.masksToBounds = YES;
     _touchView.layer.borderColor = [UIColor whiteColor].CGColor;
-    _touchView.layer.borderWidth = 2.0;
-    _touchView.backgroundColor = [UIColor yellowColor];
+    _touchView.layer.borderWidth = 4.0;
+    _touchView.backgroundColor = RGBA(20, 155, 236, 1);
     [self addSubview:_touchView];
     
     /** 默认最大值*/

@@ -78,22 +78,49 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
             [[NSNotificationCenter defaultCenter] postNotificationName:kPlayerBaseViewChangeNotification object:self userInfo:@{kPlayerBaseViewChangeKey:[object valueForKeyPath:keyPath]}];
             CGRect rect = [[object valueForKeyPath:keyPath] CGRectValue];
             self.width = rect.size.width;self.height = rect.size.height;
-            [self kj_changeFrame];
+            if ([UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeRight ||
+            [UIApplication sharedApplication].statusBarOrientation == UIDeviceOrientationLandscapeLeft) {
+                //当前横屏
+                [self kj_changeFrame];
+            } else {
+               //当前竖屏
+                [self kj_changeFrameShuPing];
+            }
+            
         }
     }
 }
 - (void)kj_changeFrame{
+   
     self.loadingLayer.position = CGPointMake(self.width/2, self.height/2);
     self.fastLayer.position = CGPointMake(self.width/2, self.height/2);
     self.vbLayer.position = CGPointMake(self.width/2, self.height/2);
     [self.hintTextLayer setValue:@(self.screenState) forKey:@"screenState"];
-    self.topView.frame = CGRectMake(0, 0, self.width, self.operationViewHeight);
-    self.bottomView.frame = CGRectMake(0, self.height-self.operationViewHeight, self.width, self.operationViewHeight);
-    self.lockButton.frame = CGRectMake(15, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
+    self.topView.frame = CGRectMake(kNavBarAndStatusBarHeight, 0, self.width-self.bottomView.width-(kNavBarAndStatusBarHeight+kBottomSafeHeight), self.operationViewHeight);
+    self.backButton.frame=CGRectMake(kNavBarAndStatusBarHeight, 0, self.width-self.bottomView.width-(kNavBarAndStatusBarHeight+kBottomSafeHeight), self.operationViewHeight);
+    self.bottomView.frame = CGRectMake(kTopBarSafeHeight, self.height-self.operationViewHeight, self.width-(kTopBarSafeHeight+kBottomSafeHeight), self.operationViewHeight);
+    self.lockButton.frame = CGRectMake(kNavBarAndStatusBarHeight, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
     self.centerPlayButton.frame = CGRectMake((self.width-kCenterPlayWidth)/2, (self.height-kCenterPlayWidth)/2, kCenterPlayWidth, kCenterPlayWidth);
     
-    self.bottomHYSlider.frame = CGRectMake(10, self.bottomView.height-15, self.bottomView.width-20, 5);
-    self.TimeTotal.frame = CGRectMake(10, self.bottomView.height-30, self.bottomView.width-20, 15);
+    self.bottomHYSlider.frame = CGRectMake(kTopBarSafeHeight, self.bottomView.height-20, self.bottomView.width-(kTopBarSafeHeight+kBottomSafeHeight), 5);
+    self.TimeTotal.frame = CGRectMake(kTopBarSafeHeight, self.bottomView.height-35, self.bottomView.width-(kTopBarSafeHeight+kBottomSafeHeight), 15);
+}
+
+-(void)kj_changeFrameShuPing
+{
+//    kj_changeFrameShuPing
+    self.loadingLayer.position = CGPointMake(self.width/2, self.height/2);
+    self.fastLayer.position = CGPointMake(self.width/2, self.height/2);
+    self.vbLayer.position = CGPointMake(self.width/2, self.height/2);
+    [self.hintTextLayer setValue:@(self.screenState) forKey:@"screenState"];
+    self.topView.frame = CGRectMake(0, 0, self.width-self.bottomView.width, self.operationViewHeight);
+    self.backButton.frame=CGRectMake(0, 0, self.width-self.bottomView.width, self.operationViewHeight);
+    self.bottomView.frame = CGRectMake(0, self.height-self.operationViewHeight, self.width, self.operationViewHeight);
+    self.lockButton.frame = CGRectMake(10, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
+    self.centerPlayButton.frame = CGRectMake((self.width-kCenterPlayWidth)/2, (self.height-kCenterPlayWidth)/2, kCenterPlayWidth, kCenterPlayWidth);
+    
+    self.bottomHYSlider.frame = CGRectMake(0, self.bottomView.height-15, self.bottomView.width, 5);
+    self.TimeTotal.frame = CGRectMake(0, self.bottomView.height-35, self.bottomView.width, 15);
 }
 
 #pragma mark - getter
@@ -447,14 +474,14 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
 {
     if(!_bottomHYSlider)
     {
-        _bottomHYSlider = [[HYSlider alloc]initWithFrame:CGRectMake(0, _bottomView.height-4, _bottomView.width, 5)];
+        _bottomHYSlider = [[HYSlider alloc]initWithFrame:CGRectMake(0, _bottomView.height-7, _bottomView.width, 5)];
         _bottomHYSlider.currentValueColor = RGBA(20, 155, 236, 1);
         _bottomHYSlider.maxValue = 100;
         _bottomHYSlider.currentSliderValue = 0;
         _bottomHYSlider.showTouchView = YES;
         _bottomHYSlider.showScrollTextView=YES;
-        _bottomHYSlider.showTextColor = [UIColor clearColor];
-        _bottomHYSlider.touchViewColor = [UIColor clearColor];
+        _bottomHYSlider.showTextColor = RGBA(51, 51, 51, 1);
+        _bottomHYSlider.touchViewColor = RGBA(20, 155, 236, 1);;
         _bottomHYSlider.delegate = self;
     
     }

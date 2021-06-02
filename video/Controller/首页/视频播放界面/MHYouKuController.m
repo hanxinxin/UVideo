@@ -28,6 +28,7 @@
 #import "MHYouKuTopicDetailController.h"
 
 #import "ClarityView.h"
+#import "menberViewTS.h"
 
 @interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate , MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate,KJPlayerDelegate,KJPlayerBaseViewDelegate,KJPlayerBaseViewDelegate>
 
@@ -109,6 +110,10 @@
 /** inputPanelView */
 @property (nonatomic , weak) MHYouKuInputPanelView *inputPanelView;
 
+
+@property(nonatomic,strong)menberViewTS*menberView;
+
+
 @end
 
 @implementation MHYouKuController
@@ -168,6 +173,9 @@
     
     ///设置 playerView
     [self setPlayerView];
+    
+    ///加载提示框
+    [self addmenberViewM];
     
 }
 
@@ -249,8 +257,13 @@
     
 }
 - (void)tempsAction:(NSInteger)index{
+    if(index>=2)
+    {
+        [self showmenberViewTS];
+    }else
+    {
     self.player.videoURL = [NSURL URLWithString:self.temps[index]];
-    
+    }
 }
 
 #pragma mark - KJPlayerDelegate
@@ -344,6 +357,54 @@
     return NO;
 }
 
+-(void)addmenberViewM{
+    menberViewTS *view = [[[NSBundle mainBundle]loadNibNamed:@"menberViewTS" owner:self options:nil]objectAtIndex:0];
+//    view.alpha=0.7;
+    view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
+    view.hidden=YES;
+    view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
+//    view.bottomview.layer.cornerRadius=10;
+    UIRectCorner corners = UIRectCornerTopRight | UIRectCornerTopLeft;
+    [view.bottomview setBorderWithCornerRadius:10 borderWidth:1 borderColor:[UIColor whiteColor] type:corners];
+    view.okBtn.layer.cornerRadius=6;
+    view.cancelBtn.layer.cornerRadius=6;
+    [self.view addSubview:view];
+    self.menberView=view;
+    __weak MHYouKuController * weakSelf = self;
+    self.menberView.touchIndex = ^(NSInteger Index) {
+        
+        NSLog(@"menberView idnex ==== %ld",Index);
+        if(Index==0)
+        {
+            
+        }else{
+            
+        }
+        [weakSelf HidmenberViewTS];
+    };
+}
+
+-(void)showmenberViewTS
+{
+    
+    [UIView animateWithDuration:0.7 animations:^{
+        self.menberView.bottomview.hidden=NO;
+        self.menberView.hidden=NO;
+        self.menberView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavBarAndStatusBarHeight);
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+-(void)HidmenberViewTS
+{
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.menberView.bottomview.hidden=YES;
+        self.menberView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+    } completion:^(BOOL finished) {
+        self.menberView.hidden=YES;
+    }];
+}
 #pragma mark - 公共方法
 
 

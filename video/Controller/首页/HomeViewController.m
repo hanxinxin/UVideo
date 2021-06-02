@@ -48,6 +48,8 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     [self initNav];
 //    [self PMDLabel];
     [self addPageView];
+    
+    NSLog(@"kIs_iPhoneX  = %d",kIs_iPhoneX );
 }
 
 - (void)viewDidAppear:(BOOL)animated

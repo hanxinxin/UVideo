@@ -24,7 +24,7 @@
 #import "BadgeButton.h"
 #import "UIView+lcAnyCorners.h"
 #import "interfaceHeader.h"  ///URL头文件
-
+#import "iphoneClass.h"
 
 ////////////   3.13日添加 头文件
 #import <MJRefresh/MJRefresh.h>
@@ -146,8 +146,12 @@
 
 //判断是否为iPad
 #define IS_IPAD ([[[UIDevice currentDevice] model] isEqualToString:@"iPad"])
-#define kIs_iPhoneX SCREEN_WIDTH >=375.0f && SCREENH_HEIGHT >=812.0f && !IS_IPAD
- 
+//#define kIs_iPhoneX (SCREEN_WIDTH >=375.0f && SCREENH_HEIGHT >=812.0f) && !IS_IPAD
+
+#define kIs_iPhoneX [iphoneClass isiPhoneXByHeight] && !IS_IPAD 
+
+
+
 /*状态栏高度*/
 #define kStatusBarHeight (CGFloat)(kIs_iPhoneX?(44.0):(20.0))
 /*导航栏高度*/

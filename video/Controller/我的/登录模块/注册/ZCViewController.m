@@ -48,6 +48,8 @@ static CGFloat INTERVAL_KEYBOARD = 500;
   
     [self touchOne:nil];
     
+    
+    [self gettuxingYZM];
 }
 
 -(void)InitUI{
@@ -327,6 +329,19 @@ static CGFloat INTERVAL_KEYBOARD = 500;
         }];
     }
 }
+
+-(void)gettuxingYZM{
+    [[HttpManagement shareManager] GetNetWork:[NSString stringWithFormat:@"%@%@",FWQURL,tuxingYZMurl] success:^(id _Nullable responseObject) {
+        
+        NSLog(@"responseObject == %@",responseObject);
+    } failure:^(NSError * _Nullable error) {
+        NSLog(@"shareManager error == %@",error);
+        [UHud showHUDToView:self.view text:@"网络错误"];
+    }];
+}
+
+
+
 
 ///键盘消失事件
 - (void) keyboardWillHide:(NSNotification *)notify {

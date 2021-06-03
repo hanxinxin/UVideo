@@ -51,7 +51,7 @@
 
 
 ///// Get 请求
--(void)GetNetWork:(NSString * _Nullable )url success:(void (^_Nullable)(id _Nullable))success failure:(failureBlock _Nullable )failureBlock
+-(void)GetNetWork:(NSString * _Nullable )url success:(void (^_Nullable)(id _Nullable responseObject))success failure:(failureBlock _Nullable )failureBlock
 {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -65,6 +65,7 @@
                 // 设置Authorization的方法设置header
 //                [manager.requestSerializer setValue:authorization forHTTPHeaderField:@"Authorization"];
                 [manager.requestSerializer setValue:application forHTTPHeaderField:@"content-type"];
+    NSLog(@"get URL == %@",url);
             [manager GET:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {

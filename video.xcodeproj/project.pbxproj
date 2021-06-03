@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5474D0A6172289002C304956 /* Pods_videoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CD8D4ACCA9DB8AD56FD560 /* Pods_videoTests.framework */; };
-		8A0520EC2648CE4600E5188E /* HYSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0520EB2648CE4600E5188E /* HYSlider.m */; };
 		8A0520F32648D56C00E5188E /* SliderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0520F12648D56C00E5188E /* SliderTableViewCell.m */; };
 		8A0520F42648D56C00E5188E /* SliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A0520F22648D56C00E5188E /* SliderTableViewCell.xib */; };
 		8A05210C264919BE00E5188E /* LXTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A05210A264919BE00E5188E /* LXTableViewCell.m */; };
@@ -376,6 +375,8 @@
 		FA9662E1266335A500AF7B46 /* chongzhiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9662E0266335A500AF7B46 /* chongzhiView.xib */; };
 		FA9662E42663360400AF7B46 /* PlayWTView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9662E32663360400AF7B46 /* PlayWTView.m */; };
 		FA9662E62663361500AF7B46 /* PlayWTView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9662E52663361500AF7B46 /* PlayWTView.xib */; };
+		FA97027C26692D8C00418B3A /* YTSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA97027826692D8C00418B3A /* YTSliderView.m */; };
+		FA97027D26692D8C00418B3A /* YTSliderSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = FA97027A26692D8C00418B3A /* YTSliderSetting.m */; };
 		FA997E8F265407AE00CB0DE0 /* ZqwTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997E8E265407AE00CB0DE0 /* ZqwTableViewCell.m */; };
 		FA997E9726540E2900CB0DE0 /* VtitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997E9526540E2900CB0DE0 /* VtitleCollectionViewCell.m */; };
 		FA997E9826540E2900CB0DE0 /* VtitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA997E9626540E2900CB0DE0 /* VtitleCollectionViewCell.xib */; };
@@ -416,8 +417,6 @@
 		5437873FD7DF35C95396A3BD /* Pods-videoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoTests.debug.xcconfig"; path = "Target Support Files/Pods-videoTests/Pods-videoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		55ABB0CE13DBD1E859581D18 /* Pods-video.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-video.debug.xcconfig"; path = "Target Support Files/Pods-video/Pods-video.debug.xcconfig"; sourceTree = "<group>"; };
 		83CD8D4ACCA9DB8AD56FD560 /* Pods_videoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_videoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8A0520EA2648CE4500E5188E /* HYSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HYSlider.h; sourceTree = "<group>"; };
-		8A0520EB2648CE4600E5188E /* HYSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HYSlider.m; sourceTree = "<group>"; };
 		8A0520F02648D56C00E5188E /* SliderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SliderTableViewCell.h; sourceTree = "<group>"; };
 		8A0520F12648D56C00E5188E /* SliderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SliderTableViewCell.m; sourceTree = "<group>"; };
 		8A0520F22648D56C00E5188E /* SliderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderTableViewCell.xib; sourceTree = "<group>"; };
@@ -1110,6 +1109,10 @@
 		FA9662E22663360400AF7B46 /* PlayWTView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlayWTView.h; sourceTree = "<group>"; };
 		FA9662E32663360400AF7B46 /* PlayWTView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PlayWTView.m; sourceTree = "<group>"; };
 		FA9662E52663361500AF7B46 /* PlayWTView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PlayWTView.xib; sourceTree = "<group>"; };
+		FA97027826692D8C00418B3A /* YTSliderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSliderView.m; sourceTree = "<group>"; };
+		FA97027926692D8C00418B3A /* YTSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSliderView.h; sourceTree = "<group>"; };
+		FA97027A26692D8C00418B3A /* YTSliderSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSliderSetting.m; sourceTree = "<group>"; };
+		FA97027B26692D8C00418B3A /* YTSliderSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSliderSetting.h; sourceTree = "<group>"; };
 		FA997E8D265407AE00CB0DE0 /* ZqwTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZqwTableViewCell.h; sourceTree = "<group>"; };
 		FA997E8E265407AE00CB0DE0 /* ZqwTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZqwTableViewCell.m; sourceTree = "<group>"; };
 		FA997E9426540E2900CB0DE0 /* VtitleCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VtitleCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1179,8 +1182,10 @@
 		8A0520E92648CE3300E5188E /* 滑竿 */ = {
 			isa = PBXGroup;
 			children = (
-				8A0520EA2648CE4500E5188E /* HYSlider.h */,
-				8A0520EB2648CE4600E5188E /* HYSlider.m */,
+				FA97027B26692D8C00418B3A /* YTSliderSetting.h */,
+				FA97027A26692D8C00418B3A /* YTSliderSetting.m */,
+				FA97027926692D8C00418B3A /* YTSliderView.h */,
+				FA97027826692D8C00418B3A /* YTSliderView.m */,
 			);
 			path = "滑竿";
 			sourceTree = "<group>";
@@ -3610,6 +3615,7 @@
 				8A8BC39525FC6F9E0028173C /* UIImage+MHCrop.m in Sources */,
 				8A39312225FCDED100E7331B /* MHTopicHeaderView.m in Sources */,
 				8A82F131264FA07E004AAF40 /* SVProgressHUD.m in Sources */,
+				FA97027C26692D8C00418B3A /* YTSliderView.m in Sources */,
 				FA9662DF2663359200AF7B46 /* chongzhiView.m in Sources */,
 				8A9C563225F8A10000EFA410 /* UIImage+animatedGIF.m in Sources */,
 				8A39305F25FCD91A00E7331B /* CMHHTTPResponse.m in Sources */,
@@ -3672,6 +3678,7 @@
 				8A9C560B25F8A10000EFA410 /* UIView+Frame.m in Sources */,
 				8A8BC39925FC6F9E0028173C /* UIImage+MHFile.m in Sources */,
 				8A9C563425F8A10000EFA410 /* UIImage+Resize.m in Sources */,
+				FA97027D26692D8C00418B3A /* YTSliderSetting.m in Sources */,
 				8A95C2F7265A5C7B00A6D144 /* KJRotateManager.m in Sources */,
 				8A82F0E2264F59FA004AAF40 /* ShapeView.m in Sources */,
 				FA8A03952667D78300B41281 /* menberViewTS.m in Sources */,
@@ -3812,7 +3819,6 @@
 				8A95C313265A5C7B00A6D144 /* KJRecordPlayerVC.m in Sources */,
 				8A8BC3A125FC6F9E0028173C /* UIBarButtonItem+MHExtension.m in Sources */,
 				8A8BC38425FC6F9E0028173C /* YYTimer.m in Sources */,
-				8A0520EC2648CE4600E5188E /* HYSlider.m in Sources */,
 				8A39309025FCDAED00E7331B /* CMHTabBarController.m in Sources */,
 				8A8BC3AA25FC6F9E0028173C /* NSObject+MHAlert.m in Sources */,
 				8AE01B7C2661EDBB0031C82F /* menberJSCollectionViewCell.m in Sources */,

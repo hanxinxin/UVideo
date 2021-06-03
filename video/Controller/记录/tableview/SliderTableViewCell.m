@@ -8,7 +8,7 @@
 #import "SliderTableViewCell.h"
 
 
-@interface SliderTableViewCell ()<HYSliderDelegate>
+@interface SliderTableViewCell ()<YTSliderViewDelegate>
 
 
 
@@ -22,21 +22,33 @@
 }
 -(void)addslider
 {
-    _Slider = [[HYSlider alloc]initWithFrame:CGRectMake(self.leftLabel.left, CGRectGetMaxY(self.leftLabel.frame)+5, self.frame.size.width - self.bfbLabel.width-10, 10)];
-    _Slider.layer.cornerRadius = self.frame.size.height/2;
-    _Slider.currentValueColor = RGB(234, 158, 57);
-    _Slider.maxValue = 255;
-    _Slider.currentSliderValue = 200;
-    _Slider.showTouchView = YES;
-    _Slider.showTextColor = RGB(234, 158, 57);
-    _Slider.touchViewColor = RGB(255, 218, 150);
+    YTSliderSetting *setting_h = [YTSliderSetting defaultSetting];
+    _Slider = [[YTSliderView alloc]initWithFrame:CGRectMake(self.leftLabel.left, self.leftLabel.bottom+5, self.bfbLabel.left-10, 10.0f) setting:setting_h];
+    _Slider.tag = 2000;
     _Slider.delegate = self;
     [self addSubview:_Slider];
+        [_Slider mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.leftLabel);
+            make.top.equalTo(self.leftLabel.mas_bottom).offset(5);
+            make.width.mas_equalTo(self.bfbLabel.left).offset(-10);
+            make.height.mas_equalTo(10.0f);
+        }];
 }
-- (void)HYSlider:(HYSlider *)hySlider didScrollValue:(CGFloat)value{
-    
-    NSLog(@"%f",value);
-    
+#pragma mark - delegate
+- (void)sliderTouchBegin:(float)value {
+    NSLog(@"jilu滑杆开始滑动===%f", value);
+}
+
+- (void)sliderTouchEnded:(float)value {
+    NSLog(@"jilu滑杆结束滑动===%f", value);
+}
+
+- (void)sliderValueChanged:(float)value {
+    NSLog(@"jilu滑杆滑动中===%f", value);
+}
+
+- (void)sliderTapped:(float)value {
+    NSLog(@"jilu滑杆点击====%f", value);
 }
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

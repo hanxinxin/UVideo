@@ -16,7 +16,7 @@ typedef void(^failureBlock)(NSError * _Nullable error);
 -(void)getStartScreenRequest:(nullable void (^)(LaunchModel * _Nullable model,NSError * _Nullable error))block;
 
 /// Get 请求
--(void)GetNetWork:(NSString * _Nullable )url success:(void (^_Nullable)(id _Nullable))success failure:(failureBlock _Nullable )failureBlock;
+-(void)GetNetWork:(NSString * _Nullable )url success:(void (^_Nullable)(id _Nullable responseObject))success failure:(failureBlock _Nullable )failureBlock;
 
 /// Post 请求
 -(void)PostNewWork:(NSString * _Nullable )url Dictionary:(NSDictionary *_Nullable)params success:(successBlock _Nullable )successBlock failure:(failureBlock _Nullable )failureBlock;

@@ -6,14 +6,13 @@
 //
 
 #import "jiluViewController.h"
-#import "HYSlider.h"
 
 #import "SCJTableViewCell.h"
 #import "SliderTableViewCell.h"
 
 #define cellID @"cellID"
 #define cellID2 @"SliderTableViewCell"
-@interface jiluViewController ()<UITableViewDelegate,UITableViewDataSource,HYSliderDelegate>
+@interface jiluViewController ()<UITableViewDelegate,UITableViewDataSource,YTSliderViewDelegate>
 @property(nonatomic,strong)UIView*topView;
 @property(nonatomic,strong)UITableView*downtableview1;
 @property (nonatomic ,strong)NSMutableArray*Listarray1;

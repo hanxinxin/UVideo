@@ -30,7 +30,7 @@
 #import "ClarityView.h"
 #import "menberViewTS.h"
 
-@interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate , MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate,KJPlayerDelegate,KJPlayerBaseViewDelegate,KJPlayerBaseViewDelegate>
+@interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate , MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate,KJPlayerDelegate,KJPlayerBaseViewDelegate,KJPlayerBaseViewDelegate,YTSliderViewDelegate>
 
 ///// 播放器 Player
 
@@ -275,7 +275,7 @@
     }else if (state == KJPlayerStatePreparePlay || state == KJPlayerStatePlaying) {
         [player kj_stopAnimation];
         //设置 滑竿 最大值
-        player.playerView.bottomHYSlider.maxValue=self.player.totalTime;
+//        player.playerView.bottomHYSlider=self.player.totalTime;
     }else if (state == KJPlayerStatePlayFinished) {
         [player kj_replay];
     }
@@ -286,7 +286,7 @@
     NSString * qstring = [NSString stringWithFormat:@"%d:%d",(int)time/60,(int)fmodl(time,60.0)];
     NSString * hstring = [NSString stringWithFormat:@"%d:%d",(int)self.player.totalTime/60,(int)fmod(self.player.totalTime,60.0)];
     player.playerView.TimeTotal.text=[NSString stringWithFormat:@"%@/%@",qstring,hstring];
-    player.playerView.bottomHYSlider.currentSliderValue=time;
+//    player.playerView.bottomHYSlider.currentSliderValue=time;
     
 }
 /* 缓存进度 */

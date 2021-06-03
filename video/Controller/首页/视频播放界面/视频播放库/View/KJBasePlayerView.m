@@ -12,7 +12,7 @@
 #define kCenterPlayWidth (60)
 NSString *kPlayerBaseViewChangeNotification = @"kPlayerBaseViewNotification";
 NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
-@interface KJBasePlayerView ()<UIGestureRecognizerDelegate,HYSliderDelegate>
+@interface KJBasePlayerView ()<UIGestureRecognizerDelegate,YTSliderViewDelegate>//HYSliderDelegate>
 @property (nonatomic,assign) KJPlayerVideoScreenState screenState;
 @property (nonatomic,assign) NSInteger width,height;
 @property (nonatomic,assign) BOOL haveVolume;
@@ -470,20 +470,17 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     }
     return _centerPlayButton;
 }
--(HYSlider *)bottomHYSlider
+-(YTSliderView *)bottomHYSlider
 {
     if(!_bottomHYSlider)
     {
-        _bottomHYSlider = [[HYSlider alloc]initWithFrame:CGRectMake(0, _bottomView.height-7, _bottomView.width, 5)];
-        _bottomHYSlider.currentValueColor = RGBA(20, 155, 236, 1);
-        _bottomHYSlider.maxValue = 100;
-        _bottomHYSlider.currentSliderValue = 0;
-        _bottomHYSlider.showTouchView = YES;
-        _bottomHYSlider.showScrollTextView=YES;
-        _bottomHYSlider.showTextColor = RGBA(51, 51, 51, 1);
-        _bottomHYSlider.touchViewColor = RGBA(20, 155, 236, 1);;
+//        _bottomHYSlider = [[YTSliderView alloc]initWithFrame:CGRectMake(0, _bottomView.height-7, _bottomView.width, 5)];
+        
+        
+        YTSliderSetting *setting_h = [YTSliderSetting defaultSetting];
+        _bottomHYSlider = [[YTSliderView alloc]initWithFrame:CGRectMake(0, _bottomView.height-7, _bottomView.width, 5) setting:setting_h];
+        _bottomHYSlider.tag = 2000;
         _bottomHYSlider.delegate = self;
-    
     }
     return _bottomHYSlider;
 }

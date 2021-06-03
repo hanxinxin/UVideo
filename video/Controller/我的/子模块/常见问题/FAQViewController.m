@@ -6,7 +6,6 @@
 //
 
 #import "FAQViewController.h"
-#import "HYSlider.h"
 #import "lxkfViewController.h"
 
 #import "SCJTableViewCell.h"
@@ -18,7 +17,7 @@
 #define cellID @"cellID"
 #define cellID2 @"SliderTableViewCell"
 #define cellID3 @"FAQTableViewCell"
-@interface FAQViewController ()<UITableViewDelegate,UITableViewDataSource,HYSliderDelegate>
+@interface FAQViewController ()<UITableViewDelegate,UITableViewDataSource,YTSliderViewDelegate>
 @property(nonatomic,strong)UIView*topView;
 @property(nonatomic,strong)UITableView*downtableview1;
 @property (nonatomic ,strong)NSMutableArray*Listarray1;

@@ -25,6 +25,8 @@
 #import "UIView+lcAnyCorners.h"
 #import "interfaceHeader.h"  ///URL头文件
 #import "iphoneClass.h"
+#import "HttpManagement.h"
+#import "YTSliderView.h"
 
 ////////////   3.13日添加 头文件
 #import <MJRefresh/MJRefresh.h>

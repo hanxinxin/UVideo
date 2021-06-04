@@ -18,7 +18,7 @@
         CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
         CGFloat screenHeight = [UIScreen mainScreen].bounds.size.height;
         CGFloat maxLength = screenWidth > screenHeight ? screenWidth : screenHeight;
-        if (maxLength == 812.0f || maxLength == 896.f) {
+        if (maxLength == 812.0f || maxLength == 896.f || maxLength == 926.f) {
             return YES;
         }
     }

@@ -221,6 +221,7 @@
     [Listarray2 addObject:@"清理缓存"];
     [Listarray2 addObject:@"清理缓存"];
     [Listarray2 addObject:@"清理缓存"];
+    NSLog(@"SCREENH_HEIGHT == %f   h ==== %f",SCREENH_HEIGHT,SCREENH_HEIGHT-50-kNavAndTabHeight);
     self.downtableview2=[[UITableView alloc] init];
     self.downtableview2.frame=CGRectMake(20, 50, SCREEN_WIDTH-40, SCREENH_HEIGHT-50-kNavAndTabHeight);
     self.downtableview2.backgroundColor=[UIColor whiteColor];
@@ -283,7 +284,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.layer.borderColor = [UIColor colorWithRed:229/255.0 green:229/255.0 blue:229/255.0 alpha:1.0].CGColor;
         cell.layer.borderWidth = 1;
-        cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+//        cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
+        cell.Slider.currentPercent=(0.5*indexPath.section*0.1);
         cell.layer.shadowColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:0.30].CGColor;
         cell.layer.shadowOffset = CGSizeMake(2,3);
         cell.layer.shadowRadius = 6;

@@ -29,7 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
 @interface YTSliderView : UIView
 
 - (instancetype)initWithFrame:(CGRect)frame setting:(YTSliderSetting *)setting;
+@property (strong, nonatomic)UIView *backgroundView;
 
+@property (strong, nonatomic)UIView *progressView;
+
+@property (strong, nonatomic)UIView *trackContView;
+
+@property (strong, nonatomic)UIView *thumbView;
 //滑杆初始位置（零点位置）
 @property (assign, nonatomic) CGFloat anchorPercent;
 //当前百分比

@@ -478,7 +478,11 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
         
         
         YTSliderSetting *setting_h = [YTSliderSetting defaultSetting];
-        _bottomHYSlider = [[YTSliderView alloc]initWithFrame:CGRectMake(0, _bottomView.height-7, _bottomView.width, 5) setting:setting_h];
+        setting_h.thumbColor = RGBA(20, 155, 236, 1);
+        setting_h.backgroundColor = RGBA(51, 51, 51, 0.8);
+        setting_h.progressColor = RGBA(20, 155, 236, 1);
+        setting_h.thumbBorderColor = RGBA(255, 255, 255, 1);
+        _bottomHYSlider = [[YTSliderView alloc]initWithFrame:CGRectMake(0, _bottomView.height-7, _bottomView.width, 7) setting:setting_h];
         _bottomHYSlider.tag = 2000;
         _bottomHYSlider.delegate = self;
     }
@@ -489,7 +493,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     
     if(!_TimeTotal)
     {
-        _TimeTotal = [[UILabel alloc]initWithFrame:CGRectMake(5, _bottomView.height-19, _bottomView.width-5, 15)];
+        _TimeTotal = [[UILabel alloc]initWithFrame:CGRectMake(5, _bottomView.height-23, _bottomView.width-5, 15)];
         _TimeTotal.textColor=[UIColor whiteColor];
         _TimeTotal.text = @"00:00";
         _TimeTotal.textAlignment=NSTextAlignmentLeft;

@@ -287,6 +287,7 @@
     NSString * hstring = [NSString stringWithFormat:@"%d:%d",(int)self.player.totalTime/60,(int)fmod(self.player.totalTime,60.0)];
     player.playerView.TimeTotal.text=[NSString stringWithFormat:@"%@/%@",qstring,hstring];
 //    player.playerView.bottomHYSlider.currentSliderValue=time;
+    player.playerView.bottomHYSlider.currentPercent=(time/self.player.totalTime);
     
 }
 /* 缓存进度 */

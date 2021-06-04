@@ -345,6 +345,11 @@
 		8AE01B95266252CE0031C82F /* PWView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AE01B94266252CE0031C82F /* PWView.xib */; };
 		8AE01BAF26625D550031C82F /* KFView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AE01BAE26625D550031C82F /* KFView.xib */; };
 		8AE01BB826625E560031C82F /* KFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE01BB726625E560031C82F /* KFView.m */; };
+		8AE0C4CD266A54BA0084248D /* PanCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8AE0C4C6266A54B80084248D /* PanCollectionViewCell.xib */; };
+		8AE0C4CE266A54BA0084248D /* PanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0C4C8266A54B90084248D /* PanTableViewCell.m */; };
+		8AE0C4CF266A54BA0084248D /* PanCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0C4C9266A54B90084248D /* PanCollectionViewCell.m */; };
+		8AE0C4D0266A54BA0084248D /* PanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0C4CC266A54BA0084248D /* PanView.m */; };
+		8AE0C4DC266A54F80084248D /* menuBJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0C4DB266A54F80084248D /* menuBJViewController.m */; };
 		8AF2C84425FF0FDA0029AC13 /* HomeTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF2C84325FF0FDA0029AC13 /* HomeTitleView.m */; };
 		8AFDD3C525F8C890006B1384 /* HXBaseNavgationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFDD3BB25F8C890006B1384 /* HXBaseNavgationController.m */; };
 		8AFDD3C625F8C890006B1384 /* NSString+GetImageFromBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFDD3BD25F8C890006B1384 /* NSString+GetImageFromBundle.m */; };
@@ -1053,6 +1058,15 @@
 		8AE01BB626625E560031C82F /* KFView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KFView.h; sourceTree = "<group>"; };
 		8AE01BB726625E560031C82F /* KFView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KFView.m; sourceTree = "<group>"; };
 		8AE01BC226647ACF0031C82F /* interfaceHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = interfaceHeader.h; sourceTree = "<group>"; };
+		8AE0C4C6266A54B80084248D /* PanCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PanCollectionViewCell.xib; sourceTree = "<group>"; };
+		8AE0C4C7266A54B90084248D /* PanTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanTableViewCell.h; sourceTree = "<group>"; };
+		8AE0C4C8266A54B90084248D /* PanTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanTableViewCell.m; sourceTree = "<group>"; };
+		8AE0C4C9266A54B90084248D /* PanCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanCollectionViewCell.m; sourceTree = "<group>"; };
+		8AE0C4CA266A54B90084248D /* PanCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanCollectionViewCell.h; sourceTree = "<group>"; };
+		8AE0C4CB266A54B90084248D /* PanView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanView.h; sourceTree = "<group>"; };
+		8AE0C4CC266A54BA0084248D /* PanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanView.m; sourceTree = "<group>"; };
+		8AE0C4DA266A54F80084248D /* menuBJViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menuBJViewController.h; sourceTree = "<group>"; };
+		8AE0C4DB266A54F80084248D /* menuBJViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = menuBJViewController.m; sourceTree = "<group>"; };
 		8AF2C7A825FCE5F20029AC13 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		8AF2C84225FF0FDA0029AC13 /* HomeTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTitleView.h; sourceTree = "<group>"; };
 		8AF2C84325FF0FDA0029AC13 /* HomeTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTitleView.m; sourceTree = "<group>"; };
@@ -3004,6 +3018,20 @@
 			path = "密码提示";
 			sourceTree = "<group>";
 		};
+		8AE0C4C5266A53810084248D /* 菜单编辑 */ = {
+			isa = PBXGroup;
+			children = (
+				8AE0C4CB266A54B90084248D /* PanView.h */,
+				8AE0C4CC266A54BA0084248D /* PanView.m */,
+				8AE0C4C7266A54B90084248D /* PanTableViewCell.h */,
+				8AE0C4C8266A54B90084248D /* PanTableViewCell.m */,
+				8AE0C4CA266A54B90084248D /* PanCollectionViewCell.h */,
+				8AE0C4C9266A54B90084248D /* PanCollectionViewCell.m */,
+				8AE0C4C6266A54B80084248D /* PanCollectionViewCell.xib */,
+			);
+			path = "菜单编辑";
+			sourceTree = "<group>";
+		};
 		8AF2C84125FF0FB60029AC13 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -3044,6 +3072,9 @@
 		8AFDD40425F8D1D2006B1384 /* 菜单 */ = {
 			isa = PBXGroup;
 			children = (
+				8AE0C4DA266A54F80084248D /* menuBJViewController.h */,
+				8AE0C4DB266A54F80084248D /* menuBJViewController.m */,
+				8AE0C4C5266A53810084248D /* 菜单编辑 */,
 				8AF2C84125FF0FB60029AC13 /* View */,
 				8A8BC1B425FA12480028173C /* Controller */,
 				8A8BC18425F8F7CE0028173C /* Untitled1.json */,
@@ -3430,6 +3461,7 @@
 				8A82F133264FA07E004AAF40 /* SVProgressHUD.bundle in Resources */,
 				8AE01BAF26625D550031C82F /* KFView.xib in Resources */,
 				8AE01B95266252CE0031C82F /* PWView.xib in Resources */,
+				8AE0C4CD266A54BA0084248D /* PanCollectionViewCell.xib in Resources */,
 				8A3930E225FCDB3800E7331B /* cmh_default_sold_goods@2x.png in Resources */,
 				8A9C54B425F7837E00EFA410 /* LaunchScreen.storyboard in Resources */,
 				8A3930E625FCDB3800E7331B /* cmh_default_red_pocket@3x.png in Resources */,
@@ -3666,7 +3698,9 @@
 				8A3930D425FCDB3800E7331B /* CMHExampleCell.m in Sources */,
 				8A9C565F25F8A17B00EFA410 /* VPKCUIViewExt.m in Sources */,
 				8A95C320265A5C7B00A6D144 /* KJPlayerButton.m in Sources */,
+				8AE0C4CE266A54BA0084248D /* PanTableViewCell.m in Sources */,
 				8A39305D25FCD91A00E7331B /* SAMKeychain+CMHUtil.m in Sources */,
+				8AE0C4DC266A54F80084248D /* menuBJViewController.m in Sources */,
 				8A95C303265A5C7B00A6D144 /* KJFileHandleManager.m in Sources */,
 				8A8BC2F025FC6ED10028173C /* MHYouKuMediaDetail.m in Sources */,
 				8A39308C25FCDAED00E7331B /* CMHCollectionViewCell.m in Sources */,
@@ -3712,6 +3746,7 @@
 				FA9FBAAC2647ADDB00E4F27E /* topHeaderView.m in Sources */,
 				8A95C31A265A5C7B00A6D144 /* KJPlayerLoadingLayer.m in Sources */,
 				8A8BC3A825FC6F9E0028173C /* UITableView+MHExtension.m in Sources */,
+				8AE0C4D0266A54BA0084248D /* PanView.m in Sources */,
 				8A9C561125F8A10000EFA410 /* UIView+draggable.m in Sources */,
 				8A82F12F264FA07E004AAF40 /* SVRadialGradientLayer.m in Sources */,
 				8A8BC23D25FB3F770028173C /* MSCycleScrollView.m in Sources */,
@@ -3729,6 +3764,7 @@
 				8A8BC17525F8F73F0028173C /* ColumnEditViewController.m in Sources */,
 				8A8BC39225FC6F9E0028173C /* MHExample.m in Sources */,
 				8A82F10F264F9E01004AAF40 /* HttpManagement.m in Sources */,
+				8AE0C4CF266A54BA0084248D /* PanCollectionViewCell.m in Sources */,
 				8A39303225FCD86A00E7331B /* MHDivider.m in Sources */,
 				8A82F13D264FA128004AAF40 /* LBLaunchImageAdView.m in Sources */,
 				8A39314425FCDFCE00E7331B /* MHTopicManager.m in Sources */,

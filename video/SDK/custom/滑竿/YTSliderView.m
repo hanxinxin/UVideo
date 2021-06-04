@@ -17,13 +17,7 @@
     CGFloat trackHeight;
 }
 
-@property (strong, nonatomic)UIView *backgroundView;
 
-@property (strong, nonatomic)UIView *progressView;
-
-@property (strong, nonatomic)UIView *trackContView;
-
-@property (strong, nonatomic)UIView *thumbView;
 
 
 @end
@@ -219,7 +213,7 @@
 - (UIView *)backgroundView {
     if(!_backgroundView) {
         _backgroundView = [[UIView alloc]initWithFrame:self.bounds];
-        _backgroundView.backgroundColor = [UIColor whiteColor];
+        _backgroundView.backgroundColor = RGBA(231,231,231,1);
         _backgroundView.layer.cornerRadius = thumbSizeValue/2;
     }
     return _backgroundView;

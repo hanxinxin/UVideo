@@ -55,8 +55,10 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     [self addSubview:self.bottomView];
     [self addSubview:self.lockButton];
     [self addSubview:self.centerPlayButton];
+    
     [self.bottomView addSubview:self.bottomHYSlider];
     [self.bottomView addSubview:self.TimeTotal];
+    [self addSubview:self.danmubottomView];
     self.smallScreenHiddenBackButton = YES;
     self.displayOperation = YES;
     [self kj_hiddenOperationView];
@@ -99,10 +101,11 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     self.topView.frame = CGRectMake(kNavBarAndStatusBarHeight, 0, self.width-self.bottomView.width-(kNavBarAndStatusBarHeight+kBottomSafeHeight), self.operationViewHeight);
     self.backButton.frame=CGRectMake(kNavBarAndStatusBarHeight, 0, self.width-self.bottomView.width-(kNavBarAndStatusBarHeight+kBottomSafeHeight), self.operationViewHeight);
     self.bottomView.frame = CGRectMake(kTopBarSafeHeight, self.height-self.operationViewHeight, self.width-(kTopBarSafeHeight+kBottomSafeHeight), self.operationViewHeight);
+    self.danmubottomView.frame = CGRectMake(kTopBarSafeHeight, self.height-self.operationViewHeight, self.width-(kTopBarSafeHeight+kBottomSafeHeight), self.operationViewHeight);
     self.lockButton.frame = CGRectMake(kNavBarAndStatusBarHeight, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
     self.centerPlayButton.frame = CGRectMake((self.width-kCenterPlayWidth)/2, (self.height-kCenterPlayWidth)/2, kCenterPlayWidth, kCenterPlayWidth);
     
-    self.bottomHYSlider.frame = CGRectMake(kTopBarSafeHeight, self.bottomView.height-20, self.bottomView.width-(kTopBarSafeHeight+kBottomSafeHeight), 5);
+    self.bottomHYSlider.frame = CGRectMake(kTopBarSafeHeight, self.bottomView.height-20, self.bottomView.width-(kTopBarSafeHeight+kBottomSafeHeight), 10);
     self.TimeTotal.frame = CGRectMake(kTopBarSafeHeight, self.bottomView.height-35, self.bottomView.width-(kTopBarSafeHeight+kBottomSafeHeight), 15);
 }
 
@@ -118,8 +121,8 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     self.bottomView.frame = CGRectMake(0, self.height-self.operationViewHeight, self.width, self.operationViewHeight);
     self.lockButton.frame = CGRectMake(10, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
     self.centerPlayButton.frame = CGRectMake((self.width-kCenterPlayWidth)/2, (self.height-kCenterPlayWidth)/2, kCenterPlayWidth, kCenterPlayWidth);
-    
-    self.bottomHYSlider.frame = CGRectMake(0, self.bottomView.height-15, self.bottomView.width, 5);
+    self.danmubottomView.frame= CGRectMake(0, self.height-self.operationViewHeight, self.width, self.operationViewHeight);
+    self.bottomHYSlider.frame = CGRectMake(0, self.bottomView.height-7, self.bottomView.width, 8);
     self.TimeTotal.frame = CGRectMake(0, self.bottomView.height-35, self.bottomView.width, 15);
 }
 
@@ -442,6 +445,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     if (!_bottomView) {
         _bottomView = [[KJPlayerOperationView alloc] initWithFrame:CGRectMake(0, self.height-self.operationViewHeight, self.width, self.operationViewHeight) OperationType:(KJPlayerOperationViewTypeBottom)];
         _bottomView.mainColor = self.mainColor;
+//        _bottomView.backgroundColor=[UIColor redColor];
     }
     return _bottomView;
 }
@@ -482,7 +486,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
         setting_h.backgroundColor = RGBA(51, 51, 51, 0.8);
         setting_h.progressColor = RGBA(20, 155, 236, 1);
         setting_h.thumbBorderColor = RGBA(255, 255, 255, 1);
-        _bottomHYSlider = [[YTSliderView alloc]initWithFrame:CGRectMake(0, _bottomView.height-7, _bottomView.width, 7) setting:setting_h];
+        _bottomHYSlider = [[YTSliderView alloc]initWithFrame:CGRectMake(0, self.bottomView.height-10, self.bottomView.width, 8) setting:setting_h];
         _bottomHYSlider.tag = 2000;
         _bottomHYSlider.delegate = self;
     }
@@ -500,6 +504,17 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     }
     return _TimeTotal;
 }
-
+-(hxplayerDanmuView*)danmubottomView
+{
+    
+    if(!_danmubottomView)
+    {
+        _danmubottomView =  [[[NSBundle mainBundle]loadNibNamed:@"hxplayerDanmuView" owner:self options:nil]objectAtIndex:0];
+        _danmubottomView.frame=CGRectMake(0, self.height-self.operationViewHeight-self.operationViewHeight, self.width, self.operationViewHeight);
+        _danmubottomView.backgroundColor=[UIColor blueColor];
+//        _danmubottomView.hidden=YES;
+    }
+    return _danmubottomView;
+}
 
 @end

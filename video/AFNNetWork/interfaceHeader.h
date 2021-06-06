@@ -21,7 +21,26 @@
 #define xiugaiPwURL @"/secrity/changePassword" ///修改登录密码
 
 #define tuxingYZMurl @"/captcha"  ///图形验证码
-
+#define emailYZMurl @"/captcha/email" //电子邮箱验证码
+/// 个人中心
+#define rechargeRecordurl @"/user/rechargeRecord"  //取得用户充值记录
+#define videoHistoryurl @"/user/videoHistory"  //取得用户观看视频的历史记录
+#define videoFavoriteurl @"/user/videoFavorite"  //取得用户收藏的视频
+#define changeNicknameurl @"/user/changeNickname"  //修改用户昵称
+#define changeAvatarurl @"/user/changeAvatar"  //修改用户头像
+#define changeGenderurl @"/user/changeGender"  //修改用户性别
+#define infourl @"/user/info"  //取得用户信息
+//消息
+//#define url @""  //
+//#define url @""  //
+//#define url @""  //
+//#define url @""  //
+//#define url @""  //
+//#define url @""  //
+//#define url @""  //
+//#define url @""  //
+//#define url @""  //
+//#define url @""  //
 
 
 

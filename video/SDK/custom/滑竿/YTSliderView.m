@@ -36,6 +36,15 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     return [self initWithFrame:frame setting:[YTSliderSetting defaultSetting]];
 }
+-(void)setFrame:(CGRect)frame
+{
+    super.frame=frame;
+    [self initData];
+    _backgroundView.frame = self.bounds;
+    _progressView.frame = CGRectMake(0, 0, 0, trackHeight);
+    _trackContView.frame = CGRectMake(_setting.progressInset, _setting.progressInset,trackWidth, trackHeight);
+    _thumbView.frame=CGRectMake(0, 0, thumbSizeValue, thumbSizeValue);
+}
 
 - (void)initData {
     trackWidth = self.frame.size.width - 2*_setting.progressInset;

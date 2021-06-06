@@ -213,6 +213,33 @@
       
         NSLog(@"pingmu == %ld",state);
     };
+    
+    backview.bottomView.kVideoOperationViewBtnTouch = ^(NSInteger selectIndex) {
+//        NSLog(@"selectIndex====   %ld",(long)selectIndex);
+        // 1是 弹幕  2是 静音
+      if(selectIndex==1)
+      {
+//          if(self.player.playerView.danmubottomView.hidden==YES)
+//          {
+//              self.player.playerView.danmubottomView.hidden=NO;
+//              self.player.playerView.bottomView.hidden=YES;
+//          }else{
+//              self.player.playerView.danmubottomView.hidden=YES;
+//              self.player.playerView.bottomView.hidden=NO;
+//          }
+      }else if(selectIndex==2)
+      {
+          if(self.player.muted==YES)
+          {
+              self.player.muted=NO;
+              self.player.playerView.bottomView.ShengyiButton.selected=NO;
+          }else{
+              self.player.muted=YES;
+              self.player.playerView.bottomView.ShengyiButton.selected=YES;
+          }
+          
+      }
+    };
 //
     KJAVPlayer *player = [[KJAVPlayer alloc]init];
     self.player = player;

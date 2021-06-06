@@ -27,7 +27,7 @@
     self.view.userInteractionEnabled = YES;
     [self.view addSubview:self.tableview];
     [self.view addSubview:self.subView];
-    [self.view addSubview:self.tittleView];
+//    [self.view addSubview:self.tittleView];
     //点击标签后根据标签选择刷新数据
     self.subView.block = ^(NSString *labelText) {
         NSLog(@"====%@",labelText);
@@ -40,7 +40,7 @@
 //    [self.tableview scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
     [UIView animateWithDuration:.5 animations:^{
         self.tittleView.alpha = 0;
-        self.subView.frame = CGRectMake(0, 64, self.view.frame.size.width, headerHeight);
+        self.subView.frame = CGRectMake(0, 0, self.view.frame.size.width, headerHeight);
     }];
 }
 
@@ -61,7 +61,7 @@
 
 -(UITableView *)tableview{
     if (!_tableview) {
-        _tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, headerHeight+64, self.view.bounds.size.width, self.view.bounds.size.height-(headerHeight+64)) style:UITableViewStylePlain];
+        _tableview = [[UITableView alloc]initWithFrame:CGRectMake(0, headerHeight, self.view.bounds.size.width, self.view.bounds.size.height-(headerHeight)) style:UITableViewStylePlain];
         _tableview.delegate = self;
         _tableview.dataSource = self;
     }
@@ -71,11 +71,11 @@
 //控制头部显示
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetY = scrollView.contentOffset.y;
-    self.subView.frame = CGRectMake(0,  -scrollerToRect+64, self.view.frame.size.width, headerHeight);
+    self.subView.frame = CGRectMake(0,  -scrollerToRect, self.view.frame.size.width, headerHeight);
     NSLog(@"%lf",offsetY);
     if (offsetY > 0 && offsetY < headerHeight) {
         scrollerToRect = offsetY;
-        self.subView.frame = CGRectMake(0,  -scrollerToRect+64, self.view.frame.size.width, headerHeight);
+        self.subView.frame = CGRectMake(0,  -scrollerToRect, self.view.frame.size.width, headerHeight);
         self.tableview.frame = CGRectMake(0, headerHeight - offsetY, self.view.bounds.size.width, self.view.bounds.size.height - headerHeight + offsetY);
         if (offsetY>140) {
             if (headerHeight - offsetY  <= 105) {
@@ -87,8 +87,8 @@
             }
         }
     }else if(offsetY<=0) {
-        self.subView.frame = CGRectMake(0, 64, self.view.frame.size.width, headerHeight);
-        self.tableview.frame = CGRectMake(0, headerHeight + 64, self.view.bounds.size.width, self.view.bounds.size.height-headerHeight);
+        self.subView.frame = CGRectMake(0, 0, self.view.frame.size.width, headerHeight);
+        self.tableview.frame = CGRectMake(0, headerHeight + 0, self.view.bounds.size.width, self.view.bounds.size.height-headerHeight);
         self.tittleView.alpha = 0;
     }else{
         self.tittleView.alpha = 1;
@@ -96,7 +96,7 @@
 }
 -(UIView *)tittleView{
     if (!_tittleView) {
-        _tittleView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, 40)];
+        _tittleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 40)];
         _tittleView.backgroundColor = [UIColor grayColor];
         _tittleView.alpha = 0;
         UIButton * button = [[UIButton alloc]initWithFrame:CGRectMake((self.view.frame.size.width-100)/2, 10, 100, 30)];
@@ -110,7 +110,7 @@
 }
 -(PanView *)subView{
     if (!_subView) {
-        _subView = [[PanView alloc]initWithFrame:CGRectMake(0, 64, self.view.frame.size.width, headerHeight) WithTextDic:self.dataDic];
+        _subView = [[PanView alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, headerHeight) WithTextDic:self.dataDic];
     }
     return _subView;
 }

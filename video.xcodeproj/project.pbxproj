@@ -362,6 +362,8 @@
 		FA75823326496DB300778A63 /* CZCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA75823126496DB300778A63 /* CZCollectionViewCell.xib */; };
 		FA75823726497CC400778A63 /* vipHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA75823626497CC400778A63 /* vipHeaderView.m */; };
 		FA75823926497CD500778A63 /* vipHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA75823826497CD500778A63 /* vipHeaderView.xib */; };
+		FA80AD90266CC7B700BF28D8 /* hxplayerDanmuView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA80AD8F266CC7B700BF28D8 /* hxplayerDanmuView.m */; };
+		FA80AD92266CC82400BF28D8 /* hxplayerDanmuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA80AD91266CC82400BF28D8 /* hxplayerDanmuView.xib */; };
 		FA8A03912667D0BE00B41281 /* iphoneClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8A03902667D0BE00B41281 /* iphoneClass.m */; };
 		FA8A03952667D78300B41281 /* menberViewTS.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8A03942667D78300B41281 /* menberViewTS.m */; };
 		FA8A03972667D79000B41281 /* menberViewTS.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8A03962667D79000B41281 /* menberViewTS.xib */; };
@@ -1090,6 +1092,9 @@
 		FA75823526497CC400778A63 /* vipHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vipHeaderView.h; sourceTree = "<group>"; };
 		FA75823626497CC400778A63 /* vipHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = vipHeaderView.m; sourceTree = "<group>"; };
 		FA75823826497CD500778A63 /* vipHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = vipHeaderView.xib; sourceTree = "<group>"; };
+		FA80AD8E266CC7B700BF28D8 /* hxplayerDanmuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hxplayerDanmuView.h; sourceTree = "<group>"; };
+		FA80AD8F266CC7B700BF28D8 /* hxplayerDanmuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hxplayerDanmuView.m; sourceTree = "<group>"; };
+		FA80AD91266CC82400BF28D8 /* hxplayerDanmuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = hxplayerDanmuView.xib; sourceTree = "<group>"; };
 		FA8A038F2667D0BE00B41281 /* iphoneClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iphoneClass.h; sourceTree = "<group>"; };
 		FA8A03902667D0BE00B41281 /* iphoneClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iphoneClass.m; sourceTree = "<group>"; };
 		FA8A03932667D78300B41281 /* menberViewTS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menberViewTS.h; sourceTree = "<group>"; };
@@ -1927,6 +1932,7 @@
 		8A8BC2BF25FC6D790028173C /* 视频播放界面 */ = {
 			isa = PBXGroup;
 			children = (
+				FA80AD8D266CC7A900BF28D8 /* hxView */,
 				8A95C257265A560200A6D144 /* 视频播放库 */,
 				FA8E717F2652A35E0058F02F /* Palyview */,
 				8A39312725FCDF0300E7331B /* Base */,
@@ -3120,6 +3126,16 @@
 			path = view;
 			sourceTree = "<group>";
 		};
+		FA80AD8D266CC7A900BF28D8 /* hxView */ = {
+			isa = PBXGroup;
+			children = (
+				FA80AD8E266CC7B700BF28D8 /* hxplayerDanmuView.h */,
+				FA80AD8F266CC7B700BF28D8 /* hxplayerDanmuView.m */,
+				FA80AD91266CC82400BF28D8 /* hxplayerDanmuView.xib */,
+			);
+			path = hxView;
+			sourceTree = "<group>";
+		};
 		FA8A03922667D0C100B41281 /* iphoneClass */ = {
 			isa = PBXGroup;
 			children = (
@@ -3417,6 +3433,7 @@
 				8A3930EC25FCDB3800E7331B /* cmh_default_my_address@3x.png in Resources */,
 				8AE01B752661EBFC0031C82F /* HXtitleLabelView.xib in Resources */,
 				8A3930DB25FCDB3800E7331B /* cmh_default_goods_detail@3x.png in Resources */,
+				FA80AD92266CC82400BF28D8 /* hxplayerDanmuView.xib in Resources */,
 				8A8BC17A25F8F73F0028173C /* ColumnEditViewController.xib in Resources */,
 				8A3930F425FCDB3800E7331B /* cmh_default_service_error@2x.png in Resources */,
 				FA8E71872652A46A0058F02F /* clarityCollectionViewCell.xib in Resources */,
@@ -3712,6 +3729,7 @@
 				8A9C560B25F8A10000EFA410 /* UIView+Frame.m in Sources */,
 				8A8BC39925FC6F9E0028173C /* UIImage+MHFile.m in Sources */,
 				8A9C563425F8A10000EFA410 /* UIImage+Resize.m in Sources */,
+				FA80AD90266CC7B700BF28D8 /* hxplayerDanmuView.m in Sources */,
 				FA97027D26692D8C00418B3A /* YTSliderSetting.m in Sources */,
 				8A95C2F7265A5C7B00A6D144 /* KJRotateManager.m in Sources */,
 				8A82F0E2264F59FA004AAF40 /* ShapeView.m in Sources */,

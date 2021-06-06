@@ -25,6 +25,7 @@
 @property (assign , nonatomic) BOOL needUpdate;
 @end
 
+
 @implementation ColumnEditViewController
 
 - (instancetype)initWithColumnArray:(NSMutableArray *)array allCloumn:(NSArray *)allArray {

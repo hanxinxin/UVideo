@@ -10,6 +10,7 @@
 #import <objc/runtime.h>
 #import <YYCategories.h>
 #import "ColumnEditViewController.h"
+#import "menuBJViewController.h"
 
 static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 
@@ -176,14 +177,17 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     }];
     
     [slide slideShowMenuCallBack:^(BOOL show) {
-        ColumnEditViewController *columnEdit = [[ColumnEditViewController alloc] initWithColumnArray:[[weakSel.dataSource arrayForEditTitles] mutableCopy] allCloumn:[weakSel.dataSource arrayForEditAllTitles]];
-        columnEdit.hidesBottomBarWhenPushed = true;
-        columnEdit.delegate = weakSel.dataSource;
+//        ColumnEditViewController *columnEdit = [[ColumnEditViewController alloc] initWithColumnArray:[[weakSel.dataSource arrayForEditTitles] mutableCopy] allCloumn:[weakSel.dataSource arrayForEditAllTitles]];
+//        columnEdit.hidesBottomBarWhenPushed = true;
+//        columnEdit.delegate = weakSel.dataSource;
+//
+//        UIBarButtonItem *item = [[UIBarButtonItem alloc] init];
+//        item.title = @"完成";
+//        weakSel.navigationController.navigationBar.topItem.backBarButtonItem = item;
+//        [weakSel.navigationController pushViewController:columnEdit animated:YES];
         
-        UIBarButtonItem *item = [[UIBarButtonItem alloc] init];
-        item.title = @"完成";
-        weakSel.navigationController.navigationBar.topItem.backBarButtonItem = item;
-        [weakSel.navigationController pushViewController:columnEdit animated:YES];
+//        menuBJViewController * avc = [[menuBJViewController alloc] init];
+//        [weakSel.navigationController pushViewController:avc animated:YES];
     }];
 }
 

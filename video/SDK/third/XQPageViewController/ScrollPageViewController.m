@@ -166,7 +166,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     slide.showMenuButton = _showMore;
     slide.menuButtonSelectedTitleColor = [UIColor colorWithWhite:.5 alpha:1];
     slide.menuButtonImage = [UIImage imageNamed:@"rightmenu.png"];
-    slide.menuButtonSelectedImage = [UIImage imageNamed:@"rightmenu.png"];
+    slide.menuButtonSelectedImage = [UIImage imageNamed:@"closeSY.png"];
     slide.menuButtonTitleColor = [UIColor colorWithWhite:0.5 alpha:1];
     // callBack
     __weak typeof(self) weakSel = self;

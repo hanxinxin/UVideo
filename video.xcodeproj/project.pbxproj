@@ -375,6 +375,8 @@
 		FA949CBD264AC76E00498EB6 /* safeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CBC264AC76E00498EB6 /* safeViewController.m */; };
 		FA949CC2264AC90800498EB6 /* chongzhiListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CC1264AC90800498EB6 /* chongzhiListViewController.m */; };
 		FA949CC5264AC92A00498EB6 /* zhanghuInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CC4264AC92A00498EB6 /* zhanghuInfoViewController.m */; };
+		FA95C9FF266E6B7200889820 /* vlistCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA95C9FD266E6B7200889820 /* vlistCollectionViewCell.m */; };
+		FA95CA00266E6B7200889820 /* vlistCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA95C9FE266E6B7200889820 /* vlistCollectionViewCell.xib */; };
 		FA9662D726632CC700AF7B46 /* UIView+lcAnyCorners.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9662D626632CC700AF7B46 /* UIView+lcAnyCorners.m */; };
 		FA9662DA2663354D00AF7B46 /* KMPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9662D92663354D00AF7B46 /* KMPlayView.m */; };
 		FA9662DC2663355B00AF7B46 /* KMPlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9662DB2663355B00AF7B46 /* KMPlayView.xib */; };
@@ -1117,6 +1119,9 @@
 		FA949CC1264AC90800498EB6 /* chongzhiListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = chongzhiListViewController.m; sourceTree = "<group>"; };
 		FA949CC3264AC92A00498EB6 /* zhanghuInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zhanghuInfoViewController.h; sourceTree = "<group>"; };
 		FA949CC4264AC92A00498EB6 /* zhanghuInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zhanghuInfoViewController.m; sourceTree = "<group>"; };
+		FA95C9FC266E6B7100889820 /* vlistCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vlistCollectionViewCell.h; sourceTree = "<group>"; };
+		FA95C9FD266E6B7200889820 /* vlistCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = vlistCollectionViewCell.m; sourceTree = "<group>"; };
+		FA95C9FE266E6B7200889820 /* vlistCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = vlistCollectionViewCell.xib; sourceTree = "<group>"; };
 		FA9662D526632CC700AF7B46 /* UIView+lcAnyCorners.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+lcAnyCorners.h"; sourceTree = "<group>"; };
 		FA9662D626632CC700AF7B46 /* UIView+lcAnyCorners.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+lcAnyCorners.m"; sourceTree = "<group>"; };
 		FA9662D82663354D00AF7B46 /* KMPlayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KMPlayView.h; sourceTree = "<group>"; };
@@ -2628,6 +2633,9 @@
 				8AFDD40425F8D1D2006B1384 /* 菜单 */,
 				8A9C566B25F8A21B00EFA410 /* HomeViewController.h */,
 				8A9C566C25F8A21B00EFA410 /* HomeViewController.m */,
+				FA95C9FC266E6B7100889820 /* vlistCollectionViewCell.h */,
+				FA95C9FD266E6B7200889820 /* vlistCollectionViewCell.m */,
+				FA95C9FE266E6B7200889820 /* vlistCollectionViewCell.xib */,
 			);
 			path = "首页";
 			sourceTree = "<group>";
@@ -3432,6 +3440,7 @@
 				8A3930DD25FCDB3800E7331B /* cmh_default_publish_goods@3x.png in Resources */,
 				8A3930EC25FCDB3800E7331B /* cmh_default_my_address@3x.png in Resources */,
 				8AE01B752661EBFC0031C82F /* HXtitleLabelView.xib in Resources */,
+				FA95CA00266E6B7200889820 /* vlistCollectionViewCell.xib in Resources */,
 				8A3930DB25FCDB3800E7331B /* cmh_default_goods_detail@3x.png in Resources */,
 				FA80AD92266CC82400BF28D8 /* hxplayerDanmuView.xib in Resources */,
 				8A8BC17A25F8F73F0028173C /* ColumnEditViewController.xib in Resources */,
@@ -3670,6 +3679,7 @@
 				8A39305F25FCD91A00E7331B /* CMHHTTPResponse.m in Sources */,
 				8A95C2FE265A5C7B00A6D144 /* KJProxyManager.m in Sources */,
 				FA9662D726632CC700AF7B46 /* UIView+lcAnyCorners.m in Sources */,
+				FA95C9FF266E6B7200889820 /* vlistCollectionViewCell.m in Sources */,
 				8A8BC38225FC6F9E0028173C /* YYGestureRecognizer.m in Sources */,
 				8A9C561B25F8A10000EFA410 /* BaseColor.m in Sources */,
 				8A8BC2ED25FC6ED10028173C /* MHYouKuMediaSummary.m in Sources */,

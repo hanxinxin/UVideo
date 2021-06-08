@@ -55,16 +55,11 @@
 {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-                  manager.responseSerializer = [AFJSONResponseSerializer serializer];
-                  manager.requestSerializer = [AFJSONRequestSerializer serializer];
-        //          [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-            manager.requestSerializer = [AFJSONRequestSerializer serializer];
-            manager.responseSerializer = [AFJSONResponseSerializer serializer];
-//       NSString * authorization = UserTokenKey;
-        NSString*application= @"application/json";
-                // 设置Authorization的方法设置header
-//                [manager.requestSerializer setValue:authorization forHTTPHeaderField:@"Authorization"];
-                [manager.requestSerializer setValue:application forHTTPHeaderField:@"content-type"];
+    manager.responseSerializer =[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//        NSString*application= @"application/json";
+//                [manager.requestSerializer setValue:application forHTTPHeaderField:@"content-type"];
     NSLog(@"get URL == %@",url);
             [manager GET:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
 

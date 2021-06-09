@@ -34,6 +34,10 @@
 #import <HYBImageCliped/HYBImageCliped.h>
 #import "KJPlayerHeader.h"
 
+///// 网络请求加密
+#import "AES.h"
+#import "RSA.h"
+
 
 /// User Custom File
 /// 协议

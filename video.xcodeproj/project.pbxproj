@@ -350,6 +350,11 @@
 		8AE0C4CF266A54BA0084248D /* PanCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0C4C9266A54B90084248D /* PanCollectionViewCell.m */; };
 		8AE0C4D0266A54BA0084248D /* PanView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0C4CC266A54BA0084248D /* PanView.m */; };
 		8AE0C4DC266A54F80084248D /* menuBJViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE0C4DB266A54F80084248D /* menuBJViewController.m */; };
+		8AE1A0F72670E89200922103 /* AES.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE1A0F42670E89100922103 /* AES.m */; };
+		8AE1A0F82670E89200922103 /* DES.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE1A0F52670E89200922103 /* DES.m */; };
+		8AE1A0F92670E89200922103 /* RSA.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AE1A0F62670E89200922103 /* RSA.m */; };
+		8AE1A1032670E8C200922103 /* client-private.pem in Resources */ = {isa = PBXBuildFile; fileRef = 8AE1A1012670E8C200922103 /* client-private.pem */; };
+		8AE1A1042670E8C200922103 /* server-public.pem in Resources */ = {isa = PBXBuildFile; fileRef = 8AE1A1022670E8C200922103 /* server-public.pem */; };
 		8AF2C84425FF0FDA0029AC13 /* HomeTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AF2C84325FF0FDA0029AC13 /* HomeTitleView.m */; };
 		8AFDD3C525F8C890006B1384 /* HXBaseNavgationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFDD3BB25F8C890006B1384 /* HXBaseNavgationController.m */; };
 		8AFDD3C625F8C890006B1384 /* NSString+GetImageFromBundle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFDD3BD25F8C890006B1384 /* NSString+GetImageFromBundle.m */; };
@@ -1071,6 +1076,14 @@
 		8AE0C4CC266A54BA0084248D /* PanView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanView.m; sourceTree = "<group>"; };
 		8AE0C4DA266A54F80084248D /* menuBJViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menuBJViewController.h; sourceTree = "<group>"; };
 		8AE0C4DB266A54F80084248D /* menuBJViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = menuBJViewController.m; sourceTree = "<group>"; };
+		8AE1A0F12670E89000922103 /* RSA.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSA.h; sourceTree = "<group>"; };
+		8AE1A0F22670E89000922103 /* DES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DES.h; sourceTree = "<group>"; };
+		8AE1A0F32670E89100922103 /* AES.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AES.h; sourceTree = "<group>"; };
+		8AE1A0F42670E89100922103 /* AES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AES.m; sourceTree = "<group>"; };
+		8AE1A0F52670E89200922103 /* DES.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DES.m; sourceTree = "<group>"; };
+		8AE1A0F62670E89200922103 /* RSA.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSA.m; sourceTree = "<group>"; };
+		8AE1A1012670E8C200922103 /* client-private.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "client-private.pem"; sourceTree = "<group>"; };
+		8AE1A1022670E8C200922103 /* server-public.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "server-public.pem"; sourceTree = "<group>"; };
 		8AF2C7A825FCE5F20029AC13 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		8AF2C84225FF0FDA0029AC13 /* HomeTitleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeTitleView.h; sourceTree = "<group>"; };
 		8AF2C84325FF0FDA0029AC13 /* HomeTitleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeTitleView.m; sourceTree = "<group>"; };
@@ -1719,6 +1732,7 @@
 		8A82F10C264F9DDB004AAF40 /* AFNNetWork */ = {
 			isa = PBXGroup;
 			children = (
+				8AE1A0ED2670E87500922103 /* 网络请求加密 */,
 				8A82F10D264F9E00004AAF40 /* HttpManagement.h */,
 				8A82F10E264F9E01004AAF40 /* HttpManagement.m */,
 				8AE01BC226647ACF0031C82F /* interfaceHeader.h */,
@@ -3046,6 +3060,29 @@
 			path = "菜单编辑";
 			sourceTree = "<group>";
 		};
+		8AE1A0ED2670E87500922103 /* 网络请求加密 */ = {
+			isa = PBXGroup;
+			children = (
+				8AE1A0FD2670E89800922103 /* RSA加密key */,
+				8AE1A0F32670E89100922103 /* AES.h */,
+				8AE1A0F42670E89100922103 /* AES.m */,
+				8AE1A0F22670E89000922103 /* DES.h */,
+				8AE1A0F52670E89200922103 /* DES.m */,
+				8AE1A0F12670E89000922103 /* RSA.h */,
+				8AE1A0F62670E89200922103 /* RSA.m */,
+			);
+			path = "网络请求加密";
+			sourceTree = "<group>";
+		};
+		8AE1A0FD2670E89800922103 /* RSA加密key */ = {
+			isa = PBXGroup;
+			children = (
+				8AE1A1012670E8C200922103 /* client-private.pem */,
+				8AE1A1022670E8C200922103 /* server-public.pem */,
+			);
+			path = "RSA加密key";
+			sourceTree = "<group>";
+		};
 		8AF2C84125FF0FB60029AC13 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -3456,6 +3493,7 @@
 				8A3930E725FCDB3800E7331B /* cmh_default_buy_goods@2x.png in Resources */,
 				8A05210D264919BE00E5188E /* LXTableViewCell.xib in Resources */,
 				8A3930EB25FCDB3800E7331B /* cmh_default_collect_goods@2x.png in Resources */,
+				8AE1A1032670E8C200922103 /* client-private.pem in Resources */,
 				8A3930DF25FCDB3800E7331B /* cmh_default_no_wifi_1@3x.png in Resources */,
 				FAB7829E265FEFB8002A5E6B /* promptbottomView.xib in Resources */,
 				8A3930EF25FCDB3800E7331B /* cmh_default_no_custom_service@3x.png in Resources */,
@@ -3492,6 +3530,7 @@
 				8A9C54B425F7837E00EFA410 /* LaunchScreen.storyboard in Resources */,
 				8A3930E625FCDB3800E7331B /* cmh_default_red_pocket@3x.png in Resources */,
 				8A9C54B125F7837E00EFA410 /* Assets.xcassets in Resources */,
+				8AE1A1042670E8C200922103 /* server-public.pem in Resources */,
 				8A3930EE25FCDB3800E7331B /* cmh_default_collect_goods@3x.png in Resources */,
 				8A9C559E25F8A0B300EFA410 /* GuideImage.bundle in Resources */,
 				FA8A03972667D79000B41281 /* menberViewTS.xib in Resources */,
@@ -3645,6 +3684,7 @@
 				8A39306325FCD91A00E7331B /* CMHHTTPRequest.m in Sources */,
 				8A9C562125F8A10000EFA410 /* UIButton+Submitting.m in Sources */,
 				8A9C561A25F8A10000EFA410 /* UIColor+Web.m in Sources */,
+				8AE1A0F92670E89200922103 /* RSA.m in Sources */,
 				FA8E71822652A3D50058F02F /* ClarityView.m in Sources */,
 				8A95C30B265A5C7B00A6D144 /* KJMidiPlayerVC.m in Sources */,
 				8A39313E25FCDFCE00E7331B /* MHCommentReply.m in Sources */,
@@ -3886,6 +3926,7 @@
 				8A39309025FCDAED00E7331B /* CMHTabBarController.m in Sources */,
 				8A8BC3AA25FC6F9E0028173C /* NSObject+MHAlert.m in Sources */,
 				8AE01B7C2661EDBB0031C82F /* menberJSCollectionViewCell.m in Sources */,
+				8AE1A0F82670E89200922103 /* DES.m in Sources */,
 				8A8BC38125FC6F9E0028173C /* YYKeychain.m in Sources */,
 				8A95C308265A5C7B00A6D144 /* KJTablePlayerVC.m in Sources */,
 				FA9FBAC02648057B00E4F27E /* SCJTableViewCell.m in Sources */,
@@ -3934,6 +3975,7 @@
 				8A39306425FCD91A00E7331B /* CMHControllerHelper.m in Sources */,
 				8A8BC19925F9C7500028173C /* LLSearchResultDoubleViewCell.m in Sources */,
 				8A272485264E883500B033BB /* XGpasswordViewController.m in Sources */,
+				8AE1A0F72670E89200922103 /* AES.m in Sources */,
 				8A9C563125F8A10000EFA410 /* UIImage+Alpha.m in Sources */,
 				FA8E71862652A46A0058F02F /* clarityCollectionViewCell.m in Sources */,
 			);

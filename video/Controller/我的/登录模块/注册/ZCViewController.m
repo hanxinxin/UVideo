@@ -50,6 +50,23 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     
     
     [self gettuxingYZM];
+    
+    
+    
+    NSString *certsPath = [[NSBundle mainBundle] pathForResource:@"client-private" ofType:@"pem"];
+    NSError *error;
+    NSString *contentInUTF8 = [NSString stringWithContentsOfFile:certsPath
+                    encoding:NSUTF8StringEncoding
+                     error:&error]; 
+    NSLog(@"contentInUTF8 = %@",contentInUTF8);
+    NSLog(@"error = %@",error);
+    NSString *certsPath2 = [[NSBundle mainBundle] pathForResource:@"server-public" ofType:@"pem"];
+    NSError *error2;
+    NSString *contentInUTF82 = [NSString stringWithContentsOfFile:certsPath2
+                    encoding:NSUTF8StringEncoding
+                     error:&error2];
+    NSLog(@"contentInUTF82 = %@",contentInUTF82);
+    NSLog(@"error2 = %@",error2);
 }
 
 -(void)InitUI{

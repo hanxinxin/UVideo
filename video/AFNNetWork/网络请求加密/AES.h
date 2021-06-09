@@ -16,7 +16,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(NSString *)AES256_Encrypt:(NSString *)key encryptString:(NSString *)encryptText giv:(NSString *)gIv;
 + (NSString *)AES256_Decrypt:(NSString *)key encryptString:(NSString *)encryptText giv:(NSString *)gIv;
-
+/**
+ *生成32为无序标示
+ *
+ *@return  32位无序标示
+ */
++(NSString*)createUuid;
 @end
 
 NS_ASSUME_NONNULL_END

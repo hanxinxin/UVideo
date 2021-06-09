@@ -9,6 +9,22 @@
 #define interfaceHeader_h
 
 
+
+//1 所有请求都是post方式
+//2 传输的数据以 request body 的形式，跟不加密时的 Content-Type:application/json 这种类似
+//3 生成一个随机的32长度的aes key，用这个aes key去加密 json字符串，得到crypted_data (经过base64编码的)
+//4 用rsa加密上面的aes key，得到crypted_key (经过base64编码的)
+//5 把crypted_data和crypted_key这两个字符串拼接起来，中间用点号分隔，解密时就是依据这个确定哪个是加密后的key，哪个是加密后的json数据
+//6 对传输的参数进行去除空值(整形0 浮点型0 字符串0 null undefined 空字符串 false)，然后进行铵键名字典排序，再组合成 http query格式的data，如a=xxx&b=xxxx&c=xxxxx
+//7 套用公式生成签名 md5(token + '-' + data + '-' + timestamp)
+//8 请求头信息 X-TOKEN 值是token, X-TIMESTAMP值是timestamp,X-SIGNATURE值是签名
+//9 请求body 就是刚刚拼接的加密的数据
+
+
+
+
+
+
 //  服务器地址
 //#define FWQURL @"http://192.168.1.8:8012" ///局域网地址
 #define FWQURL @"http://51.79.223.179:8012" ///公网地址

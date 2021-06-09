@@ -139,7 +139,7 @@
     return output;
 }
 
-//AES128解密data(带自定义向量)
+//AES256解密data(带自定义向量)
 + (NSData *)AES256_Decrypt:(NSString *)key encryptData:(NSData *)data giv:(NSString *)gIv{
     char keyPtr[kCCKeySizeAES256+1];
     bzero(keyPtr, sizeof(keyPtr));
@@ -179,5 +179,23 @@
 
 
 
+/**
+
+ *生成32为无序标示
+
+ *
+
+ *@return  32位无序标示
+
+ */
+
++(NSString*)createUuid
+
+{
+    char data[32];
+    for (int x=0;x<32;data[x++] = (char)('A' + (arc4random_uniform(26))));
+    return [[NSString alloc] initWithBytes:data length:32 encoding:NSUTF8StringEncoding];
+
+}
 
 @end

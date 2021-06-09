@@ -53,21 +53,68 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     
     
     
-    NSString *certsPath = [[NSBundle mainBundle] pathForResource:@"client-private" ofType:@"pem"];
-    NSError *error;
-    NSString *contentInUTF8 = [NSString stringWithContentsOfFile:certsPath
-                    encoding:NSUTF8StringEncoding
-                     error:&error]; 
-    NSLog(@"contentInUTF8 = %@",contentInUTF8);
-    NSLog(@"error = %@",error);
-    NSString *certsPath2 = [[NSBundle mainBundle] pathForResource:@"server-public" ofType:@"pem"];
-    NSError *error2;
-    NSString *contentInUTF82 = [NSString stringWithContentsOfFile:certsPath2
-                    encoding:NSUTF8StringEncoding
-                     error:&error2];
-    NSLog(@"contentInUTF82 = %@",contentInUTF82);
-    NSLog(@"error2 = %@",error2);
+
+    
+//    /// 加密流程
+//    NSString *certsPath2 = [[NSBundle mainBundle] pathForResource:@"server-public" ofType:@"pem"];
+//    NSError *error2;
+//    NSString *contentInUTF82 = [NSString stringWithContentsOfFile:certsPath2
+//                    encoding:NSUTF8StringEncoding
+//                     error:&error2];
+//    NSString * aeskey = [AES createUuid];
+//    NSLog(@"随机key aeskey = %@",aeskey);
+//    NSString * string =  [AES AES256_Encrypt:aeskey encryptString:@"AESKEY" giv:@"abcdefghijklmnop"];
+//    NSString *RSAjiami = [RSA encryptString:aeskey publicKey:contentInUTF82];
+//    NSLog(@"AES string = %@",string);
+//    NSLog(@"RSAjiami = %@",RSAjiami);
+    
+    
+////    解密流程
+//    NSString *certsPath = [[NSBundle mainBundle] pathForResource:@"client-private" ofType:@"pem"];
+//    NSError *error;
+//    NSString *contentInUTF8 = [NSString stringWithContentsOfFile:certsPath
+//                    encoding:NSUTF8StringEncoding
+//                     error:&error];
+//    NSLog(@"contentInUTF8 === %@",contentInUTF8);
+//
+//    NSString *RSAjiemi = [RSA decryptString:RSAjiami privateKey:contentInUTF8];
+//    NSLog(@"RSA 加密后的数据 %@ 解密后的数据 %@",RSAjiami,RSAjiemi);
+//
+////
+//    NSString * string1 =  [AES AES256_Decrypt:aeskey encryptString:string giv:@"abcdefghijklmnop"];
+//    NSLog(@"AES jiemi string = %@",string1);
+    
 }
+
+
+-(void)gettuxingYZM{
+//    [[HttpManagement shareManager] GetNetWork:[NSString stringWithFormat:@"%@%@",FWQURL,tuxingYZMurl] success:^(id _Nullable responseObject) {
+//
+//        NSLog(@"responseObject == %@",responseObject);
+//        NSString * str = (NSString*)responseObject;
+//        NSString * string1 =  [AES AES256_Decrypt:aeskey encryptString:string giv:@"abcdefghijklmnop"];
+//
+//
+//    } failure:^(NSError * _Nullable error) {
+//        NSLog(@"shareManager error == %@",error);
+//        [UHud showHUDToView:self.view text:@"网络错误"];
+//    }];
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,tuxingYZMurl] Dictionary:nil success:^(id  _Nullable responseObject) {
+        NSLog(@"post responseObject == %@",responseObject);
+        NSData * data = (NSData*)responseObject;
+        NSString * str = [[jiemishujuClass shareManager] jiemiData:data];
+        NSLog(@"json == %@",str);
+    } failure:^(NSError * _Nullable error) {
+        
+        NSLog(@"shareManager error == %@",error);
+        [UHud showHUDToView:self.view text:@"网络错误"];
+    }];
+    
+}
+
+
+
+
 
 -(void)InitUI{
     self.topImageBg = [[UIImageView alloc] initWithFrame:CGRectMake(30, 40, self.view.width-60, 200)];
@@ -347,15 +394,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     }
 }
 
--(void)gettuxingYZM{
-    [[HttpManagement shareManager] GetNetWork:[NSString stringWithFormat:@"%@%@",FWQURL,tuxingYZMurl] success:^(id _Nullable responseObject) {
-        
-        NSLog(@"responseObject == %@",responseObject);
-    } failure:^(NSError * _Nullable error) {
-        NSLog(@"shareManager error == %@",error);
-        [UHud showHUDToView:self.view text:@"网络错误"];
-    }];
-}
+
 
 
 

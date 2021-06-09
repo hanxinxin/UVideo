@@ -37,7 +37,7 @@
 ///// 网络请求加密
 #import "AES.h"
 #import "RSA.h"
-
+#import "jiemishujuClass.h"
 
 /// User Custom File
 /// 协议

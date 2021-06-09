@@ -65,7 +65,7 @@
 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 
-                NSLog(@"responseObject   = %@",responseObject);
+                NSLog(@"Get responseObject   = %@",responseObject);
                 success(responseObject);
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 failureBlock(error);
@@ -76,28 +76,22 @@
 }
 
 /// Post 请求
--(void)PostNewWork:(NSString * )url Dictionary:(NSDictionary *)params success:(successBlock)successBlock failure:(failureBlock)failureBlock
+-(void)PostNewWork:(NSString * _Nullable )url Dictionary:(NSDictionary *_Nullable)params success:(SuccessBlock _Nullable )successBlock failure:(failureBlock _Nullable )failureBlock;
 {
    
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-                  manager.responseSerializer = [AFJSONResponseSerializer serializer];
-                  manager.requestSerializer = [AFJSONRequestSerializer serializer];
-        //          [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-            manager.requestSerializer = [AFJSONRequestSerializer serializer];
-            manager.responseSerializer = [AFJSONResponseSerializer serializer];
-//       NSString * authorization = UserTokenKey;
-        NSString*application= @"application/json";
-                // 设置Authorization的方法设置header
-//                [manager.requestSerializer setValue:authorization forHTTPHeaderField:@"Authorization"];
-                [manager.requestSerializer setValue:application forHTTPHeaderField:@"content-type"];
+    manager.responseSerializer =[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    [manager.requestSerializer setValue:token forHTTPHeaderField:@"X-TOKEN"];
+//    [manager.requestSerializer setValue:shijianchuo forHTTPHeaderField:@"X-TIMESTAMP"];
+//    [manager.requestSerializer setValue:jianming forHTTPHeaderField:@"X-SIGNATURE"];
             [manager POST:url parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 
-                NSLog(@"responseObject   = %@",responseObject);
-                NSMutableArray *arr = [NSMutableArray array];
-                [arr addObject:responseObject[@"data"]];
-                successBlock(responseObject[@"code"],responseObject[@"message"],arr);
+                NSLog(@"POST responseObject   = %@",responseObject);
+                successBlock(responseObject);
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 failureBlock(error);
                 [UHud showHudWithStatus:@"网络异常"];

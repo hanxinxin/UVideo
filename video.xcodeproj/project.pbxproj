@@ -376,6 +376,7 @@
 		FA8E71862652A46A0058F02F /* clarityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8E71842652A46A0058F02F /* clarityCollectionViewCell.m */; };
 		FA8E71872652A46A0058F02F /* clarityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8E71852652A46A0058F02F /* clarityCollectionViewCell.xib */; };
 		FA8E718D2652BF450058F02F /* ZqwHorizontalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8E718C2652BF450058F02F /* ZqwHorizontalTableView.m */; };
+		FA911E4F2671178E002B6D6D /* jiemishujuClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FA911E4E2671178E002B6D6D /* jiemishujuClass.m */; };
 		FA936FAA265944EA00067614 /* HJCornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = FA936FA9265944EA00067614 /* HJCornerRadius.m */; };
 		FA949CBD264AC76E00498EB6 /* safeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CBC264AC76E00498EB6 /* safeViewController.m */; };
 		FA949CC2264AC90800498EB6 /* chongzhiListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CC1264AC90800498EB6 /* chongzhiListViewController.m */; };
@@ -1124,6 +1125,8 @@
 		FA8E718A2652BF440058F02F /* ZqwTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZqwTableViewDelegate.h; sourceTree = "<group>"; };
 		FA8E718B2652BF450058F02F /* ZqwHorizontalTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZqwHorizontalTableView.h; sourceTree = "<group>"; };
 		FA8E718C2652BF450058F02F /* ZqwHorizontalTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZqwHorizontalTableView.m; sourceTree = "<group>"; };
+		FA911E4D2671178E002B6D6D /* jiemishujuClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jiemishujuClass.h; sourceTree = "<group>"; };
+		FA911E4E2671178E002B6D6D /* jiemishujuClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jiemishujuClass.m; sourceTree = "<group>"; };
 		FA936FA8265944EA00067614 /* HJCornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJCornerRadius.h; sourceTree = "<group>"; };
 		FA936FA9265944EA00067614 /* HJCornerRadius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJCornerRadius.m; sourceTree = "<group>"; };
 		FA949CBB264AC76E00498EB6 /* safeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = safeViewController.h; sourceTree = "<group>"; };
@@ -1736,6 +1739,8 @@
 				8A82F10D264F9E00004AAF40 /* HttpManagement.h */,
 				8A82F10E264F9E01004AAF40 /* HttpManagement.m */,
 				8AE01BC226647ACF0031C82F /* interfaceHeader.h */,
+				FA911E4D2671178E002B6D6D /* jiemishujuClass.h */,
+				FA911E4E2671178E002B6D6D /* jiemishujuClass.m */,
 			);
 			path = AFNNetWork;
 			sourceTree = "<group>";
@@ -3946,6 +3951,7 @@
 				8A39306525FCD91A00E7331B /* YYCache+CMHHelper.m in Sources */,
 				8A8BC17725F8F73F0028173C /* ScrollPageViewController.m in Sources */,
 				8A9C567325F8A23900EFA410 /* SearchViewController.m in Sources */,
+				FA911E4F2671178E002B6D6D /* jiemishujuClass.m in Sources */,
 				8A39309425FCDAED00E7331B /* CMHViewController.m in Sources */,
 				8A95C31B265A5C7B00A6D144 /* KJPlayerStatusLayer.m in Sources */,
 				8A9C560A25F8A10000EFA410 /* UIView+ViewController.m in Sources */,

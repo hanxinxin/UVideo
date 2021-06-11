@@ -38,7 +38,7 @@
 #import "AES.h"
 #import "RSA.h"
 #import "jiemishujuClass.h"
-
+#import "NSString+hxAES.h"
 /// User Custom File
 /// 协议
 #import "CMHConfigureCell.h"

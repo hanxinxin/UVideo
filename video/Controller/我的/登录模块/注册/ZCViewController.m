@@ -91,28 +91,48 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 //    [[HttpManagement shareManager] GetNetWork:[NSString stringWithFormat:@"%@%@",FWQURL,tuxingYZMurl] success:^(id _Nullable responseObject) {
 //
 //        NSLog(@"responseObject == %@",responseObject);
-//        NSString * str = (NSString*)responseObject;
-//        NSString * string1 =  [AES AES256_Decrypt:aeskey encryptString:string giv:@"abcdefghijklmnop"];
-//
-//
+//                NSData * data = (NSData*)responseObject;
+//                NSString * str = [[jiemishujuClass shareManager] jiemiData:data];
+//                NSLog(@"jsonstr == %@",str);
+//        NSDictionary *dict =[self dictionaryWithJsonString:str];
+//        NSLog(@"dict == %@",dict);
 //    } failure:^(NSError * _Nullable error) {
 //        NSLog(@"shareManager error == %@",error);
 //        [UHud showHUDToView:self.view text:@"网络错误"];
 //    }];
-    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,tuxingYZMurl] Dictionary:nil success:^(id  _Nullable responseObject) {
+    NSDictionary * dict = @{@"email":@"hx940610@163.com"};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,emailYZMurl] Dictionary:dict success:^(id  _Nullable responseObject) {
         NSLog(@"post responseObject == %@",responseObject);
         NSData * data = (NSData*)responseObject;
         NSString * str = [[jiemishujuClass shareManager] jiemiData:data];
+                NSDictionary *dict =[self dictionaryWithJsonString:str];
+                NSLog(@"dict == %@",dict);
         NSLog(@"json == %@",str);
     } failure:^(NSError * _Nullable error) {
-        
+
         NSLog(@"shareManager error == %@",error);
         [UHud showHUDToView:self.view text:@"网络错误"];
     }];
     
+    
 }
 
+- (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
 
+    if (jsonString == nil) {
+        return nil;
+    }
+    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *err;
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
+                                                        options:NSJSONReadingMutableContainers
+                                                          error:&err];
+    if(err) {
+        NSLog(@"json解析失败：%@",err);
+        return nil;
+    }
+    return dic;
+}
 
 
 

@@ -86,7 +86,16 @@
 //    [manager.requestSerializer setValue:token forHTTPHeaderField:@"X-TOKEN"];
 //    [manager.requestSerializer setValue:shijianchuo forHTTPHeaderField:@"X-TIMESTAMP"];
 //    [manager.requestSerializer setValue:jianming forHTTPHeaderField:@"X-SIGNATURE"];
-            [manager POST:url parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
+    
+//    加密要传输的数据
+//    NSString * jiamiData=nil;
+//    if(params!=nil)
+//    {
+//        NSData *data = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil];
+//
+//        jiamiData=[[jiemishujuClass shareManager] jiamiData:data];
+//    }
+    [manager POST:url parameters:params progress:^(NSProgress * _Nonnull uploadProgress) {
 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 

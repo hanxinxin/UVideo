@@ -30,7 +30,7 @@
     size_t numBytesEncrypted = 0;
     CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt,
                                           kCCAlgorithmAES128,
-                                          kCCOptionPKCS7Padding| kCCOptionECBMode,
+                                          kCCOptionPKCS7Padding,
                                           keyPtr,
                                           kCCBlockSizeAES128,
                                           ivPtr,
@@ -70,7 +70,7 @@
     size_t numBytesDecrypted = 0;
     CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt,
                                           kCCAlgorithmAES128,
-                                          kCCOptionPKCS7Padding| kCCOptionECBMode,
+                                          kCCOptionPKCS7Padding,
                                           keyPtr,
                                           kCCBlockSizeAES128,
                                           ivPtr,
@@ -93,8 +93,6 @@
 }
 
 
-
-
 //////////////
 
 
@@ -105,7 +103,7 @@
     bzero(keyPtr, sizeof(keyPtr));
     [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
 
-    char ivPtr[kCCKeySizeAES256+1];
+    char ivPtr[kCCKeySizeAES128+1];
     bzero(ivPtr, sizeof(ivPtr));
     [gIv getCString:ivPtr maxLength:sizeof(ivPtr) encoding:NSUTF8StringEncoding];
 
@@ -115,9 +113,9 @@
     size_t numBytesEncrypted = 0;
     CCCryptorStatus cryptStatus = CCCrypt(kCCEncrypt,
                                           kCCAlgorithmAES128,
-                                          kCCOptionPKCS7Padding| kCCOptionECBMode,
+                                          kCCOptionPKCS7Padding,
                                           keyPtr,
-                                          kCCBlockSizeAES128,
+                                          kCCKeySizeAES256,
                                           ivPtr,
                                           [data bytes],
                                           dataLength,
@@ -144,8 +142,7 @@
     char keyPtr[kCCKeySizeAES256+1];
     bzero(keyPtr, sizeof(keyPtr));
     [key getCString:keyPtr maxLength:sizeof(keyPtr) encoding:NSUTF8StringEncoding];
-    
-    char ivPtr[kCCKeySizeAES256+1];
+    char ivPtr[kCCKeySizeAES128+1];
     bzero(ivPtr, sizeof(ivPtr));
     [gIv getCString:ivPtr maxLength:sizeof(ivPtr) encoding:NSUTF8StringEncoding];
     
@@ -153,11 +150,12 @@
     size_t bufferSize = dataLength + kCCBlockSizeAES128;
     void *buffer = malloc(bufferSize);
     size_t numBytesDecrypted = 0;
+//    kCCOptionECBMode
     CCCryptorStatus cryptStatus = CCCrypt(kCCDecrypt,
                                           kCCAlgorithmAES128,
-                                          kCCOptionPKCS7Padding| kCCOptionECBMode,
+                                          kCCOptionPKCS7Padding,
                                           keyPtr,
-                                          kCCBlockSizeAES128,
+                                          kCCKeySizeAES256,
                                           ivPtr,
                                           [data bytes],
                                           dataLength,
@@ -173,14 +171,17 @@
 + (NSString *)AES256_Decrypt:(NSString *)key encryptString:(NSString *)encryptText giv:(NSString *)gIv{
     NSData *data = [[NSData alloc] initWithBase64EncodedString:encryptText options:NSDataBase64DecodingIgnoreUnknownCharacters];
     NSData * encryptData =  [self AES256_Decrypt:key encryptData:data giv:gIv];
+//    NSLog(@"encryptData == %@",encryptData);
+//    NSError * error;
+//    NSDictionary *responseObject = [NSJSONSerialization JSONObjectWithData:encryptData options:NSJSONReadingMutableContainers error:&error];
+//
+//    NSLog(@"responseObject == %@",responseObject);
+//    NSLog(@"error == %@",error);
     NSString *output = [[NSString alloc] initWithData:encryptData encoding:NSUTF8StringEncoding];
     return output;
 }
 
-
-
-/**
-
+/*
  *生成32为无序标示
 
  *

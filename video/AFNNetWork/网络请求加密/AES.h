@@ -15,7 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)AES128_Decrypt:(NSString *)key encryptString:(NSString *)encryptText giv:(NSString *)gIv;
 
 +(NSString *)AES256_Encrypt:(NSString *)key encryptString:(NSString *)encryptText giv:(NSString *)gIv;
+
+
 + (NSString *)AES256_Decrypt:(NSString *)key encryptString:(NSString *)encryptText giv:(NSString *)gIv;
+
+
 /**
  *生成32为无序标示
  *

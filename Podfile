@@ -25,7 +25,7 @@ pod 'MSPageControl'
 # ijkplayer
 pod 'IJKMediaFramework'
 
-
+pod 'GTMBase64'
 
 #########  YYKit ###############
 #pod 'YYKit'                             , '1.0.9'

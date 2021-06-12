@@ -1,19 +1,4 @@
 PODS:
-  - AFNetworking (3.2.1):
-    - AFNetworking/NSURLSession (= 3.2.1)
-    - AFNetworking/Reachability (= 3.2.1)
-    - AFNetworking/Security (= 3.2.1)
-    - AFNetworking/Serialization (= 3.2.1)
-    - AFNetworking/UIKit (= 3.2.1)
-  - AFNetworking/NSURLSession (3.2.1):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/Reachability (3.2.1)
-  - AFNetworking/Security (3.2.1)
-  - AFNetworking/Serialization (3.2.1)
-  - AFNetworking/UIKit (3.2.1):
-    - AFNetworking/NSURLSession
   - BGFMDB (2.0.12):
     - BGFMDB/BG (= 2.0.12)
     - BGFMDB/FMDB (= 2.0.12)
@@ -45,7 +30,6 @@ PODS:
   - DZNEmptyDataSet (1.8.1)
   - FDFullscreenPopGesture (1.1)
   - FLAnimatedImage (1.0.16)
-  - GTMBase64 (1.0.1)
   - HYBImageCliped (2.2.4)
   - IJKMediaFramework (0.1.5)
   - IQKeyboardManager (6.0.3)
@@ -100,7 +84,6 @@ PODS:
   - ZYCornerRadius (1.0.2)
 
 DEPENDENCIES:
-  - AFNetworking (= 3.2.1)
   - BGFMDB (= 2.0.12)
   - BlocksKit (= 2.2.5)
   - CHTCollectionViewWaterfallLayout (= 0.9.6)
@@ -109,7 +92,6 @@ DEPENDENCIES:
   - DZNEmptyDataSet (= 1.8.1)
   - FDFullscreenPopGesture (= 1.1)
   - FLAnimatedImage
-  - GTMBase64
   - HYBImageCliped (= 2.2.4)
   - IJKMediaFramework
   - IQKeyboardManager (= 6.0.3)
@@ -145,7 +127,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
-    - AFNetworking
     - BGFMDB
     - BlocksKit
     - CHTCollectionViewWaterfallLayout
@@ -154,7 +135,6 @@ SPEC REPOS:
     - DZNEmptyDataSet
     - FDFullscreenPopGesture
     - FLAnimatedImage
-    - GTMBase64
     - HYBImageCliped
     - IJKMediaFramework
     - IQKeyboardManager
@@ -186,7 +166,6 @@ SPEC REPOS:
     - ZYCornerRadius
 
 SPEC CHECKSUMS:
-  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   BGFMDB: cd5e468218d4c7345862d814d313c0888db3a66a
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   CHTCollectionViewWaterfallLayout: f4dab06db57b36dcf29e802594175acc76c56615
@@ -195,7 +174,6 @@ SPEC CHECKSUMS:
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
   FDFullscreenPopGesture: a8a620179e3d9c40e8e00256dcee1c1a27c6d0f0
   FLAnimatedImage: 8f3e854ebf9680b71f0b6e700939687fc4d82b4b
-  GTMBase64: f0f91be06a7a20b84c8e4fee30c0430395091d82
   HYBImageCliped: 22d14431324bc9d056353d6f1490a3bd03fc7dff
   IJKMediaFramework: f1119f6324c96bc4654f3045a5beaa95ba0596c0
   IQKeyboardManager: c390e612f4b98c8fd748016470138537dc163ead
@@ -226,6 +204,6 @@ SPEC CHECKSUMS:
   YZDisplayViewController: 621f737a9aa3dfbc95a901e89e5e7c4b2ea6ef79
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: 99159dc56ea1a31b6966f6f81aa9f40019ff819b
+PODFILE CHECKSUM: fd2ced293fda7c418810783860dd08581616d78e
 
-COCOAPODS: 1.9.3
+COCOAPODS: 1.10.1

@@ -12,6 +12,9 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 @interface ZCViewController ()<UITextFieldDelegate>
 {
     NSDictionary *keyboardInfo;
+    
+    NSString * phrase_id;
+    NSString * captcha_data;
 }
 @property(nonatomic,strong)UIView*topView;
 @property(nonatomic,strong)UIButton *menuBtn1;
@@ -36,7 +39,8 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
     //// 初始化数据
     self.menuIndex = 2; //初始值 为2 [self touchOne:nil];会修改为1
-    
+    phrase_id=@"";
+    captcha_data=@"";
 //    加载UI
     [self InitUI];
     [self addNoticeForKeyboard];
@@ -44,94 +48,14 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 
     dispatch_after(delayTime, dispatch_get_main_queue(), ^{
         [self addtopview];
+        
+        [self TuXingCodeBtn_touch:nil];
     });
   
     [self touchOne:nil];
     
     
-    [self gettuxingYZM];
-    
-    
-    
 
-    
-//    /// 加密流程
-//    NSString *certsPath2 = [[NSBundle mainBundle] pathForResource:@"server-public" ofType:@"pem"];
-//    NSError *error2;
-//    NSString *contentInUTF82 = [NSString stringWithContentsOfFile:certsPath2
-//                    encoding:NSUTF8StringEncoding
-//                     error:&error2];
-//    NSString * aeskey = [AES createUuid];
-//    NSLog(@"随机key aeskey = %@",aeskey);
-//    NSString * string =  [AES AES256_Encrypt:aeskey encryptString:@"AESKEY" giv:@"abcdefghijklmnop"];
-//    NSString *RSAjiami = [RSA encryptString:aeskey publicKey:contentInUTF82];
-//    NSLog(@"AES string = %@",string);
-//    NSLog(@"RSAjiami = %@",RSAjiami);
-    
-    
-////    解密流程
-//    NSString *certsPath = [[NSBundle mainBundle] pathForResource:@"client-private" ofType:@"pem"];
-//    NSError *error;
-//    NSString *contentInUTF8 = [NSString stringWithContentsOfFile:certsPath
-//                    encoding:NSUTF8StringEncoding
-//                     error:&error];
-//    NSLog(@"contentInUTF8 === %@",contentInUTF8);
-//
-//    NSString *RSAjiemi = [RSA decryptString:RSAjiami privateKey:contentInUTF8];
-//    NSLog(@"RSA 加密后的数据 %@ 解密后的数据 %@",RSAjiami,RSAjiemi);
-//
-////
-//    NSString * string1 =  [AES AES256_Decrypt:aeskey encryptString:string giv:@"abcdefghijklmnop"];
-//    NSLog(@"AES jiemi string = %@",string1);
-    
-}
-
-
--(void)gettuxingYZM{
-//    [[HttpManagement shareManager] GetNetWork:[NSString stringWithFormat:@"%@%@",FWQURL,tuxingYZMurl] success:^(id _Nullable responseObject) {
-//
-//        NSLog(@"responseObject == %@",responseObject);
-//                NSData * data = (NSData*)responseObject;
-//                NSString * str = [[jiemishujuClass shareManager] jiemiData:data];
-//                NSLog(@"jsonstr == %@",str);
-//        NSDictionary *dict =[self dictionaryWithJsonString:str];
-//        NSLog(@"dict == %@",dict);
-//    } failure:^(NSError * _Nullable error) {
-//        NSLog(@"shareManager error == %@",error);
-//        [UHud showHUDToView:self.view text:@"网络错误"];
-//    }];
-    NSDictionary * dict = @{@"email":@"hx940610@163.com"};
-    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,emailYZMurl] Dictionary:dict success:^(id  _Nullable responseObject) {
-        NSLog(@"post responseObject == %@",responseObject);
-        NSData * data = (NSData*)responseObject;
-        NSString * str = [[jiemishujuClass shareManager] jiemiData:data];
-                NSDictionary *dict =[self dictionaryWithJsonString:str];
-                NSLog(@"dict == %@",dict);
-        NSLog(@"json == %@",str);
-    } failure:^(NSError * _Nullable error) {
-
-        NSLog(@"shareManager error == %@",error);
-        [UHud showHUDToView:self.view text:@"网络错误"];
-    }];
-    
-    
-}
-
-- (NSDictionary *)dictionaryWithJsonString:(NSString *)jsonString {
-
-    if (jsonString == nil) {
-        return nil;
-    }
-    NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *err;
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:jsonData
-                                                        options:NSJSONReadingMutableContainers
-                                                          error:&err];
-    if(err) {
-        NSLog(@"json解析失败：%@",err);
-        return nil;
-    }
-    return dic;
 }
 
 
@@ -153,7 +77,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.emailTextfield = [[UITextField alloc] initWithFrame:CGRectMake(8, 50, self.centerView.width-16, 42)];
     
     self.emailTextfield.placeholder=@"请输入邮箱";
-    self.emailTextfield.keyboardType=UIKeyboardTypeEmailAddress;
+    self.emailTextfield.keyboardType=UIKeyboardTypeURL;
     self.emailTextfield.borderStyle=UITextBorderStyleRoundedRect;
     self.emailTextfield.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
     self.emailTextfield.delegate=self;
@@ -181,11 +105,22 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.CodeTextfield.borderStyle=UITextBorderStyleNone;
     self.CodeTextfield.delegate=self;
     [self.CodeView addSubview:self.CodeTextfield];
+    self.TuXingCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.CodeTextfield.right-8, 6, 100, 30)];
+    self.TuXingCodeBtn.hidden=NO;
+    self.TuXingCodeBtn.layer.cornerRadius = 4;
+    self.TuXingCodeBtn.backgroundColor=[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0];
+//    [self.TuXingCodeBtn setTitle:@"验证码" forState:(UIControlStateNormal)];
+    [self.TuXingCodeBtn setImage:[captcha_data isEqualToString:@""]?[UIImage imageNamed:@"image"]:[self base64Image:captcha_data] forState:(UIControlStateNormal)];
+    [self.TuXingCodeBtn addTarget:self action:@selector(TuXingCodeBtn_touch:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.TuXingCodeBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    [self.CodeView addSubview:self.TuXingCodeBtn];
     
     self.getCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.CodeTextfield.right-8, 6, 70, 30)];
     self.getCodeBtn.layer.cornerRadius = 4;
+    self.getCodeBtn.hidden=YES;
     self.getCodeBtn.backgroundColor=[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0];
     [self.getCodeBtn setTitle:@"验证码" forState:(UIControlStateNormal)];
+    [self.getCodeBtn addTarget:self action:@selector(getCodeBtn_touch:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.getCodeBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     [self.CodeView addSubview:self.getCodeBtn];
     
@@ -219,10 +154,168 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+-(void)TuXingCodeBtn_touch:(id)sender
+{
+    [UHud showHUDLoading];
+//    [UHud showHudWithStatus:@""];
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,tuxingYZMurl] Dictionary:nil success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+        [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    NSDictionary *dictdata =[dict objectForKey:@"data"];
+                    self->phrase_id=[dictdata objectForKey:@"phrase_id"];
+                    self->captcha_data=[dictdata objectForKey:@"captcha_data"];
+                    [self updatetuxingBtn];
+//                    [UHud showSuccessWithStatus:@"获取成功" delay:2.f];
+//                }else if([code intValue]==20){
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+            }];
+}
+-(void)updatetuxingBtn
+{
+    [self.TuXingCodeBtn setImage:[captcha_data isEqualToString:@""]?[UIImage imageNamed:@"image"]:[self base64Image:captcha_data] forState:(UIControlStateNormal)];
+}
+-(void)getCodeBtn_touch:(id)sender
+{
+    if(self.emailTextfield.text.length>0)
+    {
+        [UHud showHUDLoading];
+        NSDictionary * dict = @{@"email":self.emailTextfield.text};
+        [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,emailYZMurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+    //        NSLog(@"post responseObject == %@",responseObject);
+            [UHud hideLoadHud];
+            NSDictionary *dict=(NSDictionary *)responseObject;
+            NSNumber * code = [dict objectForKey:@"error"];
+            if([code intValue]==0)
+            {
+                NSDictionary *dictdata =[dict objectForKey:@"data"];
+                self->phrase_id=[dictdata objectForKey:@"phrase_id"];
+                [self verifyEvent];
+                [UHud showSuccessWithStatus:@"获取成功" delay:2.f];
+                
+            }else if([code intValue]==20){
+                NSString * message = [dict objectForKey:@"message"];
+    //            [UHud showHUDToView:self.view text:message];
+    //            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
+                [UHud showTXTWithStatus:message delay:2.f];
+            }
+    
+        } failure:^(NSError * _Nullable error) {
+            [UHud hideLoadHud];
+            NSLog(@"shareManager error == %@",error);
+            [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+        }];
+    }else{
+        [UHud showTXTWithStatus:@"请输入正确的邮箱" delay:2.f];
+    }
+}
 -(void)ZC_touch:(id)sender
 {
+    __block ZCViewController *weakSelf = self;
+    if(self.emailTextfield.text.length>0)
+    {
+        if(self.passwordTextfield.text.length>0)
+        {
+            if(self.CodeTextfield.text.length>0)
+            {
+                if(![phrase_id isEqualToString:@""])
+                {
+                    [UHud showHUDLoading];
+                    NSDictionary * dict = @{@"username":self.emailTextfield.text,@"password":self.passwordTextfield.text,@"email":self.emailTextfield.text,@"captcha":self.CodeTextfield.text,@"phrase_id":phrase_id};
+                    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,emailzhuce] Dictionary:dict success:^(id  _Nullable responseObject) {
+                //        NSLog(@"post responseObject == %@",responseObject);
+                        [UHud hideLoadHud];
+                        NSDictionary *dict=(NSDictionary *)responseObject;
+                        NSNumber * code = [dict objectForKey:@"error"];
+                        if([code intValue]==0)
+                        {
+                            NSDictionary *dictdata=[dict objectForKey:@"data"];
+                            NSDictionary *userdata =[dictdata objectForKey:@"user"];
+                            NSString * email = [userdata objectForKey:@"email"];
+                            NSString * vip_expired_time = [userdata objectForKey:@"vip_expired_time"];
+                            
+                            NSDictionary *tokendata =[dictdata objectForKey:@"token"];
+                            NSString * token = [tokendata objectForKey:@"token"];
+                            NSString *expired_time=[tokendata objectForKey:@"expired_time"];
+                            [[NSUserDefaults standardUserDefaults] setValue:email forKey:@"UserZH"];
+                            [[NSUserDefaults standardUserDefaults] setValue:vip_expired_time forKey:@"vip_expired_time"];
+                            [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"UserToken"];
+                            [[NSUserDefaults standardUserDefaults] setObject:expired_time forKey:@"expired_time"];
+                            [UHud showHudWithStatus:@"注册成功" delay:2.f];
+                            dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC));
+
+                            dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+                                [weakSelf popViewcontroller];
+                            });
+                        }else{
+                            NSString * message = [dict objectForKey:@"message"];
+                            [UHud showHudWithStatus:message delay:2.f];
+                        }
+
+                    } failure:^(NSError * _Nullable error) {
+                        [UHud hideLoadHud];
+                        NSLog(@"shareManager error == %@",error);
+                        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+                    }];
+                }else{
+                    [UHud showTXTWithStatus:@"没有获取验证码" delay:2.f];
+                }
+            }else{
+                [UHud showTXTWithStatus:@"验证码长度不能为空" delay:2.f];
+            }
+        }else{
+            [UHud showTXTWithStatus:@"密码长度不能为空" delay:2.f];
+        }
+    }else{
+        [UHud showTXTWithStatus:@"邮箱长度不能为空" delay:2.f];
+    }
+    
     
 }
+
+-(void)popViewcontroller
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+- (void)verifyEvent
+{
+    //启动倒计时
+    [self performSelector:@selector(reflashGetKeyBt:)withObject:[NSNumber numberWithInt:60] afterDelay:0];
+}
+//倒数
+
+- (void)reflashGetKeyBt:(NSNumber *)second
+{
+    if ([second integerValue] == 0)
+    {
+        _getCodeBtn.selected=YES;
+        _getCodeBtn.userInteractionEnabled=YES;
+        [_getCodeBtn setTitle:@"重新获取"forState:(UIControlStateNormal)];
+        [_getCodeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    else
+    {
+        _getCodeBtn.selected=NO;
+        _getCodeBtn.userInteractionEnabled=NO;
+        int i = [second intValue];
+        [_getCodeBtn setTitle:[NSString stringWithFormat:@"重新获得(%i)",i]forState:(UIControlStateNormal)];
+        [self performSelector:@selector(reflashGetKeyBt:)withObject:[NSNumber numberWithInt:i-1] afterDelay:1];
+        
+    }
+}
+
+
 
 -(void)addtopview
 {
@@ -271,9 +364,11 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 
         [self.menuBtn1 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
         [self.menuBtn2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-        self.CodeView.hidden=YES;
+        self.CodeView.hidden=NO;
+        self.TuXingCodeBtn.hidden=NO;
+        self.getCodeBtn.hidden=YES;
     //    self.centerView.backgroundColor=[UIColor orangeColor];
-        self.centerView.frame = CGRectMake(30, 252, self.view.width-60, 210-40);
+        self.centerView.frame = CGRectMake(30, 252, self.view.width-60, 210);
         [self setyinying];
 
         self.backBtn.frame = CGRectMake(30,self.centerView.bottom+15,((self.view.width-68)/2)-5,46);
@@ -297,6 +392,8 @@ static CGFloat INTERVAL_KEYBOARD = 500;
         [self.menuBtn1 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
         [self.menuBtn2 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
         self.CodeView.hidden=NO;
+        self.TuXingCodeBtn.hidden=YES;
+        self.getCodeBtn.hidden=NO;
         self.centerView.frame = CGRectMake(30, 252, self.view.width-60, 210);
         [self setyinying];
 

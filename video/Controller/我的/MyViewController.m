@@ -35,11 +35,15 @@
     // Do any additional setup after loading the view.
 //    self.navBarColor=[UIColor whiteColor];
 //    self.hiddenLeftBtn=YES;
-    
     [self InitUIView];
     [self Addtableview];
     [self setyinying];
     [self addpromptViewM];
+//    dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC));
+//
+//    dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+//        [UHud hideLoadHudForView:nil];
+//    });
 }
 -(void)addpromptViewM{
     promptbottomView *view = [[[NSBundle mainBundle]loadNibNamed:@"promptbottomView" owner:self options:nil]objectAtIndex:0];
@@ -99,7 +103,7 @@
         if(touchIndex==1001)
         {
 
-            LoginViewController * avc = [[UIStoryboard storyboardWithName: @"Main" bundle: nil] instantiateViewControllerWithIdentifier: @"LoginViewController"];
+            LoginViewController * avc = [[LoginViewController alloc] init];
             [weakSelf pushRootNav:avc animated:YES];
         }
     };

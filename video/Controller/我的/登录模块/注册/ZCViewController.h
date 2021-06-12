@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UITextField *emailTextfield;
 @property(nonatomic,strong)UITextField *passwordTextfield;
 @property(nonatomic,strong)UIView *CodeView;
+@property(nonatomic,strong)UIButton *TuXingCodeBtn;
 @property(nonatomic,strong)UIButton *getCodeBtn;
 @property(nonatomic,strong)UITextField *CodeTextfield;
 

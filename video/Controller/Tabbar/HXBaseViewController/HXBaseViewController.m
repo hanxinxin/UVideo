@@ -714,14 +714,14 @@
         [self.navigationController pushViewController:viewController animated:YES];
     }
 }
-/*
- #pragma mark - Navigation
 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+
+
+-(UIImage*)base64Image:(NSString*)base64Str
+{
+    NSData * showData = [[NSData alloc]initWithBase64EncodedString:base64Str options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    UIImage*image = [UIImage imageWithData:showData];
+    return image;
+}
 
 @end

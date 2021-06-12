@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="-1029" y="-15"/>
         </scene>
-        <!--Login View Controller-->
+        <!--View Controller-->
         <scene sceneID="Ihy-Tx-ToC">
             <objects>
-                <viewController restorationIdentifier="LoginViewController" storyboardIdentifier="LoginViewController" id="Q4J-na-b0x" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController id="Q4J-na-b0x" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="VLz-Ss-kvL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

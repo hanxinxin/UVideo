@@ -80,7 +80,8 @@
         [TimeOfBootCount setValue:@"" forKey:@"UserZH"];
         [TimeOfBootCount setValue:@"" forKey:@"UserPW"];
         [TimeOfBootCount setValue:@"0" forKey:@"SetDevNumber"];
-        
+        [TimeOfBootCount setValue:@"" forKey:@"expired_time"];
+        [TimeOfBootCount setValue:@"" forKey:@"vip_expired_time"];
         NSLog(@"第一次启动");
     }else{
         if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]isEqualToString:@""]) {

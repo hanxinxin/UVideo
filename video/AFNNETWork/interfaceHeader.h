@@ -24,6 +24,7 @@
 
 
 
+#define usertoken [[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]
 
 //  服务器地址
 //#define FWQURL @"http://192.168.1.8:8012" ///局域网地址

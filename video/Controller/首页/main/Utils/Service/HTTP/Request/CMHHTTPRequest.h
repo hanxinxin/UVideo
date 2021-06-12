@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "CMHURLParameters.h"
 #import "CMHHTTPResponse.h"
-#import <AFNetworking/AFNetworking.h>
+#import "AFNetworking.h"
 @interface CMHHTTPRequest : NSObject
 /// 请求参数
 @property (nonatomic, readonly, strong) CMHURLParameters *urlParameters;

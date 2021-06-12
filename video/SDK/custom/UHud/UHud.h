@@ -23,6 +23,8 @@ NS_ASSUME_NONNULL_BEGIN
 +(BOOL)hideLoadHudForView:(UIView *)view;
 +(BOOL)hudForView:(UIView *)view;
 
++ (void)showHUDLoading;
++(BOOL)hideLoadHud;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,16 +10,21 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface LoginViewController : HXBaseViewController
-@property (weak, nonatomic) IBOutlet UIImageView *topImage;
-@property (weak, nonatomic) IBOutlet UIView *centerView;
-@property (weak, nonatomic) IBOutlet UITextField *emailTextfield;
-@property (weak, nonatomic) IBOutlet UITextField *passwordTextfield;
+
+@property(nonatomic,strong)UIImageView * topImageBg;
+
+@property(nonatomic,strong)UIView * centerView;
+//@property(nonatomic,strong)UIView * centerView;
+@property(nonatomic,strong)UITextField *emailTextfield;
+@property(nonatomic,strong)UITextField *passwordTextfield;
+@property(nonatomic,strong)UIView *CodeView;
+@property(nonatomic,strong)UIButton *TuXingCodeBtn;
+@property(nonatomic,strong)UIButton *getCodeBtn;
+@property(nonatomic,strong)UITextField *CodeTextfield;
 
 
-
-@property (weak, nonatomic) IBOutlet UIButton *ZC_btn;
-@property (weak, nonatomic) IBOutlet UIButton *DL_Btn;
-@property (weak, nonatomic) IBOutlet UIButton *WJMM_btn;
+@property(nonatomic,strong)UIButton * backBtn;
+@property(nonatomic,strong)UIButton * LoginBtn;
 
 @end
 

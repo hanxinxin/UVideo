@@ -46,6 +46,25 @@
     // YES代表需要蒙版效果
     hud.dimBackground = NO;
 }
+
+
++ (void)showHUDLoading
+{
+    UIView*view = [[UIApplication sharedApplication].windows lastObject];
+    // 快速显示一个提示信息
+    MBProgressHUD *hud = [MBProgressHUD HUDForView:view];
+    if (hud == nil)
+    {
+        hud = [MBProgressHUD showHUDAddedTo:view animated:YES];
+    }else{
+        return;
+    }
+//    hud.label.text = message;
+    // 隐藏时候从父控件中移除
+    hud.removeFromSuperViewOnHide = YES;
+    // YES代表需要蒙版效果
+    hud.dimBackground = NO;
+}
 +(void)showHUDToView:(UIView *)view text:(NSString *)text
 {
     if (view == nil) view = [[UIApplication sharedApplication].windows lastObject];
@@ -70,6 +89,13 @@
     if (view == nil) view = [[UIApplication sharedApplication].windows lastObject];
     return [MBProgressHUD hideAllHUDsForView:view animated:NO];
 }
++(BOOL)hideLoadHud
+{
+    UIView *view = [[UIApplication sharedApplication].windows lastObject];
+    return [MBProgressHUD hideAllHUDsForView:view animated:NO];
+}
+
+
 +(BOOL)hudForView:(UIView *)view
 {
     MBProgressHUD *hud = [MBProgressHUD HUDForView:view];

@@ -6,8 +6,8 @@
 //  Copyright © 2018年 CoderMikeHe. All rights reserved.
 //
 
-#import <AFNetworking/AFNetworking.h>
-#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
+#import "AFNetworking.h"
+#import "AFNetworkActivityIndicatorManager.h"
 #import "CMHHTTPRequest.h"
 
 // The domain for all errors originating in MHHTTPService.

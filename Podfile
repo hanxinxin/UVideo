@@ -25,7 +25,7 @@ pod 'MSPageControl'
 # ijkplayer
 pod 'IJKMediaFramework'
 
-pod 'GTMBase64'
+
 
 #########  YYKit ###############
 #pod 'YYKit'                             , '1.0.9'
@@ -80,8 +80,8 @@ pod 'BGFMDB'                         , '2.0.12'
 # 适配Xcode9.0 iOS 11
 #pod 'ReactiveCocoa', :git => 'https://github.com/zhao0/ReactiveCocoa.git', :tag => '2.5.2'
 pod 'ReactiveObjC',                      '3.1.0'
-# 网络请求
-pod 'AFNetworking'                      , '3.2.1'
+## 网络请求
+#pod 'AFNetworking'                      , '3.2.1'
 
 
 # UIView模糊

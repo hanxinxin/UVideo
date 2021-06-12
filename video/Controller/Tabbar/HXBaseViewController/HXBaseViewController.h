@@ -134,4 +134,13 @@ typedef void(^GCusNavClickIndex)(NSInteger index);
 
 
 - (void)updateNavigationBarAppearance ;
+
+
+
+
+
+
+-(UIImage*)base64Image:(NSString*)base64Str;
+
+
 @end

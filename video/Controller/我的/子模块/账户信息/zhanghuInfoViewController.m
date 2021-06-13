@@ -34,7 +34,7 @@
     arrtitle=[NSMutableArray arrayWithCapacity:0];
     [arrtitle addObject:[NSArray arrayWithObjects:@"用户名",@"会员级别",@"VIP到期时间",@"电子邮箱", nil]];
     Darray=[NSMutableArray arrayWithCapacity:0];
-    [Darray addObject:[NSArray arrayWithObjects:@"APDSDAPSOD",@"普通会员",@"2021-10-22",@"98989898@qq.com", nil]];
+    [Darray addObject:[NSArray arrayWithObjects:username_loca,([vip_expired_time_loca intValue]==0)?@"无会员":@"普通会员",([vip_expired_time_loca intValue]==0)?@"0":[self getTimeFromTimestamp:vip_expired_time_loca],UserZH_loca, nil]];
     self.downtableview=[[UITableView alloc] init];
     self.downtableview.frame=CGRectMake(20, 0, SCREEN_WIDTH-40, SCREENH_HEIGHT);
     self.downtableview.backgroundColor=[UIColor clearColor];

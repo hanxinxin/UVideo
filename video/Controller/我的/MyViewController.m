@@ -8,6 +8,9 @@
 #import "MyViewController.h"
 #import "topHeaderView.h"
 
+
+#import "HQImageEditViewController.h"
+#import "TZImagePickerController.h"
 #import "safeViewController.h"
 #import "chongzhiListViewController.h"
 #import "zhanghuInfoViewController.h"
@@ -16,7 +19,8 @@
 #import "FAQViewController.h"
 #import "promptbottomView.h"
 
-@interface MyViewController ()<UITableViewDelegate,UITableViewDataSource>
+@interface MyViewController ()<UITableViewDelegate,UITableViewDataSource,ZGQActionSheetViewDelegate,HQImageEditViewControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+
 @property(nonatomic,strong)UIView*ZtopView;
 @property(nonatomic,strong)topHeaderView *Headerview;
 
@@ -66,10 +70,45 @@
         {
             
         }else{
-            
+            [weakSelf signoutURL_touch];
         }
         [weakSelf Hidprompt];
     };
+}
+-(void)signoutURL_touch
+{
+    [UHud showHUDLoading];
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,signoutURL] Dictionary:nil success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+        [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    
+//                    [UHud showSuccessWithStatus:@"获取成功" delay:2.f];
+//                }else if([code intValue]==20){
+                    NSUserDefaults *TimeOfBootCount = [NSUserDefaults standardUserDefaults];
+                    [TimeOfBootCount setValue:@"" forKey:@"UserToken"];
+                    [TimeOfBootCount setValue:@"" forKey:@"Userrole"];
+                    [TimeOfBootCount setValue:@"" forKey:@"UserZH"];
+                    [TimeOfBootCount setValue:@"" forKey:@"UserPW"];
+                    [TimeOfBootCount setValue:@"" forKey:@"nickname"];
+                    [TimeOfBootCount setValue:@"" forKey:@"username"];
+                    [TimeOfBootCount setValue:@"" forKey:@"avatar"];
+                    [TimeOfBootCount setValue:@(0) forKey:@"expired_time"];
+                    [TimeOfBootCount setValue:@(0) forKey:@"vip_expired_time"];
+                    [UHud showSuccessWithStatus:@"退出成功" delay:2.f];
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+            }];
 }
 -(void)InitUIView
 {
@@ -92,7 +131,25 @@
     view.layer.shadowOffset = CGSizeMake(0,3);
     view.layer.shadowRadius = 6;
     view.layer.shadowOpacity = 1;
-    
+    NSLog(@"avatar_loca==== %@,nickname_loca= %@,username_loca= %@",avatar_loca,nickname_loca,username_loca);
+    if(![self StringIsNullOrEmpty:avatar_loca])
+    {
+        [view.txImage setImage:[self base64Image:avatar_loca] forState:(UIControlStateNormal)];
+    }
+    if(![self StringIsNullOrEmpty:nickname_loca])
+    {
+        [view.nameLabel setText:nickname_loca];
+    }else{
+        [view.nameLabel setText:username_loca];
+    }
+    if([vip_expired_time_loca intValue]==0)
+    {
+        [view.vipTime setText:@"马上充值会员，立刻享受VIP观影特权"];
+        [view.vipImage setImage:[UIImage imageNamed:@"nohuiyuan"] forState:(UIControlStateNormal)];
+    }else{
+        [view.vipTime setText:[NSString stringWithFormat:@"会员到期时间 %@",[self getTimeFromTimestamp:vip_expired_time_loca]]];
+        [view.vipImage setImage:[UIImage imageNamed:@"vipimage"] forState:(UIControlStateNormal)];
+    }
     view.txImage.layer.cornerRadius = 30;
     view.txImage.layer.masksToBounds = YES;
     [self.ZtopView addSubview:view];
@@ -102,9 +159,13 @@
         NSLog(@"Touchindex= %ld",touchIndex);
         if(touchIndex==1001)
         {
-
-            LoginViewController * avc = [[LoginViewController alloc] init];
-            [weakSelf pushRootNav:avc animated:YES];
+            if([usertoken isEqualToString:@""])
+            {
+                LoginViewController * avc = [[LoginViewController alloc] init];
+                [weakSelf pushRootNav:avc animated:YES];
+            }else{
+                [weakSelf ShowProfilePhoto];
+            }
         }
     };
     self.Headerview.cellindexBlock = ^(NSInteger CellIndex) {
@@ -138,28 +199,41 @@
         }else if(CellIndex==1003)
         {
 
-            // 这是从一个模态出来的页面跳到tabbar的某一个页面
-//            if (@available(iOS 13.0, *)) {
-//                NSArray *array =[[[UIApplication sharedApplication] connectedScenes] allObjects];
-//                UIWindowScene *windowScene = (UIWindowScene *)array[0];
-//                SceneDelegate *delegate =(SceneDelegate *)windowScene.delegate;
-//                HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
-//                NSArray * arraynav = nav.viewControllers;
-//                UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
-//                tabViewController.selectedIndex = 2;
-//            } else {
-                // Fallback on earlier versions
                 AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
                 
                 HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
                 NSArray * arraynav = nav.viewControllers;
                 UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
                 tabViewController.selectedIndex = 2;
-//            }
- 
+
         }
     };
 }
+    
+-(void)ShowProfilePhoto
+{
+    
+    //    optionArray = [NSArray array];
+    NSArray *optionArray = @[@"拍照",@"相册选择照片"];
+    ZGQActionSheetView *sheetView = [[ZGQActionSheetView alloc] initWithOptions:optionArray];
+    sheetView.tag=101;
+    sheetView.delegate = self;
+    [sheetView show];
+}
+- (void)ZGQActionSheetView:(ZGQActionSheetView *)sheetView didSelectRowAtIndex:(NSInteger)index text:(NSString *)text {
+    NSLog(@"%zd,%@",index,text);
+    if(sheetView.tag==101)
+    {
+        if (index==0) {
+            [self openCamera];
+        }else if (index==1)
+        {
+            [self openAlbum];
+        }
+    }
+}
+    
+    
 - (void)setyinying
 {
     self.ZtopView.layer.masksToBounds = NO;
@@ -280,20 +354,7 @@
 
 //        ZjiluViewController * avc = [[ZjiluViewController alloc] init];
 //        [self pushRootNav:avc animated:YES];
-        
-//        // 这是从一个模态出来的页面跳到tabbar的某一个页面
-//        if (@available(iOS 13.0, *)) {
-//            NSArray *array =[[[UIApplication sharedApplication] connectedScenes] allObjects];
-//            UIWindowScene *windowScene = (UIWindowScene *)array[0];
-//            SceneDelegate *delegate =(SceneDelegate *)windowScene.delegate;
-////            UITabBarController* tabViewController=(UITabBarController *) delegate.window.rootViewController;
-////            tabViewController.selectedIndex = 1;
-//            HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
-//            NSArray * arraynav = nav.viewControllers;
-//            UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
-//            tabViewController.selectedIndex = 1;
-//
-//        } else {
+
             // Fallback on earlier versions
             AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
 //            UITabBarController *tabViewController = (UITabBarController *) delegate.window.rootViewController;
@@ -302,7 +363,7 @@
             NSArray * arraynav = nav.viewControllers;
             UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
             tabViewController.selectedIndex = 1;
-//        }
+
         
         
     }else if(indexPath.section==1)
@@ -350,4 +411,239 @@
     }];
 }
 
+    
+    
+    
+    
+    
+    
+-(void)postUploadHeadImage:(UIImage *)image
+{
+    ///暂时有问题
+    [UHud showHUDLoading];
+//    avatar
+    NSArray * arr = [NSArray arrayWithObjects:image, nil];
+    [[HttpManagement shareManager] uploadImagesWihtImgArr:arr url:[NSString stringWithFormat:@"%@%@",FWQURL,YHupdateavatar] Tokenbool:NO parameters:nil block:^(id objc, BOOL success) {
+        [UHud hideLoadHud];
+        if(success==YES)
+        {
+                NSDictionary *dict=(NSDictionary *)objc;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+//                    NSDictionary *dictdata =[dict objectForKey:@"user"];
+                   
+//                    [UHud showSuccessWithStatus:@"获取成功" delay:2.f];
+//                }else if([code intValue]==20){
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+        }else{
+            NSError * error = (NSError *)objc;
+            NSLog(@"shareManager error == %@",error);
+            [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+        }
+    }blockprogress:^(id progress) {
+        
+    }];
+}
+    
+- (void)openCamera
+{
+    //判断是否已授权
+    //    AVAuthorizationStatus autjStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
+        AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        if (authStatus == AVAuthorizationStatusDenied||authStatus == AVAuthorizationStatusRestricted) {
+            UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                           message:@"在设置-隐私中允许 U视频 访问摄像头" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+                //响应事件
+                NSLog(@"action = %@", action);
+                [self dismissViewControllerAnimated:YES completion:nil];
+                //                [self dismissViewControllerAnimated:YES completion:nil];
+            }];
+            
+            [alert addAction:defaultAction];
+            [self presentViewController:alert animated:YES completion:nil];
+            
+        }else
+        {
+            UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+            ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
+            //            ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            ipc.delegate = self;
+            [self.navigationController presentViewController:ipc animated:YES completion:nil];
+//            [self pushRootNav:ipc animated:YES];
+        }
+    }
+}
+
+-(void)openSDKHQImageEdit:(UIImage*)imageBD
+{
+     HQImageEditViewController *vc = [[HQImageEditViewController alloc] init];
+        vc.originImage = imageBD;
+        vc.delegate = self;
+        vc.maskViewAnimation = YES;
+    //    vc.editViewSize = CGSizeMake(300, 200);
+    //    [self presentViewController:vc animated:YES completion:nil];
+//        [self.navigationController pushViewController:vc animated:YES];
+    [self pushRootNav:vc animated:YES];
+}
+#pragma mark - HQImageEditViewControllerDelegate
+- (void)editController:(HQImageEditViewController *)vc finishiEditShotImage:(UIImage *)image originSizeImage:(UIImage *)originSizeImage {
+//    self.imageView.image = originSizeImage;
+//    [vc dismissViewControllerAnimated:YES completion:nil];
+    [self postUploadHeadImage:originSizeImage];
+    [vc.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)editControllerDidClickCancel:(HQImageEditViewController *)vc {
+//    [vc dismissViewControllerAnimated:YES completion:nil];
+    [vc.navigationController popViewControllerAnimated:YES];
+}
+
+
+- (void)openAlbum
+{
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+        //        TZImagePickerController *imagePickerVc = [[TZImagePickerController alloc] initWithMaxImagesCount:1 delegate:self];
+        //        [self presentViewController:imagePickerVc animated:YES completion:nil];
+        UIImagePickerController *ipc = [[UIImagePickerController alloc] init];
+        //            ipc.sourceType = UIImagePickerControllerSourceTypeCamera;
+        ipc.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        ipc.delegate = self;
+        [self.navigationController presentViewController:ipc animated:YES completion:nil];
+//        [self pushRootNav:ipc animated:YES];
+    }else{
+        //        [self showHint:@"请打开允许访问相册权限"];
+        NSLog(@"请打开允许访问相册权限");
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"提示"
+                                                                       message:@"在设置-隐私中允许 U视频 访问相册" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+            //响应事件
+            NSLog(@"action = %@", action);
+            [self dismissViewControllerAnimated:YES completion:nil];
+            //                [self dismissViewControllerAnimated:YES completion:nil];
+        }];
+        
+        [alert addAction:defaultAction];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
+#pragma mark - UIImagePickerControllerDelegate
+//相机选的图片
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
+{
+    // 关闭相册\相机
+    [picker dismissViewControllerAnimated:YES completion:nil];
+//    [self.navigationController popViewControllerAnimated:YES];
+    //     [self.navigationController popViewControllerAnimated:NO];
+    // 往数据数组拼接图片
+    //    [self.dataArr addObject:info[UIImagePickerControllerOriginalImage]];
+    NSLog(@"MMMM= %@",info[UIImagePickerControllerOriginalImage]);
+    [self openSDKHQImageEdit:[MyViewController compressImageQuality:info[UIImagePickerControllerOriginalImage] toByte:51200]];
+//    [self postUploadHeadImage:[InformationViewController compressImageQuality:info[UIImagePickerControllerOriginalImage] toByte:51200]];
+}
+//取消按钮
+- (void)imagePickerControllerDidCancel:(TZImagePickerController *)picke{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    NSDictionary *dict = @{@"Dismiss":@"1"};
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"changeNext" object:nil userInfo:dict];
+}
+// 相册选的图片
+- (void)imagePickerController:(TZImagePickerController *)picker didFinishPickingPhotos:(NSArray<UIImage *> *)photos sourceAssets:(NSArray *)assets isSelectOriginalPhoto:(BOOL)isSelectOriginalPhoto{
+    
+//    [self postUploadHeadImage:[InformationViewController compressImageQuality:(UIImage*)photos[0] toByte:51200]];
+    [self openSDKHQImageEdit:[MyViewController compressImageQuality:(UIImage*)photos[0] toByte:51200]];
+}
+
+
+
+-(NSData *)compressWithMaxLength:(NSUInteger)maxLength image_P:(UIImage *)imageVV{
+    // Compress by quality
+    CGFloat compression = 1;
+    NSData *data = UIImageJPEGRepresentation(imageVV, compression);
+    //NSLog(@"Before compressing quality, image size = %ld KB",data.length/1024);
+    if (data.length < maxLength) return data;
+    
+    CGFloat max = 1;
+    CGFloat min = 0;
+    for (int i = 0; i < 6; ++i) {
+        compression = (max + min) / 2;
+        data = UIImageJPEGRepresentation(imageVV, compression);
+        //NSLog(@"Compression = %.1f", compression);
+        //NSLog(@"In compressing quality loop, image size = %ld KB", data.length / 1024);
+        if (data.length < maxLength * 0.9) {
+            min = compression;
+        } else if (data.length > maxLength) {
+            max = compression;
+        } else {
+            break;
+        }
+    }
+    //NSLog(@"After compressing quality, image size = %ld KB", data.length / 1024);
+    if (data.length < maxLength) return data;
+    UIImage *resultImage = [UIImage imageWithData:data];
+    // Compress by size
+    NSUInteger lastDataLength = 0;
+    while (data.length > maxLength && data.length != lastDataLength) {
+        lastDataLength = data.length;
+        CGFloat ratio = (CGFloat)maxLength / data.length;
+        //NSLog(@"Ratio = %.1f", ratio);
+        CGSize size = CGSizeMake((NSUInteger)(resultImage.size.width * sqrtf(ratio)),
+                                 (NSUInteger)(resultImage.size.height * sqrtf(ratio))); // Use NSUInteger to prevent white blank
+        UIGraphicsBeginImageContext(size);
+        [resultImage drawInRect:CGRectMake(0, 0, size.width, size.height)];
+        resultImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        data = UIImageJPEGRepresentation(resultImage, compression);
+        //NSLog(@"In compressing size loop, image size = %ld KB", data.length / 1024);
+    }
+    //NSLog(@"After compressing size loop, image size = %ld KB", data.length / 1024);
+    return data;
+}
+
+
++ (UIImage *)compressImageQuality:(UIImage *)image toByte:(NSInteger)maxLength {
+    CGFloat compression = 1;
+    NSData *data = UIImageJPEGRepresentation(image, compression);
+    if (data.length < maxLength) return image;
+    CGFloat max = 1;
+    CGFloat min = 0;
+    for (int i = 0; i < 6; ++i) {
+        compression = (max + min) / 2;
+        data = UIImageJPEGRepresentation(image, compression);
+        if (data.length < maxLength * 0.9) {
+            min = compression;
+        } else if (data.length > maxLength) {
+            max = compression;
+        } else {
+            break;
+        }
+    }
+    UIImage *resultImage = [UIImage imageWithData:data];
+    return resultImage;
+}
+
+-(NSData *)imageData:(UIImage *)myimage
+{
+    NSData *data=UIImageJPEGRepresentation(myimage, 1.0);
+    if (data.length>100*1024) {
+        if (data.length>2*1024*1024) {//2M以及以上
+            data=UIImageJPEGRepresentation(myimage, 0.05);
+        }else if (data.length>1024*1024) {//1M-2M
+            data=UIImageJPEGRepresentation(myimage, 0.1);
+        }else if (data.length>512*1024) {//0.5M-1M
+            data=UIImageJPEGRepresentation(myimage, 0.2);
+        }else if (data.length>200*1024) {//0.25M-0.5M
+            data=UIImageJPEGRepresentation(myimage, 0.4);
+        }
+    }
+    return data;
+}
 @end

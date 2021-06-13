@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UITextField * onenewTextfield;
 
 @property(nonatomic,strong)UITextField * twonewTextfield;
+@property(nonatomic,strong)UILabel * tispLabel;
 @property(nonatomic,strong)UIButton * XGBtn;
 
 @end

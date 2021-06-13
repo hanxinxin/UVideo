@@ -27,4 +27,20 @@ typedef void (^SuccessBlock)(id _Nullable responseObject);
 /// Post 请求
 -(void)PostNewWork:(NSString * _Nullable )url Dictionary:(NSDictionary *_Nullable)params success:(SuccessBlock _Nullable )successBlock failure:(failureBlock _Nullable )failureBlock;
 
+
+/// Post 请求
+/**
+ *  图片上传
+ *
+ *  @param imgArr 图片数组
+ *  @param block  返回图片地址数组
+ */
+- (void)uploadImagesWihtImgArr:(NSArray *)imgArr
+                           url:(NSString *)url
+                     Tokenbool:(BOOL)Tokenbool
+                    parameters:(id)parameters
+                         block:(void (^)(id objc,BOOL success))block
+                 blockprogress:(void(^)(id progress))progress;
+
+
 @end

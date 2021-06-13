@@ -6,7 +6,7 @@
 //
 
 #import "promptbottomView.h"
-@interface promptbottomView ()
+@interface promptbottomView ()<UIGestureRecognizerDelegate>
 @end
 @implementation promptbottomView
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -30,7 +30,7 @@
 {
     UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(event:)];
 //    步骤3：给View添加手势
-
+    tapGesture.delegate=self;
      //设置需要连续点击几次才响应，默认点击1次
      [tapGesture setNumberOfTapsRequired:1];
     //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
@@ -54,10 +54,17 @@
     }
 }
 - (IBAction)ok_touch:(id)sender {
+    
+    
     //确定
     if (self.touchIndex) {
         self.touchIndex(1);
     }
 }
-
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    if ([touch.view isKindOfClass:[UIButton class]]){
+        return NO;
+    }
+    return YES;
+}
 @end

@@ -62,7 +62,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 
 -(void)InitUI{
     self.topImageBg = [[UIImageView alloc] initWithFrame:CGRectMake(30, 40, self.view.width-60, 200)];
-    [self.topImageBg setImage:[UIImage imageNamed:@"loginBg"]];
+    [self.topImageBg setImage:[UIImage imageNamed:@"kaunchlogo"]];
     [self.view addSubview:self.topImageBg];
     self.centerView = [[UIView alloc] initWithFrame:CGRectMake(30, 252, self.view.width-60, 210-40)];
     self.centerView.layer.cornerRadius=6;
@@ -77,7 +77,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.emailTextfield = [[UITextField alloc] initWithFrame:CGRectMake(8, 50, self.centerView.width-16, 42)];
     
     self.emailTextfield.placeholder=@"请输入邮箱";
-    self.emailTextfield.keyboardType=UIKeyboardTypeURL;
+    self.emailTextfield.keyboardType=UIKeyboardTypeDefault;
     self.emailTextfield.borderStyle=UITextBorderStyleRoundedRect;
     self.emailTextfield.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
     self.emailTextfield.delegate=self;
@@ -105,25 +105,26 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.CodeTextfield.borderStyle=UITextBorderStyleNone;
     self.CodeTextfield.delegate=self;
     [self.CodeView addSubview:self.CodeTextfield];
-    self.TuXingCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.CodeTextfield.right-8, 6, 100, 30)];
-    self.TuXingCodeBtn.hidden=NO;
-    self.TuXingCodeBtn.layer.cornerRadius = 4;
-    self.TuXingCodeBtn.backgroundColor=[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0];
-//    [self.TuXingCodeBtn setTitle:@"验证码" forState:(UIControlStateNormal)];
-    [self.TuXingCodeBtn setImage:[captcha_data isEqualToString:@""]?[UIImage imageNamed:@"image"]:[self base64Image:captcha_data] forState:(UIControlStateNormal)];
-    [self.TuXingCodeBtn addTarget:self action:@selector(TuXingCodeBtn_touch:) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.TuXingCodeBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-    [self.CodeView addSubview:self.TuXingCodeBtn];
+   
     
-    self.getCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.CodeTextfield.right-8, 6, 70, 30)];
+    self.getCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.CodeTextfield.right-8, 6, 100, 30)];
     self.getCodeBtn.layer.cornerRadius = 4;
     self.getCodeBtn.hidden=YES;
     self.getCodeBtn.backgroundColor=[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0];
     [self.getCodeBtn setTitle:@"验证码" forState:(UIControlStateNormal)];
+    [self.getCodeBtn.titleLabel setFont:[UIFont systemFontOfSize:14.f]];
     [self.getCodeBtn addTarget:self action:@selector(getCodeBtn_touch:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.getCodeBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     [self.CodeView addSubview:self.getCodeBtn];
-    
+    self.TuXingCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.CodeTextfield.right-8, 6, 100, 30)];
+    self.TuXingCodeBtn.hidden=NO;
+    self.TuXingCodeBtn.layer.cornerRadius = 4;
+    self.TuXingCodeBtn.backgroundColor=[UIColor whiteColor];
+//    [self.TuXingCodeBtn setTitle:@"验证码" forState:(UIControlStateNormal)];
+//    [self.TuXingCodeBtn setImage:[captcha_data isEqualToString:@""]?[UIImage imageNamed:@"image"]:[self base64Image:captcha_data] forState:(UIControlStateNormal)];
+    [self.TuXingCodeBtn addTarget:self action:@selector(TuXingCodeBtn_touch:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.TuXingCodeBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    [self.CodeView addSubview:self.TuXingCodeBtn];
     self.backBtn = [[UIButton alloc] init];
     self.backBtn.frame = CGRectMake(30,self.centerView.bottom+15,((self.view.width-68)/2)-5,46);
     self.backBtn.alpha = 1;
@@ -232,8 +233,15 @@ static CGFloat INTERVAL_KEYBOARD = 500;
                 if(![phrase_id isEqualToString:@""])
                 {
                     [UHud showHUDLoading];
-                    NSDictionary * dict = @{@"username":self.emailTextfield.text,@"password":self.passwordTextfield.text,@"email":self.emailTextfield.text,@"captcha":self.CodeTextfield.text,@"phrase_id":phrase_id};
-                    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,emailzhuce] Dictionary:dict success:^(id  _Nullable responseObject) {
+                    NSDictionary * dict =[[NSDictionary alloc] init];
+                    if(self.menuIndex==1)
+                    {
+                        dict =@{@"username":self.emailTextfield.text,@"password":self.passwordTextfield.text,@"captcha":self.CodeTextfield.text,@"phrase_id":phrase_id};
+                    }else if(self.menuIndex==2)
+                    {
+                        dict =@{@"password":self.passwordTextfield.text,@"email":self.emailTextfield.text,@"captcha":self.CodeTextfield.text,@"phrase_id":phrase_id};
+                    }
+                    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,(self.menuIndex==1)?zhuceURL:emailzhuce] Dictionary:dict success:^(id  _Nullable responseObject) {
                 //        NSLog(@"post responseObject == %@",responseObject);
                         [UHud hideLoadHud];
                         NSDictionary *dict=(NSDictionary *)responseObject;
@@ -243,13 +251,20 @@ static CGFloat INTERVAL_KEYBOARD = 500;
                             NSDictionary *dictdata=[dict objectForKey:@"data"];
                             NSDictionary *userdata =[dictdata objectForKey:@"user"];
                             NSString * email = [userdata objectForKey:@"email"];
-                            NSString * vip_expired_time = [userdata objectForKey:@"vip_expired_time"];
+                            NSNumber * vip_expired_time = [userdata objectForKey:@"vip_expired_time"];
+                            NSString * nickname = [userdata objectForKey:@"nickname"];
+                            NSString * username = [userdata objectForKey:@"username"];
+                            NSString * avatar = [userdata objectForKey:@"avatar"];
                             
                             NSDictionary *tokendata =[dictdata objectForKey:@"token"];
                             NSString * token = [tokendata objectForKey:@"token"];
-                            NSString *expired_time=[tokendata objectForKey:@"expired_time"];
+                            NSNumber *expired_time=[tokendata objectForKey:@"expired_time"];
                             [[NSUserDefaults standardUserDefaults] setValue:email forKey:@"UserZH"];
+                            [[NSUserDefaults standardUserDefaults] setValue:nickname forKey:@"nickname"];
+                            [[NSUserDefaults standardUserDefaults] setValue:username forKey:@"username"];
+                            [[NSUserDefaults standardUserDefaults] setValue:avatar forKey:@"avatar"];
                             [[NSUserDefaults standardUserDefaults] setValue:vip_expired_time forKey:@"vip_expired_time"];
+                            
                             [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"UserToken"];
                             [[NSUserDefaults standardUserDefaults] setObject:expired_time forKey:@"expired_time"];
                             [UHud showHudWithStatus:@"注册成功" delay:2.f];

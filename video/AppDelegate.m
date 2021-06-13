@@ -54,7 +54,17 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
-   
+    if (@available(iOS 11.0, *)) {
+
+            UITableView.appearance.estimatedRowHeight = 0;
+
+            UITableView.appearance.estimatedSectionFooterHeight = 0;
+
+            UITableView.appearance.estimatedSectionHeaderHeight = 0;
+
+            UITableView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
+
+        }
     
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:0.f], NSForegroundColorAttributeName: [UIColor blackColor]} forState:UIControlStateNormal];
            
@@ -79,22 +89,48 @@
         [TimeOfBootCount setValue:@"" forKey:@"Userrole"];
         [TimeOfBootCount setValue:@"" forKey:@"UserZH"];
         [TimeOfBootCount setValue:@"" forKey:@"UserPW"];
-        [TimeOfBootCount setValue:@"0" forKey:@"SetDevNumber"];
-        [TimeOfBootCount setValue:@"" forKey:@"expired_time"];
-        [TimeOfBootCount setValue:@"" forKey:@"vip_expired_time"];
+        [TimeOfBootCount setValue:@"" forKey:@"nickname"];
+        [TimeOfBootCount setValue:@"" forKey:@"username"];
+        [TimeOfBootCount setValue:@"" forKey:@"avatar"];
+        [TimeOfBootCount setValue:@(0) forKey:@"expired_time"];
+        [TimeOfBootCount setValue:@(0) forKey:@"vip_expired_time"];
         NSLog(@"第一次启动");
     }else{
         if (![[[NSUserDefaults standardUserDefaults] valueForKey:@"UserToken"]isEqualToString:@""]) {
             
         }
         NSLog(@"不是第一次启动");
+        
+        if(!([expired_time_loca intValue]==0))
+        {
+            NSLog(@"[[self getCurrentTimestamp] intValue]= %d   [expired_time_loca intValue]=%d",[[self getCurrentTimestamp] intValue],[expired_time_loca intValue]);
+            if([[self getCurrentTimestamp] intValue]>[expired_time_loca intValue])
+            {
+                NSUserDefaults *TimeOfBootCount = [NSUserDefaults standardUserDefaults];
+                [TimeOfBootCount setValue:@"" forKey:@"UserToken"];
+                [TimeOfBootCount setValue:@"" forKey:@"Userrole"];
+                [TimeOfBootCount setValue:@"" forKey:@"UserZH"];
+                [TimeOfBootCount setValue:@"" forKey:@"UserPW"];
+                [TimeOfBootCount setValue:@"" forKey:@"nickname"];
+                [TimeOfBootCount setValue:@"" forKey:@"username"];
+                [TimeOfBootCount setValue:@"" forKey:@"avatar"];
+                [TimeOfBootCount setValue:@(0) forKey:@"expired_time"];
+                [TimeOfBootCount setValue:@(0) forKey:@"vip_expired_time"];
+            }
+        }
     }
     
     
     
     return YES;
 }
-
+// 获取当前时间戳
+- (NSString *)getCurrentTimestamp {
+NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0]; // 获取当前时间0秒后的时间
+NSTimeInterval time = [date timeIntervalSince1970];// *1000 是精确到毫秒(13位),不乘就是精确到秒(10位)
+NSString *timeString = [NSString stringWithFormat:@"%.0f", time];
+return timeString;
+}
 -(UITabBarController *)tabBarController
 {
     UITabBarController * tabBarC = [[UITabBarController alloc] init];

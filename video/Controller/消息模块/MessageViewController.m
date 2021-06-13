@@ -15,6 +15,9 @@
 @property(nonatomic,strong)UITableView*downtableview1;
 @property (nonatomic ,strong) NSMutableArray*Listarray1;
 @property (nonatomic ,strong) NSMutableArray *deleteArray;//删除的数据
+
+@property(nonatomic,assign)NSInteger page;
+
 @property (nonatomic ,strong) UIButton *btn;//编辑按钮
 @property (nonatomic ,assign) BOOL isInsertEdit;//tableview编辑方式的判断
 @property (nonatomic ,strong) BottomView *bottom_view;//底部视图
@@ -70,6 +73,7 @@
     self.title=@"通知&公告";
     self.hiddenLeftBtn=YES;
     self.statusBarTextIsWhite=NO;
+    self.page=1;
     self.statusBarBackgroundColor=[UIColor blackColor];
     self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
     _isInsertEdit = NO;
@@ -79,8 +83,7 @@
     [self initnilView];
     [self Addtableview1];;
     
-    ////显示无内容的view
-    [self addnilView];
+   
 }
 ///// 加载无内容显示的view
 -(void)initnilView
@@ -131,6 +134,87 @@
     // 注册cell
     [self.downtableview1 registerNib:[UINib nibWithNibName:NSStringFromClass([MsgTableViewCell class]) bundle:nil] forCellReuseIdentifier:CellID];
     [self.view addSubview:self.downtableview1];
+    // 为瀑布流控件添加下拉加载和上拉加载
+    self.downtableview1.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self getheaderData];
+    }];
+    // 第一次进入则自动加载
+    [self.downtableview1.mj_header beginRefreshing];
+    
+    
+    self.downtableview1.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self getfootData];
+    }];
+}
+
+-(void)getheaderData
+{
+    
+    
+    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"pagesize":@"50"};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,msgListurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        [self.downtableview1.mj_header endRefreshing];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary *dictdata =[dict objectForKey:@"data"];
+            NSNumber* message_total=[dictdata objectForKey:@"message_total"];
+            if([message_total intValue]==0)
+            {
+                ////显示无内容的view
+                [self addnilView];
+            }else
+            {
+                
+            }
+        }else if([code intValue]==20){
+            NSString * message = [dict objectForKey:@"message"];
+//            [UHud showHUDToView:self.view text:message];
+//            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [self.downtableview1.mj_header endRefreshing];
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+
+}
+-(void)getfootData
+{
+    
+    
+    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page+1],@"pagesize":@"50"};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,msgListurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        [self.downtableview1.mj_footer endRefreshing];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary *dictdata =[dict objectForKey:@"data"];
+            self.page+=1;
+            
+        }else if([code intValue]==20){
+            NSString * message = [dict objectForKey:@"message"];
+//            [UHud showHUDToView:self.view text:message];
+//            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [self.downtableview1.mj_footer endRefreshing];
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+
 }
 
 #pragma mark -------- Tableview -------

@@ -11,6 +11,7 @@
 @property(nonatomic,strong)UITableView*downtableview;
 @property(nonatomic,strong)NSMutableArray*arrtitle;
 @property(nonatomic,strong)NSMutableArray*Darray;
+@property(nonatomic,assign)NSInteger page;
 @end
 
 @implementation chongzhiListViewController
@@ -21,6 +22,7 @@
 //    self.navBarColor=[UIColor whiteColor];
 //    self.hiddenLeftBtn=YES;
     self.title=@"充值记录";
+    self.page=1;
     self.hiddenLeftBtn=YES;
     self.statusBarTextIsWhite=NO;
     self.statusBarBackgroundColor=[UIColor blackColor];
@@ -31,9 +33,9 @@
 -(void)Addtableview
 {
     arrtitle=[NSMutableArray arrayWithCapacity:0];
-    [arrtitle addObject:[NSArray arrayWithObjects:@"2021-10-22 19:32",@"2021-10-23 19:32",@"2021-10-24 19:32",@"2021-10-27 19:32", nil]];
+//    [arrtitle addObject:[NSArray arrayWithObjects:@"2021-10-22 19:32",@"2021-10-23 19:32",@"2021-10-24 19:32",@"2021-10-27 19:32", nil]];
     Darray=[NSMutableArray arrayWithCapacity:0];
-    [Darray addObject:[NSArray arrayWithObjects:@"会员年卡 99$",@"会员月卡 9.99$",@"会员月卡 9.99$",@"会员月卡 9.99$", nil]];
+//    [Darray addObject:[NSArray arrayWithObjects:@"会员年卡 99$",@"会员月卡 9.99$",@"会员月卡 9.99$",@"会员月卡 9.99$", nil]];
     self.downtableview=[[UITableView alloc] init];
     self.downtableview.frame=CGRectMake(20, 0, SCREEN_WIDTH-40, SCREENH_HEIGHT);
     self.downtableview.backgroundColor=[UIColor clearColor];
@@ -44,7 +46,99 @@
     self.downtableview.separatorStyle=UITableViewCellSeparatorStyleNone;
 
     [self.view addSubview:self.downtableview];
+    // 为瀑布流控件添加下拉加载和上拉加载
+    self.downtableview.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self getheaderData];
+    }];
+    // 第一次进入则自动加载
+    [self.downtableview.mj_header beginRefreshing];
+    
+    
+    self.downtableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self getfootData];
+    }];
 }
+
+-(void)getheaderData
+{
+    
+    
+    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"pagesize":@"50"};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,rechargeRecordurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        [self.downtableview.mj_header endRefreshing];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary *dictdata =[dict objectForKey:@"data"];
+            
+            NSNumber* recharge_record_total=[dictdata objectForKey:@"recharge_record_total"];
+            if([recharge_record_total intValue]==0)
+            {
+                [UHud showTXTWithStatus:@"没有充值记录" delay:2.f];
+            }else
+            {
+                
+            }
+        }else if([code intValue]==20){
+            NSString * message = [dict objectForKey:@"message"];
+//            [UHud showHUDToView:self.view text:message];
+//            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [self.downtableview.mj_header endRefreshing];
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+
+}
+-(void)getfootData
+{
+    
+    
+    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page+1],@"pagesize":@"50"};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,rechargeRecordurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        [self.downtableview.mj_footer endRefreshing];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary *dictdata =[dict objectForKey:@"data"];
+            self.page+=1;
+            
+            NSNumber* recharge_record_total=[dictdata objectForKey:@"recharge_record_total"];
+            if([recharge_record_total intValue]==0)
+            {
+                [UHud showTXTWithStatus:@"没有更多记录" delay:2.f];
+            }else
+            {
+                
+            }
+            
+        }else if([code intValue]==20){
+            NSString * message = [dict objectForKey:@"message"];
+//            [UHud showHUDToView:self.view text:message];
+//            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [self.downtableview.mj_footer endRefreshing];
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+
+}
+
+
 
 #pragma mark -------- Tableview -------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -52,8 +146,13 @@
 }
 //4、设置组数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    NSArray * arr = arrtitle[0];
-    return arr.count;
+    if(arrtitle.count>0)
+    {
+        NSArray * arr = arrtitle[0];
+        return arr.count;
+    }else{
+        return 0;
+    }
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {

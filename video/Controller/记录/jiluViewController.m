@@ -16,8 +16,11 @@
 @property(nonatomic,strong)UIView*topView;
 @property(nonatomic,strong)UITableView*downtableview1;
 @property (nonatomic ,strong)NSMutableArray*Listarray1;
+@property (nonatomic,assign)NSInteger page1;
+
 @property(nonatomic,strong)UITableView*downtableview2;
 @property (nonatomic ,strong)NSMutableArray*Listarray2;
+@property (nonatomic,assign)NSInteger page2;
 @property(nonatomic,strong)UIButton *menuBtn1;
 @property(nonatomic,strong)UIButton *menuBtn2;
 
@@ -37,6 +40,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
    
+    self.page1=1;
+    self.page2=1;
     
     [self addtopview];
     [self initnilView];
@@ -202,6 +207,18 @@
     // 注册cell
     [self.downtableview1 registerNib:[UINib nibWithNibName:NSStringFromClass([SCJTableViewCell class]) bundle:nil] forCellReuseIdentifier:cellID];
     [self.view addSubview:self.downtableview1];
+    // 为瀑布流控件添加下拉加载和上拉加载
+    self.downtableview1.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self getheaderData1];
+    }];
+    // 第一次进入则自动加载
+    [self.downtableview1.mj_header beginRefreshing];
+    
+    
+    self.downtableview1.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self getfootData1];
+    }];
+
 }
 -(void)Addtableview2
 {
@@ -234,7 +251,147 @@
     // 注册cell
     [self.downtableview2 registerNib:[UINib nibWithNibName:NSStringFromClass([SliderTableViewCell class]) bundle:nil] forCellReuseIdentifier:cellID2];
     [self.view addSubview:self.downtableview2];
+    // 为瀑布流控件添加下拉加载和上拉加载
+    self.downtableview2.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self getheaderData2];
+    }];
+    // 第一次进入则自动加载
+    [self.downtableview2.mj_header beginRefreshing];
+    
+    
+    self.downtableview2.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self getfootData2];
+    }];
 }
+
+-(void)getheaderData1
+{
+    
+    
+//    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page1],@"pagesize":@"50"};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,videoFavoriteurl] Dictionary:nil success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        [self.downtableview1.mj_header endRefreshing];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary *dictdata =[dict objectForKey:@"data"];
+            
+            
+        }else if([code intValue]==20){
+            NSString * message = [dict objectForKey:@"message"];
+//            [UHud showHUDToView:self.view text:message];
+//            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [self.downtableview1.mj_header endRefreshing];
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+
+}
+-(void)getfootData1
+{
+    
+    
+    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page1+1],@"pagesize":@"50"};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,videoFavoriteurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        [self.downtableview1.mj_footer endRefreshing];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary *dictdata =[dict objectForKey:@"data"];
+            self.page1+=1;
+            
+        }else if([code intValue]==20){
+            NSString * message = [dict objectForKey:@"message"];
+//            [UHud showHUDToView:self.view text:message];
+//            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [self.downtableview1.mj_footer endRefreshing];
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+
+}
+
+-(void)getheaderData2
+{
+    
+    
+//    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page2],@"pagesize":@"50"};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,videoHistoryurl] Dictionary:nil success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        [self.downtableview2.mj_header endRefreshing];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary *dictdata =[dict objectForKey:@"data"];
+            
+            
+        }else if([code intValue]==20){
+            NSString * message = [dict objectForKey:@"message"];
+//            [UHud showHUDToView:self.view text:message];
+//            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [self.downtableview2.mj_header endRefreshing];
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+
+}
+-(void)getfootData2
+{
+    
+    
+    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page2+1],@"pagesize":@"50"};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,videoHistoryurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        [self.downtableview2.mj_footer endRefreshing];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary *dictdata =[dict objectForKey:@"data"];
+            self.page2+=1;
+            
+        }else if([code intValue]==20){
+            NSString * message = [dict objectForKey:@"message"];
+//            [UHud showHUDToView:self.view text:message];
+//            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [self.downtableview2.mj_footer endRefreshing];
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+
+}
+
+
+
 #pragma mark -------- Tableview -------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     if(tableView.tag==10001)

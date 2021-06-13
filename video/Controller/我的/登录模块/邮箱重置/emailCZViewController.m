@@ -12,6 +12,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 @interface emailCZViewController ()<UITextFieldDelegate>
 {
     NSDictionary *keyboardInfo;
+    NSString * phrase_id;
 }
 @property(nonatomic,strong)UIView*topView;
 @property(nonatomic,strong)UIButton *menuBtn1;
@@ -32,7 +33,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.statusBarBackgroundColor=[UIColor blackColor];
     self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
     
-    
+    phrase_id=@"";
 //    加载UI
     [self InitUI];
     [self addNoticeForKeyboard];
@@ -81,17 +82,19 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.CodeView.layer.borderWidth = 1;
     self.CodeView.layer.cornerRadius = 6;
     [self.centerView addSubview:self.CodeView];;
-    self.CodeTextfield = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, self.CodeView.width-92, 42)];
+    self.CodeTextfield = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, self.CodeView.width-116, 42)];
     self.CodeTextfield.placeholder=@"请输入验证码";
     self.CodeTextfield.keyboardType=UIKeyboardTypeNumberPad;
     self.CodeTextfield.borderStyle=UITextBorderStyleNone;
     self.CodeTextfield.delegate=self;
     [self.CodeView addSubview:self.CodeTextfield];
     
-    self.getCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.CodeTextfield.right-8, 6, 70, 30)];
+    self.getCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.CodeTextfield.right-8, 6, 100, 30)];
     self.getCodeBtn.layer.cornerRadius = 4;
     self.getCodeBtn.backgroundColor=[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0];
     [self.getCodeBtn setTitle:@"验证码" forState:(UIControlStateNormal)];
+    [self.getCodeBtn.titleLabel setFont:[UIFont systemFontOfSize:14.f]];
+    [self.getCodeBtn addTarget:self action:@selector(getCodeBtn_touch:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.getCodeBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     [self.CodeView addSubview:self.getCodeBtn];
     
@@ -134,15 +137,129 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
--(void)ZC_touch:(id)sender
+//-(void)ZC_touch:(id)sender
+//{
+//    
+//}
+
+-(void)getCodeBtn_touch:(id)sender
 {
+    if(self.emailTextfield.text.length>0)
+    {
+        [UHud showHUDLoading];
+        self->phrase_id=@"";
+        NSDictionary * dict = @{@"email":self.emailTextfield.text};
+        [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,emailYZMurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+    //        NSLog(@"post responseObject == %@",responseObject);
+            [UHud hideLoadHud];
+            NSDictionary *dict=(NSDictionary *)responseObject;
+            NSNumber * code = [dict objectForKey:@"error"];
+            if([code intValue]==0)
+            {
+                NSDictionary *dictdata =[dict objectForKey:@"data"];
+                self->phrase_id=[dictdata objectForKey:@"phrase_id"];
+                [self verifyEvent];
+                [UHud showSuccessWithStatus:@"获取成功" delay:2.f];
+                
+            }else if([code intValue]==20){
+                NSString * message = [dict objectForKey:@"message"];
+    //            [UHud showHUDToView:self.view text:message];
+    //            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
+                [UHud showTXTWithStatus:message delay:2.f];
+            }
     
-}
--(void)XG_touch:(id)sender
-{
-    
+        } failure:^(NSError * _Nullable error) {
+            [UHud hideLoadHud];
+            NSLog(@"shareManager error == %@",error);
+            [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+        }];
+    }else{
+        [UHud showTXTWithStatus:@"请输入正确的邮箱" delay:2.f];
+    }
 }
 
+
+-(void)XG_touch:(id)sender
+{
+    __block emailCZViewController *weakSelf = self;
+    [UHud showHUDLoading];
+    NSDictionary * dict =[[NSDictionary alloc] init];
+    
+        dict =@{@"email":self.emailTextfield.text,@"new_password":self.passwordTextfield.text,@"captcha":self.CodeTextfield.text,@"phrase_id":phrase_id};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,resetemaliPW] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary *dictdata=[dict objectForKey:@"data"];
+            NSDictionary *userdata =[dictdata objectForKey:@"user"];
+            NSString * email = [userdata objectForKey:@"email"];
+            NSNumber * vip_expired_time = [userdata objectForKey:@"vip_expired_time"];
+            NSString * nickname = [userdata objectForKey:@"nickname"];
+            NSString * username = [userdata objectForKey:@"username"];
+            NSString * avatar = [userdata objectForKey:@"avatar"];
+            
+            NSDictionary *tokendata =[dictdata objectForKey:@"token"];
+            NSString * token = [tokendata objectForKey:@"token"];
+            NSNumber *expired_time=[tokendata objectForKey:@"expired_time"];
+            [[NSUserDefaults standardUserDefaults] setValue:email forKey:@"UserZH"];
+            [[NSUserDefaults standardUserDefaults] setValue:nickname forKey:@"nickname"];
+            [[NSUserDefaults standardUserDefaults] setValue:username forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults] setValue:avatar forKey:@"avatar"];
+            [[NSUserDefaults standardUserDefaults] setValue:vip_expired_time forKey:@"vip_expired_time"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"UserToken"];
+            [[NSUserDefaults standardUserDefaults] setObject:expired_time forKey:@"expired_time"];
+            
+            [UHud showHudWithStatus:@"重置成功" delay:2.f];
+            dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC));
+
+            dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+                [weakSelf popViewcontroller];
+            });
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showHudWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+}
+-(void)popViewcontroller
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+- (void)verifyEvent
+{
+    //启动倒计时
+    [self performSelector:@selector(reflashGetKeyBt:)withObject:[NSNumber numberWithInt:60] afterDelay:0];
+}
+//倒数
+
+- (void)reflashGetKeyBt:(NSNumber *)second
+{
+    if ([second integerValue] == 0)
+    {
+        _getCodeBtn.selected=YES;
+        _getCodeBtn.userInteractionEnabled=YES;
+        [_getCodeBtn setTitle:@"重新获取"forState:(UIControlStateNormal)];
+        [_getCodeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    }
+    else
+    {
+        _getCodeBtn.selected=NO;
+        _getCodeBtn.userInteractionEnabled=NO;
+        int i = [second intValue];
+        [_getCodeBtn setTitle:[NSString stringWithFormat:@"重新获得(%i)",i]forState:(UIControlStateNormal)];
+        [self performSelector:@selector(reflashGetKeyBt:)withObject:[NSNumber numberWithInt:i-1] afterDelay:1];
+        
+    }
+}
 
 -(void)addtopview
 {
@@ -166,7 +283,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     button2.frame = CGRectMake(button1.right+1,2,((topView.width-2)/2)-1,38);
     button2.alpha = 1;
     button2.layer.cornerRadius = 10;
-    [button2 setTitle:@"邮箱注册" forState:(UIControlStateNormal)];
+    [button2 setTitle:@"" forState:(UIControlStateNormal)];
     [button2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
     button2.selected=NO;
 //    [button2.layer insertSublayer:[self NormalLayer:CGRectMake(0, 0, button2.width, button2.height)]atIndex:0];

@@ -9,6 +9,9 @@
 #import "HttpManagement.h"
 #import "AFNetworking.h"
 #import "LaunchModel.h"
+
+
+#define ACCEPTTYPEIMAGE @[@"text/plain", @"multipart/form-data", @"application/json", @"text/html", @"image/jpeg", @"image/png", @"application/octet-stream", @"text/json"]
 @implementation HttpManagement
 
 +(instancetype)shareManager
@@ -21,31 +24,67 @@
     return manager;
 }
 
-//-(void)getStartScreenRequest:(nullable void (^)(LaunchModel *model,NSError *error))block
-//{
-//    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-//    //注意：responseObject:请求成功返回的响应结果（AFN内部已经把响应体转换为OC对象，通常是字典或数组）
-//    LaunchModel *model = [NSKeyedUnarchiver unarchiveObjectWithFile:klaunch_path];
-//    NSString *url = nil;
-//    NSString *app_build = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
-//
-//
-//    NSLog(@"url -- >%@",url);
-//    [manager GET:url parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nonnull responseObject)
-//    {
-//       LaunchModel *model = [LaunchModel JsonToDeviceModel:responseObject];
-//        if (block)
-//        {
-//            [NSKeyedArchiver archiveRootObject:model toFile:klaunch_path];
-//            block(model,nil);
-//        }
-//    } failure:^(NSURLSessionDataTask * _Nonnull task, NSError * _Nonnull error) {
-//        NSLog(@"失败---%@",error);
-//        if (block) {
-//            block(nil,error);
-//        }
-//    }];
-//}
+/// Post 请求
+/**
+ *  图片上传
+ *
+ *  @param imgArr 图片数组
+ *  @param block  返回图片地址数组
+ */
+- (void)uploadImagesWihtImgArr:(NSArray *)imgArr
+                           url:(NSString *)url
+                     Tokenbool:(BOOL)Tokenbool
+                    parameters:(id)parameters
+                         block:(void (^)(id objc,BOOL success))block
+                 blockprogress:(void(^)(id progress))progress{
+    
+    
+    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
+    manager.responseSerializer =[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    NSString*application= @"application/json";
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:ACCEPTTYPEIMAGE];
+    NSString* timeStr=[self getCurrentTimestamp];
+    [manager.requestSerializer setValue:usertoken forHTTPHeaderField:@"X-TOKEN"];
+    [manager.requestSerializer setValue:timeStr forHTTPHeaderField:@"X-TIMESTAMP"];
+    [manager.requestSerializer setValue:[self signaturemd5:parameters timestamp:timeStr] forHTTPHeaderField:@"X-SIGNATURE"];
+    
+    [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        for (int i = 0; i < imgArr.count; i++) {
+            UIImage *image = imgArr[i];
+            NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+            
+            // 在网络开发中，上传文件时，是文件不允许被覆盖，文件重名
+            // 要解决此问题，
+            // 可以在上传时使用当前的系统事件作为文件名
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            // 设置时间格式
+            [formatter setDateFormat:@"yyyyMMddHHmmss"];
+            NSString *dateString = [formatter stringFromDate:[NSDate date]];
+            NSString *fileName = [NSString  stringWithFormat:@"%@.jpg", dateString];
+            /*
+             *该方法的参数
+             1. appendPartWithFileData：要上传的照片[二进制流]
+             2. name：对应网站上[upload.php中]处理文件的字段（比如upload）
+             3. fileName：要保存在服务器上的文件名
+             4. mimeType：上传的文件的类型
+             */
+            [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/jpeg"];
+        }
+    } progress:^(NSProgress * _Nonnull uploadProgress) {
+        NSLog(@"ssss  == %@",uploadProgress);
+        progress(uploadProgress);
+    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSData * data = (NSData*)responseObject;
+        NSString * str = [[jiemishujuClass shareManager] jiemiData:data];
+        NSDictionary *dict =[self dictionaryWithJsonString:str];
+        block(dict,YES);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        block(error,NO);
+    }];
+   
+}
 
 
 
@@ -106,7 +145,7 @@
 }
 
 /// Post 请求
--(void)PostNewWork:(NSString * _Nullable )url Dictionary:(NSDictionary *_Nullable)params success:(SuccessBlock _Nullable )successBlock failure:(failureBlock _Nullable )failureBlock;
+-(void)PostNewWork:(NSString * _Nullable )url Dictionary:(NSDictionary *_Nullable)params success:(SuccessBlock _Nullable )successBlock failure:(failureBlock _Nullable )failureBlock
 {
     
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
@@ -125,15 +164,6 @@
     NSString * jiamiData=nil;
     if(params!=nil)
     {
-//        NSDictionary * dictZ = [[NSDictionary alloc] init];
-//        NSArray * array = params.allKeys;
-//        for (int i=0; i<array.count; i++) {
-//            NSString*key=array[i];
-//            NSString*Value=[params objectForKey:key];
-//            NSString*ValueDecode=[Value stringByURLEncode];
-////            [dictZ setValue:ValueDecode forKey:key];
-//
-//        }
         NSData *data = [NSJSONSerialization dataWithJSONObject:params options:NSJSONWritingPrettyPrinted error:nil];
 
         jiamiData=[[jiemishujuClass shareManager] jiamiData:data];
@@ -231,10 +261,10 @@ return timeString;
 //    }];
     
     NSArray *sortedArray=[array sortedArrayUsingComparator:^(id a, id b) {
-        NSString *string1 = [self huoqushouzimuWithString:a];
-        NSString *string2 = [self huoqushouzimuWithString:b];;
+//        NSString *string1 = [self huoqushouzimuWithString:a];
+//        NSString *string2 = [self huoqushouzimuWithString:b];;
 
-        return [string1 compare:string2];
+        return [a compare:b];
 
     }];
     return sortedArray;

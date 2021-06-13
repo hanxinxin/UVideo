@@ -142,5 +142,7 @@ typedef void(^GCusNavClickIndex)(NSInteger index);
 
 -(UIImage*)base64Image:(NSString*)base64Str;
 
+- (NSString *)getTimeFromTimestamp:(NSNumber*)number;
 
+- (BOOL)StringIsNullOrEmpty:(NSString *)str;
 @end

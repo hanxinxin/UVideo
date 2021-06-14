@@ -25,6 +25,8 @@ pod 'MSPageControl'
 # ijkplayer
 pod 'IJKMediaFramework'
 
+#model  iOS模型自动生成工具
+#pod 'DYModelMaker'
 
 
 #########  YYKit ###############

@@ -410,6 +410,10 @@
 		FA984FB42674AEDF0014DCA8 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984FA32674AEDF0014DCA8 /* AFSecurityPolicy.m */; };
 		FA993BA92676EF0200C6F298 /* bannerMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA993BA82676EF0200C6F298 /* bannerMode.m */; };
 		FA993BAC2676F8EF00C6F298 /* videoFenleiMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA993BAB2676F8EF00C6F298 /* videoFenleiMode.m */; };
+		FA993BB626774A2700C6F298 /* NSObject+DYModelArchive.m in Sources */ = {isa = PBXBuildFile; fileRef = FA993BB226774A2700C6F298 /* NSObject+DYModelArchive.m */; };
+		FA993BB726774A2700C6F298 /* DYMakeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA993BB326774A2700C6F298 /* DYMakeModel.m */; };
+		FA993BB826774A2700C6F298 /* DYModelMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = FA993BB426774A2700C6F298 /* DYModelMaker.m */; };
+		FA993BBB26774C7100C6F298 /* VideoRankMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA993BBA26774C7100C6F298 /* VideoRankMode.m */; };
 		FA997E8F265407AE00CB0DE0 /* ZqwTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997E8E265407AE00CB0DE0 /* ZqwTableViewCell.m */; };
 		FA997E9726540E2900CB0DE0 /* VtitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997E9526540E2900CB0DE0 /* VtitleCollectionViewCell.m */; };
 		FA997E9826540E2900CB0DE0 /* VtitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA997E9626540E2900CB0DE0 /* VtitleCollectionViewCell.xib */; };
@@ -1221,6 +1225,15 @@
 		FA993BA82676EF0200C6F298 /* bannerMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bannerMode.m; sourceTree = "<group>"; };
 		FA993BAA2676F8EF00C6F298 /* videoFenleiMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = videoFenleiMode.h; sourceTree = "<group>"; };
 		FA993BAB2676F8EF00C6F298 /* videoFenleiMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = videoFenleiMode.m; sourceTree = "<group>"; };
+		FA993BAF26774A2700C6F298 /* NSObject+DYModelArchive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+DYModelArchive.h"; sourceTree = "<group>"; };
+		FA993BB026774A2700C6F298 /* DYModelMaker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYModelMaker.h; sourceTree = "<group>"; };
+		FA993BB126774A2700C6F298 /* DYMakeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYMakeModel.h; sourceTree = "<group>"; };
+		FA993BB226774A2700C6F298 /* NSObject+DYModelArchive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+DYModelArchive.m"; sourceTree = "<group>"; };
+		FA993BB326774A2700C6F298 /* DYMakeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYMakeModel.m; sourceTree = "<group>"; };
+		FA993BB426774A2700C6F298 /* DYModelMaker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DYModelMaker.m; sourceTree = "<group>"; };
+		FA993BB526774A2700C6F298 /* DYPropertyString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DYPropertyString.h; sourceTree = "<group>"; };
+		FA993BB926774C7100C6F298 /* VideoRankMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoRankMode.h; sourceTree = "<group>"; };
+		FA993BBA26774C7100C6F298 /* VideoRankMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoRankMode.m; sourceTree = "<group>"; };
 		FA997E8D265407AE00CB0DE0 /* ZqwTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZqwTableViewCell.h; sourceTree = "<group>"; };
 		FA997E8E265407AE00CB0DE0 /* ZqwTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZqwTableViewCell.m; sourceTree = "<group>"; };
 		FA997E9426540E2900CB0DE0 /* VtitleCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VtitleCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1840,6 +1853,8 @@
 				FA993BA82676EF0200C6F298 /* bannerMode.m */,
 				FA993BAA2676F8EF00C6F298 /* videoFenleiMode.h */,
 				FA993BAB2676F8EF00C6F298 /* videoFenleiMode.m */,
+				FA993BB926774C7100C6F298 /* VideoRankMode.h */,
+				FA993BBA26774C7100C6F298 /* VideoRankMode.m */,
 			);
 			path = Mode;
 			sourceTree = "<group>";
@@ -2982,6 +2997,7 @@
 		8A9C563C25F8A17B00EFA410 /* custom */ = {
 			isa = PBXGroup;
 			children = (
+				FA993BAD26774A1200C6F298 /* ios模型自动生成工具 */,
 				FAA6DEFB2675C77500DE5E7C /* 图片剪切 */,
 				FAA6DEF32675C66700DE5E7C /* 底部选择框 */,
 				FA8A03922667D0C100B41281 /* iphoneClass */,
@@ -3418,6 +3434,28 @@
 				FA984FA52674AEDF0014DCA8 /* AFHTTPSessionManager.h */,
 			);
 			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		FA993BAD26774A1200C6F298 /* ios模型自动生成工具 */ = {
+			isa = PBXGroup;
+			children = (
+				FA993BAE26774A2700C6F298 /* DYModelMaker */,
+			);
+			path = "ios模型自动生成工具";
+			sourceTree = "<group>";
+		};
+		FA993BAE26774A2700C6F298 /* DYModelMaker */ = {
+			isa = PBXGroup;
+			children = (
+				FA993BAF26774A2700C6F298 /* NSObject+DYModelArchive.h */,
+				FA993BB026774A2700C6F298 /* DYModelMaker.h */,
+				FA993BB126774A2700C6F298 /* DYMakeModel.h */,
+				FA993BB226774A2700C6F298 /* NSObject+DYModelArchive.m */,
+				FA993BB326774A2700C6F298 /* DYMakeModel.m */,
+				FA993BB426774A2700C6F298 /* DYModelMaker.m */,
+				FA993BB526774A2700C6F298 /* DYPropertyString.h */,
+			);
+			path = DYModelMaker;
 			sourceTree = "<group>";
 		};
 		FA997E9026540DE600CB0DE0 /* collectionCell */ = {
@@ -3946,6 +3984,7 @@
 				FA97027C26692D8C00418B3A /* YTSliderView.m in Sources */,
 				FA9662DF2663359200AF7B46 /* chongzhiView.m in Sources */,
 				8A9C563225F8A10000EFA410 /* UIImage+animatedGIF.m in Sources */,
+				FA993BBB26774C7100C6F298 /* VideoRankMode.m in Sources */,
 				8A39305F25FCD91A00E7331B /* CMHHTTPResponse.m in Sources */,
 				8A95C2FE265A5C7B00A6D144 /* KJProxyManager.m in Sources */,
 				FA9662D726632CC700AF7B46 /* UIView+lcAnyCorners.m in Sources */,
@@ -3984,6 +4023,7 @@
 				FA984FB22674AEDF0014DCA8 /* AFURLRequestSerialization.m in Sources */,
 				8A82F15A264FC663004AAF40 /* ZjiluViewController.m in Sources */,
 				8A9C561225F8A10000EFA410 /* UIView+Visuals.m in Sources */,
+				FA993BB726774A2700C6F298 /* DYMakeModel.m in Sources */,
 				FA9662E42663360400AF7B46 /* PlayWTView.m in Sources */,
 				8A95C2FB265A5C7B00A6D144 /* KJBasePlayer+KJPingTimer.m in Sources */,
 				FA75823726497CC400778A63 /* vipHeaderView.m in Sources */,
@@ -4024,6 +4064,7 @@
 				8A9C566D25F8A21B00EFA410 /* HomeViewController.m in Sources */,
 				8A95C2FC265A5C7B00A6D144 /* DBPlayerDataInfo.m in Sources */,
 				FAA6DF122675C77500DE5E7C /* HQEditImageActionView.m in Sources */,
+				FA993BB826774A2700C6F298 /* DYModelMaker.m in Sources */,
 				8A052173264A832E00E5188E /* MsgTableViewCell.m in Sources */,
 				8A95C319265A5C7B00A6D144 /* KJBasePlayerView.m in Sources */,
 				8A8BC3A925FC6F9E0028173C /* NSObject+MHRandom.m in Sources */,
@@ -4068,6 +4109,7 @@
 				8A8BC39225FC6F9E0028173C /* MHExample.m in Sources */,
 				8A82F10F264F9E01004AAF40 /* HttpManagement.m in Sources */,
 				8AE0C4CF266A54BA0084248D /* PanCollectionViewCell.m in Sources */,
+				FA993BB626774A2700C6F298 /* NSObject+DYModelArchive.m in Sources */,
 				8A39303225FCD86A00E7331B /* MHDivider.m in Sources */,
 				8A82F13D264FA128004AAF40 /* LBLaunchImageAdView.m in Sources */,
 				8A39314425FCDFCE00E7331B /* MHTopicManager.m in Sources */,

@@ -141,6 +141,10 @@ static NSString * const shopCellReuseID = @"shop";
 
 }
 
+
+
+
+
 -(void)addScrollviewLB
 {
     // 网络加载 --- 创建带标题的图片轮播器

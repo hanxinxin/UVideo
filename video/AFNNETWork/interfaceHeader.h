@@ -115,8 +115,8 @@
 //|video_id|是|integer||视频id|
 //|evaluate|是|integer||评价类型(1=赞 -1=踩)|
 
-//#define video_rankurl @"/video/rank"  //视频排行榜列表
-//#define video_listurl @"/video/list"  //视频列表
+#define video_rankurl @"/video/rank"  //视频排行榜列表
+#define video_listurl @"/video/list"  //视频列表
 //#### 请求参数:
 //|参数名|必须|类型|默认值|说明|
 //|:----|:---|:-----|:-----|-----|

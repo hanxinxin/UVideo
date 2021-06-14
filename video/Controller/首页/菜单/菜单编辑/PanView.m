@@ -11,8 +11,7 @@
 #define KWidth [UIScreen mainScreen].bounds.size.width
 @interface PanView()<UITableViewDelegate,UITableViewDataSource,SelectWhichlabelDelegete>
 
-@property(strong,nonatomic)UITableView * mainView;
-@property(strong,nonatomic)NSDictionary * dataDic;
+
 
 @end
 

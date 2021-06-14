@@ -27,7 +27,8 @@
 - (NSMutableArray *)hotArray
 {
     if (!_hotArray) {
-        self.hotArray = [NSMutableArray arrayWithObjects:@"悦诗风吟", @"洗面奶", @"兰芝", @"面膜", @"篮球鞋", @"阿迪达斯", @"耐克", @"运动鞋", nil];
+        self.hotArray=[NSMutableArray arrayWithCapacity:0];
+//        self.hotArray = [NSMutableArray arrayWithObjects:@"悦诗风吟", @"洗面奶", @"兰芝", @"面膜", @"篮球鞋", @"阿迪达斯", @"耐克", @"运动鞋", nil];
     }
     return _hotArray;
 }
@@ -79,6 +80,7 @@
     if (!_searchBar.isFirstResponder) {
         [self.searchBar becomeFirstResponder];
     }
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -87,6 +89,11 @@
     // 回收键盘
     [self.searchBar resignFirstResponder];
     _searchSuggestVC.view.hidden = YES;
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self getvideo_rankurlData];
 }
 
 
@@ -98,6 +105,7 @@
     [self.view addSubview:self.searchView];
     [self.view addSubview:self.searchSuggestVC.view];
     [self addChildViewController:_searchSuggestVC];
+    
 }
 
 
@@ -226,5 +234,42 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+-(void)getvideo_rankurlData
+{
+//    NSDictionary * dict = @{@"parent_category_id":@""};
+    [UHud showHUDLoading];
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_rankurl] Dictionary:nil success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        [self.hotArray removeAllObjects];
+        if([code intValue]==0)
+        {
+            
+            NSDictionary * datadict = [dict objectForKey:@"data"];
+            NSArray * video_rank_list = [datadict objectForKey:@"video_rank_list"];
+            for (int i=0; i<video_rank_list.count; i++) {
+                NSDictionary * video_rankdata=video_rank_list[i];
+                //直接放到网络请求结果调用，生成模型后删除就行，结果打印在控制台
+                [DYModelMaker DY_makeModelWithDictionary:video_rankdata modelKeyword:@"DY" modelName:@"testModel"];
+            }
+//            [self.hotArray addObject:@""];
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+//            [UHud showHUDToView:self.view text:message];
+//            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+
+}
 
 @end

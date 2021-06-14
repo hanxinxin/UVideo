@@ -12,7 +12,8 @@
 typedef void(^selectBock)(NSString *labelText);
 
 @interface PanView : UIView
-
+@property(strong,nonatomic)UITableView * mainView;
+@property(strong,nonatomic)NSDictionary * dataDic;
 -(instancetype)initWithFrame:(CGRect)frame WithTextDic:(NSDictionary *)textDic;
 @property(copy,nonatomic)selectBock block;
 

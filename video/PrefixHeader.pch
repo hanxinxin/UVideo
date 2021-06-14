@@ -98,6 +98,9 @@
 #import "AppDelegate.h"
 #import "CMHHTTPService.h"
 
+#import "VideoRankMode.h"
+#import "DYModelMaker.h"
+#import <NSObject+YYModel.h>
 /// 常量
 //#import "SUConstant.h"
 #import "MHInline.h"

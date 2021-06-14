@@ -10,11 +10,7 @@
 static NSString *reuseId = @"LLSearchViewcell";
 @interface LLSearchView ()<UITableViewDelegate,UITableViewDataSource>
 
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSMutableArray *hotArray;
-@property (nonatomic, strong) NSMutableArray *historyArray;
-@property (nonatomic, strong) UIView *searchHistoryView;
-@property (nonatomic, strong) UIView *hotSearchView;
+
 
 @end
 @implementation LLSearchView
@@ -134,6 +130,7 @@ static NSString *reuseId = @"LLSearchViewcell";
     tableview.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableview.frame = CGRectMake(15, 40, SCREEN_WIDTH, SCREENH_HEIGHT-riginY- titleL.bottom);
     [view addSubview:tableview];
+    self.Downtableview=tableview;
     view.frame = CGRectMake(0, riginY, SCREEN_WIDTH, SCREENH_HEIGHT-riginY);
     return view;
 }
@@ -219,7 +216,7 @@ static NSString *reuseId = @"LLSearchViewcell";
         titleL.layer.borderColor=[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0].CGColor;
         [cell addSubview:titleL];
     }else{
-        UILabel * titleL = [[UILabel alloc] initWithFrame:CGRectMake(0,(cell.height-20)/2, 20, 20)];
+        UILabel * titleL = [[UILabel alloc] initWithFrame:CGRectMake(0,(cell.height-20)/2, 25, 20)];
         titleL.text = [NSString stringWithFormat:@"%ld.",indexPath.row+1];
 //        titleL.font = [UIFont systemFontOfSize:18];
         [titleL setFont:[UIFont fontWithName:@"Helvetica-Bold" size:18]];
@@ -231,7 +228,9 @@ static NSString *reuseId = @"LLSearchViewcell";
         titleL.layer.borderColor=[UIColor clearColor].CGColor;
         [cell addSubview:titleL];
     }
-    cell.textLabel.text =[NSString stringWithFormat:@" %@",self.hotArray[indexPath.row]];
+    VideoRankMode*model=self.hotArray[indexPath.row];
+    NSString *text = model.title;
+    cell.textLabel.text =[NSString stringWithFormat:@" %@",text];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

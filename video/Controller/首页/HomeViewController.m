@@ -52,7 +52,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 //@property (nonatomic, strong)NSArray *broadcastArray;
 
 @property (nonatomic, strong) NSMutableArray *VideofenleiList;//菜单分类 数组
-
+@property (nonatomic, strong) NSMutableArray *VideoDictList;//菜单分类 数组
 
 @property(strong,nonatomic)UIView * tittleView;
 @property(strong,nonatomic)PanView * subView;
@@ -61,12 +61,29 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 @end
 
 @implementation HomeViewController
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+//    if (!_searchBar.isFirstResponder) {
+//        [self.searchBar becomeFirstResponder];
+//    }
+    
+    
+}
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    // 回收键盘
+    [self.searchBar resignFirstResponder];
+   
+}
 - (void)viewDidLoad {
     self.showMore = YES;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.VideofenleiList=[NSMutableArray arrayWithCapacity:0];
+    self.VideoDictList=[NSMutableArray arrayWithCapacity:0];
     [self initNav];
 //    [self PMDLabel];
     [self addPageView];
@@ -100,6 +117,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     [self.slideBar slideShowMenuCallBack:^(BOOL show) {
         if(self->menuBool==NO)
         {
+            [self getShaixuanData];
             [self addcollectionViewMM];
             self->menuBool=!self->menuBool;
         }else{
@@ -108,6 +126,10 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         }
     }];
     
+    
+    [self getmenuData];
+    
+//    [self getShaixuanData];
 }
 
 -(void)getmenuData
@@ -119,16 +141,26 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         NSDictionary *dict=(NSDictionary *)responseObject;
         NSNumber * code = [dict objectForKey:@"error"];
         [self.VideofenleiList removeAllObjects];
-        
+        [self.VideoDictList removeAllObjects];
         if([code intValue]==0)
         {
             NSDictionary * datadict = [dict objectForKey:@"data"];
             NSArray * category_list=[datadict objectForKey:@"category_list"];
             for (int i=0; i<category_list.count; i++) {
-                videoFenleiMode *model = [videoFenleiMode provinceWithDictionary:category_list[i]];
-                [self.VideofenleiList addObject:model];
+//                videoFenleiMode *model = [videoFenleiMode provinceWithDictionary:category_list[i]];
+//                [self.VideofenleiList addObject:model];
+                NSDictionary * dictM = category_list[i];
+                NSNumber*show=[dictM objectForKey:@"show"];
+                if([show intValue]==1)
+                {
+                    [self.VideoDictList addObject:dictM];
+                }
             }
             
+            if(self.VideoDictList.count>0)
+            {
+                [self loadData];
+            }
         }else if([code intValue]==20){
             NSString * message = [dict objectForKey:@"message"];
             [UHud showTXTWithStatus:message delay:2.f];
@@ -140,22 +172,11 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         [UHud showTXTWithStatus:@"网络错误" delay:2.f];
     }];
 }
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-//    if (!_searchBar.isFirstResponder) {
-//        [self.searchBar becomeFirstResponder];
-//    }
-    
-    
-}
 
-- (void)viewWillDisappear:(BOOL)animated
+
+-(void)huoquleibiao
 {
-    [super viewWillDisappear:animated];
-    // 回收键盘
-    [self.searchBar resignFirstResponder];
-   
+    
 }
 
 - (void)initNav {
@@ -261,19 +282,19 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         // network request data ....
         // get local cache
-        id array = [[NSUserDefaults standardUserDefaults] objectForKey:@"catlist"];
-        self->_arrayForShow = [NSMutableArray arrayWithArray:array];
+//        id array = [[NSUserDefaults standardUserDefaults] objectForKey:@"catlist"];
+//        self->_arrayForShow = [NSMutableArray arrayWithArray:array];
         // normally, error value is from request
         NSError *error = nil;
         if (!error) {
-            NSData *jsonData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Untitled1" ofType:@"json"]];
-            self->_dataArray = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
+//            NSData *jsonData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Untitled1" ofType:@"json"]];
+//            self->_dataArray = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
             if (self->_arrayForShow.count == 0) {
                 // you can add a custom item, here is all
 //                self->_arrayForShow = [NSMutableArray arrayWithArray:self->_dataArray];
-                
+                self->_arrayForShow = [NSMutableArray arrayWithArray:self.VideoDictList];
                 // save to local
-                [[NSUserDefaults standardUserDefaults] setObject:self->_arrayForShow forKey:@"catlist"];
+//                [[NSUserDefaults standardUserDefaults] setObject:self->_arrayForShow forKey:@"catlist"];
             }
         }
         // reload
@@ -289,8 +310,8 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 
 - (NSArray *)arrayForEditAllTitles {
     NSMutableArray *array = [NSMutableArray array];
-    [self.dataArray enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [array addObject:@{EditTitleKey:obj[@"name"], EditIDKey:obj[@"code"]}];
+    [self.VideoDictList enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [array addObject:@{EditTitleKey:obj[@"name"], EditIDKey:obj[@"id"]}];
     }];
     return array;
 }
@@ -298,7 +319,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 - (NSArray *)arrayForEditTitles {
     NSMutableArray *array = [NSMutableArray array];
     [self.arrayForShow enumerateObjectsUsingBlock:^(NSDictionary * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        [array addObject:@{EditTitleKey:obj[@"name"], EditIDKey:obj[@"code"]}];
+        [array addObject:@{EditTitleKey:obj[@"name"], EditIDKey:obj[@"id"]}];
     }];
     return array;
 }
@@ -344,11 +365,11 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
             NSLog(@"%@", obj);
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
             dict[@"name"] = obj[EditTitleKey];
-            dict[@"code"] = obj[EditIDKey];
+            dict[@"id"] = obj[EditIDKey];
             [self.arrayForShow addObject:dict];
         }];
         // save to local
-        [[NSUserDefaults standardUserDefaults] setObject:_arrayForShow forKey:@"catlist"];
+//        [[NSUserDefaults standardUserDefaults] setObject:_arrayForShow forKey:@"catlist"];
     }
     // remove controler recorder, reload UI
     [self.modelDictionary removeAllObjects];
@@ -474,18 +495,56 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     if (!_dataDic) {
         //制造假数据
         _dataDic = [NSMutableDictionary dictionary];
-        [_dataDic setValue:@[@"综合排序",@"热播榜",@"好评榜",@"新上线"] forKey:@"1"];
-        [_dataDic setValue:@[@"全部地区",@"华语",@"香港地区",@"美国",@"欧洲",@"韩国",@"日本",@"泰国"] forKey:@"2"];
-        [_dataDic setValue:@[@"全部类型",@"喜剧",@"爱情",@"动作",@"抢占",@"犯罪",@"伦理",@"色情"] forKey:@"3"];
-        [_dataDic setValue:@[@"全部规格",@"巨制",@"院线",@"独播",@"网络大电影",@"经典",@"杜比",@"电影节目"] forKey:@"4"];
-        [_dataDic setValue:@[@"全部年份",@"2019",@"2018",@"2017",@"2016",@"2015",@"2000",@"1900"] forKey:@"5"];
-        [_dataDic setValue:@[@"是否付费",@"免费",@"付费"] forKey:@"6"];
+        
     }return _dataDic;
 }
 
 
+-(void)getShaixuanData
+{
+    [UHud showHUDLoading];
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_filterurl] Dictionary:nil success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        [self.dataDic removeAllObjects];
+        if([code intValue]==0)
+        {
+            NSDictionary * datadict = [dict objectForKey:@"data"];
+            NSArray * regions=[datadict objectForKey:@"regions"];
+            [self.dataDic setValue:regions forKey:@"1"];
+            NSArray * languages=[datadict objectForKey:@"languages"];
+            [self.dataDic setValue:languages forKey:@"2"];
+            NSArray * states=[datadict objectForKey:@"states"];
+            [self.dataDic setValue:states forKey:@"3"];
+            NSArray * years=[datadict objectForKey:@"years"];
+            [self.dataDic setValue:years forKey:@"4"];
+            self->_subView.dataDic=self.dataDic;
+            [self->_subView.mainView reloadData];
+        }else if([code intValue]==20){
+            NSString * message = [dict objectForKey:@"message"];
+//            [UHud showHUDToView:self.view text:message];
+//            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
 
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
 
+}
+-(NSMutableArray* )getarrayString:(NSArray*)dictarray
+{
+    NSMutableArray*array=[NSMutableArray arrayWithCapacity:0];
+    for (int i =0; i<dictarray.count; i++) {
+        NSString * name = dictarray[i];
+        [array addObject:name];
+    }
+    return array;
+}
 
 #pragma mark - <UICollectionViewDataSource>
 

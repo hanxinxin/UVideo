@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 
-typedef void(^selectBock)(NSString *labelText);
+typedef void(^selectBock)(NSString *labelText,NSIndexPath*indexPath,NSInteger celltag);
 
 @interface PanView : UIView
 @property(strong,nonatomic)UITableView * mainView;

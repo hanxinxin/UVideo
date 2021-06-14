@@ -10,7 +10,7 @@
 
 @protocol SelectWhichlabelDelegete <NSObject>
 
--(void)SelectWhichlabel:(NSString *)labelText;
+-(void)SelectWhichlabel:(NSString *)labelText indexPath:(NSIndexPath*)indexPath celltag:(NSInteger)tag;
 
 @end
 

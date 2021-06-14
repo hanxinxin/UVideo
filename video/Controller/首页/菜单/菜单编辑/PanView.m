@@ -9,6 +9,7 @@
 #import "PanView.h"
 #import "PanTableViewCell.h"
 #define KWidth [UIScreen mainScreen].bounds.size.width
+static NSString * identifier = @"PanTableViewCell";
 @interface PanView()<UITableViewDelegate,UITableViewDataSource,SelectWhichlabelDelegete>
 
 
@@ -34,6 +35,7 @@
     self.mainView.scrollEnabled = NO;
     self.mainView.delegate = self;
     self.mainView.dataSource = self;
+    [self.mainView registerClass:[PanTableViewCell class] forCellReuseIdentifier:identifier];
     [self addSubview:self.mainView];
 }
 
@@ -46,20 +48,23 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString * identifier = @"PanTableViewCell";
+   
     PanTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
         cell = [[PanTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     cell.deleget = self;
+//    NSLog(@"indexPath.row === %ld",indexPath.row+1);
+    cell.tag=indexPath.row+1;
     cell.dataArr = [self.dataDic valueForKey:@(indexPath.row+1).description];
     return cell;
 }
 
 //点击选择的某个标签
--(void)SelectWhichlabel:(NSString *)labelText{
+-(void)SelectWhichlabel:(NSString *)labelText indexPath:(NSIndexPath *)indexPath celltag:(NSInteger)tag
+{
     if (self.block) {
-        self.block(labelText);
+        self.block(labelText,indexPath,tag);
     }
 }
 

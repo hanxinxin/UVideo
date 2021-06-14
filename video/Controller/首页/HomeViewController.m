@@ -58,6 +58,11 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 @property(strong,nonatomic)PanView * subView;
 @property(strong,nonatomic)NSMutableDictionary  * dataDic;
 @property(strong,nonatomic)UICollectionView *collectionView;
+
+@property (nonatomic, strong) NSString * regionsstring;
+@property (nonatomic, strong) NSString * languagesstring;
+@property (nonatomic, strong) NSString * statesstring;
+@property (nonatomic, strong) NSString * yearsstring;
 @end
 
 @implementation HomeViewController
@@ -106,11 +111,28 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         });
     }];
     
-    
+    __block HomeViewController *weekself = self;
     [self hiddenViewMenu];
+    if()
     //点击标签后根据标签选择刷新数据
-    self.subView.block = ^(NSString *labelText) {
-        NSLog(@"====%@",labelText);
+    self.subView.block = ^(NSString *labelText, NSIndexPath *indexPath, NSInteger celltag) {
+        NSArray * arr =[weekself.dataDic valueForKey:@(indexPath.row+1).description];
+        if(celltag==1)
+        {
+            weekself.regionsstring=labelText;
+        }else if(celltag==2)
+        {
+            weekself.languagesstring=labelText;
+        }else if(celltag==3)
+        {
+            weekself.statesstring=labelText;
+        }else if(celltag==4)
+        {
+            weekself.yearsstring=labelText;
+        }
+        
+        NSLog(@"====%@   === %ld   celltag==%ld",labelText,indexPath.row,celltag);
+        
     };
 //    NSLog(@"kIs_iPhoneX  = %d",kIs_iPhoneX );
     menuBool=NO;
@@ -512,13 +534,17 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         if([code intValue]==0)
         {
             NSDictionary * datadict = [dict objectForKey:@"data"];
-            NSArray * regions=[datadict objectForKey:@"regions"];
+            NSMutableArray * regions=[datadict objectForKey:@"regions"];
+            [regions insertObject:@"地区" atIndex:0];
             [self.dataDic setValue:regions forKey:@"1"];
-            NSArray * languages=[datadict objectForKey:@"languages"];
+            NSMutableArray * languages=[datadict objectForKey:@"languages"];
+            [languages insertObject:@"语言" atIndex:0];
             [self.dataDic setValue:languages forKey:@"2"];
-            NSArray * states=[datadict objectForKey:@"states"];
+            NSMutableArray * states=[datadict objectForKey:@"states"];
+            [states insertObject:@"状态" atIndex:0];
             [self.dataDic setValue:states forKey:@"3"];
-            NSArray * years=[datadict objectForKey:@"years"];
+            NSMutableArray * years=[datadict objectForKey:@"years"];
+            [years insertObject:@"年份" atIndex:0];
             [self.dataDic setValue:years forKey:@"4"];
             self->_subView.dataDic=self.dataDic;
             [self->_subView.mainView reloadData];

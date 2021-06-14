@@ -38,6 +38,8 @@
     flowLayout.sectionInset = UIEdgeInsetsMake(5, 10, 5, 5);
     self.mainView = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, self.frame.size.height) collectionViewLayout:flowLayout];
     [self.mainView registerNib:[UINib nibWithNibName:@"PanCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"PanCollectionViewCell"];
+    NSLog(@"self.tag=  %ld",self.tag);
+    self.mainView.tag=self.tag;
     self.mainView.backgroundColor = [UIColor whiteColor];
     self.mainView.delegate = self;
     self.mainView.dataSource = self;
@@ -57,7 +59,26 @@
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     PanCollectionViewCell * cell  = [collectionView dequeueReusableCellWithReuseIdentifier:@"PanCollectionViewCell" forIndexPath:indexPath];
     cell.backgroundColor = [UIColor clearColor];
-    cell.showLabel.text = self.dataArr[indexPath.row];
+//    if(indexPath.row==0)
+//    {
+//        if(self.tag==1)
+//        {
+//            cell.showLabel.text =@"地区";
+//        }else if(self.tag==2)
+//        {
+//            cell.showLabel.text =@"语言";
+//        }else if(self.tag==3)
+//        {
+//            cell.showLabel.text =@"状态";
+//        }else if(self.tag==4)
+//        {
+//            cell.showLabel.text =@"年份";
+//        }
+//
+//    }else{
+        cell.showLabel.text = self.dataArr[indexPath.row];
+//    }
+    cell.tag=self.tag;
     if (self.indexPath == indexPath) {
         cell.showLabel.textColor = [UIColor redColor];
     }else{
@@ -68,8 +89,8 @@
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     self.indexPath  = indexPath;
-    if (self.deleget && [self.deleget respondsToSelector:@selector(SelectWhichlabel:)]) {
-        [self.deleget SelectWhichlabel:self.dataArr[indexPath.row]];
+    if (self.deleget && [self.deleget respondsToSelector:@selector(SelectWhichlabel:indexPath:celltag:)]) {
+        [self.deleget SelectWhichlabel:self.dataArr[indexPath.row] indexPath:indexPath celltag:self.tag];
     }
     [self.mainView reloadData];
 }

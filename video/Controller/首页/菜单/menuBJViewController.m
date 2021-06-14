@@ -29,8 +29,10 @@
     [self.view addSubview:self.subView];
 //    [self.view addSubview:self.tittleView];
     //点击标签后根据标签选择刷新数据
-    self.subView.block = ^(NSString *labelText) {
-        NSLog(@"====%@",labelText);
+    self.subView.block = ^(NSString *labelText, NSIndexPath *indexPath, NSInteger celltag) {
+        
+        
+        NSLog(@"====%@   === %ld   celltag==%ld",labelText,indexPath.row,celltag);
     };
 }
 

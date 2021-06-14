@@ -17,6 +17,8 @@
 #import "MHViewController.h"
 #import "MHYouKuController.h"
 
+#import "bannerMode.h"
+#import "videoFenleiMode.h"
 
 // collectionViewCell的重用标识符
 static NSString * const shopCellReuseID = @"shop";
@@ -31,10 +33,16 @@ static NSString * const shopCellReuseID = @"shop";
 /** shops */
 @property (nonatomic, strong) NSMutableArray *shops;
 
+@property (nonatomic, strong) NSMutableArray *bannerimagesmode;///轮播图mode数组
+@property (nonatomic, strong) NSMutableArray *bannerimagesURL;//轮播图url
+
+
 /** 包含瀑布流view */
 @property (nonatomic, weak) UIView *bottomView;
 
 @property (nonatomic, assign) NSUInteger currentPage;
+
+@property (nonatomic, strong)MSCycleScrollView *cycleScrollView;
 
 @end
 
@@ -46,10 +54,13 @@ static NSString * const shopCellReuseID = @"shop";
     }
     return _shops;
 }
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.bannerimagesURL=[NSMutableArray arrayWithCapacity:0];
+    self.bannerimagesmode=[NSMutableArray arrayWithCapacity:0];
     UIScrollView * scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT)];
     scrollview.backgroundColor = [UIColor whiteColor];
     scrollview.scrollsToTop = NO;
@@ -91,35 +102,47 @@ static NSString * const shopCellReuseID = @"shop";
     // 初始化瀑布流view
     [self setupCollectionView1];
     [self setupCollectionView2];
+    [self getbannerData];
+//    [self getmenuData];
 }
+
+-(void)getbannerData
+{
+    NSDictionary * dict = @{@"platform":@"2"}; ///|platform|是|number||平台[1=pc 2=移动]|
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,getbannerurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        [self.bannerimagesURL removeAllObjects];
+        [self.bannerimagesmode removeAllObjects];
+        if([code intValue]==0)
+        {
+            NSDictionary * datadict = [dict objectForKey:@"data"];
+            NSArray * banner_list=[datadict objectForKey:@"banner_list"];
+            for (int i=0; i<banner_list.count; i++) {
+                bannerMode *model = [bannerMode provinceWithDictionary:banner_list[i]];
+                [self.bannerimagesmode addObject:model];
+                [self.bannerimagesURL addObject:model.source];
+            }
+            self.cycleScrollView.imageUrls = self.bannerimagesURL;
+        }else if([code intValue]==20){
+            NSString * message = [dict objectForKey:@"message"];
+//            [UHud showHUDToView:self.view text:message];
+//            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+
+}
+
 -(void)addScrollviewLB
 {
-//    // 情景一：采用本地图片实现
-//    NSArray *imageNames = @[@"timg5.jpeg",
-//                            @"timg6.jpeg",
-//                            @"timg7.jpeg",
-//                            @"timg8.jpeg",
-//                            @"timg9.jpeg",// 本地图片请填写全名
-//                            ];
-//    // 本地加载 --- 创建不带标题的图片轮播器
-//    MSCycleScrollView *cycleScrollView = [MSCycleScrollView cycleViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 160) InfiniteLoop:YES locationImageNames:imageNames];
-//    cycleScrollView.delegate = self;
-//    cycleScrollView.pageDotColor = [UIColor blueColor];
-//    cycleScrollView.currentPageDotColor = [UIColor yellowColor];
-//    cycleScrollView.dotsIsSquare = YES;
-//    cycleScrollView.currentWidthMultiple = 3;
-////    cycleScrollView5.pageControlDotSize = CGSizeMake(6, 5);
-//    [self.ZScrollView addSubview:cycleScrollView];
-//    //指定Index
-//    [cycleScrollView makeScrollViewScrollToIndex:2];
-    
-    // 情景二：采用网络图片实现
-    NSArray *imagesURLStrings = @[
-                                  @"https://weiliicimg9.pstatp.com/weili/l/378983035183038486.webp",
-                                  @"https://icweiliimg1.pstatp.com/weili/l/446936813792919821.webp",
-                                  @"https://icweiliimg1.pstatp.com/weili/l/446936813792919821.webp",
-                                  @"https://weiliicimg9.pstatp.com/weili/l/454268675154510337.webp",
-                                  ];
     // 网络加载 --- 创建带标题的图片轮播器
     MSCycleScrollView *cycleScrollView7 = [MSCycleScrollView cycleViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 160) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
     cycleScrollView7.pageDotColor = [UIColor whiteColor];
@@ -131,8 +154,9 @@ static NSString * const shopCellReuseID = @"shop";
     cycleScrollView7.dotsIsSquare = YES;
     cycleScrollView7.pageControlDotSize = CGSizeMake(20, 4);
     [self.ZScrollView addSubview:cycleScrollView7];
+    self.cycleScrollView =cycleScrollView7;
     
-    cycleScrollView7.imageUrls = imagesURLStrings;
+    cycleScrollView7.imageUrls = self.bannerimagesURL;
     
     /*
      block监听点击方式

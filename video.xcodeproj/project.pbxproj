@@ -408,6 +408,8 @@
 		FA984FB22674AEDF0014DCA8 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984FA02674AEDF0014DCA8 /* AFURLRequestSerialization.m */; };
 		FA984FB32674AEDF0014DCA8 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984FA22674AEDF0014DCA8 /* AFNetworkReachabilityManager.m */; };
 		FA984FB42674AEDF0014DCA8 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984FA32674AEDF0014DCA8 /* AFSecurityPolicy.m */; };
+		FA993BA92676EF0200C6F298 /* bannerMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA993BA82676EF0200C6F298 /* bannerMode.m */; };
+		FA993BAC2676F8EF00C6F298 /* videoFenleiMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA993BAB2676F8EF00C6F298 /* videoFenleiMode.m */; };
 		FA997E8F265407AE00CB0DE0 /* ZqwTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997E8E265407AE00CB0DE0 /* ZqwTableViewCell.m */; };
 		FA997E9726540E2900CB0DE0 /* VtitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997E9526540E2900CB0DE0 /* VtitleCollectionViewCell.m */; };
 		FA997E9826540E2900CB0DE0 /* VtitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA997E9626540E2900CB0DE0 /* VtitleCollectionViewCell.xib */; };
@@ -1215,6 +1217,10 @@
 		FA984FA32674AEDF0014DCA8 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
 		FA984FA42674AEDF0014DCA8 /* AFCompatibilityMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCompatibilityMacros.h; sourceTree = "<group>"; };
 		FA984FA52674AEDF0014DCA8 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		FA993BA72676EF0200C6F298 /* bannerMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = bannerMode.h; sourceTree = "<group>"; };
+		FA993BA82676EF0200C6F298 /* bannerMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = bannerMode.m; sourceTree = "<group>"; };
+		FA993BAA2676F8EF00C6F298 /* videoFenleiMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = videoFenleiMode.h; sourceTree = "<group>"; };
+		FA993BAB2676F8EF00C6F298 /* videoFenleiMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = videoFenleiMode.m; sourceTree = "<group>"; };
 		FA997E8D265407AE00CB0DE0 /* ZqwTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZqwTableViewCell.h; sourceTree = "<group>"; };
 		FA997E8E265407AE00CB0DE0 /* ZqwTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZqwTableViewCell.m; sourceTree = "<group>"; };
 		FA997E9426540E2900CB0DE0 /* VtitleCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VtitleCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1830,6 +1836,10 @@
 			children = (
 				8A82F114264F9E77004AAF40 /* LaunchModel.h */,
 				8A82F115264F9E77004AAF40 /* LaunchModel.m */,
+				FA993BA72676EF0200C6F298 /* bannerMode.h */,
+				FA993BA82676EF0200C6F298 /* bannerMode.m */,
+				FA993BAA2676F8EF00C6F298 /* videoFenleiMode.h */,
+				FA993BAB2676F8EF00C6F298 /* videoFenleiMode.m */,
 			);
 			path = Mode;
 			sourceTree = "<group>";
@@ -3928,6 +3938,7 @@
 				8A9C560925F8A10000EFA410 /* UIView+GestureCallback.m in Sources */,
 				8A8BC38725FC6F9E0028173C /* ViewPagerController.m in Sources */,
 				8A8BC2F125FC6ED10028173C /* MHYouKuAnthologyHeaderView.m in Sources */,
+				FA993BA92676EF0200C6F298 /* bannerMode.m in Sources */,
 				FA984FAB2674AEDF0014DCA8 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				8A8BC39525FC6F9E0028173C /* UIImage+MHCrop.m in Sources */,
 				8A39312225FCDED100E7331B /* MHTopicHeaderView.m in Sources */,
@@ -4004,6 +4015,7 @@
 				FA97027D26692D8C00418B3A /* YTSliderSetting.m in Sources */,
 				8A95C2F7265A5C7B00A6D144 /* KJRotateManager.m in Sources */,
 				8A82F0E2264F59FA004AAF40 /* ShapeView.m in Sources */,
+				FA993BAC2676F8EF00C6F298 /* videoFenleiMode.m in Sources */,
 				FA8A03952667D78300B41281 /* menberViewTS.m in Sources */,
 				FA9662DA2663354D00AF7B46 /* KMPlayView.m in Sources */,
 				8A8BC1E325FA1DC20028173C /* SHeaderView.m in Sources */,

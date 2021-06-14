@@ -18,6 +18,8 @@
 #import "WSLWaterFlowLayout.h"
 #import "MHYouKuController.h"
 
+#import "videoFenleiMode.h"
+
 #import "vlistCollectionViewCell.h"
 #import "BadgeButton.h"
 #import "PanView.h"
@@ -49,6 +51,9 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 //@property (nonatomic, strong)YZYHorizListView *horizListView;
 //@property (nonatomic, strong)NSArray *broadcastArray;
 
+@property (nonatomic, strong) NSMutableArray *VideofenleiList;//菜单分类 数组
+
+
 @property(strong,nonatomic)UIView * tittleView;
 @property(strong,nonatomic)PanView * subView;
 @property(strong,nonatomic)NSMutableDictionary  * dataDic;
@@ -61,7 +66,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     self.showMore = YES;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+    self.VideofenleiList=[NSMutableArray arrayWithCapacity:0];
     [self initNav];
 //    [self PMDLabel];
     [self addPageView];
@@ -105,6 +110,36 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     
 }
 
+-(void)getmenuData
+{
+    
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_categoryurl] Dictionary:nil success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        [self.VideofenleiList removeAllObjects];
+        
+        if([code intValue]==0)
+        {
+            NSDictionary * datadict = [dict objectForKey:@"data"];
+            NSArray * category_list=[datadict objectForKey:@"category_list"];
+            for (int i=0; i<category_list.count; i++) {
+                videoFenleiMode *model = [videoFenleiMode provinceWithDictionary:category_list[i]];
+                [self.VideofenleiList addObject:model];
+            }
+            
+        }else if([code intValue]==20){
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+}
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
@@ -235,8 +270,8 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
             self->_dataArray = [NSJSONSerialization JSONObjectWithData:jsonData options:kNilOptions error:nil];
             if (self->_arrayForShow.count == 0) {
                 // you can add a custom item, here is all
-                self->_arrayForShow = [NSMutableArray arrayWithArray:self->_dataArray];
-//                [self->_arrayForShow insertObject:@{@"name" : @"全部", @"code" : @""} atIndex:0];
+//                self->_arrayForShow = [NSMutableArray arrayWithArray:self->_dataArray];
+                
                 // save to local
                 [[NSUserDefaults standardUserDefaults] setObject:self->_arrayForShow forKey:@"catlist"];
             }

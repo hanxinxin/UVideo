@@ -364,6 +364,11 @@
 		FA75823326496DB300778A63 /* CZCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA75823126496DB300778A63 /* CZCollectionViewCell.xib */; };
 		FA75823726497CC400778A63 /* vipHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA75823626497CC400778A63 /* vipHeaderView.m */; };
 		FA75823926497CD500778A63 /* vipHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA75823826497CD500778A63 /* vipHeaderView.xib */; };
+		FA7A80732678DE7F001B62AA /* VDxfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A80722678DE7F001B62AA /* VDxfViewController.m */; };
+		FA7A8076267905C3001B62AA /* VideoVideoInfoMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A8075267905C3001B62AA /* VideoVideoInfoMode.m */; };
+		FA7A807926790601001B62AA /* VideoRelatedlistMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A807826790601001B62AA /* VideoRelatedlistMode.m */; };
+		FA7A807C26790647001B62AA /* videofragmentMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A807B26790647001B62AA /* videofragmentMode.m */; };
+		FA7A807F2679069F001B62AA /* ZVideoMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A807E2679069F001B62AA /* ZVideoMode.m */; };
 		FA80AD90266CC7B700BF28D8 /* hxplayerDanmuView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA80AD8F266CC7B700BF28D8 /* hxplayerDanmuView.m */; };
 		FA80AD92266CC82400BF28D8 /* hxplayerDanmuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA80AD91266CC82400BF28D8 /* hxplayerDanmuView.xib */; };
 		FA8A03912667D0BE00B41281 /* iphoneClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8A03902667D0BE00B41281 /* iphoneClass.m */; };
@@ -1135,6 +1140,16 @@
 		FA75823526497CC400778A63 /* vipHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vipHeaderView.h; sourceTree = "<group>"; };
 		FA75823626497CC400778A63 /* vipHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = vipHeaderView.m; sourceTree = "<group>"; };
 		FA75823826497CD500778A63 /* vipHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = vipHeaderView.xib; sourceTree = "<group>"; };
+		FA7A80712678DE7F001B62AA /* VDxfViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VDxfViewController.h; sourceTree = "<group>"; };
+		FA7A80722678DE7F001B62AA /* VDxfViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VDxfViewController.m; sourceTree = "<group>"; };
+		FA7A8074267905C3001B62AA /* VideoVideoInfoMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoVideoInfoMode.h; sourceTree = "<group>"; };
+		FA7A8075267905C3001B62AA /* VideoVideoInfoMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoVideoInfoMode.m; sourceTree = "<group>"; };
+		FA7A807726790601001B62AA /* VideoRelatedlistMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoRelatedlistMode.h; sourceTree = "<group>"; };
+		FA7A807826790601001B62AA /* VideoRelatedlistMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoRelatedlistMode.m; sourceTree = "<group>"; };
+		FA7A807A26790647001B62AA /* videofragmentMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = videofragmentMode.h; sourceTree = "<group>"; };
+		FA7A807B26790647001B62AA /* videofragmentMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = videofragmentMode.m; sourceTree = "<group>"; };
+		FA7A807D2679069F001B62AA /* ZVideoMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZVideoMode.h; sourceTree = "<group>"; };
+		FA7A807E2679069F001B62AA /* ZVideoMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZVideoMode.m; sourceTree = "<group>"; };
 		FA80AD8E266CC7B700BF28D8 /* hxplayerDanmuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hxplayerDanmuView.h; sourceTree = "<group>"; };
 		FA80AD8F266CC7B700BF28D8 /* hxplayerDanmuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hxplayerDanmuView.m; sourceTree = "<group>"; };
 		FA80AD91266CC82400BF28D8 /* hxplayerDanmuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = hxplayerDanmuView.xib; sourceTree = "<group>"; };
@@ -1849,6 +1864,14 @@
 				FA993BAB2676F8EF00C6F298 /* videoFenleiMode.m */,
 				FA993BB926774C7100C6F298 /* VideoRankMode.h */,
 				FA993BBA26774C7100C6F298 /* VideoRankMode.m */,
+				FA7A8074267905C3001B62AA /* VideoVideoInfoMode.h */,
+				FA7A8075267905C3001B62AA /* VideoVideoInfoMode.m */,
+				FA7A807726790601001B62AA /* VideoRelatedlistMode.h */,
+				FA7A807826790601001B62AA /* VideoRelatedlistMode.m */,
+				FA7A807A26790647001B62AA /* videofragmentMode.h */,
+				FA7A807B26790647001B62AA /* videofragmentMode.m */,
+				FA7A807D2679069F001B62AA /* ZVideoMode.h */,
+				FA7A807E2679069F001B62AA /* ZVideoMode.m */,
 			);
 			path = Mode;
 			sourceTree = "<group>";
@@ -1982,6 +2005,8 @@
 				8A8BC1A825FA0E440028173C /* videoCell */,
 				8A8BC1B525FA12A00028173C /* VDViewController.h */,
 				8A8BC1B625FA12A00028173C /* VDViewController.m */,
+				FA7A80712678DE7F001B62AA /* VDxfViewController.h */,
+				FA7A80722678DE7F001B62AA /* VDxfViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1998,8 +2023,8 @@
 		8A8BC1C525FA13850028173C /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				8A8BC1C625FA13850028173C /* JRShopCell.m */,
 				8A8BC1C725FA13850028173C /* JRShopCell.h */,
+				8A8BC1C625FA13850028173C /* JRShopCell.m */,
 				8A8BC1C825FA13850028173C /* Model */,
 				8A8BC1CF25FA13850028173C /* JRShopCell.xib */,
 			);
@@ -3916,6 +3941,7 @@
 				8AE01B8B266252A90031C82F /* PWView.m in Sources */,
 				8A95C2F9265A5C7B00A6D144 /* KJBasePlayer.m in Sources */,
 				8A95C309265A5C7B00A6D144 /* KJListPlayerVC.m in Sources */,
+				FA7A80732678DE7F001B62AA /* VDxfViewController.m in Sources */,
 				8A9C559325F89F0C00EFA410 /* CYLPlusButton.m in Sources */,
 				8A8BC2EC25FC6ED10028173C /* MHYouKuController.m in Sources */,
 				8A9C559125F89F0C00EFA410 /* CYLTabBarController.m in Sources */,
@@ -3928,6 +3954,7 @@
 				8A3930D325FCDB3800E7331B /* CMHRefreshHeader.m in Sources */,
 				8A39314325FCDFCE00E7331B /* MHTopicFrame.m in Sources */,
 				8A8BC39D25FC6F9E0028173C /* UIView+MHFrame.m in Sources */,
+				FA7A807F2679069F001B62AA /* ZVideoMode.m in Sources */,
 				8A8BC3A225FC6F9E0028173C /* NSString+MHValid.m in Sources */,
 				8A39312025FCDED100E7331B /* MHCommentCell.m in Sources */,
 				FA949CC2264AC90800498EB6 /* chongzhiListViewController.m in Sources */,
@@ -4019,6 +4046,7 @@
 				8A8BC2F725FC6ED10028173C /* MHYouKuMedia.m in Sources */,
 				8A39308D25FCDAED00E7331B /* CMHView.m in Sources */,
 				8A82F104264F9A86004AAF40 /* StartViewController.m in Sources */,
+				FA7A8076267905C3001B62AA /* VideoVideoInfoMode.m in Sources */,
 				8A9C563325F8A10000EFA410 /* UIImage+RoundedCorner.m in Sources */,
 				8A8BC2E925FC6ED10028173C /* MHYouKuCommentController.m in Sources */,
 				8A3930D425FCDB3800E7331B /* CMHExampleCell.m in Sources */,
@@ -4026,6 +4054,7 @@
 				8A95C320265A5C7B00A6D144 /* KJPlayerButton.m in Sources */,
 				8AE0C4CE266A54BA0084248D /* PanTableViewCell.m in Sources */,
 				8A39305D25FCD91A00E7331B /* SAMKeychain+CMHUtil.m in Sources */,
+				FA7A807926790601001B62AA /* VideoRelatedlistMode.m in Sources */,
 				8AE0C4DC266A54F80084248D /* menuBJViewController.m in Sources */,
 				8A95C303265A5C7B00A6D144 /* KJFileHandleManager.m in Sources */,
 				8A8BC2F025FC6ED10028173C /* MHYouKuMediaDetail.m in Sources */,
@@ -4167,6 +4196,7 @@
 				8A8BC17625F8F73F0028173C /* FDSlideBar.m in Sources */,
 				8A05217B264A8AC400E5188E /* msgInfoViewController.m in Sources */,
 				8A95C30A265A5C7B00A6D144 /* KJVideoPlayVC.m in Sources */,
+				FA7A807C26790647001B62AA /* videofragmentMode.m in Sources */,
 				8A95C305265A5C7B00A6D144 /* KJAVPlayer+KJCache.m in Sources */,
 				8A9C560C25F8A10000EFA410 /* UIView+BlockGesture.m in Sources */,
 				8A9C560D25F8A10000EFA410 /* UIView+Animation.m in Sources */,

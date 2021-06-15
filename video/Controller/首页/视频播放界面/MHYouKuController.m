@@ -114,6 +114,14 @@
 @property(nonatomic,strong)menberViewTS*menberView;
 
 
+//////////    video数据     /////////////////
+
+//@property(nonatomic,strong);
+
+
+
+
+
 @end
 
 @implementation MHYouKuController
@@ -176,7 +184,49 @@
     
     ///加载提示框
     [self addmenberViewM];
+    [self getplayerMode:[NSString stringWithFormat:@"%f",_Vmodel.id] video_fragment_id:[NSString stringWithFormat:@"%f",_Vmodel.paid] quality:@"1"];
     
+}
+
+-(void)getplayerMode:(NSString*)video_id video_fragment_id:(NSString*)video_fragment_id quality:(NSString*)quality
+{
+    NSDictionary* dict = @{
+        @"video_id":[NSString stringWithFormat:@"%@",video_id],
+        @"video_fragment_id":[NSString stringWithFormat:@"%@",video_fragment_id],
+        @"quality":[NSString stringWithFormat:@"%@",quality],};
+    
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_sourceurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+        [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    NSDictionary  * dataArr = [dict objectForKey:@"data"];
+                    NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
+                    NSDictionary * video_source = [dataArr objectForKey:@"video_source"];
+                    //直接放到网络请求结果调用，生成模型后删除就行，结果打印在控制台
+                    [DYModelMaker DY_makeModelWithDictionary:video_source modelKeyword:@"Video" modelName:@"videosource"];
+                    NSArray * qualities = [dataArr objectForKey:@"qualities"];
+                    NSArray * subtitles = [dataArr objectForKey:@"subtitles"];
+                    for (int i =0; i<subtitles.count; i++) {
+                        NSDictionary * subtitlesDict =subtitles[i];
+                        //直接放到网络请求结果调用，生成模型后删除就行，结果打印在控制台
+                        [DYModelMaker DY_makeModelWithDictionary:subtitlesDict modelKeyword:@"Video" modelName:@"subtitle"];
+                    }
+                    
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+        
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+            
+            }];
 }
 
 

@@ -19,15 +19,25 @@
 
 @implementation JRShopCell
 
-- (void)setShop:(JRShop *)shop
+//- (void)setShop:(JRShop *)shop
+//{
+//    _shop = shop;
+//
+//    [self.iconView sd_setImageWithURL:[NSURL URLWithString:shop.img] placeholderImage:[UIImage imageNamed:@"image"]];
+//    self.priceLabel.layer.cornerRadius=4;
+//    self.priceLabel.text = shop.price;
+//    self.infoLabel.layer.cornerRadius=4;
+//    self.infoLabel.text = shop.price;
+//}
+- (void)setShop:(VideoRankMode *)shop
 {
     _shop = shop;
     
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:shop.img] placeholderImage:[UIImage imageNamed:@"image"]];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:shop.pic] placeholderImage:[UIImage imageNamed:@"image"]];
     self.priceLabel.layer.cornerRadius=4;
-    self.priceLabel.text = shop.price;
+    self.priceLabel.text = shop.title;
     self.infoLabel.layer.cornerRadius=4;
-    self.infoLabel.text = shop.price;
+    self.infoLabel.text = shop.title_alias;
 }
 
 

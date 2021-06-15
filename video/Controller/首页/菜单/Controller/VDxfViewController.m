@@ -1,11 +1,11 @@
 //
-//  VDViewController.m
+//  VDxfViewController.m
 //  video
 //
-//  Created by nian on 2021/3/11.
+//  Created by macbook on 2021/6/15.
 //
 
-#import "VDViewController.h"
+#import "VDxfViewController.h"
 #import "JRShop.h"
 #import "JRShopCell.h"
 #import "MJRefresh.h"
@@ -18,11 +18,15 @@
 #import "MHYouKuController.h"
 
 #import "bannerMode.h"
+#import "ZVideoMode.h"
 
 
 // collectionViewCell的重用标识符
 static NSString * const shopCellReuseID = @"shop";
-@interface VDViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate, JRWaterFallLayoutDelegate,WSLWaterFlowLayoutDelegate,MSCycleScrollViewDelegate>
+@interface VDxfViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate, JRWaterFallLayoutDelegate,WSLWaterFlowLayoutDelegate,MSCycleScrollViewDelegate>
+{
+    CGFloat scrollerToRect;
+}
 /** 滑动底部 ScrollView */
 @property (nonatomic, weak) UIScrollView *ZScrollView;
 
@@ -36,6 +40,7 @@ static NSString * const shopCellReuseID = @"shop";
 @property (nonatomic, strong) NSMutableArray *bannerimagesURL;//轮播图url
 
 
+@property(nonatomic,assign)NSInteger page;
 /** 包含瀑布流view */
 @property (nonatomic, weak) UIView *bottomView;
 
@@ -43,9 +48,11 @@ static NSString * const shopCellReuseID = @"shop";
 
 @property (nonatomic, strong)MSCycleScrollView *cycleScrollView;
 
+@property (nonatomic, strong)UIImageView * imageviewGG;
+
 @end
 
-@implementation VDViewController
+@implementation VDxfViewController
 - (NSMutableArray *)shopsDS
 {
     if (_shopsDS == nil) {
@@ -66,7 +73,8 @@ static NSString * const shopCellReuseID = @"shop";
     // Do any additional setup after loading the view.
     self.bannerimagesURL=[NSMutableArray arrayWithCapacity:0];
     self.bannerimagesmode=[NSMutableArray arrayWithCapacity:0];
-    UIScrollView * scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT)];
+    self.page=1;
+    UIScrollView * scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight-40)];
     scrollview.backgroundColor = [UIColor whiteColor];
     scrollview.scrollsToTop = NO;
 
@@ -79,18 +87,18 @@ static NSString * const shopCellReuseID = @"shop";
     scrollview.pagingEnabled = NO;
     // 是否滚动//
     scrollview.scrollEnabled = YES;
-    scrollview.contentSize =CGSizeMake(SCREEN_WIDTH, SCREENH_HEIGHT+30+60) ;
+//    scrollview.contentSize =CGSizeMake(SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight-40) ;
     scrollview.tag=1000;
     scrollview.showsVerticalScrollIndicator = NO;
     scrollview.showsHorizontalScrollIndicator = NO;
     [self.view addSubview:scrollview];
     self.ZScrollView=scrollview;
-    [scrollview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(@0);
-        make.width.mas_equalTo(SCREEN_WIDTH);
-        make.bottom.equalTo(@0);
-        
-    }];
+//    [scrollview mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(@0);
+//        make.width.mas_equalTo(SCREEN_WIDTH);
+//        make.bottom.equalTo(@0);
+//
+//    }];
     ///包含瀑布流view
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(15, 160+70, self.ZScrollView.width-30, self.ZScrollView.height-160-70)];
     view.backgroundColor=[UIColor whiteColor];
@@ -106,7 +114,7 @@ static NSString * const shopCellReuseID = @"shop";
     [self addScrollviewLB];
     // 初始化瀑布流view
     [self setupCollectionView1];
-    [self setupCollectionView2];
+//    [self setupCollectionView2];
     [self getbannerData];
 //    [self getmenuData];
 }
@@ -175,8 +183,10 @@ static NSString * const shopCellReuseID = @"shop";
      */
     UIImageView * imageview = [[UIImageView alloc] initWithFrame:CGRectMake(20, 165, self.bottomView.width, 60)];
     [imageview setImage:[UIImage imageNamed:@"kthuiyuan"]];
-//    imageview.backgroundColor=[UIColor redColor];
     [self.ZScrollView addSubview:imageview];
+    self.imageviewGG=imageview;
+//    imageview.backgroundColor=[UIColor redColor];
+    
     
 }
 - (void)setupCollectionView1
@@ -192,20 +202,20 @@ static NSString * const shopCellReuseID = @"shop";
     layout.flowLayoutStyle = WSLWaterFlowVerticalEqualHeight;
     
     // 创建瀑布流view
-    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+    UICollectionView *collectionView = [[UICollectionView alloc] initWithFrame:self.ZScrollView.bounds collectionViewLayout:layout];
     // 设置数据源
     collectionView.dataSource = self;
     collectionView.delegate=self;
     collectionView.backgroundColor = [UIColor whiteColor];
     collectionView.tag=2001;
     // 是否滚动//
-    collectionView.scrollEnabled = NO;
+//    collectionView.scrollEnabled = NO;
     [self.bottomView addSubview:collectionView];
     [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.top.equalTo(@0);
         make.width.mas_equalTo(self.bottomView.width);
-        make.height.equalTo(@420);
+        make.height.mas_equalTo(self.ZScrollView.height-self.imageviewGG.bottom);
     }];
     self.collectionView1 = collectionView;
     
@@ -226,7 +236,8 @@ static NSString * const shopCellReuseID = @"shop";
             [self getDataList_footer1];
             
     }];
-    
+    //更新 scrollview 滑动
+    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, self.collectionView1.bottom+kNavAndTabHeight) ;
 }
 
 -(void)setupCollectionView2
@@ -282,15 +293,18 @@ static NSString * const shopCellReuseID = @"shop";
 -(void)getDataList_header1
 {
     // 清空数据
-    
+    self.page=1;
     NSDictionary*dict =nil;
     if(_SelectIndex==0)
     {
-        dict = @{@"parent_category_id":[NSString stringWithFormat:@"%@",@(100)]};
+        dict = @{@"parent_category_id":[NSString stringWithFormat:@"%@",@(100)],
+                 @"page":[NSString stringWithFormat:@"%@",@(self.page)],
+                 @"pagesize":[NSString stringWithFormat:@"%@",@(15)],
+        };
     }else{
         dict = @{@"parent_category_id":[NSString stringWithFormat:@"%f",_FenleiMode.id],
-                 @"page":[NSString stringWithFormat:@"%@",@(1)],
-                 @"pagesize":[NSString stringWithFormat:@"%@",@(10)],};
+                 @"page":[NSString stringWithFormat:@"%@",@(self.page)],
+                 @"pagesize":[NSString stringWithFormat:@"%@",@(15)],};
     }
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_listurl] Dictionary:dict success:^(id  _Nullable responseObject) {
         //        NSLog(@"post responseObject == %@",responseObject);
@@ -338,8 +352,61 @@ static NSString * const shopCellReuseID = @"shop";
 -(void)getDataList_footer1
 {
     // 刷新数据
-    [self.collectionView1 reloadData];
     
+    NSDictionary*dict =nil;
+    if(_SelectIndex==0)
+    {
+        dict = @{@"parent_category_id":[NSString stringWithFormat:@"%@",@(100)],
+                 @"page":[NSString stringWithFormat:@"%@",@(self.page+1)],
+                 @"pagesize":[NSString stringWithFormat:@"%@",@(15)],
+        };
+    }else{
+        dict = @{@"parent_category_id":[NSString stringWithFormat:@"%f",_FenleiMode.id],
+                 @"page":[NSString stringWithFormat:@"%@",@(self.page+1)],
+                 @"pagesize":[NSString stringWithFormat:@"%@",@(15)],};
+    }
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_listurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+        [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    
+                        NSDictionary  * dataArr = [dict objectForKey:@"data"];
+                        NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
+//                    [arr addObject:self.shopsDS];
+                        NSArray * video_list = [dataArr objectForKey:@"video_list"];
+                    if(video_list.count>0)
+                    {
+                        self.page+=1;
+                        for (int i=0; i<video_list.count; i++) {
+                            
+                            VideoRankMode *model = [VideoRankMode yy_modelWithDictionary:video_list[i]];
+                            [arr addObject:model];
+                            
+                        }
+                        [self.shopsDS addObjectsFromArray:arr];
+                        // 刷新数据
+                        [self.collectionView1 reloadData];
+                    }
+                        
+                    
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+        
+        // 停止刷新
+        [self.collectionView1.mj_header endRefreshing];
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+                // 停止刷新
+                [self.collectionView1.mj_header endRefreshing];
+            }];
     // 停止刷新
     [self.collectionView1.mj_footer endRefreshing];
 }
@@ -348,16 +415,14 @@ static NSString * const shopCellReuseID = @"shop";
 -(void)getDataList_header2
 {
     
-    
+    self.page=1;
 //    [self.shopsDY addObjectsFromArray:[self newShops]];
     NSDictionary*dict =nil;
     if(_SelectIndex==0)
     {
         dict = @{@"parent_category_id":[NSString stringWithFormat:@"%@",@(101)]};
     }else{
-        dict = @{@"parent_category_id":[NSString stringWithFormat:@"%f",_FenleiMode.id],
-                 @"page":[NSString stringWithFormat:@"%@",@(1)],
-                 @"pagesize":[NSString stringWithFormat:@"%@",@(10)],};
+        dict = @{@"parent_category_id":[NSString stringWithFormat:@"%f",_FenleiMode.id]};
     }
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_listurl] Dictionary:dict success:^(id  _Nullable responseObject) {
         //        NSLog(@"post responseObject == %@",responseObject);
@@ -372,8 +437,6 @@ static NSString * const shopCellReuseID = @"shop";
                     [self.shopsDY removeAllObjects];
                     NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
                     NSArray * video_list = [dataArr objectForKey:@"video_list"];
-                    if(video_list.count>0)
-                    {
                     for (int i=0; i<video_list.count; i++) {
                         
                         VideoRankMode *model = [VideoRankMode yy_modelWithDictionary:video_list[i]];
@@ -381,7 +444,6 @@ static NSString * const shopCellReuseID = @"shop";
                         
                     }
                     [self.shopsDY addObjectsFromArray:arr];
-                    }
                     // 刷新数据
                     [self.collectionView2 reloadData];
                     
@@ -474,19 +536,53 @@ static NSString * const shopCellReuseID = @"shop";
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"选择第%ld素材",indexPath.item);
-    
-    MHYouKuController *avc = [[MHYouKuController alloc] init];
     if(collectionView.tag==2001)
     {
-        avc.Vmodel=self.shopsDS[indexPath.row];
-       
+        VideoRankMode*Vmodel=self.shopsDS[indexPath.row];
+        [self getVideoInfo:[NSString stringWithFormat:@"%f",Vmodel.id]];
     }else if(collectionView.tag==2002)
     {
-        avc.Vmodel=self.shopsDY[indexPath.row];
+        VideoRankMode*Vmodel=self.shopsDY[indexPath.row];
+        [self getVideoInfo:[NSString stringWithFormat:@"%f",Vmodel.id]];
     }
-        
-    [self pushRootNav:avc animated:YES];
+   
     
+}
+
+-(void)pushViewControllerVideo{
+    MHYouKuController *avc = [[MHYouKuController alloc] init];
+    
+    [self pushRootNav:avc animated:YES];
+}
+-(void)getVideoInfo:(NSString*)videoId
+{
+    NSDictionary* dict = @{
+        @"id":videoId,};
+    
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_infourl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+        [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    NSDictionary  * dataArr = [dict objectForKey:@"data"];
+                    
+                    // 将数据转模型
+//                    ZVideoMode *model = [ZVideoMode yy_modelWithDictionary:dataArr];
+//                    NSLog(@"model  == %@",model);
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+//        [self pushViewControllerVideo];
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+            
+            }];
 }
 
 #pragma mark - WSLWaterFlowLayoutDelegate
@@ -529,7 +625,7 @@ static NSString * const shopCellReuseID = @"shop";
         // if (self.dataArr.count == 0) return view; 这里之前没有注意，直接return view 的话 刷新会看到这个view，通过下面处理就行了。
 //        if (self.shops.count == 0){
             view.backgroundColor = [UIColor clearColor];
-            [view.leftLabel setText:@"电影"];
+            [view.leftLabel setText:_FenleiMode.name];
 //            if(indexPath.section==0)
 //            {
 //                [view.leftLabel setText:@"电视剧"];
@@ -567,5 +663,35 @@ static NSString * const shopCellReuseID = @"shop";
 }
 
 
+
+
+
+
+//控制头部显示
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if(scrollView.tag==1000)
+    {
+//    CGFloat offsetY = scrollView.contentOffset.y;
+//
+//    NSLog(@"%lf",offsetY);
+//    if (offsetY > 0 && offsetY < self.ZScrollView.height) {
+//        scrollerToRect = offsetY;
+//        if(offsetY>=120)
+//        {
+//            self.collectionView1.scrollEnabled = YES;
+////            self.ZScrollView.scrollEnabled=NO;
+//            self.collectionView1.frame = CGRectMake(0, 120, self.ZScrollView.width, self.view.height -kNavAndTabHeight);
+//        }else{
+//            self.collectionView1.scrollEnabled = NO;
+////            self.ZScrollView.scrollEnabled=YES;
+//        }
+//
+//    }else if(offsetY<=0) {
+//        self.ZScrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight-40);
+//        self.collectionView1.frame = CGRectMake(0, self.imageviewGG.bottom, self.ZScrollView.width, self.view.height -kNavAndTabHeight-40);
+//        self.ZScrollView.scrollEnabled=YES;
+//    }
+    }
+}
 
 @end

@@ -8,11 +8,11 @@
 //  文档说明：
 
 #import "MHViewController.h"
-
+#import "VideoRankMode.h"
 //@interface MHYouKuController : hxpushViewController
 @interface MHYouKuController : HXBaseViewController
 
-
+@property(nonatomic,strong)VideoRankMode* Vmodel;
 
 
 @end

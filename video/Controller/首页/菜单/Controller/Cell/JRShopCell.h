@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "VideoRankMode.h"
 @class JRShop;
 
 @interface JRShopCell : UICollectionViewCell
 
-@property (nonatomic, strong) JRShop *shop;
+//@property (nonatomic, strong) JRShop *shop;
+@property (nonatomic, strong) VideoRankMode *shop;
 
 @end

@@ -20,6 +20,7 @@
 
 #import "videoFenleiMode.h"
 
+#import "VDxfViewController.h"
 #import "vlistCollectionViewCell.h"
 #import "BadgeButton.h"
 #import "PanView.h"
@@ -377,10 +378,10 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         vc.FenleiMode =model;
         return vc;
     }else{
-        VDViewController *vc = [[VDViewController alloc] init];
+        VDxfViewController *vc = [[VDxfViewController alloc] init];
         if(!vc)
         {
-            vc = [VDViewController new];
+            vc = [VDxfViewController new];
         }
         vc.SelectIndex=index;
         vc.FenleiMode =model;

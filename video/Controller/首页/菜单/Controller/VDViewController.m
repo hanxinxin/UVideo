@@ -18,7 +18,7 @@
 #import "MHYouKuController.h"
 
 #import "bannerMode.h"
-#import "videoFenleiMode.h"
+
 
 // collectionViewCell的重用标识符
 static NSString * const shopCellReuseID = @"shop";
@@ -30,8 +30,7 @@ static NSString * const shopCellReuseID = @"shop";
 @property (nonatomic, weak) UICollectionView *collectionView1;
 /** 瀑布流view */
 @property (nonatomic, weak) UICollectionView *collectionView2;
-/** shops */
-@property (nonatomic, strong) NSMutableArray *shops;
+
 
 @property (nonatomic, strong) NSMutableArray *bannerimagesmode;///轮播图mode数组
 @property (nonatomic, strong) NSMutableArray *bannerimagesURL;//轮播图url
@@ -47,14 +46,20 @@ static NSString * const shopCellReuseID = @"shop";
 @end
 
 @implementation VDViewController
-- (NSMutableArray *)shops
+- (NSMutableArray *)shopsDS
 {
-    if (_shops == nil) {
-        _shops = [NSMutableArray array];
+    if (_shopsDS == nil) {
+        _shopsDS = [NSMutableArray array];
     }
-    return _shops;
+    return _shopsDS;
 }
-
+- (NSMutableArray *)shopsDY
+{
+    if (_shopsDY == nil) {
+        _shopsDY = [NSMutableArray array];
+    }
+    return _shopsDY;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -210,20 +215,16 @@ static NSString * const shopCellReuseID = @"shop";
 //    [self.collectionView1 registerNib:[UINib nibWithNibName:NSStringFromClass([SHeaderView class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"SHeaderView1"];
     // 为瀑布流控件添加下拉加载和上拉加载
     self.collectionView1.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 模拟网络请求延迟
-            
+        
             [self getDataList_header1];
-        });
     }];
     // 第一次进入则自动加载
     [self.collectionView1.mj_header beginRefreshing];
     
     
     self.collectionView1.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 模拟网络请求延迟
             [self getDataList_footer1];
             
-        });
     }];
     
 }
@@ -261,20 +262,16 @@ static NSString * const shopCellReuseID = @"shop";
 //    [self.collectionView2 registerNib:[UINib nibWithNibName:NSStringFromClass([SHeaderView class]) bundle:nil] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"SHeaderView2"];
     // 为瀑布流控件添加下拉加载和上拉加载
     self.collectionView2.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 模拟网络请求延迟
-            
+ 
             [self getDataList_header2];
-        });
     }];
     // 第一次进入则自动加载
     [self.collectionView2.mj_header beginRefreshing];
     
     
     self.collectionView2.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 模拟网络请求延迟
             [self getDataList_footer2];
             
-        });
     }];
     
     //更新 scrollview 滑动
@@ -285,10 +282,47 @@ static NSString * const shopCellReuseID = @"shop";
 -(void)getDataList_header1
 {
     // 清空数据
-    [self.shops removeAllObjects];
     
-    [self.shops addObjectsFromArray:[self newShops]];
-    
+    NSDictionary*dict =nil;
+    if(_SelectIndex==0)
+    {
+        dict = @{@"parent_category_id":[NSString stringWithFormat:@"%@",@(100)]};
+    }else{
+        dict = @{@"parent_category_id":[NSString stringWithFormat:@"%f",_FenleiMode.id]};
+    }
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_listurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+        [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    
+                        NSDictionary  * dataArr = [dict objectForKey:@"data"];
+                        // 清空数据
+                        [self.shopsDS removeAllObjects];
+                        NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
+                        NSArray * video_list = [dataArr objectForKey:@"video_list"];
+                        for (int i=0; i<video_list.count; i++) {
+                            
+                            VideoRankMode *model = [VideoRankMode yy_modelWithDictionary:video_list[i]];
+                            [arr addObject:model];
+                            
+                        }
+                        [self.shopsDS addObjectsFromArray:arr];
+                        // 刷新数据
+                        [self.collectionView1 reloadData];
+                    
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+            }];
     // 刷新数据
     [self.collectionView1 reloadData];
     
@@ -307,13 +341,50 @@ static NSString * const shopCellReuseID = @"shop";
 
 -(void)getDataList_header2
 {
-    // 清空数据
-    [self.shops removeAllObjects];
     
-    [self.shops addObjectsFromArray:[self newShops]];
     
-    // 刷新数据
-    [self.collectionView2 reloadData];
+//    [self.shopsDY addObjectsFromArray:[self newShops]];
+    NSDictionary*dict =nil;
+    if(_SelectIndex==0)
+    {
+        dict = @{@"parent_category_id":[NSString stringWithFormat:@"%@",@(101)]};
+    }else{
+        dict = @{@"parent_category_id":[NSString stringWithFormat:@"%f",_FenleiMode.id]};
+    }
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_listurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+        [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    NSDictionary  * dataArr = [dict objectForKey:@"data"];
+                    // 清空数据
+                    [self.shopsDY removeAllObjects];
+                    NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
+                    NSArray * video_list = [dataArr objectForKey:@"video_list"];
+                    for (int i=0; i<video_list.count; i++) {
+                        
+                        VideoRankMode *model = [VideoRankMode yy_modelWithDictionary:video_list[i]];
+                        [arr addObject:model];
+                        
+                    }
+                    [self.shopsDY addObjectsFromArray:arr];
+                    // 刷新数据
+                    [self.collectionView2 reloadData];
+                    
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+            }];
+    
+    
     
     // 停止刷新
     [self.collectionView2.mj_header endRefreshing];
@@ -355,28 +426,56 @@ static NSString * const shopCellReuseID = @"shop";
 
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
 
+    if(collectionView.tag==2001)
+    {
+        return 1;
+    }else if(collectionView.tag==2002)
+    {
+        return 1;
+    }
     return 1;
-    
 }
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    
-    return self.shops.count;
+    if(collectionView.tag==2001)
+    {
+        return self.shopsDS.count;
+    }else if(collectionView.tag==2002)
+    {
+        return self.shopsDY.count;
+    }
+    return 0;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(collectionView.tag==2001)
+    {
+        
     // 创建cell
     JRShopCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:shopCellReuseID forIndexPath:indexPath];
     
     // 给cell传递模型
-    JRShop *shop1=self.shops[indexPath.row];
+    JRShop *shop1=self.shopsDS[indexPath.row];
     shop1.price=[NSString stringWithFormat:@"使用素材%ld",indexPath.row];
     cell.shop = shop1;
-    
-    
     // 返回cell
     return cell;
+       
+    }else if(collectionView.tag==2002)
+    {
+        // 创建cell
+        JRShopCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:shopCellReuseID forIndexPath:indexPath];
+        
+        // 给cell传递模型
+        JRShop *shop1=self.shopsDY[indexPath.row];
+        shop1.price=[NSString stringWithFormat:@"使用素材%ld",indexPath.row];
+        cell.shop = shop1;
+        // 返回cell
+        return cell;
+           
+    }
+    return nil;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -147,10 +147,7 @@
 		8A8BC1C125FA135A0028173C /* JRWaterFallLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BC1C025FA135A0028173C /* JRWaterFallLayout.m */; };
 		8A8BC1D025FA13850028173C /* JRShopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BC1C625FA13850028173C /* JRShopCell.m */; };
 		8A8BC1D125FA13850028173C /* JRShop.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BC1C925FA13850028173C /* JRShop.m */; };
-		8A8BC1D225FA13850028173C /* 2.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A8BC1CA25FA13850028173C /* 2.plist */; };
 		8A8BC1D325FA13850028173C /* 0.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A8BC1CB25FA13850028173C /* 0.plist */; };
-		8A8BC1D425FA13850028173C /* 1.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A8BC1CD25FA13850028173C /* 1.plist */; };
-		8A8BC1D525FA13850028173C /* 3.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8A8BC1CE25FA13850028173C /* 3.plist */; };
 		8A8BC1D625FA13850028173C /* JRShopCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A8BC1CF25FA13850028173C /* JRShopCell.xib */; };
 		8A8BC1E325FA1DC20028173C /* SHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BC1E225FA1DC20028173C /* SHeaderView.m */; };
 		8A8BC1E925FA203E0028173C /* HQCustomButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A8BC1E825FA203E0028173C /* HQCustomButton.m */; };
@@ -707,11 +704,8 @@
 		8A8BC1C625FA13850028173C /* JRShopCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRShopCell.m; sourceTree = "<group>"; };
 		8A8BC1C725FA13850028173C /* JRShopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRShopCell.h; sourceTree = "<group>"; };
 		8A8BC1C925FA13850028173C /* JRShop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JRShop.m; sourceTree = "<group>"; };
-		8A8BC1CA25FA13850028173C /* 2.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 2.plist; sourceTree = "<group>"; };
 		8A8BC1CB25FA13850028173C /* 0.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 0.plist; sourceTree = "<group>"; };
 		8A8BC1CC25FA13850028173C /* JRShop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JRShop.h; sourceTree = "<group>"; };
-		8A8BC1CD25FA13850028173C /* 1.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 1.plist; sourceTree = "<group>"; };
-		8A8BC1CE25FA13850028173C /* 3.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = 3.plist; sourceTree = "<group>"; };
 		8A8BC1CF25FA13850028173C /* JRShopCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JRShopCell.xib; sourceTree = "<group>"; };
 		8A8BC1E125FA1DC20028173C /* SHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SHeaderView.h; sourceTree = "<group>"; };
 		8A8BC1E225FA1DC20028173C /* SHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SHeaderView.m; sourceTree = "<group>"; };
@@ -2016,11 +2010,8 @@
 			isa = PBXGroup;
 			children = (
 				8A8BC1C925FA13850028173C /* JRShop.m */,
-				8A8BC1CA25FA13850028173C /* 2.plist */,
 				8A8BC1CB25FA13850028173C /* 0.plist */,
 				8A8BC1CC25FA13850028173C /* JRShop.h */,
-				8A8BC1CD25FA13850028173C /* 1.plist */,
-				8A8BC1CE25FA13850028173C /* 3.plist */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -3748,7 +3739,6 @@
 				8A0520F42648D56C00E5188E /* SliderTableViewCell.xib in Resources */,
 				8A3930E525FCDB3800E7331B /* cmh_default_red_pocket@2x.png in Resources */,
 				FAA6DF112675C77500DE5E7C /* cycle_top_right.png in Resources */,
-				8A8BC1D225FA13850028173C /* 2.plist in Resources */,
 				8A3930E725FCDB3800E7331B /* cmh_default_buy_goods@2x.png in Resources */,
 				8A05210D264919BE00E5188E /* LXTableViewCell.xib in Resources */,
 				FAA6DF0F2675C77500DE5E7C /* cycle_bottom_left.png in Resources */,
@@ -3763,7 +3753,6 @@
 				8A3930F025FCDB3800E7331B /* cmh_default_no_wifi_0@3x.png in Resources */,
 				8A3930E025FCDB3800E7331B /* cmh_default_search_no_result@3x.png in Resources */,
 				8A3930E125FCDB3800E7331B /* cmh_default_order_detail@2x.png in Resources */,
-				8A8BC1D425FA13850028173C /* 1.plist in Resources */,
 				8A95C300265A5C7B00A6D144 /* KJMidiSource.bundle in Resources */,
 				FA9662DC2663355B00AF7B46 /* KMPlayView.xib in Resources */,
 				8A95C30C265A5C7B00A6D144 /* KJMidiPlayerVC.xib in Resources */,
@@ -3774,7 +3763,6 @@
 				8A3930D925FCDB3800E7331B /* cmh_default_search_no_result@2x.png in Resources */,
 				8A3930ED25FCDB3800E7331B /* cmh_default_my_address@2x.png in Resources */,
 				FA9FBAAE2647ADEB00E4F27E /* topHeaderView.xib in Resources */,
-				8A8BC1D525FA13850028173C /* 3.plist in Resources */,
 				FA9662E1266335A500AF7B46 /* chongzhiView.xib in Resources */,
 				FA9662E62663361500AF7B46 /* PlayWTView.xib in Resources */,
 				8A9C565D25F8A17B00EFA410 /* BezierCurveView.xib in Resources */,

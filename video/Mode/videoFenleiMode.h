@@ -8,10 +8,10 @@
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+@class videoFenleiMode;
 @interface videoFenleiMode : NSObject
-@property(nonatomic,assign) long id;//分类id
-@property(nonatomic,assign) long pid;// 上级id
+@property(nonatomic,assign) double id;//分类id
+@property(nonatomic,assign) double pid;// 上级id
 @property(nonatomic,assign) NSString* name;// 分类名称
 @property(nonatomic,assign) NSString* icon;// 图标地址
 

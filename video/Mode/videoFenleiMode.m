@@ -8,6 +8,9 @@
 #import "videoFenleiMode.h"
 
 @implementation videoFenleiMode
++(NSDictionary *)mj_replacedKeyFromPropertyName {
+  return @{@"Id" : @"id"};
+}
 - (instancetype)initWithDictionary:(NSDictionary *)dict
 
 {

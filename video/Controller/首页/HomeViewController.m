@@ -113,7 +113,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     
     __block HomeViewController *weekself = self;
     [self hiddenViewMenu];
-    if()
+
     //点击标签后根据标签选择刷新数据
     self.subView.block = ^(NSString *labelText, NSIndexPath *indexPath, NSInteger celltag) {
         NSArray * arr =[weekself.dataDic valueForKey:@(indexPath.row+1).description];
@@ -132,7 +132,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         }
         
         NSLog(@"====%@   === %ld   celltag==%ld",labelText,indexPath.row,celltag);
-        
+//        561.8
     };
 //    NSLog(@"kIs_iPhoneX  = %d",kIs_iPhoneX );
     menuBool=NO;
@@ -162,12 +162,20 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         [UHud hideLoadHud];
         NSDictionary *dict=(NSDictionary *)responseObject;
         NSNumber * code = [dict objectForKey:@"error"];
-        [self.VideofenleiList removeAllObjects];
         [self.VideoDictList removeAllObjects];
         if([code intValue]==0)
         {
             NSDictionary * datadict = [dict objectForKey:@"data"];
             NSArray * category_list=[datadict objectForKey:@"category_list"];
+            if(category_list.count>0)
+            {
+                NSDictionary * zdy = @{@"icon":@"",
+                                       @"id":@(0),
+                                       @"name":@"全部",
+                                       @"pid":@(0),
+                                       @"show":@(1),};
+                [self.VideoDictList addObject:zdy];
+            }
             for (int i=0; i<category_list.count; i++) {
 //                videoFenleiMode *model = [videoFenleiMode provinceWithDictionary:category_list[i]];
 //                [self.VideofenleiList addObject:model];
@@ -354,6 +362,9 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 - (UIViewController *)viewcontrollerWithIndex:(NSInteger)index {
     if (index <0 || index > self.arrayForControllerTitles.count) return nil;
 //    id model = _arrayForShow[index];
+    NSDictionary * dict = _arrayForShow[index];
+    videoFenleiMode * model = [videoFenleiMode yy_modelWithDictionary:dict];
+    NSLog(@"model.name = %@ ,id =   %f",model.name,model.id);
     if(index==0)
     {
         
@@ -362,7 +373,8 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         {
             vc = [VDViewController new];
         }
-        
+        vc.SelectIndex=index;
+        vc.FenleiMode =model;
         return vc;
     }else{
         VDViewController *vc = [[VDViewController alloc] init];
@@ -370,6 +382,8 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         {
             vc = [VDViewController new];
         }
+        vc.SelectIndex=index;
+        vc.FenleiMode =model;
         return vc;
     }
     return nil;

@@ -74,7 +74,10 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 //        [self.searchBar becomeFirstResponder];
 //    }
     
-    
+    //获取通知中心单例对象
+        NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+        //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
+        [center addObserver:self selector:@selector(noticePush:) name:@"pushMovie" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -82,6 +85,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     [super viewWillDisappear:animated];
     // 回收键盘
     [self.searchBar resignFirstResponder];
+    [[NSNotificationCenter defaultCenter] removeObserver:@"pushMovie"];
    
 }
 - (void)viewDidLoad {
@@ -645,6 +649,17 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     return UIEdgeInsetsMake(15, 15, 15, 15);
 }
 
-
+-(void)noticePush:(NSNotification *)not
+{
+    NSDictionary*userInfo=not.userInfo;
+    NSNumber* index=[userInfo objectForKey:@"index"];
+    if([index intValue]==1)
+    {
+        [self setToIndex:1];
+    }else if([index intValue]==2)
+    {
+        [self setToIndex:2];
+    }
+}
 
 @end

@@ -28,7 +28,7 @@
     [self.leftLabel setFont:[UIFont systemFontOfSize:17.f]];
     [self addSubview:self.leftLabel];
     
-    UIButton * button1 =[[UIButton alloc] initWithFrame:CGRectMake(self.width/2, 0, self.width/2-15, 30)];
+    UIButton * button1 =[[UIButton alloc] initWithFrame:CGRectMake(self.width/2, 0, self.width/2-30, 30)];
     [button1 setBackgroundColor:[UIColor whiteColor]];
     [button1 setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
     button1.layer.cornerRadius=4;
@@ -48,6 +48,9 @@
 -(void)Btn_Touch:(id)sender
 {
     NSLog(@"BtnTouch");
+    if (self.touchIndex) {
+        self.touchIndex(self.tag);
+    }
 }
 -(void)setLeftTitle:(NSString *)Str
 {

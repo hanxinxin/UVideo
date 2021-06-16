@@ -568,6 +568,7 @@ static NSString * const shopCellReuseID = @"shop";
 //        if (self.shops.count == 0){
             view.backgroundColor = [UIColor clearColor];
             [view.leftLabel setText:@"电影"];
+            view.tag=collectionView.tag;
 //            if(indexPath.section==0)
 //            {
 //                [view.leftLabel setText:@"电视剧"];
@@ -575,6 +576,12 @@ static NSString * const shopCellReuseID = @"shop";
 //            {
 //                [view.leftLabel setText:@"电影"];
 //            }
+            view.touchIndex = ^(NSInteger tag) {
+              if(tag==2001)
+              {
+                  [self pushMovie:1];
+              }
+            };
             return view;
 //        }
         }
@@ -587,6 +594,13 @@ static NSString * const shopCellReuseID = @"shop";
 //            if (self.shops.count == 0){
                 view.backgroundColor = [UIColor clearColor];
                 [view.leftLabel setText:@"电视剧"];
+            view.tag=collectionView.tag;
+            view.touchIndex = ^(NSInteger tag) {
+              if(tag==2002)
+              {
+                  [self pushMovie:2];
+              }
+            };
                 return view;
 //            }
         }
@@ -594,6 +608,13 @@ static NSString * const shopCellReuseID = @"shop";
     return nil;
 }
 
+/// 发送跳转 界面
+/// @param index 1是 电影 2是电视剧
+-(void)pushMovie:(NSInteger)index
+{
+    NSNotification *notification = [NSNotification notificationWithName:@"pushMovie" object:nil userInfo:@{@"index":@(index)}];
+    [[NSNotificationCenter defaultCenter]postNotification:notification];
+}
 
 
 #pragma mark - SDCycleScrollViewDelegate

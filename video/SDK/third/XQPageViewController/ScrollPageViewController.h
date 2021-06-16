@@ -45,6 +45,8 @@
 /// 在setdata之后要刷新数据
 - (void)reloadData;
 
+/// 切换到某个index
+- (void)setToIndex:(NSInteger)index;
 
 
 ////  自定义加入

@@ -209,14 +209,14 @@ static NSString * const shopCellReuseID = @"shop";
     collectionView.backgroundColor = [UIColor whiteColor];
     collectionView.tag=2001;
     // 是否滚动//
-//    collectionView.scrollEnabled = NO;
+    collectionView.scrollEnabled = NO;
     [self.bottomView addSubview:collectionView];
-    [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(@0);
-        make.width.mas_equalTo(self.bottomView.width);
-        make.height.mas_equalTo(self.ZScrollView.height-self.imageviewGG.bottom);
-    }];
+//    [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.top.equalTo(@0);
+//        make.width.mas_equalTo(self.bottomView.width);
+//        make.height.mas_equalTo(self.ZScrollView.height-self.imageviewGG.bottom);
+//    }];
     self.collectionView1 = collectionView;
     
     // 注册cell
@@ -237,7 +237,7 @@ static NSString * const shopCellReuseID = @"shop";
             
     }];
     //更新 scrollview 滑动
-    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, self.collectionView1.bottom+kNavAndTabHeight) ;
+    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, self.collectionView1.bottom+230) ;
 }
 
 -(void)setupCollectionView2
@@ -628,6 +628,7 @@ static NSString * const shopCellReuseID = @"shop";
 //        if (self.shops.count == 0){
             view.backgroundColor = [UIColor clearColor];
             [view.leftLabel setText:_FenleiMode.name];
+//            view.rightBtn.hidden=YES;
 //            if(indexPath.section==0)
 //            {
 //                [view.leftLabel setText:@"电视剧"];
@@ -673,26 +674,24 @@ static NSString * const shopCellReuseID = @"shop";
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     if(scrollView.tag==1000)
     {
-//    CGFloat offsetY = scrollView.contentOffset.y;
-//
-//    NSLog(@"%lf",offsetY);
-//    if (offsetY > 0 && offsetY < self.ZScrollView.height) {
-//        scrollerToRect = offsetY;
-//        if(offsetY>=120)
-//        {
-//            self.collectionView1.scrollEnabled = YES;
-////            self.ZScrollView.scrollEnabled=NO;
-//            self.collectionView1.frame = CGRectMake(0, 120, self.ZScrollView.width, self.view.height -kNavAndTabHeight);
-//        }else{
-//            self.collectionView1.scrollEnabled = NO;
-////            self.ZScrollView.scrollEnabled=YES;
-//        }
-//
-//    }else if(offsetY<=0) {
-//        self.ZScrollView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight-40);
-//        self.collectionView1.frame = CGRectMake(0, self.imageviewGG.bottom, self.ZScrollView.width, self.view.height -kNavAndTabHeight-40);
-//        self.ZScrollView.scrollEnabled=YES;
-//    }
+        
+    CGFloat offsetY = scrollView.contentOffset.y;
+
+    NSLog(@"%lf",offsetY);
+    if (offsetY > 0 && offsetY < self.ZScrollView.height) {
+        scrollerToRect=offsetY;
+        if(offsetY>=220)
+        {
+            self.collectionView1.scrollEnabled = YES;
+            self.bottomView.frame=CGRectMake(15, kNavAndTabHeight+50, self.ZScrollView.width-30, self.ZScrollView.height) ;
+            self.collectionView1.frame=CGRectMake(0,0,self.bottomView.width, self.bottomView.height) ;
+        }else{
+            self.collectionView1.scrollEnabled = NO;
+            self.bottomView.frame=CGRectMake(15, 160+70, self.ZScrollView.width-30, self.ZScrollView.height-160-70) ;
+            self.collectionView1.frame=CGRectMake(0,0,self.bottomView.width, self.collectionView1.height+scrollerToRect) ;
+            
+        }
+    }
     }
 }
 

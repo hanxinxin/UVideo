@@ -475,19 +475,57 @@ static NSString * const shopCellReuseID = @"shop";
 {
     NSLog(@"选择第%ld素材",indexPath.item);
     
-    MHYouKuController *avc = [[MHYouKuController alloc] init];
     if(collectionView.tag==2001)
     {
-        avc.Vmodel=self.shopsDS[indexPath.row];
-       
+        VideoRankMode*Vmodel=self.shopsDS[indexPath.row];
+        [self getVideoInfo:[NSString stringWithFormat:@"%f",Vmodel.id]];
     }else if(collectionView.tag==2002)
     {
-        avc.Vmodel=self.shopsDY[indexPath.row];
+        VideoRankMode*Vmodel=self.shopsDY[indexPath.row];
+        [self getVideoInfo:[NSString stringWithFormat:@"%f",Vmodel.id]];
     }
-        
-    [self pushRootNav:avc animated:YES];
     
 }
+-(void)pushViewControllerVideo:(ZVideoMode*)mode{
+    MHYouKuController *avc = [[MHYouKuController alloc] init];
+    avc.Zvideomodel= mode;
+    [self pushRootNav:avc animated:YES];
+}
+
+-(void)getVideoInfo:(NSString*)videoId
+{
+    NSDictionary* dict = @{
+        @"id":videoId,};
+    
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_infourl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+        [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    NSDictionary  * dataArr = [dict objectForKey:@"data"];
+                    
+                    // 将数据转模型
+                    ZVideoMode *model = [ZVideoMode yy_modelWithDictionary:dataArr];
+                    NSLog(@"model  == %@",model);
+                    [self pushViewControllerVideo:model];
+                    
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+//        [self pushViewControllerVideo];
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+            
+            }];
+}
+
+
 
 #pragma mark - WSLWaterFlowLayoutDelegate
 //返回每个item大小

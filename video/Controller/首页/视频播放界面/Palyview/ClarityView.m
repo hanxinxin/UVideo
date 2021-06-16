@@ -12,9 +12,7 @@
 #define CellID @"clarityCollectionViewCell"
 
 @interface ClarityView ()<UICollectionViewDataSource,UICollectionViewDelegate,UIScrollViewDelegate,WSLWaterFlowLayoutDelegate>
-@property (nonatomic, weak) UICollectionView *collectionView1;
 @property (nonatomic, strong)NSMutableArray * titlearray;
-@property (nonatomic, assign)NSInteger selectIndex;
 @end
 @implementation ClarityView
 
@@ -22,7 +20,11 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        
+        [self.titlearray addObject:@"标清·360"];
+        [self.titlearray addObject:@"高清·480P"];
+        [self.titlearray addObject:@"超清·720P"];
+        [self.titlearray addObject:@"蓝光·1080P"];
+        self.selectIndex=0;
         // 初始化CollectionView
         [self setupCollectionView1];
         
@@ -38,10 +40,17 @@
     }
     return _titlearray;
 }
+- (NSArray *)titleNumberarray
+{
+    if (_titleNumberarray == nil) {
+        _titleNumberarray = [NSArray array];
+    }
+    return _titleNumberarray;
+}
 
 - (void)setupCollectionView1
 {
-    self.selectIndex=0;
+    
    
     // 创建瀑布流layout
 //    JRWaterFallLayout *layout = [[JRWaterFallLayout alloc] init];
@@ -100,10 +109,7 @@
 }
 -(void)updateCollection
 {
-    [self.titlearray addObject:@"标清·360"];
-    [self.titlearray addObject:@"高清·480P"];
-    [self.titlearray addObject:@"超清·720P"];
-    [self.titlearray addObject:@"蓝光·1080P"];
+    
     [self.collectionView1.mj_header endRefreshing];
     [self.collectionView1 reloadData];
 }
@@ -118,7 +124,7 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
-    return self.titlearray.count;
+    return self.titleNumberarray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -160,19 +166,45 @@
         
         }
     }
-    [cell.downtitle setTitle:self.titlearray[indexPath.item] forState:(UIControlStateNormal)];
-    if(indexPath.item==0)
+    NSNumber * Sindex=self.titleNumberarray[indexPath.item];
+    [cell.downtitle setTitle:self.titlearray[[Sindex intValue]-1] forState:(UIControlStateNormal)];
+    if(self.titleNumberarray.count==1)
     {
-        cell.toptitle.text=@"游客";
-        cell.toptitle.textColor=RGB(102, 102, 102);
-    }else if(indexPath.item==1)
+        if(indexPath.item==0)
+        {
+            cell.toptitle.text=@"游客";
+            cell.toptitle.textColor=RGB(102, 102, 102);
+        }else{
+            cell.toptitle.text=@"注册会员";
+            cell.toptitle.textColor=RGB(255, 136, 0);
+        }
+        
+    }else if(self.titleNumberarray.count==2)
     {
-        cell.toptitle.text=@"注册会员";
-        cell.toptitle.textColor=RGB(102, 102, 102);
-    }else{
-        cell.toptitle.text=@"VIP会员";
-        cell.toptitle.textColor=RGB(255, 136, 0);
+        if(indexPath.item==0)
+        {
+            cell.toptitle.text=@"游客";
+            cell.toptitle.textColor=RGB(102, 102, 102);
+        }else{
+            cell.toptitle.text=@"注册会员";
+            cell.toptitle.textColor=RGB(255, 136, 0);
+        }
+        
+    }else if(self.titleNumberarray.count==3){
+        if(indexPath.item==0)
+        {
+            cell.toptitle.text=@"游客";
+            cell.toptitle.textColor=RGB(102, 102, 102);
+        }else if(indexPath.item==1)
+        {
+            cell.toptitle.text=@"注册会员";
+            cell.toptitle.textColor=RGB(102, 102, 102);
+        }else{
+            cell.toptitle.text=@"VIP会员";
+            cell.toptitle.textColor=RGB(255, 136, 0);
+        }
     }
+    
     
     // 返回cell
     return cell;

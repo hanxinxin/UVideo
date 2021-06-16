@@ -173,10 +173,12 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
 - (NSMutableArray *)topArray
 {
     if (_topArray == nil) {
-        _topArray = [NSMutableArray array];
+        _topArray = [NSMutableArray arrayWithCapacity:0];
     }
     return _topArray;
 }
+
+
 + (instancetype)headerViewWithTableView:(UITableView *)tableView
 {
     static NSString *ID = @"AnthologyHeader";
@@ -191,6 +193,7 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
 {
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
+        _topArray=[NSMutableArray arrayWithCapacity:0];
         // 初始化
         [self _setup];
         
@@ -209,7 +212,30 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
     _anthologyItem = anthologyItem;
     
     self.anthologyLabel.text = anthologyItem.title;
-    
+    for (int i=0; i<_anthologyItem.anthologys.count; i++) {
+        static int p=0;
+        if(i!=0)
+        {
+        if((i+1)%20==0)
+        {
+            MHYouKuAnthology *anthology1=_anthologyItem.anthologys[p];
+            MHYouKuAnthology *anthology2=_anthologyItem.anthologys[i];
+            [_topArray addObject:[NSString stringWithFormat:@"%ld-%ld",(long)anthology1.albums_sort,(long)anthology2.albums_sort]];
+            p=i;
+        }else{
+//            if(_anthologyItem.anthologys.count%20)
+//            {
+//                _anthologyItem.anthologys.count-i
+//            }
+        }
+        }
+        
+    }
+//    if(_anthologyItem.anthologys.count%20)
+//    {
+//
+//    }
+    [self.XJcollectionView reloadData];
     [self.collectionView reloadData];
 }
 
@@ -257,10 +283,10 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
     [titleView addSubview:moreBtn];
     self.moreBtn = moreBtn;
     
-    _topArray=[NSMutableArray array];
-    [_topArray addObject:@"1-20"];
-    [_topArray addObject:@"21-40"];
-    [_topArray addObject:@"41-60"];
+    
+//    [_topArray addObject:@"1-20"];
+//    [_topArray addObject:@"21-40"];
+//    [_topArray addObject:@"41-60"];
     self.xuanjiSelect = 0;
 //    _tableView = [[ZqwHorizontalTableView alloc] initWithFrame:CGRectMake(0, 0, self.width, 40)];
 ////    _tableView.backgroundColor = [UIColor whiteColor];

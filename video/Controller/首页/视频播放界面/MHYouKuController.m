@@ -116,12 +116,13 @@
 
 //////////    video数据     /////////////////
 
-//@property(nonatomic,strong);
+@property(nonatomic,strong)NSArray*qualitieslist;
+@property(nonatomic,strong)NSArray*subtitleslist;
 
+@property(nonatomic,strong)NSArray*video_fragment_list;
 
-
-
-
+@property(nonatomic,assign)NSInteger QXDSelectIndex; //// 清晰度选择
+@property(nonatomic,assign)NSInteger xuanjiSelectIndex; ///  集数选择
 @end
 
 @implementation MHYouKuController
@@ -163,7 +164,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+    [self SetData];
     // 初始化
     [self _setup];
 
@@ -184,10 +185,27 @@
     
     ///加载提示框
     [self addmenberViewM];
-    [self getplayerMode:[NSString stringWithFormat:@"%f",_Vmodel.id] video_fragment_id:[NSString stringWithFormat:@"%f",_Vmodel.paid] quality:@"1"];
     
+   
 }
 
+-(void)SetData
+{
+    
+    self.qualitieslist=[[NSArray alloc] init];
+    self.subtitleslist=[[NSArray alloc] init];
+    self.QXDSelectIndex=0;
+    self.xuanjiSelectIndex=0;
+    if(_Zvideomodel!=nil)
+    {
+    VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+    videofragmentMode*Fmo=[videofragmentMode yy_modelWithDictionary:_Zvideomodel.video_fragment_list[0] ];
+    
+        self.video_fragment_list=_Zvideomodel.video_fragment_list;
+    
+    [self getplayerMode:[NSString stringWithFormat:@"%f",modelL.id] video_fragment_id:[NSString stringWithFormat:@"%f",Fmo.id] quality:Fmo.qualities[self.QXDSelectIndex]];
+    }
+}
 -(void)getplayerMode:(NSString*)video_id video_fragment_id:(NSString*)video_fragment_id quality:(NSString*)quality
 {
     NSDictionary* dict = @{
@@ -204,18 +222,18 @@
                 if([code intValue]==0)
                 {
                     NSDictionary  * dataArr = [dict objectForKey:@"data"];
-                    NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
-                    NSDictionary * video_source = [dataArr objectForKey:@"video_source"];
-                    //直接放到网络请求结果调用，生成模型后删除就行，结果打印在控制台
-                    [DYModelMaker DY_makeModelWithDictionary:video_source modelKeyword:@"Video" modelName:@"videosource"];
+                    NSDictionary * video_soruce = [dataArr objectForKey:@"video_soruce"];
+                    VideoVideosource*model=[VideoVideosource yy_modelWithDictionary:video_soruce];
+//                    //直接放到网络请求结果调用，生成模型后删除就行，结果打印在控制台
+//                    [DYModelMaker DY_makeModelWithDictionary:video_soruce modelKeyword:@"Video" modelName:@"videosource"];
+                    self.player.videoURL = [NSURL URLWithString:model.url];
                     NSArray * qualities = [dataArr objectForKey:@"qualities"];
                     NSArray * subtitles = [dataArr objectForKey:@"subtitles"];
-                    for (int i =0; i<subtitles.count; i++) {
-                        NSDictionary * subtitlesDict =subtitles[i];
-                        //直接放到网络请求结果调用，生成模型后删除就行，结果打印在控制台
-                        [DYModelMaker DY_makeModelWithDictionary:subtitlesDict modelKeyword:@"Video" modelName:@"subtitle"];
-                    }
+                    self.qualitieslist=qualities;
+                    self.subtitleslist=subtitles;
+                    self.Clarity.titleNumberarray=self.qualitieslist;
                     
+                    [self.Clarity.collectionView1 reloadData];
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
                     [UHud showTXTWithStatus:message delay:2.f];
@@ -244,6 +262,11 @@
     backview.smallScreenHiddenBackButton = YES;
     backview.backButton.hidden=YES;
     backview.autoHideTime = 3;
+    if(_Zvideomodel!=nil)
+    {
+        VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+        [backview.backButton setTitle:modelL.title forState:(UIControlStateNormal)];
+    }
     PLAYER_WEAKSELF;
     backview.kVideoClickButtonBack = ^(KJBasePlayerView *view){
 //        if (view.isFullScreen) {
@@ -299,13 +322,13 @@
 //    player.videoURL = [NSURL URLWithString:@"https://mp4.vjshi.com/2018-03-30/1f36dd9819eeef0bc508414494d34ad9.mp4"];
 
     
-    self.temps = @[@"https://mp4.vjshi.com/2021-01-13/d37b7bea25b063b4f9d4bdd98bc611e3.mp4",
-                   @"https://mp4.vjshi.com/2018-03-30/1f36dd9819eeef0bc508414494d34ad9.mp4",
-                   @"https://mp4.vjshi.com/2021-01-13/ac721f0590f0b0509092afea52d55a90.mp4",@"http://ivi.bupt.edu.cn/hls/hunanhd.m3u8"];
+//    self.temps = @[@"https://mp4.vjshi.com/2021-01-13/d37b7bea25b063b4f9d4bdd98bc611e3.mp4",
+//                   @"https://mp4.vjshi.com/2018-03-30/1f36dd9819eeef0bc508414494d34ad9.mp4",
+//                   @"https://mp4.vjshi.com/2021-01-13/ac721f0590f0b0509092afea52d55a90.mp4",@"http://ivi.bupt.edu.cn/hls/hunanhd.m3u8"];
     
     
 //    self.player.videoURL = [NSURL URLWithString:self.temps[3]];
-    player.videoURL = [NSURL URLWithString:self.temps[0]];
+//    player.videoURL = [NSURL URLWithString:self.temps[0]];
     
     
     //注册、接收通知
@@ -334,13 +357,21 @@
     
 }
 - (void)tempsAction:(NSInteger)index{
-    if(index>=2)
-    {
-        [self showmenberViewTS];
-    }else
-    {
-    self.player.videoURL = [NSURL URLWithString:self.temps[index]];
-    }
+//    if(index>=1)
+//    {
+//        [self showmenberViewTS];
+//    }else
+//    {
+//    self.player.videoURL = [NSURL URLWithString:self.temps[index]];
+        
+        if(_Zvideomodel!=nil)
+        {
+        VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+        videofragmentMode*Fmo=[videofragmentMode yy_modelWithDictionary:_Zvideomodel.video_fragment_list[self.xuanjiSelectIndex] ];
+        
+        [self getplayerMode:[NSString stringWithFormat:@"%f",modelL.id] video_fragment_id:[NSString stringWithFormat:@"%f",Fmo.id] quality:Fmo.qualities[index]];
+        }
+//    }
 }
 
 #pragma mark - KJPlayerDelegate
@@ -573,14 +604,17 @@
         _anthologyItem.mediabase_id = self.mediabase_id;
         _anthologyItem.displayType = MHYouKuAnthologyDisplayTypeTextPlain;
         // 98757
-        for (NSInteger i = 89750; i<89770; i++) {
-            
+//        VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+//        _mediabase_id = [NSString stringWithFormat:@"%.f",modelL.id];
+        
+        for (NSInteger i = 0; i<self.video_fragment_list.count; i++) {
+            videofragmentMode*Fmo=[videofragmentMode yy_modelWithDictionary:_Zvideomodel.video_fragment_list[i] ];
             MHYouKuAnthology *anthology = [[MHYouKuAnthology alloc] init];
-            anthology.albums_sort = (i-89749);
-            anthology.mediabase_id = [NSString stringWithFormat:@"%zd",i];
+            anthology.albums_sort = i+1;
+            anthology.mediabase_id = [NSString stringWithFormat:@"%.f",Fmo.id];
             if([anthology.mediabase_id isEqualToString:_anthologyItem.mediabase_id])
             {
-                _anthologyItem.item = (i-89750);
+                _anthologyItem.item = i;
             }
             [_anthologyItem.anthologys addObject:anthology];
         }
@@ -614,7 +648,8 @@
     // hiden掉系统的导航栏
     self.fd_prefersNavigationBarHidden = YES;
     // 设置视频id 编号89757
-    _mediabase_id = @"89757";
+    VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+    _mediabase_id = [NSString stringWithFormat:@"%.f",modelL.id];;
    
 }
 - (UIButton *)btn{
@@ -647,7 +682,13 @@
 #pragma mark - 设置导航栏
 - (void)_setupNavigationItem
 {
-    self.title = @"我们的世界";
+    if(_Zvideomodel!=nil)
+    {
+    VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+        self.title = modelL.title;
+    }
+    
+    
     self.hiddenLeftBtn=YES;
     self.statusBarTextIsWhite=NO;
     self.statusBarBackgroundColor=[UIColor blackColor];
@@ -861,12 +902,13 @@
     clarity.backgroundColor = [UIColor whiteColor];
     self.Clarity=clarity;
     tableView.tableHeaderView = clarity;
-
+    
     // 详情点击事件
 //    __weak typeof(self) weakSelf = self;
     [self.Clarity setClarityCallBack:^(NSInteger index) {
         
         NSLog(@"清晰度选择 = %ld",index);
+        self.QXDSelectIndex=index;
         [self tempsAction:index];
     }];
     
@@ -1479,8 +1521,11 @@
 
 - (void) anthologyHeaderView:(MHYouKuAnthologyHeaderView *)anthologyHeaderView mediaBaseId:(NSString *)mediaBaseId
 {
+    MHLog(@"anthologyHeaderView.anthologyItem.item== %ld" , (long)anthologyHeaderView.anthologyItem.item);;
+    self.xuanjiSelectIndex=anthologyHeaderView.anthologyItem.item;
+    [self tempsAction:self.QXDSelectIndex];
     // 选集集数按钮被点击
-    MHLog(@"+++ 选集集数按钮点击 +++ %@" , mediaBaseId);
+    MHLog(@" 选集集数按钮点击=== %@" , mediaBaseId);
 }
 
 #pragma mark - MHYouKuCommentHeaderViewDelegate

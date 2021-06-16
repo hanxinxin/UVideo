@@ -11,7 +11,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface ZVideoMode : NSObject
-@property (nonatomic, strong) VideoVideoInfoMode*model;
+//@property (nonatomic, strong) VideoVideoInfoMode*model;
+@property (nonatomic, strong) NSDictionary*video;
 @property (nonatomic, assign) double in_favorite;                     // 是否已收藏[0=否 1=是]
 @property (nonatomic, assign) double in_evaluate;                     // 是否已评价(赞或踩)[0=否 1=是]
 @property (nonatomic, assign) double evaluate_type;                   // 评价类型[0=未评价 大于0=赞 小于0=踩]

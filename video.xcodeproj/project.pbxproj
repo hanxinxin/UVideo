@@ -330,6 +330,7 @@
 		8A9C567925F8A24E00EFA410 /* OfflineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C567825F8A24E00EFA410 /* OfflineViewController.m */; };
 		8A9C567F25F8A27500EFA410 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C567E25F8A27500EFA410 /* MyViewController.m */; };
 		8A9C56B925F8A4D000EFA410 /* LocalStringObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C56B725F8A4D000EFA410 /* LocalStringObj.m */; };
+		8AADB3972679C99A009051B7 /* VideoVideosource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AADB3962679C99A009051B7 /* VideoVideosource.m */; };
 		8ACAEA972643E22C0091EEFE /* ZBCycleVerticalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACAEA932643E22C0091EEFE /* ZBCycleVerticalView.m */; };
 		8ACAEA982643E22C0091EEFE /* ZBCycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACAEA942643E22C0091EEFE /* ZBCycleView.m */; };
 		8ACAEAA92643F2390091EEFE /* YZYHorizListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACAEAA82643F2390091EEFE /* YZYHorizListView.m */; };
@@ -1079,6 +1080,8 @@
 		8A9C56AE25F8A41100EFA410 /* GlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConfig.h; sourceTree = "<group>"; };
 		8A9C56B725F8A4D000EFA410 /* LocalStringObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalStringObj.m; sourceTree = "<group>"; };
 		8A9C56B825F8A4D000EFA410 /* LocalStringObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalStringObj.h; sourceTree = "<group>"; };
+		8AADB3952679C99A009051B7 /* VideoVideosource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoVideosource.h; sourceTree = "<group>"; };
+		8AADB3962679C99A009051B7 /* VideoVideosource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoVideosource.m; sourceTree = "<group>"; };
 		8ACAEA932643E22C0091EEFE /* ZBCycleVerticalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBCycleVerticalView.m; sourceTree = "<group>"; };
 		8ACAEA942643E22C0091EEFE /* ZBCycleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBCycleView.m; sourceTree = "<group>"; };
 		8ACAEA952643E22C0091EEFE /* ZBCycleVerticalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBCycleVerticalView.h; sourceTree = "<group>"; };
@@ -1872,6 +1875,8 @@
 				FA7A807B26790647001B62AA /* videofragmentMode.m */,
 				FA7A807D2679069F001B62AA /* ZVideoMode.h */,
 				FA7A807E2679069F001B62AA /* ZVideoMode.m */,
+				8AADB3952679C99A009051B7 /* VideoVideosource.h */,
+				8AADB3962679C99A009051B7 /* VideoVideosource.m */,
 			);
 			path = Mode;
 			sourceTree = "<group>";
@@ -4075,6 +4080,7 @@
 				FA993BAC2676F8EF00C6F298 /* videoFenleiMode.m in Sources */,
 				FA8A03952667D78300B41281 /* menberViewTS.m in Sources */,
 				FA9662DA2663354D00AF7B46 /* KMPlayView.m in Sources */,
+				8AADB3972679C99A009051B7 /* VideoVideosource.m in Sources */,
 				8A8BC1E325FA1DC20028173C /* SHeaderView.m in Sources */,
 				8A8BC2EA25FC6ED10028173C /* MHYouKuTopicDetailController.m in Sources */,
 				8A39308B25FCDAED00E7331B /* MHReflection.m in Sources */,

@@ -549,9 +549,9 @@ static NSString * const shopCellReuseID = @"shop";
     
 }
 
--(void)pushViewControllerVideo{
+-(void)pushViewControllerVideo:(ZVideoMode*)mode{
     MHYouKuController *avc = [[MHYouKuController alloc] init];
-    
+    avc.Zvideomodel= mode;
     [self pushRootNav:avc animated:YES];
 }
 -(void)getVideoInfo:(NSString*)videoId
@@ -570,8 +570,10 @@ static NSString * const shopCellReuseID = @"shop";
                     NSDictionary  * dataArr = [dict objectForKey:@"data"];
                     
                     // 将数据转模型
-//                    ZVideoMode *model = [ZVideoMode yy_modelWithDictionary:dataArr];
-//                    NSLog(@"model  == %@",model);
+                    ZVideoMode *model = [ZVideoMode yy_modelWithDictionary:dataArr];
+                    NSLog(@"model  == %@",model);
+                    [self pushViewControllerVideo:model];
+                    
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
                     [UHud showTXTWithStatus:message delay:2.f];

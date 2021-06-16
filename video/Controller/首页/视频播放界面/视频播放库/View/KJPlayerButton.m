@@ -80,7 +80,7 @@
 //        [self setTitle:@"\U0000e697" forState:(UIControlStateNormal)];
 //        self.titleLabel.font = [UIFont fontWithName:@"KJPlayerfont" size:self.frame.size.width/4*3];
         [self setImage:[UIImage imageNamed:@"whiteBack"] forState:(UIControlStateNormal)];
-        [self setTitle:@" 我们的世界第一集" forState:(UIControlStateNormal)];
+//        [self setTitle:@" 我们的世界第一集" forState:(UIControlStateNormal)];
         [self setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
         self.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
 //        [self setImage:[UIImage imageNamed:@"zanting"] forState:(UIControlStateSelected)];

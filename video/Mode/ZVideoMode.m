@@ -8,5 +8,7 @@
 #import "ZVideoMode.h"
 
 @implementation ZVideoMode
-
++(NSDictionary *)mj_replacedKeyFromPropertyName {
+  return @{@"Id" : @"id"};
+}
 @end

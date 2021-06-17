@@ -1521,8 +1521,9 @@
 
 - (void) anthologyHeaderView:(MHYouKuAnthologyHeaderView *)anthologyHeaderView mediaBaseId:(NSString *)mediaBaseId
 {
-    MHLog(@"anthologyHeaderView.anthologyItem.item== %ld" , (long)anthologyHeaderView.anthologyItem.item);;
-    self.xuanjiSelectIndex=anthologyHeaderView.anthologyItem.item;
+    MHLog(@"anthologyHeaderView.selectXJindex== %ld" , (long)anthologyHeaderView.selectXJindex);
+    
+    self.xuanjiSelectIndex=anthologyHeaderView.selectXJindex;
     [self tempsAction:self.QXDSelectIndex];
     // 选集集数按钮被点击
     MHLog(@" 选集集数按钮点击=== %@" , mediaBaseId);

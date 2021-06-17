@@ -34,4 +34,8 @@
 /** 容器 */
 @property (nonatomic , strong) MHYouKuAnthologyItem *anthologyItem;
 
+
+/** 选集  delegate 使用 因为做了分组，所以要整合下再发送*/
+@property (nonatomic , assign) NSInteger selectXJindex;
+
 @end

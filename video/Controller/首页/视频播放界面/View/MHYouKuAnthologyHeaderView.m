@@ -161,6 +161,8 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
 @property (nonatomic , strong) NSMutableArray *fenList;
 @property (nonatomic , assign) NSInteger xuanjiSelect;
 
+@property (nonatomic , assign) NSInteger xuanzhongVideoItem;
+
 @end
 
 
@@ -204,6 +206,8 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
         _topArray=[NSMutableArray arrayWithCapacity:0];
         _fenList=[NSMutableArray arrayWithCapacity:0];
+        self.xuanjiSelect = 0;
+        self.xuanzhongVideoItem=0;
         // 初始化
         [self _setup];
         
@@ -222,19 +226,41 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
     _anthologyItem = anthologyItem;
     
     self.anthologyLabel.text = anthologyItem.title;
+    NSMutableArray * fenarray=[NSMutableArray arrayWithCapacity:0];
+    [self.fenList removeAllObjects];
+    [self.topArray removeAllObjects];
+    int p=0;
     for (int i=0; i<_anthologyItem.anthologys.count; i++) {
-        static int p=0;
+        
+        
+        MHYouKuAnthology *anthology2=_anthologyItem.anthologys[i];
+        [fenarray addObject:anthology2];
         if(i!=0)
         {
-        if((i+1)%20==0)
-        {
-            MHYouKuAnthology *anthology1=_anthologyItem.anthologys[p];
-            MHYouKuAnthology *anthology2=_anthologyItem.anthologys[i];
-            [_topArray addObject:[NSString stringWithFormat:@"%ld-%ld",(long)anthology1.albums_sort,(long)anthology2.albums_sort]];
-            p=i;
-        }else{
+                if((i+1)%20==0)
+                {
+//                    NSMutableArray * arr=[fenarray copy];
+                
+                    [self.fenList addObject:[fenarray copy]];
+                    [fenarray removeAllObjects];
+                    MHYouKuAnthology *anthology1=_anthologyItem.anthologys[p];
+                    [_topArray addObject:[NSString stringWithFormat:@"%ld-%ld",(long)anthology1.albums_sort,(long)anthology2.albums_sort]];
+                    p=i+1;
+                }else{
+                    if((_anthologyItem.anthologys.count-p)<20)
+                    {
+                        if(i==(_anthologyItem.anthologys.count-1))
+                        {
+//                            NSMutableArray * arr=[fenarray copy];
+                            [self.fenList addObject:[fenarray copy]];
+                            [fenarray removeAllObjects];
+                            MHYouKuAnthology *anthology1=_anthologyItem.anthologys[p];
+                            [_topArray addObject:[NSString stringWithFormat:@"%ld-%ld",(long)anthology1.albums_sort,(long)anthology2.albums_sort]];
+                        }
+                    }
+                }
             
-        }
+            
         }
         
     }
@@ -290,7 +316,7 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
 //    [_topArray addObject:@"1-20"];
 //    [_topArray addObject:@"21-40"];
 //    [_topArray addObject:@"41-60"];
-    self.xuanjiSelect = 0;
+    
 //    _tableView = [[ZqwHorizontalTableView alloc] initWithFrame:CGRectMake(0, 0, self.width, 40)];
 ////    _tableView.backgroundColor = [UIColor whiteColor];
 //    _tableView.dataSource = self;
@@ -438,7 +464,8 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
     if(collectionView.tag==1000)
     {
 //        return self.anthologyItem.anthologys.count;
-        return self.fenList.count;
+        NSMutableArray * arr = self.fenList[self.xuanjiSelect];
+        return arr.count;
     }else if(collectionView.tag==2000)
     {
         return self.topArray.count;
@@ -454,8 +481,11 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
         
     JLAnthologyCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
 //    cell.anthology = self.anthologyItem.anthologys[indexPath.item];
-        cell.anthology = self.fenList[indexPath.item];
-        if(self.lastSelectedIndexPath.item==indexPath.item)
+//        cell.anthology = self.fenList[indexPath.item];
+        NSMutableArray * arr = self.fenList[self.xuanjiSelect];
+        cell.anthology = arr[indexPath.item];
+//        if(self.lastSelectedIndexPath.item==indexPath.item)
+        if(self.xuanzhongVideoItem==self.selectXJindex)
         {
             cell.numLabel.layer.borderWidth = 1;
             cell.numLabel.layer.cornerRadius = 4;
@@ -491,10 +521,12 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
        
     // 记录选中的Item
     self.anthologyItem.item = indexPath.item;
-    
+        self.selectXJindex=(self.xuanjiSelect*20+indexPath.item);
     // 取消上一次的选中
-    if (self.lastSelectedIndexPath != indexPath)
+//    if (self.lastSelectedIndexPath != indexPath)
+    if(self.xuanzhongVideoItem!=self.selectXJindex)
     {
+        
         // 选中不是同一个cell
         // 获取上一次的选中的cell
         JLAnthologyCell *lastCell = (JLAnthologyCell *)[collectionView cellForItemAtIndexPath:self.lastSelectedIndexPath];
@@ -502,20 +534,26 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
         lastCell.selected = NO;
         // 记录当前的选中
         self.lastSelectedIndexPath = indexPath;
+        self.xuanzhongVideoItem=self.selectXJindex;
+        
+        
+    }
         
         if (self.delegate && [self.delegate respondsToSelector:@selector(anthologyHeaderView:mediaBaseId:)]) {
 //            MHYouKuAnthology *anthology = self.anthologyItem.anthologys[indexPath.item];
-            MHYouKuAnthology *anthology = self.fenList[indexPath.item];
+            NSArray * arr = self.fenList[self.xuanjiSelect];
+            MHYouKuAnthology *anthology = arr[indexPath.item];
             [self.delegate anthologyHeaderView:self mediaBaseId:anthology.mediabase_id];
             
         }
         
-    }
         [self.collectionView reloadData];
     }else if(collectionView.tag==2000)
     {
         self.xuanjiSelect=indexPath.item;
+        self.anthologyItem.item=0;
         [self.XJcollectionView reloadData];
+        [self.collectionView reloadData];
     }
 }
 

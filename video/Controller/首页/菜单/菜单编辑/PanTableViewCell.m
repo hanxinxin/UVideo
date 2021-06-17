@@ -80,9 +80,11 @@
 //    }
     cell.tag=self.tag;
     if (self.indexPath == indexPath) {
-        cell.showLabel.textColor = [UIColor redColor];
+        cell.showLabel.textColor = RGBA(20, 155, 236, 1);
+        cell.backgroundColor=RGBA(239, 248, 253, 1);
     }else{
         cell.showLabel.textColor = [UIColor blackColor];
+        cell.backgroundColor=[UIColor whiteColor];
     }
     return cell;
 }

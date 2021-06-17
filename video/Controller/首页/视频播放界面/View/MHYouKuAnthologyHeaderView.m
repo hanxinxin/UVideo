@@ -157,6 +157,8 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
 /** tableView */
 //@property (nonatomic , strong) ZqwHorizontalTableView *tableView;
 @property (nonatomic , strong) NSMutableArray *topArray;
+/** 选集分列表 */
+@property (nonatomic , strong) NSMutableArray *fenList;
 @property (nonatomic , assign) NSInteger xuanjiSelect;
 
 @end
@@ -178,6 +180,13 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
     return _topArray;
 }
 
+- (NSMutableArray *)fenList
+{
+    if (_fenList == nil) {
+        _fenList = [NSMutableArray arrayWithCapacity:0];
+    }
+    return _fenList;
+}
 
 + (instancetype)headerViewWithTableView:(UITableView *)tableView
 {
@@ -194,6 +203,7 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
 {
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
         _topArray=[NSMutableArray arrayWithCapacity:0];
+        _fenList=[NSMutableArray arrayWithCapacity:0];
         // 初始化
         [self _setup];
         
@@ -223,18 +233,11 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
             [_topArray addObject:[NSString stringWithFormat:@"%ld-%ld",(long)anthology1.albums_sort,(long)anthology2.albums_sort]];
             p=i;
         }else{
-//            if(_anthologyItem.anthologys.count%20)
-//            {
-//                _anthologyItem.anthologys.count-i
-//            }
+            
         }
         }
         
     }
-//    if(_anthologyItem.anthologys.count%20)
-//    {
-//
-//    }
     [self.XJcollectionView reloadData];
     [self.collectionView reloadData];
 }
@@ -434,7 +437,8 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
 {
     if(collectionView.tag==1000)
     {
-        return self.anthologyItem.anthologys.count;
+//        return self.anthologyItem.anthologys.count;
+        return self.fenList.count;
     }else if(collectionView.tag==2000)
     {
         return self.topArray.count;
@@ -449,7 +453,8 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
     {
         
     JLAnthologyCell * cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
-    cell.anthology = self.anthologyItem.anthologys[indexPath.item];
+//    cell.anthology = self.anthologyItem.anthologys[indexPath.item];
+        cell.anthology = self.fenList[indexPath.item];
         if(self.lastSelectedIndexPath.item==indexPath.item)
         {
             cell.numLabel.layer.borderWidth = 1;
@@ -499,7 +504,8 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
         self.lastSelectedIndexPath = indexPath;
         
         if (self.delegate && [self.delegate respondsToSelector:@selector(anthologyHeaderView:mediaBaseId:)]) {
-            MHYouKuAnthology *anthology = self.anthologyItem.anthologys[indexPath.item];
+//            MHYouKuAnthology *anthology = self.anthologyItem.anthologys[indexPath.item];
+            MHYouKuAnthology *anthology = self.fenList[indexPath.item];
             [self.delegate anthologyHeaderView:self mediaBaseId:anthology.mediabase_id];
             
         }
@@ -609,10 +615,25 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
         
     }else if(collectionView.tag==2000)
     {
-        CGFloat width = 60;
-        return CGSizeMake(width, 35);
+//        CGFloat width = 60;
+        
+        return CGSizeMake([self calculateRowWidth:self.topArray[indexPath.item]], 35);
     }
     return CGSizeMake(0, 0);
 }
-
+//计算文字宽度
+-(CGFloat)calculateRowWidth:(NSString*)string {
+//    NSDictionary * dic = @{NSFontAttributeName:[UIFont systemFontOfSize:16]};
+//    CGRect rect = [string boundingRectWithSize:CGSizeMake(4, 35)/*计算宽度时要确定高度*/options: NSStringDrawingUsesFontLeading attributes:dic context:nil];
+//    return rect.size.width;
+    
+//    NSString *str = @"计算字符串的宽度和高度";
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:5];//设置行间距
+    //最大宽度为300，最大高度为200
+    CGSize size = [string boundingRectWithSize:CGSizeMake(300, 200) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17] ,NSParagraphStyleAttributeName:paragraphStyle} context:nil].size;
+     
+//    NSLog(@"宽度=%f，高度=%f",size.width,size.height);
+    return size.width;
+}
 @end

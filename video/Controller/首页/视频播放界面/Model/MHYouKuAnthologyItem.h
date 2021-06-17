@@ -31,7 +31,7 @@ typedef NS_ENUM(NSUInteger, MHYouKuAnthologyDisplayType) {
 /** mediabase_id */
 @property (nonatomic , copy) NSString *mediabase_id;
 
-/** 选集列表 */
+/** 选集总列表 */
 @property (nonatomic , strong) NSMutableArray *anthologys;
 
 /** 显示类型 */

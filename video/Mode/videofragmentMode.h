@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class videofragmentMode;
 @interface videofragmentMode : NSObject
 @property (nonatomic, assign) double id;
-@property (nonatomic, copy) NSString *symbol;
+@property (nonatomic, assign) double symbol;
 @property (nonatomic, strong) NSArray *qualities;
 @end
 

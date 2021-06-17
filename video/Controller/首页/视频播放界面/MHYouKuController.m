@@ -199,7 +199,7 @@
     if(_Zvideomodel!=nil)
     {
     VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
-    videofragmentMode*Fmo=[videofragmentMode yy_modelWithDictionary:_Zvideomodel.video_fragment_list[0] ];
+    videofragmentMode*Fmo=[videofragmentMode yy_modelWithDictionary:_Zvideomodel.video_fragment_list[self.xuanjiSelectIndex] ];
     
         self.video_fragment_list=_Zvideomodel.video_fragment_list;
     
@@ -610,7 +610,7 @@
         for (NSInteger i = 0; i<self.video_fragment_list.count; i++) {
             videofragmentMode*Fmo=[videofragmentMode yy_modelWithDictionary:_Zvideomodel.video_fragment_list[i] ];
             MHYouKuAnthology *anthology = [[MHYouKuAnthology alloc] init];
-            anthology.albums_sort = i+1;
+            anthology.albums_sort = Fmo.symbol;
             anthology.mediabase_id = [NSString stringWithFormat:@"%.f",Fmo.id];
             if([anthology.mediabase_id isEqualToString:_anthologyItem.mediabase_id])
             {

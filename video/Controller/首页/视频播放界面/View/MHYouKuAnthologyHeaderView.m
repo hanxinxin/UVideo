@@ -464,8 +464,13 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
     if(collectionView.tag==1000)
     {
 //        return self.anthologyItem.anthologys.count;
-        NSMutableArray * arr = self.fenList[self.xuanjiSelect];
-        return arr.count;
+        if(self.fenList.count>0)
+        {
+            NSMutableArray * arr = self.fenList[self.xuanjiSelect];
+            return arr.count;
+        }else{
+            return 0;
+        }
     }else if(collectionView.tag==2000)
     {
         return self.topArray.count;

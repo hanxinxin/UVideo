@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 
 typedef void(^SuggestSelectBlock)(NSString *searchTest);
-@interface LLSearchSuggestionVC : UIViewController
+@interface LLSearchSuggestionVC : hxViewController
 
 @property (nonatomic, copy) SuggestSelectBlock searchBlock;
+@property(strong,nonatomic)NSMutableArray * dataArr;
+@property (nonatomic, strong)NSString * keyword;
 
 - (void)searchTestChangeWithTest:(NSString *)test;
 

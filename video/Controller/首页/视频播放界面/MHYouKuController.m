@@ -216,7 +216,7 @@
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_sourceurl] Dictionary:dict success:^(id  _Nullable responseObject) {
         //        NSLog(@"post responseObject == %@",responseObject);
 //        [UHud hideLoadHudForView:self.view];
-        [UHud hideLoadHud];
+            [UHud hideLoadHud];
                 NSDictionary *dict=(NSDictionary *)responseObject;
                 NSNumber * code = [dict objectForKey:@"error"];
                 if([code intValue]==0)
@@ -1462,7 +1462,7 @@
                 self.media.thumbNums-=1;
             }
             [self _refreshDataWithMedia:self.media];
-
+            
         }
             break;
         case MHYouKuBottomToolBarTypeComment:

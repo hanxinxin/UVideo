@@ -40,7 +40,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 @property (nonatomic, copy) NSArray *dataArray;
 @property (nonatomic, strong) NSMutableArray *arrayForShow;
 
-
+@property (nonatomic, strong) NSMutableArray *SXArray; ///筛选后的数组
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 //@property (nonatomic, strong) HomeTitleView *titleView;
@@ -64,6 +64,10 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 @property (nonatomic, strong) NSString * languagesstring;
 @property (nonatomic, strong) NSString * statesstring;
 @property (nonatomic, strong) NSString * yearsstring;
+
+@property (nonatomic, assign) NSInteger TopSelectIndex;  //// 当前选中的头列表
+
+@property (nonatomic, assign) NSInteger SXpage;///筛选 page
 @end
 
 @implementation HomeViewController
@@ -94,6 +98,14 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     // Do any additional setup after loading the view.
     self.VideofenleiList=[NSMutableArray arrayWithCapacity:0];
     self.VideoDictList=[NSMutableArray arrayWithCapacity:0];
+    self.SXArray=[NSMutableArray arrayWithCapacity:0];
+    
+    self.regionsstring=@"";
+    self.languagesstring=@"";
+    self.statesstring=@"";
+    self.yearsstring=@"";
+    self.TopSelectIndex=0;
+    self.SXpage=1;
     [self initNav];
 //    [self PMDLabel];
     [self addPageView];
@@ -101,42 +113,61 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     [self.view addSubview:self.collectionView];
     // 为瀑布流控件添加下拉加载和上拉加载
     self.collectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 模拟网络请求延迟
-            [self.collectionView.mj_header endRefreshing];
-        });
+        [self getSXCollecheader];
     }];
     // 第一次进入则自动加载
     [self.collectionView.mj_header beginRefreshing];
     
     
     self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{ // 模拟网络请求延迟
-            // 停止刷新
-            [self.collectionView.mj_footer endRefreshing];
-        });
+        [self getSXCollecfoot];
     }];
     
     __block HomeViewController *weekself = self;
     [self hiddenViewMenu];
-
+    
     //点击标签后根据标签选择刷新数据
     self.subView.block = ^(NSString *labelText, NSIndexPath *indexPath, NSInteger celltag) {
-        NSArray * arr =[weekself.dataDic valueForKey:@(indexPath.row+1).description];
+//        NSArray * arr =[weekself.dataDic valueForKey:@(indexPath.row+1).description];
         if(celltag==1)
         {
-            weekself.regionsstring=labelText;
+            
+            if(indexPath.row==0)
+            {
+                weekself.regionsstring=@"";
+            }else{
+                weekself.regionsstring=labelText;
+            }
         }else if(celltag==2)
         {
-            weekself.languagesstring=labelText;
+            if(indexPath.row==0)
+            {
+                weekself.languagesstring=@"";
+            }else{
+                weekself.languagesstring=labelText;
+            }
         }else if(celltag==3)
         {
-            weekself.statesstring=labelText;
+            if(indexPath.row==0)
+            {
+                weekself.statesstring=@"";
+            }else{
+                weekself.statesstring=labelText;
+            }
         }else if(celltag==4)
         {
-            weekself.yearsstring=labelText;
+            if(indexPath.row==0)
+            {
+                weekself.yearsstring=@"";
+            }else{
+                weekself.yearsstring=labelText;
+            }
         }
         
         NSLog(@"====%@   === %ld   celltag==%ld",labelText,indexPath.row,celltag);
+        [weekself SearchGetData:weekself.regionsstring languagesstring:weekself.languagesstring statesstring:weekself.statesstring yearsstring:weekself.yearsstring];
+        
+        
 //        561.8
     };
 //    NSLog(@"kIs_iPhoneX  = %d",kIs_iPhoneX );
@@ -207,8 +238,230 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         [UHud showTXTWithStatus:@"网络错误" delay:2.f];
     }];
 }
+-(void)getSXCollecheader
+{
+//    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%@",@(self.SXpage)],
+//                            @"pagesize":[NSString stringWithFormat:@"%@",@(15)],};
+    self.SXpage=1;
+    NSMutableDictionary*dict =[NSMutableDictionary dictionary];
+//
+    if(![_yearsstring isEqualToString:@""])
+    {
+        [dict setObject:_yearsstring forKey:@"year"];
+    }
+    if(![_regionsstring isEqualToString:@""])
+    {
+        [dict setObject:_regionsstring forKey:@"region"];
+    }
+    if(![_languagesstring isEqualToString:@""])
+    {
+        [dict setObject:_languagesstring forKey:@"language"];
+    }
+    if(![_statesstring isEqualToString:@""])
+    {
+        [dict setObject:_statesstring forKey:@"state"];
+    }
+    if(self.TopSelectIndex!=0)
+    {
+        NSDictionary * dictAA = _arrayForShow[self.TopSelectIndex];
+        videoFenleiMode * model = [videoFenleiMode yy_modelWithDictionary:dictAA];
+        [dict setObject:[NSString stringWithFormat:@"%.f",model.id] forKey:@"parent_category_id"];
+    }
+    [dict setObject:[NSString stringWithFormat:@"%@",@(self.SXpage)] forKey:@"page"];
+    [dict setObject:[NSString stringWithFormat:@"%@",@(15)] forKey:@"pagesize"];
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_listurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            
+                NSDictionary  * dataArr = [dict objectForKey:@"data"];
+                // 清空数据
+                [self.SXArray removeAllObjects];
+                NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
+                NSArray * video_list = [dataArr objectForKey:@"video_list"];
+            if(video_list.count>0)
+            {
+                for (int i=0; i<video_list.count; i++) {
+                    
+                    VideoRankMode *model = [VideoRankMode yy_modelWithDictionary:video_list[i]];
+                    [arr addObject:model];
+                    
+                }
+                [self.SXArray addObjectsFromArray:arr];
+            }
+            [self.collectionView.mj_header endRefreshing];
+                // 刷新数据
+                [self.collectionView reloadData];
+            
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showTXTWithStatus:message delay:2.f];
+            [self.collectionView.mj_header endRefreshing];
+            // 刷新数据
+            [self.collectionView reloadData];
+        }
+        
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+                [self.collectionView.mj_header endRefreshing];
+                // 刷新数据
+                [self.collectionView reloadData];
+            }];
+}
 
-
+-(void)getSXCollecfoot
+{
+//    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%@",@(self.SXpage)],
+//                            @"pagesize":[NSString stringWithFormat:@"%@",@(15)],};
+    NSMutableDictionary*dict =[NSMutableDictionary dictionary];
+//
+    if(![_yearsstring isEqualToString:@""])
+    {
+        [dict setObject:_yearsstring forKey:@"year"];
+    }
+    if(![_regionsstring isEqualToString:@""])
+    {
+        [dict setObject:_regionsstring forKey:@"region"];
+    }
+    if(![_languagesstring isEqualToString:@""])
+    {
+        [dict setObject:_languagesstring forKey:@"language"];
+    }
+    if(![_statesstring isEqualToString:@""])
+    {
+        [dict setObject:_statesstring forKey:@"state"];
+    }
+    if(self.TopSelectIndex!=0)
+    {
+        NSDictionary * dictAA = _arrayForShow[self.TopSelectIndex];
+        videoFenleiMode * model = [videoFenleiMode yy_modelWithDictionary:dictAA];
+        [dict setObject:[NSString stringWithFormat:@"%.f",model.id] forKey:@"parent_category_id"];
+    }
+    [dict setObject:[NSString stringWithFormat:@"%@",@(self.SXpage+1)] forKey:@"page"];
+    [dict setObject:[NSString stringWithFormat:@"%@",@(15)] forKey:@"pagesize"];
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_listurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            
+                NSDictionary  * dataArr = [dict objectForKey:@"data"];
+                // 清空数据
+                [self.SXArray removeAllObjects];
+                NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
+                NSArray * video_list = [dataArr objectForKey:@"video_list"];
+            if(video_list.count>0)
+            {
+                self.SXpage+=1;
+                for (int i=0; i<video_list.count; i++) {
+                    
+                    VideoRankMode *model = [VideoRankMode yy_modelWithDictionary:video_list[i]];
+                    [arr addObject:model];
+                    
+                }
+                [self.SXArray addObjectsFromArray:arr];
+            }
+            [self.collectionView.mj_footer endRefreshing];
+                // 刷新数据
+                [self.collectionView reloadData];
+            
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showTXTWithStatus:message delay:2.f];
+            [self.collectionView.mj_footer endRefreshing];
+            // 刷新数据
+            [self.collectionView reloadData];
+        }
+        
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+                [self.collectionView.mj_footer endRefreshing];
+                // 刷新数据
+                [self.collectionView reloadData];
+            }];
+}
+-(void)SearchGetData:(NSString*)regionsstring languagesstring:(NSString*)languagesstring statesstring:(NSString*)statesstring yearsstring:(NSString*)yearsstring
+{
+//    |year|否|string||年份|
+//    |region|否|string||地区|
+//    |language|否|string||语言|
+//    |paid|否|number||是否付费[1=是 0=否]|
+//    |state|否|string||更新状态|
+//    |sort_field|否|string||排序依据字段(create_time|update_time|hits|score)|
+//    |sort_type|否|string||排序类型(desc=降序|asc=升序)|
+    NSMutableDictionary*dict =[NSMutableDictionary dictionary];
+//
+    if(![yearsstring isEqualToString:@""])
+    {
+        [dict setObject:yearsstring forKey:@"year"];
+    }
+    if(![regionsstring isEqualToString:@""])
+    {
+        [dict setObject:regionsstring forKey:@"region"];
+    }
+    if(![languagesstring isEqualToString:@""])
+    {
+        [dict setObject:languagesstring forKey:@"language"];
+    }
+    if(![statesstring isEqualToString:@""])
+    {
+        [dict setObject:statesstring forKey:@"state"];
+    }
+    if(self.TopSelectIndex!=0)
+    {
+        NSDictionary * dictAA = _arrayForShow[self.TopSelectIndex];
+        videoFenleiMode * model = [videoFenleiMode yy_modelWithDictionary:dictAA];
+        [dict setObject:[NSString stringWithFormat:@"%.f",model.id] forKey:@"parent_category_id"];
+    }
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_listurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+                [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    
+                        NSDictionary  * dataArr = [dict objectForKey:@"data"];
+                        // 清空数据
+                        [self.SXArray removeAllObjects];
+                        NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
+                        NSArray * video_list = [dataArr objectForKey:@"video_list"];
+                    if(video_list.count>0)
+                    {
+                        for (int i=0; i<video_list.count; i++) {
+                            
+                            VideoRankMode *model = [VideoRankMode yy_modelWithDictionary:video_list[i]];
+                            [arr addObject:model];
+                            
+                        }
+                        [self.SXArray addObjectsFromArray:arr];
+                    }
+                        // 刷新数据
+                        [self.collectionView reloadData];
+                    
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                    // 刷新数据
+                    [self.collectionView reloadData];
+                }
+        
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+                // 刷新数据
+                [self.collectionView reloadData];
+            }];
+}
 -(void)huoquleibiao
 {
     
@@ -370,6 +623,8 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     NSDictionary * dict = _arrayForShow[index];
     videoFenleiMode * model = [videoFenleiMode yy_modelWithDictionary:dict];
     NSLog(@"model.name = %@ ,id =   %f",model.name,model.id);
+    self.TopSelectIndex=index;
+    [self getSXCollecheader];
     if(index==0)
     {
         
@@ -391,6 +646,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         vc.FenleiMode =model;
         return vc;
     }
+    
     return nil;
 }
 
@@ -426,7 +682,6 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     
         self.subView.hidden=NO;
         self.collectionView.hidden=NO;
-    
 //    [self.view addSubview:self.tittleView];
     
 }
@@ -601,7 +856,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     
-    return 14;
+    return self.SXArray.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -610,7 +865,9 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     vlistCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:VCellReuseID forIndexPath:indexPath];
     
     
+    VideoRankMode*model=self.SXArray[indexPath.item];
     
+    cell.model=model;
     
     // 返回cell
     return cell;
@@ -619,8 +876,9 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 {
     NSLog(@"选择第%ld素材",indexPath.item);
     
-    MHYouKuController *avc = [[MHYouKuController alloc] init];
-    [self pushRootNav:avc animated:YES];
+    VideoRankMode*model=self.SXArray[indexPath.item];
+    
+    [self getVideoInfo:[NSString stringWithFormat:@"%f",model.id]];
     
 }
 
@@ -662,4 +920,46 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     }
 }
 
+
+
+
+
+-(void)getVideoInfo:(NSString*)videoId
+{
+    NSDictionary* dict = @{
+        @"id":videoId,};
+    
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_infourl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+        [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    NSDictionary  * dataArr = [dict objectForKey:@"data"];
+                    
+                    // 将数据转模型
+                    ZVideoMode *model = [ZVideoMode yy_modelWithDictionary:dataArr];
+                    NSLog(@"model  == %@",model);
+                    [self pushViewControllerVideo:model];
+                    
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+//        [self pushViewControllerVideo];
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+            
+            }];
+}
+
+-(void)pushViewControllerVideo:(ZVideoMode*)mode{
+    MHYouKuController *avc = [[MHYouKuController alloc] init];
+    avc.Zvideomodel= mode;
+    [self pushRootNav:avc animated:YES];
+}
 @end

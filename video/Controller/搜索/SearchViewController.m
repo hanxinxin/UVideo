@@ -123,6 +123,7 @@
     searchBar.placeholder = @"请输入关键字";
 //    searchBar.backgroundImage = [UIImage imageNamed:@"guideImage_button_backgound"];
 //    searchBar.backgroundColor=[UIColor whiteColor];
+    searchBar.keyboardType=UIKeyboardTypeDefault;
     searchBar.delegate = self;
     searchBar.showsCancelButton = YES;
     NSString *version = [UIDevice currentDevice].systemVersion;

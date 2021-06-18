@@ -28,6 +28,7 @@
 #import "HttpManagement.h"
 #import "YTSliderView.h"
 #import "ZGQActionSheetView.h"
+#import "UIImageView+WebCache.h"
 
 ////////////   3.13日添加 头文件
 #import <MJRefresh/MJRefresh.h>

@@ -13,5 +13,13 @@
     [super awakeFromNib];
     // Initialization code
 }
+- (void)setModel:(VideoRankMode *)model
+{
+    _model = model;
+    
+    [self.topImage sd_setImageWithURL:[NSURL URLWithString:model.pic] placeholderImage:[UIImage imageNamed:@"image"]];
+    self.downTitle.text=model.title;
+}
+
 
 @end

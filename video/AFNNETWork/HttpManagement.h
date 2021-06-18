@@ -19,6 +19,9 @@ typedef void (^SuccessBlock)(id _Nullable responseObject);
 @interface HttpManagement : NSObject
 +(instancetype _Nullable )shareManager;
 
+/// 取消网络请求
+-(void)StartcancelAllOperations;
+
 -(void)getStartScreenRequest:(nullable void (^)(LaunchModel * _Nullable model,NSError * _Nullable error))block;
 
 /// Get 请求

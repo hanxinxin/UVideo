@@ -12,8 +12,13 @@
 
 
 #define ACCEPTTYPEIMAGE @[@"text/plain", @"multipart/form-data", @"application/json", @"text/html", @"image/jpeg", @"image/png", @"application/octet-stream", @"text/json"]
-@implementation HttpManagement
 
+@interface HttpManagement ()
+@property(nonatomic,strong)AFHTTPSessionManager *manager;
+@end
+
+@implementation HttpManagement
+//@synthesize self.manager;
 +(instancetype)shareManager
 {
     static HttpManagement * manager = nil;
@@ -22,6 +27,20 @@
         manager = [[HttpManagement alloc]init];
     });
     return manager;
+}
+
+-(AFHTTPSessionManager *)manager
+{
+   if(!_manager)
+   {
+       _manager = [AFHTTPSessionManager manager];
+   }
+    return _manager;
+}
+
+-(void)StartcancelAllOperations
+{
+    [self.manager.operationQueue cancelAllOperations];
 }
 
 /// Post 请求
@@ -39,18 +58,18 @@
                  blockprogress:(void(^)(id progress))progress{
     
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer =[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    AFHTTPSessionself.manager *self.manager = [AFHTTPSessionself.manager self.manager];
+    self.manager.responseSerializer =[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    self.manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 //    NSString*application= @"application/json";
-    manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:ACCEPTTYPEIMAGE];
+    self.manager.responseSerializer.acceptableContentTypes = [NSSet setWithArray:ACCEPTTYPEIMAGE];
     NSString* timeStr=[self getCurrentTimestamp];
-    [manager.requestSerializer setValue:usertoken forHTTPHeaderField:@"X-TOKEN"];
-    [manager.requestSerializer setValue:timeStr forHTTPHeaderField:@"X-TIMESTAMP"];
-    [manager.requestSerializer setValue:[self signaturemd5:parameters timestamp:timeStr] forHTTPHeaderField:@"X-SIGNATURE"];
+    [self.manager.requestSerializer setValue:usertoken forHTTPHeaderField:@"X-TOKEN"];
+    [self.manager.requestSerializer setValue:timeStr forHTTPHeaderField:@"X-TIMESTAMP"];
+    [self.manager.requestSerializer setValue:[self signaturemd5:parameters timestamp:timeStr] forHTTPHeaderField:@"X-SIGNATURE"];
     
-    [manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [self.manager POST:url parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         for (int i = 0; i < imgArr.count; i++) {
             UIImage *image = imgArr[i];
             NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
@@ -123,14 +142,14 @@
 -(void)GetNetWork:(NSString * _Nullable )url success:(void (^_Nullable)(id _Nullable responseObject))success failure:(failureBlock _Nullable )failureBlock
 {
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer =[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    AFHTTPSessionManager *self.manager = [AFHTTPSessionManager self.manager];
+    self.manager.responseSerializer =[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    self.manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 //        NSString*application= @"application/json";
-//                [manager.requestSerializer setValue:application forHTTPHeaderField:@"content-type"];
+//                [self.manager.requestSerializer setValue:application forHTTPHeaderField:@"content-type"];
     NSLog(@"get URL == %@",url);
-            [manager GET:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
+            [self.manager GET:url parameters:nil progress:^(NSProgress * _Nonnull uploadProgress) {
 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 
@@ -148,17 +167,17 @@
 -(void)PostNewWork:(NSString * _Nullable )url Dictionary:(NSDictionary *_Nullable)params success:(SuccessBlock _Nullable )successBlock failure:(failureBlock _Nullable )failureBlock
 {
     
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    manager.responseSerializer =[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
-    manager.requestSerializer = [AFJSONRequestSerializer serializer];
-    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+//    AFHTTPSessionManager *self.manager = [AFHTTPSessionManager self.manager];
+    self.manager.responseSerializer =[AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+    self.manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    self.manager.responseSerializer = [AFHTTPResponseSerializer serializer];
 //    NSString*application= @"application/json";
-    manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
-//    [manager.requestSerializer setValue:application forHTTPHeaderField:@"content-type"];
+    self.manager.responseSerializer.acceptableContentTypes=[NSSet setWithObjects:@"application/json", @"text/json", @"text/javascript",@"text/html", nil];
+//    [self.manager.requestSerializer setValue:application forHTTPHeaderField:@"content-type"];
     NSString* timeStr=[self getCurrentTimestamp];
-    [manager.requestSerializer setValue:usertoken forHTTPHeaderField:@"X-TOKEN"];
-    [manager.requestSerializer setValue:timeStr forHTTPHeaderField:@"X-TIMESTAMP"];
-    [manager.requestSerializer setValue:[self signaturemd5:params timestamp:timeStr] forHTTPHeaderField:@"X-SIGNATURE"];
+    [self.manager.requestSerializer setValue:usertoken forHTTPHeaderField:@"X-TOKEN"];
+    [self.manager.requestSerializer setValue:timeStr forHTTPHeaderField:@"X-TIMESTAMP"];
+    [self.manager.requestSerializer setValue:[self signaturemd5:params timestamp:timeStr] forHTTPHeaderField:@"X-SIGNATURE"];
     
 //    加密要传输的数据
     NSString * jiamiData=nil;
@@ -171,7 +190,7 @@
         NSData *data =[@"" dataUsingEncoding:NSUTF8StringEncoding];
         jiamiData=[[jiemishujuClass shareManager] jiamiData:data];
     }
-    [manager POST:url parameters:jiamiData progress:^(NSProgress * _Nonnull uploadProgress) {
+    [self.manager POST:url parameters:jiamiData progress:^(NSProgress * _Nonnull uploadProgress) {
 
             } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
                 NSData * data = (NSData*)responseObject;
@@ -233,7 +252,7 @@ return timeString;
     NSString* pinjieStr=[NSString stringWithFormat:@"%@-%@-%@",usertoken,dictStr,timestamp];
     NSLog(@"签名 拼接后字符串  = %@",pinjieStr);
 //    NSString * md5Str1=[NSString md5To32bit:pinjieStr];
-    NSString * md5Str=[pinjieStr md5String];
+    NSString * md5Str=[[pinjieStr lowercaseString] md5String];  ////转为 小写后再 md5加密
     NSLog(@"md5Str = %@",md5Str);
     return md5Str;
 }

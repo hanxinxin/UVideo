@@ -9,6 +9,7 @@
 
 #import "SCJTableViewCell.h"
 #import "SliderTableViewCell.h"
+#import "VideoHistoryMode.h"
 
 #define cellID @"cellID"
 #define cellID2 @"SliderTableViewCell"
@@ -42,13 +43,15 @@
    
     self.page1=1;
     self.page2=1;
-    
+    Listarray1=[NSMutableArray arrayWithCapacity:0];
+    Listarray2=[NSMutableArray arrayWithCapacity:0];
     [self addtopview];
     [self initnilView];
     [self Addtableview1];
     [self Addtableview2];
     [self touchOne:nil];
-//    [self addnilView];
+    [self addnilView];
+    [self removeNilView];
 }
 ///// 加载无内容显示的view
 -(void)initnilView
@@ -147,6 +150,12 @@
     self.downtableview2.hidden=YES;
     self.menuBtn1.selected=YES;
     self.menuBtn2.selected=NO;
+    if(Listarray1.count!=0)
+    {
+        [self removeNilView];
+    }else{
+        [self addnilView];
+    }
 }
 -(void)touchTwo:(id)sender
 {
@@ -162,6 +171,12 @@
     self.downtableview2.hidden=NO;
     self.menuBtn1.selected=NO;
     self.menuBtn2.selected=YES;
+    if(Listarray2.count!=0)
+    {
+        [self removeNilView];
+    }else{
+        [self addnilView];
+    }
 }
 -(CAGradientLayer*)selectLayer:(CGRect)frame
 {
@@ -187,14 +202,9 @@
 }
 -(void)Addtableview1
 {
-    Listarray1=[NSMutableArray arrayWithCapacity:0];
+    
 //    [Listarray addObject:[NSArray arrayWithObjects:@"播放记录",@"充值记录",@"账户信息",@"帮助中心",@"安全设置",@"清理缓存",@"退出登录", nil]];
-    [Listarray1 addObject:@"播放记录"];
-    [Listarray1 addObject:@"充值记录"];
-    [Listarray1 addObject:@"账户信息"];
-    [Listarray1 addObject:@"帮助中心"];
-    [Listarray1 addObject:@"安全设置"];
-    [Listarray1 addObject:@"清理缓存"];
+    
     self.downtableview1=[[UITableView alloc] init];
     self.downtableview1.frame=CGRectMake(20, 50, SCREEN_WIDTH-40, SCREENH_HEIGHT-50-kNavAndTabHeight);
     self.downtableview1.backgroundColor=[UIColor whiteColor];
@@ -222,22 +232,7 @@
 }
 -(void)Addtableview2
 {
-    Listarray2=[NSMutableArray arrayWithCapacity:0];
-//    [Listarray addObject:[NSArray arrayWithObjects:@"播放记录",@"充值记录",@"账户信息",@"帮助中心",@"安全设置",@"清理缓存",@"退出登录", nil]];
-    [Listarray2 addObject:@"播放记录"];
-    [Listarray2 addObject:@"充值记录"];
-    [Listarray2 addObject:@"账户信息"];
-    [Listarray2 addObject:@"帮助中心"];
-    [Listarray2 addObject:@"安全设置"];
-    [Listarray2 addObject:@"清理缓存"];
-    [Listarray2 addObject:@"清理缓存"];
-    [Listarray2 addObject:@"清理缓存"];
-    [Listarray2 addObject:@"清理缓存"];
-    [Listarray2 addObject:@"清理缓存"];
-    [Listarray2 addObject:@"清理缓存"];
-    [Listarray2 addObject:@"清理缓存"];
-    [Listarray2 addObject:@"清理缓存"];
-    [Listarray2 addObject:@"清理缓存"];
+    
     NSLog(@"SCREENH_HEIGHT == %f   h ==== %f",SCREENH_HEIGHT,SCREENH_HEIGHT-50-kNavAndTabHeight);
     self.downtableview2=[[UITableView alloc] init];
     self.downtableview2.frame=CGRectMake(20, 50, SCREEN_WIDTH-40, SCREENH_HEIGHT-50-kNavAndTabHeight);
@@ -268,8 +263,8 @@
 {
     
     
-//    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page1],@"pagesize":@"50"};
-    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,videoFavoriteurl] Dictionary:nil success:^(id  _Nullable responseObject) {
+    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page1],@"pagesize":@"20"};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,videoFavoriteurl] Dictionary:dict success:^(id  _Nullable responseObject) {
 //        NSLog(@"post responseObject == %@",responseObject);
         [UHud hideLoadHud];
         [self.downtableview1.mj_header endRefreshing];
@@ -278,7 +273,15 @@
         if([code intValue]==0)
         {
             NSDictionary *dictdata =[dict objectForKey:@"data"];
-            
+            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
+            NSArray*video_history_list=[dictdata objectForKey:@"video_history_list"];
+            if([video_history_total intValue]>0)
+            {
+                self.page2+=1;
+                
+            }else{
+                [self addnilView];
+            }
             
         }else if([code intValue]==20){
             NSString * message = [dict objectForKey:@"message"];
@@ -299,7 +302,7 @@
 {
     
     
-    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page1+1],@"pagesize":@"50"};
+    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page1+1],@"pagesize":@"20"};
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,videoFavoriteurl] Dictionary:dict success:^(id  _Nullable responseObject) {
 //        NSLog(@"post responseObject == %@",responseObject);
         [UHud hideLoadHud];
@@ -309,7 +312,16 @@
         if([code intValue]==0)
         {
             NSDictionary *dictdata =[dict objectForKey:@"data"];
-            self.page1+=1;
+            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
+            NSArray*video_history_list=[dictdata objectForKey:@"video_history_list"];
+            if(video_history_total>0)
+            {
+                self.page1+=1;
+                
+            }else{
+                [self addnilView];
+            }
+            
             
         }else if([code intValue]==20){
             NSString * message = [dict objectForKey:@"message"];
@@ -331,8 +343,8 @@
 {
     
     
-//    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page2],@"pagesize":@"50"};
-    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,videoHistoryurl] Dictionary:nil success:^(id  _Nullable responseObject) {
+    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page2],@"pagesize":@"20"};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,videoHistoryurl] Dictionary:dict success:^(id  _Nullable responseObject) {
 //        NSLog(@"post responseObject == %@",responseObject);
         [UHud hideLoadHud];
         [self.downtableview2.mj_header endRefreshing];
@@ -341,18 +353,34 @@
         if([code intValue]==0)
         {
             NSDictionary *dictdata =[dict objectForKey:@"data"];
-            
-            
+            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
+            NSArray*video_history_list=[dictdata objectForKey:@"video_history_list"];
+            if(video_history_total>0)
+            {
+                self.page1+=1;
+                [self.Listarray2 removeAllObjects];
+                for (int i =0; i<video_history_list.count; i++) {
+                    NSDictionary * video_history =video_history_list[i];
+                    VideoHistoryMode* model= [VideoHistoryMode yy_modelWithDictionary:video_history];
+//                    [DYModelMaker DY_makeModelWithDictionary:video_history modelKeyword:@"Video" modelName:@"historyMode"];
+                    [self.Listarray2 addObject:model];
+                }
+            }else{
+                [self addnilView];
+            }
+            [self.downtableview2 reloadData];
         }else if([code intValue]==20){
             NSString * message = [dict objectForKey:@"message"];
 //            [UHud showHUDToView:self.view text:message];
 //            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
             [UHud showTXTWithStatus:message delay:2.f];
+            [self.downtableview2 reloadData];
         }
 
     } failure:^(NSError * _Nullable error) {
         [UHud hideLoadHud];
         NSLog(@"shareManager error == %@",error);
+        [self.downtableview2 reloadData];
         [self.downtableview2.mj_header endRefreshing];
         [UHud showTXTWithStatus:@"网络错误" delay:2.f];
     }];
@@ -362,7 +390,7 @@
 {
     
     
-    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page2+1],@"pagesize":@"50"};
+    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page2+1],@"pagesize":@"20"};
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,videoHistoryurl] Dictionary:dict success:^(id  _Nullable responseObject) {
 //        NSLog(@"post responseObject == %@",responseObject);
         [UHud hideLoadHud];
@@ -372,8 +400,15 @@
         if([code intValue]==0)
         {
             NSDictionary *dictdata =[dict objectForKey:@"data"];
-            self.page2+=1;
-            
+            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
+            NSArray*video_history_list=[dictdata objectForKey:@"video_history_list"];
+            if(video_history_total>0)
+            {
+                self.page2+=1;
+                
+            }else{
+                [self addnilView];
+            }
         }else if([code intValue]==20){
             NSString * message = [dict objectForKey:@"message"];
 //            [UHud showHUDToView:self.view text:message];
@@ -449,8 +484,27 @@
         cell.layer.shadowOpacity = 1;
         cell.layer.cornerRadius = 8;
         
-        
+        VideoHistoryMode * mode =Listarray2[indexPath.section];
         NSLog(@"in  === %ld",indexPath.section);
+        
+//        "video_history_total": 5,                  // 视频观看记录总数
+//        "video_history_list": [                    // 观看历史列表
+//          {
+//            "video_id": 7,                        // 视频id
+//            "video_title": "ss",                  // 视频标题(名称)
+//            "video_description": "ss",            // 视频描述(简介)
+//            "video_pic": "http://xxx/sss.jpg",    // 封面图地址
+//            "video_score": 8.1,                   // 视频评分
+//            "video_hits": 0,                      // 视频点击数量(播放数量)
+//            "video_favorite": 0,                  // 视频总收藏数量
+//            "video_appreciate": 0,                // 视频总点赞数量
+//            "video_depreciate": 0,                // 视频总点踩数量
+//            "video_remark": "ss",                 // 视频备注说明
+//            "create_time": 1234567890,            // 观看时间
+//          }
+//        ]
+        cell.leftLabel.text=mode.video_title;
+        
         
         
         return cell;

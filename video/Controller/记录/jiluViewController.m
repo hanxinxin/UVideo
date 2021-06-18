@@ -50,9 +50,23 @@
     [self Addtableview1];
     [self Addtableview2];
     [self touchOne:nil];
-    [self addnilView];
+    [self addnilView1];
+    [self addnilView2];
     [self removeNilView];
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if(self.downtableview1)
+    {
+        [self getheaderData1];
+    }
+    if(self.downtableview2)
+    {
+        [self getheaderData2];
+    }
+}
+
 ///// 加载无内容显示的view
 -(void)initnilView
 {
@@ -68,10 +82,16 @@
     [self.nilView addSubview:self.nilLabel];
 }
 //显示
--(void)addnilView
+-(void)addnilView1
 {
     self.nilView.hidden=NO;
-    [self.view addSubview:self.nilView];
+    [self.downtableview1 addSubview:self.nilView];
+}
+//显示
+-(void)addnilView2
+{
+    self.nilView.hidden=NO;
+    [self.downtableview2 addSubview:self.nilView];
 }
 //删除
 -(void)removeNilView
@@ -154,7 +174,7 @@
     {
         [self removeNilView];
     }else{
-        [self addnilView];
+        [self addnilView1];
     }
 }
 -(void)touchTwo:(id)sender
@@ -175,7 +195,7 @@
     {
         [self removeNilView];
     }else{
-        [self addnilView];
+        [self addnilView2];
     }
 }
 -(CAGradientLayer*)selectLayer:(CGRect)frame
@@ -213,6 +233,7 @@
     self.downtableview1.tag=10001;
     self.downtableview1.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.downtableview1.tableFooterView = [[UIView alloc]init];
+ 
 //    self.downtableview.separatorStyle=UITableViewCellSeparatorStyleNone;
     // 注册cell
     [self.downtableview1 registerNib:[UINib nibWithNibName:NSStringFromClass([SCJTableViewCell class]) bundle:nil] forCellReuseIdentifier:cellID];
@@ -225,7 +246,7 @@
     [self.downtableview1.mj_header beginRefreshing];
     
     
-    self.downtableview1.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.downtableview1.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [self getfootData1];
     }];
 
@@ -254,7 +275,7 @@
     [self.downtableview2.mj_header beginRefreshing];
     
     
-    self.downtableview2.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.downtableview2.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [self getfootData2];
     }];
 }
@@ -275,12 +296,12 @@
             NSDictionary *dictdata =[dict objectForKey:@"data"];
             NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
             NSArray*video_history_list=[dictdata objectForKey:@"video_history_list"];
-            if([video_history_total intValue]>0)
+            if(video_history_list.count>0)
             {
-                self.page2+=1;
+                self.page1+=1;
                 
             }else{
-                [self addnilView];
+                [self addnilView1];
             }
             
         }else if([code intValue]==20){
@@ -314,12 +335,12 @@
             NSDictionary *dictdata =[dict objectForKey:@"data"];
             NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
             NSArray*video_history_list=[dictdata objectForKey:@"video_history_list"];
-            if(video_history_total>0)
+            if(video_history_list.count>0)
             {
                 self.page1+=1;
                 
             }else{
-                [self addnilView];
+//                [self addnilView1];
             }
             
             
@@ -355,8 +376,12 @@
             NSDictionary *dictdata =[dict objectForKey:@"data"];
             NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
             NSArray*video_history_list=[dictdata objectForKey:@"video_history_list"];
-            if(video_history_total>0)
+            if(![video_history_list isKindOfClass:[NSNull class]]){
+            if(video_history_list.count>0)
             {
+//                if(NULL_TO_NIL(video_history_list))
+//                {
+                
                 self.page1+=1;
                 [self.Listarray2 removeAllObjects];
                 for (int i =0; i<video_history_list.count; i++) {
@@ -365,8 +390,9 @@
 //                    [DYModelMaker DY_makeModelWithDictionary:video_history modelKeyword:@"Video" modelName:@"historyMode"];
                     [self.Listarray2 addObject:model];
                 }
+                }
             }else{
-                [self addnilView];
+                [self addnilView2];
             }
             [self.downtableview2 reloadData];
         }else if([code intValue]==20){
@@ -402,12 +428,11 @@
             NSDictionary *dictdata =[dict objectForKey:@"data"];
             NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
             NSArray*video_history_list=[dictdata objectForKey:@"video_history_list"];
-            if(video_history_total>0)
+            if(video_history_list.count>0)
             {
                 self.page2+=1;
-                
             }else{
-                [self addnilView];
+//                [self addnilView2];
             }
         }else if([code intValue]==20){
             NSString * message = [dict objectForKey:@"message"];

@@ -204,6 +204,11 @@
         self.video_fragment_list=_Zvideomodel.video_fragment_list;
     
     [self getplayerMode:[NSString stringWithFormat:@"%f",modelL.id] video_fragment_id:[NSString stringWithFormat:@"%f",Fmo.id] quality:Fmo.qualities[self.QXDSelectIndex]];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [self.bottomToolBar.NameBtn setTitle:modelL.title forState:(UIControlStateNormal)];
+//            [self.bottomToolBar.shoucangBtn];
+            });
     }
 }
 -(void)getplayerMode:(NSString*)video_id video_fragment_id:(NSString*)video_fragment_id quality:(NSString*)quality
@@ -1463,6 +1468,7 @@
             }
             [self _refreshDataWithMedia:self.media];
             
+            
         }
             break;
         case MHYouKuBottomToolBarTypeComment:
@@ -1476,6 +1482,9 @@
         {
             // 收藏
             MHLog(@"++ 收藏 ++");
+            VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+            [self shoucangPost:modelL.id];
+            
         }
             break;
         case MHYouKuBottomToolBarTypeShare:
@@ -1488,6 +1497,12 @@
         {
             // 下载
             MHLog(@"++ 下载 ++");
+        }
+            break;
+        case MHYouKuBottomToolBarTypeFankui:
+        {
+            // 反馈
+            MHLog(@"++ 反馈 ++");
         }
             break;
             
@@ -1503,6 +1518,34 @@
             break;
     }
 }
+
+-(void)shoucangPost:(double)iddouble
+{
+    NSDictionary*dict=@{@"video_id":[NSString stringWithFormat:@"%.f",iddouble]};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_favoriteurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+//            NSString * message = @"收藏成功";
+//            [UHud showTXTWithStatus:message delay:2.f];
+            // 刷新底部工具条
+            self.bottomToolBar.shoucangBtn.selected=YES;
+            
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+        
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+                
+            }];
+}
+
 
 #pragma mark - MHYouKuTopicControllerDelegate
 - (void)topicControllerForCloseAction:(MHYouKuTopicController *)topicController

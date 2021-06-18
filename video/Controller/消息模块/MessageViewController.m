@@ -142,7 +142,7 @@
     [self.downtableview1.mj_header beginRefreshing];
     
     
-    self.downtableview1.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.downtableview1.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [self getfootData];
     }];
 }

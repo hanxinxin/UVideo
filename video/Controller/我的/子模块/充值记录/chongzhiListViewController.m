@@ -54,7 +54,7 @@
     [self.downtableview.mj_header beginRefreshing];
     
     
-    self.downtableview.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.downtableview.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [self getfootData];
     }];
 }

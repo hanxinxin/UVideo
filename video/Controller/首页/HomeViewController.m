@@ -119,7 +119,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     [self.collectionView.mj_header beginRefreshing];
     
     
-    self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.collectionView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
         [self getSXCollecfoot];
     }];
     

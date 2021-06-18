@@ -222,7 +222,7 @@ static NSString * const shopCellReuseID = @"shop";
     [self.collectionView1.mj_header beginRefreshing];
     
     
-    self.collectionView1.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.collectionView1.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
             [self getDataList_footer1];
             
     }];
@@ -269,7 +269,7 @@ static NSString * const shopCellReuseID = @"shop";
     [self.collectionView2.mj_header beginRefreshing];
     
     
-    self.collectionView2.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    self.collectionView2.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
             [self getDataList_footer2];
             
     }];

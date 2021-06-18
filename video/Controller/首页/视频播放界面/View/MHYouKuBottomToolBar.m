@@ -7,36 +7,11 @@
 //  底部工具条
 
 #import "MHYouKuBottomToolBar.h"
-#import "MHYouKuVerticalSeparateButton.h"
-#import "MHYouKuMedia.h"
+
 
 @interface MHYouKuBottomToolBar ()
 
-/** 名字 **/
-@property (nonatomic , strong) MHYouKuVerticalSeparateButton *NameBtn;
 
-
-/** 点赞 */
-@property (nonatomic , weak) MHYouKuVerticalSeparateButton * thumbBtn;
-
-/** 评论 **/
-//@property (nonatomic , weak) MHYouKuVerticalSeparateButton *commentBtn;
-
-/** 收藏 */
-@property (nonatomic , weak) MHYouKuVerticalSeparateButton * collectBtn;
-
-/** 下载 **/
-//@property (nonatomic , weak) MHYouKuVerticalSeparateButton *downloadBtn;
-
-/** 分享 */
-@property (nonatomic , weak) MHYouKuVerticalSeparateButton * shareBtn;
-
-/** 分割线 **/
-@property (nonatomic , weak) MHImageView *separate ;
-
-
-/** 按钮数组 **/
-@property (nonatomic,strong) NSMutableArray  *buttons;
 
 @end
 
@@ -106,25 +81,29 @@
     // 分享按钮
     self.NameBtn = [self _setupButtonWithTitle:@"主演/导演/简介" imageName:@"xialaimage" selectedImageName:@"xialaimage" type:MHYouKuBottomToolBarTypetitle];
     [self.NameBtn showRightSeparate];
-
+    // 反馈
+    self.fankuiBtn = [self _setupButtonWithTitle:@"反馈" imageName:@"fankui" selectedImageName:nil type:MHYouKuBottomToolBarTypeFankui];
+    [self.fankuiBtn showRightSeparate];
     // 点赞按钮
     self.thumbBtn = [self _setupButtonWithTitle:@"0" imageName:@"dianzan" selectedImageName:@"dianzan" type:MHYouKuBottomToolBarTypeThumb];
+    self.thumbBtn.tag=10001;
     [self.thumbBtn showRightSeparate];
 
     // 评论
 //    self.commentBtn = [self _setupButtonWithTitle:@"0" imageName:@"mh_comment" selectedImageName:nil type:MHYouKuBottomToolBarTypeComment];
 //    [self.commentBtn showRightSeparate];
     
-    // 收藏
-    self.collectBtn = [self _setupButtonWithTitle:nil imageName:@"zanxin" selectedImageName:nil type:MHYouKuBottomToolBarTypeCollect];
-    [self.collectBtn showRightSeparate];
+    // 倒彩
+    self.daocaiBtn = [self _setupButtonWithTitle:nil imageName:@"daocai" selectedImageName:nil type:MHYouKuBottomToolBarTypeThumb];
+    self.daocaiBtn.tag=10002;
+    [self.daocaiBtn showRightSeparate];
 
     // 下载
 //    self.downloadBtn = [self _setupButtonWithTitle:nil imageName:@"mh_download" selectedImageName:nil type:MHYouKuBottomToolBarTypeDownload];
 //    [self.downloadBtn showRightSeparate];
     
-    // 分享
-    self.shareBtn = [self _setupButtonWithTitle:nil imageName:@"fenxiang" selectedImageName:nil type:MHYouKuBottomToolBarTypeShare];
+    // 收藏
+    self.shoucangBtn = [self _setupButtonWithTitle:nil imageName:@"zanxin" selectedImageName:nil type:MHYouKuBottomToolBarTypeCollect];
 
     // 分割线
     MHImageView *separate = [MHImageView imageView];
@@ -146,25 +125,34 @@
     for (NSInteger i = 0; i < buttonsCount; i++) {
         
         UIButton *button = self.buttons[i];
-        CGFloat wid = ((self.width/5)*2/(buttonsCount-1));
+        CGFloat wid = ((self.width/4)*2/(buttonsCount-1));
         [button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.and.bottom.equalTo(self);
         }];
         
         if (lastButton) {
-            
+            if(i==1)
+            {
+                // 第2个按钮
+                [button mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.equalTo(lastButton.mas_right);
+    //                make.width.equalTo(lastButton.mas_width);
+                    make.width.mas_equalTo(@(wid+15));
+                }];
+            }else{
             [button mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.equalTo(lastButton.mas_right);
 //                make.width.equalTo(lastButton.mas_width);
                 make.width.mas_equalTo(@(wid));
             }];
+            }
             
         }else{
             
             // 第一个按钮
             [button mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(@(0));
-                make.width.mas_equalTo(@(self.width/5*3));
+                make.width.mas_equalTo(@(self.width/10*3));
             }];
             
         }

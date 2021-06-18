@@ -293,6 +293,8 @@ _Pragma("clang diagnostic pop")\
 // 打印方法
 #define MHLogFunc MHLog(@"%s", __func__)
 
+///判断是否为NSNull
+#define NULL_TO_NIL(obj) ({ __typeof__ (obj) __obj = (obj); __obj == [NSNull null] ? nil : obj; })
 
 // 打印请求错误信息
 #define MHLogErrorMessage  MHLog(@"错误请求日志-----【 %@ 】--【 %@ 】",[self class] , error.mh_message)

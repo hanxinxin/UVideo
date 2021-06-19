@@ -206,8 +206,8 @@
             filePath = "video/Controller/&#x6211;&#x7684;/MyViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "-signoutURL_touch"
             landmarkType = "7">
          </BreakpointContent>
@@ -353,38 +353,6 @@
             startingLineNumber = "360"
             endingLineNumber = "360"
             landmarkName = "-getDataList_header2"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0FA68FF4-FE71-4C5B-AF5E-442A3136A884"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/Controller/&#x8bb0;&#x5f55;/jiluViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "314"
-            endingLineNumber = "314"
-            landmarkName = "-getfootData1"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "80E29FC3-DC8E-482B-9FFA-04A555F5EB03"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/Controller/&#x8bb0;&#x5f55;/jiluViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "405"
-            endingLineNumber = "405"
-            landmarkName = "-getfootData2"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

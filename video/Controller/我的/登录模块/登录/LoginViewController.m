@@ -412,8 +412,9 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 
         [self.menuBtn1 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
         [self.menuBtn2 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
-        self.getCodeBtn.hidden=NO;
-        self.TuXingCodeBtn.hidden=YES;
+//        self.getCodeBtn.hidden=NO;
+        self.getCodeBtn.hidden=YES;
+        self.TuXingCodeBtn.hidden=NO;
         self.CodeView.hidden=NO;
         
         self.centerView.frame = CGRectMake(30, 252, self.view.width-60, 210);

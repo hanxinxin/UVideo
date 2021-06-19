@@ -103,9 +103,31 @@
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
                     [UHud showTXTWithStatus:message delay:2.f];
+                    NSUserDefaults *TimeOfBootCount = [NSUserDefaults standardUserDefaults];
+                    [TimeOfBootCount setValue:@"" forKey:@"UserToken"];
+                    [TimeOfBootCount setValue:@"" forKey:@"Userrole"];
+                    [TimeOfBootCount setValue:@"" forKey:@"UserZH"];
+                    [TimeOfBootCount setValue:@"" forKey:@"UserPW"];
+                    [TimeOfBootCount setValue:@"" forKey:@"nickname"];
+                    [TimeOfBootCount setValue:@"" forKey:@"username"];
+                    [TimeOfBootCount setValue:@"" forKey:@"avatar"];
+                    [TimeOfBootCount setValue:@(0) forKey:@"expired_time"];
+                    [TimeOfBootCount setValue:@(0) forKey:@"vip_expired_time"];
+                    [UHud showSuccessWithStatus:@"退出成功" delay:2.f];
                 }
             } failure:^(NSError * _Nullable error) {
                 [UHud hideLoadHud];
+                NSUserDefaults *TimeOfBootCount = [NSUserDefaults standardUserDefaults];
+                [TimeOfBootCount setValue:@"" forKey:@"UserToken"];
+                [TimeOfBootCount setValue:@"" forKey:@"Userrole"];
+                [TimeOfBootCount setValue:@"" forKey:@"UserZH"];
+                [TimeOfBootCount setValue:@"" forKey:@"UserPW"];
+                [TimeOfBootCount setValue:@"" forKey:@"nickname"];
+                [TimeOfBootCount setValue:@"" forKey:@"username"];
+                [TimeOfBootCount setValue:@"" forKey:@"avatar"];
+                [TimeOfBootCount setValue:@(0) forKey:@"expired_time"];
+                [TimeOfBootCount setValue:@(0) forKey:@"vip_expired_time"];
+                [UHud showSuccessWithStatus:@"退出成功" delay:2.f];
                 NSLog(@"shareManager error == %@",error);
                 [UHud showTXTWithStatus:@"网络错误" delay:2.f];
             }];
@@ -172,24 +194,15 @@
         NSLog(@"CellIndex= %ld",CellIndex);
         if(CellIndex==1000)
         {
-//            // 这是从一个模态出来的页面跳到tabbar的某一个页面
-//            if (@available(iOS 13.0, *)) {
-//                NSArray *array =[[[UIApplication sharedApplication] connectedScenes] allObjects];
-//                UIWindowScene *windowScene = (UIWindowScene *)array[0];
-//                SceneDelegate *delegate =(SceneDelegate *)windowScene.delegate;
-//                HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
-//                NSArray * arraynav = nav.viewControllers;
-//                UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
-//                tabViewController.selectedIndex = 1;
-//            } else {
-                // Fallback on earlier versions
+
                 AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
                 
                 HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
                 NSArray * arraynav = nav.viewControllers;
                 UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
                 tabViewController.selectedIndex = 1;
-//            }
+            NSNotification *notification = [NSNotification notificationWithName:@"listUpdate" object:nil userInfo:@{@"update":@(1)}];
+            [[NSNotificationCenter defaultCenter]postNotification:notification];
         }else if(CellIndex==1001)
         {
             
@@ -363,7 +376,8 @@
             NSArray * arraynav = nav.viewControllers;
             UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
             tabViewController.selectedIndex = 1;
-
+        NSNotification *notification = [NSNotification notificationWithName:@"listUpdate" object:nil userInfo:@{@"update":@(2)}];
+        [[NSNotificationCenter defaultCenter]postNotification:notification];
         
         
     }else if(indexPath.section==1)

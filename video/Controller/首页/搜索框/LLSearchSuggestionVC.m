@@ -97,6 +97,7 @@
 {
 //    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%@",@(self.SXpage)],
 //                            @"pagesize":[NSString stringWithFormat:@"%@",@(15)],};
+    
     self.SXpage=1;
     NSMutableDictionary*dict =[NSMutableDictionary dictionary];
     [dict setObject:self.keyword forKey:@"keyword"];
@@ -114,6 +115,8 @@
                 [self.dataArr removeAllObjects];
                 NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
                 NSArray * video_list = [dataArr objectForKey:@"video_list"];
+            if(![video_list isKindOfClass:[NSNull class]]){
+         
             if(video_list.count>0)
             {
                 for (int i=0; i<video_list.count; i++) {
@@ -123,6 +126,7 @@
                     
                 }
                 [self.dataArr addObjectsFromArray:arr];
+            }
             }
             [self.collectionView.mj_header endRefreshing];
                 // 刷新数据
@@ -168,6 +172,7 @@
                 [self.dataArr removeAllObjects];
                 NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
                 NSArray * video_list = [datadict objectForKey:@"video_list"];
+            if(![video_list isKindOfClass:[NSNull class]]){
             if(video_list.count>0)
             {
                 self.SXpage+=1;
@@ -178,6 +183,7 @@
                     
                 }
                 [self.dataArr addObjectsFromArray:arr];
+            }
             }
             [self.collectionView.mj_footer endRefreshing];
                 // 刷新数据
@@ -228,6 +234,7 @@
 //                 @"sort_type":@"asc"
                  
         };
+    [[HttpManagement shareManager] StartcancelAllOperations];
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_listurl] Dictionary:dict success:^(id  _Nullable responseObject) {
         //        NSLog(@"post responseObject == %@",responseObject);
 //        [UHud hideLoadHudForView:self.view];
@@ -242,6 +249,7 @@
                         [self.dataArr removeAllObjects];
                         NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
                         NSArray * video_list = [dataArray objectForKey:@"video_list"];
+                    if(![video_list isKindOfClass:[NSNull class]]){
                     if(video_list.count>0)
                     {
                         for (int i=0; i<video_list.count; i++) {
@@ -251,6 +259,7 @@
                             
                         }
                         [self.dataArr addObjectsFromArray:arr];
+                    }
                     }
                         // 刷新数据
                         [self.collectionView reloadData];

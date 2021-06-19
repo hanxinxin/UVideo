@@ -57,6 +57,12 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    //获取通知中心单例对象
+        NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
+        //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
+        [center addObserver:self selector:@selector(noticeUpdate:) name:@"listUpdate" object:nil];
+    
     if(self.downtableview1)
     {
         [self getheaderData1];
@@ -64,6 +70,24 @@
     if(self.downtableview2)
     {
         [self getheaderData2];
+    }
+}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:@"listUpdate"];
+   
+}
+-(void)noticeUpdate:(NSNotification *)not
+{
+    NSDictionary*userInfo=not.userInfo;
+    NSNumber* index=[userInfo objectForKey:@"update"];
+    if([index intValue]==1)
+    {
+        [self touchOne:nil];
+    }else if([index intValue]==2)
+    {
+        [self touchTwo:nil];
     }
 }
 

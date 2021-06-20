@@ -85,17 +85,16 @@
     self.fankuiBtn = [self _setupButtonWithTitle:@"反馈" imageName:@"fankui" selectedImageName:nil type:MHYouKuBottomToolBarTypeFankui];
     [self.fankuiBtn showRightSeparate];
     // 点赞按钮
-    self.thumbBtn = [self _setupButtonWithTitle:@"0" imageName:@"dianzan" selectedImageName:@"dianzan" type:MHYouKuBottomToolBarTypeThumb];
-    self.thumbBtn.tag=10001;
-    [self.thumbBtn showRightSeparate];
+    self.thumbBtn = [self _setupButtonWithTitle:nil imageName:@"dianzan" selectedImageName:@"zanselect" type:MHYouKuBottomToolBarTypeThumb];
+        [self.thumbBtn showRightSeparate];
+
 
     // 评论
 //    self.commentBtn = [self _setupButtonWithTitle:@"0" imageName:@"mh_comment" selectedImageName:nil type:MHYouKuBottomToolBarTypeComment];
 //    [self.commentBtn showRightSeparate];
     
     // 倒彩
-    self.daocaiBtn = [self _setupButtonWithTitle:nil imageName:@"daocai" selectedImageName:nil type:MHYouKuBottomToolBarTypeThumb];
-    self.daocaiBtn.tag=10002;
+    self.daocaiBtn = [self _setupButtonWithTitle:nil imageName:@"daocai" selectedImageName:nil type:MHYouKuBottomToolBarTypeThumbCai];
     [self.daocaiBtn showRightSeparate];
 
     // 下载
@@ -103,8 +102,8 @@
 //    [self.downloadBtn showRightSeparate];
     
     // 收藏
-    self.shoucangBtn = [self _setupButtonWithTitle:nil imageName:@"zanxin" selectedImageName:nil type:MHYouKuBottomToolBarTypeCollect];
-
+    self.shoucangBtn = [self _setupButtonWithTitle:nil imageName:@"zanxin" selectedImageName:@"zanxinselect" type:MHYouKuBottomToolBarTypeCollect];
+    
     // 分割线
     MHImageView *separate = [MHImageView imageView];
     separate.backgroundColor = MHGlobalBottomLineColor;

@@ -15,10 +15,14 @@ typedef void(^TapActionBlock)(NSString *str);
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *hotArray;
 @property (nonatomic, strong) NSMutableArray *historyArray;
+@property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) UIView *searchHistoryView;
 @property (nonatomic, strong) UIView *hotSearchView;
 
 @property (nonatomic, strong) UITableView * Downtableview;
 - (instancetype)initWithFrame:(CGRect)frame hotArray:(NSMutableArray *)hotArr historyArray:(NSMutableArray *)historyArr;
+
+
+-(void)updatesearchHistoryView;
 
 @end

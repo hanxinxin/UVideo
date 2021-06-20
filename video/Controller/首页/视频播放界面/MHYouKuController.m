@@ -208,6 +208,7 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             [self.bottomToolBar.NameBtn setTitle:modelL.title forState:(UIControlStateNormal)];
 //            [self.bottomToolBar.shoucangBtn];
+            
             });
     }
 }
@@ -395,7 +396,7 @@
 }
 /* 播放进度 */
 - (void)kj_player:(KJBasePlayer*)player currentTime:(NSTimeInterval)time{
-    NSLog(@"播放进度 == %f   self.player.totalTime= %d",fmod(time,60.0),(int)fmod(self.player.totalTime,60.0));
+//    NSLog(@"播放进度 == %f   self.player.totalTime= %d",fmod(time,60.0),(int)fmod(self.player.totalTime,60.0));
     NSString * qstring = [NSString stringWithFormat:@"%d:%d",(int)time/60,(int)fmodl(time,60.0)];
     NSString * hstring = [NSString stringWithFormat:@"%d:%d",(int)self.player.totalTime/60,(int)fmod(self.player.totalTime,60.0)];
     player.playerView.TimeTotal.text=[NSString stringWithFormat:@"%@/%@",qstring,hstring];
@@ -837,8 +838,35 @@
         make.top.equalTo(self.GGimageview.mas_bottom).offset(5);
         make.height.mas_equalTo(36.0f);
     }];
-    
-    
+    if(self->_Zvideomodel.in_favorite==1)
+    {
+        // 刷新底部工具条
+        self.bottomToolBar.shoucangBtn.selected=YES;
+    }else{
+        // 刷新底部工具条
+        self.bottomToolBar.shoucangBtn.selected=NO;
+    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            if(self.Zvideomodel.in_favorite==0)
+            {
+                self.bottomToolBar.shoucangBtn.selected=NO;
+            }else{
+                self.bottomToolBar.shoucangBtn.selected=YES;
+            }
+            if(self.Zvideomodel.in_evaluate!=1)
+            {
+                self.bottomToolBar.thumbBtn.selected=NO;
+            }else{
+                self.bottomToolBar.thumbBtn.selected=YES;
+            }
+        
+            if(self->_Zvideomodel.in_evaluate!=-1)
+            {
+                self.bottomToolBar.daocaiBtn.selected=NO;
+            }else{
+                self.bottomToolBar.daocaiBtn.selected=YES;
+            }
+        });
 }
 
 
@@ -1187,8 +1215,9 @@
     self.summary.media = media;
     
     // 刷新详情
-    self.detail.media = media;
-    
+//    self.detail.media = media;
+    VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+    self.detail.model=modelL;
     // 刷新底部工具条
     self.bottomToolBar.media = media;
     
@@ -1460,13 +1489,26 @@
         {
             //
             MHLog(@"++ 点赞 ++");
-            self.media.thumb = !self.media.isThumb;
-            if (self.media.isThumb) {
-                self.media.thumbNums+=1;
-            }else{
-                self.media.thumbNums-=1;
-            }
-            [self _refreshDataWithMedia:self.media];
+//            self.media.thumb = !self.media.isThumb;
+//            if (self.media.isThumb) {
+//                self.media.thumbNums+=1;
+//            }else{
+//                self.media.thumbNums-=1;
+//            }
+//            [self _refreshDataWithMedia:self.media];
+            VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+            [self CaiAndZanPost:modelL.id evaluate:1];
+            
+            
+        }
+            break;
+        case MHYouKuBottomToolBarTypeThumbCai:
+        {
+            //
+            MHLog(@"++ 踩 ++");
+            
+            VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+            [self CaiAndZanPost:modelL.id evaluate:-1];
             
             
         }
@@ -1482,8 +1524,14 @@
         {
             // 收藏
             MHLog(@"++ 收藏 ++");
-            VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
-            [self shoucangPost:modelL.id];
+            if(_Zvideomodel.in_favorite==0)
+            {
+                VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+                [self shoucangPost:modelL.id];
+            }else{
+                VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+                [self quxiaoshoucangPost:modelL.id];
+            }
             
         }
             break;
@@ -1532,7 +1580,69 @@
 //            [UHud showTXTWithStatus:message delay:2.f];
             // 刷新底部工具条
             self.bottomToolBar.shoucangBtn.selected=YES;
+            self->_Zvideomodel.in_favorite=1;// 是否已收藏[0=否 1=是]
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+        
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+                
+            }];
+}
+-(void)quxiaoshoucangPost:(double)iddouble
+{
+    NSDictionary*dict=@{@"video_id":[NSString stringWithFormat:@"%.f",iddouble]};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,deleteFavoriteurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+//            NSString * message = @"收藏成功";
+//            [UHud showTXTWithStatus:message delay:2.f];
+            // 刷新底部工具条
+            self.bottomToolBar.shoucangBtn.selected=NO;
+            self->_Zvideomodel.in_favorite=0;// 是否已收藏[0=否 1=是]
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+        
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+                
+            }];
+}
+//|evaluate|是|integer||评价类型(1=赞 -1=踩)|
+-(void)CaiAndZanPost:(double)iddouble evaluate:(double)evaluate
+{
+    NSDictionary*dict=@{@"video_id":[NSString stringWithFormat:@"%.f",iddouble],
+                        @"evaluate":[NSString stringWithFormat:@"%.f",evaluate],
+    };
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_evaluateurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+//            NSString * message = @"收藏成功";
+//            [UHud showTXTWithStatus:message delay:2.f];
             
+            if(evaluate==1)
+            {
+                // 刷新底部工具条
+                self.bottomToolBar.thumbBtn.selected=YES;
+            }else if(evaluate==-1)
+            {
+                // 刷新底部工具条
+                self.bottomToolBar.daocaiBtn.selected=YES;
+            }
         }else{
             NSString * message = [dict objectForKey:@"message"];
             [UHud showTXTWithStatus:message delay:2.f];

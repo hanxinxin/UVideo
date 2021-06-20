@@ -12,7 +12,7 @@
 #import "LLSearchView.h"
 
 
-@interface LLSearchViewController ()<UISearchBarDelegate>
+@interface LLSearchViewController ()<UISearchBarDelegate,UITextFieldDelegate>
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) LLSearchView *searchView;
@@ -48,10 +48,15 @@
 - (LLSearchView *)searchView
 {
     if (!_searchView) {
-        self.searchView = [[LLSearchView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREENH_HEIGHT - 64) hotArray:self.hotArray historyArray:self.historyArray];
+        self.searchView = [[LLSearchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT -(kNavBarAndStatusBarHeight)) hotArray:self.hotArray historyArray:self.historyArray];
         __weak LLSearchViewController *weakSelf = self;
         _searchView.tapAction = ^(NSString *str) {
-            [weakSelf pushToSearchResultWithSearchStr:str];
+//            [weakSelf pushToSearchResultWithSearchStr:str];
+            weakSelf.searchBar.text = str;
+            weakSelf.searchSuggestVC.view.hidden = NO;
+            [weakSelf.view bringSubviewToFront:weakSelf.searchSuggestVC.view];
+            [weakSelf.searchSuggestVC searchTestChangeWithTest:str];
+            [weakSelf setHistoryArrWithStr:str];
         };
     }
     return _searchView;
@@ -62,15 +67,19 @@
 {
     if (!_searchSuggestVC) {
         self.searchSuggestVC = [[LLSearchSuggestionVC alloc] init];
-        _searchSuggestVC.view.frame = CGRectMake(0, 64, SCREEN_WIDTH, SCREENH_HEIGHT - 64);
+        _searchSuggestVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT - (kNavBarAndStatusBarHeight));
         _searchSuggestVC.view.hidden = YES;
         __weak LLSearchViewController *weakSelf = self;
         _searchSuggestVC.searchBlock = ^(NSString *searchTest) {
-            [weakSelf pushToSearchResultWithSearchStr:searchTest];
+//            [weakSelf pushToSearchResultWithSearchStr:searchTest];
+            
+            [weakSelf.searchSuggestVC searchTestChangeWithTest:searchTest];
+            [weakSelf setHistoryArrWithStr:searchTest];
         };
     }
     return _searchSuggestVC;
 }
+
 
 
 
@@ -80,7 +89,6 @@
     if (!_searchBar.isFirstResponder) {
         [self.searchBar becomeFirstResponder];
     }
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -158,7 +166,6 @@
 - (void)cancelDidClick
 {
     [self.searchBar resignFirstResponder];
-    
     [self dismissViewControllerAnimated:NO completion:nil];
 }
 
@@ -192,14 +199,17 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [self pushToSearchResultWithSearchStr:searchBar.text];
+//    [self pushToSearchResultWithSearchStr:searchBar.text];
+    [searchBar resignFirstResponder];    //主要是[receiver resignFirstResponder]在哪调用就能把receiver对应的键盘往下收
+    [_searchSuggestVC searchTestChangeWithTest:searchBar.text];
+    [self setHistoryArrWithStr:searchBar.text];
 }
 
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
 {
     [self.searchBar resignFirstResponder];
-    [self.navigationController popViewControllerAnimated:NO];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
@@ -212,29 +222,16 @@
     if (searchBar.text == nil || [searchBar.text length] <= 0) {
         _searchSuggestVC.view.hidden = YES;
         [self.view bringSubviewToFront:_searchView];
+        _historyArray = [NSKeyedUnarchiver unarchiveObjectWithFile:KHistorySearchPath];
+        self.searchView.historyArray=_historyArray;
+        [self.searchView updatesearchHistoryView];
     } else {
         _searchSuggestVC.view.hidden = NO;
         [self.view bringSubviewToFront:_searchSuggestVC.view];
-        [_searchSuggestVC searchTestChangeWithTest:searchBar.text];
+        ///边输入边搜索 停止只有搜索按钮才开始搜索
+//        [_searchSuggestVC searchTestChangeWithTest:searchBar.text];
     }
 }
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 
 -(void)getvideo_rankurlData
 {
@@ -252,9 +249,17 @@
             NSDictionary * datadict = [dict objectForKey:@"data"];
             NSArray * video_rank_list = [datadict objectForKey:@"video_rank_list"];
             for (int i=0; i<video_rank_list.count; i++) {
-                NSDictionary * video_rankdata=video_rank_list[i];
-                //直接放到网络请求结果调用，生成模型后删除就行，结果打印在控制台
-                [DYModelMaker DY_makeModelWithDictionary:video_rankdata modelKeyword:@"DY" modelName:@"testModel"];
+//                NSDictionary * video_rankdata=video_rank_list[i];
+//                //直接放到网络请求结果调用，生成模型后删除就行，结果打印在控制台
+//                [DYModelMaker DY_makeModelWithDictionary:video_rankdata modelKeyword:@"Video" modelName:@"RankMode"];
+//                [VideoRankMode mj_replacedKeyFromPropertyName];
+//                VideoRankMode *model=[[VideoRankMode alloc] init];
+                // 将数据转模型
+                VideoRankMode *model = [VideoRankMode yy_modelWithDictionary:video_rank_list[i]];
+//                VideoRankMode *model = [VideoRankMode provinceWithDictionary:video_rank_list[i]];
+                [self.hotArray addObject:model];
+                self->_searchView.hotArray=self.hotArray;
+                [self.searchView.Downtableview reloadData];
             }
 //            [self.hotArray addObject:@""];
         }else{
@@ -272,4 +277,12 @@
 
 }
 
+
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+//    [self.view endEditing:YES];
+    // 回收键盘
+    [self.searchBar resignFirstResponder];
+}
 @end

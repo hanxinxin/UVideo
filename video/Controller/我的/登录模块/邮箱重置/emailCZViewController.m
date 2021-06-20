@@ -46,10 +46,10 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 }
 
 -(void)InitUI{
-    self.topImageBg = [[UIImageView alloc] initWithFrame:CGRectMake(30, 40, self.view.width-60, 200)];
+    self.topImageBg = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.width-125)/2, 40, 125, 50)];
     [self.topImageBg setImage:[UIImage imageNamed:@"loginBg"]];
     [self.view addSubview:self.topImageBg];
-    self.centerView = [[UIView alloc] initWithFrame:CGRectMake(30, 252, self.view.width-60, 226)];
+    self.centerView = [[UIView alloc] initWithFrame:CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 226)];
     self.centerView.layer.cornerRadius=6;
     self.centerView.backgroundColor=[UIColor whiteColor];
     self.centerView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.16].CGColor;
@@ -306,8 +306,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.CodeView.hidden=YES;
 //    self.centerView.backgroundColor=[UIColor orangeColor];
     
-    self.centerView.frame = CGRectMake(30, 252, self.view.width-60, 210-40);
-
+    self.centerView.frame = CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 210-40);
     self.centerView.layer.cornerRadius=6;
     [self setyinying];
 
@@ -327,7 +326,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
         [self.menuBtn2 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
     }
     self.CodeView.hidden=NO;
-    self.centerView.frame = CGRectMake(30, 252, self.view.width-60, 210);
+    self.centerView.frame = CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 210);
 //    self.centerView.backgroundColor=[UIColor grayColor];
     self.centerView.layer.cornerRadius=6;
     [self setyinying];

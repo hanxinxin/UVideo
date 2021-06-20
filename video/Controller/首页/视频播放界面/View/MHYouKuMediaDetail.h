@@ -7,6 +7,7 @@
 //  视频详情
 
 #import <UIKit/UIKit.h>
+#import "VideoVideoInfoMode.h"
 
 @class MHYouKuMedia;
 
@@ -14,7 +15,9 @@
 + (instancetype)detail;
 
 /** 详情 */
-@property (nonatomic , strong) MHYouKuMedia *media;
+//@property (nonatomic , strong) MHYouKuMedia *media;
+
+@property (nonatomic , strong)VideoVideoInfoMode * model;
 
 /** 推掉 **/
 @property (nonatomic,copy) void(^closeCallBack)(MHYouKuMediaDetail *detail);

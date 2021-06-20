@@ -14,6 +14,7 @@
 
 typedef NS_ENUM(NSUInteger, MHYouKuBottomToolBarType) {
     MHYouKuBottomToolBarTypeThumb = 10, // 点赞
+    MHYouKuBottomToolBarTypeThumbCai = 100, // 踩
     MHYouKuBottomToolBarTypeComment,   // 评论
     MHYouKuBottomToolBarTypeCollect,   // 收藏
     MHYouKuBottomToolBarTypeDownload,  // 下载

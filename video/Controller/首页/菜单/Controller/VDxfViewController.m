@@ -320,6 +320,7 @@ static NSString * const shopCellReuseID = @"shop";
                         [self.shopsDS removeAllObjects];
                         NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
                         NSArray * video_list = [dataArr objectForKey:@"video_list"];
+                    if(![video_list isKindOfClass:[NSNull class]]){
                     if(video_list.count>0)
                     {
                         for (int i=0; i<video_list.count; i++) {
@@ -329,6 +330,7 @@ static NSString * const shopCellReuseID = @"shop";
                             
                         }
                         [self.shopsDS addObjectsFromArray:arr];
+                    }
                     }
                         // 刷新数据
                         [self.collectionView1 reloadData];
@@ -378,6 +380,7 @@ static NSString * const shopCellReuseID = @"shop";
                         NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
 //                    [arr addObject:self.shopsDS];
                         NSArray * video_list = [dataArr objectForKey:@"video_list"];
+                    if(![video_list isKindOfClass:[NSNull class]]){
                     if(video_list.count>0)
                     {
                         self.page+=1;
@@ -388,11 +391,12 @@ static NSString * const shopCellReuseID = @"shop";
                             
                         }
                         [self.shopsDS addObjectsFromArray:arr];
-                        // 刷新数据
-                        [self.collectionView1 reloadData];
+                        
+                    }
                     }
                         
-                    
+                    // 刷新数据
+                    [self.collectionView1 reloadData];
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
                     [UHud showTXTWithStatus:message delay:2.f];
@@ -437,11 +441,13 @@ static NSString * const shopCellReuseID = @"shop";
                     [self.shopsDY removeAllObjects];
                     NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
                     NSArray * video_list = [dataArr objectForKey:@"video_list"];
+                    if(![video_list isKindOfClass:[NSNull class]]){
                     for (int i=0; i<video_list.count; i++) {
                         
                         VideoRankMode *model = [VideoRankMode yy_modelWithDictionary:video_list[i]];
                         [arr addObject:model];
                         
+                    }
                     }
                     [self.shopsDY addObjectsFromArray:arr];
                     // 刷新数据

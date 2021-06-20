@@ -421,6 +421,15 @@
 		FA997E8F265407AE00CB0DE0 /* ZqwTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997E8E265407AE00CB0DE0 /* ZqwTableViewCell.m */; };
 		FA997E9726540E2900CB0DE0 /* VtitleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA997E9526540E2900CB0DE0 /* VtitleCollectionViewCell.m */; };
 		FA997E9826540E2900CB0DE0 /* VtitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA997E9626540E2900CB0DE0 /* VtitleCollectionViewCell.xib */; };
+		FA9B2EC6267F2FA800C149B9 /* zjssCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9B2EC4267F2FA800C149B9 /* zjssCollectionViewCell.m */; };
+		FA9B2EC7267F2FA800C149B9 /* zjssCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9B2EC5267F2FA800C149B9 /* zjssCollectionViewCell.xib */; };
+		FA9B2ECB267F3F9600C149B9 /* FankuiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9B2ECA267F3F9600C149B9 /* FankuiViewController.m */; };
+		FA9B2ED0267F41B100C149B9 /* FKTextTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9B2ECE267F41B100C149B9 /* FKTextTableViewCell.m */; };
+		FA9B2ED1267F41B100C149B9 /* FKTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9B2ECF267F41B100C149B9 /* FKTextTableViewCell.xib */; };
+		FA9B2ED5267F44B300C149B9 /* FKnumberTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9B2ED3267F44B300C149B9 /* FKnumberTableViewCell.m */; };
+		FA9B2ED6267F44B300C149B9 /* FKnumberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9B2ED4267F44B300C149B9 /* FKnumberTableViewCell.xib */; };
+		FA9B2ED9267F50BB00C149B9 /* feedbacktypeMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9B2ED8267F50BB00C149B9 /* feedbacktypeMode.m */; };
+		FA9B2EDC267F8C2E00C149B9 /* Paymentmethodlist.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9B2EDB267F8C2E00C149B9 /* Paymentmethodlist.m */; };
 		FA9CFEF926515BAC00A116A3 /* lxkfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9CFEF826515BAC00A116A3 /* lxkfViewController.m */; };
 		FA9FBAA72647819700E4F27E /* menberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FBAA62647819700E4F27E /* menberViewController.m */; };
 		FA9FBAAC2647ADDB00E4F27E /* topHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FBAAB2647ADDB00E4F27E /* topHeaderView.m */; };
@@ -1254,6 +1263,21 @@
 		FA997E9426540E2900CB0DE0 /* VtitleCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VtitleCollectionViewCell.h; sourceTree = "<group>"; };
 		FA997E9526540E2900CB0DE0 /* VtitleCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VtitleCollectionViewCell.m; sourceTree = "<group>"; };
 		FA997E9626540E2900CB0DE0 /* VtitleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VtitleCollectionViewCell.xib; sourceTree = "<group>"; };
+		FA9B2EC3267F2FA800C149B9 /* zjssCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zjssCollectionViewCell.h; sourceTree = "<group>"; };
+		FA9B2EC4267F2FA800C149B9 /* zjssCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zjssCollectionViewCell.m; sourceTree = "<group>"; };
+		FA9B2EC5267F2FA800C149B9 /* zjssCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = zjssCollectionViewCell.xib; sourceTree = "<group>"; };
+		FA9B2EC9267F3F9600C149B9 /* FankuiViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FankuiViewController.h; sourceTree = "<group>"; };
+		FA9B2ECA267F3F9600C149B9 /* FankuiViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FankuiViewController.m; sourceTree = "<group>"; };
+		FA9B2ECD267F41B100C149B9 /* FKTextTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FKTextTableViewCell.h; sourceTree = "<group>"; };
+		FA9B2ECE267F41B100C149B9 /* FKTextTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FKTextTableViewCell.m; sourceTree = "<group>"; };
+		FA9B2ECF267F41B100C149B9 /* FKTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FKTextTableViewCell.xib; sourceTree = "<group>"; };
+		FA9B2ED2267F44B300C149B9 /* FKnumberTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FKnumberTableViewCell.h; sourceTree = "<group>"; };
+		FA9B2ED3267F44B300C149B9 /* FKnumberTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FKnumberTableViewCell.m; sourceTree = "<group>"; };
+		FA9B2ED4267F44B300C149B9 /* FKnumberTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FKnumberTableViewCell.xib; sourceTree = "<group>"; };
+		FA9B2ED7267F50BB00C149B9 /* feedbacktypeMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = feedbacktypeMode.h; sourceTree = "<group>"; };
+		FA9B2ED8267F50BB00C149B9 /* feedbacktypeMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = feedbacktypeMode.m; sourceTree = "<group>"; };
+		FA9B2EDA267F8C2E00C149B9 /* Paymentmethodlist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Paymentmethodlist.h; sourceTree = "<group>"; };
+		FA9B2EDB267F8C2E00C149B9 /* Paymentmethodlist.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Paymentmethodlist.m; sourceTree = "<group>"; };
 		FA9CFEF726515BAC00A116A3 /* lxkfViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = lxkfViewController.h; sourceTree = "<group>"; };
 		FA9CFEF826515BAC00A116A3 /* lxkfViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = lxkfViewController.m; sourceTree = "<group>"; };
 		FA9FBAA52647819700E4F27E /* menberViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menberViewController.h; sourceTree = "<group>"; };
@@ -1882,6 +1906,10 @@
 				8AADB3962679C99A009051B7 /* VideoVideosource.m */,
 				8AADB39B267CC835009051B7 /* VideoHistoryMode.h */,
 				8AADB39C267CC835009051B7 /* VideoHistoryMode.m */,
+				FA9B2ED7267F50BB00C149B9 /* feedbacktypeMode.h */,
+				FA9B2ED8267F50BB00C149B9 /* feedbacktypeMode.m */,
+				FA9B2EDA267F8C2E00C149B9 /* Paymentmethodlist.h */,
+				FA9B2EDB267F8C2E00C149B9 /* Paymentmethodlist.m */,
 			);
 			path = Mode;
 			sourceTree = "<group>";
@@ -1976,6 +2004,7 @@
 		8A8BC18925F9C7370028173C /* 搜索框 */ = {
 			isa = PBXGroup;
 			children = (
+				FA9B2EC2267F2F8400C149B9 /* collectionCell */,
 				8A8BC1A025F9C9220028173C /* LLSearchViewController.h */,
 				8A8BC19F25F9C9220028173C /* LLSearchViewController.m */,
 				8A8BC19125F9C74E0028173C /* LLSearchResultDoubleViewCell.h */,
@@ -2809,6 +2838,7 @@
 		8A9C550725F85D2400EFA410 /* 我的 */ = {
 			isa = PBXGroup;
 			children = (
+				FA9B2EC8267F3F7400C149B9 /* 反馈 */,
 				FAB78299265FEDB0002A5E6B /* View */,
 				8ADF898A264D16C200029B05 /* 登录模块 */,
 				FA949CB9264AC72500498EB6 /* 子模块 */,
@@ -3494,6 +3524,39 @@
 			path = collectionCell;
 			sourceTree = "<group>";
 		};
+		FA9B2EC2267F2F8400C149B9 /* collectionCell */ = {
+			isa = PBXGroup;
+			children = (
+				FA9B2EC3267F2FA800C149B9 /* zjssCollectionViewCell.h */,
+				FA9B2EC4267F2FA800C149B9 /* zjssCollectionViewCell.m */,
+				FA9B2EC5267F2FA800C149B9 /* zjssCollectionViewCell.xib */,
+			);
+			path = collectionCell;
+			sourceTree = "<group>";
+		};
+		FA9B2EC8267F3F7400C149B9 /* 反馈 */ = {
+			isa = PBXGroup;
+			children = (
+				FA9B2ECC267F418400C149B9 /* cell */,
+				FA9B2EC9267F3F9600C149B9 /* FankuiViewController.h */,
+				FA9B2ECA267F3F9600C149B9 /* FankuiViewController.m */,
+			);
+			path = "反馈";
+			sourceTree = "<group>";
+		};
+		FA9B2ECC267F418400C149B9 /* cell */ = {
+			isa = PBXGroup;
+			children = (
+				FA9B2ECD267F41B100C149B9 /* FKTextTableViewCell.h */,
+				FA9B2ECE267F41B100C149B9 /* FKTextTableViewCell.m */,
+				FA9B2ECF267F41B100C149B9 /* FKTextTableViewCell.xib */,
+				FA9B2ED2267F44B300C149B9 /* FKnumberTableViewCell.h */,
+				FA9B2ED3267F44B300C149B9 /* FKnumberTableViewCell.m */,
+				FA9B2ED4267F44B300C149B9 /* FKnumberTableViewCell.xib */,
+			);
+			path = cell;
+			sourceTree = "<group>";
+		};
 		FA9CFEF626515B8F00A116A3 /* 联系客服 */ = {
 			isa = PBXGroup;
 			children = (
@@ -3768,6 +3831,7 @@
 				FA8E71872652A46A0058F02F /* clarityCollectionViewCell.xib in Resources */,
 				FA75823326496DB300778A63 /* CZCollectionViewCell.xib in Resources */,
 				8A8BC38A25FC6F9E0028173C /* MBProgressHUD.bundle in Resources */,
+				FA9B2EC7267F2FA800C149B9 /* zjssCollectionViewCell.xib in Resources */,
 				FAA6DF0E2675C77500DE5E7C /* cycle_bottom_right.png in Resources */,
 				8A82F102264F9A86004AAF40 /* LaunchViewController.xib in Resources */,
 				8A95C31E265A5C7B00A6D144 /* KJPlayerFont.ttf in Resources */,
@@ -3820,7 +3884,9 @@
 				8A9C559E25F8A0B300EFA410 /* GuideImage.bundle in Resources */,
 				FA8A03972667D79000B41281 /* menberViewTS.xib in Resources */,
 				8A3930DA25FCDB3800E7331B /* cmh_default_no_wifi_1@2x.png in Resources */,
+				FA9B2ED1267F41B100C149B9 /* FKTextTableViewCell.xib in Resources */,
 				8A82F16D264FCEBA004AAF40 /* FAQTableViewCell.xib in Resources */,
+				FA9B2ED6267F44B300C149B9 /* FKnumberTableViewCell.xib in Resources */,
 				8A3930EA25FCDB3800E7331B /* cmh_default_no_custom_service@2x.png in Resources */,
 				8A3930E425FCDB3800E7331B /* cmh_default_buy_goods@3x.png in Resources */,
 				8A3930E825FCDB3800E7331B /* cmh_default_empty_data_1@3x.png in Resources */,
@@ -3955,6 +4021,7 @@
 				8A9C559325F89F0C00EFA410 /* CYLPlusButton.m in Sources */,
 				8A8BC2EC25FC6ED10028173C /* MHYouKuController.m in Sources */,
 				8A9C559125F89F0C00EFA410 /* CYLTabBarController.m in Sources */,
+				FA9B2EDC267F8C2E00C149B9 /* Paymentmethodlist.m in Sources */,
 				8A95C315265A5C7B00A6D144 /* KJLoadingPlayerVC.m in Sources */,
 				8A8BC3A625FC6F9E0028173C /* UIViewController+MHHUD.m in Sources */,
 				8A9C562925F8A10000EFA410 /* UIImage+BetterFace.m in Sources */,
@@ -3974,6 +4041,7 @@
 				8A9C561A25F8A10000EFA410 /* UIColor+Web.m in Sources */,
 				8AE1A0F92670E89200922103 /* RSA.m in Sources */,
 				FA8E71822652A3D50058F02F /* ClarityView.m in Sources */,
+				FA9B2ECB267F3F9600C149B9 /* FankuiViewController.m in Sources */,
 				FA984FB02674AEDF0014DCA8 /* AFHTTPSessionManager.m in Sources */,
 				FA984FB42674AEDF0014DCA8 /* AFSecurityPolicy.m in Sources */,
 				8A95C30B265A5C7B00A6D144 /* KJMidiPlayerVC.m in Sources */,
@@ -3989,6 +4057,7 @@
 				8A39306225FCD91A00E7331B /* CMHKeyedSubscript.m in Sources */,
 				8A8BC1D025FA13850028173C /* JRShopCell.m in Sources */,
 				8A8BC19625F9C7500028173C /* LLSearchResultListViewCell.m in Sources */,
+				FA9B2ED9267F50BB00C149B9 /* feedbacktypeMode.m in Sources */,
 				8A8BC1D125FA13850028173C /* JRShop.m in Sources */,
 				8A9C561625F8A10000EFA410 /* UIView+Screenshot.m in Sources */,
 				8A82F130264FA07E004AAF40 /* SVProgressAnimatedView.m in Sources */,
@@ -4133,6 +4202,7 @@
 				8A8BC2F825FC6ED10028173C /* MHYouKuAnthologyItem.m in Sources */,
 				FA949CC5264AC92A00498EB6 /* zhanghuInfoViewController.m in Sources */,
 				8A95C31C265A5C7B00A6D144 /* KJPlayerHintTextLayer.m in Sources */,
+				FA9B2ED0267F41B100C149B9 /* FKTextTableViewCell.m in Sources */,
 				8A39306025FCD91A00E7331B /* CMHHTTPService.m in Sources */,
 				8A8BC17525F8F73F0028173C /* ColumnEditViewController.m in Sources */,
 				8A8BC39225FC6F9E0028173C /* MHExample.m in Sources */,
@@ -4149,6 +4219,7 @@
 				8A3930D125FCDB3800E7331B /* CMHProfileButton.m in Sources */,
 				8A8BC2F625FC6ED10028173C /* MHYouKuCommentItem.m in Sources */,
 				8A9C561725F8A10000EFA410 /* UIColor+Gradient.m in Sources */,
+				FA9B2EC6267F2FA800C149B9 /* zjssCollectionViewCell.m in Sources */,
 				8A8BC38925FC6F9E0028173C /* MBProgressHUD+MHExtension.m in Sources */,
 				8A39308F25FCDAED00E7331B /* CMHTableViewController.m in Sources */,
 				8A82F16C264FCEBA004AAF40 /* FAQTableViewCell.m in Sources */,
@@ -4197,6 +4268,7 @@
 				8A8BC39825FC6F9E0028173C /* UIImage+MHBlur.m in Sources */,
 				FA9FBAB22647B77900E4F27E /* headerCollectionViewCell.m in Sources */,
 				8A9C561E25F8A10000EFA410 /* UIButton+CountDown.m in Sources */,
+				FA9B2ED5267F44B300C149B9 /* FKnumberTableViewCell.m in Sources */,
 				8A95C304265A5C7B00A6D144 /* KJResourceLoader.m in Sources */,
 				8A052168264A809800E5188E /* MessageViewController.m in Sources */,
 				FA9FBABB2647D94C00E4F27E /* jiluViewController.m in Sources */,

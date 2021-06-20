@@ -306,6 +306,7 @@ static NSString * const shopCellReuseID = @"shop";
                         [self.shopsDS removeAllObjects];
                         NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
                         NSArray * video_list = [dataArr objectForKey:@"video_list"];
+                    if(![video_list isKindOfClass:[NSNull class]]){
                     if(video_list.count>0)
                     {
                         for (int i=0; i<video_list.count; i++) {
@@ -315,6 +316,7 @@ static NSString * const shopCellReuseID = @"shop";
                             
                         }
                         [self.shopsDS addObjectsFromArray:arr];
+                    }
                     }
                         // 刷新数据
                         [self.collectionView1 reloadData];
@@ -372,6 +374,7 @@ static NSString * const shopCellReuseID = @"shop";
                     [self.shopsDY removeAllObjects];
                     NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
                     NSArray * video_list = [dataArr objectForKey:@"video_list"];
+                    if(![video_list isKindOfClass:[NSNull class]]){
                     if(video_list.count>0)
                     {
                     for (int i=0; i<video_list.count; i++) {
@@ -381,6 +384,7 @@ static NSString * const shopCellReuseID = @"shop";
                         
                     }
                     [self.shopsDY addObjectsFromArray:arr];
+                    }
                     }
                     // 刷新数据
                     [self.collectionView2 reloadData];

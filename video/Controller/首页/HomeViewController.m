@@ -219,7 +219,10 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
                 NSNumber*show=[dictM objectForKey:@"show"];
                 if([show intValue]==1)
                 {
-                    [self.VideoDictList addObject:dictM];
+                    if(i<=8)
+                    {
+                        [self.VideoDictList addObject:dictM];
+                    }
                 }
             }
             
@@ -281,6 +284,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
                 [self.SXArray removeAllObjects];
                 NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
                 NSArray * video_list = [dataArr objectForKey:@"video_list"];
+            if(![video_list isKindOfClass:[NSNull class]]){
             if(video_list.count>0)
             {
                 for (int i=0; i<video_list.count; i++) {
@@ -290,6 +294,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
                     
                 }
                 [self.SXArray addObjectsFromArray:arr];
+            }
             }
             [self.collectionView.mj_header endRefreshing];
                 // 刷新数据
@@ -355,6 +360,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
                 [self.SXArray removeAllObjects];
                 NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
                 NSArray * video_list = [dataArr objectForKey:@"video_list"];
+            if(![video_list isKindOfClass:[NSNull class]]){
             if(video_list.count>0)
             {
                 self.SXpage+=1;
@@ -365,6 +371,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
                     
                 }
                 [self.SXArray addObjectsFromArray:arr];
+            }
             }
             [self.collectionView.mj_footer endRefreshing];
                 // 刷新数据
@@ -434,6 +441,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
                         [self.SXArray removeAllObjects];
                         NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
                         NSArray * video_list = [dataArr objectForKey:@"video_list"];
+                    if(![video_list isKindOfClass:[NSNull class]]){
                     if(video_list.count>0)
                     {
                         for (int i=0; i<video_list.count; i++) {
@@ -443,6 +451,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
                             
                         }
                         [self.SXArray addObjectsFromArray:arr];
+                    }
                     }
                         // 刷新数据
                         [self.collectionView reloadData];

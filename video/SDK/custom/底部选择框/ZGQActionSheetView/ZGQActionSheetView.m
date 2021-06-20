@@ -73,7 +73,7 @@ typedef void(^cancelBlock)(void);
 
 - (void)initializeInformation
 {
-    self.maxShowCount = 5;
+    self.maxShowCount = 10;
     self.fontSize = 16.0f;
     self.optionHeight = 56.0f;
     self.optionColor = [UIColor colorWithWhite:0.2 alpha:1.000];

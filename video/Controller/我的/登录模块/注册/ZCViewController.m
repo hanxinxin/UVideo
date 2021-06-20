@@ -61,10 +61,10 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 
 
 -(void)InitUI{
-    self.topImageBg = [[UIImageView alloc] initWithFrame:CGRectMake(30, 40, self.view.width-60, 200)];
+    self.topImageBg = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.width-125)/2, 40, 125, 50)];
     [self.topImageBg setImage:[UIImage imageNamed:@"kaunchlogo"]];
     [self.view addSubview:self.topImageBg];
-    self.centerView = [[UIView alloc] initWithFrame:CGRectMake(30, 252, self.view.width-60, 210-40)];
+    self.centerView = [[UIView alloc] initWithFrame:CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 226)];
     self.centerView.layer.cornerRadius=6;
     self.centerView.backgroundColor=[UIColor whiteColor];
     self.centerView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.16].CGColor;
@@ -383,7 +383,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
         self.TuXingCodeBtn.hidden=NO;
         self.getCodeBtn.hidden=YES;
     //    self.centerView.backgroundColor=[UIColor orangeColor];
-        self.centerView.frame = CGRectMake(30, 252, self.view.width-60, 210);
+        self.centerView.frame = CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 210);
         [self setyinying];
 
         self.backBtn.frame = CGRectMake(30,self.centerView.bottom+15,((self.view.width-68)/2)-5,46);
@@ -409,7 +409,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
         self.CodeView.hidden=NO;
         self.TuXingCodeBtn.hidden=YES;
         self.getCodeBtn.hidden=NO;
-        self.centerView.frame = CGRectMake(30, 252, self.view.width-60, 210);
+        self.centerView.frame = CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 210);
         [self setyinying];
 
         self.backBtn.frame = CGRectMake(30,self.centerView.bottom+15,((self.view.width-68)/2)-5,46);

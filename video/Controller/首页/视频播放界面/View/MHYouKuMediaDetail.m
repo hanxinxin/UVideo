@@ -118,6 +118,7 @@
     [thumbBtn setImage:[UIImage imageNamed:@"mh_thumb"] forState:UIControlStateNormal];
     [thumbBtn setImage:[UIImage imageNamed:@"mh_thumb_sel"] forState:UIControlStateSelected];
     thumbBtn.titleLabel.font = MHMediumFont(MHPxConvertPt(12.0f));
+    thumbBtn.hidden=YES;
     self.thumbBtn = thumbBtn;
     [scrollView addSubview:thumbBtn];
 }
@@ -172,7 +173,7 @@
     [self.content mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.title.mas_bottom).with.offset(MHGlobalViewInterInset);
         make.left.equalTo(self.title.mas_left);
-        make.right.equalTo(self.title.mas_right);
+        make.right.equalTo(self.title.mas_right).offset(15);
     }];
     
     
@@ -186,17 +187,29 @@
 }
 
 
-- (void)setMedia:(MHYouKuMedia *)media
+//- (void)setMedia:(MHYouKuMedia *)media
+//{
+//    _media = media;
+//
+//    self.title.text = [NSString stringWithFormat:@"名称：%@",media.mediaTitle];
+//
+//    self.content.text = [NSString stringWithFormat:@"%@",media.mediaContent];
+//
+//    [self.thumbBtn setTitle:[NSString stringWithFormat:@"%@人赞过",media.thumbNumsString] forState:UIControlStateNormal];
+//    self.thumbBtn.selected = media.isThumb;
+//
+//}
+
+-(void)setModel:(VideoVideoInfoMode *)model
 {
-    _media = media;
+        _model = model;
     
-    self.title.text = [NSString stringWithFormat:@"名称：%@",media.mediaTitle];
+        self.title.text = [NSString stringWithFormat:@"名称：%@",model.title];
     
-    self.content.text = [NSString stringWithFormat:@"%@",media.mediaContent];
+        self.content.text = [NSString stringWithFormat:@"%@",model.description];
     
-    [self.thumbBtn setTitle:[NSString stringWithFormat:@"%@人赞过",media.thumbNumsString] forState:UIControlStateNormal];
-    self.thumbBtn.selected = media.isThumb;
-    
+//        [self.thumbBtn setTitle:[NSString stringWithFormat:@"%@人赞过",media.thumbNumsString] forState:UIControlStateNormal];
+//        self.thumbBtn.selected = media.isThumb;
 }
 
 

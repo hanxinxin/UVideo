@@ -45,7 +45,7 @@
         layout.flowLayoutStyle = WSLWaterFlowVerticalEqualHeight;
         
         // 创建瀑布流view
-        UICollectionView *collectionView1 = [[UICollectionView alloc] initWithFrame:CGRectMake(10, 0, self.view.width-20,self.view.height) collectionViewLayout:layout];
+        UICollectionView *collectionView1 = [[UICollectionView alloc] initWithFrame:CGRectMake(10, 0, self.view.width-20,self.view.height-kNavBarAndStatusBarHeight) collectionViewLayout:layout];
         // 设置数据源
         collectionView1.dataSource = self;
         collectionView1.delegate=self;
@@ -168,8 +168,6 @@
         {
             
                 NSDictionary  * datadict = [dict objectForKey:@"data"];
-                // 清空数据
-                [self.dataArr removeAllObjects];
                 NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
                 NSArray * video_list = [datadict objectForKey:@"video_list"];
             if(![video_list isKindOfClass:[NSNull class]]){
@@ -307,11 +305,51 @@
 {
     NSLog(@"选择第%ld素材",indexPath.item);
     
-    MHYouKuController *avc = [[MHYouKuController alloc] init];
-    [self pushRootNav:avc animated:YES];
+//    MHYouKuController *avc = [[MHYouKuController alloc] init];
+//    [self pushRootNav:avc animated:YES];
+    VideoRankMode*Vmodel=self.dataArr[indexPath.row];
+    [self getVideoInfo:[NSString stringWithFormat:@"%f",Vmodel.id]];
+   
     
 }
 
+-(void)getVideoInfo:(NSString*)videoId
+{
+    NSDictionary* dict = @{
+        @"id":videoId,};
+    
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_infourl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+        [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    NSDictionary  * dataArr = [dict objectForKey:@"data"];
+                    
+                    // 将数据转模型
+                    ZVideoMode *model = [ZVideoMode yy_modelWithDictionary:dataArr];
+                    NSLog(@"model  == %@",model);
+                    [self pushViewControllerVideo:model];
+                    
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+//        [self pushViewControllerVideo];
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+            
+            }];
+}
+-(void)pushViewControllerVideo:(ZVideoMode*)mode{
+    MHYouKuController *avc = [[MHYouKuController alloc] init];
+    avc.Zvideomodel= mode;
+    [self pushRootNav:avc animated:YES];
+}
 #pragma mark - WSLWaterFlowLayoutDelegate
 //返回每个item大小
 - (CGSize)waterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -380,5 +418,9 @@
 
 
 
-
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+//    [self.view endEditing:YES];
+    // 回收键盘
+//    [self.searchBar resignFirstResponder];
+}
 @end

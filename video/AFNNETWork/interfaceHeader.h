@@ -74,6 +74,10 @@
 //支付方式
 #define payment_methodurl @"/payment/method"  //可用的支付方式
 #define purchaseVipCardurl @"/payment/purchaseVipCard"  //购买会员卡
+#define postfeedbackcategoryurl @"/feedback/category"//// 反馈类型列表
+#define postfeedbackdurl @"/feedback/post"/// 反馈
+
+
 
 ////视频播放页
 #define video_latesturl @"/video/latest"  //视频排行榜列表

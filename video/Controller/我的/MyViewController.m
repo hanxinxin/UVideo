@@ -18,6 +18,7 @@
 #import "ZjiluViewController.h"
 #import "FAQViewController.h"
 #import "promptbottomView.h"
+#import "FankuiViewController.h"
 
 @interface MyViewController ()<UITableViewDelegate,UITableViewDataSource,ZGQActionSheetViewDelegate,HQImageEditViewControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
@@ -49,6 +50,42 @@
 //        [UHud hideLoadHudForView:nil];
 //    });
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self updateHeaderViwe];
+}
+
+-(void)updateHeaderViwe
+{
+    if(self.Headerview)
+    {
+        if(![self StringIsNullOrEmpty:avatar_loca])
+        {
+            [self.Headerview.txImage setImage:[self base64Image:avatar_loca] forState:(UIControlStateNormal)];
+        }
+        if(![self StringIsNullOrEmpty:nickname_loca])
+        {
+            [self.Headerview.nameLabel setText:nickname_loca];
+        }else{
+            if(![self StringIsNullOrEmpty:username_loca])
+            {
+                [self.Headerview.nameLabel setText:username_loca];
+            }else{
+                [self.Headerview.nameLabel setText:@"未登录"];
+            }
+        }
+        if([vip_expired_time_loca intValue]==0)
+        {
+            [self.Headerview.vipTime setText:@"马上充值会员，立刻享受VIP观影特权"];
+            [self.Headerview.vipImage setImage:[UIImage imageNamed:@"nohuiyuan"] forState:(UIControlStateNormal)];
+        }else{
+            [self.Headerview.vipTime setText:[NSString stringWithFormat:@"会员到期时间 %@",[self getTimeFromTimestamp:vip_expired_time_loca]]];
+            [self.Headerview.vipImage setImage:[UIImage imageNamed:@"vipimage"] forState:(UIControlStateNormal)];
+        }
+    }
+}
+
 -(void)addpromptViewM{
     promptbottomView *view = [[[NSBundle mainBundle]loadNibNamed:@"promptbottomView" owner:self options:nil]objectAtIndex:0];
 //    view.alpha=0.7;
@@ -100,6 +137,7 @@
                     [TimeOfBootCount setValue:@(0) forKey:@"expired_time"];
                     [TimeOfBootCount setValue:@(0) forKey:@"vip_expired_time"];
                     [UHud showSuccessWithStatus:@"退出成功" delay:2.f];
+                    [self updateHeaderViwe];
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
                     [UHud showTXTWithStatus:message delay:2.f];
@@ -114,6 +152,7 @@
                     [TimeOfBootCount setValue:@(0) forKey:@"expired_time"];
                     [TimeOfBootCount setValue:@(0) forKey:@"vip_expired_time"];
                     [UHud showSuccessWithStatus:@"退出成功" delay:2.f];
+                    [self updateHeaderViwe];
                 }
             } failure:^(NSError * _Nullable error) {
                 [UHud hideLoadHud];
@@ -128,8 +167,9 @@
                 [TimeOfBootCount setValue:@(0) forKey:@"expired_time"];
                 [TimeOfBootCount setValue:@(0) forKey:@"vip_expired_time"];
                 [UHud showSuccessWithStatus:@"退出成功" delay:2.f];
+                [self updateHeaderViwe];
                 NSLog(@"shareManager error == %@",error);
-                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+//                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
             }];
 }
 -(void)InitUIView
@@ -154,24 +194,10 @@
     view.layer.shadowRadius = 6;
     view.layer.shadowOpacity = 1;
     NSLog(@"avatar_loca==== %@,nickname_loca= %@,username_loca= %@",avatar_loca,nickname_loca,username_loca);
-    if(![self StringIsNullOrEmpty:avatar_loca])
-    {
-        [view.txImage setImage:[self base64Image:avatar_loca] forState:(UIControlStateNormal)];
-    }
-    if(![self StringIsNullOrEmpty:nickname_loca])
-    {
-        [view.nameLabel setText:nickname_loca];
-    }else{
-        [view.nameLabel setText:username_loca];
-    }
-    if([vip_expired_time_loca intValue]==0)
-    {
-        [view.vipTime setText:@"马上充值会员，立刻享受VIP观影特权"];
-        [view.vipImage setImage:[UIImage imageNamed:@"nohuiyuan"] forState:(UIControlStateNormal)];
-    }else{
-        [view.vipTime setText:[NSString stringWithFormat:@"会员到期时间 %@",[self getTimeFromTimestamp:vip_expired_time_loca]]];
-        [view.vipImage setImage:[UIImage imageNamed:@"vipimage"] forState:(UIControlStateNormal)];
-    }
+    [self updateHeaderViwe];
+    view.nameLabel.userInteractionEnabled=YES;
+    UITapGestureRecognizer *labelTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(labelTouchUpInside:)];
+    [view.nameLabel addGestureRecognizer:labelTapGestureRecognizer];
     view.txImage.layer.cornerRadius = 30;
     view.txImage.layer.masksToBounds = YES;
     [self.ZtopView addSubview:view];
@@ -194,7 +220,7 @@
         NSLog(@"CellIndex= %ld",CellIndex);
         if(CellIndex==1000)
         {
-
+// 收藏夹
                 AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
                 
                 HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
@@ -205,13 +231,16 @@
             [[NSNotificationCenter defaultCenter]postNotification:notification];
         }else if(CellIndex==1001)
         {
-            
+            // 求片
+            FankuiViewController * avc = [[FankuiViewController alloc] init];
+            avc.typeInt=1001;
+            [weakSelf pushRootNav:avc animated:YES];
         }else if(CellIndex==1002)
         {
-            
+            // 任务
         }else if(CellIndex==1003)
         {
-
+            // 充值
                 AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
                 
                 HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
@@ -222,7 +251,16 @@
         }
     };
 }
+-(void)labelTouchUpInside:(UITapGestureRecognizer*)tap
+{
     
+    NSLog(@"label被点击了" );
+    if([usertoken isEqualToString:@""])
+    {
+        LoginViewController * avc = [[LoginViewController alloc] init];
+        [self pushRootNav:avc animated:YES];
+    }
+}
 -(void)ShowProfilePhoto
 {
     

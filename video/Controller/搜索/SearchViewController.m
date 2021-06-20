@@ -51,7 +51,12 @@
         self.searchView = [[LLSearchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT -(kNavBarAndStatusBarHeight)) hotArray:self.hotArray historyArray:self.historyArray];
         __weak SearchViewController *weakSelf = self;
         _searchView.tapAction = ^(NSString *str) {
-            [weakSelf pushToSearchResultWithSearchStr:str];
+//            [weakSelf pushToSearchResultWithSearchStr:str];
+            weakSelf.searchBar.text = str;
+            weakSelf.searchSuggestVC.view.hidden = NO;
+            [weakSelf.view bringSubviewToFront:weakSelf.searchSuggestVC.view];
+            [weakSelf.searchSuggestVC searchTestChangeWithTest:str];
+            [weakSelf setHistoryArrWithStr:str];
         };
     }
     return _searchView;
@@ -66,7 +71,10 @@
         _searchSuggestVC.view.hidden = YES;
         __weak SearchViewController *weakSelf = self;
         _searchSuggestVC.searchBlock = ^(NSString *searchTest) {
-            [weakSelf pushToSearchResultWithSearchStr:searchTest];
+//            [weakSelf pushToSearchResultWithSearchStr:searchTest];
+            
+            [weakSelf.searchSuggestVC searchTestChangeWithTest:searchTest];
+            [weakSelf setHistoryArrWithStr:searchTest];
         };
     }
     return _searchSuggestVC;
@@ -188,7 +196,6 @@
 - (void)cancelDidClick
 {
 //    [self.searchBar resignFirstResponder];
-    
     [self dismissViewControllerAnimated:NO completion:nil];
     [self.navigationController popViewControllerAnimated:NO];
 }
@@ -223,7 +230,10 @@
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
-    [self pushToSearchResultWithSearchStr:searchBar.text];
+//    [self pushToSearchResultWithSearchStr:searchBar.text];
+    [searchBar resignFirstResponder];    //主要是[receiver resignFirstResponder]在哪调用就能把receiver对应的键盘往下收
+    [_searchSuggestVC searchTestChangeWithTest:searchBar.text];
+    [self setHistoryArrWithStr:searchBar.text];
 }
 
 
@@ -243,17 +253,21 @@
     if (searchBar.text == nil || [searchBar.text length] <= 0) {
         _searchSuggestVC.view.hidden = YES;
         [self.view bringSubviewToFront:_searchView];
+        _historyArray = [NSKeyedUnarchiver unarchiveObjectWithFile:KHistorySearchPath];
+        self.searchView.historyArray=_historyArray;
+        [self.searchView updatesearchHistoryView];
     } else {
         _searchSuggestVC.view.hidden = NO;
         [self.view bringSubviewToFront:_searchSuggestVC.view];
-        [_searchSuggestVC searchTestChangeWithTest:searchBar.text];
+        ///边输入边搜索 停止只有搜索按钮才开始搜索
+//        [_searchSuggestVC searchTestChangeWithTest:searchBar.text];
     }
 }
 
 -(void)getvideo_rankurlData
 {
 //    NSDictionary * dict = @{@"parent_category_id":@""};
-    [UHud showHUDLoading];
+//    [UHud showHUDLoading];
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_rankurl] Dictionary:nil success:^(id  _Nullable responseObject) {
 //        NSLog(@"post responseObject == %@",responseObject);
         [UHud hideLoadHud];
@@ -292,5 +306,14 @@
         [UHud showTXTWithStatus:@"网络错误" delay:2.f];
     }];
 
+}
+
+
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+//    [self.view endEditing:YES];
+    // 回收键盘
+    [self.searchBar resignFirstResponder];
 }
 @end

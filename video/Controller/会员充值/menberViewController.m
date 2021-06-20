@@ -14,6 +14,7 @@
 #import "KMPlayView.h"
 #import "chongzhiView.h"
 #import "PlayWTView.h"
+#import "Paymentmethodlist.h"
 
 #import "menberJSCollectionViewCell.h"
 
@@ -86,14 +87,61 @@
     [self addTopView];
     [self setupCollectionView];
     [self Addtableview];
-    [self setupCollectionViewMenber];
+//    [self setupCollectionViewMenber];
     
     [self addkfViewM];
     [self addKMViewM];
     [self addCZViewM];
     [self addplaywtViewM];
 }
-
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self postPlayList];
+}
+-(void)postPlayList
+{
+    
+    [UHud showHUDLoading];
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,payment_methodurl] Dictionary:nil success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+        [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+        
+                if([code intValue]==0)
+                {
+                    NSDictionary *dictdata =[dict objectForKey:@"data"];
+                    NSArray * payment_method_list=[dictdata objectForKey:@"payment_method_list"];
+                    if(![payment_method_list isKindOfClass:[NSNull class]]){
+                    if(payment_method_list.count>0)
+                    {
+                        [self.PayArray removeAllObjects];
+                        for (int i=0; i<payment_method_list.count; i++) {
+//                            [DYModelMaker DY_makeModelWithDictionary:payment_method_list[i] modelKeyword:@"payment" modelName:@"paymentmethodlist"];
+//                            
+                            Paymentmethodlist *model = [Paymentmethodlist yy_modelWithDictionary:payment_method_list[i]];
+                            [self.PayArray addObject:model];
+                            
+                        }
+                        self.downtableview.frame=CGRectMake(20, self.collectionView.bottom+10, SCREEN_WIDTH-40, (self.PayArray.count+1)*50+(self.PayArray.count+1)*10);
+                        [self.downtableview reloadData];
+                        [self setupCollectionViewMenber];
+                    }
+                    
+                    }
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+            }];
+}
 
 
 
@@ -173,14 +221,14 @@
 -(void)Addtableview
 {
     _tableviewselect=1; ///默认为1 0是title
-    _PayArray=[NSMutableArray arrayWithCapacity:0];
-    NSArray* titlearr=[NSArray arrayWithObjects:@"选择支付方式",@"",@"",@"",@"卡密支付",@"联系客服充值", nil];
-    [_PayArray addObject:titlearr];
-    _imagearray=[NSMutableArray arrayWithCapacity:0];
-    NSArray * iamgearr = [NSArray arrayWithObjects:@"",@"paypal",@"zhifubao",@"wximage",@"yhkimage",@"",nil];
-    [_imagearray addObject:iamgearr];
+//    _PayArray=[NSMutableArray arrayWithCapacity:0];
+//    NSArray* titlearr=[NSArray arrayWithObjects:@"选择支付方式",@"",@"",@"",@"卡密支付",@"联系客服充值", nil];
+//    [_PayArray addObject:titlearr];
+//    _imagearray=[NSMutableArray arrayWithCapacity:0];
+//    NSArray * iamgearr = [NSArray arrayWithObjects:@"",@"paypal",@"zhifubao",@"wximage",@"yhkimage",@"",nil];
+//    [_imagearray addObject:iamgearr];
     self.downtableview=[[UITableView alloc] init];
-    self.downtableview.frame=CGRectMake(20, self.collectionView.bottom+10, SCREEN_WIDTH-40, titlearr.count*50+(titlearr.count)*10);
+    self.downtableview.frame=CGRectMake(20, self.collectionView.bottom+10, SCREEN_WIDTH-40, (self.PayArray.count+1)*50+(self.PayArray.count)*10);
     self.downtableview.backgroundColor=[UIColor clearColor];
     self.downtableview.delegate=self;
     self.downtableview.dataSource=self;
@@ -196,6 +244,9 @@
 - (void)setupCollectionViewMenber
 {
 
+    [self.menberLabel removeFromSuperview];
+    [self.menbercollectionView removeFromSuperview];
+    [self.ConfirmPlayBtn removeFromSuperview];
     HXtitleLabelView *view = [[[NSBundle mainBundle]loadNibNamed:@"HXtitleLabelView" owner:self options:nil]objectAtIndex:0];
     view.frame=CGRectMake(20, self.downtableview.bottom+8, SCREEN_WIDTH-40, 40);
     [ScrollView addSubview:view];
@@ -280,6 +331,7 @@
 -(void)getmenberList
 {
     [self.menbercollectionView.mj_header endRefreshing];
+    [self.menberJSArray removeAllObjects];
     [self.menberJSArray addObject:@{@"img":@"qingxiHD",@"title":@"清/蓝光清晰度"}];
     [self.menberJSArray addObject:@{@"img":@"beishuplay",@"title":@"倍数播放"}];
     [self.menberJSArray addObject:@{@"img":@"duxiangpy",@"title":@"VIP会员独享片源"}];
@@ -487,12 +539,12 @@
 
 #pragma mark -------- Tableview -------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _PayArray.count;
+    return 1;
 }
 //4、设置组数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    NSArray * arr = _PayArray[0];
-    return arr.count;
+    
+    return self.PayArray.count+1;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -505,8 +557,7 @@
     }
     if(indexPath.section==0)
     {
-        NSArray  * titleT=_PayArray[0];
-        cell.textLabel.text = [titleT objectAtIndex:indexPath.section];
+        cell.textLabel.text = @"选择支付方式";
         cell.textLabel.textAlignment=NSTextAlignmentLeft;
     }else{
         UIView *lbl = [[UIView alloc] init]; //定义一个label用于显示cell之间的分割线（未使用系统自带的分割线），也可以用view来画分割线
@@ -515,10 +566,20 @@
         [cell.contentView addSubview:lbl];
         //cell选中效果
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        NSArray  * titleT=_PayArray[0];
-        cell.textLabel.text = [titleT objectAtIndex:indexPath.section];
-        NSArray  * titleI=_imagearray[0];
-        cell.imageView.image=[UIImage imageNamed:[titleI objectAtIndex:indexPath.section]];
+        Paymentmethodlist *model = self.PayArray[indexPath.section-1];
+//        cell.textLabel.text = model.name;
+        if([model.symbol isEqualToString:@"paypal"])
+        {
+            cell.imageView.image=[UIImage imageNamed:@"paypal"];
+        }else if([model.symbol isEqualToString:@"alipay"])
+        {
+            cell.imageView.image=[UIImage imageNamed:@"zhifubao"];
+        }else if([model.symbol isEqualToString:@"vip-card"])
+        {
+            cell.textLabel.text =@"卡密支付";
+            cell.imageView.image=[UIImage imageNamed:@"yhkimage"];
+        }
+//        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.icon]];
         NSLog(@"section==== %ld",(long)indexPath.section);
         
         cell.backgroundColor = [UIColor whiteColor];
@@ -576,27 +637,26 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"index == %ld",indexPath.section);
-    NSArray * arr = _PayArray[0];
 
     if(indexPath.section!=0)
     {
-        if(indexPath.section==1)
+        Paymentmethodlist *model = self.PayArray[indexPath.section-1];
+//        cell.textLabel.text = model.name;
+        if([model.symbol isEqualToString:@"paypal"])
+        {
+            
+        }else if([model.symbol isEqualToString:@"alipay"])
+        {
+            
+        }else if([model.symbol isEqualToString:@"vip-card"])
         {
             [self showkmPlay];
-        }else if(indexPath.section==2)
-        {
-            [self showczView:YES];
-        }else if(indexPath.section==3)
-        {
-            [self showczView:NO];
-        }else if(indexPath.section==4)
-        {
-            [self showplaywtView];
         }
-        else if((arr.count-1)==indexPath.section)
-        {
-            [self showkfView];
-        }
+     
+//            [self showczView:YES];
+//            [self showczView:NO];
+//            [self showplaywtView];
+//            [self showkfView];
         _tableviewselect=indexPath.section;
         [self.downtableview reloadData];
     }

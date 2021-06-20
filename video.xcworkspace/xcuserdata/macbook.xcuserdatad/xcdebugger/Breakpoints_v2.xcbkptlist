@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2BE489C5-F9B6-47DD-BB71-198EF6D68CE1"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/Controller/&#x641c;&#x7d22;/SearchViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "182"
-            endingLineNumber = "182"
-            landmarkName = "-presentVCFirstBackClick:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "B35F83FD-C5D9-4051-A249-7C9F69536F85"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -80,7 +64,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "214"
                   endingLineNumber = "214"
-                  offsetFromSymbolStart = "44">
+                  offsetFromSymbolStart = "52">
                </Location>
                <Location
                   uuid = "D075B340-4A48-41C2-92CF-FAB082668169 - 310e828c063a63e8"
@@ -95,7 +79,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "214"
                   endingLineNumber = "214"
-                  offsetFromSymbolStart = "296">
+                  offsetFromSymbolStart = "381">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -142,10 +126,10 @@
             filePath = "video/Controller/&#x6211;&#x7684;/MyViewController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "432"
-            endingLineNumber = "432"
-            landmarkName = "-postUploadHeadImage:"
-            landmarkType = "7">
+            startingLineNumber = "470"
+            endingLineNumber = "470"
+            landmarkName = "MyViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -199,128 +183,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D9C4DD1C-5531-4430-A289-941643810755"
+            uuid = "E43C23C2-511C-47FC-AAA7-0905AA772A1F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "video/Controller/Tabbar/&#x81ea;&#x5b9a;&#x4e49;/hxViewController.m"
+            filePath = "video/Controller/&#x9996;&#x9875;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x754c;&#x9762;/MHYouKuController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "-btnTouch:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E9D4D075-7896-4004-A996-20CDE56AF6B4"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/Controller/&#x9996;&#x9875;/&#x641c;&#x7d22;&#x6846;/LLSearchViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
-            landmarkName = "-getvideo_rankurlData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "200B51B0-17BE-4072-A884-EB79AFBB35D4"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/Controller/&#x9996;&#x9875;/&#x641c;&#x7d22;&#x6846;/LLSearchViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
-            landmarkName = "-getvideo_rankurlData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "374A2CB9-F1BB-423B-A8A8-15B605C74DAB"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/Controller/&#x9996;&#x9875;/&#x641c;&#x7d22;&#x6846;/LLSearchViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "243"
-            endingLineNumber = "243"
-            landmarkName = "-getvideo_rankurlData"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "374A2CB9-F1BB-423B-A8A8-15B605C74DAB - 2bb88a265c67ed1f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[LLSearchViewController getvideo_rankurlData]"
-                  moduleName = "video"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macbook/Desktop/Video%E9%A1%B9%E7%9B%AE/UVideo/video/Controller/%E9%A6%96%E9%A1%B5/%E6%90%9C%E7%B4%A2%E6%A1%86/LLSearchViewController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "243"
-                  endingLineNumber = "243"
-                  offsetFromSymbolStart = "44">
-               </Location>
-               <Location
-                  uuid = "374A2CB9-F1BB-423B-A8A8-15B605C74DAB - 97d5f3ddde9eb2cf"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__46-[LLSearchViewController getvideo_rankurlData]_block_invoke"
-                  moduleName = "video"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macbook/Desktop/Video%E9%A1%B9%E7%9B%AE/UVideo/video/Controller/%E9%A6%96%E9%A1%B5/%E6%90%9C%E7%B4%A2%E6%A1%86/LLSearchViewController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "245"
-                  endingLineNumber = "245"
-                  offsetFromSymbolStart = "48">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "969EDB3A-2563-469A-AFDA-FC2AC5A4487C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/Controller/&#x9996;&#x9875;/&#x641c;&#x7d22;&#x6846;/LLSearchViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "257"
-            endingLineNumber = "257"
-            landmarkName = "-getvideo_rankurlData"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "25BD06DE-C74D-4ADE-8362-D06665C7E2F2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/Controller/&#x9996;&#x9875;/&#x641c;&#x7d22;&#x6846;/LLSearchViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "255"
-            endingLineNumber = "255"
-            landmarkName = "-getvideo_rankurlData"
+            startingLineNumber = "1637"
+            endingLineNumber = "1637"
+            landmarkName = "-CaiAndZanPost:evaluate:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

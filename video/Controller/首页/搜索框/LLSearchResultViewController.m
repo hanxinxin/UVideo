@@ -205,7 +205,7 @@
     if ([searchBar.text length] > 0) {
         _searchSuggestVC.view.hidden = NO;
         [self.view bringSubviewToFront:_searchSuggestVC.view];
-        [_searchSuggestVC searchTestChangeWithTest:searchBar.text];
+//        [_searchSuggestVC searchTestChangeWithTest:searchBar.text];
     }
 }
 
@@ -238,10 +238,13 @@
         _searchSuggestVC.view.hidden = YES;
         [self.view addSubview:self.searchView];
         [self.view bringSubviewToFront:_searchView];
+        _historyArray = [NSKeyedUnarchiver unarchiveObjectWithFile:KHistorySearchPath];
+        self.searchView.historyArray=_historyArray;
+        [self.searchView updatesearchHistoryView];
     } else {
         _searchSuggestVC.view.hidden = NO;
         [self.view bringSubviewToFront:_searchSuggestVC.view];
-        [_searchSuggestVC searchTestChangeWithTest:searchBar.text];
+//        [_searchSuggestVC searchTestChangeWithTest:searchBar.text];
     }
 }
 

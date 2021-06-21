@@ -17,6 +17,7 @@
 #import "jiluViewController.h"
 #import "ZjiluViewController.h"
 #import "FAQViewController.h"
+#import "NewFAQViewController.h"
 #import "promptbottomView.h"
 #import "FankuiViewController.h"
 
@@ -53,8 +54,51 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    [self getInfoData];
     [self updateHeaderViwe];
 }
+
+-(void)getInfoData
+{
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,GetUserInfoURL] Dictionary:nil success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary *dictdata=[dict objectForKey:@"data"];
+            NSDictionary *userdata =[dictdata objectForKey:@"user"];
+            NSString * email = [userdata objectForKey:@"email"];
+            NSNumber * vip_expired_time = [userdata objectForKey:@"vip_expired_time"];
+            NSString * nickname = [userdata objectForKey:@"nickname"];
+            NSString * username = [userdata objectForKey:@"username"];
+            NSString * avatar = [userdata objectForKey:@"avatar"];
+            
+           
+            [[NSUserDefaults standardUserDefaults] setValue:email forKey:@"UserZH"];
+            [[NSUserDefaults standardUserDefaults] setValue:nickname forKey:@"nickname"];
+            [[NSUserDefaults standardUserDefaults] setValue:username forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults] setValue:avatar forKey:@"avatar"];
+            [[NSUserDefaults standardUserDefaults] setValue:vip_expired_time forKey:@"vip_expired_time"];
+            
+            [self updateHeaderViwe];
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showHudWithStatus:message delay:2.f];
+            [self updateHeaderViwe];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [self updateHeaderViwe];
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+}
+
+
+
 
 -(void)updateHeaderViwe
 {
@@ -429,7 +473,8 @@
         
     }else if(indexPath.section==3)
     {
-        FAQViewController * avc = [[FAQViewController alloc] init];
+//        FAQViewController * avc = [[FAQViewController alloc] init];
+        NewFAQViewController* avc = [[NewFAQViewController alloc] init];
         [self pushRootNav:avc animated:YES];
     }else if(indexPath.section==4)
     {

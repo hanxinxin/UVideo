@@ -6,11 +6,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "MessageInfoMode.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface msgInfoViewController : HXBaseViewController
-
+@property(nonatomic,strong) MessageInfoMode*model;
 @end
 
 NS_ASSUME_NONNULL_END

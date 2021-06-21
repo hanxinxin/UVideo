@@ -8,7 +8,8 @@
 #import "MessageViewController.h"
 #import "BottomView.h"
 #import "MsgTableViewCell.h"
-
+#import "MessageInfoMode.h"
+#import "msgInfoViewController.h"
 
 #define CellID @"MsgTableViewCell"
 @interface MessageViewController ()<UITableViewDelegate,UITableViewDataSource>
@@ -77,7 +78,7 @@
     self.statusBarBackgroundColor=[UIColor blackColor];
     self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
     _isInsertEdit = NO;
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.btn];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.btn];
     
     
     [self initnilView];
@@ -115,13 +116,12 @@
 -(void)Addtableview1
 {
     Listarray1=[NSMutableArray arrayWithCapacity:0];
-//    [Listarray addObject:[NSArray arrayWithObjects:@"播放记录",@"充值记录",@"账户信息",@"帮助中心",@"安全设置",@"清理缓存",@"退出登录", nil]];
-    [Listarray1 addObject:@"播放记录"];
-    [Listarray1 addObject:@"充值记录"];
-    [Listarray1 addObject:@"账户信息"];
-    [Listarray1 addObject:@"帮助中心"];
-    [Listarray1 addObject:@"安全设置"];
-    [Listarray1 addObject:@"清理缓存"];
+//    [Listarray1 addObject:@"播放记录"];
+//    [Listarray1 addObject:@"充值记录"];
+//    [Listarray1 addObject:@"账户信息"];
+//    [Listarray1 addObject:@"帮助中心"];
+//    [Listarray1 addObject:@"安全设置"];
+//    [Listarray1 addObject:@"清理缓存"];
     self.downtableview1=[[UITableView alloc] init];
     self.downtableview1.frame=CGRectMake(20, 0, SCREEN_WIDTH-40, SCREENH_HEIGHT-kNavBarAndStatusBarHeight);
     self.downtableview1.backgroundColor=[UIColor whiteColor];
@@ -151,7 +151,7 @@
 {
     
     
-    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"pagesize":@"50"};
+    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page],@"pagesize":@"10"};
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,msgListurl] Dictionary:dict success:^(id  _Nullable responseObject) {
 //        NSLog(@"post responseObject == %@",responseObject);
         [UHud hideLoadHud];
@@ -162,15 +162,28 @@
         {
             NSDictionary *dictdata =[dict objectForKey:@"data"];
             NSNumber* message_total=[dictdata objectForKey:@"message_total"];
+            NSArray* message_list=[dictdata objectForKey:@"message_list"];
+
             if([message_total intValue]==0)
             {
                 ////显示无内容的view
                 [self addnilView];
             }else
             {
+                if(![message_list isKindOfClass:[NSNull class]]){
+                    [self->Listarray1 removeAllObjects];
+                    for (int i=0; i<message_list.count; i++) {
+//                        [DYModelMaker DY_makeModelWithDictionary:message_list[i] modelKeyword:@"Message" modelName:@"infoMode"];
+                        MessageInfoMode* mode=[MessageInfoMode yy_modelWithDictionary:message_list[i]];
+                        [self->Listarray1 addObject:mode];
+                    }
+                    [self.downtableview1 reloadData];
+                }
                 
             }
-        }else if([code intValue]==20){
+        }else{
+            ////显示无内容的view
+            [self addnilView];
             NSString * message = [dict objectForKey:@"message"];
 //            [UHud showHUDToView:self.view text:message];
 //            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
@@ -180,6 +193,8 @@
     } failure:^(NSError * _Nullable error) {
         [UHud hideLoadHud];
         NSLog(@"shareManager error == %@",error);
+        ////显示无内容的view
+        [self addnilView];
         [self.downtableview1.mj_header endRefreshing];
         [UHud showTXTWithStatus:@"网络错误" delay:2.f];
     }];
@@ -199,12 +214,27 @@
         if([code intValue]==0)
         {
             NSDictionary *dictdata =[dict objectForKey:@"data"];
-            self.page+=1;
-            
-        }else if([code intValue]==20){
+            NSNumber* message_total=[dictdata objectForKey:@"message_total"];
+            NSArray* message_list=[dictdata objectForKey:@"message_list"];
+
+            if([message_total intValue]==0)
+            {
+                
+            }else
+            {
+                if(![message_list isKindOfClass:[NSNull class]]){
+                    self.page+=1;
+                    for (int i=0; i<message_list.count; i++) {
+//                        [DYModelMaker DY_makeModelWithDictionary:message_list[i] modelKeyword:@"Message" modelName:@"infoMode"];
+                        MessageInfoMode* mode=[MessageInfoMode yy_modelWithDictionary:message_list[i]];
+                        [self->Listarray1 addObject:mode];
+                    }
+                    [self.downtableview1 reloadData];
+                }
+                
+            }
+        }else{
             NSString * message = [dict objectForKey:@"message"];
-//            [UHud showHUDToView:self.view text:message];
-//            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
             [UHud showTXTWithStatus:message delay:2.f];
         }
 
@@ -216,6 +246,8 @@
     }];
 
 }
+
+
 
 #pragma mark -------- Tableview -------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -247,7 +279,7 @@
             cell = [[MsgTableViewCell alloc] init];
         }
         //cell选中效果
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
         //处理选中背景色问题
 //        UIView *backGroundView = [[UIView alloc]init];
@@ -262,12 +294,21 @@
         cell.layer.shadowRadius = 6;
         cell.layer.shadowOpacity = 1;
         cell.layer.cornerRadius = 8;
-        
-        if(indexPath.section%3 == 0)
+//        cell.readRedLabel.layer.cornerRadius=4;
+        MessageInfoMode*model=Listarray1[indexPath.section];;
+        cell.titleLabel.text=model.title;
+        cell.miaoshuLabel.text=model.content;
+        if(model.type == 1)
         {
             [cell.leftImage setImage:[UIImage imageNamed:@"xitongMsg"]];
         }else{
             [cell.leftImage setImage:[UIImage imageNamed:@"msgImage"]];
+        }
+        if(model.read_time==0)
+        {
+            cell.readRedLabel.hidden=NO;
+        }else{
+            cell.readRedLabel.hidden=YES;
         }
         
         
@@ -359,6 +400,11 @@
 
         }else{
             NSLog(@"跳转下一页");
+            MessageInfoMode*model=Listarray1[indexPath.section];
+    //        msgInfoViewController*avc= [[msgInfoViewController alloc] init];
+            msgInfoViewController * avc = [[UIStoryboard storyboardWithName: @"Main" bundle: nil] instantiateViewControllerWithIdentifier: @"msgInfoViewController"];
+            avc.model=model;
+            [self pushRootNav:avc animated:YES];
         }
     }else if(tableView.tag==10002)
     {
@@ -374,6 +420,7 @@
         
     }else{
         NSLog(@"取消跳转");
+       
     }
 
     

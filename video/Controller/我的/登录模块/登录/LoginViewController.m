@@ -279,7 +279,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
                             [[NSUserDefaults standardUserDefaults] setObject:expired_time forKey:@"expired_time"];
                             
                             [UHud showHudWithStatus:@"登录成功" delay:2.f];
-                            dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC));
+                            dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC));
 
                             dispatch_after(delayTime, dispatch_get_main_queue(), ^{
                                 [weakSelf popViewcontroller];

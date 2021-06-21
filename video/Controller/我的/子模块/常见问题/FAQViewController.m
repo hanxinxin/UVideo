@@ -17,8 +17,24 @@
 #define cellID @"cellID"
 #define cellID2 @"SliderTableViewCell"
 #define cellID3 @"FAQTableViewCell"
+
+
+
+
+//@implementation faqcategorymodel
+//
+//+(NSDictionary *)mj_replacedKeyFromPropertyName {
+//  return @{@"Id" : @"id"};
+//}
+//@end
+
+
+
+
+
 @interface FAQViewController ()<UITableViewDelegate,UITableViewDataSource,YTSliderViewDelegate>
 @property(nonatomic,strong)UIView*topView;
+@property (nonatomic ,strong)NSMutableArray*FAQListArray;
 @property(nonatomic,strong)UITableView*downtableview1;
 @property (nonatomic ,strong)NSMutableArray*Listarray1;
 @property(nonatomic,strong)UITableView*downtableview2;
@@ -57,7 +73,7 @@
     self.statusBarTextIsWhite=NO;
     self.statusBarBackgroundColor=[UIColor blackColor];
     self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
-    
+    self.FAQListArray=[NSMutableArray arrayWithCapacity:0];
     //下载按钮
     UIButton *rightItem = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64, 25)];
     [rightItem setTitle:@"联系客服" forState:(UIControlStateNormal)];
@@ -75,6 +91,7 @@
     [self Addtableview3];
     [self touchOne:nil];
 //    [self addnilView];
+//    [self getFAQData];
 }
 -(void)right_touch:(id)sender
 {
@@ -82,6 +99,45 @@
 //    [self pushRootNav:avc animated:YES];
     [self showkfView];
 }
+
+//-(void)getFAQData
+//{
+//
+//
+//    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,postfaqcategoryurl] Dictionary:nil success:^(id  _Nullable responseObject) {
+////        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHud];
+//        NSDictionary *dict=(NSDictionary *)responseObject;
+//        NSNumber * code = [dict objectForKey:@"error"];
+//        if([code intValue]==0)
+//        {
+//            NSDictionary *dictdata =[dict objectForKey:@"data"];
+//
+//            NSArray* faq_category_list=[dictdata objectForKey:@"faq_category_list"];
+//            if(![faq_category_list isKindOfClass:[NSNull class]]){
+//            if(faq_category_list.count>=0)
+//            {
+//                [self.FAQListArray removeAllObjects];
+//                for (int i=0; i<faq_category_list.count; i++) {
+//                    faqcategorymodel*model=[faqcategorymodel yy_modelWithDictionary:faq_category_list[i]];
+//                    [self.FAQListArray addObject:model];
+//                }
+//
+//            }
+//            }
+//        }else{
+//            NSString * message = [dict objectForKey:@"message"];
+//            [UHud showTXTWithStatus:message delay:2.f];
+//        }
+//
+//    } failure:^(NSError * _Nullable error) {
+//        [UHud hideLoadHud];
+//        NSLog(@"shareManager error == %@",error);
+//        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+//    }];
+//}
+
+
 ///// 加载无内容显示的view
 -(void)initnilView
 {

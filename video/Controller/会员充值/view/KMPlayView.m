@@ -6,6 +6,9 @@
 //
 
 #import "KMPlayView.h"
+@interface KMPlayView ()<UITextFieldDelegate>
+
+@end
 
 @implementation KMPlayView
 
@@ -28,14 +31,15 @@
 }
 -(void)addTapGesture
 {
-    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(event:)];
-//    步骤3：给View添加手势
-
-     //设置需要连续点击几次才响应，默认点击1次
-     [tapGesture setNumberOfTapsRequired:1];
-    //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
-    tapGesture.cancelsTouchesInView = NO;
-     [self addGestureRecognizer:tapGesture];
+    
+//    UITapGestureRecognizer * tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(event:)];
+////    步骤3：给View添加手势
+//
+//     //设置需要连续点击几次才响应，默认点击1次
+//     [tapGesture setNumberOfTapsRequired:1];
+//    //设置成NO表示当前控件响应后会传播到其他控件上，默认为YES。
+//    tapGesture.cancelsTouchesInView = NO;
+//     [self addGestureRecognizer:tapGesture];
 }
 -(void)event:(UITapGestureRecognizer *)gesture
 {
@@ -46,16 +50,25 @@
     }
 }
 - (IBAction)cancel_touch:(id)sender {
+    [self.PWText resignFirstResponder];
     //取消
     if (self.touchIndex) {
         self.touchIndex(0, self.PWText.text);
     }
 }
 - (IBAction)ok_touch:(id)sender {
-    //取消
+    
+    //确认
     if (self.touchIndex) {
         self.touchIndex(1, self.PWText.text);
     }
 }
 
+
+
+
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    [self endEditing:YES];
+}
 @end

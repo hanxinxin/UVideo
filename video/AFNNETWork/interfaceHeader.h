@@ -46,6 +46,8 @@
 
 #define signoutURL @"/secrity/signout"  ///退出登录
 
+#define GetUserInfoURL @"/user/info" ///获取用户信息
+
 
 #define tuxingYZMurl @"/captcha"  ///图形验证码
 #define emailYZMurl @"/captcha/email" //电子邮箱验证码
@@ -74,8 +76,21 @@
 //支付方式
 #define payment_methodurl @"/payment/method"  //可用的支付方式
 #define purchaseVipCardurl @"/payment/purchaseVipCard"  //购买会员卡
+#define vipCardcategoryurl @"/vipCard/category"  //点卡种类(全部)
+#define PostCardactivateurl @"/vipCard/activate" //激活点卡
+
+//// 反馈
 #define postfeedbackcategoryurl @"/feedback/category"//// 反馈类型列表
 #define postfeedbackdurl @"/feedback/post"/// 反馈
+
+////帮助中心
+#define postfaqcategoryurl @"/faq/category"  //帮助中心分类(全部)
+#define postfaqlisturl @"/faq/list" ///帮助中心列表
+
+//// 客服
+#define postcustomerServicelisturl @"/customerService/list" ///获取全部客服信息
+#define postcustomerServicelisturl @"/customerService/list" ///获取全部客服单个信息
+#define postcustomerServiceinfourl @"/customerService/info"////获取某一个客服信息
 
 
 

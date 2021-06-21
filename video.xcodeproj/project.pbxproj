@@ -371,6 +371,12 @@
 		FA7A807926790601001B62AA /* VideoRelatedlistMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A807826790601001B62AA /* VideoRelatedlistMode.m */; };
 		FA7A807C26790647001B62AA /* videofragmentMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A807B26790647001B62AA /* videofragmentMode.m */; };
 		FA7A807F2679069F001B62AA /* ZVideoMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7A807E2679069F001B62AA /* ZVideoMode.m */; };
+		FA7C8DC926803C7B00B1A022 /* NewFAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7C8DC826803C7B00B1A022 /* NewFAQViewController.m */; };
+		FA7C8DCC26804DCE00B1A022 /* customerInfoMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7C8DCB26804DCE00B1A022 /* customerInfoMode.m */; };
+		FA7C8DCF268065E700B1A022 /* vipcardcategorylistModel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7C8DCE268065E700B1A022 /* vipcardcategorylistModel.m */; };
+		FA7C8DD22680D64200B1A022 /* MessageInfoMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7C8DD12680D64200B1A022 /* MessageInfoMode.m */; };
+		FA7C8DD52680DE0700B1A022 /* msgInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7C8DD42680DE0700B1A022 /* msgInfoView.m */; };
+		FA7C8DD72680DE1800B1A022 /* msgInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7C8DD62680DE1800B1A022 /* msgInfoView.xib */; };
 		FA80AD90266CC7B700BF28D8 /* hxplayerDanmuView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA80AD8F266CC7B700BF28D8 /* hxplayerDanmuView.m */; };
 		FA80AD92266CC82400BF28D8 /* hxplayerDanmuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA80AD91266CC82400BF28D8 /* hxplayerDanmuView.xib */; };
 		FA8A03912667D0BE00B41281 /* iphoneClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8A03902667D0BE00B41281 /* iphoneClass.m */; };
@@ -1165,6 +1171,17 @@
 		FA7A807B26790647001B62AA /* videofragmentMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = videofragmentMode.m; sourceTree = "<group>"; };
 		FA7A807D2679069F001B62AA /* ZVideoMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZVideoMode.h; sourceTree = "<group>"; };
 		FA7A807E2679069F001B62AA /* ZVideoMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZVideoMode.m; sourceTree = "<group>"; };
+		FA7C8DC726803C7B00B1A022 /* NewFAQViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewFAQViewController.h; sourceTree = "<group>"; };
+		FA7C8DC826803C7B00B1A022 /* NewFAQViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewFAQViewController.m; sourceTree = "<group>"; };
+		FA7C8DCA26804DCE00B1A022 /* customerInfoMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = customerInfoMode.h; sourceTree = "<group>"; };
+		FA7C8DCB26804DCE00B1A022 /* customerInfoMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = customerInfoMode.m; sourceTree = "<group>"; };
+		FA7C8DCD268065E700B1A022 /* vipcardcategorylistModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vipcardcategorylistModel.h; sourceTree = "<group>"; };
+		FA7C8DCE268065E700B1A022 /* vipcardcategorylistModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = vipcardcategorylistModel.m; sourceTree = "<group>"; };
+		FA7C8DD02680D64200B1A022 /* MessageInfoMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MessageInfoMode.h; sourceTree = "<group>"; };
+		FA7C8DD12680D64200B1A022 /* MessageInfoMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MessageInfoMode.m; sourceTree = "<group>"; };
+		FA7C8DD32680DE0700B1A022 /* msgInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = msgInfoView.h; sourceTree = "<group>"; };
+		FA7C8DD42680DE0700B1A022 /* msgInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = msgInfoView.m; sourceTree = "<group>"; };
+		FA7C8DD62680DE1800B1A022 /* msgInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = msgInfoView.xib; sourceTree = "<group>"; };
 		FA80AD8E266CC7B700BF28D8 /* hxplayerDanmuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hxplayerDanmuView.h; sourceTree = "<group>"; };
 		FA80AD8F266CC7B700BF28D8 /* hxplayerDanmuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hxplayerDanmuView.m; sourceTree = "<group>"; };
 		FA80AD91266CC82400BF28D8 /* hxplayerDanmuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = hxplayerDanmuView.xib; sourceTree = "<group>"; };
@@ -1405,6 +1422,9 @@
 			children = (
 				8A052179264A8AC400E5188E /* msgInfoViewController.h */,
 				8A05217A264A8AC400E5188E /* msgInfoViewController.m */,
+				FA7C8DD32680DE0700B1A022 /* msgInfoView.h */,
+				FA7C8DD42680DE0700B1A022 /* msgInfoView.m */,
+				FA7C8DD62680DE1800B1A022 /* msgInfoView.xib */,
 			);
 			path = msgInfo;
 			sourceTree = "<group>";
@@ -1910,6 +1930,12 @@
 				FA9B2ED8267F50BB00C149B9 /* feedbacktypeMode.m */,
 				FA9B2EDA267F8C2E00C149B9 /* Paymentmethodlist.h */,
 				FA9B2EDB267F8C2E00C149B9 /* Paymentmethodlist.m */,
+				FA7C8DCA26804DCE00B1A022 /* customerInfoMode.h */,
+				FA7C8DCB26804DCE00B1A022 /* customerInfoMode.m */,
+				FA7C8DCD268065E700B1A022 /* vipcardcategorylistModel.h */,
+				FA7C8DCE268065E700B1A022 /* vipcardcategorylistModel.m */,
+				FA7C8DD02680D64200B1A022 /* MessageInfoMode.h */,
+				FA7C8DD12680D64200B1A022 /* MessageInfoMode.m */,
 			);
 			path = Mode;
 			sourceTree = "<group>";
@@ -1967,6 +1993,8 @@
 				8A82F168264FCE42004AAF40 /* cell */,
 				8A82F15F264FCBE4004AAF40 /* FAQViewController.h */,
 				8A82F160264FCBE4004AAF40 /* FAQViewController.m */,
+				FA7C8DC726803C7B00B1A022 /* NewFAQViewController.h */,
+				FA7C8DC826803C7B00B1A022 /* NewFAQViewController.m */,
 			);
 			path = "常见问题";
 			sourceTree = "<group>";
@@ -3837,6 +3865,7 @@
 				8A95C31E265A5C7B00A6D144 /* KJPlayerFont.ttf in Resources */,
 				8A0520F42648D56C00E5188E /* SliderTableViewCell.xib in Resources */,
 				8A3930E525FCDB3800E7331B /* cmh_default_red_pocket@2x.png in Resources */,
+				FA7C8DD72680DE1800B1A022 /* msgInfoView.xib in Resources */,
 				FAA6DF112675C77500DE5E7C /* cycle_top_right.png in Resources */,
 				8A3930E725FCDB3800E7331B /* cmh_default_buy_goods@2x.png in Resources */,
 				8A05210D264919BE00E5188E /* LXTableViewCell.xib in Resources */,
@@ -4133,6 +4162,7 @@
 				8A95C320265A5C7B00A6D144 /* KJPlayerButton.m in Sources */,
 				8AE0C4CE266A54BA0084248D /* PanTableViewCell.m in Sources */,
 				8AADB39D267CC836009051B7 /* VideoHistoryMode.m in Sources */,
+				FA7C8DC926803C7B00B1A022 /* NewFAQViewController.m in Sources */,
 				8A39305D25FCD91A00E7331B /* SAMKeychain+CMHUtil.m in Sources */,
 				FA7A807926790601001B62AA /* VideoRelatedlistMode.m in Sources */,
 				8AE0C4DC266A54F80084248D /* menuBJViewController.m in Sources */,
@@ -4186,6 +4216,7 @@
 				8A39302E25FCD86A00E7331B /* MHButton.m in Sources */,
 				8A95C336265A5F6700A6D144 /* BaseViewController.m in Sources */,
 				FA9FBAAC2647ADDB00E4F27E /* topHeaderView.m in Sources */,
+				FA7C8DD22680D64200B1A022 /* MessageInfoMode.m in Sources */,
 				8A95C31A265A5C7B00A6D144 /* KJPlayerLoadingLayer.m in Sources */,
 				8A8BC3A825FC6F9E0028173C /* UITableView+MHExtension.m in Sources */,
 				8AE0C4D0266A54BA0084248D /* PanView.m in Sources */,
@@ -4227,6 +4258,7 @@
 				FA9CFEF926515BAC00A116A3 /* lxkfViewController.m in Sources */,
 				8A3930F525FCDB3800E7331B /* UIView+CMHEmptyView.m in Sources */,
 				8A8BC1C125FA135A0028173C /* JRWaterFallLayout.m in Sources */,
+				FA7C8DD52680DE0700B1A022 /* msgInfoView.m in Sources */,
 				8A8BC23F25FB3F770028173C /* MSCollectionViewCell.m in Sources */,
 				8A82F13C264FA128004AAF40 /* NSObject+LBLaunchImage.m in Sources */,
 				8A9C561825F8A10000EFA410 /* UIColor+HEX.m in Sources */,
@@ -4329,6 +4361,7 @@
 				8A8BC3A525FC6F9E0028173C /* UIViewController+MHDismissKeyboard.m in Sources */,
 				8AFDD3C925F8C890006B1384 /* UINavigationItem+margin.m in Sources */,
 				8A9C560825F8A10000EFA410 /* UIView+CustomBorder.m in Sources */,
+				FA7C8DCC26804DCE00B1A022 /* customerInfoMode.m in Sources */,
 				8A39308A25FCDAED00E7331B /* CMHObject.m in Sources */,
 				8AFDD3C625F8C890006B1384 /* NSString+GetImageFromBundle.m in Sources */,
 				8A82F132264FA07E004AAF40 /* SVIndefiniteAnimatedView.m in Sources */,
@@ -4364,6 +4397,7 @@
 				FA8A03912667D0BE00B41281 /* iphoneClass.m in Sources */,
 				8ADF898F264D16F700029B05 /* LoginViewController.m in Sources */,
 				8A39306425FCD91A00E7331B /* CMHControllerHelper.m in Sources */,
+				FA7C8DCF268065E700B1A022 /* vipcardcategorylistModel.m in Sources */,
 				8A8BC19925F9C7500028173C /* LLSearchResultDoubleViewCell.m in Sources */,
 				8A272485264E883500B033BB /* XGpasswordViewController.m in Sources */,
 				8AE1A0F72670E89200922103 /* AES.m in Sources */,

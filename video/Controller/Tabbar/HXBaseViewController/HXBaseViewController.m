@@ -747,6 +747,29 @@
 
 }
 
+
+- (NSString *)getTimeFromTimestamp13:(NSNumber*)number{
+
+    //将对象类型的时间转换为NSDate类型
+
+    double time =[number doubleValue];
+
+    NSDate * myDate=[NSDate dateWithTimeIntervalSince1970:time];
+
+    //设置时间格式
+
+    NSDateFormatter * formatter=[[NSDateFormatter alloc]init];
+
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm"];
+
+    //将时间转换为字符串
+
+    NSString *timeStr=[formatter stringFromDate:myDate];
+
+    return timeStr;
+
+}
+
 - (BOOL)StringIsNullOrEmpty:(NSString *)str
 {
     return (str == nil || [str isKindOfClass:[NSNull class]] || str.length == 0);

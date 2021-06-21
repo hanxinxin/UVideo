@@ -12,6 +12,9 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    
+    self.readRedLabel.clipsToBounds = YES;
+    self.readRedLabel.layer.cornerRadius=4;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

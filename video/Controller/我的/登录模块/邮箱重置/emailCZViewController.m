@@ -27,7 +27,13 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.title=@"邮箱重置";
+    if(self.Type==1)
+    {
+        self.title=@"邮箱重置";
+    }else if(self.Type==2)
+    {
+        self.title=@"邮箱设置";
+    }
     self.hiddenLeftBtn=YES;
     self.statusBarTextIsWhite=NO;
     self.statusBarBackgroundColor=[UIColor blackColor];

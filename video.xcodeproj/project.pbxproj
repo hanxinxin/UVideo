@@ -332,6 +332,7 @@
 		8A9C56B925F8A4D000EFA410 /* LocalStringObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C56B725F8A4D000EFA410 /* LocalStringObj.m */; };
 		8AADB3972679C99A009051B7 /* VideoVideosource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AADB3962679C99A009051B7 /* VideoVideosource.m */; };
 		8AADB39D267CC836009051B7 /* VideoHistoryMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AADB39C267CC835009051B7 /* VideoHistoryMode.m */; };
+		8AADB3A92681CB82009051B7 /* infoXGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AADB3A82681CB80009051B7 /* infoXGViewController.m */; };
 		8ACAEA972643E22C0091EEFE /* ZBCycleVerticalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACAEA932643E22C0091EEFE /* ZBCycleVerticalView.m */; };
 		8ACAEA982643E22C0091EEFE /* ZBCycleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACAEA942643E22C0091EEFE /* ZBCycleView.m */; };
 		8ACAEAA92643F2390091EEFE /* YZYHorizListView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8ACAEAA82643F2390091EEFE /* YZYHorizListView.m */; };
@@ -1100,6 +1101,8 @@
 		8AADB3962679C99A009051B7 /* VideoVideosource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoVideosource.m; sourceTree = "<group>"; };
 		8AADB39B267CC835009051B7 /* VideoHistoryMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoHistoryMode.h; sourceTree = "<group>"; };
 		8AADB39C267CC835009051B7 /* VideoHistoryMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoHistoryMode.m; sourceTree = "<group>"; };
+		8AADB3A72681CB80009051B7 /* infoXGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = infoXGViewController.h; sourceTree = "<group>"; };
+		8AADB3A82681CB80009051B7 /* infoXGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = infoXGViewController.m; sourceTree = "<group>"; };
 		8ACAEA932643E22C0091EEFE /* ZBCycleVerticalView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBCycleVerticalView.m; sourceTree = "<group>"; };
 		8ACAEA942643E22C0091EEFE /* ZBCycleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZBCycleView.m; sourceTree = "<group>"; };
 		8ACAEA952643E22C0091EEFE /* ZBCycleVerticalView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZBCycleVerticalView.h; sourceTree = "<group>"; };
@@ -3450,6 +3453,8 @@
 			children = (
 				FA949CC3264AC92A00498EB6 /* zhanghuInfoViewController.h */,
 				FA949CC4264AC92A00498EB6 /* zhanghuInfoViewController.m */,
+				8AADB3A72681CB80009051B7 /* infoXGViewController.h */,
+				8AADB3A82681CB80009051B7 /* infoXGViewController.m */,
 			);
 			path = "账户信息";
 			sourceTree = "<group>";
@@ -4133,6 +4138,7 @@
 				8A8BC1A125F9C9220028173C /* LLSearchViewController.m in Sources */,
 				8A9C561425F8A10000EFA410 /* UIView+Constraints.m in Sources */,
 				8A9C561925F8A10000EFA410 /* UIColor+Random.m in Sources */,
+				8AADB3A92681CB82009051B7 /* infoXGViewController.m in Sources */,
 				8A8BC38525FC6F9E0028173C /* YYThreadSafeArray.m in Sources */,
 				8A9C562C25F8A10000EFA410 /* UIImage+PDF.m in Sources */,
 				8A95C318265A5C7B00A6D144 /* KJAVPlayer.m in Sources */,

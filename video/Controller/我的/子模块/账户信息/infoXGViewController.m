@@ -1,21 +1,20 @@
 //
-//  XGpasswordViewController.m
+//  infoXGViewController.m
 //  video
 //
-//  Created by nian on 2021/5/14.
+//  Created by nian on 2021/6/22.
 //
 
-#import "XGpasswordViewController.h"
+#import "infoXGViewController.h"
 #import "PWView.h"
 static CGFloat INTERVAL_KEYBOARD = 500;
-@interface XGpasswordViewController ()<UITextFieldDelegate>
+@interface infoXGViewController ()<UITextFieldDelegate>
 {
     NSDictionary *keyboardInfo;
 }
 @property(nonatomic,assign)PWView*pwView;
 @end
-
-@implementation XGpasswordViewController
+@implementation infoXGViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -41,15 +40,13 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     view.okBtn.layer.cornerRadius=6;
     [self.view addSubview:view];
     self.pwView=view;
-    __weak XGpasswordViewController * weakSelf = self;
+    __weak infoXGViewController * weakSelf = self;
     self.pwView.touchIndex = ^(NSInteger Index) {
         
         NSLog(@"prompt idnex ==== %ld",Index);
         if(Index==0)
         {
-            [weakSelf popViewcontroller];
         }else{
-            [weakSelf popViewcontroller];
         }
         [weakSelf HidpwView];
     };
@@ -79,44 +76,30 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 
 -(void)InitUI
 {
-    self.centerView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, self.view.width-40, 256)];
+    self.centerView = [[UIView alloc] initWithFrame:CGRectMake(20, 0, self.view.width-40, 80)];
     self.centerView.backgroundColor=[UIColor clearColor];
     [self.view addSubview:self.centerView];
-    self.oldTextfield = [[UITextField alloc] initWithFrame:CGRectMake(8, 50, self.centerView.width-16, 42)];
-    self.oldTextfield.placeholder=@"输入旧密码";
-    self.oldTextfield.secureTextEntry = YES;
-    self.oldTextfield.delegate = self;
-    self.oldTextfield.keyboardType=UIKeyboardTypeEmailAddress;
-    self.oldTextfield.borderStyle=UITextBorderStyleRoundedRect;
-    self.oldTextfield.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
-    self.oldTextfield.layer.borderWidth = 1;
-    self.oldTextfield.layer.cornerRadius = 6;
-    [self.centerView addSubview:self.oldTextfield];
-    self.onenewTextfield = [[UITextField alloc] initWithFrame:CGRectMake(8, self.oldTextfield.bottom+10, self.centerView.width-16, 42)];
-    self.onenewTextfield.placeholder=@"输入新密码";
-    self.onenewTextfield.secureTextEntry = YES;
-    self.onenewTextfield.delegate = self;
-    self.onenewTextfield.keyboardType=UIKeyboardTypeEmailAddress;
-    self.onenewTextfield.borderStyle=UITextBorderStyleRoundedRect;
-    self.onenewTextfield.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
-    self.onenewTextfield.layer.borderWidth = 1;
-    self.onenewTextfield.layer.cornerRadius = 6;
-    [self.centerView addSubview:self.onenewTextfield];
-    self.twonewTextfield = [[UITextField alloc] initWithFrame:CGRectMake(8, self.onenewTextfield.bottom+10, self.centerView.width-16, 42)];
-    self.twonewTextfield.placeholder=@"重复新密码";
-    self.twonewTextfield.secureTextEntry = YES;
-    self.twonewTextfield.delegate = self;
-    self.twonewTextfield.keyboardType=UIKeyboardTypeEmailAddress;
-    self.twonewTextfield.borderStyle=UITextBorderStyleRoundedRect;
-    self.twonewTextfield.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
-    self.twonewTextfield.layer.borderWidth = 1;
-    self.twonewTextfield.layer.cornerRadius = 6;
-    [self.centerView addSubview:self.twonewTextfield];
-    self.tispLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, self.twonewTextfield.bottom+10, self.centerView.width-16, 30)];
+    self.SRTextfield = [[UITextField alloc] initWithFrame:CGRectMake(8, 50, self.centerView.width-16, 42)];
+    if(![self StringIsNullOrEmpty:nickname_loca])
+    {
+        self.SRTextfield.placeholder=nickname_loca;
+    }else{
+        self.SRTextfield.placeholder=@"请输入昵称";
+    }
+    self.SRTextfield.secureTextEntry = NO;
+    self.SRTextfield.delegate = self;
+    self.SRTextfield.keyboardType=UIKeyboardTypeEmailAddress;
+    self.SRTextfield.borderStyle=UITextBorderStyleRoundedRect;
+    self.SRTextfield.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
+    self.SRTextfield.layer.borderWidth = 1;
+    self.SRTextfield.layer.cornerRadius = 6;
+    [self.centerView addSubview:self.SRTextfield];
+    self.tispLabel = [[UILabel alloc] initWithFrame:CGRectMake(8, self.SRTextfield.bottom+10, self.centerView.width-16, 30)];
     self.tispLabel.text=@"";
     self.tispLabel.textColor=RGBA(255, 0, 0, 1);
     self.tispLabel.textAlignment=NSTextAlignmentCenter;
     [self.tispLabel setFont:[UIFont systemFontOfSize:15.f]];
+    self.tispLabel.hidden=YES;
     [self.centerView addSubview:self.tispLabel];
     
     
@@ -195,23 +178,17 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     [UIView commitAnimations];
 }
 - (UITextField *)isFirstTextFieldResponder{
-    if ([self.oldTextfield isFirstResponder]) {
-        return self.oldTextfield;
-    }else if ([self.onenewTextfield isFirstResponder]) {
-        return self.onenewTextfield;
-    }else if ([self.twonewTextfield isFirstResponder]) {
-        return self.twonewTextfield;
+    if ([self.SRTextfield isFirstResponder]) {
+        return self.SRTextfield;
     }else
     {
-        return self.oldTextfield;
+        return self.SRTextfield;
     }
 }
 #pragma UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    if (textField == self.onenewTextfield) {
-        [self.onenewTextfield becomeFirstResponder];
-    }else if (textField == self.twonewTextfield){
-        [self.twonewTextfield becomeFirstResponder];
+    if (textField == self.SRTextfield) {
+        [self.SRTextfield becomeFirstResponder];
     }else{
         [textField resignFirstResponder];
     }
@@ -222,23 +199,9 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     NSString *text = textField.text;
     text = [text stringByReplacingCharactersInRange:range withString:string];
     NSString *trimText = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    if (textField == self.oldTextfield) {
+    if (textField == self.SRTextfield) {
         if ([trimText length] > 60) {
             return NO;
-        }
-    }else if (textField == self.onenewTextfield) {
-        if ([trimText length] > 60) {
-            return NO;
-        }
-    }else if (textField == self.twonewTextfield){
-        if ([trimText length] > 60) {
-            return NO;
-        }
-        if([self.onenewTextfield.text isEqualToString:trimText])
-        {
-            self.tispLabel.text=@"";
-        }else{
-            self.tispLabel.text=@"两次输入的密码不一致，请重新输入";
         }
     }
     
@@ -274,84 +237,53 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 
 -(void)XG_touch:(id)sender
 {
-    [self PostsetPW];
+    [self PossXGdata];
 }
-
--(void)PostsetPW
+-(void)PossXGdata
 {
-    __block XGpasswordViewController *weakSelf = self;
-    
-    if([self.oldTextfield.text length]>0)
+    __block infoXGViewController *weakSelf = self;
+    if(self.SRTextfield.text.length>3)
     {
-        if([self.onenewTextfield.text length]>0)
-        {
-            if([self.twonewTextfield.text length]>0)
+        [UHud showHUDLoading];
+        NSDictionary * dict =[[NSDictionary alloc] init];
+        
+            dict =@{@"nickname":self.SRTextfield.text,};
+        [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,changeNicknameurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+    //        NSLog(@"post responseObject == %@",responseObject);
+            [UHud hideLoadHud];
+            NSDictionary *dict=(NSDictionary *)responseObject;
+            NSNumber * code = [dict objectForKey:@"error"];
+            if([code intValue]==0)
             {
-                if([self.onenewTextfield.text isEqualToString:self.twonewTextfield.text])
-                {
-    [UHud showHUDLoading];
-    NSDictionary * dict =[[NSDictionary alloc] init];
-    
-        dict =@{@"original_password":self.oldTextfield.text,@"new_password":self.twonewTextfield.text};
-    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,xiugaiPwURL] Dictionary:dict success:^(id  _Nullable responseObject) {
-//        NSLog(@"post responseObject == %@",responseObject);
-        [UHud hideLoadHud];
-        NSDictionary *dict=(NSDictionary *)responseObject;
-        NSNumber * code = [dict objectForKey:@"error"];
-        if([code intValue]==0)
-        {
-            NSDictionary *dictdata=[dict objectForKey:@"data"];
-            NSDictionary *userdata =[dictdata objectForKey:@"user"];
-            NSString * email = [userdata objectForKey:@"email"];
-            NSNumber * vip_expired_time = [userdata objectForKey:@"vip_expired_time"];
-            NSString * nickname = [userdata objectForKey:@"nickname"];
-            NSString * username = [userdata objectForKey:@"username"];
-            NSString * avatar = [userdata objectForKey:@"avatar"];
-            
-            NSDictionary *tokendata =[dictdata objectForKey:@"token"];
-            NSString * token = [tokendata objectForKey:@"token"];
-            NSNumber *expired_time=[tokendata objectForKey:@"expired_time"];
-            [[NSUserDefaults standardUserDefaults] setValue:email forKey:@"UserZH"];
-            [[NSUserDefaults standardUserDefaults] setValue:nickname forKey:@"nickname"];
-            [[NSUserDefaults standardUserDefaults] setValue:username forKey:@"username"];
-            [[NSUserDefaults standardUserDefaults] setValue:avatar forKey:@"avatar"];
-            [[NSUserDefaults standardUserDefaults] setValue:vip_expired_time forKey:@"vip_expired_time"];
-            
-            [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"UserToken"];
-            [[NSUserDefaults standardUserDefaults] setObject:expired_time forKey:@"expired_time"];
-            
-            [UHud showHudWithStatus:@"重置成功" delay:2.f];
-            dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));
+                NSDictionary *dictdata=[dict objectForKey:@"data"];
+                NSDictionary *userdata =[dictdata objectForKey:@"user"];
+                NSString * nickname = [userdata objectForKey:@"nickname"];
+                
+                [[NSUserDefaults standardUserDefaults] setValue:nickname forKey:@"nickname"];
+                
+                [UHud showHudWithStatus:@"修改成功" delay:2.f];
+                dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC));
 
-            dispatch_after(delayTime, dispatch_get_main_queue(), ^{
-//
-                [weakSelf showpwView];
-            });
-        }else{
-            NSString * message = [dict objectForKey:@"message"];
-            [UHud showHudWithStatus:message delay:2.f];
-        }
-
-    } failure:^(NSError * _Nullable error) {
-        [UHud hideLoadHud];
-        NSLog(@"shareManager error == %@",error);
-        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
-    }];
-                }else{
-                    [UHud showTXTWithStatus:@"新密码不一致" delay:2.f];
-                }
+                dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+    //
+                    [weakSelf popViewcontroller];
+                });
             }else{
-                [UHud showTXTWithStatus:@"新密码不能为空" delay:2.f];
+                NSString * message = [dict objectForKey:@"message"];
+                [UHud showHudWithStatus:message delay:2.f];
             }
-        }else{
-            [UHud showTXTWithStatus:@"新密码不能为空" delay:2.f];
-        }
-    }else{
-        [UHud showTXTWithStatus:@"旧密码不能为空" delay:2.f];
+
+        } failure:^(NSError * _Nullable error) {
+            [UHud hideLoadHud];
+            NSLog(@"shareManager error == %@",error);
+            [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+        }];
     }
 }
+
 -(void)popViewcontroller
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
+
 @end

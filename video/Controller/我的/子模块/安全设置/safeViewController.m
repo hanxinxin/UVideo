@@ -135,6 +135,7 @@
     }
     else{
         emailCZViewController *avc = [[emailCZViewController alloc] init];
+        avc.Type=1;
         [self.navigationController pushViewController:avc animated:YES];
     }
 }

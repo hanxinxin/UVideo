@@ -199,22 +199,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B9800EC6-7732-42FD-96C7-F93E9F518065"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/Controller/&#x6211;&#x7684;/MyViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
-            landmarkName = "-signoutURL_touch"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "24516DBE-FA23-45E0-A377-7754986602EA"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -337,22 +321,6 @@
             startingLineNumber = "372"
             endingLineNumber = "372"
             landmarkName = "-topicHeaderViewForClickedThumbAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "278ABA0D-F397-4048-923A-B7A89C2256D0"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/Controller/&#x9996;&#x9875;/&#x83dc;&#x5355;/Controller/VDViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "360"
-            endingLineNumber = "360"
-            landmarkName = "-getDataList_header2"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -6,12 +6,16 @@
 //
 
 #import "zhanghuInfoViewController.h"
+#import "infoXGViewController.h"
+#import "XGpasswordViewController.h"
+#import "emailCZViewController.h"
 
 @interface zhanghuInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UIView*ZtopView;
 @property(nonatomic,strong)UITableView*downtableview;
 @property(nonatomic,strong)NSMutableArray*arrtitle;
 @property(nonatomic,strong)NSMutableArray*Darray;
+
 @end
 
 @implementation zhanghuInfoViewController
@@ -34,7 +38,7 @@
     arrtitle=[NSMutableArray arrayWithCapacity:0];
     [arrtitle addObject:[NSArray arrayWithObjects:@"用户名",@"会员级别",@"VIP到期时间",@"电子邮箱", nil]];
     Darray=[NSMutableArray arrayWithCapacity:0];
-    [Darray addObject:[NSArray arrayWithObjects:username_loca,([vip_expired_time_loca intValue]==0)?@"无会员":@"普通会员",([vip_expired_time_loca intValue]==0)?@"0":[self getTimeFromTimestamp:vip_expired_time_loca],UserZH_loca, nil]];
+    [Darray addObject:[NSArray arrayWithObjects:(![self StringIsNullOrEmpty:nickname_loca])?nickname_loca:@"去设置",([vip_expired_time_loca intValue]==0)?@"无会员":@"普通会员",([vip_expired_time_loca intValue]==0)?@"0":[self getTimeFromTimestamp:vip_expired_time_loca],(![self StringIsNullOrEmpty:UserZH_loca])?UserZH_loca:@"去设置", nil]];
     self.downtableview=[[UITableView alloc] init];
     self.downtableview.frame=CGRectMake(20, 0, SCREEN_WIDTH-40, SCREENH_HEIGHT);
     self.downtableview.backgroundColor=[UIColor clearColor];
@@ -127,5 +131,16 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"index == %ld",indexPath.section);
+    if(indexPath.section==0)
+    {
+        infoXGViewController*avc = [[infoXGViewController alloc] init];
+        [self pushRootNav:avc animated:YES];
+    }else if(indexPath.section==3)
+    {
+        emailCZViewController*avc = [[emailCZViewController alloc] init];
+        avc.Type=2;
+        [self pushRootNav:avc animated:YES];
+        
+    }
 }
 @end

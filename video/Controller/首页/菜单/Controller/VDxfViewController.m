@@ -286,7 +286,9 @@ static NSString * const shopCellReuseID = @"shop";
     }];
     
     //更新 scrollview 滑动
-    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, self.collectionView2.bottom+kNavAndTabHeight+30) ;
+//    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, self.collectionView2.bottom+kNavAndTabHeight+30) ;
+    //更新 scrollview 滑动
+    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, 160+70+self.bottomView.height+10);
 }
 
 

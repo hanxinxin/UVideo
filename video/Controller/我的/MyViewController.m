@@ -86,6 +86,16 @@
         }else{
             NSString * message = [dict objectForKey:@"message"];
             [UHud showHudWithStatus:message delay:2.f];
+            NSUserDefaults *TimeOfBootCount = [NSUserDefaults standardUserDefaults];
+            [TimeOfBootCount setValue:@"" forKey:@"UserToken"];
+            [TimeOfBootCount setValue:@"" forKey:@"Userrole"];
+            [TimeOfBootCount setValue:@"" forKey:@"UserZH"];
+            [TimeOfBootCount setValue:@"" forKey:@"UserPW"];
+            [TimeOfBootCount setValue:@"" forKey:@"nickname"];
+            [TimeOfBootCount setValue:@"" forKey:@"username"];
+            [TimeOfBootCount setValue:@"" forKey:@"avatar"];
+            [TimeOfBootCount setValue:@(0) forKey:@"expired_time"];
+            [TimeOfBootCount setValue:@(0) forKey:@"vip_expired_time"];
             [self updateHeaderViwe];
         }
 

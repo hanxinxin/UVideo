@@ -2,8 +2,8 @@
 //  LLSearchSuggestionVC.m
 //  LLSearchView
 //
-//  Created by 王龙龙 on 2017/7/25.
-//  Copyright © 2017年 王龙龙. All rights reserved.
+//  Created by mac on 2021/6/1.
+//  Copyright © 2021年 mac. All rights reserved.
 //
 
 #import "LLSearchSuggestionVC.h"
@@ -225,13 +225,21 @@
     
 //    |sort_field|否|string||排序依据字段(create_time|update_time|hits|score)|
 //    |sort_type|否|string||排序类型(desc=降序|asc=升序)|
-    NSDictionary*dict =nil;
-   
-        dict = @{@"keyword":string,
-//                 @"sort_field":@"score",
-//                 @"sort_type":@"asc"
-                 
-        };
+    // 清空数据
+    [self.dataArr removeAllObjects];
+    [self.collectionView reloadData];
+//    NSDictionary*dict =nil;
+//
+//        dict = @{@"keyword":string,
+////                 @"sort_field":@"score",
+////                 @"sort_type":@"asc"
+//
+//        };
+    self.SXpage=1;
+    NSMutableDictionary*dict =[NSMutableDictionary dictionary];
+    [dict setObject:string forKey:@"keyword"];
+    [dict setObject:[NSString stringWithFormat:@"%@",@(self.SXpage)] forKey:@"page"];
+    [dict setObject:[NSString stringWithFormat:@"%@",@(15)] forKey:@"pagesize"];
     [[HttpManagement shareManager] StartcancelAllOperations];
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_listurl] Dictionary:dict success:^(id  _Nullable responseObject) {
         //        NSLog(@"post responseObject == %@",responseObject);
@@ -354,7 +362,7 @@
 //返回每个item大小
 - (CGSize)waterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-        return CGSizeMake((self.collectionView.width-15*3)/3, 156);
+        return CGSizeMake((self.collectionView.width-15*4)/3, 156);
 }
 
 /** 列数*/

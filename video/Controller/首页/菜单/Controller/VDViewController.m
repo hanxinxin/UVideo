@@ -66,7 +66,7 @@ static NSString * const shopCellReuseID = @"shop";
     // Do any additional setup after loading the view.
     self.bannerimagesURL=[NSMutableArray arrayWithCapacity:0];
     self.bannerimagesmode=[NSMutableArray arrayWithCapacity:0];
-    UIScrollView * scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT)];
+    UIScrollView * scrollview = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight)];
     scrollview.backgroundColor = [UIColor whiteColor];
     scrollview.scrollsToTop = NO;
 
@@ -79,7 +79,7 @@ static NSString * const shopCellReuseID = @"shop";
     scrollview.pagingEnabled = NO;
     // 是否滚动//
     scrollview.scrollEnabled = YES;
-    scrollview.contentSize =CGSizeMake(SCREEN_WIDTH, SCREENH_HEIGHT+30+60) ;
+    scrollview.contentSize =CGSizeMake(SCREEN_WIDTH, SCREENH_HEIGHT+30+60-kNavAndTabHeight) ;
     scrollview.tag=1000;
     scrollview.showsVerticalScrollIndicator = NO;
     scrollview.showsHorizontalScrollIndicator = NO;
@@ -92,7 +92,7 @@ static NSString * const shopCellReuseID = @"shop";
         
     }];
     ///包含瀑布流view
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(15, 160+70, self.ZScrollView.width-30, self.ZScrollView.height-160-70)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(15, 160+70, self.ZScrollView.width-30, 60+420+420)];
     view.backgroundColor=[UIColor whiteColor];
     
     [self.ZScrollView addSubview:view];
@@ -275,7 +275,7 @@ static NSString * const shopCellReuseID = @"shop";
     }];
     
     //更新 scrollview 滑动
-    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, self.collectionView2.bottom+kNavAndTabHeight+30) ;
+    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, 160+70+self.bottomView.height+10);
 }
 
 
@@ -286,7 +286,10 @@ static NSString * const shopCellReuseID = @"shop";
     NSDictionary*dict =nil;
     if(_SelectIndex==0)
     {
-        dict = @{@"parent_category_id":[NSString stringWithFormat:@"%@",@(100)]};
+        dict = @{@"parent_category_id":[NSString stringWithFormat:@"%@",@(100)],
+                 @"page":[NSString stringWithFormat:@"%@",@(1)],
+                 @"pagesize":[NSString stringWithFormat:@"%@",@(7)]
+        };
     }else{
         dict = @{@"parent_category_id":[NSString stringWithFormat:@"%f",_FenleiMode.id],
                  @"page":[NSString stringWithFormat:@"%@",@(1)],
@@ -355,7 +358,10 @@ static NSString * const shopCellReuseID = @"shop";
     NSDictionary*dict =nil;
     if(_SelectIndex==0)
     {
-        dict = @{@"parent_category_id":[NSString stringWithFormat:@"%@",@(101)]};
+        dict = @{@"parent_category_id":[NSString stringWithFormat:@"%@",@(101)],
+                 @"page":[NSString stringWithFormat:@"%@",@(1)],
+                 @"pagesize":[NSString stringWithFormat:@"%@",@(7)]
+        };
     }else{
         dict = @{@"parent_category_id":[NSString stringWithFormat:@"%f",_FenleiMode.id],
                  @"page":[NSString stringWithFormat:@"%@",@(1)],

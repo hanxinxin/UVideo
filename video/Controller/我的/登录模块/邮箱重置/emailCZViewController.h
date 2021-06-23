@@ -24,6 +24,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic,strong)UIButton * backBtn;
 @property(nonatomic,strong)UIButton * ZCBtn;
 @property(nonatomic,strong)UIButton * XGBtn;
+
+
+@property(nonatomic,assign)NSInteger Type;  ///1是重置邮箱  2是 设置邮箱
+
+
 @end
 
 NS_ASSUME_NONNULL_END

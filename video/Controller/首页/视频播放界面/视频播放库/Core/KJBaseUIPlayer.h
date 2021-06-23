@@ -31,9 +31,9 @@
 /* 列表上播放绑定tableView */
 - (void)kj_bindTableView:(UITableView*)tableView indexPath:(NSIndexPath*)indexPath;
 /* 圆圈加载动画 */
-- (void)kj_startAnimation;
-/* 停止动画 */
-- (void)kj_stopAnimation;
+//- (void)kj_startAnimation;
+///* 停止动画 */
+//- (void)kj_stopAnimation;
 /* 支持富文本提示的文本框，零秒表示不自动消失 */
 - (void)kj_displayHintText:(id)text;
 - (void)kj_displayHintText:(id)text max:(float)max;

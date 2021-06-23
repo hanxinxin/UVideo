@@ -95,7 +95,7 @@
     KJAVPlayer *player = [[KJAVPlayer alloc]init];
     self.player = player;
     player.playerView = backview;
-    [player kj_startAnimation];
+//    [player kj_startAnimation];
     player.delegate = self;
     player.roregroundResume = YES;
     player.kVideoTotalTime = ^(NSTimeInterval time) {
@@ -137,9 +137,9 @@
 /* 当前播放器状态 */
 - (void)kj_player:(KJBasePlayer*)player state:(KJPlayerState)state{
     if (state == KJPlayerStateBuffering) {
-        [player kj_startAnimation];
+//        [player kj_startAnimation];
     }else if (state == KJPlayerStatePreparePlay || state == KJPlayerStatePlaying) {
-        [player kj_stopAnimation];
+//        [player kj_stopAnimation];
         [player kj_displayHintText:KJPlayerStateStringMap[state]];
     }else{
         [player kj_displayHintText:KJPlayerStateStringMap[state] position:KJPlayerHintPositionLeftBottom];
@@ -165,7 +165,7 @@
             player.videoURL = video;
             player.kVideoTryLookTime(^{
                 NSLog(@"试看时间已到");
-                [player kj_startAnimation];
+//                [player kj_startAnimation];
             }, 150);
         }
     }

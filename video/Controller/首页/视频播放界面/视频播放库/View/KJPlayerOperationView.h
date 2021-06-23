@@ -24,7 +24,7 @@ typedef NS_ENUM(NSUInteger, KJPlayerOperationViewType) {
 /* 控件尺寸发生变化 */
 @property (nonatomic,copy,readwrite) void (^kVideoOperationViewChanged)(KJPlayerOperationView *view);
 /* 按钮block */
-@property (nonatomic,copy,readwrite) void (^kVideoOperationViewBtnTouch)(NSInteger selectIndex);// 1是 弹幕  2是 静音
+@property (nonatomic,copy,readwrite) void (^kVideoOperationViewBtnTouch)(NSInteger selectIndex);// 1是 弹幕  2是 静音 3是 播放
 
 /* 初始化 */
 - (instancetype)initWithFrame:(CGRect)frame OperationType:(KJPlayerOperationViewType)type;

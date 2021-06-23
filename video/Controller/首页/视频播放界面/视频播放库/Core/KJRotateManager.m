@@ -136,7 +136,8 @@ window;})
         baseView.bottomView.alpha = 1;
         baseView.topView.hidden = NO;
         baseView.bottomView.hidden = NO;
-        baseView.danmubottomView.hidden = NO;
+//        baseView.danmubottomView.hidden = YES;
+        baseView.centerPlayButton.hidden=NO;
         baseView.lockButton.hidden = NO;
         if (baseView.screenState == KJPlayerVideoScreenStateFullScreen) {
             baseView.backButton.hidden = NO;
@@ -160,9 +161,10 @@ window;})
 //            self.topView.frame = CGRectMake(self.topView.frame.origin.x, -self.topView.frame.size.height, self.topView.frame.size.width, self.topView.frame.size.height);
 //            self.bottomView.frame = CGRectMake(self.bottomView.frame.origin.x, y2+self.bottomView.frame.size.height, self.bottomView.frame.size.width, self.bottomView.frame.size.height);
 //        }else{
+        baseView.centerPlayButton.hidden=YES;
         baseView.topView.hidden = YES;
         baseView.bottomView.hidden = YES;
-        baseView.danmubottomView.hidden = YES;
+//        baseView.danmubottomView.hidden = YES;
         baseView.lockButton.hidden = YES;
         if (baseView.screenState == KJPlayerVideoScreenStateFullScreen) {
             baseView.backButton.hidden = YES;

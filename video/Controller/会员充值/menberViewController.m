@@ -350,6 +350,7 @@
         if([vip_expired_time_loca intValue]==0)
         {
             [self.Topview.dateBtn setTitle:@"马上充值会员，立刻享受VIP观影特权" forState:(UIControlStateNormal)];
+            [self.Topview.bgImage setImage:[UIImage imageNamed:@"novipbg"]];
         }else{
             [self.Topview.dateBtn setTitle:[NSString stringWithFormat:@"会员到期时间: %@",[self getTimeFromTimestamp:vip_expired_time_loca]] forState:(UIControlStateNormal)];
         }
@@ -360,6 +361,7 @@
 {
     vipHeaderView *view = [[[NSBundle mainBundle]loadNibNamed:@"vipHeaderView" owner:self options:nil]objectAtIndex:0];
     view.frame=CGRectMake(20, 8, SCREEN_WIDTH-40, 120);
+    view.txImage.layer.masksToBounds = YES;
     view.txImage.layer.cornerRadius=20;
     [ScrollView addSubview:view];
     self.Topview = view;

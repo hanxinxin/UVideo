@@ -85,11 +85,11 @@ PLAYER_COMMON_FUNCTION_PROPERTY PLAYER_COMMON_UI_PROPERTY
 }
 /* 圆圈加载动画 */
 - (void)kj_startAnimation{
-    [super kj_startAnimation];
+//    [super kj_startAnimation];
 }
 /* 停止动画 */
 - (void)kj_stopAnimation{
-    [super kj_stopAnimation];
+//    [super kj_stopAnimation];
 }
 
 #pragma mark - setter

@@ -46,13 +46,13 @@
             filePath = "video/Controller/&#x9996;&#x9875;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x754c;&#x9762;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x5e93;/Core/KJRotateManager.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
+            startingLineNumber = "216"
+            endingLineNumber = "216"
             landmarkName = "+topViewController"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "D075B340-4A48-41C2-92CF-FAB082668169 - 310e828c063a63e8"
+                  uuid = "D075B340-4A48-41C2-92CF-FAB082668169 - 310e828c063a63aa"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -62,12 +62,12 @@
                   urlString = "file:///Users/macbook/Desktop/Video%E9%A1%B9%E7%9B%AE/UVideo/video/Controller/%E9%A6%96%E9%A1%B5/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E7%95%8C%E9%9D%A2/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%BA%93/Core/KJRotateManager.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "214"
-                  endingLineNumber = "214"
+                  startingLineNumber = "216"
+                  endingLineNumber = "216"
                   offsetFromSymbolStart = "44">
                </Location>
                <Location
-                  uuid = "D075B340-4A48-41C2-92CF-FAB082668169 - 310e828c063a63e8"
+                  uuid = "D075B340-4A48-41C2-92CF-FAB082668169 - 310e828c063a63aa"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -77,8 +77,8 @@
                   urlString = "file:///Users/macbook/Desktop/Video%E9%A1%B9%E7%9B%AE/UVideo/video/Controller/%E9%A6%96%E9%A1%B5/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E7%95%8C%E9%9D%A2/%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%BA%93/Core/KJRotateManager.m"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "214"
-                  endingLineNumber = "214"
+                  startingLineNumber = "216"
+                  endingLineNumber = "216"
                   offsetFromSymbolStart = "296">
                </Location>
             </Locations>
@@ -112,8 +112,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "515"
             endingLineNumber = "515"
-            landmarkName = "MyViewController"
-            landmarkType = "3">
+            landmarkName = "-Hidprompt"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -174,8 +174,8 @@
             filePath = "video/Controller/&#x9996;&#x9875;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x754c;&#x9762;/MHYouKuController.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1637"
-            endingLineNumber = "1637"
+            startingLineNumber = "1658"
+            endingLineNumber = "1658"
             landmarkName = "-CaiAndZanPost:evaluate:"
             landmarkType = "7">
          </BreakpointContent>

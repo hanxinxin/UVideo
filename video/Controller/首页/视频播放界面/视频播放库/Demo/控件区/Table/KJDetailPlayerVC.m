@@ -84,10 +84,10 @@
     }else{
         if ([self.player isPlaying]) {
             [self.player kj_pause];
-            [self.player kj_startAnimation];
+//            [self.player kj_startAnimation];
         }else{
             [self.player kj_resume];
-            [self.player kj_stopAnimation];
+//            [self.player kj_stopAnimation];
         }
     }
 }

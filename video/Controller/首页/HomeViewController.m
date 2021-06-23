@@ -164,7 +164,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
             }
         }
         
-        NSLog(@"====%@   === %ld   celltag==%ld",labelText,indexPath.row,celltag);
+        NSLog(@"====%@   === %ld   celltag==%ld",labelText,(long)indexPath.row,(long)celltag);
         [weekself SearchGetData:weekself.regionsstring languagesstring:weekself.languagesstring statesstring:weekself.statesstring yearsstring:weekself.yearsstring];
         
         
@@ -356,8 +356,8 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         {
             
                 NSDictionary  * dataArr = [dict objectForKey:@"data"];
-                // 清空数据
-                [self.SXArray removeAllObjects];
+//                // 清空数据
+//                [self.SXArray removeAllObjects];
                 NSMutableArray* arr=[NSMutableArray arrayWithCapacity:0];
                 NSArray * video_list = [dataArr objectForKey:@"video_list"];
             if(![video_list isKindOfClass:[NSNull class]]){

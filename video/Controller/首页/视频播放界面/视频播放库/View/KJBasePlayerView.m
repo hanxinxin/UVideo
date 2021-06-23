@@ -94,7 +94,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
 }
 - (void)kj_changeFrame{
    
-    self.loadingLayer.position = CGPointMake(self.width/2, self.height/2);
+//    self.loadingLayer.position = CGPointMake(self.width/2, self.height/2);
     self.fastLayer.position = CGPointMake(self.width/2, self.height/2);
     self.vbLayer.position = CGPointMake(self.width/2, self.height/2);
     [self.hintTextLayer setValue:@(self.screenState) forKey:@"screenState"];
@@ -112,7 +112,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
 -(void)kj_changeFrameShuPing
 {
 //    kj_changeFrameShuPing
-    self.loadingLayer.position = CGPointMake(self.width/2, self.height/2);
+//    self.loadingLayer.position = CGPointMake(self.width/2, self.height/2);
     self.fastLayer.position = CGPointMake(self.width/2, self.height/2);
     self.vbLayer.position = CGPointMake(self.width/2, self.height/2);
     [self.hintTextLayer setValue:@(self.screenState) forKey:@"screenState"];
@@ -413,16 +413,16 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     }
     return _vbLayer;
 }
-- (KJPlayerLoadingLayer *)loadingLayer{
-    if (!_loadingLayer) {
-        CGFloat width = 40;
-        KJPlayerLoadingLayer *layer = [KJPlayerLoadingLayer layer];
-        [layer kj_setAnimationSize:CGSizeMake(width, width) color:self.mainColor];
-        layer.frame = CGRectMake((self.width-width)/2.f, (self.height-width)/2.f, width, width);
-        _loadingLayer = layer;
-    }
-    return _loadingLayer;
-}
+//- (KJPlayerLoadingLayer *)loadingLayer{
+//    if (!_loadingLayer) {
+//        CGFloat width = 40;
+//        KJPlayerLoadingLayer *layer = [KJPlayerLoadingLayer layer];
+//        [layer kj_setAnimationSize:CGSizeMake(width, width) color:self.mainColor];
+//        layer.frame = CGRectMake((self.width-width)/2.f, (self.height-width)/2.f, width, width);
+//        _loadingLayer = layer;
+//    }
+//    return _loadingLayer;
+//}
 - (KJPlayerHintTextLayer *)hintTextLayer{
     if (!_hintTextLayer) {
         KJPlayerHintTextLayer *layer = [KJPlayerHintTextLayer layer];
@@ -437,7 +437,8 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
 - (KJPlayerOperationView *)topView{
     if (!_topView) {
         _topView = [[KJPlayerOperationView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.operationViewHeight) OperationType:(KJPlayerOperationViewTypeTop)];
-        _topView.mainColor = self.mainColor;
+//        _topView.mainColor = self.mainColor;
+        _topView.mainColor = [UIColor redColor];
     }
     return _topView;
 }
@@ -471,9 +472,15 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
         _centerPlayButton = [[KJPlayerButton alloc]initWithFrame:CGRectMake((self.width-kCenterPlayWidth)/2, (self.height-kCenterPlayWidth)/2, kCenterPlayWidth, kCenterPlayWidth)];
         _centerPlayButton.mainColor = self.mainColor;
         _centerPlayButton.type = KJPlayerButtonTypeCenterPlay;
+        [_centerPlayButton addTarget:self action:@selector(playVideoItemClick:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _centerPlayButton;
 }
+-(void)playVideoItemClick:(id)sender
+{
+    
+}
+
 -(YTSliderView *)bottomHYSlider
 {
     if(!_bottomHYSlider)
@@ -511,8 +518,8 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     {
         _danmubottomView =  [[[NSBundle mainBundle]loadNibNamed:@"hxplayerDanmuView" owner:self options:nil]objectAtIndex:0];
         _danmubottomView.frame=CGRectMake(0, self.height-self.operationViewHeight-self.operationViewHeight, self.width, self.operationViewHeight);
-        _danmubottomView.backgroundColor=[UIColor blueColor];
-//        _danmubottomView.hidden=YES;
+        _danmubottomView.backgroundColor=[UIColor redColor];
+        _danmubottomView.hidden=YES;
     }
     return _danmubottomView;
 }

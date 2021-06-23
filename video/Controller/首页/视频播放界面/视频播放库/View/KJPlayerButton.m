@@ -48,6 +48,9 @@
         }
     }else if (_type == KJPlayerButtonTypeCenterPlay) {
         
+        if (baseView.kVideoPlayButtonBack) {
+            baseView.kVideoPlayButtonBack(baseView);
+        }
     }
     if ([baseView.delegate respondsToSelector:@selector(kj_basePlayerView:PlayerButton:)]) {
         [baseView.delegate kj_basePlayerView:baseView PlayerButton:sender];
@@ -98,7 +101,7 @@
 //        [self setTitle:@"\U0000e719" forState:(UIControlStateNormal)];
 //        [self setTitle:@"\U0000e71a" forState:(UIControlStateSelected)];
 //        self.titleLabel.font = [UIFont fontWithName:@"KJPlayerfont" size:self.frame.size.width/5*3];Image("")
-        [self setImage:[UIImage imageNamed:@"zanting"] forState:(UIControlStateNormal)];
+        [self setImage:[UIImage imageNamed:@"MMVideoPreviewPlay"] forState:(UIControlStateNormal)];
         [self setImage:[UIImage imageNamed:@"zanting"] forState:(UIControlStateSelected)];
     }
 }

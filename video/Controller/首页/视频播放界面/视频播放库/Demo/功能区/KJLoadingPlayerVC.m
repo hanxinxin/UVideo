@@ -44,7 +44,7 @@
     KJAVPlayer *player = [[KJAVPlayer alloc]init];
     self.player = player;
     player.playerView = backview;
-    [player kj_startAnimation];
+//    [player kj_startAnimation];
     
     [self.player kj_displayHintText:@"顺便测试文本提示框长文字" time:0 position:KJPlayerHintPositionBottom];
     {
@@ -101,9 +101,9 @@
 - (void)buttonAction:(UIButton*)sender{
     sender.selected = !sender.selected;
     if (sender.selected) {
-        [self.player kj_stopAnimation];
+//        [self.player kj_stopAnimation];
     }else{
-        [self.player kj_startAnimation];
+//        [self.player kj_startAnimation];
     }
 }
 - (void)buttonAction2:(UIButton*)sender{

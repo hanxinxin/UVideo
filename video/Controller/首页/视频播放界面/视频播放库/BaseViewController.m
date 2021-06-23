@@ -78,7 +78,7 @@
     player.placeholder = backview.image;
     player.playerView = backview;
     player.openPing = YES;
-    [player kj_startAnimation];
+//    [player kj_startAnimation];
     player.roregroundResume = YES;
     player.kVideoTotalTime = ^(NSTimeInterval time) {
         slider.maximumValue = time;

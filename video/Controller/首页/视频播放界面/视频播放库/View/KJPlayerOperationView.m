@@ -76,7 +76,12 @@
         self.kVideoOperationViewBtnTouch(2);
     }
 }
-
+-(void)playvideoItemClick:(UIButton*)sender
+{
+    if (self.kVideoOperationViewBtnTouch) {
+        self.kVideoOperationViewBtnTouch(3);
+    }
+}
 
 - (void)layoutSubviews{
     [super layoutSubviews];

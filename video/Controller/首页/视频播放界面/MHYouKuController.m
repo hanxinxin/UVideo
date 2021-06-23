@@ -30,8 +30,10 @@
 #import "ClarityView.h"
 #import "menberViewTS.h"
 
-@interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate , MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate,KJPlayerDelegate,KJPlayerBaseViewDelegate,KJPlayerBaseViewDelegate,YTSliderViewDelegate>
-
+@interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate ,UITextFieldDelegate, MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate,KJPlayerDelegate,KJPlayerBaseViewDelegate,KJPlayerBaseViewDelegate,YTSliderViewDelegate>
+{
+    NSDictionary *keyboardInfo;
+}
 ///// 播放器 Player
 
 
@@ -187,6 +189,8 @@
     [self addmenberViewM];
     
    
+    /// 键盘
+    [self addNoticeForKeyboard];
 }
 
 -(void)SetData
@@ -268,6 +272,7 @@
     backview.smallScreenHiddenBackButton = YES;
     backview.backButton.hidden=YES;
     backview.autoHideTime = 3;
+    backview.danmubottomView.centerTextfield.delegate=self;
     if(_Zvideomodel!=nil)
     {
         VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
@@ -290,19 +295,33 @@
     };
     backview.kVideoChangeScreenState = ^(KJPlayerVideoScreenState state) {
       
-        NSLog(@"pingmu == %ld",state);
+        NSLog(@"pingmu == %lu",(unsigned long)state);
     };
-    
+    /// 播放按钮点击事件
+    backview.kVideoPlayButtonBack = ^(KJBasePlayerView * view) {
+        [self.player kj_replay];
+        
+//        NSLog(@"block播放状态 == %ld  ",(long)state);
+       
+        
+        
+        
+    };
     backview.bottomView.kVideoOperationViewBtnTouch = ^(NSInteger selectIndex) {
 //        NSLog(@"selectIndex====   %ld",(long)selectIndex);
         // 1是 弹幕  2是 静音
       if(selectIndex==1)
       {
+//          self.player.playerView.danmubottomView.hidden=NO;
+//          (void)bringSubviewToFront:(UIView *)view;
+         
 //          if(self.player.playerView.danmubottomView.hidden==YES)
 //          {
+//              [self.player.playerView bringSubviewToFront:self.player.playerView.danmubottomView];
 //              self.player.playerView.danmubottomView.hidden=NO;
 //              self.player.playerView.bottomView.hidden=YES;
 //          }else{
+//              [self.player.playerView bringSubviewToFront:self.player.playerView.bottomView];
 //              self.player.playerView.danmubottomView.hidden=YES;
 //              self.player.playerView.bottomView.hidden=NO;
 //          }
@@ -319,6 +338,7 @@
           
       }
     };
+
 //
     KJAVPlayer *player = [[KJAVPlayer alloc]init];
     self.player = player;
@@ -327,15 +347,12 @@
     player.playerView = backview;
 //    player.videoURL = [NSURL URLWithString:@"https://mp4.vjshi.com/2018-03-30/1f36dd9819eeef0bc508414494d34ad9.mp4"];
 
-    
-//    self.temps = @[@"https://mp4.vjshi.com/2021-01-13/d37b7bea25b063b4f9d4bdd98bc611e3.mp4",
-//                   @"https://mp4.vjshi.com/2018-03-30/1f36dd9819eeef0bc508414494d34ad9.mp4",
-//                   @"https://mp4.vjshi.com/2021-01-13/ac721f0590f0b0509092afea52d55a90.mp4",@"http://ivi.bupt.edu.cn/hls/hunanhd.m3u8"];
-    
-    
-//    self.player.videoURL = [NSURL URLWithString:self.temps[3]];
-//    player.videoURL = [NSURL URLWithString:self.temps[0]];
-    
+    self.player.kVideoTryLookTime(^{
+        NSLog(@"试看时间已到");
+//        [weakself.player kj_startAnimation];
+        [weakself.player kj_displayHintText:@"试看时间已到，请缴费～" time:0 position:KJPlayerHintPositionBottom];
+    }, 0);
+
     
     //注册、接收通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatefullItemClick:)name:@"fullItemClick"object:nil];
@@ -385,9 +402,13 @@
 - (void)kj_player:(KJBasePlayer*)player state:(KJPlayerState)state{
     NSLog(@"播放状态 == %ld  ",(long)state);
     if (state == KJPlayerStateBuffering || state == KJPlayerStatePausing) {
-        [player kj_startAnimation];
+        self.playerView.centerPlayButton.selected=YES;
+        self.playerView.centerPlayButton.hidden=NO;
+//        [player kj_startAnimation];
     }else if (state == KJPlayerStatePreparePlay || state == KJPlayerStatePlaying) {
-        [player kj_stopAnimation];
+        self.playerView.centerPlayButton.selected=NO;
+        self.playerView.centerPlayButton.hidden=NO;
+//        [player kj_stopAnimation];
         //设置 滑竿 最大值
 //        player.playerView.bottomHYSlider=self.player.totalTime;
     }else if (state == KJPlayerStatePlayFinished) {
@@ -488,7 +509,7 @@
     __weak MHYouKuController * weakSelf = self;
     self.menberView.touchIndex = ^(NSInteger Index) {
         
-        NSLog(@"menberView idnex ==== %ld",Index);
+        NSLog(@"menberView idnex ==== %ld",(long)Index);
         if(Index==0)
         {
             
@@ -1835,5 +1856,96 @@
 {
     return UIStatusBarStyleLightContent;
 }
+
+
+
+
+
+#pragma mark - 键盘通知
+- (void)addNoticeForKeyboard {
+    
+    //注册键盘出现的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillShow:)
+                                                 name:UIKeyboardWillShowNotification object:nil];
+    //注册键盘消失的通知
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification object:nil];
+}
+///键盘显示事件
+- (void) keyboardWillShow:(NSNotification *)notification {
+    //    获取键盘高度，在不同设备上，以及中英文下是不同的
+    CGFloat kbHeight = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
+    
+    //计算出键盘顶端到inputTextView panel底端的距离(加上自定义的缓冲距离INTERVAL_KEYBOARD)
+    NSLog(@"%f      =    %f ",(self.playerView.bottom+kbHeight+40),SCREENH_HEIGHT);
+    CGFloat offset = (self.playerView.bottom+kbHeight+40) - (SCREENH_HEIGHT);
+    
+    // 取得键盘的动画时间，这样可以在视图上移的时候更连贯
+    double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    //将视图上移计算好的偏移
+    if(offset > 0) {
+        [UIView animateWithDuration:duration animations:^{
+            self.playerView.frame = CGRectMake(0.0f, -offset, self.playerView.frame.size.width, self.playerView.frame.size.height);
+//            self.view.frame = CGRectMake(0.0f, -offset, self.view.frame.size.height,self.view.frame.size.width);
+        }];
+    }
+}
+
+
+
+
+
+
+///键盘消失事件
+- (void) keyboardWillHide:(NSNotification *)notify {
+    // 键盘动画时间
+    double duration = [[notify.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    
+    //视图下沉恢复原状
+    [UIView animateWithDuration:duration animations:^{
+//        self.view.frame = [UIScreen mainScreen].bounds;
+        self.playerView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+    }];
+}
+
+
+
+- (void)animationWithkeybooard:(void (^)(void))animations{
+    NSTimeInterval duration = [[keyboardInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] floatValue];
+    UIViewAnimationCurve curve = [[keyboardInfo objectForKey:UIKeyboardAnimationCurveUserInfoKey] integerValue];
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:duration];
+    [UIView setAnimationCurve:curve];
+    animations();
+    [UIView commitAnimations];
+}
+
+
+#pragma UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    NSString *text = textField.text;
+    text = [text stringByReplacingCharactersInRange:range withString:string];
+    NSString *trimText = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if (textField == self.playerView.danmubottomView.centerTextfield) {
+        if ([trimText length] > 20) {
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    /* 辞去第一响应者 */
+        [textField resignFirstResponder];
+    return YES;
+}
+
 
 @end

@@ -37,15 +37,15 @@
 /* 当前播放器状态 */
 - (void)kj_player:(KJBasePlayer*)player state:(KJPlayerState)state{
     if (state == KJPlayerStateBuffering) {
-        [player kj_startAnimation];
+//        [player kj_startAnimation];
     }else if (state == KJPlayerStatePreparePlay) {
-        [player kj_stopAnimation];
+//        [player kj_stopAnimation];
     }else if (state == KJPlayerStatePlaying) {
-        [player kj_stopAnimation];
+//        [player kj_stopAnimation];
     }else if (state == KJPlayerStatePlayFinished) {
         [player kj_replay];
     }else if (state == KJPlayerStatePausing) {
-        [player kj_startAnimation];
+//        [player kj_startAnimation];
         [player kj_displayHintText:@"暂停ing" time:5 position:KJPlayerHintPositionLeftBottom];
     }
 }

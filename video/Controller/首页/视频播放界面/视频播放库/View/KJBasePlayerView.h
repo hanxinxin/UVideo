@@ -12,7 +12,7 @@
 #import "KJPlayerProtocol.h"
 #import "KJPlayerSystemLayer.h"
 #import "KJPlayerFastLayer.h"
-#import "KJPlayerLoadingLayer.h"
+//#import "KJPlayerLoadingLayer.h"
 #import "KJPlayerHintTextLayer.h"
 #import "KJPlayerOperationView.h"
 #import "KJPlayerButton.h"
@@ -58,6 +58,9 @@ extern NSString *kPlayerBaseViewChangeKey;
 @property (nonatomic,copy,readwrite) void (^kVideoChangeScreenState)(KJPlayerVideoScreenState state);
 /* 返回回调 */
 @property (nonatomic,copy,readwrite) void (^kVideoClickButtonBack)(KJBasePlayerView *view);
+
+/* 返回回调 */
+@property (nonatomic,copy,readwrite) void (^kVideoPlayButtonBack)(KJBasePlayerView *view);
 /* 提示文字面板属性，默认最大宽度250px */
 @property (nonatomic,copy,readonly) void (^kVideoHintTextInfo)(void(^)(KJPlayerHintInfo *info));
 
@@ -67,7 +70,7 @@ extern NSString *kPlayerBaseViewChangeKey;
 /* 音量亮度控件 */
 @property (nonatomic,strong) KJPlayerSystemLayer *vbLayer;
 /* 加载动画层 */
-@property (nonatomic,strong) KJPlayerLoadingLayer *loadingLayer;
+//@property (nonatomic,strong) KJPlayerLoadingLayer *loadingLayer;
 /* 文本提示框 */
 @property (nonatomic,strong) KJPlayerHintTextLayer *hintTextLayer;
 /* 顶部操作面板 */
@@ -80,7 +83,8 @@ extern NSString *kPlayerBaseViewChangeKey;
 @property (nonatomic,strong) KJPlayerButton *lockButton;
 /* 播放按钮 */
 @property (nonatomic,strong) KJPlayerButton *centerPlayButton;
-
+/* 暂停按钮 */
+@property (nonatomic,strong) KJPlayerButton *ZantingButton;
 /// 进度Time
 @property (nonatomic,strong) UILabel *TimeTotal;
 

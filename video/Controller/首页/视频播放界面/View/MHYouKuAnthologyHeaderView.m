@@ -261,6 +261,14 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
                 }
             
             
+        }else{
+            if(_anthologyItem.anthologys.count==1)
+            {
+                [self.fenList addObject:[fenarray copy]];
+                [fenarray removeAllObjects];
+                MHYouKuAnthology *anthology1=_anthologyItem.anthologys[p];
+                [_topArray addObject:[NSString stringWithFormat:@"%ld-%ld",(long)anthology1.albums_sort,(long)anthology2.albums_sort]];
+            }
         }
         
     }

@@ -190,7 +190,7 @@
     
    
     /// 键盘
-    [self addNoticeForKeyboard];
+//    [self addNoticeForKeyboard];
 }
 
 -(void)SetData
@@ -601,14 +601,15 @@
 - (MHYouKuMedia *)media
 {
     if (_media == nil) {
+        VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
         _media = [[MHYouKuMedia alloc] init];
-        _media.thumb = [NSObject mh_randomNumber:0 to:1];
-        _media.thumbNums = [NSObject mh_randomNumber:10 to:1000];
-        _media.mediaUrl = @"xxxx";
-        _media.commentNums = [NSObject mh_randomNumber:0 to:1000];
-        _media.collect = [NSObject mh_randomNumber:0 to:1];
-        _media.mediaScanTotal = [NSObject mh_randomNumber:0 to:100000];
-        _media.creatTime = [NSDate mh_currentTimestamp];
+        _media.thumb = _Zvideomodel.in_evaluate;
+        _media.thumbNums = modelL.appreciate;
+        _media.mediaUrl = @"";
+        _media.commentNums = modelL.comment;
+        _media.collect = _Zvideomodel.in_favorite;
+        _media.mediaScanTotal = 0;
+        _media.creatTime = [self getTimeFromTimestamp:@(modelL.create_time)];
     }
     return _media;
 }
@@ -700,7 +701,7 @@
 - (void)_setupData
 {
     [self.dataSource insertObject:self.anthologyItem atIndex:0];
-    
+    [self.dataSource addObject:self.commentItem];
     [self.tableView reloadData];
 }
 
@@ -1371,8 +1372,15 @@
     }
     
     if ([model isKindOfClass:[MHYouKuAnthologyItem class]]) {
-        // 选集
+     
+        int height = (int)_anthologyItem.anthologys.count/4;
+        if(height<=0)
+        {
+            return MHRecommendAnthologyHeaderViewHeight/2;
+        }else{
+        
         return MHRecommendAnthologyHeaderViewHeight;
+        }
     }
     
     if ([model isKindOfClass:[MHYouKuCommentItem class]]) {
@@ -1880,7 +1888,7 @@
     
     //计算出键盘顶端到inputTextView panel底端的距离(加上自定义的缓冲距离INTERVAL_KEYBOARD)
     NSLog(@"%f      =    %f ",(self.playerView.bottom+kbHeight+40),SCREENH_HEIGHT);
-    CGFloat offset = (self.playerView.bottom+kbHeight+40) - (SCREENH_HEIGHT);
+    CGFloat offset = (self.playerView.danmubottomView.bottom+kbHeight+40) - (SCREENH_HEIGHT);
     
     // 取得键盘的动画时间，这样可以在视图上移的时候更连贯
     double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
@@ -1888,7 +1896,7 @@
     //将视图上移计算好的偏移
     if(offset > 0) {
         [UIView animateWithDuration:duration animations:^{
-            self.playerView.frame = CGRectMake(0.0f, -offset, self.playerView.frame.size.width, self.playerView.frame.size.height);
+            self.playerView.danmubottomView.frame = CGRectMake(0.0f, -offset, self.playerView.danmubottomView.frame.size.width, self.playerView.danmubottomView.frame.size.height);
 //            self.view.frame = CGRectMake(0.0f, -offset, self.view.frame.size.height,self.view.frame.size.width);
         }];
     }
@@ -1907,7 +1915,7 @@
     //视图下沉恢复原状
     [UIView animateWithDuration:duration animations:^{
 //        self.view.frame = [UIScreen mainScreen].bounds;
-        self.playerView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+//        self.playerView.danmubottomView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
     }];
 }
 

@@ -323,6 +323,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
                             self.fastLayer.hidden = NO;
                         }
                         NSTimeInterval time = [array[0] floatValue] + value * totalTime;
+                        NSLog(@"滑动time==== %f",time);
                         [self.fastLayer kj_updateFastValue:time?:0.0 TotalTime:totalTime];
                     }
                 }

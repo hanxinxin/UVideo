@@ -18,11 +18,14 @@
 /** 昵称 */
 @property (nonatomic , weak) YYLabel *nicknameLable;
 
-/** 点赞 */
-@property (nonatomic , weak) UIButton *thumbBtn;
+///** 点赞 */
+//@property (nonatomic , weak) UIButton *thumbBtn;
+//
+///** 更多 */
+//@property (nonatomic , weak) UIButton *moreBtn;
 
-/** 更多 */
-@property (nonatomic , weak) UIButton *moreBtn;
+/** 回复按钮 */
+@property (nonatomic , weak) UIButton *huifuBtn;
 
 /** 创建时间 */
 @property (nonatomic , weak) YYLabel *createTimeLabel;
@@ -89,12 +92,12 @@
     self.nicknameLable.text = user.nickname;
     
     // 点赞
-    self.thumbBtn.frame = topicFrame.thumbFrame;
-    [self.thumbBtn setTitle:topic.thumbNumsString forState:UIControlStateNormal];
-    self.thumbBtn.selected = topic.isThumb;
+//    self.thumbBtn.frame = topicFrame.thumbFrame;
+//    [self.thumbBtn setTitle:topic.thumbNumsString forState:UIControlStateNormal];
+//    self.thumbBtn.selected = topic.isThumb;
     
     // 更多
-    self.moreBtn.frame = topicFrame.moreFrame;
+//    self.moreBtn.frame = topicFrame.moreFrame;
     
     // 时间
     self.createTimeLabel.frame = topicFrame.createTimeFrame;
@@ -103,6 +106,9 @@
     // 内容
     self.contentLabel.frame = topicFrame.textFrame;
     self.contentLabel.attributedText = topic.attributedText;
+    
+    //回复
+    self.huifuBtn.frame = topicFrame.thumbFrame;
     
 }
 
@@ -146,24 +152,24 @@
     };
     
     // 点赞按钮
-    UIButton *thumbBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    thumbBtn.adjustsImageWhenHighlighted = NO;
-    [thumbBtn setImage:MHImageNamed(@"comment_zan_nor") forState:UIControlStateNormal];
-    [thumbBtn setImage:MHImageNamed(@"comment_zan_high") forState:UIControlStateSelected];
-    [thumbBtn setTitleColor:MHGlobalGrayTextColor forState:UIControlStateNormal];
-    [thumbBtn setTitleColor:[UIColor redColor] forState:UIControlStateDisabled];
-    [thumbBtn addTarget:self action:@selector(_thumbBtnDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    thumbBtn.titleLabel.font = MHTopicThumbFont;
-    [self.contentView addSubview:thumbBtn];
-    self.thumbBtn = thumbBtn;
+//    UIButton *thumbBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    thumbBtn.adjustsImageWhenHighlighted = NO;
+//    [thumbBtn setImage:MHImageNamed(@"comment_zan_nor") forState:UIControlStateNormal];
+//    [thumbBtn setImage:MHImageNamed(@"comment_zan_high") forState:UIControlStateSelected];
+//    [thumbBtn setTitleColor:MHGlobalGrayTextColor forState:UIControlStateNormal];
+//    [thumbBtn setTitleColor:[UIColor redColor] forState:UIControlStateDisabled];
+//    [thumbBtn addTarget:self action:@selector(_thumbBtnDidClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    thumbBtn.titleLabel.font = MHTopicThumbFont;
+//    [self.contentView addSubview:thumbBtn];
+//    self.thumbBtn = thumbBtn;
     
     
     // 更多
-    UIButton *moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [moreBtn setImage:MHImageNamed(@"comment_more") forState:UIControlStateNormal];
-    [moreBtn addTarget:self action:@selector(_moreBtnDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [self.contentView addSubview:moreBtn];
-    self.moreBtn = moreBtn;
+//    UIButton *moreBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [moreBtn setImage:MHImageNamed(@"comment_more") forState:UIControlStateNormal];
+//    [moreBtn addTarget:self action:@selector(_moreBtnDidClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [self.contentView addSubview:moreBtn];
+//    self.moreBtn = moreBtn;
     
     
     // 时间
@@ -195,6 +201,17 @@
     contentLabel.textTapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {
         [weakSelf _contentTextDidClicked];
     };
+    
+    
+    UIButton *huifuBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    huifuBtn.adjustsImageWhenHighlighted = NO;
+    [huifuBtn setTitle:@"回复" forState:(UIControlStateNormal)];
+    [huifuBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [huifuBtn addTarget:self action:@selector(_huifuBtnDidClicked:) forControlEvents:UIControlEventTouchUpInside];
+    huifuBtn.titleLabel.font = MHTopicThumbFont;
+        [self.contentView addSubview:huifuBtn];
+        self.huifuBtn = huifuBtn;
+    
 }
 
 
@@ -206,13 +223,21 @@
 
 #pragma mark - 事件处理
 
-- (void)_thumbBtnDidClicked:(UIButton *)sender
+//- (void)_thumbBtnDidClicked:(UIButton *)sender
+//{
+//    if (self.delegate && [self.delegate respondsToSelector:@selector(topicHeaderViewForClickedThumbAction:)]) {
+//        [self.delegate topicHeaderViewForClickedThumbAction:self];
+//    }
+//
+//}
+
+-(void)_huifuBtnDidClicked:(UIButton *)sender
 {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(topicHeaderViewForClickedThumbAction:)]) {
-        [self.delegate topicHeaderViewForClickedThumbAction:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(topicHeaderViewForHuiFuAction:)]) {
+        [self.delegate topicHeaderViewForHuiFuAction:self];
     }
-    
 }
+
 
 - (void)_moreBtnDidClicked:(UIButton *)sender
 {

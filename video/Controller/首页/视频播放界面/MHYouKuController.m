@@ -26,6 +26,8 @@
 #import "MHYouKuCommentController.h"
 #import "MHYouKuInputPanelView.h"
 #import "MHYouKuTopicDetailController.h"
+#import "pinglunHeaderView.h"
+
 
 #import "ClarityView.h"
 #import "menberViewTS.h"
@@ -59,7 +61,7 @@
 @property (nonatomic , strong) UIView *topicContainer;
 
 /** Footer */
-@property (nonatomic , strong) UIButton *commentFooter;
+//@property (nonatomic , strong) UIButton *commentFooter;
 
 /** 返回按钮 **/
 @property (nonatomic , strong) MHBackButton *backBtn;
@@ -92,8 +94,8 @@
 /** 详情 **/
 @property (nonatomic , weak) MHYouKuMediaDetail *detail;
 
-/** 选中的话题尺寸模型 */
-@property (nonatomic , strong) MHTopicFrame *selectedTopicFrame;
+///** 选中的话题尺寸模型 */
+//@property (nonatomic , strong) MHTopicFrame *selectedTopicFrame;
 
 /** 评论Item */
 @property (nonatomic , strong) MHYouKuCommentItem *commentItem;
@@ -651,21 +653,21 @@
 }
 
 
-/** 评论底部 */
-- (UIButton *)commentFooter
-{
-    if (_commentFooter == nil) {
-        _commentFooter = [[UIButton alloc] init];
-        _commentFooter.backgroundColor = [UIColor whiteColor];
-        [_commentFooter addTarget:self action:@selector(_commentFooterDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-        [_commentFooter setTitle:@"查看全部0条回复 >" forState:UIControlStateNormal];
-        _commentFooter.titleLabel.font = MHFont(MHPxConvertPt(14.0f), NO);
-        [_commentFooter setTitleColor:MHGlobalOrangeTextColor forState:UIControlStateNormal];
-        [_commentFooter setTitleColor:MHGlobalShadowBlackTextColor forState:UIControlStateHighlighted];
-        _commentFooter.mh_height = 44.0f;
-    }
-    return _commentFooter;
-}
+///** 评论底部 */
+//- (UIButton *)commentFooter
+//{
+//    if (_commentFooter == nil) {
+//        _commentFooter = [[UIButton alloc] init];
+//        _commentFooter.backgroundColor = [UIColor whiteColor];
+//        [_commentFooter addTarget:self action:@selector(_commentFooterDidClicked:) forControlEvents:UIControlEventTouchUpInside];
+//        [_commentFooter setTitle:@"查看全部0条回复 >" forState:UIControlStateNormal];
+//        _commentFooter.titleLabel.font = MHFont(MHPxConvertPt(14.0f), NO);
+//        [_commentFooter setTitleColor:MHGlobalOrangeTextColor forState:UIControlStateNormal];
+//        [_commentFooter setTitleColor:MHGlobalShadowBlackTextColor forState:UIControlStateHighlighted];
+//        _commentFooter.mh_height = 44.0f;
+//    }
+//    return _commentFooter;
+//}
 
 
 #pragma mark - 初始化
@@ -1003,132 +1005,18 @@
 - (void)_addNotificationCenter
 {
     // 视频评论成功
-    [MHNotificationCenter addObserver:self selector:@selector(_commentSuccess:) name:MHCommentSuccessNotification object:nil];
-    
-    // 视频评论回复成功
-    [MHNotificationCenter addObserver:self selector:@selector(_commentReplySuccess:) name:MHCommentReplySuccessNotification object:nil];
-    
-    // 请求数据成功
-    [MHNotificationCenter addObserver:self selector:@selector(_commentRequestDataSuccess:) name:MHCommentRequestDataSuccessNotification object:nil];
-    
-    // 视频点赞成功
-    [MHNotificationCenter addObserver:self selector:@selector(_thumbSuccess:) name:MHThumbSuccessNotification object:nil];
+//    [MHNotificationCenter addObserver:self selector:@selector(_commentSuccess:) name:MHCommentSuccessNotification object:nil];
+//
+//    // 视频评论回复成功
+//    [MHNotificationCenter addObserver:self selector:@selector(_commentReplySuccess:) name:MHCommentReplySuccessNotification object:nil];
+//
+//    // 请求数据成功
+//    [MHNotificationCenter addObserver:self selector:@selector(_commentRequestDataSuccess:) name:MHCommentRequestDataSuccessNotification object:nil];
+//
+//    // 视频点赞成功
+//    [MHNotificationCenter addObserver:self selector:@selector(_thumbSuccess:) name:MHThumbSuccessNotification object:nil];
 }
 
-#pragma mark - 通知事件处理
-// 视频评论成功
-- (void)_commentSuccess:(NSNotification *)note
-{
-    // 获取数据
-    MHTopicFrame *topicFrame = [note.userInfo objectForKey:MHCommentSuccessKey];
-    
-    // 这里需要判断数据 不是同一个视频  直接退出
-    if (!(topicFrame.topic.mediabase_id.longLongValue == self.mediabase_id.longLongValue))
-    {
-        return;
-    }
-    
-    // 修改数据
-    self.media.commentNums = self.media.commentNums+1;
-
-    // 存在评论容器
-    if ([self.dataSource containsObject:self.commentItem])
-    {
-        // 获取索引 可能这里需要加锁  防止插入数据异常
-        NSInteger index = [self.dataSource indexOfObject:self.commentItem];
-        // 安全处理
-        if (self.dataSource.count == (index+1)) {
-            // 直接添加到后面
-            [self.dataSource addObject:topicFrame];
-        }else{
-            // 插入数据
-            [self.dataSource insertObject:topicFrame atIndex:(index+1)];
-        }
-    }else{
-        
-        // 不存在评论容器  就添加一个
-        
-        // 配置一个评论表头的假数据
-        [self.dataSource addObject:self.commentItem];
-        // 配置评论数据
-        [self.dataSource addObject:topicFrame];
-    }
-    
-    // 检测footer
-    [self _checkTableViewFooterState:YES];
-    
-    // 刷新数据
-    [self _refreshDataWithMedia:self.media];
-    
-}
-// 视频评论回复成功
-- (void)_commentReplySuccess:(NSNotification *)note
-{
-    MHTopicFrame *topicFrame = [note.userInfo objectForKey:MHCommentReplySuccessKey];
-    
-    // 这里需要判断数据 不是同一个视频  直接退出
-    if (!(topicFrame.topic.mediabase_id.longLongValue == self.mediabase_id.longLongValue))
-    {
-        return;
-    }
-    
-    if (topicFrame == self.selectedTopicFrame) {
-        // 刷新组
-        [self _reloadSelectedSectin];
-        
-    }else
-    {
-        [self.tableView reloadData];
-    }
-
-}
-// 请求数据成功
-- (void)_commentRequestDataSuccess:(NSNotification *)note
-{
-    NSArray *topicFrames = [note.userInfo objectForKey:MHCommentRequestDataSuccessKey];
-    MHTopicFrame *topicFrame  = topicFrames.firstObject;
-    // 这里需要判断数据 不是同一个视频  直接退出
-    if (!(topicFrame.topic.mediabase_id.longLongValue == self.mediabase_id.longLongValue))
-    {
-        return;
-    }
-    
-    //
-    if ([self.dataSource containsObject:self.commentItem]) {
-        // 包含
-        // 安全处理
-        // 获取索引 可能这里需要加锁  防止插入数据异常
-        NSInteger index = [self.dataSource indexOfObject:self.commentItem];
-        
-        if (self.dataSource.count == (index+1)) {
-            // 直接添加到后面
-            [self.dataSource addObjectsFromArray:topicFrames];
-        }else{
-            // 插入数据
-            NSRange range = NSMakeRange(index+1, self.dataSource.count-(1+index));
-            [self.dataSource replaceObjectsInRange:range withObjectsFromArray:topicFrames];
-        }
-        
-    }else{
-        // 配置一个评论表头的假数据
-        [self.dataSource addObject:self.commentItem];
-        
-        // 配置评论数据
-        [self.dataSource addObjectsFromArray:topicFrames];
-    }
-    
-    [self _checkTableViewFooterState:topicFrames.count>0];
-    
-    // 重新刷新表格
-    [self.tableView reloadData];
-}
-
-// 话题点赞成功
-- (void)_thumbSuccess:(NSNotificationCenter *)note
-{
-    // 刷新数据
-    [self.tableView reloadData];
-}
 
 #pragma mark - 点击事件处理
 // 返回按钮点击
@@ -1250,7 +1138,7 @@
     [self.tableView reloadData];
     
     // footer设置数据
-    [self.commentFooter setTitle:[NSString stringWithFormat:@"查看全部%@条回复 >" , media.commentNumsString] forState:UIControlStateNormal];
+//    [self.commentFooter setTitle:[NSString stringWithFormat:@"查看全部%@条回复 >" , media.commentNumsString] forState:UIControlStateNormal];
     
     // 刷新topicVC的评论的数据
     [self.topic refreshCommentsWithCommentItem:self.commentItem];
@@ -1269,21 +1157,12 @@
 - (void)_checkTableViewFooterState:(BOOL)state
 {
     if (state) {
-        self.tableView.tableFooterView = self.commentFooter;
+//        self.tableView.tableFooterView = self.commentFooter;
     }else{
         self.tableView.tableFooterView = nil;
     }
 }
-/** 刷新段  */
-- (void)_reloadSelectedSectin
-{
-    // 获取索引
-    [self.tableView beginUpdates];
-    NSInteger index = [self.dataSource indexOfObject:self.selectedTopicFrame];
-    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:index];
-    [self.tableView reloadSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
-    [self.tableView endUpdates];
-}
+
 
 /** 评论回复 */
 - (void)_replyCommentWithCommentReply:(MHCommentReply *)commentReply
@@ -1443,6 +1322,9 @@
         headerView.commentItem = commentItem;
         headerView.delegate = self;
         return headerView;
+//        pinglunHeaderView *headerView = [pinglunHeaderView headerViewWithTableView:tableView];
+////                headerView.delegate = self;
+//        return headerView;
     }
     
     return nil;
@@ -1464,40 +1346,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    id model = self.dataSource[indexPath.section];
     
-    // 评论
-    if ([model isKindOfClass:[MHTopicFrame class]])
-    {
-        MHTopicFrame *topicFrame = (MHTopicFrame *)model;
-        MHCommentFrame *commentFrame = topicFrame.commentFrames[indexPath.row];
-        // 选中的栏
-        self.selectedTopicFrame = topicFrame;
-        
-        
-        // 判断
-        if ([commentFrame.comment.commentId isEqualToString:MHAllCommentsId]) {
-            // 跳转到更多评论
-            MHYouKuTopicDetailController *topicDetail = [[MHYouKuTopicDetailController alloc] init];
-            topicDetail.topicFrame = topicFrame;
-            // push
-            [self.navigationController pushViewController:topicDetail animated:YES];
-            return;
-        }
-        
-        // 这里是回复
-        
-        // 回复自己则跳过
-        if ([commentFrame.comment.fromUser.userId isEqualToString:[AppDelegate sharedDelegate].account.userId]) {
-            return;
-        }
-        
-        // 回复评论
-        MHCommentReply *commentReply = [[MHTopicManager sharedManager] commentReplyWithModel:commentFrame.comment];
-        
-        // show
-        [self _replyCommentWithCommentReply:commentReply];
-    }
+    
 }
 
 
@@ -1761,101 +1611,7 @@
     
 }
 
-// 话题内容点击
-- (void) topicHeaderViewDidClickedTopicContent:(MHTopicHeaderView *)topicHeaderView
-{
-    // 选中的栏 话题内容自己可以评论
-    self.selectedTopicFrame = topicHeaderView.topicFrame;
-    
-    // 评论跳转到评论
-    MHCommentReply *commentReply =  [[MHTopicManager sharedManager] commentReplyWithModel:topicHeaderView.topicFrame.topic];
-    
-    // 回复
-    [self _replyCommentWithCommentReply:commentReply];
-}
 
-
-
-#pragma mark - MHYouKuInputPanelViewDelegate
-- (void) inputPanelView:(MHYouKuInputPanelView *)inputPanelView attributedText:(NSString *)attributedText
-{
-    // 发送评论 模拟网络发送
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.25f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        // 评论或者回复成功
-        MHComment *comment = [[MHComment alloc] init];
-        comment.mediabase_id = self.mediabase_id;
-        comment.commentId = [NSString stringWithFormat:@"%zd",[NSObject mh_randomNumber:0 to:100]];
-        comment.text = attributedText;
-        comment.creatTime = [NSDate mh_currentTimestamp];
-        
-        MHUser *fromUser = [[MHUser alloc] init];
-        fromUser.userId = [AppDelegate sharedDelegate].account.userId ;
-        fromUser.avatarUrl = [AppDelegate sharedDelegate].account.avatarUrl;
-        fromUser.nickname = [AppDelegate sharedDelegate].account.nickname;
-        comment.fromUser = fromUser;
-        
-        
-        // 只有回复才会有 toUser
-        if (inputPanelView.commentReply.isReply) {
-            MHUser *toUser = [[MHUser alloc] init];
-            toUser.avatarUrl = inputPanelView.commentReply.user.avatarUrl;
-            toUser.userId = inputPanelView.commentReply.user.userId;
-            toUser.nickname = inputPanelView.commentReply.user.nickname;
-            comment.toUser = toUser;
-        }
-        
-        // 这里需要插入假数据
-        MHCommentFrame* newCommentFrame = [[MHTopicManager sharedManager] commentFramesWithComments:@[comment]].lastObject;
-        
-        // 这里要插入话题数据源中去
-        
-        // 修改评论回复数目
-        self.selectedTopicFrame.topic.commentsCount  =  self.selectedTopicFrame.topic.commentsCount + 1;
-        
-        // 判断数据
-        if (self.selectedTopicFrame.topic.comments.count>2) {
-            
-            // 有 查看全部xx条回复
-            // 插入数据
-            NSInteger count = self.selectedTopicFrame.commentFrames.count;
-            NSInteger index = count - 1;
-            [self.selectedTopicFrame.commentFrames insertObject:newCommentFrame atIndex:index];
-            [self.selectedTopicFrame.topic.comments insertObject:comment atIndex:index];
-            
-            // 取出最后一条数据 就是查看全部xx条回复
-            MHComment *lastComment = self.selectedTopicFrame.topic.comments.lastObject;
-            lastComment.text = [NSString stringWithFormat:@"查看全部%zd条回复" , self.selectedTopicFrame.topic.commentsCount];
-            
-        }else {
-            
-            // 临界点
-            if (self.selectedTopicFrame.topic.comments.count == 2)
-            {
-                // 添加数据源
-                [self.selectedTopicFrame.commentFrames addObject:newCommentFrame];
-                [self.selectedTopicFrame.topic.comments addObject:comment];
-                
-                // 设置假数据
-                MHComment *lastComment = [[MHComment alloc] init];
-                lastComment.commentId = MHAllCommentsId;
-                lastComment.text = [NSString stringWithFormat:@"查看全部%zd条回复" , self.selectedTopicFrame.topic.commentsCount];
-                MHCommentFrame *lastCommentFrame =  [[MHTopicManager sharedManager] commentFramesWithComments:@[lastComment]].lastObject;
-                // 添加假数据
-                [self.selectedTopicFrame.commentFrames addObject:lastCommentFrame];
-                [self.selectedTopicFrame.topic.comments addObject:lastComment];
-            }else{
-                // 添加数据源
-                [self.selectedTopicFrame.commentFrames addObject:newCommentFrame];
-                [self.selectedTopicFrame.topic.comments addObject:comment];
-            }
-        }
-        
-        // 发送评论回复成功的通知
-        [MHNotificationCenter postNotificationName:MHCommentReplySuccessNotification object:nil userInfo:@{MHCommentReplySuccessKey:self.selectedTopicFrame}];
-    });
-    
-}
 
 
 

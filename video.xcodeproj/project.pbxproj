@@ -404,6 +404,7 @@
 		FA9662E62663361500AF7B46 /* PlayWTView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9662E52663361500AF7B46 /* PlayWTView.xib */; };
 		FA97027C26692D8C00418B3A /* YTSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA97027826692D8C00418B3A /* YTSliderView.m */; };
 		FA97027D26692D8C00418B3A /* YTSliderSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = FA97027A26692D8C00418B3A /* YTSliderSetting.m */; };
+		FA9804802684D99D00FF6BF9 /* pinglunHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA98047F2684D99D00FF6BF9 /* pinglunHeaderView.m */; };
 		FA984FA62674AEDF0014DCA8 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984F832674AEDF0014DCA8 /* UIProgressView+AFNetworking.m */; };
 		FA984FA72674AEDF0014DCA8 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984F852674AEDF0014DCA8 /* UIRefreshControl+AFNetworking.m */; };
 		FA984FA82674AEDF0014DCA8 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984F882674AEDF0014DCA8 /* AFNetworkActivityIndicatorManager.m */; };
@@ -1231,6 +1232,8 @@
 		FA97027926692D8C00418B3A /* YTSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSliderView.h; sourceTree = "<group>"; };
 		FA97027A26692D8C00418B3A /* YTSliderSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSliderSetting.m; sourceTree = "<group>"; };
 		FA97027B26692D8C00418B3A /* YTSliderSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSliderSetting.h; sourceTree = "<group>"; };
+		FA98047E2684D99D00FF6BF9 /* pinglunHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pinglunHeaderView.h; sourceTree = "<group>"; };
+		FA98047F2684D99D00FF6BF9 /* pinglunHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pinglunHeaderView.m; sourceTree = "<group>"; };
 		FA984F832674AEDF0014DCA8 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
 		FA984F842674AEDF0014DCA8 /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AFNetworking.h"; sourceTree = "<group>"; };
 		FA984F852674AEDF0014DCA8 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
@@ -2147,6 +2150,7 @@
 		8A8BC2BF25FC6D790028173C /* 视频播放界面 */ = {
 			isa = PBXGroup;
 			children = (
+				FA98047D2684D97100FF6BF9 /* video评论 */,
 				FA80AD8D266CC7A900BF28D8 /* hxView */,
 				8A95C257265A560200A6D144 /* 视频播放库 */,
 				FA8E717F2652A35E0058F02F /* Palyview */,
@@ -3468,6 +3472,15 @@
 			path = "充值记录";
 			sourceTree = "<group>";
 		};
+		FA98047D2684D97100FF6BF9 /* video评论 */ = {
+			isa = PBXGroup;
+			children = (
+				FA98047E2684D99D00FF6BF9 /* pinglunHeaderView.h */,
+				FA98047F2684D99D00FF6BF9 /* pinglunHeaderView.m */,
+			);
+			path = "video评论";
+			sourceTree = "<group>";
+		};
 		FA984F812674AEDF0014DCA8 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -4324,6 +4337,7 @@
 				8A9C560D25F8A10000EFA410 /* UIView+Animation.m in Sources */,
 				8A39314025FCDFCE00E7331B /* MHTopic.m in Sources */,
 				8A9C559225F89F0C00EFA410 /* CYLTabBar.m in Sources */,
+				FA9804802684D99D00FF6BF9 /* pinglunHeaderView.m in Sources */,
 				8A3930CF25FCDB3800E7331B /* CMHExample.m in Sources */,
 				FA936FAA265944EA00067614 /* HJCornerRadius.m in Sources */,
 				8A9C562025F8A10000EFA410 /* UIButton+MiddleAligning.m in Sources */,

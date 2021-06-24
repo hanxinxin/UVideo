@@ -20,7 +20,7 @@
 @property (nonatomic , weak) UILabel *commentLabel;
 
 /** 评论总数 */
-@property (nonatomic , weak) UILabel *commentNumsLabel;
+//@property (nonatomic , weak) UILabel *commentNumsLabel;
 
 /** 热门和最新 */
 @property (nonatomic , weak) UIButton *topicTypeBtn;
@@ -36,7 +36,10 @@
 @property (nonatomic , weak) UIView *commentView ;
 
 /** 评论按钮 */
-@property (nonatomic , weak) MHYouKuCommentButton *commentBtn;
+//@property (nonatomic , weak) MHYouKuCommentButton *commentBtn;
+
+/** 评论按钮 */
+@property (nonatomic , strong) UIButton *pinglunBtn;
 
 /** 底部分割线 */
 @property (nonatomic , weak) MHDivider *bottomLine ;
@@ -85,8 +88,8 @@
     
     self.commentLabel.text = commentItem.title;
     
-    self.commentNumsLabel.text = [NSString stringWithFormat:@"%lld" , commentItem.commentCount];
-    [self.commentBtn setTitle:[NSString stringWithFormat:@"已有%lld条评论，快来说说你的感想吧",commentItem.commentCount] forState:UIControlStateNormal];
+//    self.commentNumsLabel.text = [NSString stringWithFormat:@"%lld" , commentItem.commentCount];
+//    [self.commentBtn setTitle:[NSString stringWithFormat:@"已有%lld条评论，快来说说你的感想吧",commentItem.commentCount] forState:UIControlStateNormal];
 }
 
 
@@ -104,7 +107,7 @@
     [self _setupTitleView];
     
     // 设置评论View
-    [self _setupCommentView];
+//    [self _setupCommentView];
     
 }
 
@@ -113,7 +116,7 @@
 {
     // 评论View
     UIView *titleView = [[UIView alloc] init];
-    titleView.backgroundColor = [UIColor whiteColor];
+//    titleView.backgroundColor = [UIColor redColor];
     [self.contentView addSubview:titleView];
     self.titleView = titleView;
     
@@ -123,82 +126,96 @@
     commentLabel.font = MHFont(MHPxConvertPt(15.0f), NO);
     commentLabel.textAlignment = NSTextAlignmentLeft;
     commentLabel.textColor = MHGlobalBlackTextColor;
+//    [commentLabel setBackgroundColor:[UIColor blueColor]];
     self.commentLabel = commentLabel;
     [titleView addSubview:commentLabel];
     
-    
+    self.pinglunBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [[UIButton alloc] initWithFrame:CGRectMake(self.commentLabel.right, 0, 60, 30)];
+    [self.pinglunBtn setImage:[UIImage imageNamed:@"pinglun"] forState:(UIControlStateNormal)];
+    [self.pinglunBtn setTitle:@"评论" forState:(UIControlStateNormal)];
+    [self.pinglunBtn setTitleColor:[UIColor blackColor] forState:(UIControlStateNormal)];
+    [self.pinglunBtn addTarget:self action:@selector(pinglun_touch:) forControlEvents:(UIControlEventTouchUpInside)];
+    [titleView addSubview:self.pinglunBtn];
     // 评论数
-    UILabel *commentNumsLabel = [[UILabel alloc] init];
-    commentNumsLabel.font = MHFont(MHPxConvertPt(12.0f), NO);
-    commentNumsLabel.textAlignment = NSTextAlignmentLeft;
-    commentNumsLabel.textColor = MHGlobalOrangeTextColor;
-    [titleView addSubview:commentNumsLabel];
-    self.commentNumsLabel = commentNumsLabel;
+//    UILabel *commentNumsLabel = [[UILabel alloc] init];
+//    commentNumsLabel.font = MHFont(MHPxConvertPt(12.0f), NO);
+//    commentNumsLabel.textAlignment = NSTextAlignmentLeft;
+//    commentNumsLabel.textColor = MHGlobalOrangeTextColor;
+//    commentNumsLabel.hidden=YES;
+//    [titleView addSubview:commentNumsLabel];
+//    self.commentNumsLabel = commentNumsLabel;
     
     // 话题类型
-    UIButton *topicTypeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [topicTypeBtn addTarget:self action:@selector(_topicTypeBtnDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [titleView addSubview:topicTypeBtn];
-    self.topicTypeBtn = topicTypeBtn;
+//    UIButton *topicTypeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+//    [topicTypeBtn addTarget:self action:@selector(_topicTypeBtnDidClicked:) forControlEvents:UIControlEventTouchUpInside];
+//    [titleView addSubview:topicTypeBtn];
+//    self.topicTypeBtn = topicTypeBtn;
     
     // 中间分割线
     MHDivider *middleLine = [MHDivider divider];
     self.middleLine = middleLine;
     [titleView addSubview:middleLine];
     
-    // 话题热门
-    [self.topicTypeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.right.and.bottom.equalTo(self.titleView);
-        make.width.equalTo(self.titleView.mas_height);
-    }];
-    
-    // 评论数
-    [self.commentNumsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.commentLabel.mas_right).with.offset(6);
-        make.right.equalTo(self.topicTypeBtn.mas_left);
-        make.top.and.bottom.equalTo(self.titleView);
-    }];
+//    // 话题热门
+//    [self.topicTypeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.right.and.bottom.equalTo(self.titleView);
+//        make.width.equalTo(self.titleView.mas_height);
+//    }];
+//
+//    // 评论数
+//    [self.commentNumsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.commentLabel.mas_right).with.offset(6);
+//        make.right.equalTo(self.topicTypeBtn.mas_left);
+//        make.top.and.bottom.equalTo(self.titleView);
+//    }];
     
 }
 
-
-// 创建评论输入框
-- (void) _setupCommentView
+-(void)pinglun_touch:(id)sender
 {
-    // 评论View
-    UIView *commentView = [[UIView alloc] init];
-    commentView.backgroundColor = [UIColor whiteColor];
-    self.commentView = commentView;
-    [self.contentView addSubview:commentView];
-    
-    // 用户头像
-    MHImageView *avatarView = [MHImageView imageView];
-    avatarView.layer.cornerRadius = MHTopicAvatarWH*.5f;
-    avatarView.layer.masksToBounds = YES;
-    MHAccount *account =[AppDelegate sharedDelegate].account;
-    if (MHObjectIsNil(account)) {
-        avatarView.image = MHGlobalUserDefaultAvatar;
-    }else{
-        [MHWebImageTool setImageWithURL:account.avatarUrl placeholderImage:MHGlobalUserDefaultAvatar imageView:avatarView];
+    // 评论按钮点击事件
+    if (self.delegate && [self.delegate respondsToSelector:@selector(commentHeaderViewForCommentBtnAction:)]) {
+        [self.delegate commentHeaderViewForCommentBtnAction:self];
     }
-    self.avatarView = avatarView;
-    [commentView addSubview:avatarView];
-    
-    // 评论按钮
-    MHYouKuCommentButton *commentBtn = [MHYouKuCommentButton commentButton];
-    self.commentBtn = commentBtn;
-    [commentBtn addTarget:self action:@selector(_commentBtnDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [commentBtn setTitleColor:MHColorFromHexString(@"#BEBEBE") forState:UIControlStateNormal];
-    [commentBtn setBackgroundImage:[UIImage mh_resizableImage:@"comment_comment"] forState:UIControlStateNormal];
-    [commentView addSubview:commentBtn];
-    
-    // 分割线
-    MHDivider *bottomLine = [MHDivider divider];
-    self.bottomLine = bottomLine;
-    [commentView addSubview:bottomLine];
-    
 }
+//// 创建评论输入框
+//- (void) _setupCommentView
+//{
+//    // 评论View
+//    UIView *commentView = [[UIView alloc] init];
+//    commentView.backgroundColor = [UIColor whiteColor];
+//    self.commentView = commentView;
+//    [self.contentView addSubview:commentView];
+    
+//    // 用户头像
+//    MHImageView *avatarView = [MHImageView imageView];
+//    avatarView.layer.cornerRadius = MHTopicAvatarWH*.5f;
+//    avatarView.layer.masksToBounds = YES;
+//    MHAccount *account =[AppDelegate sharedDelegate].account;
+//    if (MHObjectIsNil(account)) {
+//        avatarView.image = MHGlobalUserDefaultAvatar;
+//    }else{
+//        [MHWebImageTool setImageWithURL:account.avatarUrl placeholderImage:MHGlobalUserDefaultAvatar imageView:avatarView];
+//    }
+//    self.avatarView = avatarView;
+//    [commentView addSubview:avatarView];
+    
+//    // 评论按钮
+//    MHYouKuCommentButton *commentBtn = [MHYouKuCommentButton commentButton];
+//    self.commentBtn = commentBtn;
+//    [commentBtn addTarget:self action:@selector(_commentBtnDidClicked:) forControlEvents:UIControlEventTouchUpInside];
+//
+//    [commentBtn setTitleColor:MHColorFromHexString(@"#BEBEBE") forState:UIControlStateNormal];
+//    [commentBtn setBackgroundImage:[UIImage mh_resizableImage:@"comment_comment"] forState:UIControlStateNormal];
+//    [commentView addSubview:commentBtn];
+//
+//    // 分割线
+//    MHDivider *bottomLine = [MHDivider divider];
+//    self.bottomLine = bottomLine;
+//    [commentView addSubview:bottomLine];
+//
+//}
 
 
 
@@ -208,21 +225,25 @@
     // 布局
     [self.titleView mas_makeConstraints:^(MASConstraintMaker *make) {
 //        make.left.right.and.top.equalTo(self.contentView).offset(-15);
-        make.left.right.and.top.equalTo(self.contentView).offset(-15);
+        make.left.right.and.top.equalTo(self.contentView).offset(5);
         make.height.mas_equalTo(50.0f);
     }];
     
     // 评论
     [self.commentLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.titleView.mas_left).with.offset(MHGlobalViewLeftInset);
-//        make.right.equalTo(self.titleView);
-        make.right.equalTo(self.titleView.mas_right).with.offset(MHGlobalViewLeftInset);
+        make.left.equalTo(self.titleView.mas_left);
+        make.right.equalTo(self.titleView.mas_right).with.offset(-80);
+//        make.right.equalTo(self.titleView.mas_right).with.offset(MHGlobalViewLeftInset);
         make.width.mas_equalTo([@"评论" mh_sizeWithFont:self.commentLabel.font].width+4);
 //        make.width.equalTo(self.titleView.mas_width).offset(-50);
         make.top.and.bottom.equalTo(self.titleView);
     }];
-    
-    
+    // 评论按钮
+    [self.pinglunBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.commentLabel.mas_right).with.offset(6);
+        make.width.equalTo(@(80));
+        make.top.and.bottom.equalTo(self.titleView);
+    }];
     // 中间分割线
     [self.middleLine mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.bottom.and.right.equalTo(self.titleView);
@@ -232,30 +253,30 @@
     
     
     // 布局
-    [self.commentView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.contentView);
-        make.top.equalTo(self.titleView.mas_bottom);
-        make.height.mas_equalTo(50.0f);
-    }];
+//    [self.commentView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.right.equalTo(self.contentView);
+//        make.top.equalTo(self.titleView.mas_bottom);
+//        make.height.mas_equalTo(50.0f);
+//    }];
+//
+//    [self.avatarView mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.commentView.mas_left).with.offset(MHGlobalViewLeftInset);
+//        make.width.height.mas_equalTo(MHTopicAvatarWH);
+//        make.centerY.equalTo(self.commentView);
+//    }];
+//
+//
+//    [self.commentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.equalTo(self.avatarView.mas_right).with.offset(6);
+//        make.right.equalTo(self.commentView).with.offset(-1 * MHGlobalViewLeftInset);
+//        make.height.mas_equalTo(28.0f);
+//        make.centerY.equalTo(self.commentView);
+//    }];
     
-    [self.avatarView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.commentView.mas_left).with.offset(MHGlobalViewLeftInset);
-        make.width.height.mas_equalTo(MHTopicAvatarWH);
-        make.centerY.equalTo(self.commentView);
-    }];
-    
-    
-    [self.commentBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.avatarView.mas_right).with.offset(6);
-        make.right.equalTo(self.commentView).with.offset(-1 * MHGlobalViewLeftInset);
-        make.height.mas_equalTo(28.0f);
-        make.centerY.equalTo(self.commentView);
-    }];
-    
-    [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.bottom.and.right.equalTo(self.commentView);
-        make.height.mas_equalTo(MHGlobalBottomLineHeight);
-    }];
+//    [self.bottomLine mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.bottom.and.right.equalTo(self.commentView);
+//        make.height.mas_equalTo(MHGlobalBottomLineHeight);
+//    }];
 }
 
 #pragma mark - 布局子控件

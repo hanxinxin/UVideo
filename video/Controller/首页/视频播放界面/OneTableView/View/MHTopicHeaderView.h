@@ -25,7 +25,8 @@
 
 /** 用户点击点赞按钮 */
 - (void)topicHeaderViewForClickedThumbAction:(MHTopicHeaderView *)topicHeaderView;
-
+/** 用户点击回复按钮 */
+- (void)topicHeaderViewForHuiFuAction:(MHTopicHeaderView *)topicHeaderView;
 
 
 @end

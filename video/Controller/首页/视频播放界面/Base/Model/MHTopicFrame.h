@@ -30,6 +30,9 @@
 /** 话题内容frame */
 @property (nonatomic , assign , readonly) CGRect textFrame;
 
+/** 回复按钮frame */
+@property (nonatomic , assign , readonly) CGRect huifuBtnFrame;
+
 /** height 这里只是 整个话题占据的高度 */
 @property (nonatomic , assign , readonly) CGFloat height;
 

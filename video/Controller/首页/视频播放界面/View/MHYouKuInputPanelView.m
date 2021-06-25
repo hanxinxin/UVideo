@@ -246,7 +246,7 @@
     YYLabel *words = [[YYLabel alloc] init];
     words.textAlignment = NSTextAlignmentLeft;
     
-    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:@"0/300字"];
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithString:@"0/140字"];
     attributedText.yy_font = MHFont(MHPxConvertPt(9.0f), NO);
     attributedText.yy_color = MHGlobalGrayTextColor;
     words.attributedText = attributedText;

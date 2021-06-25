@@ -312,6 +312,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
             if (movingH) {
                 float value = translate.x / (self.width >> 1);
                 value = MIN(MAX(-1, value), 1);
+                value=value/5.f;///降低滑动系数
                 if ([self.delegate respondsToSelector:@selector(kj_basePlayerView:progress:end:)]) {
                     NSArray *array = [self.delegate kj_basePlayerView:self progress:value end:NO];
                     if (array.count == 2) {
@@ -322,6 +323,9 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
                         }else{
                             self.fastLayer.hidden = NO;
                         }
+                        NSLog(@"滑动[array[0] floatValue]==== %f  value === %f    totalTime=%f",[array[0] floatValue],value ,totalTime);
+//                        NSTimeInterval time = [array[0] floatValue] + value * totalTime;
+                        
                         NSTimeInterval time = [array[0] floatValue] + value * totalTime;
                         NSLog(@"滑动time==== %f",time);
                         [self.fastLayer kj_updateFastValue:time?:0.0 TotalTime:totalTime];
@@ -349,6 +353,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
                 if ([self.delegate respondsToSelector:@selector(kj_basePlayerView:progress:end:)]) {
                     float value = translate.x / (self.width >> 1);
                     value = MIN(MAX(-1, value), 1);
+                    value=value/5.f;///降低滑动系数
                     [self.delegate kj_basePlayerView:self progress:value end:YES];
                     if (_fastLayer) _fastLayer.hidden = YES;
                 }

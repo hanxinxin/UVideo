@@ -151,7 +151,7 @@
 //|pagesize|否|number|50|每页数量|
 
 #define video_categoryurl @"/video/category"  //视频分类
-#define video_postCommenturl @" /video/postComment"  //对视频进行评论
+#define video_postCommenturl @"/video/postComment"  //对视频进行评论
 //#### 请求参数:
 //|参数名|必须|类型|默认值|说明|
 //|:----|:---|:-----|:-----|-----|

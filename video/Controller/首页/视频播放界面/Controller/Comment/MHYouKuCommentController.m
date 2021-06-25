@@ -247,12 +247,12 @@
 
 - (void)_send
 {
-    if (self.textView.attributedText.length == 0) {
-        [self mh_showTopHint:@"评论内容不能为空"];
+    if (self.textView.attributedText.length <= 10) {
+        [self mh_showTopHint:@"评论字数不能少于10"];
         return;
     }
     
-    if (self.textView.attributedText.length>300) {
+    if (self.textView.attributedText.length>140) {
         [self mh_showTopHint:@"评论内容字数超过上限"];
         return;
     }
@@ -260,37 +260,39 @@
     // 先关闭控制器
     [self _close];
     
-    // 假数据
-    MHTopic *topic = [[MHTopic alloc] init];
-    topic.mediabase_id = self.mediabase_id;
-    topic.topicId = [NSString stringWithFormat:@"%zd",[NSObject mh_randomNumber:30 to:100]];
-    topic.thumbNums = 0;
-    topic.thumb = NO;
-    topic.creatTime = [NSDate mh_currentTimestamp];
-    topic.text = self.textView.attributedText.string;
-    topic.commentsCount = 0;
-    MHUser *user = [[MHUser alloc] init];
-    user.avatarUrl = [AppDelegate sharedDelegate].account.avatarUrl;
-    user.nickname = [AppDelegate sharedDelegate].account.nickname;
-    user.userId = [AppDelegate sharedDelegate].account.userId;
-    topic.user = user;
+//    // 假数据
+//    MHTopic *topic = [[MHTopic alloc] init];
+//    topic.mediabase_id = self.mediabase_id;
+//    topic.topicId = [NSString stringWithFormat:@"%zd",[NSObject mh_randomNumber:30 to:100]];
+//    topic.thumbNums = 0;
+//    topic.thumb = NO;
+//    topic.creatTime = [NSDate mh_currentTimestamp];
+//    topic.text = self.textView.attributedText.string;
+//    topic.commentsCount = 0;
+//    MHUser *user = [[MHUser alloc] init];
+//    user.avatarUrl = [AppDelegate sharedDelegate].account.avatarUrl;
+//    user.nickname = [AppDelegate sharedDelegate].account.nickname;
+//    user.userId = [AppDelegate sharedDelegate].account.userId;
+//    topic.user = user;
     
-    // 模拟网络发送
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.25f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        NSString *mediaBaseId = self.mediabase_id;
-        // 解析数据
-        if (MHStringIsNotEmpty(mediaBaseId)) {
-            // 移除掉内存缓存的字段
-            [[MHTopicManager sharedManager].commentDictionary removeObjectForKey:self.mediabase_id];
-        }
-        
+//    // 模拟网络发送
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.25f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
+//        NSString *mediaBaseId = self.mediabase_id;
+//        // 解析数据
+//        if (MHStringIsNotEmpty(mediaBaseId)) {
+//            // 移除掉内存缓存的字段
+//            [[MHTopicManager sharedManager].commentDictionary removeObjectForKey:self.mediabase_id];
+//        }
+//
         // PS: 通知回调 由于有两个控制器需要回调数据 所以利用通知回调 保证地址一致
-        [MHNotificationCenter postNotificationName:MHCommentSuccessNotification object:nil userInfo:@{MHCommentSuccessKey:[self _topicFramesWithTopics:@[topic]].lastObject}];
+//        [MHNotificationCenter postNotificationName:MHCommentSuccessNotification object:nil userInfo:@{MHCommentSuccessKey:[self _topicFramesWithTopics:@[topic]].lastObject}];
         
-    });
+//    });
     
-    
+    if ([self.delegate respondsToSelector:@selector(editokController:)]) {
+        [self.delegate editokController:self.textView.attributedText.string];
+    }
     
             
 }

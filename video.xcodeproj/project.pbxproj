@@ -330,6 +330,7 @@
 		8A9C567925F8A24E00EFA410 /* OfflineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C567825F8A24E00EFA410 /* OfflineViewController.m */; };
 		8A9C567F25F8A27500EFA410 /* MyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C567E25F8A27500EFA410 /* MyViewController.m */; };
 		8A9C56B925F8A4D000EFA410 /* LocalStringObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C56B725F8A4D000EFA410 /* LocalStringObj.m */; };
+		8AA86DE32685D7A200677623 /* VideoCommentMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AA86DE22685D7A200677623 /* VideoCommentMode.m */; };
 		8AADB3972679C99A009051B7 /* VideoVideosource.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AADB3962679C99A009051B7 /* VideoVideosource.m */; };
 		8AADB39D267CC836009051B7 /* VideoHistoryMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AADB39C267CC835009051B7 /* VideoHistoryMode.m */; };
 		8AADB3A92681CB82009051B7 /* infoXGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AADB3A82681CB80009051B7 /* infoXGViewController.m */; };
@@ -404,7 +405,6 @@
 		FA9662E62663361500AF7B46 /* PlayWTView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9662E52663361500AF7B46 /* PlayWTView.xib */; };
 		FA97027C26692D8C00418B3A /* YTSliderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA97027826692D8C00418B3A /* YTSliderView.m */; };
 		FA97027D26692D8C00418B3A /* YTSliderSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = FA97027A26692D8C00418B3A /* YTSliderSetting.m */; };
-		FA9804802684D99D00FF6BF9 /* pinglunHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA98047F2684D99D00FF6BF9 /* pinglunHeaderView.m */; };
 		FA984FA62674AEDF0014DCA8 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984F832674AEDF0014DCA8 /* UIProgressView+AFNetworking.m */; };
 		FA984FA72674AEDF0014DCA8 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984F852674AEDF0014DCA8 /* UIRefreshControl+AFNetworking.m */; };
 		FA984FA82674AEDF0014DCA8 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984F882674AEDF0014DCA8 /* AFNetworkActivityIndicatorManager.m */; };
@@ -1098,6 +1098,8 @@
 		8A9C56AE25F8A41100EFA410 /* GlobalConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalConfig.h; sourceTree = "<group>"; };
 		8A9C56B725F8A4D000EFA410 /* LocalStringObj.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocalStringObj.m; sourceTree = "<group>"; };
 		8A9C56B825F8A4D000EFA410 /* LocalStringObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalStringObj.h; sourceTree = "<group>"; };
+		8AA86DE12685D7A200677623 /* VideoCommentMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoCommentMode.h; sourceTree = "<group>"; };
+		8AA86DE22685D7A200677623 /* VideoCommentMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoCommentMode.m; sourceTree = "<group>"; };
 		8AADB3952679C99A009051B7 /* VideoVideosource.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoVideosource.h; sourceTree = "<group>"; };
 		8AADB3962679C99A009051B7 /* VideoVideosource.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoVideosource.m; sourceTree = "<group>"; };
 		8AADB39B267CC835009051B7 /* VideoHistoryMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoHistoryMode.h; sourceTree = "<group>"; };
@@ -1232,8 +1234,6 @@
 		FA97027926692D8C00418B3A /* YTSliderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSliderView.h; sourceTree = "<group>"; };
 		FA97027A26692D8C00418B3A /* YTSliderSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YTSliderSetting.m; sourceTree = "<group>"; };
 		FA97027B26692D8C00418B3A /* YTSliderSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YTSliderSetting.h; sourceTree = "<group>"; };
-		FA98047E2684D99D00FF6BF9 /* pinglunHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pinglunHeaderView.h; sourceTree = "<group>"; };
-		FA98047F2684D99D00FF6BF9 /* pinglunHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = pinglunHeaderView.m; sourceTree = "<group>"; };
 		FA984F832674AEDF0014DCA8 /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
 		FA984F842674AEDF0014DCA8 /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+AFNetworking.h"; sourceTree = "<group>"; };
 		FA984F852674AEDF0014DCA8 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
@@ -1796,12 +1796,12 @@
 		8A39311825FCDED100E7331B /* View */ = {
 			isa = PBXGroup;
 			children = (
-				8A39311925FCDED100E7331B /* MHCommentCell.m */,
-				8A39311A25FCDED100E7331B /* MHTopicFooterView.m */,
-				8A39311B25FCDED100E7331B /* MHTopicHeaderView.h */,
 				8A39311C25FCDED100E7331B /* MHCommentCell.h */,
-				8A39311D25FCDED100E7331B /* MHTopicFooterView.h */,
+				8A39311925FCDED100E7331B /* MHCommentCell.m */,
+				8A39311B25FCDED100E7331B /* MHTopicHeaderView.h */,
 				8A39311E25FCDED100E7331B /* MHTopicHeaderView.m */,
+				8A39311D25FCDED100E7331B /* MHTopicFooterView.h */,
+				8A39311A25FCDED100E7331B /* MHTopicFooterView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -2215,22 +2215,22 @@
 			children = (
 				8A8BC2CE25FC6ED00028173C /* MHYouKuCommentHeaderView.h */,
 				8A8BC2CF25FC6ED00028173C /* MHYouKuAnthologyHeaderView.h */,
-				8A8BC2D025FC6ED00028173C /* MHYouKuMediaSummary.m */,
-				8A8BC2D125FC6ED00028173C /* MHYouKuBottomToolBar.m */,
-				8A8BC2D225FC6ED00028173C /* MHYouKuCommentButton.h */,
+				8A8BC2DF25FC6ED00028173C /* MHYouKuInputPanelView.h */,
 				8A8BC2D325FC6ED00028173C /* MHYouKuInputPanelView.m */,
-				8A8BC2D425FC6ED00028173C /* MHYouKuMediaDetail.m */,
 				8A8BC2D525FC6ED00028173C /* MHYouKuCommentToolBar.h */,
+				8A8BC2DD25FC6ED00028173C /* MHYouKuCommentToolBar.m */,
 				8A8BC2D625FC6ED00028173C /* MHYouKuVerticalSeparateButton.h */,
+				8A8BC2DC25FC6ED00028173C /* MHYouKuVerticalSeparateButton.m */,
 				8A8BC2D725FC6ED00028173C /* MHYouKuMediaSummary.h */,
+				8A8BC2D025FC6ED00028173C /* MHYouKuMediaSummary.m */,
 				8A8BC2D825FC6ED00028173C /* MHYouKuAnthologyHeaderView.m */,
 				8A8BC2D925FC6ED00028173C /* MHYouKuCommentHeaderView.m */,
+				8A8BC2D225FC6ED00028173C /* MHYouKuCommentButton.h */,
 				8A8BC2DA25FC6ED00028173C /* MHYouKuCommentButton.m */,
 				8A8BC2DB25FC6ED00028173C /* MHYouKuBottomToolBar.h */,
-				8A8BC2DC25FC6ED00028173C /* MHYouKuVerticalSeparateButton.m */,
-				8A8BC2DD25FC6ED00028173C /* MHYouKuCommentToolBar.m */,
+				8A8BC2D125FC6ED00028173C /* MHYouKuBottomToolBar.m */,
 				8A8BC2DE25FC6ED00028173C /* MHYouKuMediaDetail.h */,
-				8A8BC2DF25FC6ED00028173C /* MHYouKuInputPanelView.h */,
+				8A8BC2D425FC6ED00028173C /* MHYouKuMediaDetail.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -3475,8 +3475,8 @@
 		FA98047D2684D97100FF6BF9 /* video评论 */ = {
 			isa = PBXGroup;
 			children = (
-				FA98047E2684D99D00FF6BF9 /* pinglunHeaderView.h */,
-				FA98047F2684D99D00FF6BF9 /* pinglunHeaderView.m */,
+				8AA86DE12685D7A200677623 /* VideoCommentMode.h */,
+				8AA86DE22685D7A200677623 /* VideoCommentMode.m */,
 			);
 			path = "video评论";
 			sourceTree = "<group>";
@@ -4164,6 +4164,7 @@
 				8A8BC39A25FC6F9E0028173C /* UIImage+MHOrientation.m in Sources */,
 				FA984FB22674AEDF0014DCA8 /* AFURLRequestSerialization.m in Sources */,
 				8A82F15A264FC663004AAF40 /* ZjiluViewController.m in Sources */,
+				8AA86DE32685D7A200677623 /* VideoCommentMode.m in Sources */,
 				8A9C561225F8A10000EFA410 /* UIView+Visuals.m in Sources */,
 				FA993BB726774A2700C6F298 /* DYMakeModel.m in Sources */,
 				FA9662E42663360400AF7B46 /* PlayWTView.m in Sources */,
@@ -4337,7 +4338,6 @@
 				8A9C560D25F8A10000EFA410 /* UIView+Animation.m in Sources */,
 				8A39314025FCDFCE00E7331B /* MHTopic.m in Sources */,
 				8A9C559225F89F0C00EFA410 /* CYLTabBar.m in Sources */,
-				FA9804802684D99D00FF6BF9 /* pinglunHeaderView.m in Sources */,
 				8A3930CF25FCDB3800E7331B /* CMHExample.m in Sources */,
 				FA936FAA265944EA00067614 /* HJCornerRadius.m in Sources */,
 				8A9C562025F8A10000EFA410 /* UIButton+MiddleAligning.m in Sources */,

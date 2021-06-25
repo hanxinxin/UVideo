@@ -27,6 +27,9 @@
 /** 话题内容frame */
 @property (nonatomic , assign) CGRect textFrame;
 
+/** 回复按钮frame */
+@property (nonatomic , assign) CGRect huifuBtnFrame;
+
 /** height*/
 @property (nonatomic , assign) CGFloat height;
 
@@ -55,7 +58,7 @@
     _topic = topic;
     
     // 整个宽度
-    CGFloat width = [UIScreen mainScreen].bounds.size.width;
+    CGFloat width = [UIScreen mainScreen].bounds.size.width-20;
     
     // 头像
     CGFloat avatarX = MHTopicHorizontalSpace;
@@ -100,12 +103,17 @@
     
     self.textFrame = (CGRect){{textX , textY} , {textLimitSize.width, textH}};
     
-    
+    // 回复按钮
+    CGFloat huifuBtnX = self.textFrame.size.width-10;
+    CGSize huifuBtnLimitSize = CGSizeMake(60, MAXFLOAT);
+    CGFloat huifuBtnY = CGRectGetMaxY(self.textFrame)+0;
+    CGFloat huifuBtnH = 30.f;
+    self.huifuBtnFrame =(CGRect){{huifuBtnX , huifuBtnY} , {huifuBtnLimitSize.width, huifuBtnH}};
     
     CGFloat tableViewX = textX;
-    CGFloat tableViewY = CGRectGetMaxY(self.textFrame);
+    CGFloat tableViewY = CGRectGetMaxY(self.textFrame)+huifuBtnH;
     CGFloat tableViewW = textLimitSize.width;
-    CGFloat tableViewH = 0;
+    CGFloat tableViewH = 35.f;
     // 评论数据
     if (topic.comments>0)
     {
@@ -120,9 +128,11 @@
         }
     }
     
+    
+    
     self.tableViewFrame = CGRectMake(tableViewX, tableViewY, tableViewW, tableViewH);
     // 自身高度
-    self.height = CGRectGetMaxY(self.textFrame);
+    self.height = CGRectGetMaxY(self.textFrame)+35;
 
 }
 

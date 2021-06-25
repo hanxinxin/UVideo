@@ -85,7 +85,7 @@
     
     // 头像
     self.avatarView.frame = topicFrame.avatarFrame;
-    [MHWebImageTool setImageWithURL:user.avatarUrl placeholderImage:MHGlobalUserDefaultAvatar imageView:self.avatarView];
+    [MHWebImageTool setImageWithURL:user.avatarUrl placeholderImage:morenAvatar imageView:self.avatarView];
     
     // 昵称
     self.nicknameLable.frame = topicFrame.nicknameFrame;
@@ -100,15 +100,15 @@
 //    self.moreBtn.frame = topicFrame.moreFrame;
     
     // 时间
-    self.createTimeLabel.frame = topicFrame.createTimeFrame;
-    self.createTimeLabel.text = topic.creatTime;
+//    self.createTimeLabel.frame = topicFrame.createTimeFrame;
+//    self.createTimeLabel.text = topic.creatTime;
     
     // 内容
     self.contentLabel.frame = topicFrame.textFrame;
     self.contentLabel.attributedText = topic.attributedText;
     
     //回复
-    self.huifuBtn.frame = topicFrame.thumbFrame;
+    self.huifuBtn.frame = topicFrame.huifuBtnFrame;
     
 }
 
@@ -140,7 +140,7 @@
     // 昵称
     YYLabel *nicknameLable = [[YYLabel alloc] init];
     nicknameLable.text = @"";
-    nicknameLable.font = MHTopicNicknameFont;
+    nicknameLable.font = MHMediumFont(18.0f);
     nicknameLable.textAlignment = NSTextAlignmentLeft;
     nicknameLable.textColor = MHGlobalGrayTextColor;
     [self.contentView addSubview:nicknameLable];
@@ -172,17 +172,17 @@
 //    self.moreBtn = moreBtn;
     
     
-    // 时间
-    YYLabel *createTimeLabel = [[YYLabel alloc] init];
-    createTimeLabel.text = @"";
-    createTimeLabel.font = MHTopicNicknameFont;
-    createTimeLabel.textAlignment = NSTextAlignmentLeft;
-    createTimeLabel.textColor = MHGlobalGrayTextColor;
-    [self.contentView addSubview:createTimeLabel];
-    self.createTimeLabel = createTimeLabel;
-    createTimeLabel.textTapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {
-        [weakSelf _contentTextDidClicked];
-    };
+//    // 时间
+//    YYLabel *createTimeLabel = [[YYLabel alloc] init];
+//    createTimeLabel.text = @"";
+//    createTimeLabel.font = MHTopicNicknameFont;
+//    createTimeLabel.textAlignment = NSTextAlignmentLeft;
+//    createTimeLabel.textColor = MHGlobalGrayTextColor;
+//    [self.contentView addSubview:createTimeLabel];
+//    self.createTimeLabel = createTimeLabel;
+//    createTimeLabel.textTapAction = ^(UIView *containerView, NSAttributedString *text, NSRange range, CGRect rect) {
+//        [weakSelf _contentTextDidClicked];
+//    };
     
     
     // 文本
@@ -208,7 +208,8 @@
     [huifuBtn setTitle:@"回复" forState:(UIControlStateNormal)];
     [huifuBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     [huifuBtn addTarget:self action:@selector(_huifuBtnDidClicked:) forControlEvents:UIControlEventTouchUpInside];
-    huifuBtn.titleLabel.font = MHTopicThumbFont;
+    huifuBtn.titleLabel.font = MHMediumFont(18.0f);
+    huifuBtn.hidden=YES;  ////先屏蔽  暂时没有回复功能
         [self.contentView addSubview:huifuBtn];
         self.huifuBtn = huifuBtn;
     

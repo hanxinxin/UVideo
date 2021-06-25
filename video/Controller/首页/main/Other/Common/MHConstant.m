@@ -83,7 +83,7 @@ CGFloat const MHCommentHeaderViewHeight = 100.0f;
 CGFloat const MHCommentToolBarHeight  = 44.0f  ;
 
 /** 最大字数 */
-NSInteger const MHCommentMaxWords  = 300  ;
+NSInteger const MHCommentMaxWords  = 140  ;
 
 
 /** 每页数据 */

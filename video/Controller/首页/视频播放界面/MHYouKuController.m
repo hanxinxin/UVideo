@@ -26,13 +26,12 @@
 #import "MHYouKuCommentController.h"
 #import "MHYouKuInputPanelView.h"
 #import "MHYouKuTopicDetailController.h"
-#import "pinglunHeaderView.h"
 
-
+#import "VideoCommentMode.h"
 #import "ClarityView.h"
 #import "menberViewTS.h"
 
-@interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate ,UITextFieldDelegate, MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate,KJPlayerDelegate,KJPlayerBaseViewDelegate,KJPlayerBaseViewDelegate,YTSliderViewDelegate>
+@interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate ,UITextFieldDelegate, MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate,KJPlayerDelegate,KJPlayerBaseViewDelegate,KJPlayerBaseViewDelegate,YTSliderViewDelegate,MHYouKuCommentControllerDelegate>
 {
     NSDictionary *keyboardInfo;
 }
@@ -95,7 +94,7 @@
 @property (nonatomic , weak) MHYouKuMediaDetail *detail;
 
 ///** 选中的话题尺寸模型 */
-//@property (nonatomic , strong) MHTopicFrame *selectedTopicFrame;
+@property (nonatomic , strong) MHTopicFrame *selectedTopicFrame;
 
 /** 评论Item */
 @property (nonatomic , strong) MHYouKuCommentItem *commentItem;
@@ -127,6 +126,15 @@
 
 @property(nonatomic,assign)NSInteger QXDSelectIndex; //// 清晰度选择
 @property(nonatomic,assign)NSInteger xuanjiSelectIndex; ///  集数选择
+
+
+
+
+//评论 计数
+@property(nonatomic,assign)NSInteger pagepinglun;
+@property(nonatomic,assign)NSInteger pagesizepinglun;
+/** dataSource */
+@property (nonatomic , strong) NSMutableArray *PinglunList;
 @end
 
 @implementation MHYouKuController
@@ -200,8 +208,11 @@
     
     self.qualitieslist=[[NSArray alloc] init];
     self.subtitleslist=[[NSArray alloc] init];
+    self.PinglunList=[NSMutableArray arrayWithCapacity:0];
     self.QXDSelectIndex=0;
     self.xuanjiSelectIndex=0;
+    self.pagepinglun=1;
+    self.pagesizepinglun=20;
     if(_Zvideomodel!=nil)
     {
     VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
@@ -243,7 +254,7 @@
                     NSArray * subtitles = [dataArr objectForKey:@"subtitles"];
                     self.qualitieslist=qualities;
                     self.subtitleslist=subtitles;
-                    self.Clarity.titleNumberarray=self.qualitieslist;
+                    self.Clarity.titleNumberarray=[self paixunArray:self.qualitieslist];;
                     
                     [self.Clarity.collectionView1 reloadData];
                 }else{
@@ -257,6 +268,13 @@
                 [UHud showTXTWithStatus:@"网络错误" delay:2.f];
             
             }];
+}
+
+-(NSArray*)paixunArray:(NSArray*)array
+{
+//    NSMutableArray *arr1=[array sortedArrayUsingSelector:@selector(compare:)];
+    NSArray *arr1=[array sortedArrayUsingSelector:@selector(compare:)];
+    return arr1;
 }
 
 
@@ -626,6 +644,7 @@
     return _commentItem;
 }
 
+
 - (MHYouKuAnthologyItem *)anthologyItem
 {
     if (_anthologyItem == nil) {
@@ -704,6 +723,29 @@
 {
     [self.dataSource insertObject:self.anthologyItem atIndex:0];
     [self.dataSource addObject:self.commentItem];
+//    VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+//    [self.dataSource addObject:modelL];
+//    MHTopicFrame * modeTop = [[MHTopicFrame alloc] init];
+//    // 假数据
+//    MHTopic *topic = [[MHTopic alloc] init];
+//    topic.mediabase_id = self.mediabase_id;
+//    topic.topicId = [NSString stringWithFormat:@"%f",modelL.id];
+//    topic.thumbNums = 0;
+//    topic.thumb = NO;
+//    topic.creatTime = @"";
+//    topic.text = modelL.description;
+//    topic.commentsCount = 0;
+//    MHUser *user = [[MHUser alloc] init];
+//    user.avatarUrl = [AppDelegate sharedDelegate].account.avatarUrl;
+//    user.nickname = [AppDelegate sharedDelegate].account.nickname;
+//    user.userId = [AppDelegate sharedDelegate].account.userId;
+//    topic.user = user;
+//
+//    modeTop.topic=topic;
+//
+//    [self.dataSource addObject:modeTop];
+//    [self.dataSource addObject:modeTop];
+//    [self.dataSource addObject:modeTop];
     [self.tableView reloadData];
 }
 
@@ -931,6 +973,7 @@
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.delegate = self;
     tableView.dataSource = self;
+    tableView.showsVerticalScrollIndicator = NO;  ///隐藏滚动条
 //    tableView
     tableView.backgroundColor = [UIColor whiteColor];
     [self.bottomContainer addSubview:tableView];
@@ -940,7 +983,16 @@
         make.top.equalTo(self.bottomToolBar.mas_bottom);
         make.left.bottom.and.right.equalTo(self.bottomContainer);
     }];
+    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+
+            [self getHeadervideo_commenturlData];
+    }];
+    [self.tableView.mj_header beginRefreshing];
     
+    
+    self.tableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+        [self getFootvideo_commenturlData];
+    }];
 //    // 视频简介 tableViewHeader
 //    MHYouKuMediaSummary *summary = [MHYouKuMediaSummary summary];
 //    summary.backgroundColor = [UIColor whiteColor];
@@ -971,6 +1023,105 @@
     
     
 }
+
+-(void)getHeadervideo_commenturlData
+{
+    
+    self.pagepinglun=1;
+    VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+    NSDictionary* dict = @{
+        @"video_id":[NSString stringWithFormat:@"%f",modelL.id],
+        @"page":[NSString stringWithFormat:@"%@",@(self.pagepinglun)],
+        @"pagesize":[NSString stringWithFormat:@"%@",@(self.pagesizepinglun)],};
+    
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_commenturl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+            [UHud hideLoadHud];
+        [self.tableView.mj_header endRefreshing];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    [self.PinglunList removeAllObjects];
+                    NSDictionary  * dataArr = [dict objectForKey:@"data"];
+                    NSArray * video_comment_list = [dataArr objectForKey:@"video_comment_list"];
+                    if(![video_comment_list isKindOfClass:[NSNull class]]){
+                    if(video_comment_list.count>0)
+                    {
+                        for (int i=0; i<video_comment_list.count; i++) {
+                            
+                            VideoCommentMode*model=[VideoCommentMode yy_modelWithDictionary:video_comment_list[i]];
+    //                    //直接放到网络请求结果调用，生成模型后删除就行，结果打印在控制台
+//                        [DYModelMaker DY_makeModelWithDictionary:video_comment_list[i] modelKeyword:@"Video" modelName:@"commentMode"];
+                            [self.PinglunList addObject:model];
+                        }
+                    }
+                    }
+                    [self.tableView  reloadData];
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+        
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+                [self.tableView.mj_header endRefreshing];
+            }];
+}
+
+
+-(void)getFootvideo_commenturlData
+{
+    
+    
+    VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+    NSDictionary* dict = @{
+        @"video_id":[NSString stringWithFormat:@"%f",modelL.id],
+        @"page":[NSString stringWithFormat:@"%@",@(self.pagepinglun+1)],
+        @"pagesize":[NSString stringWithFormat:@"%@",@(self.pagesizepinglun)],};
+    
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_commenturl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+            [UHud hideLoadHud];
+        [self.tableView.mj_footer endRefreshing];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    
+                    NSDictionary  * dataArr = [dict objectForKey:@"data"];
+                    NSArray * video_comment_list = [dataArr objectForKey:@"video_comment_list"];
+                    if(![video_comment_list isKindOfClass:[NSNull class]]){
+                    if(video_comment_list.count>0)
+                    {
+                        self.pagepinglun+=1;
+                        for (int i=0; i<video_comment_list.count; i++) {
+                            
+                            VideoCommentMode*model=[VideoCommentMode yy_modelWithDictionary:video_comment_list[i]];
+                            [self.PinglunList addObject:model];
+                        }
+                    }
+                    }
+                    [self.tableView reloadData];
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+        
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+                [self.tableView.mj_footer endRefreshing];
+            }];
+}
+
+
+
 
 
 /** 创建视频详情 */
@@ -1176,6 +1327,37 @@
     self.inputPanelView = inputPanelView;
 }
 
+#pragma mark - MHYouKuInputPanelViewDelegate
+- (void) inputPanelView:(MHYouKuInputPanelView *)inputPanelView attributedText:(NSString *)attributedText
+{
+    VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+    NSDictionary*dict=@{@"video_id":[NSString stringWithFormat:@"%.f",modelL.id],
+                        @"content":attributedText,
+    };
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_postCommenturl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSString * message = @"评论成功";
+            [UHud showTXTWithStatus:message delay:2.f];
+            [self getHeadervideo_commenturlData];
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+        
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+                
+            }];
+}
+
+
+
 //去掉UItableview headerview黏性  ，table滑动到最上端时，header view消失掉。
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     if (scrollView == self.tableView)
@@ -1192,7 +1374,33 @@
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.dataSource.count;
+    [self.dataSource removeAllObjects];
+    [self.dataSource insertObject:self.anthologyItem atIndex:0];
+    [self.dataSource addObject:self.commentItem];
+        for (int i=0; i<self.PinglunList.count; i++) {
+            VideoCommentMode*modelll=self.PinglunList[i];
+            MHTopicFrame * modeTop = [[MHTopicFrame alloc] init];
+            /// 添加数据
+            
+            MHTopic *topic = [[MHTopic alloc] init];
+            topic.mediabase_id = self.mediabase_id;
+            topic.topicId = [NSString stringWithFormat:@"%f",modelll.id];
+            topic.thumbNums = 0;
+            topic.thumb = NO;
+            topic.creatTime = [NSString stringWithFormat:@"%f",modelll.create_time];
+            topic.text = modelll.content;
+            topic.commentsCount = 0;
+            MHUser *user = [[MHUser alloc] init];
+            user.avatarUrl = modelll.user_avatar;
+            user.nickname = modelll.user_nickname;
+            user.userId = [NSString stringWithFormat:@"%f",modelll.uid];
+            topic.user = user;
+            
+            modeTop.topic=topic;
+            
+            [self.dataSource addObject:modeTop];
+        }
+        return self.dataSource.count;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -1212,6 +1420,8 @@
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     id model = self.dataSource[indexPath.section];
+    
+    
     
     if ([model isKindOfClass:[MHTopicFrame class]])
     {
@@ -1542,7 +1752,18 @@
     // 隐藏评论VC
     [self _hideTopicComment];
 }
-
+// 点击回复按钮
+- (void) topicHeaderViewForHuiFuAction:(MHTopicHeaderView *)topicHeaderView
+{
+    // 选中的栏 话题内容自己可以评论
+    self.selectedTopicFrame = topicHeaderView.topicFrame;
+    
+    // 评论跳转到评论
+    MHCommentReply *commentReply =  [[MHTopicManager sharedManager] commentReplyWithModel:topicHeaderView.topicFrame.topic];
+    
+    // 回复
+    [self _replyCommentWithCommentReply:commentReply];
+}
 #pragma mark - MHYouKuAnthologyHeaderViewDelegate
 - (void) anthologyHeaderViewForMoreButtonAction:(MHYouKuAnthologyHeaderView *)anthologyHeaderView
 {
@@ -1569,9 +1790,36 @@
     MHYouKuCommentController *comment = [[MHYouKuCommentController alloc] init];
     comment.mediabase_id = self.mediabase_id;
     MHNavigationController *nav = [[MHNavigationController alloc] initWithRootViewController:comment];
+    comment.delegate=self;
     [self.parentViewController presentViewController:nav animated:YES completion:nil];
 }
-
+-(void)editokController:(NSString *)text
+{
+    VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+    NSDictionary*dict=@{@"video_id":[NSString stringWithFormat:@"%.f",modelL.id],
+                        @"content":text,
+    };
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_postCommenturl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSString * message = @"评论成功";
+            [UHud showTXTWithStatus:message delay:2.f];
+            [self getHeadervideo_commenturlData];
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+        
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+                
+            }];
+}
 #pragma mark - MHTopicHeaderViewDelegate
 - (void) topicHeaderViewDidClickedUser:(MHTopicHeaderView *)topicHeaderView
 {

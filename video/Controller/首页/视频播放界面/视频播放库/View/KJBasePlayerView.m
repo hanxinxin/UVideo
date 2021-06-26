@@ -323,11 +323,11 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
                         }else{
                             self.fastLayer.hidden = NO;
                         }
-                        NSLog(@"滑动[array[0] floatValue]==== %f  value === %f    totalTime=%f",[array[0] floatValue],value ,totalTime);
+//                        NSLog(@"滑动[array[0] floatValue]==== %f  value === %f    totalTime=%f",[array[0] floatValue],value ,totalTime);
 //                        NSTimeInterval time = [array[0] floatValue] + value * totalTime;
                         
                         NSTimeInterval time = [array[0] floatValue] + value * totalTime;
-                        NSLog(@"滑动time==== %f",time);
+//                        NSLog(@"滑动time==== %f",time);
                         [self.fastLayer kj_updateFastValue:time?:0.0 TotalTime:totalTime];
                     }
                 }

@@ -564,6 +564,7 @@ static NSString * const shopCellReuseID = @"shop";
 }
 -(void)getVideoInfo:(NSString*)videoId
 {
+    [UHud showHUDLoading];
     NSDictionary* dict = @{
         @"id":videoId,};
     

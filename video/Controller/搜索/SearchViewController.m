@@ -48,7 +48,7 @@
 - (LLSearchView *)searchView
 {
     if (!_searchView) {
-        self.searchView = [[LLSearchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT -(kNavBarAndStatusBarHeight)) hotArray:self.hotArray historyArray:self.historyArray];
+        self.searchView = [[LLSearchView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT -(kNavAndTabHeight)) hotArray:self.hotArray historyArray:self.historyArray];
         __weak SearchViewController *weakSelf = self;
         _searchView.tapAction = ^(NSString *str) {
 //            [weakSelf pushToSearchResultWithSearchStr:str];
@@ -267,7 +267,7 @@
 -(void)getvideo_rankurlData
 {
 //    NSDictionary * dict = @{@"parent_category_id":@""};
-//    [UHud showHUDLoading];
+    [UHud showHUDLoading];
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_rankurl] Dictionary:nil success:^(id  _Nullable responseObject) {
 //        NSLog(@"post responseObject == %@",responseObject);
         [UHud hideLoadHud];

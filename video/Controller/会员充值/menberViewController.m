@@ -486,14 +486,15 @@
     // 注册cell
     [self.menbercollectionView registerNib:[UINib nibWithNibName:NSStringFromClass([menberJSCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:MBCollectionViewCellID];
 //    [self.collectionView registerClass:[SHeaderView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"SHeaderView1"];
-    // 为瀑布流控件添加下拉加载和上拉加载
-    self.menbercollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        
-            
-            [self getmenberList];
-    }];
-    // 第一次进入则自动加载
-    [self.menbercollectionView.mj_header beginRefreshing];
+    [self getmenberList];
+//    // 为瀑布流控件添加下拉加载和上拉加载
+//    self.menbercollectionView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//
+//
+//            [self getmenberList];
+//    }];
+//    // 第一次进入则自动加载
+//    [self.menbercollectionView.mj_header beginRefreshing];
     
     
 //    self.collectionView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{

@@ -10,6 +10,8 @@
 #import "SCJTableViewCell.h"
 #import "SliderTableViewCell.h"
 #import "VideoHistoryMode.h"
+#import "MHYouKuController.h"
+
 
 #define cellID @"cellID"
 #define cellID2 @"SliderTableViewCell"
@@ -318,17 +320,18 @@
         if([code intValue]==0)
         {
             NSDictionary *dictdata =[dict objectForKey:@"data"];
-            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
+//            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
             NSArray*video_history_list=[dictdata objectForKey:@"video_history_list"];
             if(video_history_list.count>0)
             {
                 self.page1+=1;
-                
+                [self removeNilView];
             }else{
                 [self addnilView1];
             }
             
-        }else if([code intValue]==20){
+        }else{
+            
             NSString * message = [dict objectForKey:@"message"];
 //            [UHud showHUDToView:self.view text:message];
 //            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
@@ -357,18 +360,18 @@
         if([code intValue]==0)
         {
             NSDictionary *dictdata =[dict objectForKey:@"data"];
-            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
+//            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
             NSArray*video_history_list=[dictdata objectForKey:@"video_history_list"];
             if(video_history_list.count>0)
             {
                 self.page1+=1;
-                
+                [self removeNilView];
             }else{
 //                [self addnilView1];
             }
             
             
-        }else if([code intValue]==20){
+        }else{
             NSString * message = [dict objectForKey:@"message"];
 //            [UHud showHUDToView:self.view text:message];
 //            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
@@ -398,14 +401,14 @@
         if([code intValue]==0)
         {
             NSDictionary *dictdata =[dict objectForKey:@"data"];
-            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
+//            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
             NSArray*video_history_list=[dictdata objectForKey:@"video_history_list"];
             if(![video_history_list isKindOfClass:[NSNull class]]){
             if(video_history_list.count>0)
             {
 //                if(NULL_TO_NIL(video_history_list))
 //                {
-                
+                [self removeNilView];
                 self.page1+=1;
                 [self.Listarray2 removeAllObjects];
                 for (int i =0; i<video_history_list.count; i++) {
@@ -419,7 +422,7 @@
                 [self addnilView2];
             }
             [self.downtableview2 reloadData];
-        }else if([code intValue]==20){
+        }else{
             NSString * message = [dict objectForKey:@"message"];
 //            [UHud showHUDToView:self.view text:message];
 //            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
@@ -450,15 +453,24 @@
         if([code intValue]==0)
         {
             NSDictionary *dictdata =[dict objectForKey:@"data"];
-            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
+//            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
             NSArray*video_history_list=[dictdata objectForKey:@"video_history_list"];
+            if(![video_history_list isKindOfClass:[NSNull class]]){
             if(video_history_list.count>0)
             {
+                [self removeNilView];
                 self.page2+=1;
+                for (int i =0; i<video_history_list.count; i++) {
+                    NSDictionary * video_history =video_history_list[i];
+                    VideoHistoryMode* model= [VideoHistoryMode yy_modelWithDictionary:video_history];
+//                    [DYModelMaker DY_makeModelWithDictionary:video_history modelKeyword:@"Video" modelName:@"historyMode"];
+                    [self.Listarray2 addObject:model];
+                }
             }else{
 //                [self addnilView2];
             }
-        }else if([code intValue]==20){
+            }
+        }else{
             NSString * message = [dict objectForKey:@"message"];
 //            [UHud showHUDToView:self.view text:message];
 //            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
@@ -609,8 +621,48 @@
     }else if(tableView.tag==10002)
     {
         NSLog(@"10002index == %ld",indexPath.section);
+        
+        VideoHistoryMode* model= self.Listarray2[indexPath.section];
+        [self getVideoInfo:[NSString stringWithFormat:@"%f",model.video_id]];
     }
     
 }
+-(void)pushViewControllerVideo:(ZVideoMode*)mode{
+    MHYouKuController *avc = [[MHYouKuController alloc] init];
+    avc.Zvideomodel= mode;
+    [self pushRootNav:avc animated:YES];
+}
 
+-(void)getVideoInfo:(NSString*)videoId
+{
+    [UHud showHUDLoading];
+    NSDictionary* dict = @{
+        @"id":videoId,};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_infourl] Dictionary:dict success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+        [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    NSDictionary  * dataArr = [dict objectForKey:@"data"];
+                    
+                    // 将数据转模型
+                    ZVideoMode *model = [ZVideoMode yy_modelWithDictionary:dataArr];
+                    NSLog(@"model  == %@",model);
+                    [self pushViewControllerVideo:model];
+                    
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+//        [self pushViewControllerVideo];
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+            
+            }];
+}
 @end

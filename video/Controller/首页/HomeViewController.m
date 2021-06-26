@@ -935,6 +935,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 
 -(void)getVideoInfo:(NSString*)videoId
 {
+    [UHud showHUDLoading];
     NSDictionary* dict = @{
         @"id":videoId,};
     

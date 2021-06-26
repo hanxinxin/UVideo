@@ -10,6 +10,8 @@
 #import "MHYouKuController.h"
 #import "WSLWaterFlowLayout.h"
 #import "vlistCollectionViewCell.h"
+#import "FankuiViewController.h"
+
 #define VCellReuseID @"vlistCollectionViewCell"
 
 @interface LLSearchSuggestionVC ()<WSLWaterFlowLayoutDelegate, UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource>
@@ -19,6 +21,12 @@
 @property(strong,nonatomic)NSIndexPath * indexPath;
 @property (nonatomic, copy)   NSString *searchTest;
 @property(assign,nonatomic)NSInteger SXpage;
+
+///无内容显示view
+@property (strong, nonatomic) UIView *nilView;
+@property (strong, nonatomic) UIImageView * nilImageView;
+@property (strong, nonatomic) UILabel * nilLabel;
+@property(nonatomic,strong)UIButton * XGBtn;
 @end
 
 @implementation LLSearchSuggestionVC
@@ -75,6 +83,8 @@
     self.dataArr=[NSMutableArray arrayWithCapacity:0];
     self.keyword=@"";
     self.SXpage=1;
+    [self initnilView];
+    
 //    [self.view addSubview:self.contentView];
     [self.view addSubview:self.collectionView];
     
@@ -91,6 +101,56 @@
     }];
     
     
+}
+
+///// 加载无内容显示的view
+-(void)initnilView
+{
+    self.nilView=[[UIView alloc] initWithFrame:CGRectMake(0, 40, self.view.width, self.view.height-40)];
+    self.nilView.backgroundColor=[UIColor whiteColor];
+    self.nilImageView=[[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-250)/2, (self.view.height-40-200-kNavBarAndStatusBarHeight)/2, 250, 150)];
+    [self.nilImageView setImage:[UIImage imageNamed:@"nilImage"]];
+    [self.nilView addSubview:self.nilImageView];
+    self.nilLabel=[[UILabel alloc] initWithFrame:CGRectMake(self.nilImageView.left, self.nilImageView.bottom, self.nilImageView.width, 30)];
+    [self.nilLabel setText:@"没有您搜索的内容"];
+    self.nilLabel.textAlignment=NSTextAlignmentCenter;
+    [self.nilLabel setTextColor:[UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0]];
+    
+    
+    self.XGBtn= [[UIButton alloc] init];
+    self.XGBtn.frame = CGRectMake(20, 0, self.nilView.width-40,46);
+    self.XGBtn.alpha = 1;
+    self.XGBtn.layer.cornerRadius = 10;
+    self.XGBtn.backgroundColor=RGBA(20, 155, 236, 1);
+    [self.XGBtn setTitle:@"我要求片" forState:(UIControlStateNormal)];
+    [self.XGBtn.titleLabel setFont:[UIFont systemFontOfSize:20.f]];
+    [self.XGBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+//    [button1.layer insertSublayer:[self selectLayer:CGRectMake(0, 0, button1.width, button1.height)]atIndex:0];
+    [self.XGBtn addTarget:self action:@selector(XG_touch:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:self.XGBtn];
+    
+    [self.nilView setHidden:YES];
+    [self.nilView addSubview:self.nilLabel];
+}
+//显示
+-(void)addnilView
+{
+    self.nilView.hidden=NO;
+    [self.view addSubview:self.nilView];
+}
+
+//删除
+-(void)removeNilView
+{
+    self.nilView.hidden=YES;
+//    [self.nilView removeFromSuperview];
+}
+-(void)XG_touch:(id)sender
+{
+    // 求片
+    FankuiViewController * avc = [[FankuiViewController alloc] init];
+    avc.typeInt=1002;
+    [self pushRootNav:avc animated:YES];
 }
 
 -(void)getSXCollecheader
@@ -119,6 +179,7 @@
          
             if(video_list.count>0)
             {
+                [self removeNilView];
                 for (int i=0; i<video_list.count; i++) {
                     
                     VideoRankMode *model = [VideoRankMode yy_modelWithDictionary:video_list[i]];
@@ -126,6 +187,8 @@
                     
                 }
                 [self.dataArr addObjectsFromArray:arr];
+            }else{
+                [self addnilView];
             }
             }
             [self.collectionView.mj_header endRefreshing];
@@ -265,6 +328,8 @@
                             
                         }
                         [self.dataArr addObjectsFromArray:arr];
+                        
+                        [self addnilView];
                     }
                     }
                         // 刷新数据
@@ -323,6 +388,7 @@
 
 -(void)getVideoInfo:(NSString*)videoId
 {
+    [UHud showHUDLoading];
     NSDictionary* dict = @{
         @"id":videoId,};
     

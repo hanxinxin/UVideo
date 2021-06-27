@@ -94,7 +94,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
 }
 - (void)kj_changeFrame{
    
-//    self.loadingLayer.position = CGPointMake(self.width/2, self.height/2);
+    self.loadingLayer.position = CGPointMake(self.width/2, self.height/2);
     self.fastLayer.position = CGPointMake(self.width/2, self.height/2);
     self.vbLayer.position = CGPointMake(self.width/2, self.height/2);
     [self.hintTextLayer setValue:@(self.screenState) forKey:@"screenState"];
@@ -112,7 +112,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
 -(void)kj_changeFrameShuPing
 {
 //    kj_changeFrameShuPing
-//    self.loadingLayer.position = CGPointMake(self.width/2, self.height/2);
+    self.loadingLayer.position = CGPointMake(self.width/2, self.height/2);
     self.fastLayer.position = CGPointMake(self.width/2, self.height/2);
     self.vbLayer.position = CGPointMake(self.width/2, self.height/2);
     [self.hintTextLayer setValue:@(self.screenState) forKey:@"screenState"];
@@ -419,16 +419,16 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     }
     return _vbLayer;
 }
-//- (KJPlayerLoadingLayer *)loadingLayer{
-//    if (!_loadingLayer) {
-//        CGFloat width = 40;
-//        KJPlayerLoadingLayer *layer = [KJPlayerLoadingLayer layer];
-//        [layer kj_setAnimationSize:CGSizeMake(width, width) color:self.mainColor];
-//        layer.frame = CGRectMake((self.width-width)/2.f, (self.height-width)/2.f, width, width);
-//        _loadingLayer = layer;
-//    }
-//    return _loadingLayer;
-//}
+- (KJPlayerLoadingLayer *)loadingLayer{
+    if (!_loadingLayer) {
+        CGFloat width = 40;
+        KJPlayerLoadingLayer *layer = [KJPlayerLoadingLayer layer];
+        [layer kj_setAnimationSize:CGSizeMake(width, width) color:self.mainColor];
+        layer.frame = CGRectMake((self.width-width)/2.f, (self.height-width)/2.f, width, width);
+        _loadingLayer = layer;
+    }
+    return _loadingLayer;
+}
 - (KJPlayerHintTextLayer *)hintTextLayer{
     if (!_hintTextLayer) {
         KJPlayerHintTextLayer *layer = [KJPlayerHintTextLayer layer];

@@ -256,15 +256,15 @@ NSString * kPlayerCurrentSourceName(KJBasePlayer *bp){
             return;
         }
     });
-//    if (self.playerView.loadingLayer.superlayer == nil) {
-//        [self.playerView.layer addSublayer:self.playerView.loadingLayer];
-//    }
+    if (self.playerView.loadingLayer.superlayer == nil) {
+        [self.playerView.layer addSublayer:self.playerView.loadingLayer];
+    }
 }
 /* 停止动画 */
 - (void)kj_stopAnimation{
-//    [UIView animateWithDuration:1.f animations:^{
-//        [self.playerView.loadingLayer removeFromSuperlayer];
-//    }];
+    [UIView animateWithDuration:1.f animations:^{
+        [self.playerView.loadingLayer removeFromSuperlayer];
+    }];
 }
 
 #pragma mark - hintText

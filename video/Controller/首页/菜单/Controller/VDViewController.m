@@ -91,6 +91,15 @@ static NSString * const shopCellReuseID = @"shop";
         make.bottom.equalTo(@0);
         
     }];
+    
+    // 为ScrollView添加下拉加载
+    self.ZScrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+        [self getDataList_header1];
+        [self getDataList_header2];
+    }];
+    [self.ZScrollView.mj_header beginRefreshing];
+    
+    
     ///包含瀑布流view
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(15, 160+70, self.ZScrollView.width-30, 60+420+420)];
     view.backgroundColor=[UIColor whiteColor];
@@ -219,7 +228,7 @@ static NSString * const shopCellReuseID = @"shop";
             [self getDataList_header1];
     }];
     // 第一次进入则自动加载
-    [self.collectionView1.mj_header beginRefreshing];
+//    [self.collectionView1.mj_header beginRefreshing];
     
     
     self.collectionView1.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -266,7 +275,7 @@ static NSString * const shopCellReuseID = @"shop";
             [self getDataList_header2];
     }];
     // 第一次进入则自动加载
-    [self.collectionView2.mj_header beginRefreshing];
+//    [self.collectionView2.mj_header beginRefreshing];
     
     
     self.collectionView2.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
@@ -331,12 +340,14 @@ static NSString * const shopCellReuseID = @"shop";
         
         // 停止刷新
         [self.collectionView1.mj_header endRefreshing];
+        [self.ZScrollView.mj_header endRefreshing];
             } failure:^(NSError * _Nullable error) {
                 [UHud hideLoadHud];
                 NSLog(@"shareManager error == %@",error);
                 [UHud showTXTWithStatus:@"网络错误" delay:2.f];
                 // 停止刷新
                 [self.collectionView1.mj_header endRefreshing];
+                [self.ZScrollView.mj_header endRefreshing];
             }];
     
 }
@@ -403,6 +414,7 @@ static NSString * const shopCellReuseID = @"shop";
         
         // 停止刷新
         [self.collectionView2.mj_header endRefreshing];
+        [self.ZScrollView.mj_header endRefreshing];
             } failure:^(NSError * _Nullable error) {
                 [UHud hideLoadHud];
                 NSLog(@"shareManager error == %@",error);
@@ -410,6 +422,7 @@ static NSString * const shopCellReuseID = @"shop";
                 
                 // 停止刷新
                 [self.collectionView2.mj_header endRefreshing];
+                [self.ZScrollView.mj_header endRefreshing];
             }];
     
     

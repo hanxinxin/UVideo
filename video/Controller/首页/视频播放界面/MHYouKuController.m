@@ -252,9 +252,10 @@
                     self.player.videoURL = [NSURL URLWithString:model.url];
                     NSArray * qualities = [dataArr objectForKey:@"qualities"];
                     NSArray * subtitles = [dataArr objectForKey:@"subtitles"];
-                    self.qualitieslist=qualities;
+                    
+                    self.qualitieslist=[self paixunArray:qualities];
                     self.subtitleslist=subtitles;
-                    self.Clarity.titleNumberarray=[self paixunArray:self.qualitieslist];;
+                    self.Clarity.titleNumberarray=self.qualitieslist;
                     
                     [self.Clarity.collectionView1 reloadData];
                 }else{
@@ -412,7 +413,7 @@
         VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
         videofragmentMode*Fmo=[videofragmentMode yy_modelWithDictionary:_Zvideomodel.video_fragment_list[self.xuanjiSelectIndex] ];
         
-        [self getplayerMode:[NSString stringWithFormat:@"%f",modelL.id] video_fragment_id:[NSString stringWithFormat:@"%f",Fmo.id] quality:Fmo.qualities[index]];
+        [self getplayerMode:[NSString stringWithFormat:@"%f",modelL.id] video_fragment_id:[NSString stringWithFormat:@"%f",Fmo.id] quality:self.qualitieslist[index]];  ///因为调整过数组顺序不能直接用Fmo 的数组
         }
 //    }
 }
@@ -421,11 +422,16 @@
 /* 当前播放器状态 */
 - (void)kj_player:(KJBasePlayer*)player state:(KJPlayerState)state{
     NSLog(@"播放状态 == %ld  ",(long)state);
-    if (state == KJPlayerStateBuffering || state == KJPlayerStatePausing) {
+    if (state == KJPlayerStateBuffering)
+    {
+        [player kj_startAnimation];
+    }else if(state == KJPlayerStatePausing) {
         self.playerView.centerPlayButton.selected=YES;
         self.playerView.centerPlayButton.hidden=NO;
 //        [player kj_startAnimation];
-    }else if (state == KJPlayerStatePreparePlay || state == KJPlayerStatePlaying) {
+    }else if (state == KJPlayerStatePreparePlay) {
+        [player kj_stopAnimation];
+    }else if(state == KJPlayerStatePlaying){
         self.playerView.centerPlayButton.selected=NO;
         self.playerView.centerPlayButton.hidden=NO;
 //        [player kj_stopAnimation];
@@ -533,8 +539,16 @@
         if(Index==0)
         {
             
-        }else{
+        }else if(Index==1){
+            // 充值
+                AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+                
+                HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
+                NSArray * arraynav = nav.viewControllers;
+                UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
+                tabViewController.selectedIndex = 2;
             
+            [weakSelf.navigationController popViewControllerAnimated:YES];
         }
         [weakSelf HidmenberViewTS];
     };
@@ -1017,8 +1031,37 @@
     [self.Clarity setClarityCallBack:^(NSInteger index) {
         
         NSLog(@"清晰度选择 = %ld",index);
-        self.QXDSelectIndex=index;
-        [self tempsAction:index];
+        if( self.QXDSelectIndex!=index)
+        {
+            NSNumber * qxd=self.qualitieslist[index];
+        if([qxd intValue]==4)
+        {
+            //////会员才能看蓝光
+            if([vip_expired_time_loca intValue]!=0)
+            {
+                NSString * vipStr=[vip_expired_time_loca stringValue];
+                NSString * dqStr=[self gs_getCurrentTimeBySecond];
+                NSDate * timeStampToDate1 = [NSDate dateWithTimeIntervalSince1970:[dqStr doubleValue]];
+                NSDate * timeStampToDate2 = [NSDate dateWithTimeIntervalSince1970:[vipStr doubleValue]];
+                NSLog(@"[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]=====   %d",[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]);
+                if([self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]!=1)/////   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
+                {
+                    
+                    self.QXDSelectIndex=index;
+                    [self tempsAction:index];
+                }else{
+                    [self showmenberViewTS];
+                }
+            }else{
+                [self showmenberViewTS];
+            }
+        }else{
+            self.QXDSelectIndex=index;
+            [self tempsAction:index];
+        }
+        }
+        
+        
     }];
     
     
@@ -1776,8 +1819,11 @@
 {
     MHLog(@"anthologyHeaderView.selectXJindex== %ld" , (long)anthologyHeaderView.selectXJindex);
     
-    self.xuanjiSelectIndex=anthologyHeaderView.selectXJindex;
-    [self tempsAction:self.QXDSelectIndex];
+    if(self.xuanjiSelectIndex!=anthologyHeaderView.selectXJindex)
+    {
+        self.xuanjiSelectIndex=anthologyHeaderView.selectXJindex;
+        [self tempsAction:self.QXDSelectIndex];
+    }
     // 选集集数按钮被点击
     MHLog(@" 选集集数按钮点击=== %@" , mediaBaseId);
 }

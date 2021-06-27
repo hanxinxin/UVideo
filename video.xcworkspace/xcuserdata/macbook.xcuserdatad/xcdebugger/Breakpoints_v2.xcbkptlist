@@ -64,7 +64,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "216"
                   endingLineNumber = "216"
-                  offsetFromSymbolStart = "44">
+                  offsetFromSymbolStart = "52">
                </Location>
                <Location
                   uuid = "D075B340-4A48-41C2-92CF-FAB082668169 - 310e828c063a63aa"
@@ -79,7 +79,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "216"
                   endingLineNumber = "216"
-                  offsetFromSymbolStart = "296">
+                  offsetFromSymbolStart = "381">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -97,22 +97,6 @@
             startingLineNumber = "178"
             endingLineNumber = "178"
             landmarkName = "-longGRAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "56E0E2ED-8069-4877-8B8A-65919C4FD95C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/Controller/&#x6211;&#x7684;/MyViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "515"
-            endingLineNumber = "515"
-            landmarkName = "-Hidprompt"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

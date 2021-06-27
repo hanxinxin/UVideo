@@ -144,5 +144,16 @@ typedef void(^GCusNavClickIndex)(NSInteger index);
 
 - (NSString *)getTimeFromTimestamp:(NSNumber*)number;
 - (NSString *)getTimeFromTimestamp13:(NSNumber*)number;
+
+/////   10位时间戳
+- (NSString *)gs_getCurrentTimeBySecond;
+
+/** 得到当前时间相对1970时间的字符串，精度到毫秒，返回13位长度字符串*/
+
+- (NSString *)gs_getCurrentTimeStringToMilliSecond;
+
+///   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
+- (int)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay;
+
 - (BOOL)StringIsNullOrEmpty:(NSString *)str;
 @end

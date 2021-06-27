@@ -99,6 +99,10 @@ static NSString * const shopCellReuseID = @"shop";
 //        make.bottom.equalTo(@0);
 //
 //    }];
+    
+    
+    
+    
     ///包含瀑布流view
     UIView * view = [[UIView alloc] initWithFrame:CGRectMake(15, 160+70, self.ZScrollView.width-30, self.ZScrollView.height-160-70)];
     view.backgroundColor=[UIColor whiteColor];

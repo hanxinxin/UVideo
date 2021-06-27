@@ -67,7 +67,7 @@
 {
     if (!_searchSuggestVC) {
         self.searchSuggestVC = [[LLSearchSuggestionVC alloc] init];
-        _searchSuggestVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT - (kNavBarAndStatusBarHeight));
+        _searchSuggestVC.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.view.height);
         _searchSuggestVC.view.hidden = YES;
         __weak SearchViewController *weakSelf = self;
         _searchSuggestVC.searchBlock = ^(NSString *searchTest) {

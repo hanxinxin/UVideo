@@ -106,8 +106,9 @@
 ///// 加载无内容显示的view
 -(void)initnilView
 {
-    self.nilView=[[UIView alloc] initWithFrame:CGRectMake(0, 40, self.view.width, self.view.height-40)];
+    self.nilView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.width, self.view.height-kNavBarAndStatusBarHeight)];
     self.nilView.backgroundColor=[UIColor whiteColor];
+    [self.nilView setUserInteractionEnabled:YES];
     self.nilImageView=[[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-250)/2, (self.view.height-40-200-kNavBarAndStatusBarHeight)/2, 250, 150)];
     [self.nilImageView setImage:[UIImage imageNamed:@"nilImage"]];
     [self.nilView addSubview:self.nilImageView];
@@ -117,8 +118,8 @@
     [self.nilLabel setTextColor:[UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0]];
     
     
-    self.XGBtn= [[UIButton alloc] init];
-    self.XGBtn.frame = CGRectMake(20, 0, self.nilView.width-40,46);
+    self.XGBtn= [UIButton buttonWithType:(UIButtonTypeCustom)];
+    self.XGBtn.frame = CGRectMake(20, self.nilView.height-86, self.nilView.width-40,46);
     self.XGBtn.alpha = 1;
     self.XGBtn.layer.cornerRadius = 10;
     self.XGBtn.backgroundColor=RGBA(20, 155, 236, 1);
@@ -126,8 +127,9 @@
     [self.XGBtn.titleLabel setFont:[UIFont systemFontOfSize:20.f]];
     [self.XGBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
 //    [button1.layer insertSublayer:[self selectLayer:CGRectMake(0, 0, button1.width, button1.height)]atIndex:0];
-    [self.XGBtn addTarget:self action:@selector(XG_touch:) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.view addSubview:self.XGBtn];
+    [self.XGBtn setUserInteractionEnabled:YES];
+    [self.XGBtn addTarget:self action:@selector(XG_touch:) forControlEvents:(UIControlEventTouchDown)];
+    [self.nilView addSubview:self.XGBtn];
     
     [self.nilView setHidden:YES];
     [self.nilView addSubview:self.nilLabel];
@@ -321,6 +323,7 @@
                     if(![video_list isKindOfClass:[NSNull class]]){
                     if(video_list.count>0)
                     {
+                        [self removeNilView];
                         for (int i=0; i<video_list.count; i++) {
                             
                             VideoRankMode *model = [VideoRankMode yy_modelWithDictionary:video_list[i]];
@@ -329,8 +332,14 @@
                         }
                         [self.dataArr addObjectsFromArray:arr];
                         
+                        
+                        }else
+                        {
+                            [self addnilView];
+                        }
+                    }else
+                    {
                         [self addnilView];
-                    }
                     }
                         // 刷新数据
                         [self.collectionView reloadData];

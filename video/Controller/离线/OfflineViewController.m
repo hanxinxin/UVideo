@@ -81,12 +81,7 @@
 {
     Listarray1=[NSMutableArray arrayWithCapacity:0];
 //    [Listarray addObject:[NSArray arrayWithObjects:@"播放记录",@"充值记录",@"账户信息",@"帮助中心",@"安全设置",@"清理缓存",@"退出登录", nil]];
-    [Listarray1 addObject:@"播放记录"];
-    [Listarray1 addObject:@"充值记录"];
-    [Listarray1 addObject:@"账户信息"];
-    [Listarray1 addObject:@"帮助中心"];
-    [Listarray1 addObject:@"安全设置"];
-    [Listarray1 addObject:@"清理缓存"];
+//    [Listarray1 addObject:@"播放记录"];
     self.downtableview1=[[UITableView alloc] init];
     self.downtableview1.frame=CGRectMake(20, 0, SCREEN_WIDTH-40, SCREENH_HEIGHT-kNavBarAndStatusBarHeight-kTabBarHeight);
     self.downtableview1.backgroundColor=[UIColor whiteColor];

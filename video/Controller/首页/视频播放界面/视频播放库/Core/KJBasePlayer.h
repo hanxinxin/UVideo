@@ -29,6 +29,11 @@ NS_ASSUME_NONNULL_BEGIN
 /* 动态切换播放内核 */
 - (void)kj_dynamicChangeSourcePlayer:(Class)clazz;
 
+/* 圆圈加载动画 */
+- (void)kj_startAnimation;
+/* 停止动画 */
+- (void)kj_stopAnimation;
+
 #pragma mark - NSNotification
 /* 进入后台 */
 - (void)kj_detectAppEnterBackground:(NSNotification*)notification;
@@ -40,6 +45,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic,copy,readonly) BOOL (^kPlayerDynamicChangeSource)(void);
 /* 当前播放器内核名 */
 NSString * kPlayerCurrentSourceName(KJBasePlayer *bp);
+
+
 
 @end
 

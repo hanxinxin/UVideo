@@ -774,4 +774,56 @@
 {
     return (str == nil || [str isKindOfClass:[NSNull class]] || str.length == 0);
 }
+
+
+/////   10位时间戳
+- (NSString *)gs_getCurrentTimeBySecond {
+
+    double currentTime =  [[NSDate date] timeIntervalSince1970];
+
+    NSString *strTime = [NSString stringWithFormat:@"%.0f",currentTime];
+
+    return strTime;
+
+}
+
+/** 得到当前时间相对1970时间的字符串，精度到毫秒，返回13位长度字符串*/
+
+- (NSString *)gs_getCurrentTimeStringToMilliSecond {
+
+    double currentTime =  [[NSDate date] timeIntervalSince1970]*1000;
+
+    NSString *strTime = [NSString stringWithFormat:@"%.0f",currentTime];
+
+    return strTime;
+
+}
+
+///   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
+- (int)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
+    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
+    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
+    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
+    NSComparisonResult result = [dateA compare:dateB];
+    NSLog(@"oneDay : %@, anotherDay : %@", oneDay, anotherDay);
+    if (result == NSOrderedDescending) {
+        //在指定时间前面 过了指定时间 过期
+        NSLog(@"oneDay  is in the future");
+        return 1;
+    }
+    else if (result == NSOrderedAscending){
+        //没过指定时间 没过期
+        //NSLog(@"Date1 is in the past");
+        return -1;
+    }
+    //刚好时间一样.
+    //NSLog(@"Both dates are the same");
+    return 0;
+    
+}
+
 @end

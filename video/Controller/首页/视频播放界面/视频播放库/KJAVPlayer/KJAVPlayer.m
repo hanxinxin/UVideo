@@ -204,11 +204,11 @@ static NSString * const kTimeControlStatus = @"timeControlStatus";
 }
 /* 圆圈加载动画 */
 - (void)kj_startAnimation{
-//    [super kj_startAnimation];
+    [super kj_startAnimation];
 }
 /* 停止动画 */
 - (void)kj_stopAnimation{
-//    [super kj_stopAnimation];
+    [super kj_stopAnimation];
 }
 
 #pragma mark - private method

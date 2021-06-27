@@ -35,6 +35,11 @@
 @property (strong, nonatomic) UIView *nilView;
 @property (strong, nonatomic) UIImageView * nilImageView;
 @property (strong, nonatomic) UILabel * nilLabel;
+
+///无内容显示view
+@property (strong, nonatomic) UIView *nilView2;
+@property (strong, nonatomic) UIImageView * nilImageView2;
+@property (strong, nonatomic) UILabel * nilLabel2;
 @end
 
 @implementation jiluViewController
@@ -42,37 +47,44 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-   
-    self.page1=1;
-    self.page2=1;
-    Listarray1=[NSMutableArray arrayWithCapacity:0];
-    Listarray2=[NSMutableArray arrayWithCapacity:0];
-    [self addtopview];
-    [self initnilView];
-    [self Addtableview1];
-    [self Addtableview2];
-    [self touchOne:nil];
-    [self addnilView1];
-    [self addnilView2];
-    [self removeNilView];
-}
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    
     //获取通知中心单例对象
         NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
         //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
         [center addObserver:self selector:@selector(noticeUpdate:) name:@"listUpdate" object:nil];
     
-    if(self.downtableview1)
-    {
-        [self getheaderData1];
-    }
-    if(self.downtableview2)
-    {
-        [self getheaderData2];
-    }
+    
+    self.page1=1;
+    self.page2=1;
+    Listarray1=[NSMutableArray arrayWithCapacity:0];
+    Listarray2=[NSMutableArray arrayWithCapacity:0];
+    [self addtopview];
+    [self initnilView1];
+    [self initnilView2];
+    [self Addtableview1];
+    [self Addtableview2];
+    [self touchOne:nil];
+    [self addnilView1];
+    [self addnilView2];
+    [self removeNilView1];
+    [self removeNilView2];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        if(self.downtableview1)
+        {
+            [self getheaderData1];
+        }
+        if(self.downtableview2)
+        {
+            [self getheaderData2];
+        }
+        });
+    
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -86,17 +98,39 @@
     NSNumber* index=[userInfo objectForKey:@"update"];
     if([index intValue]==1)
     {
-        [self touchOne:nil];
+        if(self.menuBtn1.selected==NO)
+        {
+            [self.menuBtn1.layer insertSublayer:_gl1y above:_gl1n];
+            [self.menuBtn2.layer insertSublayer:_gl2n above:_gl2y];
+
+            [self.menuBtn1 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
+            [self.menuBtn2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+        }
+        self.downtableview1.hidden=NO;
+        self.downtableview2.hidden=YES;
+        self.menuBtn1.selected=YES;
+        self.menuBtn2.selected=NO;
     }else if([index intValue]==2)
     {
-        [self touchTwo:nil];
+        if(self.menuBtn2.selected==NO)
+        {
+            [self.menuBtn1.layer insertSublayer:_gl1n above:_gl1y];
+            [self.menuBtn2.layer insertSublayer:_gl2y above:_gl2n];
+
+            [self.menuBtn1 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
+            [self.menuBtn2 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
+        }
+        self.downtableview1.hidden=YES;
+        self.downtableview2.hidden=NO;
+        self.menuBtn1.selected=NO;
+        self.menuBtn2.selected=YES;
     }
 }
 
 ///// 加载无内容显示的view
--(void)initnilView
+-(void)initnilView1
 {
-    self.nilView=[[UIView alloc] initWithFrame:CGRectMake(0, 40, self.view.width, self.view.height-40)];
+    self.nilView=[[UIView alloc] initWithFrame:CGRectMake(0, 40, self.view.width, self.downtableview1.height)];
     self.nilView.backgroundColor=[UIColor whiteColor];
     self.nilImageView=[[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-250)/2, (self.view.height-40-200-kNavBarAndStatusBarHeight)/2, 250, 150)];
     [self.nilImageView setImage:[UIImage imageNamed:@"nilImage"]];
@@ -107,6 +141,21 @@
     [self.nilLabel setTextColor:[UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0]];
     [self.nilView addSubview:self.nilLabel];
 }
+
+///// 加载无内容显示的view
+-(void)initnilView2
+{
+    self.nilView2=[[UIView alloc] initWithFrame:CGRectMake(0, 40, self.view.width, self.downtableview2.height)];
+    self.nilView2.backgroundColor=[UIColor whiteColor];
+    self.nilImageView2=[[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-250)/2, (self.view.height-40-200-kNavBarAndStatusBarHeight)/2, 250, 150)];
+    [self.nilImageView2 setImage:[UIImage imageNamed:@"nilImage"]];
+    [self.nilView2 addSubview:self.nilImageView2];
+    self.nilLabel2=[[UILabel alloc] initWithFrame:CGRectMake(self.nilImageView2.left, self.nilImageView2.bottom, self.nilImageView2.width, 30)];
+    [self.nilLabel2 setText:@"暂无记录"];
+    self.nilLabel2.textAlignment=NSTextAlignmentCenter;
+    [self.nilLabel2 setTextColor:[UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0]];
+    [self.nilView2 addSubview:self.nilLabel2];
+}
 //显示
 -(void)addnilView1
 {
@@ -116,17 +165,22 @@
 //显示
 -(void)addnilView2
 {
-    self.nilView.hidden=NO;
-    [self.downtableview2 addSubview:self.nilView];
+    self.nilView2.hidden=NO;
+    [self.downtableview2 addSubview:self.nilView2];
 }
 //删除
--(void)removeNilView
+-(void)removeNilView1
 {
     self.nilView.hidden=YES;
 //    [self.nilView removeFromSuperview];
 }
 
-
+//删除
+-(void)removeNilView2
+{
+    self.nilView2.hidden=YES;
+//    [self.nilView removeFromSuperview];
+}
 
 
 -(void)addtopview
@@ -198,7 +252,7 @@
     self.menuBtn2.selected=NO;
     if(Listarray1.count!=0)
     {
-        [self removeNilView];
+        [self removeNilView1];
     }else{
         [self addnilView1];
     }
@@ -219,7 +273,7 @@
     self.menuBtn2.selected=YES;
     if(Listarray2.count!=0)
     {
-        [self removeNilView];
+        [self removeNilView2];
     }else{
         [self addnilView2];
     }
@@ -325,7 +379,7 @@
             if(video_history_list.count>0)
             {
                 self.page1+=1;
-                [self removeNilView];
+                [self removeNilView1];
             }else{
                 [self addnilView1];
             }
@@ -365,7 +419,7 @@
             if(video_history_list.count>0)
             {
                 self.page1+=1;
-                [self removeNilView];
+                [self removeNilView1];
             }else{
 //                [self addnilView1];
             }
@@ -408,7 +462,7 @@
             {
 //                if(NULL_TO_NIL(video_history_list))
 //                {
-                [self removeNilView];
+                [self removeNilView2];
                 self.page1+=1;
                 [self.Listarray2 removeAllObjects];
                 for (int i =0; i<video_history_list.count; i++) {
@@ -458,7 +512,7 @@
             if(![video_history_list isKindOfClass:[NSNull class]]){
             if(video_history_list.count>0)
             {
-                [self removeNilView];
+                [self removeNilView2];
                 self.page2+=1;
                 for (int i =0; i<video_history_list.count; i++) {
                     NSDictionary * video_history =video_history_list[i];

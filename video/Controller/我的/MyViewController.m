@@ -254,6 +254,7 @@
     [view.nameLabel addGestureRecognizer:labelTapGestureRecognizer];
     view.txImage.layer.cornerRadius = 30;
     view.txImage.layer.masksToBounds = YES;
+    view.jifenBtn.hidden=YES;
     [self.ZtopView addSubview:view];
     self.Headerview = view;
     __weak __typeof(self)weakSelf = self;
@@ -291,6 +292,7 @@
             [weakSelf pushRootNav:avc animated:YES];
         }else if(CellIndex==1002)
         {
+            [UHud showTXTWithStatus:@"敬请期待" delay:2.f];
             // 任务
         }else if(CellIndex==1003)
         {
@@ -490,6 +492,8 @@
     {
         safeViewController * avc = [[safeViewController alloc] init];
         [self pushRootNav:avc animated:YES];
+    }else if(indexPath.section==5){
+        [UHud showTXTWithStatus:@"敬请期待" delay:2.f];
     }else if(indexPath.section==(arr.count-1))
     {
         [self showprompt];

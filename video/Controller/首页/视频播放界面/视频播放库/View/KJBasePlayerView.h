@@ -12,7 +12,7 @@
 #import "KJPlayerProtocol.h"
 #import "KJPlayerSystemLayer.h"
 #import "KJPlayerFastLayer.h"
-//#import "KJPlayerLoadingLayer.h"
+#import "KJPlayerLoadingLayer.h"
 #import "KJPlayerHintTextLayer.h"
 #import "KJPlayerOperationView.h"
 #import "KJPlayerButton.h"
@@ -70,7 +70,7 @@ extern NSString *kPlayerBaseViewChangeKey;
 /* 音量亮度控件 */
 @property (nonatomic,strong) KJPlayerSystemLayer *vbLayer;
 /* 加载动画层 */
-//@property (nonatomic,strong) KJPlayerLoadingLayer *loadingLayer;
+@property (nonatomic,strong) KJPlayerLoadingLayer *loadingLayer;
 /* 文本提示框 */
 @property (nonatomic,strong) KJPlayerHintTextLayer *hintTextLayer;
 /* 顶部操作面板 */

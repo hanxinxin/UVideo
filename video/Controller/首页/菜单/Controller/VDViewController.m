@@ -143,7 +143,10 @@ static NSString * const shopCellReuseID = @"shop";
 //            [DYModelMaker DY_makeModelWithDictionary:dataAD modelKeyword:@"Guanggao" modelName:@"Mode"];
             self.GuanggaoModeA=[GuanggaoMode yy_modelWithDictionary:dataAD];
 //            NSString * urlstr = [dataAD objectForKey:@"source"];
+            if(self.GuanggaoModeA)
+            {
             self.guanggaoImageView.yy_imageURL=[NSURL URLWithString:self.GuanggaoModeA.source];
+            }
         }else{
             NSString * message = [dict objectForKey:@"message"];
             [UHud showTXTWithStatus:message delay:2.f];
@@ -226,21 +229,32 @@ static NSString * const shopCellReuseID = @"shop";
     }
     
     imageview.userInteractionEnabled = YES;//打开用户交互
-    //初始化一个手势
-    UIGestureRecognizer *singleTap = [[UIGestureRecognizer alloc] initWithTarget:self action:@selector(postWebView)];
-    //为图片添加手势
-    [imageview addGestureRecognizer:singleTap];
-    [self.ZScrollView addSubview:imageview];
+    //创建手势识别器对象
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];
+
+    //设置手势识别器对象的具体属性
+    // 连续敲击2次
+    tap.numberOfTapsRequired = 1;
+    // 需要2根手指一起敲击
+    tap.numberOfTouchesRequired = 1;
+
+    //添加手势识别器到对应的view上
+    [imageview addGestureRecognizer:tap];
+
+    //监听手势的触发
+    [tap addTarget:self action:@selector(postWebView:)];
     self.guanggaoImageView=imageview;
+    [self.ZScrollView addSubview:imageview];
     
 }
 
--(void)postWebView
+-(void)postWebView:(UITapGestureRecognizer*)tap
 {
     if(self.GuanggaoModeA)
     {
         TestWebViewController *webVC = [[TestWebViewController alloc] initWithURLString:self.GuanggaoModeA.url];
-        [self.navigationController pushViewController:webVC animated:YES];
+//        [self.navigationController pushViewController:webVC animated:YES];
+        [self pushRootNav:webVC animated:YES];
     }
 }
 

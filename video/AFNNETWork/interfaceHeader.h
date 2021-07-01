@@ -68,7 +68,7 @@
 #define msgreadurl @"/message/read"  //将消息标为已读
 //广告
 #define guanggaoAllurl @"/ad/all"  //获取全部广告信息，无需用户处于登录状态
-#define guanggaourl @"/ad"  //获取对应广告位广告信息，无需用户处于登录状态
+#define guanggaoGDurl @"/ad"  //获取对应广告位广告信息，无需用户处于登录状态
 // 公告列表
 #define notice_listurl @"/notice/list"  //公告列表
 #define notice_marqueeurl @"/notice/marquee"  //跑马灯公告列表

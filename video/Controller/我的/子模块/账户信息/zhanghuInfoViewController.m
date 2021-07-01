@@ -133,14 +133,23 @@
     NSLog(@"index == %ld",indexPath.section);
     if(indexPath.section==0)
     {
-        infoXGViewController*avc = [[infoXGViewController alloc] init];
-        [self pushRootNav:avc animated:YES];
+            if(![self StringIsNullOrEmpty:UserZH_loca])
+            {
+                infoXGViewController*avc = [[infoXGViewController alloc] init];
+                [self pushRootNav:avc animated:YES];
+            }else{
+                [UHud showTXTWithStatus:@"您还没有登录" delay:2.f];
+            }
     }else if(indexPath.section==3)
     {
-        emailCZViewController*avc = [[emailCZViewController alloc] init];
-        avc.Type=2;
-        [self pushRootNav:avc animated:YES];
-        
+        if(![self StringIsNullOrEmpty:UserZH_loca])
+        {
+            emailCZViewController*avc = [[emailCZViewController alloc] init];
+            avc.Type=2;
+            [self pushRootNav:avc animated:YES];
+        }else{
+            [UHud showTXTWithStatus:@"您还没有登录" delay:2.f];
+        }
     }
 }
 @end

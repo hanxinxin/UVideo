@@ -19,7 +19,8 @@
 
 #import "bannerMode.h"
 #import "ZVideoMode.h"
-
+#import "TestWebViewController.h"
+#import "GuanggaoMode.h"
 
 // collectionViewCell的重用标识符
 static NSString * const shopCellReuseID = @"shop";
@@ -48,7 +49,8 @@ static NSString * const shopCellReuseID = @"shop";
 
 @property (nonatomic, strong)MSCycleScrollView *cycleScrollView;
 
-@property (nonatomic, strong)UIImageView * imageviewGG;
+@property (nonatomic, strong)GuanggaoMode*GuanggaoModeA;
+@property (nonatomic, strong)YYAnimatedImageView * imageviewGG;
 
 @end
 
@@ -121,6 +123,39 @@ static NSString * const shopCellReuseID = @"shop";
 //    [self setupCollectionView2];
     [self getbannerData];
 //    [self getmenuData];
+    [self getGuanggao_data];
+}
+-(void)getGuanggao_data
+{
+    NSDictionary *dict =@{@"symbol":@"mobile-home-banner-below",
+                          @"result":@"1",
+    };
+    
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,guanggaoGDurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary * datadict = [dict objectForKey:@"data"];
+            NSDictionary * dataAD = [datadict objectForKey:@"ad"];
+//            [DYModelMaker DY_makeModelWithDictionary:dataAD modelKeyword:@"Guanggao" modelName:@"Mode"];
+            self.GuanggaoModeA=[GuanggaoMode yy_modelWithDictionary:dataAD];
+//            NSString * urlstr = [dataAD objectForKey:@"source"];
+            self.imageviewGG.yy_imageURL=[NSURL URLWithString:self.GuanggaoModeA.source];
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+    
+    
 }
 
 -(void)getbannerData
@@ -185,13 +220,36 @@ static NSString * const shopCellReuseID = @"shop";
      NSLog(@">>>>>  %ld", (long)index);
      };
      */
-    UIImageView * imageview = [[UIImageView alloc] initWithFrame:CGRectMake(20, 165, self.bottomView.width, 60)];
+//    UIImageView * imageview = [[UIImageView alloc] initWithFrame:CGRectMake(20, 165, self.bottomView.width, 60)];
+//    [imageview setImage:[UIImage imageNamed:@"kthuiyuan"]];
+//    [self.ZScrollView addSubview:imageview];
+//    self.imageviewGG=imageview;
+    
+    YYAnimatedImageView * imageview = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(20, 165, self.bottomView.width, 60)];
+    if(self.GuanggaoModeA==nil)
+    {
     [imageview setImage:[UIImage imageNamed:@"kthuiyuan"]];
+    }
+    
+    imageview.userInteractionEnabled = YES;//打开用户交互
+    //初始化一个手势
+    UIGestureRecognizer *singleTap = [[UIGestureRecognizer alloc] initWithTarget:self action:@selector(postWebView)];
+    //为图片添加手势
+    [imageview addGestureRecognizer:singleTap];
     [self.ZScrollView addSubview:imageview];
     self.imageviewGG=imageview;
 //    imageview.backgroundColor=[UIColor redColor];
     
     
+}
+
+-(void)postWebView
+{
+    if(self.GuanggaoModeA)
+    {
+        TestWebViewController *webVC = [[TestWebViewController alloc] initWithURLString:self.GuanggaoModeA.url];
+        [self.navigationController pushViewController:webVC animated:YES];
+    }
 }
 - (void)setupCollectionView1
 {
@@ -649,6 +707,7 @@ static NSString * const shopCellReuseID = @"shop";
 //            {
 //                [view.leftLabel setText:@"电影"];
 //            }
+            view.rightBtn.hidden=YES;
             return view;
 //        }
         }

@@ -17,6 +17,27 @@
 		8A052173264A832E00E5188E /* MsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A052171264A832E00E5188E /* MsgTableViewCell.m */; };
 		8A052174264A832E00E5188E /* MsgTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A052172264A832E00E5188E /* MsgTableViewCell.xib */; };
 		8A05217B264A8AC400E5188E /* msgInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A05217A264A8AC400E5188E /* msgInfoViewController.m */; };
+		8A142197268DEB180038D99D /* UIProgressView+WKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A14216B268DEB180038D99D /* UIProgressView+WKWebView.m */; };
+		8A142198268DEB180038D99D /* WKWebView+AOP.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A14216C268DEB180038D99D /* WKWebView+AOP.m */; };
+		8A142199268DEB180038D99D /* JXBWKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A142172268DEB180038D99D /* JXBWKWebView.m */; };
+		8A14219A268DEB180038D99D /* JXBWKWebViewPool.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A142173268DEB180038D99D /* JXBWKWebViewPool.m */; };
+		8A14219B268DEB180038D99D /* JXBWKCustomProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A142175268DEB180038D99D /* JXBWKCustomProtocol.m */; };
+		8A14219C268DEB180038D99D /* NSURLProtocol+WebKitSupport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A142176268DEB180038D99D /* NSURLProtocol+WebKitSupport.m */; };
+		8A14219D268DEB180038D99D /* WKCallNativeMethodMessageHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A14217A268DEB180038D99D /* WKCallNativeMethodMessageHandler.m */; };
+		8A14219E268DEB180038D99D /* WKMessageHandlerDispatch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A14217F268DEB180038D99D /* WKMessageHandlerDispatch.m */; };
+		8A14219F268DEB180038D99D /* WKWebView+ExternalNavigationDelegates.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A142183268DEB180038D99D /* WKWebView+ExternalNavigationDelegates.m */; };
+		8A1421A0268DEB180038D99D /* WKWebView+CookiesManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A142184268DEB180038D99D /* WKWebView+CookiesManager.m */; };
+		8A1421A1268DEB180038D99D /* WKWebView+SupportProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A142185268DEB180038D99D /* WKWebView+SupportProtocol.m */; };
+		8A1421A2268DEB180038D99D /* WKWebView+ClearWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A142187268DEB180038D99D /* WKWebView+ClearWebCache.m */; };
+		8A1421A3268DEB180038D99D /* WKWebView+SyncUserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A142188268DEB180038D99D /* WKWebView+SyncUserAgent.m */; };
+		8A1421A4268DEB180038D99D /* WKMessageHandlerHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A14218F268DEB180038D99D /* WKMessageHandlerHelper.m */; };
+		8A1421A5268DEB180038D99D /* WKAppManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A142190268DEB180038D99D /* WKAppManager.m */; };
+		8A1421A6268DEB180038D99D /* JXBWebViewNetworkInterceptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A142193268DEB180038D99D /* JXBWebViewNetworkInterceptor.m */; };
+		8A1421A7268DEB180038D99D /* JSResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8A142194268DEB180038D99D /* JSResources.bundle */; };
+		8A1421A8268DEB180038D99D /* JXBWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A142196268DEB180038D99D /* JXBWebViewController.m */; };
+		8A1421B7268DEC4D0038D99D /* TestWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1421B6268DEC4C0038D99D /* TestWebViewController.m */; };
+		8A1421BD268DECE30038D99D /* IneterceptorRequsetHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1421BC268DECE30038D99D /* IneterceptorRequsetHandler.m */; };
+		8A1421C3268DED460038D99D /* GuanggaoMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1421C2268DED450038D99D /* GuanggaoMode.m */; };
 		8A272474264D53A000B033BB /* ZCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A272473264D53A000B033BB /* ZCViewController.m */; };
 		8A27247E264E850E00B033BB /* emailCZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A27247D264E850E00B033BB /* emailCZViewController.m */; };
 		8A272485264E883500B033BB /* XGpasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A272484264E883500B033BB /* XGpasswordViewController.m */; };
@@ -501,6 +522,49 @@
 		8A052172264A832E00E5188E /* MsgTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MsgTableViewCell.xib; sourceTree = "<group>"; };
 		8A052179264A8AC400E5188E /* msgInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = msgInfoViewController.h; sourceTree = "<group>"; };
 		8A05217A264A8AC400E5188E /* msgInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = msgInfoViewController.m; sourceTree = "<group>"; };
+		8A14216B268DEB180038D99D /* UIProgressView+WKWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+WKWebView.m"; sourceTree = "<group>"; };
+		8A14216C268DEB180038D99D /* WKWebView+AOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+AOP.m"; sourceTree = "<group>"; };
+		8A14216D268DEB180038D99D /* UIProgressView+WKWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIProgressView+WKWebView.h"; sourceTree = "<group>"; };
+		8A14216E268DEB180038D99D /* WKWebView+AOP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+AOP.h"; sourceTree = "<group>"; };
+		8A142170268DEB180038D99D /* JXBWKWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXBWKWebView.h; sourceTree = "<group>"; };
+		8A142171268DEB180038D99D /* JXBWKWebViewPool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXBWKWebViewPool.h; sourceTree = "<group>"; };
+		8A142172268DEB180038D99D /* JXBWKWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXBWKWebView.m; sourceTree = "<group>"; };
+		8A142173268DEB180038D99D /* JXBWKWebViewPool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXBWKWebViewPool.m; sourceTree = "<group>"; };
+		8A142175268DEB180038D99D /* JXBWKCustomProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXBWKCustomProtocol.m; sourceTree = "<group>"; };
+		8A142176268DEB180038D99D /* NSURLProtocol+WebKitSupport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURLProtocol+WebKitSupport.m"; sourceTree = "<group>"; };
+		8A142177268DEB180038D99D /* NSURLProtocol+WebKitSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURLProtocol+WebKitSupport.h"; sourceTree = "<group>"; };
+		8A142178268DEB180038D99D /* JXBWKCustomProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXBWKCustomProtocol.h; sourceTree = "<group>"; };
+		8A14217A268DEB180038D99D /* WKCallNativeMethodMessageHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKCallNativeMethodMessageHandler.m; sourceTree = "<group>"; };
+		8A14217B268DEB180038D99D /* WKCallNativeMethodMessageHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKCallNativeMethodMessageHandler.h; sourceTree = "<group>"; };
+		8A14217C268DEB180038D99D /* WKMessageHandlerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKMessageHandlerProtocol.h; sourceTree = "<group>"; };
+		8A14217E268DEB180038D99D /* WKMessageHandlerDispatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKMessageHandlerDispatch.h; sourceTree = "<group>"; };
+		8A14217F268DEB180038D99D /* WKMessageHandlerDispatch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKMessageHandlerDispatch.m; sourceTree = "<group>"; };
+		8A142181268DEB180038D99D /* WKWebView+SyncUserAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+SyncUserAgent.h"; sourceTree = "<group>"; };
+		8A142182268DEB180038D99D /* WKWebView+ClearWebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+ClearWebCache.h"; sourceTree = "<group>"; };
+		8A142183268DEB180038D99D /* WKWebView+ExternalNavigationDelegates.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+ExternalNavigationDelegates.m"; sourceTree = "<group>"; };
+		8A142184268DEB180038D99D /* WKWebView+CookiesManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+CookiesManager.m"; sourceTree = "<group>"; };
+		8A142185268DEB180038D99D /* WKWebView+SupportProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+SupportProtocol.m"; sourceTree = "<group>"; };
+		8A142186268DEB180038D99D /* WKWebViewExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKWebViewExtension.h; sourceTree = "<group>"; };
+		8A142187268DEB180038D99D /* WKWebView+ClearWebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+ClearWebCache.m"; sourceTree = "<group>"; };
+		8A142188268DEB180038D99D /* WKWebView+SyncUserAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+SyncUserAgent.m"; sourceTree = "<group>"; };
+		8A142189268DEB180038D99D /* WKWebView+SupportProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+SupportProtocol.h"; sourceTree = "<group>"; };
+		8A14218A268DEB180038D99D /* WKWebView+CookiesManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+CookiesManager.h"; sourceTree = "<group>"; };
+		8A14218B268DEB180038D99D /* WKWebView+ExternalNavigationDelegates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WKWebView+ExternalNavigationDelegates.h"; sourceTree = "<group>"; };
+		8A14218D268DEB180038D99D /* WKAppManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKAppManager.h; sourceTree = "<group>"; };
+		8A14218E268DEB180038D99D /* WKMessageHandlerHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WKMessageHandlerHelper.h; sourceTree = "<group>"; };
+		8A14218F268DEB180038D99D /* WKMessageHandlerHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKMessageHandlerHelper.m; sourceTree = "<group>"; };
+		8A142190268DEB180038D99D /* WKAppManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WKAppManager.m; sourceTree = "<group>"; };
+		8A142192268DEB180038D99D /* JXBWebViewNetworkInterceptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXBWebViewNetworkInterceptor.h; sourceTree = "<group>"; };
+		8A142193268DEB180038D99D /* JXBWebViewNetworkInterceptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXBWebViewNetworkInterceptor.m; sourceTree = "<group>"; };
+		8A142194268DEB180038D99D /* JSResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = JSResources.bundle; sourceTree = "<group>"; };
+		8A142195268DEB180038D99D /* JXBWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXBWebViewController.h; sourceTree = "<group>"; };
+		8A142196268DEB180038D99D /* JXBWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXBWebViewController.m; sourceTree = "<group>"; };
+		8A1421B5268DEC4C0038D99D /* TestWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestWebViewController.h; sourceTree = "<group>"; };
+		8A1421B6268DEC4C0038D99D /* TestWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestWebViewController.m; sourceTree = "<group>"; };
+		8A1421BB268DECE20038D99D /* IneterceptorRequsetHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IneterceptorRequsetHandler.h; sourceTree = "<group>"; };
+		8A1421BC268DECE30038D99D /* IneterceptorRequsetHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IneterceptorRequsetHandler.m; sourceTree = "<group>"; };
+		8A1421C1268DED450038D99D /* GuanggaoMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuanggaoMode.h; sourceTree = "<group>"; };
+		8A1421C2268DED450038D99D /* GuanggaoMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuanggaoMode.m; sourceTree = "<group>"; };
 		8A272472264D53A000B033BB /* ZCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZCViewController.h; sourceTree = "<group>"; };
 		8A272473264D53A000B033BB /* ZCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZCViewController.m; sourceTree = "<group>"; };
 		8A27247C264E850E00B033BB /* emailCZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = emailCZViewController.h; sourceTree = "<group>"; };
@@ -1435,6 +1499,133 @@
 			path = msgInfo;
 			sourceTree = "<group>";
 		};
+		8A142168268DEB170038D99D /* JXBWebKit */ = {
+			isa = PBXGroup;
+			children = (
+				8A142169268DEB180038D99D /* Tools */,
+				8A142194268DEB180038D99D /* JSResources.bundle */,
+				8A142195268DEB180038D99D /* JXBWebViewController.h */,
+				8A142196268DEB180038D99D /* JXBWebViewController.m */,
+			);
+			path = JXBWebKit;
+			sourceTree = "<group>";
+		};
+		8A142169268DEB180038D99D /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				8A14216A268DEB180038D99D /* CustomUI */,
+				8A14216F268DEB180038D99D /* ReusePool */,
+				8A142174268DEB180038D99D /* URLProtocol */,
+				8A142179268DEB180038D99D /* MessageHandler */,
+				8A14217D268DEB180038D99D /* Dispatch */,
+				8A142180268DEB180038D99D /* WebViewExtension */,
+				8A14218C268DEB180038D99D /* Helper */,
+				8A142191268DEB180038D99D /* Interceptor */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		8A14216A268DEB180038D99D /* CustomUI */ = {
+			isa = PBXGroup;
+			children = (
+				8A14216B268DEB180038D99D /* UIProgressView+WKWebView.m */,
+				8A14216C268DEB180038D99D /* WKWebView+AOP.m */,
+				8A14216D268DEB180038D99D /* UIProgressView+WKWebView.h */,
+				8A14216E268DEB180038D99D /* WKWebView+AOP.h */,
+			);
+			path = CustomUI;
+			sourceTree = "<group>";
+		};
+		8A14216F268DEB180038D99D /* ReusePool */ = {
+			isa = PBXGroup;
+			children = (
+				8A142170268DEB180038D99D /* JXBWKWebView.h */,
+				8A142171268DEB180038D99D /* JXBWKWebViewPool.h */,
+				8A142172268DEB180038D99D /* JXBWKWebView.m */,
+				8A142173268DEB180038D99D /* JXBWKWebViewPool.m */,
+			);
+			path = ReusePool;
+			sourceTree = "<group>";
+		};
+		8A142174268DEB180038D99D /* URLProtocol */ = {
+			isa = PBXGroup;
+			children = (
+				8A142175268DEB180038D99D /* JXBWKCustomProtocol.m */,
+				8A142176268DEB180038D99D /* NSURLProtocol+WebKitSupport.m */,
+				8A142177268DEB180038D99D /* NSURLProtocol+WebKitSupport.h */,
+				8A142178268DEB180038D99D /* JXBWKCustomProtocol.h */,
+			);
+			path = URLProtocol;
+			sourceTree = "<group>";
+		};
+		8A142179268DEB180038D99D /* MessageHandler */ = {
+			isa = PBXGroup;
+			children = (
+				8A14217A268DEB180038D99D /* WKCallNativeMethodMessageHandler.m */,
+				8A14217B268DEB180038D99D /* WKCallNativeMethodMessageHandler.h */,
+				8A14217C268DEB180038D99D /* WKMessageHandlerProtocol.h */,
+			);
+			path = MessageHandler;
+			sourceTree = "<group>";
+		};
+		8A14217D268DEB180038D99D /* Dispatch */ = {
+			isa = PBXGroup;
+			children = (
+				8A14217E268DEB180038D99D /* WKMessageHandlerDispatch.h */,
+				8A14217F268DEB180038D99D /* WKMessageHandlerDispatch.m */,
+			);
+			path = Dispatch;
+			sourceTree = "<group>";
+		};
+		8A142180268DEB180038D99D /* WebViewExtension */ = {
+			isa = PBXGroup;
+			children = (
+				8A142181268DEB180038D99D /* WKWebView+SyncUserAgent.h */,
+				8A142182268DEB180038D99D /* WKWebView+ClearWebCache.h */,
+				8A142183268DEB180038D99D /* WKWebView+ExternalNavigationDelegates.m */,
+				8A142184268DEB180038D99D /* WKWebView+CookiesManager.m */,
+				8A142185268DEB180038D99D /* WKWebView+SupportProtocol.m */,
+				8A142186268DEB180038D99D /* WKWebViewExtension.h */,
+				8A142187268DEB180038D99D /* WKWebView+ClearWebCache.m */,
+				8A142188268DEB180038D99D /* WKWebView+SyncUserAgent.m */,
+				8A142189268DEB180038D99D /* WKWebView+SupportProtocol.h */,
+				8A14218A268DEB180038D99D /* WKWebView+CookiesManager.h */,
+				8A14218B268DEB180038D99D /* WKWebView+ExternalNavigationDelegates.h */,
+			);
+			path = WebViewExtension;
+			sourceTree = "<group>";
+		};
+		8A14218C268DEB180038D99D /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				8A14218D268DEB180038D99D /* WKAppManager.h */,
+				8A14218E268DEB180038D99D /* WKMessageHandlerHelper.h */,
+				8A14218F268DEB180038D99D /* WKMessageHandlerHelper.m */,
+				8A142190268DEB180038D99D /* WKAppManager.m */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		8A142191268DEB180038D99D /* Interceptor */ = {
+			isa = PBXGroup;
+			children = (
+				8A142192268DEB180038D99D /* JXBWebViewNetworkInterceptor.h */,
+				8A142193268DEB180038D99D /* JXBWebViewNetworkInterceptor.m */,
+			);
+			path = Interceptor;
+			sourceTree = "<group>";
+		};
+		8A1421B4268DEC380038D99D /* webView */ = {
+			isa = PBXGroup;
+			children = (
+				8A1421BB268DECE20038D99D /* IneterceptorRequsetHandler.h */,
+				8A1421BC268DECE30038D99D /* IneterceptorRequsetHandler.m */,
+				8A1421B5268DEC4C0038D99D /* TestWebViewController.h */,
+				8A1421B6268DEC4C0038D99D /* TestWebViewController.m */,
+			);
+			path = webView;
+			sourceTree = "<group>";
+		};
 		8A27247B264E847800B033BB /* 邮箱重置 */ = {
 			isa = PBXGroup;
 			children = (
@@ -1942,6 +2133,8 @@
 				FA7C8DCE268065E700B1A022 /* vipcardcategorylistModel.m */,
 				FA7C8DD02680D64200B1A022 /* MessageInfoMode.h */,
 				FA7C8DD12680D64200B1A022 /* MessageInfoMode.m */,
+				8A1421C1268DED450038D99D /* GuanggaoMode.h */,
+				8A1421C2268DED450038D99D /* GuanggaoMode.m */,
 			);
 			path = Mode;
 			sourceTree = "<group>";
@@ -2841,6 +3034,7 @@
 		8A9C550525F85D0400EFA410 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
+				8A1421B4268DEC380038D99D /* webView */,
 				8ACAEA912643E2180091EEFE /* 首页消息跑马灯 */,
 				8A8BC2FD25FC6F880028173C /* main */,
 				8A8BC2BF25FC6D790028173C /* 视频播放界面 */,
@@ -2916,6 +3110,7 @@
 		8A9C558625F89EEF00EFA410 /* third */ = {
 			isa = PBXGroup;
 			children = (
+				8A142168268DEB170038D99D /* JXBWebKit */,
 				8A8BC16625F8F73E0028173C /* XQPageViewController */,
 				8A9C559825F8A0B300EFA410 /* DHGuidePageHUD */,
 				8A9C558725F89F0C00EFA410 /* CYLTabBarController */,
@@ -3879,6 +4074,7 @@
 				8A8BC38A25FC6F9E0028173C /* MBProgressHUD.bundle in Resources */,
 				FA9B2EC7267F2FA800C149B9 /* zjssCollectionViewCell.xib in Resources */,
 				FAA6DF0E2675C77500DE5E7C /* cycle_bottom_right.png in Resources */,
+				8A1421A7268DEB180038D99D /* JSResources.bundle in Resources */,
 				8A82F102264F9A86004AAF40 /* LaunchViewController.xib in Resources */,
 				8A95C31E265A5C7B00A6D144 /* KJPlayerFont.ttf in Resources */,
 				8A0520F42648D56C00E5188E /* SliderTableViewCell.xib in Resources */,
@@ -4059,6 +4255,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8A9C562525F8A10000EFA410 /* UIImage+FileName.m in Sources */,
+				8A1421A1268DEB180038D99D /* WKWebView+SupportProtocol.m in Sources */,
 				8A39303425FCD86A00E7331B /* MHViewController.m in Sources */,
 				8AE01BB826625E560031C82F /* KFView.m in Sources */,
 				8AE01B8B266252A90031C82F /* PWView.m in Sources */,
@@ -4104,6 +4301,7 @@
 				8A39306225FCD91A00E7331B /* CMHKeyedSubscript.m in Sources */,
 				8A8BC1D025FA13850028173C /* JRShopCell.m in Sources */,
 				8A8BC19625F9C7500028173C /* LLSearchResultListViewCell.m in Sources */,
+				8A1421B7268DEC4D0038D99D /* TestWebViewController.m in Sources */,
 				FA9B2ED9267F50BB00C149B9 /* feedbacktypeMode.m in Sources */,
 				8A8BC1D125FA13850028173C /* JRShop.m in Sources */,
 				8A9C561625F8A10000EFA410 /* UIView+Screenshot.m in Sources */,
@@ -4137,6 +4335,8 @@
 				8A9C562D25F8A10000EFA410 /* UIImage+Merge.m in Sources */,
 				8A9C562225F8A10000EFA410 /* UIButton+TouchAreaInsets.m in Sources */,
 				8A39303025FCD86A00E7331B /* MHTitleLeftButton.m in Sources */,
+				8A142199268DEB180038D99D /* JXBWKWebView.m in Sources */,
+				8A1421A2268DEB180038D99D /* WKWebView+ClearWebCache.m in Sources */,
 				8A8BC39F25FC6F9E0028173C /* UIFont+MHExtension.m in Sources */,
 				8A272474264D53A000B033BB /* ZCViewController.m in Sources */,
 				8ACAEA982643E22C0091EEFE /* ZBCycleView.m in Sources */,
@@ -4153,10 +4353,12 @@
 				8A9C561925F8A10000EFA410 /* UIColor+Random.m in Sources */,
 				8AADB3A92681CB82009051B7 /* infoXGViewController.m in Sources */,
 				8A8BC38525FC6F9E0028173C /* YYThreadSafeArray.m in Sources */,
+				8A1421A8268DEB180038D99D /* JXBWebViewController.m in Sources */,
 				8A9C562C25F8A10000EFA410 /* UIImage+PDF.m in Sources */,
 				8A95C318265A5C7B00A6D144 /* KJAVPlayer.m in Sources */,
 				8A95C31F265A5C7B00A6D144 /* KJPlayerSystemLayer.m in Sources */,
 				8A39308825FCDAED00E7331B /* NSError+MHModelException.m in Sources */,
+				8A14219C268DEB180038D99D /* NSURLProtocol+WebKitSupport.m in Sources */,
 				8A39314525FCDFCE00E7331B /* MHUserInfoController.m in Sources */,
 				8A95C30F265A5C7B00A6D144 /* KJSkipHeadPlayerVC.m in Sources */,
 				8A95C30E265A5C7B00A6D144 /* KJCachePlayerVC.m in Sources */,
@@ -4170,6 +4372,7 @@
 				FA9662E42663360400AF7B46 /* PlayWTView.m in Sources */,
 				8A95C2FB265A5C7B00A6D144 /* KJBasePlayer+KJPingTimer.m in Sources */,
 				FA75823726497CC400778A63 /* vipHeaderView.m in Sources */,
+				8A1421A4268DEB180038D99D /* WKMessageHandlerHelper.m in Sources */,
 				8A39314125FCDFCE00E7331B /* MHComment.m in Sources */,
 				8A8BC2F725FC6ED10028173C /* MHYouKuMedia.m in Sources */,
 				8A39308D25FCDAED00E7331B /* CMHView.m in Sources */,
@@ -4186,9 +4389,11 @@
 				8A39305D25FCD91A00E7331B /* SAMKeychain+CMHUtil.m in Sources */,
 				FA7A807926790601001B62AA /* VideoRelatedlistMode.m in Sources */,
 				8AE0C4DC266A54F80084248D /* menuBJViewController.m in Sources */,
+				8A1421A5268DEB180038D99D /* WKAppManager.m in Sources */,
 				8A95C303265A5C7B00A6D144 /* KJFileHandleManager.m in Sources */,
 				8A8BC2F025FC6ED10028173C /* MHYouKuMediaDetail.m in Sources */,
 				8A39308C25FCDAED00E7331B /* CMHCollectionViewCell.m in Sources */,
+				8A14219A268DEB180038D99D /* JXBWKWebViewPool.m in Sources */,
 				FA997E9726540E2900CB0DE0 /* VtitleCollectionViewCell.m in Sources */,
 				FA984FAD2674AEDF0014DCA8 /* AFAutoPurgingImageCache.m in Sources */,
 				8A95C31D265A5C7B00A6D144 /* KJPlayerFastLayer.m in Sources */,
@@ -4245,6 +4450,7 @@
 				8A8BC23D25FB3F770028173C /* MSCycleScrollView.m in Sources */,
 				8A8BC19725F9C7500028173C /* LLSearchResultView.m in Sources */,
 				8A05210C264919BE00E5188E /* LXTableViewCell.m in Sources */,
+				8A14219D268DEB180038D99D /* WKCallNativeMethodMessageHandler.m in Sources */,
 				8A8BC1B725FA12A00028173C /* VDViewController.m in Sources */,
 				8A9C563025F8A10000EFA410 /* UIImage+FX.m in Sources */,
 				8A39308925FCDAED00E7331B /* MHEXTRuntimeExtensions.m in Sources */,
@@ -4329,7 +4535,10 @@
 				8A39309325FCDAED00E7331B /* CMHCollectionViewController.m in Sources */,
 				8A3930D525FCDB3800E7331B /* CAAnimation+CMHRefresh.m in Sources */,
 				8A8BC19825F9C7500028173C /* LLSearchResultViewController.m in Sources */,
+				8A1421A0268DEB180038D99D /* WKWebView+CookiesManager.m in Sources */,
 				8A8BC17625F8F73F0028173C /* FDSlideBar.m in Sources */,
+				8A142198268DEB180038D99D /* WKWebView+AOP.m in Sources */,
+				8A1421A3268DEB180038D99D /* WKWebView+SyncUserAgent.m in Sources */,
 				8A05217B264A8AC400E5188E /* msgInfoViewController.m in Sources */,
 				8A95C30A265A5C7B00A6D144 /* KJVideoPlayVC.m in Sources */,
 				FA7A807C26790647001B62AA /* videofragmentMode.m in Sources */,
@@ -4339,12 +4548,15 @@
 				8A39314025FCDFCE00E7331B /* MHTopic.m in Sources */,
 				8A9C559225F89F0C00EFA410 /* CYLTabBar.m in Sources */,
 				8A3930CF25FCDB3800E7331B /* CMHExample.m in Sources */,
+				8A14219E268DEB180038D99D /* WKMessageHandlerDispatch.m in Sources */,
 				FA936FAA265944EA00067614 /* HJCornerRadius.m in Sources */,
 				8A9C562025F8A10000EFA410 /* UIButton+MiddleAligning.m in Sources */,
+				8A142197268DEB180038D99D /* UIProgressView+WKWebView.m in Sources */,
 				8A9C562625F8A10000EFA410 /* UIImage+GIF.m in Sources */,
 				FA984FA72674AEDF0014DCA8 /* UIRefreshControl+AFNetworking.m in Sources */,
 				8A95C316265A5C7B00A6D144 /* KJScreenshotsPlayerVC.m in Sources */,
 				8A8BC1AC25FA0E6B0028173C /* VideoTableViewCell.m in Sources */,
+				8A14219F268DEB180038D99D /* WKWebView+ExternalNavigationDelegates.m in Sources */,
 				FA997E8F265407AE00CB0DE0 /* ZqwTableViewCell.m in Sources */,
 				8A8BC38025FC6F9E0028173C /* YYThreadSafeDictionary.m in Sources */,
 				8A82F161264FCBE4004AAF40 /* FAQViewController.m in Sources */,
@@ -4361,6 +4573,7 @@
 				8A95C313265A5C7B00A6D144 /* KJRecordPlayerVC.m in Sources */,
 				FAA6DEFA2675C66700DE5E7C /* ZGQActionSheetView.m in Sources */,
 				8A8BC3A125FC6F9E0028173C /* UIBarButtonItem+MHExtension.m in Sources */,
+				8A14219B268DEB180038D99D /* JXBWKCustomProtocol.m in Sources */,
 				8A8BC38425FC6F9E0028173C /* YYTimer.m in Sources */,
 				8A39309025FCDAED00E7331B /* CMHTabBarController.m in Sources */,
 				8A8BC3AA25FC6F9E0028173C /* NSObject+MHAlert.m in Sources */,
@@ -4386,9 +4599,11 @@
 				8AFDD3C625F8C890006B1384 /* NSString+GetImageFromBundle.m in Sources */,
 				8A82F132264FA07E004AAF40 /* SVIndefiniteAnimatedView.m in Sources */,
 				8A39306525FCD91A00E7331B /* YYCache+CMHHelper.m in Sources */,
+				8A1421A6268DEB180038D99D /* JXBWebViewNetworkInterceptor.m in Sources */,
 				8A8BC17725F8F73F0028173C /* ScrollPageViewController.m in Sources */,
 				8A9C567325F8A23900EFA410 /* SearchViewController.m in Sources */,
 				FA911E4F2671178E002B6D6D /* jiemishujuClass.m in Sources */,
+				8A1421BD268DECE30038D99D /* IneterceptorRequsetHandler.m in Sources */,
 				8A39309425FCDAED00E7331B /* CMHViewController.m in Sources */,
 				8A95C31B265A5C7B00A6D144 /* KJPlayerStatusLayer.m in Sources */,
 				8A9C560A25F8A10000EFA410 /* UIView+ViewController.m in Sources */,
@@ -4396,6 +4611,7 @@
 				8A39302C25FCD86A00E7331B /* MHObject.m in Sources */,
 				FA8E718D2652BF450058F02F /* ZqwHorizontalTableView.m in Sources */,
 				8A95C312265A5C7B00A6D144 /* KJM3u8PlayerVC.m in Sources */,
+				8A1421C3268DED460038D99D /* GuanggaoMode.m in Sources */,
 				8A9C567F25F8A27500EFA410 /* MyViewController.m in Sources */,
 				8A8BC38325FC6F9E0028173C /* YYFileHash.m in Sources */,
 				FA9FBAB72647C0A400E4F27E /* hxViewController.m in Sources */,

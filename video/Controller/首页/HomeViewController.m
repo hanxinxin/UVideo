@@ -17,6 +17,7 @@
 #import "MessageViewController.h"
 #import "WSLWaterFlowLayout.h"
 #import "MHYouKuController.h"
+#import "YYWebImage.h"
 
 #import "videoFenleiMode.h"
 
@@ -188,7 +189,12 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     [self getmenuData];
     
 //    [self getShaixuanData];
+//    [self getGuanggao_data];
 }
+
+
+
+
 
 -(void)getmenuData
 {
@@ -230,7 +236,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
             {
                 [self loadData];
             }
-        }else if([code intValue]==20){
+        }else{
             NSString * message = [dict objectForKey:@"message"];
             [UHud showTXTWithStatus:message delay:2.f];
         }
@@ -831,7 +837,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
             [self.dataDic setValue:years forKey:@"4"];
             self->_subView.dataDic=self.dataDic;
             [self->_subView.mainView reloadData];
-        }else if([code intValue]==20){
+        }else{
             NSString * message = [dict objectForKey:@"message"];
 //            [UHud showHUDToView:self.view text:message];
 //            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];

@@ -31,6 +31,12 @@
 #import "ClarityView.h"
 #import "menberViewTS.h"
 
+#import "YYWebImage.h"
+#import "bannerMode.h"
+
+#import "TestWebViewController.h"
+#import "GuanggaoMode.h"
+
 @interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate ,UITextFieldDelegate, MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate,KJPlayerDelegate,KJPlayerBaseViewDelegate,KJPlayerBaseViewDelegate,YTSliderViewDelegate,MHYouKuCommentControllerDelegate>
 {
     NSDictionary *keyboardInfo;
@@ -66,7 +72,9 @@
 @property (nonatomic , strong) MHBackButton *backBtn;
 
 /** 广告View */
-@property (nonatomic , weak)UIImageView * GGimageview;
+@property (nonatomic , weak)YYAnimatedImageView * GGimageview;
+
+@property (nonatomic, strong)GuanggaoMode*GuanggaoModeA;
 
 /** tableView */
 @property (nonatomic , weak) UITableView *tableView;
@@ -198,7 +206,7 @@
     ///加载提示框
     [self addmenberViewM];
     
-   
+    
     /// 键盘
 //    [self addNoticeForKeyboard];
 }
@@ -277,6 +285,42 @@
     NSArray *arr1=[array sortedArrayUsingSelector:@selector(compare:)];
     return arr1;
 }
+
+
+-(void)getGuanggao_data
+{
+    NSDictionary *dict =@{@"symbol":@"mobile-play-player",
+                          @"result":@"1",
+    };
+    
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,guanggaoGDurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary * datadict = [dict objectForKey:@"data"];
+            NSDictionary * dataAD = [datadict objectForKey:@"ad"];
+//            [DYModelMaker DY_makeModelWithDictionary:dataAD modelKeyword:@"Guanggao" modelName:@"Mode"];
+            self.GuanggaoModeA=[GuanggaoMode yy_modelWithDictionary:dataAD];
+//            NSString * urlstr = [dataAD objectForKey:@"source"];
+            self.GGimageview.yy_imageURL=[NSURL URLWithString:self.GuanggaoModeA.source];
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+    
+    
+}
+
+
 
 
 -(void)setPlayerView
@@ -889,18 +933,26 @@
     
     // 创建详情
     [self _setupVideoDetail];
-    
+    [self getGuanggao_data];
 }
 
 // 创建底部工具条
 - (void)_setupBottomToolBar
 {
-    UIImageView * iamgeview = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
-    [iamgeview setImage:[UIImage imageNamed:@"Videoguanggao"]];
-    self.GGimageview=iamgeview;
-    [self.bottomContainer addSubview:iamgeview];
+    YYAnimatedImageView * imageview = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(0, 0, 100, 100)];
+    if(!self.GuanggaoModeA)
+    {
+    [imageview setImage:[UIImage imageNamed:@"Videoguanggao"]];
+    }
+    imageview.userInteractionEnabled = YES;//打开用户交互
+    //初始化一个手势
+    UIGestureRecognizer *singleTap = [[UIGestureRecognizer alloc] initWithTarget:self action:@selector(postWebView)];
+    //为图片添加手势
+    [imageview addGestureRecognizer:singleTap];
+    self.GGimageview=imageview;
+    [self.bottomContainer addSubview:imageview];
     // 布局工具条
-    [iamgeview mas_makeConstraints:^(MASConstraintMaker *make) {
+    [imageview mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.and.right.equalTo(self.bottomContainer);
         make.top.mas_equalTo(5);
         make.height.mas_equalTo(66.0f);
@@ -948,7 +1000,14 @@
             }
         });
 }
-
+-(void)postWebView
+{
+    if(self.GuanggaoModeA)
+    {
+        TestWebViewController *webVC = [[TestWebViewController alloc] initWithURLString:self.GuanggaoModeA.url];
+        [self.navigationController pushViewController:webVC animated:YES];
+    }
+}
 
 // 初始化话题容器
 - (void)_setupTopicContainer

@@ -10,6 +10,7 @@
 #import "SCJTableViewCell.h"
 #import "SliderTableViewCell.h"
 #import "VideoHistoryMode.h"
+#import "VideoFavoriteMode.h"
 #import "MHYouKuController.h"
 
 
@@ -363,7 +364,7 @@
 -(void)getheaderData1
 {
     
-    
+    self.page1=1;
     NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page1],@"pagesize":@"20"};
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,videoFavoriteurl] Dictionary:dict success:^(id  _Nullable responseObject) {
 //        NSLog(@"post responseObject == %@",responseObject);
@@ -375,13 +376,22 @@
         {
             NSDictionary *dictdata =[dict objectForKey:@"data"];
 //            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
-            NSArray*video_history_list=[dictdata objectForKey:@"video_history_list"];
-            if(video_history_list.count>0)
+            NSArray*video_favorite_list=[dictdata objectForKey:@"video_favorite_list"];
+            if(![video_favorite_list isKindOfClass:[NSNull class]]){
+            if(video_favorite_list.count>0)
             {
-                self.page1+=1;
                 [self removeNilView1];
+                [self.Listarray1 removeAllObjects];
+                for (int i =0; i<video_favorite_list.count; i++) {
+                    NSDictionary * video_Favorite =video_favorite_list[i];
+                    VideoFavoriteMode * model=[VideoFavoriteMode yy_modelWithDictionary:video_Favorite];
+//                [DYModelMaker DY_makeModelWithDictionary:video_Favorite modelKeyword:@"Video" modelName:@"FavoriteMode"];
+                    [self.Listarray1 addObject:model];
+                }
+                [self.downtableview1 reloadData];
             }else{
                 [self addnilView1];
+            }
             }
             
         }else{
@@ -415,13 +425,21 @@
         {
             NSDictionary *dictdata =[dict objectForKey:@"data"];
 //            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
-            NSArray*video_history_list=[dictdata objectForKey:@"video_history_list"];
-            if(video_history_list.count>0)
+            NSArray*video_favorite_list=[dictdata objectForKey:@"video_favorite_list"];
+            if(![video_favorite_list isKindOfClass:[NSNull class]]){
+            if(video_favorite_list.count>0)
             {
                 self.page1+=1;
                 [self removeNilView1];
+                for (int i =0; i<video_favorite_list.count; i++) {
+                    NSDictionary * video_Favorite =video_favorite_list[i];
+                    VideoFavoriteMode * model=[VideoFavoriteMode yy_modelWithDictionary:video_Favorite];
+                    [self.Listarray1 addObject:model];
+                }
+                [self.downtableview1 reloadData];
             }else{
 //                [self addnilView1];
+            }
             }
             
             
@@ -444,7 +462,7 @@
 -(void)getheaderData2
 {
     
-    
+    self.page2=1;
     NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%ld",self.page2],@"pagesize":@"20"};
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,videoHistoryurl] Dictionary:dict success:^(id  _Nullable responseObject) {
 //        NSLog(@"post responseObject == %@",responseObject);
@@ -463,7 +481,6 @@
 //                if(NULL_TO_NIL(video_history_list))
 //                {
                 [self removeNilView2];
-                self.page1+=1;
                 [self.Listarray2 removeAllObjects];
                 for (int i =0; i<video_history_list.count; i++) {
                     NSDictionary * video_history =video_history_list[i];
@@ -574,11 +591,22 @@
         if (cell == nil) {
             cell = [[SCJTableViewCell alloc] init];
         }
-        
+        VideoFavoriteMode * modell=Listarray1[indexPath.section];
         //cell选中效果
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.shuomingBtn.titleLabel.lineBreakMode = 0;//这句话很重要，不加这句话加上换行符也没用
-        [cell addBiaoqianLabel:@[@"打斗",@"科技",@"爱情"]];
+        cell.shuomingMiaoshu.lineBreakMode = 0;//这句话很重要，不加这句话加上换行符也没用
+//        [cell addBiaoqianLabel:@[@"打斗",@"科技",@"爱情"]];
+//        @property (weak, nonatomic) IBOutlet UIImageView *leftImage;
+//        @property (weak, nonatomic) IBOutlet UILabel *movieTime;
+//        @property (weak, nonatomic) IBOutlet UILabel *movietitle;
+//        @property (weak, nonatomic) IBOutlet UIView *biaoqian;
+//        @property (weak, nonatomic) IBOutlet UILabel *liulanTime;
+//        @property (weak, nonatomic) IBOutlet UIButton *shuomingBtn;
+        [cell.leftImage sd_setImageWithURL:[NSURL URLWithString:modell.video_pic]];
+        cell.movietitle.text=modell.video_title;
+        cell.liulanTime.text=[self getTimeFromTimestamp:@(modell.create_time)];
+        cell.shuomingMiaoshu.text=modell.video_description;
+        [cell addBiaoqianLabel:@[modell.video_region,modell.video_language]];
         return cell;
     }else if(tableView.tag==10002)
     {
@@ -619,7 +647,7 @@
 //          }
 //        ]
         cell.leftLabel.text=mode.video_title;
-        
+        cell.rightLabel.text=[self getTimeFromTimestamp:@(mode.create_time)];
         
         
         return cell;
@@ -672,6 +700,9 @@
     if(tableView.tag==10001)
     {
         NSLog(@"10001index == %ld",indexPath.section);
+        VideoFavoriteMode * modell=Listarray1[indexPath.section];
+        [self getVideoInfo:[NSString stringWithFormat:@"%f",modell.video_id]];
+        
     }else if(tableView.tag==10002)
     {
         NSLog(@"10002index == %ld",indexPath.section);

@@ -38,6 +38,7 @@
 		8A1421B7268DEC4D0038D99D /* TestWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1421B6268DEC4C0038D99D /* TestWebViewController.m */; };
 		8A1421BD268DECE30038D99D /* IneterceptorRequsetHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1421BC268DECE30038D99D /* IneterceptorRequsetHandler.m */; };
 		8A1421C3268DED460038D99D /* GuanggaoMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1421C2268DED450038D99D /* GuanggaoMode.m */; };
+		8A1421E3268F05800038D99D /* VideoFavoriteMode.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1421E2268F057F0038D99D /* VideoFavoriteMode.m */; };
 		8A272474264D53A000B033BB /* ZCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A272473264D53A000B033BB /* ZCViewController.m */; };
 		8A27247E264E850E00B033BB /* emailCZViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A27247D264E850E00B033BB /* emailCZViewController.m */; };
 		8A272485264E883500B033BB /* XGpasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A272484264E883500B033BB /* XGpasswordViewController.m */; };
@@ -565,6 +566,8 @@
 		8A1421BC268DECE30038D99D /* IneterceptorRequsetHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IneterceptorRequsetHandler.m; sourceTree = "<group>"; };
 		8A1421C1268DED450038D99D /* GuanggaoMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GuanggaoMode.h; sourceTree = "<group>"; };
 		8A1421C2268DED450038D99D /* GuanggaoMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GuanggaoMode.m; sourceTree = "<group>"; };
+		8A1421E1268F057F0038D99D /* VideoFavoriteMode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoFavoriteMode.h; sourceTree = "<group>"; };
+		8A1421E2268F057F0038D99D /* VideoFavoriteMode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoFavoriteMode.m; sourceTree = "<group>"; };
 		8A272472264D53A000B033BB /* ZCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZCViewController.h; sourceTree = "<group>"; };
 		8A272473264D53A000B033BB /* ZCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZCViewController.m; sourceTree = "<group>"; };
 		8A27247C264E850E00B033BB /* emailCZViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = emailCZViewController.h; sourceTree = "<group>"; };
@@ -2135,6 +2138,8 @@
 				FA7C8DD12680D64200B1A022 /* MessageInfoMode.m */,
 				8A1421C1268DED450038D99D /* GuanggaoMode.h */,
 				8A1421C2268DED450038D99D /* GuanggaoMode.m */,
+				8A1421E1268F057F0038D99D /* VideoFavoriteMode.h */,
+				8A1421E2268F057F0038D99D /* VideoFavoriteMode.m */,
 			);
 			path = Mode;
 			sourceTree = "<group>";
@@ -4626,6 +4631,7 @@
 				8A82F116264F9E77004AAF40 /* LaunchModel.m in Sources */,
 				8A39303325FCD86A00E7331B /* MHNavigationController.m in Sources */,
 				8A8BC2F525FC6ED10028173C /* MHYouKuCommentToolBar.m in Sources */,
+				8A1421E3268F05800038D99D /* VideoFavoriteMode.m in Sources */,
 				FAA6DF132675C77500DE5E7C /* HQEditImageEditView.m in Sources */,
 				8A8BC17925F8F73F0028173C /* LXReorderableCollectionViewFlowLayout.m in Sources */,
 				8A9C56B925F8A4D000EFA410 /* LocalStringObj.m in Sources */,

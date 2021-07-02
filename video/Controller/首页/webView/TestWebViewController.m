@@ -31,8 +31,8 @@
     [super viewDidLoad];
     
     NSLog(@"Test.webView = %@", self.webView);
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Warning" style:0 target:self action:@selector(warningAcition)];
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Warning" style:0 target:self action:@selector(warningAcition)];
 
     [[JXBWebViewNetworkInterceptor sharedInstance] addDelegate:self.handler];
 }

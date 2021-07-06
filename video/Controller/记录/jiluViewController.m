@@ -620,7 +620,7 @@
         cell.layer.borderColor = [UIColor colorWithRed:229/255.0 green:229/255.0 blue:229/255.0 alpha:1.0].CGColor;
         cell.layer.borderWidth = 1;
 //        cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
-        cell.Slider.currentPercent=(0.5*indexPath.section*0.1);
+//        cell.Slider.currentPercent=(0.5*indexPath.section*0.1);
         cell.layer.shadowColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:0.30].CGColor;
         cell.layer.shadowOffset = CGSizeMake(2,3);
         cell.layer.shadowRadius = 6;
@@ -648,7 +648,16 @@
 //        ]
         cell.leftLabel.text=mode.video_title;
         cell.rightLabel.text=[self getTimeFromTimestamp:@(mode.create_time)];
-        
+        NSLog(@"播放进度== %@ %%",[NSString stringWithFormat:@"%.f%%",mode.elapsed/mode.video_duration]);
+        if(mode.video_duration!=0)
+        {
+        cell.bfbLabel.text=[NSString stringWithFormat:@"%.f%%",mode.elapsed/mode.video_duration];
+        cell.Slider.currentPercent=mode.elapsed/mode.video_duration;  /// value 百分比
+        }else
+        {
+            cell.bfbLabel.text=@"0%";
+            cell.Slider.currentPercent=0;  /// value 百分比
+        }
         
         return cell;
     }

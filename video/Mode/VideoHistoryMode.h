@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *video_description;
 @property (nonatomic, assign) double video_score;
 @property (nonatomic, copy) NSString *video_language;
+@property (nonatomic, assign) double multiple_fragment;
 @property (nonatomic, assign) double video_category_id;
 @property (nonatomic, assign) double video_depreciate;
 @property (nonatomic, copy) NSString *video_region;
@@ -39,6 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *video_remark;
 @property (nonatomic, copy) NSString *video_fragment_symbol;
 @property (nonatomic, assign) double video_parent_category_id;
+@property (nonatomic, copy) NSString *last_fragment_symbol;
 @end
 
 NS_ASSUME_NONNULL_END

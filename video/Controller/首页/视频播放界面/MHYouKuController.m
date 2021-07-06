@@ -333,8 +333,41 @@
     
     
 }
+/////更新播放历史 定时 10秒轮一次，更新观看历史
+-(void)Post_updateHistory
+{
+    VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
+    videofragmentMode*Fmo=[videofragmentMode yy_modelWithDictionary:_Zvideomodel.video_fragment_list[self.xuanjiSelectIndex] ];
+    NSNumber * qxd=self.qualitieslist[self.QXDSelectIndex];
+    NSDictionary *dict =@{@"video_id":[@(modelL.id) stringValue],
+                          @"video_fragment_id":[@(Fmo.id) stringValue],
+                          @"quality":[qxd stringValue],
+        };
+    
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_updateHistory] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary * datadict = [dict objectForKey:@"data"];
+            NSLog(@"udpate next");
 
+        }else if([code intValue]==21)
+        {
+            
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
 
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+}
 
 
 -(void)setPlayerView
@@ -507,7 +540,16 @@
     player.playerView.TimeTotal.text=[NSString stringWithFormat:@"%@/%@",qstring,hstring];
 //    player.playerView.bottomHYSlider.currentSliderValue=time;
     player.playerView.bottomHYSlider.currentPercent=(time/self.player.totalTime);
-    
+    if((int)time != 0)
+    {
+        if(((int)time)%10==0)
+        {
+            if(![usertoken isEqualToString:@""])
+            {
+                [self Post_updateHistory];
+            }
+        }
+    }
 }
 /* 缓存进度 */
 - (void)kj_player:(KJBasePlayer*)player loadProgress:(CGFloat)progress{

@@ -93,6 +93,9 @@
 #define postcustomerServiceinfourl @"/customerService/info"////获取某一个客服信息
 
 
+#define video_updateHistory @"/user/updateHistory"///更新播放历史 定时 10秒轮一次，更新观看历史
+
+
 
 ////视频播放页
 #define video_latesturl @"/video/latest"  //视频排行榜列表

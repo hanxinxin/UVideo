@@ -607,6 +607,7 @@
         cell.liulanTime.text=[self getTimeFromTimestamp:@(modell.create_time)];
         cell.shuomingMiaoshu.text=modell.video_description;
         [cell addBiaoqianLabel:@[modell.video_region,modell.video_language]];
+        cell.movieTime.hidden=YES;
         return cell;
     }else if(tableView.tag==10002)
     {

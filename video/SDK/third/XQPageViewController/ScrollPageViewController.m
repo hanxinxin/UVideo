@@ -238,18 +238,19 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
                                                       forBarMetrics:UIBarMetricsDefault];
         [self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
-    self.titleView = [[HomeTitleView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth - (80*2), 30)];
+    self.titleView = [[HomeTitleView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth - (80+40), 30)];
         self.titleView.backgroundColor=[UIColor whiteColor];
-    
     self.titleView.layer.cornerRadius=15;
 
 //    HQCustomButton * btn = [[HQCustomButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_titleView.frame), 30)];
     UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_titleView.frame), 30)];
+//    UIButton * btn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0,ScreenWidth - (80+40), 30)];
     btn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;//使图片和文字水平居中显示
     [btn setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, btn.imageView.size.width)];
     [btn setImageEdgeInsets:UIEdgeInsetsMake(0, btn.width-50, 0, 30)];
     [btn setTitle:@"请输入关键字" forState:(UIControlStateNormal)];
     [btn setImage:[UIImage imageNamed:@"search"] forState:(UIControlStateNormal)];
+    [btn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
     [btn setTitleColor:[UIColor colorWithRed:159/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:(UIControlStateNormal)];
     btn.layer.cornerRadius=15;
     [btn setTarget:self action:@selector(btnTouch:) forControlEvents:(UIControlEventTouchDown)];
@@ -299,24 +300,26 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 //    self.navigationItem.rightBarButtonItem = rightButton;
     
     
-    //两个按钮的父类view
-    UIView *leftButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 64, 30)];
-    //下载按钮
-    UIButton *Back = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64, 30)];
-    [Back setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
-    [Back setTitle:@"" forState:(UIControlStateNormal)];
-    [Back addTarget:self action:@selector(historyBtnEvent) forControlEvents:UIControlEventTouchUpInside];
-    [leftButtonView addSubview:Back];
-    self.leftBtnV=leftButtonView;
+//    //两个按钮的父类view
+//    UIView *leftButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 64, 30)];
+//    //下载按钮
+//    UIButton *Back = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64, 30)];
+//    [Back setImage:[UIImage imageNamed:@"logo"] forState:UIControlStateNormal];
+//    [Back setTitle:@"" forState:(UIControlStateNormal)];
+//    [Back addTarget:self action:@selector(historyBtnEvent) forControlEvents:UIControlEventTouchUpInside];
+//    [leftButtonView addSubview:Back];
+//    self.leftBtnV=leftButtonView;
     //两个按钮的父类view
     UIView *rightButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 35, 30)];
     //下载按钮
-    BadgeButton *historyBtn = [[BadgeButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    BadgeButton *historyBtn = [[BadgeButton alloc] initWithFrame:CGRectMake(5, 0, 30, 30)];
     [rightButtonView addSubview:historyBtn];
     historyBtn.badgeValue=1;
     historyBtn.isRedBall=YES;
     [historyBtn setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
     [historyBtn addTarget:self action:@selector(MessageBtnEvent) forControlEvents:UIControlEventTouchUpInside];
+//    historyBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, -8);
+//    historyBtn.translatesAutoresizingMaskIntoConstraints=NO;
     self.rightBtnV=rightButtonView;
     
     

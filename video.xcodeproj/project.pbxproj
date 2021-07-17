@@ -3115,6 +3115,7 @@
 		8A9C558625F89EEF00EFA410 /* third */ = {
 			isa = PBXGroup;
 			children = (
+				FA8CE96926A3032500B560E8 /* navbar */,
 				8A142168268DEB170038D99D /* JXBWebKit */,
 				8A8BC16625F8F73E0028173C /* XQPageViewController */,
 				8A9C559825F8A0B300EFA410 /* DHGuidePageHUD */,
@@ -3593,6 +3594,13 @@
 				FA8A03902667D0BE00B41281 /* iphoneClass.m */,
 			);
 			path = iphoneClass;
+			sourceTree = "<group>";
+		};
+		FA8CE96926A3032500B560E8 /* navbar */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = navbar;
 			sourceTree = "<group>";
 		};
 		FA8E717F2652A35E0058F02F /* Palyview */ = {
@@ -4819,7 +4827,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3K8AA3Y7M7;
+				DEVELOPMENT_TEAM = UK5CCXA22Q;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/video/SDK/third/IJKMediaFramework",
@@ -4836,7 +4844,7 @@
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.U.video;
+				PRODUCT_BUNDLE_IDENTIFIER = com.U.videoN;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -4849,7 +4857,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3K8AA3Y7M7;
+				DEVELOPMENT_TEAM = UK5CCXA22Q;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/video/SDK/third/IJKMediaFramework",
@@ -4866,7 +4874,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
-				PRODUCT_BUNDLE_IDENTIFIER = com.U.video;
+				PRODUCT_BUNDLE_IDENTIFIER = com.U.videoN;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

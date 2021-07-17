@@ -106,7 +106,7 @@ static NSString * const shopCellReuseID = @"shop";
     
     
     ///包含瀑布流view
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(15, 160+70, self.ZScrollView.width-30, 60+420+420)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 160+70, self.ZScrollView.width, 60+490+490)];
     view.backgroundColor=[UIColor whiteColor];
     
     [self.ZScrollView addSubview:view];
@@ -127,8 +127,9 @@ static NSString * const shopCellReuseID = @"shop";
 }
 -(void)getGuanggao_data
 {
-    NSDictionary *dict =@{@"symbol":@"mobile-home-banner-below",
-                          @"result":@"1",
+    NSDictionary *dict =@{
+        @"symbol":@"mobile-home-banner-below",
+        @"result":@"1",
     };
     
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,guanggaoGDurl] Dictionary:dict success:^(id  _Nullable responseObject) {
@@ -222,7 +223,7 @@ static NSString * const shopCellReuseID = @"shop";
      NSLog(@">>>>>  %ld", (long)index);
      };
      */
-    YYAnimatedImageView * imageview = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(20, 165, self.bottomView.width, 60)];
+    YYAnimatedImageView * imageview = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(20, 165, self.bottomView.width-40, 60)];
     if(self.GuanggaoModeA==nil)
     {
     [imageview setImage:[UIImage imageNamed:@"kthuiyuan"]];
@@ -252,9 +253,12 @@ static NSString * const shopCellReuseID = @"shop";
 {
     if(self.GuanggaoModeA)
     {
-        TestWebViewController *webVC = [[TestWebViewController alloc] initWithURLString:self.GuanggaoModeA.url];
-//        [self.navigationController pushViewController:webVC animated:YES];
-        [self pushRootNav:webVC animated:YES];
+//        TestWebViewController *webVC = [[TestWebViewController alloc] initWithURLString:self.GuanggaoModeA.url];
+////        [self.navigationController pushViewController:webVC animated:YES];
+//        [self pushRootNav:webVC animated:YES];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.GuanggaoModeA.url]];
+
+        
     }
 }
 
@@ -285,7 +289,7 @@ static NSString * const shopCellReuseID = @"shop";
         
         make.top.equalTo(@0);
         make.width.mas_equalTo(self.bottomView.width);
-        make.height.equalTo(@420);
+        make.height.equalTo(@490);
     }];
     self.collectionView1 = collectionView;
     
@@ -332,7 +336,7 @@ static NSString * const shopCellReuseID = @"shop";
     [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.collectionView1.mas_bottom).offset(8);
         make.width.mas_equalTo(self.bottomView.width);
-        make.height.equalTo(@420);
+        make.height.equalTo(@490);
     }];
     self.collectionView2 = collectionView;
     
@@ -356,6 +360,7 @@ static NSString * const shopCellReuseID = @"shop";
     
     //更新 scrollview 滑动
     self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, 160+70+self.bottomView.height+10);
+//    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, 160+70+960+50);
 }
 
 
@@ -368,7 +373,7 @@ static NSString * const shopCellReuseID = @"shop";
     {
         dict = @{@"parent_category_id":[NSString stringWithFormat:@"%@",@(100)],
                  @"page":[NSString stringWithFormat:@"%@",@(1)],
-                 @"pagesize":[NSString stringWithFormat:@"%@",@(7)]
+                 @"pagesize":[NSString stringWithFormat:@"%@",@(6)]
         };
     }else{
         dict = @{@"parent_category_id":[NSString stringWithFormat:@"%f",_FenleiMode.id],
@@ -442,7 +447,7 @@ static NSString * const shopCellReuseID = @"shop";
     {
         dict = @{@"parent_category_id":[NSString stringWithFormat:@"%@",@(101)],
                  @"page":[NSString stringWithFormat:@"%@",@(1)],
-                 @"pagesize":[NSString stringWithFormat:@"%@",@(7)]
+                 @"pagesize":[NSString stringWithFormat:@"%@",@(6)]
         };
     }else{
         dict = @{@"parent_category_id":[NSString stringWithFormat:@"%f",_FenleiMode.id],
@@ -625,8 +630,9 @@ static NSString * const shopCellReuseID = @"shop";
 #pragma mark - WSLWaterFlowLayoutDelegate
 //返回每个item大小
 - (CGSize)waterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-        return CGSizeMake((self.bottomView.width-50)/3, 179);
+    CGFloat wid=(self.bottomView.width-50)/3;
+    CGFloat hei=wid/3*4 + 50;
+        return CGSizeMake(wid, hei);
 }
 /** 头视图Size */
 -(CGSize )waterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout sizeForHeaderViewInSection:(NSInteger)section{
@@ -640,7 +646,7 @@ static NSString * const shopCellReuseID = @"shop";
 }
 /** 列间距*/
 -(CGFloat)columnMarginInWaterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout{
-    return 10;
+    return 13;
 }
 /** 行间距*/
 -(CGFloat)rowMarginInWaterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout{
@@ -649,9 +655,9 @@ static NSString * const shopCellReuseID = @"shop";
 /** 边缘之间的间距*/
 -(UIEdgeInsets)edgeInsetInWaterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout{
     if (waterFlowLayout.flowLayoutStyle == (WSLWaterFlowLayoutStyle)3){
-        return UIEdgeInsetsMake(20, 20, 20, 20);
+        return UIEdgeInsetsMake(15, 15, 15, 15);
     }
-    return UIEdgeInsetsMake(10, 10, 10, 10);
+    return UIEdgeInsetsMake(0, 10, 0, 10);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{

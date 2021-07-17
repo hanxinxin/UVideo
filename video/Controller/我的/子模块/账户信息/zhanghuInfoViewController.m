@@ -133,7 +133,7 @@
     NSLog(@"index == %ld",indexPath.section);
     if(indexPath.section==0)
     {
-            if(![self StringIsNullOrEmpty:UserZH_loca])
+            if(![self StringIsNullOrEmpty:usertoken])
             {
                 infoXGViewController*avc = [[infoXGViewController alloc] init];
                 [self pushRootNav:avc animated:YES];
@@ -142,7 +142,7 @@
             }
     }else if(indexPath.section==3)
     {
-        if(![self StringIsNullOrEmpty:UserZH_loca])
+        if(![self StringIsNullOrEmpty:usertoken])
         {
             emailCZViewController*avc = [[emailCZViewController alloc] init];
             avc.Type=2;

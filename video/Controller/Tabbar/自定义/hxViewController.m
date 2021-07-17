@@ -38,9 +38,8 @@
                                                       forBarMetrics:UIBarMetricsDefault];
         [self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
-    self.titleView = [[HomeTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - (80*2), 30)];
+    self.titleView = [[HomeTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - (80+40), 30)];
         self.titleView.backgroundColor=[UIColor whiteColor];
-    
     self.titleView.layer.cornerRadius=15;
 
 //    HQCustomButton * btn = [[HQCustomButton alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(_titleView.frame), 30)];
@@ -50,13 +49,13 @@
     [btn setImageEdgeInsets:UIEdgeInsetsMake(0, btn.width-50, 0, 30)];
     [btn setTitle:@"请输入关键字" forState:(UIControlStateNormal)];
     [btn setImage:[UIImage imageNamed:@"search"] forState:(UIControlStateNormal)];
+    [btn.titleLabel setFont:[UIFont systemFontOfSize:15.f]];
     [btn setTitleColor:[UIColor colorWithRed:159/255.0 green:159/255.0 blue:159/255.0 alpha:1] forState:(UIControlStateNormal)];
     btn.layer.cornerRadius=15;
     [btn setTarget:self action:@selector(btnTouch:) forControlEvents:(UIControlEventTouchDown)];
     [_titleView addSubview:btn];
 //    [_titleView.layer addSublayer:gl];
     self.navigationItem.titleView = _titleView;
-
 
         [self addLeft_RightButton];
 }
@@ -71,13 +70,22 @@
     UIBarButtonItem * leftButton = [[UIBarButtonItem alloc] initWithCustomView:Back];
     self.navigationItem.leftBarButtonItem = leftButton;
     
-   
-    //下载按钮
-    UIButton *historyBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    //两个按钮的父类view
+    UIView *rightButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    //    #pragma mark >>>>>消息按钮
+    BadgeButton *historyBtn = [[BadgeButton alloc] initWithFrame:CGRectMake(5, 0, 30, 30)];
+    [rightButtonView addSubview:historyBtn];
+    historyBtn.badgeValue=1;
+    historyBtn.isRedBall=YES;
     [historyBtn setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
     [historyBtn addTarget:self action:@selector(DownLoadBtnEvent) forControlEvents:UIControlEventTouchUpInside];
-    UIBarButtonItem * rightButton = [[UIBarButtonItem alloc] initWithCustomView:historyBtn];
-    self.navigationItem.rightBarButtonItem = rightButton;
+//    historyBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, -8);
+//    historyBtn.translatesAutoresizingMaskIntoConstraints=NO;
+//    //把右侧的两个按钮添加到rightBarButtonItem
+//    UIBarButtonItem *downBtn = [[UIBarButtonItem alloc] initWithCustomView:mainAndSearchBtn];
+    UIBarButtonItem *messagebtn = [[UIBarButtonItem alloc] initWithCustomView:rightButtonView];
+    
+    self.navigationItem.rightBarButtonItem = messagebtn;
 }
 -(void)DownLoadBtnEvent
 {

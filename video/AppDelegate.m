@@ -175,7 +175,7 @@ return timeString;
 }
 - (HXBaseNavgationController *)roottabbar {
     
-   
+    self.tabBar.tabBar.translucent = NO;
 //    return tabBarC;
     HXBaseNavgationController * rootNav = [[HXBaseNavgationController alloc ] initWithRootViewController:self.tabBar];
     [rootNav setNavigationBarHidden:YES];

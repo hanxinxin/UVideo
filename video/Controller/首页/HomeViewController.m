@@ -526,22 +526,29 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     
     //两个按钮的父类view
     UIView *rightButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    
+  
     //下载按钮
-    BadgeButton *historyBtn = [[BadgeButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+//    UIButton *mainAndSearchBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 10)];
+//    [rightButtonView addSubview:mainAndSearchBtn];
+////    [mainAndSearchBtn setImage:[UIImage imageNamed:@"cpselect"] forState:UIControlStateNormal];
+//    [mainAndSearchBtn addTarget:self action:@selector(MessageBtnEvent) forControlEvents:UIControlEventTouchUpInside];
+    
+    //    #pragma mark >>>>>消息按钮
+    BadgeButton *historyBtn = [[BadgeButton alloc] initWithFrame:CGRectMake(5, 0, 30, 30)];
     [rightButtonView addSubview:historyBtn];
     historyBtn.badgeValue=1;
     historyBtn.isRedBall=YES;
     [historyBtn setImage:[UIImage imageNamed:@"message"] forState:UIControlStateNormal];
     [historyBtn addTarget:self action:@selector(MessageBtnEvent) forControlEvents:UIControlEventTouchUpInside];
-
-//    #pragma mark >>>>>消息按钮
-//    UIButton *mainAndSearchBtn = [[UIButton alloc] initWithFrame:CGRectMake(35, 0, 30, 30)];
-//    [rightButtonView addSubview:mainAndSearchBtn];
-//    [mainAndSearchBtn setImage:[UIImage imageNamed:@"cpselect"] forState:UIControlStateNormal];
-//    [mainAndSearchBtn addTarget:self action:@selector(MessageBtnEvent) forControlEvents:UIControlEventTouchUpInside];
+//    historyBtn.contentEdgeInsets = UIEdgeInsetsMake(0, 8, 0, -8);
+//    historyBtn.translatesAutoresizingMaskIntoConstraints=NO;
 //    //把右侧的两个按钮添加到rightBarButtonItem
-    UIBarButtonItem *rightCunstomButtonView = [[UIBarButtonItem alloc] initWithCustomView:rightButtonView];
-    self.navigationItem.rightBarButtonItem = rightCunstomButtonView;
+//    UIBarButtonItem *downBtn = [[UIBarButtonItem alloc] initWithCustomView:mainAndSearchBtn];
+    UIBarButtonItem *messagebtn = [[UIBarButtonItem alloc] initWithCustomView:rightButtonView];
+    
+    self.navigationItem.rightBarButtonItem = messagebtn;
+//    self.navigationItem.rightBarButtonItems =@[downBtn,messagebtn];
 }
 -(void)DownLoadBtnEvent
 {
@@ -900,8 +907,9 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 #pragma mark - WSLWaterFlowLayoutDelegate
 //返回每个item大小
 - (CGSize)waterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-        return CGSizeMake(106, 156);
+    CGFloat wid=(self.collectionView.width-50)/3;
+    CGFloat hei=wid/3*4 + 50;
+        return CGSizeMake(wid, hei);
 }
 
 /** 列数*/
@@ -910,7 +918,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 }
 /** 列间距*/
 -(CGFloat)columnMarginInWaterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout{
-    return 15;
+    return 13;
 }
 /** 行间距*/
 -(CGFloat)rowMarginInWaterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout{
@@ -919,7 +927,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 /** 边缘之间的间距*/
 -(UIEdgeInsets)edgeInsetInWaterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout{
     
-    return UIEdgeInsetsMake(15, 15, 15, 15);
+    return UIEdgeInsetsMake(0, 10, 0, 10);
 }
 
 -(void)noticePush:(NSNotification *)not

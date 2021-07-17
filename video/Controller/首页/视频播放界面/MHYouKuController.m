@@ -1071,8 +1071,9 @@
 {
     if(self.GuanggaoModeA)
     {
-        TestWebViewController *webVC = [[TestWebViewController alloc] initWithURLString:self.GuanggaoModeA.url];
-        [self pushRootNav:webVC animated:YES];
+//        TestWebViewController *webVC = [[TestWebViewController alloc] initWithURLString:self.GuanggaoModeA.url];
+//        [self pushRootNav:webVC animated:YES];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.GuanggaoModeA.url]];
     }
 }
 

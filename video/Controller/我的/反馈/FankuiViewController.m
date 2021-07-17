@@ -44,7 +44,7 @@
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerTapped:)];
     singleTap.delegate=self;
         [self.view addGestureRecognizer:singleTap];
-    
+        
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -211,8 +211,27 @@
         cell.textLabel.text=@"问题分类";
         if(self.titleArray.count>0)
         {
-            feedbacktypeMode*mode=self.titleArray[self.selectIndex];
-            cell.detailTextLabel.text=mode.name;
+            if(self.typeInt==1001)
+            {
+                for (int i =0; i<self.titleArray.count; i++) {
+                    feedbacktypeMode*mode=self.titleArray[i];
+                    if([mode.name isEqual:@"求片"])
+                    {
+                        cell.detailTextLabel.text=mode.name;
+                    }
+                }
+            }else if(self.typeInt==1002)
+            {
+                for (int i =0; i<self.titleArray.count; i++) {
+                    feedbacktypeMode*mode=self.titleArray[i];
+                    if([mode.name isEqual:@"BUG报错"])
+                    {
+                        cell.detailTextLabel.text=mode.name;
+                    }
+                }
+            }
+//            feedbacktypeMode*mode=self.titleArray[self.selectIndex];
+//            cell.detailTextLabel.text=mode.name;
         }
         cell.backgroundColor = [UIColor whiteColor];
 

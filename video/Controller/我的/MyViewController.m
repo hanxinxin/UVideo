@@ -138,6 +138,11 @@
             [self.Headerview.vipImage setImage:[UIImage imageNamed:@"vipimage"] forState:(UIControlStateNormal)];
         }
     }
+    
+    
+    self.Headerview.nameLabel.frame=CGRectMake(self.Headerview.txImage.left+self.Headerview.txImage.width+8, 20, [self getWidthWithText:self.Headerview.nameLabel.text height:self.Headerview.nameLabel.height font:18.f], 30);
+    self.Headerview.vipImage.frame=CGRectMake(self.Headerview.nameLabel.left+self.Headerview.nameLabel.width+2, 20, 62, 34);
+    self.Headerview.vipTime.frame=CGRectMake(self.Headerview.txImage.left+self.Headerview.txImage.width+8, self.Headerview.nameLabel.bottom+8, [self getWidthWithText:self.Headerview.vipTime.text height:self.Headerview.vipTime.height font:15.f], 30);
 }
 
 -(void)addpromptViewM{
@@ -257,6 +262,9 @@
     view.jifenBtn.hidden=YES;
     [self.ZtopView addSubview:view];
     self.Headerview = view;
+//    [self.Headerview.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.width.mas_equalTo([self getWidthWithText:self.Headerview.nameLabel.text height:self.Headerview.nameLabel.height font:15.f]);
+//    }];
     __weak __typeof(self)weakSelf = self;
     self.Headerview.topHeaderBlock = ^(NSInteger touchIndex) {
         NSLog(@"Touchindex= %ld",touchIndex);
@@ -268,6 +276,26 @@
                 [weakSelf pushRootNav:avc animated:YES];
             }else{
                 [weakSelf ShowProfilePhoto];
+            }
+        }else if(touchIndex==1002)
+        {
+//            if([usertoken isEqualToString:@""])
+//            {
+//                LoginViewController * avc = [[LoginViewController alloc] init];
+//                [weakSelf pushRootNav:avc animated:YES];
+//            }else{
+//                zhanghuInfoViewController * avc = [[zhanghuInfoViewController alloc] init];
+//                [weakSelf pushRootNav:avc animated:YES];
+//            }
+        }else if(touchIndex==1003)
+        {
+            if([usertoken isEqualToString:@""])
+            {
+                LoginViewController * avc = [[LoginViewController alloc] init];
+                [weakSelf pushRootNav:avc animated:YES];
+            }else{
+                zhanghuInfoViewController * avc = [[zhanghuInfoViewController alloc] init];
+                [weakSelf pushRootNav:avc animated:YES];
             }
         }
     };
@@ -365,7 +393,7 @@
     [imagearray addObject:[NSArray arrayWithObjects:@"bofangjilu",@"chongzhijilu",@"zhanghu",@"bangzhu",@"setimage",@"qingli",@"signout", nil]];
     
     self.downtableview=[[UITableView alloc] init];
-    self.downtableview.frame=CGRectMake(20, 200, SCREEN_WIDTH-40, SCREENH_HEIGHT-200-kNavBarAndStatusBarHeight);
+    self.downtableview.frame=CGRectMake(20, 200, SCREEN_WIDTH-40, SCREENH_HEIGHT-210-kNavAndTabHeight);
     self.downtableview.backgroundColor=[UIColor clearColor];
     self.downtableview.delegate=self;
     self.downtableview.dataSource=self;
@@ -757,4 +785,28 @@
     }
     return data;
 }
+
+
+
+
+//根据宽度求高度  content 计算的内容  width 计算的宽度 font字体大小
+- (CGFloat)getLabelHeightWithText:(NSString *)text width:(CGFloat)width font: (CGFloat)font
+{
+    CGRect rect = [text boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:font]} context:nil];
+    
+    return rect.size.height;
+}
+//根据高度度求宽度  text 计算的内容  Height 计算的高度 font字体大小
+- (CGFloat)getWidthWithText:(NSString *)text height:(CGFloat)height font:(CGFloat)font{
+    
+    CGRect rect = [text boundingRectWithSize:CGSizeMake(MAXFLOAT, height)
+                                        options:NSStringDrawingUsesLineFragmentOrigin
+                                     attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:font]}
+                                        context:nil];
+    return rect.size.width;
+}
+
+
+
+
 @end

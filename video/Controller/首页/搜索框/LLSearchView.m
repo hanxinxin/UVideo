@@ -291,7 +291,7 @@ static NSString *CollectionCellID=@"zjssCollectionViewCell";
     }
     VideoRankMode*model=self.hotArray[indexPath.row];
     NSString *text = model.title;
-    cell.textLabel.text =[NSString stringWithFormat:@" %@",text];
+    cell.textLabel.text =[NSString stringWithFormat:@"   %@",text];
     return cell;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

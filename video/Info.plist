@@ -2,14 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>User Interface Style</key>
-	<string>Light</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>允许此权限才能使用相册功能</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>允许此权限才能使用相册功能</string>
-	<key>NSCameraUsageDescription</key>
-	<string>允许此权限才能使用相机功能</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -35,6 +27,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>允许此权限才能使用相机功能</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>允许此权限才能使用相册功能</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>允许此权限才能使用相册功能</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>KJPlayerFont.ttf</string>
@@ -62,5 +60,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>User Interface Style</key>
+	<string>Light</string>
 </dict>
 </plist>

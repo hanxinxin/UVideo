@@ -12,7 +12,7 @@
 #if __has_include("UINavigationController+FDFullscreenPopGesture.h")
 #import "UINavigationController+FDFullscreenPopGesture.h"
 #endif
-
+static CGFloat const mySpacer = -5;//item边距设置
 @interface HXBaseNavgationController ()
 <UIGestureRecognizerDelegate,UINavigationControllerDelegate>
 
@@ -76,7 +76,20 @@
 
 
 }
-
-
-
+-(void)viewDidLayoutSubviews{
+  if (@available(iOS 11.0, *)) return;
+  UINavigationItem * item=self.navigationItem;
+  NSArray * array=item.leftBarButtonItems;
+  if (array&&array.count!=0){
+    //这里需要注意,你设置的第一个leftBarButtonItem的customeView不能是空的,也就是不要设置UIBarButtonSystemItemFixedSpace这种风格的item
+    UIBarButtonItem * buttonItem=array[0];
+    UIView * view =[[[buttonItem.customView superview] superview] superview];
+    NSArray * arrayConstraint=view.constraints;
+    for (NSLayoutConstraint * constant in arrayConstraint) {
+      if (fabs(constant.constant)==16) {
+        constant.constant=0;
+      }
+    }
+  }
+}
 @end

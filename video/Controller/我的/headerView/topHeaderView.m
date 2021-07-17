@@ -52,23 +52,45 @@ static NSString * const headerCellReuseID = @"header";
     layout.flowLayoutStyle = WSLWaterFlowVerticalEqualHeight;
     
     // 创建瀑布流view
-    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 80+8, self.width-40, 80) collectionViewLayout:layout];
+    self.collectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 80+8, self.width, 80) collectionViewLayout:layout];
     // 设置数据源
     self.collectionView.dataSource = self;
     self.collectionView.delegate=self;
     self.collectionView.backgroundColor = [UIColor clearColor];
+    
+    self.collectionView.hidden=YES;
     // 是否滚动//
     self.collectionView.scrollEnabled = NO;
     [self addSubview:self.collectionView];
-//    [self.collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.top.equalTo(self.txImage.mas_bottom).offset(8);
-//        make.width.mas_equalTo(self.width-40);
-//        make.height.equalTo(@370);
-//    }];
+    
     
     
     // 注册cell
     [self.collectionView registerNib:[UINib nibWithNibName:NSStringFromClass([headerCollectionViewCell class]) bundle:nil] forCellWithReuseIdentifier:headerCellReuseID];
+    [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.txImage).offset(8);
+        make.top.mas_equalTo(20);
+        make.width.mas_equalTo([self getWidthWithText:self.nameLabel.text height:self.nameLabel.height font:17.f]);
+        make.height.mas_equalTo(30);
+    }];
+    
+    [self.vipImage mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.nameLabel).offset(2);
+        make.top.mas_equalTo(15);
+        make.width.mas_equalTo(62);
+        make.height.mas_equalTo(34);
+    }];
+    [self.vipTime mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.txImage).offset(8);
+        make.top.equalTo(self.nameLabel);
+        make.width.mas_equalTo([self getWidthWithText:self.vipTime.text height:self.vipTime.height font:15.f]);
+        make.height.mas_equalTo(30);
+    }];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        self.collectionView.hidden=NO;
+        self.collectionView.frame=CGRectMake(0, 80+8, self.width, 80);
+        [self.collectionView reloadData];
+        });
 }
 
 
@@ -129,7 +151,7 @@ static NSString * const headerCellReuseID = @"header";
 //返回每个item大小
 - (CGSize)waterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-        return CGSizeMake((self.collectionView.width-50)/self.titleArray.count, 74);
+        return CGSizeMake((self.collectionView.width-60)/self.titleArray.count, 74);
 }
 
 
@@ -139,7 +161,7 @@ static NSString * const headerCellReuseID = @"header";
 }
 /** 列间距*/
 -(CGFloat)columnMarginInWaterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout{
-    return 5;
+    return 10;
 }
 /** 行间距*/
 -(CGFloat)rowMarginInWaterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout{
@@ -147,10 +169,28 @@ static NSString * const headerCellReuseID = @"header";
 }
 /** 边缘之间的间距*/
 -(UIEdgeInsets)edgeInsetInWaterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout{
-    if (waterFlowLayout.flowLayoutStyle == (WSLWaterFlowLayoutStyle)3){
-        return UIEdgeInsetsMake(20, 20, 20, 20);
-    }
-    return UIEdgeInsetsMake(10, 10, 10, 10);
+//    if (waterFlowLayout.flowLayoutStyle == (WSLWaterFlowLayoutStyle)3){
+//        return UIEdgeInsetsMake(20, 20, 20, 20);
+//    }
+    return UIEdgeInsetsMake(0, 10, 0, 10);
 }
 
+
+
+//根据宽度求高度  content 计算的内容  width 计算的宽度 font字体大小
+- (CGFloat)getLabelHeightWithText:(NSString *)text width:(CGFloat)width font: (CGFloat)font
+{
+    CGRect rect = [text boundingRectWithSize:CGSizeMake(width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:font]} context:nil];
+    
+    return rect.size.height;
+}
+//根据高度度求宽度  text 计算的内容  Height 计算的高度 font字体大小
+- (CGFloat)getWidthWithText:(NSString *)text height:(CGFloat)height font:(CGFloat)font{
+    
+    CGRect rect = [text boundingRectWithSize:CGSizeMake(MAXFLOAT, height)
+                                        options:NSStringDrawingUsesLineFragmentOrigin
+                                     attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:font]}
+                                        context:nil];
+    return rect.size.width;
+}
 @end

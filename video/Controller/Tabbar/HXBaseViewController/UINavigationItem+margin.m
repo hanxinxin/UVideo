@@ -39,7 +39,7 @@
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0)
     {
         UIBarButtonItem *negativeSeperator = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-        negativeSeperator.width = - 10;
+//        negativeSeperator.width = - 10;
         
         if (_rightBarButtonItem)
         {

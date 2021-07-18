@@ -7,8 +7,18 @@
 
 #import "FAQTableViewCell.h"
 
-@implementation FAQTableViewCell
+static CGFloat kCell_margin =15.f;
+@interface FAQTableViewCell ()
 
+@end
+@implementation FAQTableViewCell
+- (void)setFrame:(CGRect)frame {
+    frame.origin.x += kCell_margin;
+
+    frame.size.width -= 2 * kCell_margin;
+
+    [super setFrame:frame];
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

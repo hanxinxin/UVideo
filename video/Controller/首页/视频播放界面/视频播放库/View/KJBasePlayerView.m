@@ -485,7 +485,9 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
 }
 -(void)playVideoItemClick:(id)sender
 {
-    
+//    if ([self.delegate respondsToSelector:@selector(kj_basePlayerView:isSingleTap:)]) {
+//        [self.delegate kj_basePlayerView:self isSingleTap:NO];
+//    }
 }
 
 -(YTSliderView *)bottomHYSlider

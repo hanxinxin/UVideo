@@ -39,7 +39,7 @@
 @end
 
 
-@interface NewFAQViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,YTSliderViewDelegate>
+@interface NewFAQViewController ()<UITableViewDelegate,UITableViewDataSource,UICollectionViewDelegate,UICollectionViewDataSource,YTSliderViewDelegate,CAAnimationDelegate>
 @property(nonatomic,strong)UIView*topView;
 @property(nonatomic,strong)UICollectionView*topcollectionview;
 @property (nonatomic ,strong)NSMutableArray*FAQListArray;
@@ -79,7 +79,7 @@
     self.indexItem=0;
     //下载按钮
     UIButton *rightItem = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64, 25)];
-    [rightItem setTitle:@"联系客服" forState:(UIControlStateNormal)];
+    [rightItem setTitle:@" 联系客服" forState:(UIControlStateNormal)];
     [rightItem setTintColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0]];
     [rightItem setImage:[UIImage imageNamed:@"helpimage"] forState:UIControlStateNormal];
     [rightItem addTarget:self action:@selector(right_touch:) forControlEvents:UIControlEventTouchUpInside];
@@ -218,12 +218,19 @@
 //    view.alpha=0.7;
     view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
     view.hidden=YES;
-    view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
+    view.alpha=0.0;
+    view.frame=CGRectMake(0, 0, 0, SCREENH_HEIGHT);
 //    view.bottomView.layer.cornerRadius=10;
     UIRectCorner corners = UIRectCornerTopRight | UIRectCornerTopLeft;
     [view.bottomView setBorderWithCornerRadius:10 borderWidth:1 borderColor:[UIColor whiteColor] type:corners];
+    view.bottomView.frame=CGRectMake(0, 0, 0, 360);
     [self.view addSubview:view];
     self.kfView=view;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//        view.bottomView.frame=CGRectMake(0, self.kfView.height-360, 0, 360);
+        self.kfView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavBarAndStatusBarHeight);
+        self.kfView.bottomView.frame=CGRectMake(0, self.kfView.height-360, SCREEN_WIDTH, 360);
+        });
     __weak NewFAQViewController * weakSelf = self;
     self.kfView.touchIndex = ^(NSInteger Index) {
         
@@ -241,36 +248,46 @@
 -(void)showkfView
 {
     
-    [UIView animateWithDuration:0.7 animations:^{
-        self.kfView.bottomView.hidden=NO;
+    [UIView animateWithDuration:0.5 animations:^{
+//        self.kfView.bottomView.hidden=NO;
+//        self.kfView.hidden=NO;
+//        self.kfView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavBarAndStatusBarHeight);
+//        self.kfView.bottomView.frame=CGRectMake(0, self.kfView.height-360, SCREEN_WIDTH, 360);
         self.kfView.hidden=NO;
-        self.kfView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavBarAndStatusBarHeight);
+        self.kfView.alpha=1.0;
     } completion:^(BOOL finished) {
-        
+        self.kfView.alpha=1.0;
     }];
+    
+   
+    
 }
 -(void)HidkfView
 {
     
     [UIView animateWithDuration:0.5 animations:^{
-        self.kfView.bottomView.hidden=YES;
-        self.kfView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+//        self.kfView.bottomView.hidden=YES;
+//        self.kfView.frame=CGRectMake(0, 0, 0,SCREENH_HEIGHT );
+//        self.kfView.bottomView.frame=CGRectMake(0, self.kfView.height-360, 0, 360);
+//        self.kfView.hidden=YES;
+        self.kfView.alpha=0.0;
     } completion:^(BOOL finished) {
         self.kfView.hidden=YES;
     }];
+        
 }
 
 
 -(void)addtopview
 {
-    topView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 50)];
+    topView=[[UIView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 60)];
     topView.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:topView];
     UICollectionViewFlowLayout * flowLayout = [[UICollectionViewFlowLayout alloc]init];
     flowLayout.minimumLineSpacing = 10;
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     flowLayout.sectionInset = UIEdgeInsetsMake(5, 10, 5, 5);
-    self.topcollectionview = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 0, topView.bounds.size.width, self.topView.size.height) collectionViewLayout:flowLayout];
+    self.topcollectionview = [[UICollectionView alloc]initWithFrame:CGRectMake(0, 10, topView.bounds.size.width, 50) collectionViewLayout:flowLayout];
     [self.topcollectionview registerNib:[UINib nibWithNibName:@"PanCollectionViewCell" bundle:nil] forCellWithReuseIdentifier:@"PanCollectionViewCell"];
     
     self.topcollectionview.backgroundColor = [UIColor whiteColor];
@@ -287,7 +304,7 @@
     
 
     self.downtableview1=[[UITableView alloc] init];
-    self.downtableview1.frame=CGRectMake(20, topView.bottom, SCREEN_WIDTH-60, SCREENH_HEIGHT-topView.bottom-kNavBarAndStatusBarHeight);
+    self.downtableview1.frame=CGRectMake(0, topView.bottom, self.view.width, SCREENH_HEIGHT-topView.bottom-kNavBarAndStatusBarHeight-10);
     self.downtableview1.backgroundColor=[UIColor whiteColor];
     self.downtableview1.delegate=self;
     self.downtableview1.dataSource=self;
@@ -453,7 +470,7 @@
     {
         faqListInfomodel*model=self.Listarray1[indexPath.section];
         CGFloat floatH=[self calculateRowHeight:model.content];
-        return floatH+70;
+        return floatH+80;
     }else if(tableView.tag==10002)
     {
         return 155;

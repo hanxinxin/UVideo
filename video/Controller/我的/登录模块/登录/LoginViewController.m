@@ -32,7 +32,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 //    https://www.jianshu.com/p/0754833349a1   //添加三面阴影的方法
     
     
-    self.title=@"注册";
+    self.title=@"登录";
     self.hiddenLeftBtn=YES;
     self.statusBarTextIsWhite=NO;
     self.statusBarBackgroundColor=[UIColor blackColor];
@@ -136,9 +136,9 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.backBtn.frame = CGRectMake(30,self.centerView.bottom+15,((self.view.width-68)/2)-5,46);
     self.backBtn.alpha = 1;
     self.backBtn.layer.cornerRadius = 10;
-    self.backBtn.backgroundColor=RGB(220,240,251);
+    self.backBtn.backgroundColor=RGB(20, 155, 236);
     [self.backBtn setTitle:@"注册账号" forState:(UIControlStateNormal)];
-    [self.backBtn setTitleColor:[UIColor blueColor] forState:(UIControlStateNormal)];
+    [self.backBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     [self.backBtn addTarget:self action:@selector(back_touch:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:self.backBtn];
     
@@ -146,14 +146,14 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.LoginBtn.frame = CGRectMake(self.backBtn.right+10,self.centerView.bottom+15,((self.view.width-68)/2)-5,46);
     self.LoginBtn.alpha = 1;
     self.LoginBtn.layer.cornerRadius = 10;
-    self.LoginBtn.backgroundColor=RGB(168,222,242);
+    self.LoginBtn.backgroundColor=RGB(20, 155, 236);
     [self.LoginBtn setTitle:@"立即登录" forState:(UIControlStateNormal)];
     [self.LoginBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
 //    [button1.layer insertSublayer:[self selectLayer:CGRectMake(0, 0, button1.width, button1.height)]atIndex:0];
     [self.LoginBtn addTarget:self action:@selector(Login_touch:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:self.LoginBtn];
     
-    
+
     
     
 }

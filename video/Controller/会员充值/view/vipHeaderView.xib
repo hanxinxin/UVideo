@@ -29,6 +29,9 @@
                         <constraint firstAttribute="height" constant="40" id="pHJ-Av-nPU"/>
                     </constraints>
                     <state key="normal" backgroundImage="image"/>
+                    <connections>
+                        <action selector="touxiang_touch:" destination="iN0-l3-epB" eventType="touchUpInside" id="G6b-b8-szT"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EBf-p2-CUg">
                     <rect key="frame" x="69" y="16" width="331" height="30"/>
@@ -40,6 +43,9 @@
                     <state key="normal" title="这是一个昵称">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
+                    <connections>
+                        <action selector="name_touch:" destination="iN0-l3-epB" eventType="touchUpInside" id="9n2-qP-BWH"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zri-ay-9et">
                     <rect key="frame" x="20" y="76" width="374" height="30"/>

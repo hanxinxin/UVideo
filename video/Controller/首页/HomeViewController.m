@@ -251,6 +251,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 {
 //    NSDictionary * dict = @{@"page":[NSString stringWithFormat:@"%@",@(self.SXpage)],
 //                            @"pagesize":[NSString stringWithFormat:@"%@",@(15)],};
+    [UHud showHUDLoading];
     self.SXpage=1;
     NSMutableDictionary*dict =[NSMutableDictionary dictionary];
 //
@@ -646,7 +647,10 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     videoFenleiMode * model = [videoFenleiMode yy_modelWithDictionary:dict];
     NSLog(@"model.name = %@ ,id =   %f",model.name,model.id);
     self.TopSelectIndex=index;
-    [self getSXCollecheader];
+    if(self.collectionView.hidden==NO)
+    {
+        [self getSXCollecheader];
+    }
     if(index==0)
     {
         

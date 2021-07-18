@@ -141,7 +141,7 @@
 }
 
 - (void)updateNavigationBarAppearance {
-    NSLog(@"更新导航栏");
+//    NSLog(@"更新导航栏");
     UIColor * statuBarColor = [_statusBarBackgroundColor copy];
     self.statusBarBackgroundColor = statuBarColor;
     //导航栏 字体 字色 背景色

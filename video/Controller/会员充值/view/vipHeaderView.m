@@ -16,5 +16,17 @@
     // Drawing code
 }
 */
+- (IBAction)touxiang_touch:(id)sender {
+    //取消
+    if (self.touchIndex) {
+        self.touchIndex(1);
+    }
+}
+- (IBAction)name_touch:(id)sender {
+    //取消
+    if (self.touchIndex) {
+        self.touchIndex(2);
+    }
+}
 
 @end

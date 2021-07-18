@@ -107,7 +107,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.XGBtn.frame = CGRectMake(self.centerView.left,self.centerView.bottom+40,self.centerView.width,46);
     self.XGBtn.alpha = 1;
     self.XGBtn.layer.cornerRadius = 10;
-    self.XGBtn.backgroundColor=RGB(168,222,242);
+    self.XGBtn.backgroundColor=RGB(20, 155, 236);
     [self.XGBtn setTitle:@"确认修改" forState:(UIControlStateNormal)];
     [self.XGBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
 //    [button1.layer insertSublayer:[self selectLayer:CGRectMake(0, 0, button1.width, button1.height)]atIndex:0];

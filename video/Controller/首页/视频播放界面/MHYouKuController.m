@@ -36,6 +36,7 @@
 
 #import "TestWebViewController.h"
 #import "GuanggaoMode.h"
+#import "FankuiViewController.h"
 
 @interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate ,UITextFieldDelegate, MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate,KJPlayerDelegate,KJPlayerBaseViewDelegate,KJPlayerBaseViewDelegate,YTSliderViewDelegate,MHYouKuCommentControllerDelegate>
 {
@@ -143,6 +144,13 @@
 @property(nonatomic,assign)NSInteger pagesizepinglun;
 /** dataSource */
 @property (nonatomic , strong) NSMutableArray *PinglunList;
+
+/////  播放时间记录
+@property(nonatomic,assign)NSTimeInterval JiLutime;
+@property(nonatomic,assign)NSTimeInterval OldJiLutime;
+@property(nonatomic,assign)BOOL qxdQieHuan;
+/////  当前播放的URL
+@property(nonatomic,assign)NSString * DangqianUrl;
 @end
 
 @implementation MHYouKuController
@@ -159,6 +167,12 @@
     [super viewWillAppear:animated];
     
      self.fd_prefersNavigationBarHidden = YES;
+    
+    if (_player) {
+        [self.player kj_play];
+//        _player = nil;
+    }
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -170,12 +184,39 @@
         //在页面消失的回调方法中移除通知。
            [[NSNotificationCenter defaultCenter]removeObserver:self name:@"fullItemClick"object:nil];
     }
+    
 }
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
     if (_player) {
-        [self.player kj_stop];
-        _player = nil;
+//        [self.player kj_stop];
+        [self.player kj_pause];
+//        _player = nil;
+    }
+}
+- (void)willMoveToParentViewController:(UIViewController*)parent
+{
+    [super willMoveToParentViewController:parent];
+    
+    if (!parent) {
+        NSLog(@"离开了页面1");
+        
+        if (_player) {
+            [self.player kj_stop];
+            _player = nil;
+        }
+    }
+}
+- (void)didMoveToParentViewController:(UIViewController*)parent
+{
+    [super didMoveToParentViewController:parent];
+    
+    if(!parent){
+        NSLog(@"离开了页面2");
+        if (_player) {
+            [self.player kj_stop];
+            _player = nil;
+        }
     }
 }
 
@@ -200,7 +241,7 @@
     // 初始化假数据
     [self _setupData];
     
-    ///设置 playerView
+//    ///设置 playerView
     [self setPlayerView];
     
     ///加载提示框
@@ -221,6 +262,10 @@
     self.xuanjiSelectIndex=0;
     self.pagepinglun=1;
     self.pagesizepinglun=20;
+    self.JiLutime=0;
+    self.OldJiLutime=0;
+    self.qxdQieHuan=NO;
+    self.DangqianUrl=@"";
     if(_Zvideomodel!=nil)
     {
     VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
@@ -258,6 +303,8 @@
 //                    //直接放到网络请求结果调用，生成模型后删除就行，结果打印在控制台
 //                    [DYModelMaker DY_makeModelWithDictionary:video_soruce modelKeyword:@"Video" modelName:@"videosource"];
                     self.player.videoURL = [NSURL URLWithString:model.url];
+                    self.DangqianUrl=model.url;
+                    
                     NSArray * qualities = [dataArr objectForKey:@"qualities"];
                     NSArray * subtitles = [dataArr objectForKey:@"subtitles"];
                     
@@ -411,8 +458,14 @@
     };
     /// 播放按钮点击事件
     backview.kVideoPlayButtonBack = ^(KJBasePlayerView * view) {
-        [self.player kj_replay];
-        
+        if ([self.player isPlaying]) {
+            [self.player kj_pause];
+//            [self.player kj_startAnimation];
+            
+        }else{
+            [self.player kj_resume];
+//            [self.player kj_stopAnimation];
+        }
 //        NSLog(@"block播放状态 == %ld  ",(long)state);
        
         
@@ -503,7 +556,8 @@
         {
         VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
         videofragmentMode*Fmo=[videofragmentMode yy_modelWithDictionary:_Zvideomodel.video_fragment_list[self.xuanjiSelectIndex] ];
-        
+            self.qxdQieHuan=YES;
+            self.OldJiLutime=self.JiLutime;
         [self getplayerMode:[NSString stringWithFormat:@"%f",modelL.id] video_fragment_id:[NSString stringWithFormat:@"%f",Fmo.id] quality:self.qualitieslist[index]];  ///因为调整过数组顺序不能直接用Fmo 的数组
         }
 //    }
@@ -515,6 +569,7 @@
     NSLog(@"播放状态 == %ld  ",(long)state);
     if (state == KJPlayerStateBuffering)
     {
+        
         [player kj_startAnimation];
     }else if(state == KJPlayerStatePausing) {
         self.playerView.centerPlayButton.selected=YES;
@@ -525,6 +580,12 @@
     }else if(state == KJPlayerStatePlaying){
         self.playerView.centerPlayButton.selected=NO;
         self.playerView.centerPlayButton.hidden=NO;
+        if(self.OldJiLutime!=0 && (self.qxdQieHuan==YES))
+        {
+            NSLog(@"快进到  self.OldJiLutime=== %f",self.OldJiLutime);
+            self.player.kVideoAdvanceAndReverse(self.OldJiLutime, nil);
+            self.qxdQieHuan=NO;
+        }
 //        [player kj_stopAnimation];
         //设置 滑竿 最大值
 //        player.playerView.bottomHYSlider=self.player.totalTime;
@@ -550,6 +611,8 @@
             }
         }
     }
+    
+    self.JiLutime=time;
 }
 /* 缓存进度 */
 - (void)kj_player:(KJBasePlayer*)player loadProgress:(CGFloat)progress{
@@ -1810,6 +1873,10 @@
         {
             // 反馈
             MHLog(@"++ 反馈 ++");
+            // 求片
+            FankuiViewController * avc = [[FankuiViewController alloc] init];
+            avc.typeInt=1002;
+            [self pushRootNav:avc animated:YES];
         }
             break;
             
@@ -1950,6 +2017,8 @@
     {
         self.xuanjiSelectIndex=anthologyHeaderView.selectXJindex;
         [self tempsAction:self.QXDSelectIndex];
+        self.JiLutime=0;
+        self.OldJiLutime=0;
     }
     // 选集集数按钮被点击
     MHLog(@" 选集集数按钮点击=== %@" , mediaBaseId);

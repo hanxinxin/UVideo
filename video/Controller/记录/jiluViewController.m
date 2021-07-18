@@ -131,7 +131,7 @@
 ///// 加载无内容显示的view
 -(void)initnilView1
 {
-    self.nilView=[[UIView alloc] initWithFrame:CGRectMake(0, 40, self.view.width, self.downtableview1.height)];
+    self.nilView=[[UIView alloc] initWithFrame:CGRectMake(0, 60, self.view.width, self.downtableview1.height)];
     self.nilView.backgroundColor=[UIColor whiteColor];
     self.nilImageView=[[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-250)/2, (self.view.height-40-200-kNavBarAndStatusBarHeight)/2, 250, 150)];
     [self.nilImageView setImage:[UIImage imageNamed:@"nilImage"]];
@@ -146,7 +146,7 @@
 ///// 加载无内容显示的view
 -(void)initnilView2
 {
-    self.nilView2=[[UIView alloc] initWithFrame:CGRectMake(0, 40, self.view.width, self.downtableview2.height)];
+    self.nilView2=[[UIView alloc] initWithFrame:CGRectMake(0, 60, self.view.width, self.downtableview2.height)];
     self.nilView2.backgroundColor=[UIColor whiteColor];
     self.nilImageView2=[[UIImageView alloc] initWithFrame:CGRectMake((SCREEN_WIDTH-250)/2, (self.view.height-40-200-kNavBarAndStatusBarHeight)/2, 250, 150)];
     [self.nilImageView2 setImage:[UIImage imageNamed:@"nilImage"]];
@@ -186,11 +186,11 @@
 
 -(void)addtopview
 {
-    topView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 40)];
+    topView=[[UIView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, 60)];
     topView.backgroundColor=[UIColor whiteColor];
     [self.view addSubview:topView];
     UIButton *button1 = [[UIButton alloc] init];
-    button1.frame = CGRectMake(15,2,((SCREEN_WIDTH-40)/2)-1,38);
+    button1.frame = CGRectMake(15,2,((SCREEN_WIDTH-40)/2)-1,45);
     button1.alpha = 1;
     button1.layer.cornerRadius = 10;
     [button1 setTitle:@"收藏夹" forState:(UIControlStateNormal)];
@@ -207,7 +207,7 @@
     self.menuBtn1=button1;
     
     UIButton *button2 = [[UIButton alloc] init];
-    button2.frame = CGRectMake(button1.right+1,2,((SCREEN_WIDTH-40)/2)-1,38);
+    button2.frame = CGRectMake(button1.right+1,2,((SCREEN_WIDTH-40)/2)-1,45);
     button2.alpha = 1;
     button2.layer.cornerRadius = 10;
     [button2 setTitle:@"播放记录" forState:(UIControlStateNormal)];
@@ -307,7 +307,7 @@
 //    [Listarray addObject:[NSArray arrayWithObjects:@"播放记录",@"充值记录",@"账户信息",@"帮助中心",@"安全设置",@"清理缓存",@"退出登录", nil]];
     
     self.downtableview1=[[UITableView alloc] init];
-    self.downtableview1.frame=CGRectMake(20, 50, SCREEN_WIDTH-40, SCREENH_HEIGHT-50-kNavAndTabHeight);
+    self.downtableview1.frame=CGRectMake(20, self.topView.bottom, SCREEN_WIDTH-40, SCREENH_HEIGHT-self.topView.bottom-kNavAndTabHeight);
     self.downtableview1.backgroundColor=[UIColor whiteColor];
     self.downtableview1.delegate=self;
     self.downtableview1.dataSource=self;
@@ -337,7 +337,7 @@
     
     NSLog(@"SCREENH_HEIGHT == %f   h ==== %f",SCREENH_HEIGHT,SCREENH_HEIGHT-50-kNavAndTabHeight);
     self.downtableview2=[[UITableView alloc] init];
-    self.downtableview2.frame=CGRectMake(20, 50, SCREEN_WIDTH-40, SCREENH_HEIGHT-50-kNavAndTabHeight);
+    self.downtableview2.frame=CGRectMake(20, self.topView.bottom, SCREEN_WIDTH-40, SCREENH_HEIGHT-self.topView.bottom-kNavAndTabHeight);
     self.downtableview2.backgroundColor=[UIColor whiteColor];
     self.downtableview2.delegate=self;
     self.downtableview2.dataSource=self;
@@ -596,12 +596,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.shuomingMiaoshu.lineBreakMode = 0;//这句话很重要，不加这句话加上换行符也没用
 //        [cell addBiaoqianLabel:@[@"打斗",@"科技",@"爱情"]];
-//        @property (weak, nonatomic) IBOutlet UIImageView *leftImage;
-//        @property (weak, nonatomic) IBOutlet UILabel *movieTime;
-//        @property (weak, nonatomic) IBOutlet UILabel *movietitle;
-//        @property (weak, nonatomic) IBOutlet UIView *biaoqian;
-//        @property (weak, nonatomic) IBOutlet UILabel *liulanTime;
-//        @property (weak, nonatomic) IBOutlet UIButton *shuomingBtn;
+
         [cell.leftImage sd_setImageWithURL:[NSURL URLWithString:modell.video_pic]];
         cell.movietitle.text=modell.video_title;
         cell.liulanTime.text=[self getTimeFromTimestamp:@(modell.create_time)];
@@ -669,7 +664,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(tableView.tag==10001)
     {
-        return 154;
+        return 156;
     }else if(tableView.tag==10002)
     {
         return 60;

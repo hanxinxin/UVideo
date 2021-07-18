@@ -365,6 +365,29 @@
     view.txImage.layer.cornerRadius=20;
     [ScrollView addSubview:view];
     self.Topview = view;
+    
+    __weak __typeof(self)weakSelf = self;
+    self.Topview.touchIndex = ^(NSInteger Index) {
+      if(Index==1)
+      {
+          if([usertoken isEqualToString:@""])
+          {
+              LoginViewController * avc = [[LoginViewController alloc] init];
+              [weakSelf pushRootNav:avc animated:YES];
+          }else{
+              
+          }
+      }else if(Index==2)
+      {
+          if([usertoken isEqualToString:@""])
+          {
+              LoginViewController * avc = [[LoginViewController alloc] init];
+              [weakSelf pushRootNav:avc animated:YES];
+          }else{
+              
+          }
+      }
+    };
 }
 
 
@@ -509,7 +532,7 @@
     [btn setTintColor:[UIColor whiteColor]];
     [btn addTarget:self action:@selector(play_Touch:) forControlEvents:(UIControlEventTouchUpInside)];
     btn.layer.cornerRadius=8;
-    btn.backgroundColor=[UIColor colorWithRed:106/255.0 green:203/255.0 blue:233/255.0 alpha:1.0];
+    btn.backgroundColor=RGB(20, 155, 236);
 //    CAGradientLayer *glbtn = [CAGradientLayer layer];
 //    glbtn.frame = btn.frame;
 //    glbtn.startPoint = CGPointMake(0.5, 1);

@@ -99,7 +99,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.CodeView.layer.borderWidth = 1;
     self.CodeView.layer.cornerRadius = 6;
     [self.centerView addSubview:self.CodeView];;
-    self.CodeTextfield = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, self.CodeView.width-92, 42)];
+    self.CodeTextfield = [[UITextField alloc] initWithFrame:CGRectMake(10, 0, self.CodeView.width-96, 42)];
     self.CodeTextfield.placeholder=@"请输入验证码";
     self.CodeTextfield.keyboardType=UIKeyboardTypeNumberPad;
     self.CodeTextfield.borderStyle=UITextBorderStyleNone;
@@ -107,7 +107,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     [self.CodeView addSubview:self.CodeTextfield];
    
     
-    self.getCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.CodeTextfield.right-8, 6, 100, 30)];
+    self.getCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.CodeTextfield.right-8, 6, self.CodeView.width-(self.CodeTextfield.right-10), 30)];
     self.getCodeBtn.layer.cornerRadius = 4;
     self.getCodeBtn.hidden=YES;
     self.getCodeBtn.backgroundColor=[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0];
@@ -129,9 +129,9 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.backBtn.frame = CGRectMake(30,self.centerView.bottom+15,((self.view.width-68)/2)-5,46);
     self.backBtn.alpha = 1;
     self.backBtn.layer.cornerRadius = 10;
-    self.backBtn.backgroundColor=RGB(220,240,251);
+    self.backBtn.backgroundColor=RGB(20, 155, 236);
     [self.backBtn setTitle:@"返回登录" forState:(UIControlStateNormal)];
-    [self.backBtn setTitleColor:[UIColor blueColor] forState:(UIControlStateNormal)];
+    [self.backBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     [self.backBtn addTarget:self action:@selector(back_touch:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.view addSubview:self.backBtn];
     
@@ -139,7 +139,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.ZCBtn.frame = CGRectMake(self.backBtn.right+10,self.centerView.bottom+15,((self.view.width-68)/2)-5,46);
     self.ZCBtn.alpha = 1;
     self.ZCBtn.layer.cornerRadius = 10;
-    self.ZCBtn.backgroundColor=RGB(168,222,242);
+    self.ZCBtn.backgroundColor=RGB(20, 155, 236);
     [self.ZCBtn setTitle:@"立即注册" forState:(UIControlStateNormal)];
     [self.ZCBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
 //    [button1.layer insertSublayer:[self selectLayer:CGRectMake(0, 0, button1.width, button1.height)]atIndex:0];

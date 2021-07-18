@@ -218,6 +218,7 @@
                     if([mode.name isEqual:@"求片"])
                     {
                         cell.detailTextLabel.text=mode.name;
+                        self.selectIndex=i;
                     }
                 }
             }else if(self.typeInt==1002)
@@ -227,6 +228,17 @@
                     if([mode.name isEqual:@"BUG报错"])
                     {
                         cell.detailTextLabel.text=mode.name;
+                        self.selectIndex=i;
+                    }
+                }
+            }else if(self.typeInt==1003)
+            {
+                for (int i =0; i<self.titleArray.count; i++) {
+                    feedbacktypeMode*mode=self.titleArray[i];
+                    if([mode.name isEqual:@"优化建议"])
+                    {
+                        cell.detailTextLabel.text=mode.name;
+                        self.selectIndex=i;
                     }
                 }
             }

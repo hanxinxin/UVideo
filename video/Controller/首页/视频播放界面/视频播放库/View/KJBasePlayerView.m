@@ -98,8 +98,8 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     self.fastLayer.position = CGPointMake(self.width/2, self.height/2);
     self.vbLayer.position = CGPointMake(self.width/2, self.height/2);
     [self.hintTextLayer setValue:@(self.screenState) forKey:@"screenState"];
-    self.topView.frame = CGRectMake(IS_IPAD?kNavBarAndStatusBarHeight:0, 0, self.width, self.operationViewHeight);
-    self.backButton.frame=CGRectMake(IS_IPAD?kNavBarAndStatusBarHeight:0, 0, self.width-self.bottomView.width-(IS_IPAD?kNavBarAndStatusBarHeight:0+kBottomSafeHeight), self.operationViewHeight);
+    self.topView.frame = CGRectMake(kTopBarSafeHeight, 0, self.width-(kTopBarSafeHeight+kBottomSafeHeight), self.operationViewHeight);
+    self.backButton.frame=CGRectMake(kTopBarSafeHeight*2, 5, self.topView.width-(kTopBarSafeHeight*2+kBottomSafeHeight), self.operationViewHeight - 20);
     self.bottomView.frame = CGRectMake(kTopBarSafeHeight, self.height-self.operationViewHeight, self.width-(kTopBarSafeHeight+kBottomSafeHeight), self.operationViewHeight);
     self.danmubottomView.frame = CGRectMake(kTopBarSafeHeight, self.height-self.operationViewHeight, self.width-(kTopBarSafeHeight+kBottomSafeHeight), self.operationViewHeight);
     self.lockButton.frame = CGRectMake(kNavBarAndStatusBarHeight, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
@@ -118,7 +118,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     [self.hintTextLayer setValue:@(self.screenState) forKey:@"screenState"];
 //    self.topView.frame = CGRectMake(0, 0, self.width-self.bottomView.width, self.operationViewHeight);
     self.topView.frame = CGRectMake(0, 0, self.width, self.operationViewHeight);
-    self.backButton.frame=CGRectMake(0, 0, self.width-self.bottomView.width, self.operationViewHeight);
+    self.backButton.frame=CGRectMake(kIs_iPhoneX?kNavBarHeight:0, 0, self.width-self.bottomView.width, self.operationViewHeight);
     self.bottomView.frame = CGRectMake(0, self.height-self.operationViewHeight, self.width, self.operationViewHeight);
     self.lockButton.frame = CGRectMake(10, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
     self.centerPlayButton.frame = CGRectMake((self.width-kCenterPlayWidth)/2, (self.height-kCenterPlayWidth)/2, kCenterPlayWidth, kCenterPlayWidth);
@@ -445,7 +445,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     if (!_topView) {
         _topView = [[KJPlayerOperationView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.operationViewHeight) OperationType:(KJPlayerOperationViewTypeTop)];
 //        _topView.mainColor = self.mainColor;
-        _topView.mainColor = [UIColor redColor];
+//        _topView.backgroundColor = [UIColor redColor];
     }
     return _topView;
 }

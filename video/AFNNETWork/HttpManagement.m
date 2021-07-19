@@ -89,10 +89,13 @@
              3. fileName：要保存在服务器上的文件名
              4. mimeType：上传的文件的类型
              */
-            [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/jpeg"];
+//            [formData appendPartWithFileData:imageData name:@"file" fileName:fileName mimeType:@"image/jpeg"];
+            [formData appendPartWithFileData:imageData name:@"avatar" fileName:fileName mimeType:@"image/png"];
+            
         }
     } progress:^(NSProgress * _Nonnull uploadProgress) {
-        NSLog(@"ssss  == %@",uploadProgress);
+        NSLog(@"uploadProgress.fractionCompleted  == %f",uploadProgress.fractionCompleted);
+        
         progress(uploadProgress);
     } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         NSData * data = (NSData*)responseObject;

@@ -20,6 +20,7 @@
 #import "NewFAQViewController.h"
 #import "promptbottomView.h"
 #import "FankuiViewController.h"
+#import "UIButton+WebCache.h"
 
 @interface MyViewController ()<UITableViewDelegate,UITableViewDataSource,ZGQActionSheetViewDelegate,HQImageEditViewControllerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate>
 
@@ -116,7 +117,9 @@
     {
         if(![self StringIsNullOrEmpty:avatar_loca])
         {
-            [self.Headerview.txImage setImage:[self base64Image:avatar_loca] forState:(UIControlStateNormal)];
+//            [self.Headerview.txImage setImage:[self base64Image:avatar_loca] forState:(UIControlStateNormal)];
+//            @"https://img2.baidu.com/it/u=4087057811,445331467&fm=26&fmt=auto&gp=0.jpg"  测试连接
+            [self.Headerview.txImage xr_setButtonImageWithUrl:avatar_loca];
         }
         if(![self StringIsNullOrEmpty:nickname_loca])
         {
@@ -562,6 +565,13 @@
     [UHud showHUDLoading];
 //    avatar
     NSArray * arr = [NSArray arrayWithObjects:image, nil];
+//    NSDictionary * dict;
+//    for (int i = 0; i < arr.count; i++) {
+//        UIImage *image = arr[i];
+//        NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+//        dict=@{@"avatar":imageData};
+//    }
+//
     [[HttpManagement shareManager] uploadImagesWihtImgArr:arr url:[NSString stringWithFormat:@"%@%@",FWQURL,YHupdateavatar] Tokenbool:NO parameters:nil block:^(id objc, BOOL success) {
         [UHud hideLoadHud];
         if(success==YES)
@@ -570,21 +580,35 @@
                 NSNumber * code = [dict objectForKey:@"error"];
                 if([code intValue]==0)
                 {
-//                    NSDictionary *dictdata =[dict objectForKey:@"user"];
-                   
+                    NSDictionary *dictdata =[dict objectForKey:@"data"];
+                    NSDictionary *userData =[dictdata objectForKey:@"user"];
+                    NSString * avatar =[userData objectForKey:@"avatar"];
+                    [[NSUserDefaults standardUserDefaults] setValue:avatar forKey:@"avatar"];
+                    [SVProgressHUD dismiss];
+                    [self updateHeaderViwe];
 //                    [UHud showSuccessWithStatus:@"获取成功" delay:2.f];
 //                }else if([code intValue]==20){
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
+                    [SVProgressHUD dismiss];
                     [UHud showTXTWithStatus:message delay:2.f];
                 }
         }else{
             NSError * error = (NSError *)objc;
             NSLog(@"shareManager error == %@",error);
+            [SVProgressHUD dismiss];
             [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+            
         }
     }blockprogress:^(id progress) {
-        
+//        NSLog(@"progress == %@",progress);
+        NSProgress * pro = (NSProgress *)progress;
+        CGFloat jd=pro.fractionCompleted;
+//        [SVProgressHUD showProgress:jd];
+//        if(jd>=1)
+//        {
+//            [SVProgressHUD dismiss];
+//        }
     }];
 }
     

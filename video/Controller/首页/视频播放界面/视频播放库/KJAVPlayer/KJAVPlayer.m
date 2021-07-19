@@ -34,7 +34,7 @@ static NSString * const kTimeControlStatus = @"timeControlStatus";
         _speed = 1.;
         _timeSpace = 1.;
         _autoPlay = YES;
-        _videoGravity = KJPlayerVideoGravityResizeAspect;
+        _videoGravity = KJPlayerVideoGravityResizeAspectFill;
         _background = UIColor.blackColor.CGColor;
         self.group = dispatch_group_create();
     }

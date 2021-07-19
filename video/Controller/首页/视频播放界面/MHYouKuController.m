@@ -398,7 +398,7 @@
         NSNumber * code = [dict objectForKey:@"error"];
         if([code intValue]==0)
         {
-            NSDictionary * datadict = [dict objectForKey:@"data"];
+//            NSDictionary * datadict = [dict objectForKey:@"data"];
             NSLog(@"udpate next");
 
         }else if([code intValue]==21)
@@ -432,6 +432,7 @@
     backview.backButton.hidden=YES;
     backview.autoHideTime = 3;
     backview.danmubottomView.centerTextfield.delegate=self;
+    
     if(_Zvideomodel!=nil)
     {
         VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
@@ -508,6 +509,7 @@
     KJAVPlayer *player = [[KJAVPlayer alloc]init];
     self.player = player;
     player.delegate = self;
+    
     player.placeholder = [UIImage imageNamed:@"comment_loading_bgView"];
     player.playerView = backview;
 //    player.videoURL = [NSURL URLWithString:@"https://mp4.vjshi.com/2018-03-30/1f36dd9819eeef0bc508414494d34ad9.mp4"];
@@ -517,7 +519,11 @@
 //        [weakself.player kj_startAnimation];
         [weakself.player kj_displayHintText:@"试看时间已到，请缴费～" time:0 position:KJPlayerHintPositionBottom];
     }, 0);
-
+    self.player.kVideoSkipTime(^(KJPlayerVideoSkipState skipState) {
+        if (skipState == KJPlayerVideoSkipStateHead) {
+            [weakself.player kj_displayHintText:@"跳过片头，自动播放" time:5 position:KJPlayerHintPositionLeftBottom];
+        }
+    }, 18, 0);
     
     //注册、接收通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatefullItemClick:)name:@"fullItemClick"object:nil];
@@ -536,6 +542,7 @@
         self.playerView.isHiddenBackButton=NO;
         self.playerView.smallScreenHiddenBackButton = NO;
         self.playerView.backButton.hidden=NO;
+        [self.player setVideoGravity:KJPlayerVideoGravityResizeAspect];///设置屏幕样式
     }else{
         self.hiddenNavBar=NO;
         self.playerView.isHiddenBackButton=YES;

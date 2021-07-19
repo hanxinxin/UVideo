@@ -19,7 +19,6 @@ NSString * const ID = @"MSCycleScrollViewCell";
 
 
 @property (nonatomic, weak) UICollectionView *mainView; // 显示图片的collectionView
-@property (nonatomic, strong) MSPageControl *pageControl;
 
 @property (nonatomic, weak) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic, strong) NSArray *imagePathsGroup;
@@ -594,7 +593,9 @@ NSString * const ID = @"MSCycleScrollViewCell";
     if (self.backgroundImageView) {
         self.backgroundImageView.frame = self.bounds;
     }
-
+    
+    self.backgroundImageView.layer.masksToBounds = YES;
+    self.backgroundImageView.layer.cornerRadius=8;
 }
 
 //解决当父View释放时，当前视图因为被Timer强引用而不能释放的问题
@@ -677,6 +678,9 @@ NSString * const ID = @"MSCycleScrollViewCell";
         cell.onlyDisplayText = self.onlyDisplayText;
     }
 
+    
+    /// 增加 cell 圆角
+    cell.layer.cornerRadius=8;
     return cell;
 }
 

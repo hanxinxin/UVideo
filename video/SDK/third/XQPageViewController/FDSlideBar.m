@@ -12,7 +12,7 @@
 #define DEFAULT_SLIDER_COLOR [UIColor orangeColor]
 #define SLIDER_VIEW_HEIGHT 3
 #define LAYOUTINSET 10
-#define slidebarMenuButtonImage @"rightmenu.png"
+#define slidebarMenuButtonImage @"homeMenu"
 
 NSInteger const kDefaultHeightOFSlideBar = 40;
 NSInteger const kDefaultUnifyWidth = 50;
@@ -91,7 +91,8 @@ NSInteger const MenuButtonWidth = 50;
         _menuButton.frame = CGRectMake(self.bounds.size.width - self.menuButtonWidth, 0, self.menuButtonWidth, self.bounds.size.height);
         _menuButton.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleLeftMargin;
         [_menuButton addTarget:self action:@selector(menuButtonClick:) forControlEvents:(UIControlEventTouchUpInside)];
-        _menuButton.titleLabel.font = [UIFont systemFontOfSize:14];
+//        [_menuButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:20.f]];
+        _menuButton.titleLabel.font=[UIFont boldSystemFontOfSize:20.f];
         [_menuButton setImage:[UIImage imageNamed:slidebarMenuButtonImage] forState:(UIControlStateNormal)];
     }
     
@@ -191,6 +192,9 @@ NSInteger const MenuButtonWidth = 50;
     _selectedItem = selectedItem;
     _selectedItem.selected = YES;
     
+//    [_menuButton.titleLabel setFont:[UIFont fontWithName:@"Helvetica-Bold" size:20.f]];
+    
+    _menuButton.titleLabel.font=[UIFont boldSystemFontOfSize:20.f];
     if (_callback) _callback([self.items indexOfObject:_selectedItem]);
 }
 

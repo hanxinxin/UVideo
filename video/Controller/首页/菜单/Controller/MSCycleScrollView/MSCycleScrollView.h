@@ -138,7 +138,10 @@ typedef enum {
  */
 @property(nonatomic,assign) MSPageControlAnimation pageControlAnimation;
 #pragma mark ================== PageControl属性设置 ==================
-
+/**
+ pageControl 分页控制器
+ */
+@property (nonatomic, strong) MSPageControl *pageControl;
 /**
  MSPageControl的样式 目前只支持两种样式
  */

@@ -165,7 +165,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     slide.sliderColor = RGB(20,155,236);
     slide.showMenuButton = _showMore;
     slide.menuButtonSelectedTitleColor = [UIColor colorWithWhite:.5 alpha:1];
-    slide.menuButtonImage = [UIImage imageNamed:@"rightmenu.png"];
+    slide.menuButtonImage = [UIImage imageNamed:@"homeMenu"];
     slide.menuButtonSelectedImage = [UIImage imageNamed:@"closeSY.png"];
     slide.menuButtonTitleColor = [UIColor colorWithWhite:0.5 alpha:1];
     // callBack
@@ -396,6 +396,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     [[cell viewWithTag: tag] removeFromSuperview];
     
     UILabel *label = [[UILabel alloc] initWithFrame: _horizListView.bounds];
+    
     [cell addSubview: label];
     label.tag = tag;
     [label setText: _broadcastArray[indexPath.item]];

@@ -203,15 +203,18 @@ static NSString * const shopCellReuseID = @"shop";
 -(void)addScrollviewLB
 {
     // 网络加载 --- 创建带标题的图片轮播器
-    MSCycleScrollView *cycleScrollView7 = [MSCycleScrollView cycleViewWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 160) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    MSCycleScrollView *cycleScrollView7 = [MSCycleScrollView cycleViewWithFrame:CGRectMake(15, 0, SCREEN_WIDTH-30, 160) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
     cycleScrollView7.pageDotColor = [UIColor whiteColor];
     cycleScrollView7.currentPageDotColor = [UIColor purpleColor];
     cycleScrollView7.dotBorderWidth = 1;
     cycleScrollView7.dotBorderColor = [UIColor whiteColor];
     cycleScrollView7.currentDotBorderColor =RGB(0, 174, 232);
     cycleScrollView7.currentDotBorderWidth = 5;
-    cycleScrollView7.dotsIsSquare = YES;
-    cycleScrollView7.pageControlDotSize = CGSizeMake(20, 4);
+    cycleScrollView7.dotsIsSquare = NO;
+    cycleScrollView7.spacingBetweenDots=4;
+    cycleScrollView7.pageControlRightOffset=-(cycleScrollView7.width-250);
+    cycleScrollView7.pageControlDotSize = CGSizeMake(8, 8);
+    cycleScrollView7.backgroundColor=[UIColor clearColor];
     [self.ZScrollView addSubview:cycleScrollView7];
     self.cycleScrollView =cycleScrollView7;
     
@@ -228,7 +231,7 @@ static NSString * const shopCellReuseID = @"shop";
 //    [self.ZScrollView addSubview:imageview];
 //    self.imageviewGG=imageview;
     
-    YYAnimatedImageView * imageview = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(20, 165, self.bottomView.width-40, 60)];
+    YYAnimatedImageView * imageview = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(15, 165, self.bottomView.width-30, 60)];
     if(self.GuanggaoModeA==nil)
     {
     [imageview setImage:[UIImage imageNamed:@"kthuiyuan"]];
@@ -676,7 +679,7 @@ static NSString * const shopCellReuseID = @"shop";
 //返回每个item大小
 - (CGSize)waterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    CGFloat wid=(self.bottomView.width-50)/3;
+    CGFloat wid=(self.bottomView.width-60)/3;
     CGFloat hei=wid/3*4 + 50;
         return CGSizeMake(wid, hei);
 }
@@ -703,7 +706,7 @@ static NSString * const shopCellReuseID = @"shop";
     if (waterFlowLayout.flowLayoutStyle == (WSLWaterFlowLayoutStyle)3){
         return UIEdgeInsetsMake(15, 15, 15, 15);
     }
-    return UIEdgeInsetsMake(0, 10, 0, 10);
+    return UIEdgeInsetsMake(0, 15, 0, 15);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{

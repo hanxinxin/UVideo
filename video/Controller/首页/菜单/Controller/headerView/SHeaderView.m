@@ -19,16 +19,16 @@
 }
 - (void)createLab{
 
-    self.leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(10, 5, 20, 20)];
+    self.leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(15, (self.height-20)/2, 20, 20)];
     [self.leftImage setImage:[UIImage imageNamed:@"homeimage"]];
     [self addSubview:self.leftImage];
-    self.leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(35, 0, self.width/2-40, 30)];
+    self.leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, (self.height-30)/2, self.width/2-40, 30)];
     [self.leftLabel setText:@"电视剧"];
     [self.leftLabel setTextColor:[UIColor blackColor]];
     [self.leftLabel setFont:[UIFont systemFontOfSize:17.f]];
     [self addSubview:self.leftLabel];
     
-    UIButton * button1 =[[UIButton alloc] initWithFrame:CGRectMake(self.width/2, 0, self.width/2-30, 30)];
+    UIButton * button1 =[[UIButton alloc] initWithFrame:CGRectMake(self.width/2, (self.height-20)/2, self.width/2-20, 20)];
     [button1 setBackgroundColor:[UIColor whiteColor]];
     [button1 setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
     button1.layer.cornerRadius=4;

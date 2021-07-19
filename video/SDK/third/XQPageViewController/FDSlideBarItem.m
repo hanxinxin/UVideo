@@ -9,7 +9,7 @@
 #import "FDSlideBarItem.h"
 
 #define DEFAULT_TITLE_FONTSIZE 15
-#define DEFAULT_TITLE_SELECTED_FONTSIZE 17
+#define DEFAULT_TITLE_SELECTED_FONTSIZE 18
 #define DEFAULT_TITLE_COLOR [UIColor blackColor]
 #define DEFAULT_TITLE_SELECTED_COLOR [UIColor blueColor]
 
@@ -96,7 +96,7 @@
 }
 
 - (UIFont *)titleFont {
-    return _selected ? [UIFont systemFontOfSize:_selectedFontSize] : [UIFont systemFontOfSize:_fontSize];
+    return _selected ? [UIFont fontWithName:@"Helvetica-Bold" size:_selectedFontSize] : [UIFont systemFontOfSize:_fontSize];
 }
 
 - (UIColor *)titleColor {

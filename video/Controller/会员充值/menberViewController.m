@@ -797,7 +797,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
             cell.textLabel.text =@"联系客服";
-            cell.imageView.image=[UIImage imageNamed:@"yhkimage"];
+            cell.imageView.image=[UIImage imageNamed:@"kefu_image"];
         
 //        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.icon]];
 //        NSLog(@"section==== %ld",(long)indexPath.section);

@@ -375,54 +375,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B7AC619C-154B-488C-9A29-6099E2343D27"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/AFNNETWork/HttpManagement.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
-            landmarkName = "-uploadImagesWihtImgArr:url:Tokenbool:parameters:block:blockprogress:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "B7AC619C-154B-488C-9A29-6099E2343D27 - 2a1c7de11969cc19"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[HttpManagement uploadImagesWihtImgArr:url:Tokenbool:parameters:block:blockprogress:]"
-                  moduleName = "video"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tusm/Desktop/HX_video/UVideo/video/AFNNETWork/HttpManagement.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72"
-                  offsetFromSymbolStart = "1657">
-               </Location>
-               <Location
-                  uuid = "B7AC619C-154B-488C-9A29-6099E2343D27 - 96f414190ab49246"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__86-[HttpManagement uploadImagesWihtImgArr:url:Tokenbool:parameters:block:blockprogress:]_block_invoke"
-                  moduleName = "video"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/tusm/Desktop/HX_video/UVideo/video/AFNNETWork/HttpManagement.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "73"
-                  endingLineNumber = "73"
-                  offsetFromSymbolStart = "47">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "27A26E09-8525-4AB5-9C5E-68E073013DDF"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -434,38 +386,53 @@
             endingLineNumber = "96"
             landmarkName = "-uploadImagesWihtImgArr:url:Tokenbool:parameters:block:blockprogress:"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3D14C59D-2D66-4151-9BDE-DC50E744991B"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/Controller/&#x6211;&#x7684;/MyViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "567"
-            endingLineNumber = "567"
-            landmarkName = "-postUploadHeadImage:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "86B752B3-765B-4C89-B8C3-6C5609078AA2"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/Controller/&#x6211;&#x7684;/MyViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "571"
-            endingLineNumber = "571"
-            landmarkName = "-postUploadHeadImage:"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "27A26E09-8525-4AB5-9C5E-68E073013DDF - 2a1c7de11969cf31"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[HttpManagement uploadImagesWihtImgArr:url:Tokenbool:parameters:block:blockprogress:]"
+                  moduleName = "video"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tusm/Desktop/HX_video/UVideo/video/AFNNETWork/HttpManagement.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96"
+                  offsetFromSymbolStart = "1930">
+               </Location>
+               <Location
+                  uuid = "27A26E09-8525-4AB5-9C5E-68E073013DDF - 96f414190ab4914d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__86-[HttpManagement uploadImagesWihtImgArr:url:Tokenbool:parameters:block:blockprogress:]_block_invoke"
+                  moduleName = "video"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tusm/Desktop/HX_video/UVideo/video/AFNNETWork/HttpManagement.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96"
+                  offsetFromSymbolStart = "541">
+               </Location>
+               <Location
+                  uuid = "27A26E09-8525-4AB5-9C5E-68E073013DDF - bdda8f92061d9224"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__86-[HttpManagement uploadImagesWihtImgArr:url:Tokenbool:parameters:block:blockprogress:]_block_invoke.157"
+                  moduleName = "video"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/tusm/Desktop/HX_video/UVideo/video/AFNNETWork/HttpManagement.m"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96"
+                  offsetFromSymbolStart = "12">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

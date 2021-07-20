@@ -46,7 +46,7 @@ static NSString * const headerCellReuseID = @"header";
     
     self.txImage.layer.cornerRadius=30;
     self.titleArray = [NSArray arrayWithObjects:@"收藏夹",@"求片",@"任务",@"充值", nil];
-    self.imageArray = [NSArray arrayWithObjects:@"shoucangjia",@"qiupian",@"renwu",@"chongzhiImage", nil];
+    self.imageArray = [NSArray arrayWithObjects:@"shoucangjia",@"qiupian",@"renwu",@"my_menber_image", nil];
     WSLWaterFlowLayout * layout = [[WSLWaterFlowLayout alloc] init];
     layout.delegate = self;
     layout.flowLayoutStyle = WSLWaterFlowVerticalEqualHeight;

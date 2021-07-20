@@ -19,8 +19,8 @@
 }
 - (void)createLab{
 
-    self.leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(15, (self.height-20)/2, 20, 20)];
-    [self.leftImage setImage:[UIImage imageNamed:@"homeimage"]];
+    self.leftImage = [[UIImageView alloc] initWithFrame:CGRectMake(15, (self.height-27)/2, 27, 27)];
+    [self.leftImage setImage:[UIImage imageNamed:@"shouyeheader_image"]];
     [self addSubview:self.leftImage];
     self.leftLabel = [[UILabel alloc] initWithFrame:CGRectMake(40, (self.height-30)/2, self.width/2-40, 30)];
     [self.leftLabel setText:@"电视剧"];

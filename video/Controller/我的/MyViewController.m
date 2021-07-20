@@ -527,7 +527,13 @@
         [UHud showTXTWithStatus:@"敬请期待" delay:2.f];
     }else if(indexPath.section==(arr.count-1))
     {
-        [self showprompt];
+        if([usertoken isEqualToString:@""])
+        {
+            [UHud showTXTWithStatus:@"您还没有登录" delay:2.f];
+        }else{
+            [self showprompt];;
+        }
+        
     }
 }
 
@@ -561,7 +567,7 @@
     
 -(void)postUploadHeadImage:(UIImage *)image
 {
-    ///暂时有问题
+    
     [UHud showHUDLoading];
 //    avatar
     NSArray * arr = [NSArray arrayWithObjects:image, nil];

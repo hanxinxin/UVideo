@@ -97,7 +97,7 @@ static NSString * const shopCellReuseID = @"shop";
         
     }];
     
-    // 为ScrollView添加下拉加载
+//    // 为ScrollView添加下拉加载
     self.ZScrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getDataList_header1];
         [self getDataList_header2];
@@ -106,7 +106,7 @@ static NSString * const shopCellReuseID = @"shop";
     
     
     ///包含瀑布流view
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 160+70, self.ZScrollView.width, 60+490+490)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 175+70, self.ZScrollView.width, 60+490+490)];
     view.backgroundColor=[UIColor whiteColor];
     
     [self.ZScrollView addSubview:view];
@@ -124,6 +124,7 @@ static NSString * const shopCellReuseID = @"shop";
     [self getbannerData];
 //    [self getmenuData];
     [self getGuanggao_data];
+    
 }
 -(void)getGuanggao_data
 {
@@ -203,7 +204,7 @@ static NSString * const shopCellReuseID = @"shop";
 -(void)addScrollviewLB
 {
     // 网络加载 --- 创建带标题的图片轮播器
-    MSCycleScrollView *cycleScrollView7 = [MSCycleScrollView cycleViewWithFrame:CGRectMake(15, 0, SCREEN_WIDTH-30, 160) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    MSCycleScrollView *cycleScrollView7 = [MSCycleScrollView cycleViewWithFrame:CGRectMake(15, 10, SCREEN_WIDTH-30, 160) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
     
     cycleScrollView7.pageDotColor = [UIColor whiteColor];
     cycleScrollView7.currentPageDotColor = [UIColor purpleColor];
@@ -227,7 +228,9 @@ static NSString * const shopCellReuseID = @"shop";
      NSLog(@">>>>>  %ld", (long)index);
      };
      */
-    YYAnimatedImageView * imageview = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(15, 165, self.bottomView.width-30, 60)];
+    YYAnimatedImageView * imageview = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(15, 175, self.bottomView.width-30, 60)];
+    imageview.layer.masksToBounds = YES;
+    imageview.layer.cornerRadius=8;
     if(self.GuanggaoModeA==nil)
     {
     [imageview setImage:[UIImage imageNamed:@"kthuiyuan"]];
@@ -363,7 +366,7 @@ static NSString * const shopCellReuseID = @"shop";
     }];
     
     //更新 scrollview 滑动
-    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, 160+70+self.bottomView.height+10);
+    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, 175+70+self.bottomView.height+10);
 //    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, 160+70+960+50);
 }
 

@@ -53,7 +53,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 
 -(void)InitUI{
     self.topImageBg = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.width-125)/2, 40, 125, 50)];
-    [self.topImageBg setImage:[UIImage imageNamed:@"loginBg"]];
+    [self.topImageBg setImage:[UIImage imageNamed:@"kaunchlogo"]];
     [self.view addSubview:self.topImageBg];
     self.centerView = [[UIView alloc] initWithFrame:CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 226)];
     self.centerView.layer.cornerRadius=6;

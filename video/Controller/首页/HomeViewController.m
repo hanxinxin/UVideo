@@ -78,7 +78,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 //    if (!_searchBar.isFirstResponder) {
 //        [self.searchBar becomeFirstResponder];
 //    }
-    
+//    [self getmenuData];
     //获取通知中心单例对象
         NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
         //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
@@ -186,13 +186,21 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     }];
     
     
-    [self getmenuData];
     
+    [self getmenuData];
 //    [self getShaixuanData];
 //    [self getGuanggao_data];
+
+        //注册、接收通知
+
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UpdateV:) name:@"notificationVUP"object:nil];
+    
 }
 
-
+-(void)UpdateV:(NSNotification *)noti
+{
+    [self getmenuData];
+}
 
 
 
@@ -770,7 +778,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetY = scrollView.contentOffset.y;
     self.subView.frame = CGRectMake(0,  -scrollerToRect, self.view.frame.size.width, self.subView.height);
-    NSLog(@"%lf",offsetY);
+    NSLog(@"offsetY == %lf",offsetY);
     if (offsetY > 0 && offsetY < self.subView.height) {
         scrollerToRect = offsetY;
         self.subView.frame = CGRectMake(0,  -scrollerToRect, self.view.frame.size.width, self.subView.height);

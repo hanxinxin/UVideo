@@ -183,7 +183,24 @@ return timeString;
     return rootNav;
 }
 
+//这个是UITabBarController的代理方法
+- (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    static int i=0;
+    // 判断哪个界面要需要再次点击刷新，这里以第一个VC为例
+    if ([tabBarController.selectedViewController isEqual:[tabBarController.viewControllers firstObject]]) {
+        // 判断再次选中的是否为当前的控制器
+        if ([viewController isEqual:tabBarController.selectedViewController]) {
+            // 执行操作
+            NSLog(@"刷新界面 i = %d",i);
+               [[NSNotificationCenter defaultCenter]postNotification:[NSNotification notificationWithName:@"notificationVUP" object:nil userInfo:@{@"key":@"接收到了通知"}]];
+            return NO;
+        }
+        
+    }
+    
+    return YES;
 
+}
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
@@ -218,6 +235,8 @@ return timeString;
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
+    
+
 //    [self customizeTabBarAppearance:self.tabBar];
 //    NSInteger selectInt = tabBarController.selectedIndex;
 //    if (@available(iOS 13.0, *)) {

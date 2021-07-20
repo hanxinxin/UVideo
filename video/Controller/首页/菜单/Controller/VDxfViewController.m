@@ -106,7 +106,7 @@ static NSString * const shopCellReuseID = @"shop";
     
     
     ///包含瀑布流view
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 160+70, self.ZScrollView.width, self.ZScrollView.height-160-70)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 175+70, self.ZScrollView.width, self.ZScrollView.height-175-70)];
     view.backgroundColor=[UIColor whiteColor];
     
     [self.ZScrollView addSubview:view];
@@ -203,7 +203,7 @@ static NSString * const shopCellReuseID = @"shop";
 -(void)addScrollviewLB
 {
     // 网络加载 --- 创建带标题的图片轮播器
-    MSCycleScrollView *cycleScrollView7 = [MSCycleScrollView cycleViewWithFrame:CGRectMake(15, 0, SCREEN_WIDTH-30, 160) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    MSCycleScrollView *cycleScrollView7 = [MSCycleScrollView cycleViewWithFrame:CGRectMake(15, 10, SCREEN_WIDTH-30, 160) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
     cycleScrollView7.pageDotColor = [UIColor whiteColor];
     cycleScrollView7.currentPageDotColor = [UIColor purpleColor];
     cycleScrollView7.dotBorderWidth = 1;
@@ -231,7 +231,10 @@ static NSString * const shopCellReuseID = @"shop";
 //    [self.ZScrollView addSubview:imageview];
 //    self.imageviewGG=imageview;
     
-    YYAnimatedImageView * imageview = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(15, 165, self.bottomView.width-30, 60)];
+    YYAnimatedImageView * imageview = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(15, 175, self.bottomView.width-30, 60)];
+    
+    imageview.layer.masksToBounds = YES;
+    imageview.layer.cornerRadius=8;
     if(self.GuanggaoModeA==nil)
     {
     [imageview setImage:[UIImage imageNamed:@"kthuiyuan"]];
@@ -367,7 +370,7 @@ static NSString * const shopCellReuseID = @"shop";
     //更新 scrollview 滑动
 //    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, self.collectionView2.bottom+kNavAndTabHeight+30) ;
     //更新 scrollview 滑动
-    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, 160+70+self.bottomView.height+10);
+    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, 175+70+self.bottomView.height+10);
 }
 
 
@@ -784,7 +787,7 @@ static NSString * const shopCellReuseID = @"shop";
         }else {
             self.collectionView1.scrollEnabled = NO;
             [UIView animateWithDuration:0.5 animations:^{
-            self.bottomView.frame=CGRectMake(0, 160+70, self.ZScrollView.width, self.ZScrollView.height-160-70) ;
+            self.bottomView.frame=CGRectMake(0, 175+70, self.ZScrollView.width, self.ZScrollView.height-175-70) ;
                 self.collectionView1.frame=CGRectMake(0,0,self.bottomView.width, self.collectionView1.height+self->scrollerToRect) ;
             }];
 //            [self.ZScrollView setContentOffset:CGPointMake(0, 230) animated:YES];

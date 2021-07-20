@@ -48,6 +48,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title=@"记录";
     //获取通知中心单例对象
         NSNotificationCenter * center = [NSNotificationCenter defaultCenter];
         //添加当前类对象为一个观察者，name和object设置为nil，表示接收一切通知
@@ -307,7 +308,7 @@
 //    [Listarray addObject:[NSArray arrayWithObjects:@"播放记录",@"充值记录",@"账户信息",@"帮助中心",@"安全设置",@"清理缓存",@"退出登录", nil]];
     
     self.downtableview1=[[UITableView alloc] init];
-    self.downtableview1.frame=CGRectMake(20, self.topView.bottom, SCREEN_WIDTH-40, SCREENH_HEIGHT-self.topView.bottom-kNavAndTabHeight);
+    self.downtableview1.frame=CGRectMake(20, self.topView.bottom, SCREEN_WIDTH-40, SCREENH_HEIGHT-self.topView.bottom-kNavAndTabHeight-10);
     self.downtableview1.backgroundColor=[UIColor whiteColor];
     self.downtableview1.delegate=self;
     self.downtableview1.dataSource=self;
@@ -337,7 +338,7 @@
     
     NSLog(@"SCREENH_HEIGHT == %f   h ==== %f",SCREENH_HEIGHT,SCREENH_HEIGHT-50-kNavAndTabHeight);
     self.downtableview2=[[UITableView alloc] init];
-    self.downtableview2.frame=CGRectMake(20, self.topView.bottom, SCREEN_WIDTH-40, SCREENH_HEIGHT-self.topView.bottom-kNavAndTabHeight);
+    self.downtableview2.frame=CGRectMake(20, self.topView.bottom, SCREEN_WIDTH-40, SCREENH_HEIGHT-self.topView.bottom-kNavAndTabHeight-10);
     self.downtableview2.backgroundColor=[UIColor whiteColor];
     self.downtableview2.delegate=self;
     self.downtableview2.dataSource=self;

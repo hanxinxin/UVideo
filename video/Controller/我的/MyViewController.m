@@ -42,6 +42,7 @@
     // Do any additional setup after loading the view.
 //    self.navBarColor=[UIColor whiteColor];
 //    self.hiddenLeftBtn=YES;
+    self.title=@"我的";
     [self InitUIView];
     [self Addtableview];
     [self setyinying];

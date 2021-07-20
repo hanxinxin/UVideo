@@ -96,6 +96,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.title=@"充值";
     [self addScrollView];
     [self addTopView];
     [self setupCollectionView];

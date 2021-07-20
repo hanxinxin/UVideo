@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface HomeViewController : ScrollPageViewController
 @property (nonatomic, copy) NSString *searchStr;
+
+-(void)getmenuData;
 @end
 
 NS_ASSUME_NONNULL_END

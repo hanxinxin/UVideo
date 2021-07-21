@@ -34,6 +34,9 @@
     _shop = shop;
     
     [self.iconView sd_setImageWithURL:[NSURL URLWithString:shop.pic] placeholderImage:[UIImage imageNamed:@"image"]];
+    
+    self.iconView.layer.masksToBounds = YES;
+    self.iconView.layer.cornerRadius=4;
     self.priceLabel.layer.cornerRadius=4;
     self.priceLabel.text = shop.title;
     self.infoLabel.layer.cornerRadius=4;

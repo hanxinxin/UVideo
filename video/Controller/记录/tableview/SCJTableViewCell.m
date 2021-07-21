@@ -12,17 +12,19 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    
+    self.leftImage.layer.masksToBounds = YES;
+    self.leftImage.layer.cornerRadius=4;
 }
 
 -(void)addBiaoqianLabel:(NSArray*)textArr
 {
+    [self.biaoqian removeAllSubviews];
     CGFloat y = 0;
     CGFloat letfWidth = 0;
     for (int i = 0; i < textArr.count; i++) {
         NSString *text = textArr[i];
         CGFloat width = [self getWidthWithStr:text] + 30;
-        if (letfWidth + width + 15 > SCREEN_WIDTH) {
+        if (letfWidth + width + 15 > self.biaoqian.width) {
             if (y >= 130 && [text isEqualToString:@"最近搜索"]) {
                 [self removeTestDataWithTextArr:textArr index:i];
                 break;
@@ -30,7 +32,7 @@
             y += 40;
             letfWidth = 0;
         }
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(letfWidth, y, width, 24)];
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(ceil(letfWidth), ceil(y), ceil(width), 24)];
         label.userInteractionEnabled = YES;
         label.font = [UIFont systemFontOfSize:12];
         label.text = text;

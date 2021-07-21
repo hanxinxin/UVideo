@@ -233,10 +233,11 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
                 NSNumber*show=[dictM objectForKey:@"show"];
                 if([show intValue]==1)
                 {
-                    if(i<=8)
-                    {
+                    ///以前默认展示8个 全部展示
+//                    if(i<=8)
+//                    {
                         [self.VideoDictList addObject:dictM];
-                    }
+//                    }
                 }
             }
             
@@ -252,7 +253,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     } failure:^(NSError * _Nullable error) {
         [UHud hideLoadHud];
         NSLog(@"shareManager error == %@",error);
-        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+        [UHud showTXTWithStatus:@"加载失败" delay:2.f];
     }];
 }
 -(void)getSXCollecheader

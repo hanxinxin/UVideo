@@ -18,6 +18,8 @@
     _model = model;
     
     [self.topImage sd_setImageWithURL:[NSURL URLWithString:model.pic] placeholderImage:[UIImage imageNamed:@"image"]];
+    self.topImage.layer.masksToBounds = YES;
+    self.topImage.layer.cornerRadius=4;
     self.downTitle.text=model.title;
 }
 

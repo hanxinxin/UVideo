@@ -3,7 +3,6 @@
 //  MHDevelopExample
 //
 //  Created by CoderMikeHe on 17/2/14.
-//  Copyright © 2017年 CoderMikeHe. All rights reserved.
 //
 
 #import "MHYouKuController.h"
@@ -151,6 +150,8 @@
 @property(nonatomic,assign)BOOL qxdQieHuan;
 /////  当前播放的URL
 @property(nonatomic,assign)NSString * DangqianUrl;
+@property (nonatomic, assign) double DQtail_duration; //片尾时间
+@property (nonatomic, assign) double DQfront_duration;//片头时间
 @end
 
 @implementation MHYouKuController
@@ -161,7 +162,10 @@
     // 移除通知
     [MHNotificationCenter removeObserver:self];
 }
-
+///隐藏底部横条
+-(BOOL)prefersHomeIndicatorAutoHidden {
+    return YES;
+}
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -266,6 +270,8 @@
     self.OldJiLutime=0;
     self.qxdQieHuan=NO;
     self.DangqianUrl=@"";
+    self.DQtail_duration=0;
+    self.DQfront_duration=0;
     if(_Zvideomodel!=nil)
     {
     VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
@@ -304,7 +310,13 @@
 //                    [DYModelMaker DY_makeModelWithDictionary:video_soruce modelKeyword:@"Video" modelName:@"videosource"];
                     self.player.videoURL = [NSURL URLWithString:model.url];
                     self.DangqianUrl=model.url;
-                    
+                    self.DQtail_duration=model.tail_duration;
+                    self.DQfront_duration=model.front_duration;
+                    self.player.kVideoSkipTime(^(KJPlayerVideoSkipState skipState) {
+                        if (skipState == KJPlayerVideoSkipStateHead) {
+                            [self.player kj_displayHintText:@"跳过片头，自动播放" time:2 position:KJPlayerHintPositionLeftBottom];
+                        }
+                    }, self.DQfront_duration, self.DQtail_duration);
                     NSArray * qualities = [dataArr objectForKey:@"qualities"];
                     NSArray * subtitles = [dataArr objectForKey:@"subtitles"];
                     
@@ -519,11 +531,7 @@
 //        [weakself.player kj_startAnimation];
         [weakself.player kj_displayHintText:@"试看时间已到，请缴费～" time:0 position:KJPlayerHintPositionBottom];
     }, 0);
-    self.player.kVideoSkipTime(^(KJPlayerVideoSkipState skipState) {
-        if (skipState == KJPlayerVideoSkipStateHead) {
-            [weakself.player kj_displayHintText:@"跳过片头，自动播放" time:5 position:KJPlayerHintPositionLeftBottom];
-        }
-    }, 18, 0);
+    
     
     //注册、接收通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatefullItemClick:)name:@"fullItemClick"object:nil];
@@ -608,6 +616,15 @@
     player.playerView.TimeTotal.text=[NSString stringWithFormat:@"%@/%@",qstring,hstring];
 //    player.playerView.bottomHYSlider.currentSliderValue=time;
     player.playerView.bottomHYSlider.currentPercent=(time/self.player.totalTime);
+    
+//    if(self.DQtail_duration!=0)
+//    {
+//
+//    }
+//    if(self.DQfront_duration!=0)
+//    {
+//
+//    }
     if((int)time != 0)
     {
         if(((int)time)%10==0)

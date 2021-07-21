@@ -79,7 +79,7 @@ static NSString * const shopCellReuseID = @"shop";
     // 设置内容大小
 //    scrollview.contentSize =CGSizeMake(SCREEN_WIDTH,SCREEN_HEIGHT*2);
     // 是否反弹//
-    scrollview.bounces = NO;
+    scrollview.bounces = YES;
     // 是否分页//
     scrollview.pagingEnabled = NO;
     // 是否滚动//

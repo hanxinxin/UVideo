@@ -41,8 +41,8 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     [self addObserver:self forKeyPath:@"frame" options:NSKeyValueObservingOptionNew context:NULL];
     [self addObserver:self forKeyPath:@"bounds" options:NSKeyValueObservingOptionNew context:NULL];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(kj_orientationChange:) name:UIDeviceOrientationDidChangeNotification object:nil];
-    self.longPressTime = 1.f;
-    self.autoHideTime = 2.f;
+    self.longPressTime = 1000.f;
+    self.autoHideTime = 1.5f;
     self.mainColor = UIColor.whiteColor;
     self.viceColor = UIColor.redColor;
     self.width = self.frame.size.width;
@@ -102,7 +102,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     self.backButton.frame=CGRectMake(kTopBarSafeHeight*2, 5, self.topView.width-(kTopBarSafeHeight*2+kBottomSafeHeight), self.operationViewHeight - 20);
     self.bottomView.frame = CGRectMake(kTopBarSafeHeight, self.height-self.operationViewHeight, self.width-(kTopBarSafeHeight+kBottomSafeHeight), self.operationViewHeight);
     self.danmubottomView.frame = CGRectMake(kTopBarSafeHeight, self.height-self.operationViewHeight, self.width-(kTopBarSafeHeight+kBottomSafeHeight), self.operationViewHeight);
-    self.lockButton.frame = CGRectMake(kNavBarAndStatusBarHeight, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
+    self.lockButton.frame = CGRectMake(kIs_iPhoneX?kNavBarAndStatusBarHeight:10, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
     self.centerPlayButton.frame = CGRectMake((self.width-kCenterPlayWidth)/2, (self.height-kCenterPlayWidth)/2, kCenterPlayWidth, kCenterPlayWidth);
     
     self.bottomHYSlider.frame = CGRectMake(kTopBarSafeHeight, self.bottomView.height-20, self.bottomView.width-(kTopBarSafeHeight+kBottomSafeHeight), 10);
@@ -160,9 +160,10 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
         if (haveTap) [tapGesture requireGestureRecognizerToFail:gesture];
     }
     if (gestureType == 3 || (gestureType & KJPlayerGestureTypeLong)) {
-        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longAction:)];
-        longPress.minimumPressDuration = self.longPressTime;
-        [self addGestureRecognizer:longPress];
+        /// 不添加长按手势
+//        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(longAction:)];
+//        longPress.minimumPressDuration = self.longPressTime;
+//        [self addGestureRecognizer:longPress];
     }
     if (gestureType == 4 || (gestureType & KJPlayerGestureTypeProgress)) {
         if (self.pan) { }
@@ -445,7 +446,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     if (!_topView) {
         _topView = [[KJPlayerOperationView alloc] initWithFrame:CGRectMake(0, 0, self.width, self.operationViewHeight) OperationType:(KJPlayerOperationViewTypeTop)];
 //        _topView.mainColor = self.mainColor;
-//        _topView.backgroundColor = [UIColor redColor];
+        _topView.backgroundColor = [UIColor clearColor];
     }
     return _topView;
 }

@@ -20,7 +20,7 @@
 #import "YYWebImage.h"
 
 #import "videoFenleiMode.h"
-
+#import "VDHomeOneViewController.h"
 #import "VDxfViewController.h"
 #import "vlistCollectionViewCell.h"
 #import "BadgeButton.h"
@@ -663,11 +663,12 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     if(index==0)
     {
         
-        VDViewController *vc = [[VDViewController alloc] init];
-        if(!vc)
-        {
-            vc = [VDViewController new];
-        }
+//        VDViewController *vc = [[VDViewController alloc] init];
+//        if(!vc)
+//        {
+//            vc = [VDViewController new];
+//        }
+        VDHomeOneViewController*vc = [[VDHomeOneViewController alloc] init];
         vc.SelectIndex=index;
         vc.FenleiMode =model;
         return vc;

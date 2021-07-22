@@ -484,6 +484,9 @@
 		FAA6DF142675C77500DE5E7C /* HQEditImageCaptureView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA6DF092675C77500DE5E7C /* HQEditImageCaptureView.m */; };
 		FAB7829C265FEEB3002A5E6B /* promptbottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAB7829B265FEEB3002A5E6B /* promptbottomView.m */; };
 		FAB7829E265FEFB8002A5E6B /* promptbottomView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAB7829D265FEFB8002A5E6B /* promptbottomView.xib */; };
+		FAF4063026A9B496001706F1 /* VDHomeOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF4062F26A9B496001706F1 /* VDHomeOneViewController.m */; };
+		FAF4063A26A9B569001706F1 /* homeOneTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAF4063826A9B569001706F1 /* homeOneTableViewCell.m */; };
+		FAF4063B26A9B569001706F1 /* homeOneTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FAF4063926A9B569001706F1 /* homeOneTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1408,6 +1411,11 @@
 		FAB7829A265FEEB3002A5E6B /* promptbottomView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = promptbottomView.h; sourceTree = "<group>"; };
 		FAB7829B265FEEB3002A5E6B /* promptbottomView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = promptbottomView.m; sourceTree = "<group>"; };
 		FAB7829D265FEFB8002A5E6B /* promptbottomView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = promptbottomView.xib; sourceTree = "<group>"; };
+		FAF4062E26A9B496001706F1 /* VDHomeOneViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VDHomeOneViewController.h; sourceTree = "<group>"; };
+		FAF4062F26A9B496001706F1 /* VDHomeOneViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VDHomeOneViewController.m; sourceTree = "<group>"; };
+		FAF4063726A9B569001706F1 /* homeOneTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = homeOneTableViewCell.h; sourceTree = "<group>"; };
+		FAF4063826A9B569001706F1 /* homeOneTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = homeOneTableViewCell.m; sourceTree = "<group>"; };
+		FAF4063926A9B569001706F1 /* homeOneTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = homeOneTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2271,6 +2279,7 @@
 		8A8BC1B425FA12480028173C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FAF4063126A9B4E8001706F1 /* homeOnecell */,
 				8A8BC23625FB3F770028173C /* MSCycleScrollView */,
 				8A8BC1F025FA415A0028173C /* WSLWaterFlowLayout */,
 				8A8BC1E025FA1D940028173C /* headerView */,
@@ -2281,6 +2290,8 @@
 				8A8BC1B625FA12A00028173C /* VDViewController.m */,
 				FA7A80712678DE7F001B62AA /* VDxfViewController.h */,
 				FA7A80722678DE7F001B62AA /* VDxfViewController.m */,
+				FAF4062E26A9B496001706F1 /* VDHomeOneViewController.h */,
+				FAF4062F26A9B496001706F1 /* VDHomeOneViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -3980,6 +3991,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		FAF4063126A9B4E8001706F1 /* homeOnecell */ = {
+			isa = PBXGroup;
+			children = (
+				FAF4063726A9B569001706F1 /* homeOneTableViewCell.h */,
+				FAF4063826A9B569001706F1 /* homeOneTableViewCell.m */,
+				FAF4063926A9B569001706F1 /* homeOneTableViewCell.xib */,
+			);
+			path = homeOnecell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4149,6 +4170,7 @@
 				8A3930E625FCDB3800E7331B /* cmh_default_red_pocket@3x.png in Resources */,
 				8A9C54B125F7837E00EFA410 /* Assets.xcassets in Resources */,
 				8AE1A1042670E8C200922103 /* server-public.pem in Resources */,
+				FAF4063B26A9B569001706F1 /* homeOneTableViewCell.xib in Resources */,
 				8A3930EE25FCDB3800E7331B /* cmh_default_collect_goods@3x.png in Resources */,
 				8A9C559E25F8A0B300EFA410 /* GuideImage.bundle in Resources */,
 				FA8A03972667D79000B41281 /* menberViewTS.xib in Resources */,
@@ -4339,6 +4361,7 @@
 				FA984FAE2674AEDF0014DCA8 /* AFImageDownloader.m in Sources */,
 				8A95C301265A5C7B00A6D144 /* KJDownloader.m in Sources */,
 				8A9C560925F8A10000EFA410 /* UIView+GestureCallback.m in Sources */,
+				FAF4063A26A9B569001706F1 /* homeOneTableViewCell.m in Sources */,
 				8A8BC38725FC6F9E0028173C /* ViewPagerController.m in Sources */,
 				8A8BC2F125FC6ED10028173C /* MHYouKuAnthologyHeaderView.m in Sources */,
 				FA993BA92676EF0200C6F298 /* bannerMode.m in Sources */,
@@ -4490,6 +4513,7 @@
 				8A8BC17525F8F73F0028173C /* ColumnEditViewController.m in Sources */,
 				8A8BC39225FC6F9E0028173C /* MHExample.m in Sources */,
 				8A82F10F264F9E01004AAF40 /* HttpManagement.m in Sources */,
+				FAF4063026A9B496001706F1 /* VDHomeOneViewController.m in Sources */,
 				8AE0C4CF266A54BA0084248D /* PanCollectionViewCell.m in Sources */,
 				FA993BB626774A2700C6F298 /* NSObject+DYModelArchive.m in Sources */,
 				8A39303225FCD86A00E7331B /* MHDivider.m in Sources */,

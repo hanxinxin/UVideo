@@ -757,6 +757,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         collectionView1.dataSource = self;
         collectionView1.delegate=self;
         collectionView1.backgroundColor = [UIColor whiteColor];
+        collectionView1.tag=5566;
         // 是否滚动//
         collectionView1.scrollEnabled = YES;
 //        [collectionView1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -778,6 +779,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 
 //控制头部显示
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    if(scrollView.tag == 5566){
     CGFloat offsetY = scrollView.contentOffset.y;
     self.subView.frame = CGRectMake(0,  -scrollerToRect, self.view.frame.size.width, self.subView.height);
     NSLog(@"offsetY == %lf",offsetY);
@@ -801,6 +803,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         self.tittleView.alpha = 0;
     }else{
         self.tittleView.alpha = 1;
+    }
     }
 }
 -(UIView *)tittleView{
@@ -948,13 +951,15 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 {
     NSDictionary*userInfo=not.userInfo;
     NSNumber* index=[userInfo objectForKey:@"index"];
-    if([index intValue]==1)
-    {
-        [self setToIndex:1];
-    }else if([index intValue]==2)
-    {
-        [self setToIndex:2];
-    }
+//    if([index intValue]==1)
+//    {
+//        [self setToIndex:1];
+//    }else if([index intValue]==2)
+//    {
+//        [self setToIndex:2];
+//    }
+//    self.VideoDictList[];
+    [self setToIndex:[index intValue]+1];
 }
 
 

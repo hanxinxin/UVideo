@@ -36,7 +36,7 @@ static NSString * const shopCellReuseID = @"shop";
 {
     _model=model;
     
-    [self.collectionView1.mj_header beginRefreshing];
+    [self getDataList_header1];
 }
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -100,7 +100,7 @@ static NSString * const shopCellReuseID = @"shop";
 -(void)getDataList_header1
 {
     // 清空数据
-    [UHud showHUDLoading];
+//    [UHud showHUDLoading];
     NSDictionary*dict = @{@"parent_category_id":[NSString stringWithFormat:@"%.f",self.model.id],
                                 @"page":[NSString stringWithFormat:@"%@",@(1)],
                                 @"pagesize":[NSString stringWithFormat:@"%@",@(6)]
@@ -190,7 +190,10 @@ static NSString * const shopCellReuseID = @"shop";
     NSLog(@"选择第%ld素材",indexPath.item);
 
         VideoRankMode*Vmodel=self.shopsDS[indexPath.row];
-        [self getVideoInfo:[NSString stringWithFormat:@"%f",Vmodel.id]];
+//        [self getVideoInfo:[NSString stringWithFormat:@"%f",Vmodel.id]];
+    if (self.touchIndex) {
+        self.touchIndex(indexPath.row, Vmodel);
+    }
     
 }
 -(void)pushViewControllerVideo:(ZVideoMode*)mode{
@@ -277,7 +280,8 @@ static NSString * const shopCellReuseID = @"shop";
 //        if (self.shops.count == 0){
             view.backgroundColor = [UIColor clearColor];
             [view.leftLabel setText:self.model.name];
-            view.tag=collectionView.tag;
+//            view.tag=collectionView.tag;
+            view.tag=indexPath.item;
 //            if(indexPath.section==0)
 //            {
 //                [view.leftLabel setText:@"电视剧"];
@@ -286,10 +290,10 @@ static NSString * const shopCellReuseID = @"shop";
 //                [view.leftLabel setText:@"电影"];
 //            }
             view.touchIndex = ^(NSInteger tag) {
-              if(tag==2001)
-              {
-                  [self pushMovie:1];
-              }
+//              if(tag==2001)
+//              {
+                  [self pushMovie:self.tag];
+//              }
             };
             return view;
 //        }

@@ -471,6 +471,7 @@
 		FA9FBAC02648057B00E4F27E /* SCJTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9FBABE2648057B00E4F27E /* SCJTableViewCell.m */; };
 		FA9FBAC12648057B00E4F27E /* SCJTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA9FBABF2648057B00E4F27E /* SCJTableViewCell.xib */; };
 		FAA1EBFF26A5B6C200030146 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA1EBFE26A5B6C200030146 /* UIButton+WebCache.m */; };
+		FAA33AA926AB07A200A2DD83 /* hometableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA33AA826AB07A200A2DD83 /* hometableHeaderView.m */; };
 		FAA6DEF92675C66700DE5E7C /* ZGQTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA6DEF62675C66700DE5E7C /* ZGQTableViewCell.m */; };
 		FAA6DEFA2675C66700DE5E7C /* ZGQActionSheetView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA6DEF72675C66700DE5E7C /* ZGQActionSheetView.m */; };
 		FAA6DF0C2675C77500DE5E7C /* HQImageEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA6DEFD2675C77500DE5E7C /* HQImageEditViewController.m */; };
@@ -1391,6 +1392,8 @@
 		FA9FBABF2648057B00E4F27E /* SCJTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SCJTableViewCell.xib; sourceTree = "<group>"; };
 		FAA1EBFD26A5B6C200030146 /* UIButton+WebCache.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIButton+WebCache.h"; sourceTree = "<group>"; };
 		FAA1EBFE26A5B6C200030146 /* UIButton+WebCache.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIButton+WebCache.m"; sourceTree = "<group>"; };
+		FAA33AA726AB07A200A2DD83 /* hometableHeaderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hometableHeaderView.h; sourceTree = "<group>"; };
+		FAA33AA826AB07A200A2DD83 /* hometableHeaderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hometableHeaderView.m; sourceTree = "<group>"; };
 		FAA6DEF52675C66700DE5E7C /* ZGQActionSheetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZGQActionSheetView.h; sourceTree = "<group>"; };
 		FAA6DEF62675C66700DE5E7C /* ZGQTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGQTableViewCell.m; sourceTree = "<group>"; };
 		FAA6DEF72675C66700DE5E7C /* ZGQActionSheetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZGQActionSheetView.m; sourceTree = "<group>"; };
@@ -3997,6 +4000,8 @@
 				FAF4063726A9B569001706F1 /* homeOneTableViewCell.h */,
 				FAF4063826A9B569001706F1 /* homeOneTableViewCell.m */,
 				FAF4063926A9B569001706F1 /* homeOneTableViewCell.xib */,
+				FAA33AA726AB07A200A2DD83 /* hometableHeaderView.h */,
+				FAA33AA826AB07A200A2DD83 /* hometableHeaderView.m */,
 			);
 			path = homeOnecell;
 			sourceTree = "<group>";
@@ -4609,6 +4614,7 @@
 				8A14219F268DEB180038D99D /* WKWebView+ExternalNavigationDelegates.m in Sources */,
 				FA997E8F265407AE00CB0DE0 /* ZqwTableViewCell.m in Sources */,
 				8A8BC38025FC6F9E0028173C /* YYThreadSafeDictionary.m in Sources */,
+				FAA33AA926AB07A200A2DD83 /* hometableHeaderView.m in Sources */,
 				8A82F161264FCBE4004AAF40 /* FAQViewController.m in Sources */,
 				8A8BC3AC25FC6F9E0028173C /* NSDateFormatter+Extension.m in Sources */,
 				FA984FA92674AEDF0014DCA8 /* UIImageView+AFNetworking.m in Sources */,

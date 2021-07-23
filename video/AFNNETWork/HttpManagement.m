@@ -199,7 +199,7 @@
                 NSData * data = (NSData*)responseObject;
                 NSString * str = [[jiemishujuClass shareManager] jiemiData:data];
                 NSDictionary *dict =[self dictionaryWithJsonString:str];
-                NSLog(@"POST dict   = %@",dict);
+//                NSLog(@"POST dict   = %@",dict);
                 successBlock(dict);
             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                 failureBlock(error);

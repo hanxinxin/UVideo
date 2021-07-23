@@ -21,7 +21,7 @@
 
 #import "TestWebViewController.h"
 #import "GuanggaoMode.h"
-
+#import "hometableHeaderView.h"
 
 #define homeOneTableViewCellID @"homeOneTableViewCellID"
 
@@ -98,7 +98,7 @@ static NSString * const shopCellReuseID = @"shop";
     // 是否分页//
     scrollview.pagingEnabled = NO;
     // 是否滚动//
-    scrollview.scrollEnabled = YES;
+    scrollview.scrollEnabled = NO;
     scrollview.contentSize =CGSizeMake(SCREEN_WIDTH, SCREENH_HEIGHT+30+60-kNavAndTabHeight) ;
     scrollview.tag=1000;
     scrollview.showsVerticalScrollIndicator = NO;
@@ -113,17 +113,17 @@ static NSString * const shopCellReuseID = @"shop";
     }];
     
 //    // 为ScrollView添加下拉加载
-    self.ZScrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
-        [self getDataList_header1];
-        [self getDataList_header2];
-    }];
-    [self.ZScrollView.mj_header beginRefreshing];
+//    self.ZScrollView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+//        [self getDataList_header1];
+//        [self getDataList_header2];
+//    }];
+//    [self.ZScrollView.mj_header beginRefreshing];
     UIView * topV = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.ZScrollView.width, 175+70)];
     topV.backgroundColor=[UIColor whiteColor];
     [self.ZScrollView addSubview:topV];
     self.TopView =topV;
     ///包含瀑布流view
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 175+70, self.ZScrollView.width, 60+490+490)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 175+70, self.ZScrollView.width, SCREENH_HEIGHT-kNavAndTabHeight-40)];
     view.backgroundColor=[UIColor whiteColor];
     
     [self.ZScrollView addSubview:view];
@@ -134,7 +134,7 @@ static NSString * const shopCellReuseID = @"shop";
     // 设置当前页码为0
     self.currentPage = 0;
     //加载轮播图
-    [self addScrollviewLB];
+//    [self addScrollviewLB];
     // 初始化瀑布流view
     [self setupDowntableView];
 //    [self setupCollectionView1];
@@ -162,9 +162,11 @@ static NSString * const shopCellReuseID = @"shop";
 //            [DYModelMaker DY_makeModelWithDictionary:dataAD modelKeyword:@"Guanggao" modelName:@"Mode"];
             self.GuanggaoModeA=[GuanggaoMode yy_modelWithDictionary:dataAD];
 //            NSString * urlstr = [dataAD objectForKey:@"source"];
+            
             if(self.GuanggaoModeA)
             {
-            self.guanggaoImageView.yy_imageURL=[NSURL URLWithString:self.GuanggaoModeA.source];
+                [self.DowntableView reloadData];
+//                self.guanggaoImageView.yy_imageURL=[NSURL URLWithString:self.GuanggaoModeA.source];
             }
         }else{
             NSString * message = [dict objectForKey:@"message"];
@@ -199,6 +201,7 @@ static NSString * const shopCellReuseID = @"shop";
                 [self.bannerimagesURL addObject:model.source];
             }
             self.cycleScrollView.imageUrls = self.bannerimagesURL;
+            [self.DowntableView reloadData];
         }else if([code intValue]==20){
             NSString * message = [dict objectForKey:@"message"];
 //            [UHud showHUDToView:self.view text:message];
@@ -345,22 +348,24 @@ static NSString * const shopCellReuseID = @"shop";
 }
 -(void)setupDowntableView
 {
-    self.DowntableView=[[UITableView alloc] init];
-    self.DowntableView.frame=CGRectMake(0, 0, SCREEN_WIDTH-40,500);
+//    self.DowntableView=[[UITableView alloc] initWithFrame:CGRectMake(0, self.TopView.bottom, self.bottomView.width,self.ZScrollView.height-245) style:UITableViewStyleGrouped];
+    self.DowntableView=[[UITableView alloc] initWithFrame:CGRectMake(0, 10, self.bottomView.width,self.ZScrollView.height) style:UITableViewStyleGrouped];
+//    self.DowntableView.frame=CGRectMake(0, self.TopView.bottom, self.bottomView.width,self.ZScrollView.height-245);
     self.DowntableView.backgroundColor=[UIColor whiteColor];
     self.DowntableView.delegate=self;
     self.DowntableView.dataSource=self;
     self.DowntableView.tag=10001;
     self.DowntableView.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.DowntableView.tableFooterView = [[UIView alloc]init];
-    self.DowntableView.scrollEnabled=NO;
-    [self.bottomView addSubview:self.DowntableView];
-    [self.DowntableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        
-        make.top.equalTo(@0);
-        make.width.mas_equalTo(self.bottomView.width);
-        make.height.equalTo(self.bottomView);
-    }];
+//    self.DowntableView.scrollEnabled=YES;
+//    [self.bottomView addSubview:self.DowntableView];
+    [self.ZScrollView addSubview:self.DowntableView];
+//    [self.DowntableView mas_makeConstraints:^(MASConstraintMaker *make) {
+//
+//        make.top.equalTo(self.TopView.mas_bottom);
+//        make.width.mas_equalTo(self.bottomView.width);
+//        make.height.mas_equalTo(self.ZScrollView.height-245);
+//    }];
 //    self.downtableview.separatorStyle=UITableViewCellSeparatorStyleNone;
     // 注册cell
     [self.DowntableView registerNib:[UINib nibWithNibName:NSStringFromClass([homeOneTableViewCell class]) bundle:nil] forCellReuseIdentifier:homeOneTableViewCellID];
@@ -368,6 +373,8 @@ static NSString * const shopCellReuseID = @"shop";
     self.DowntableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getheaderData1];
     }];
+    
+   
     // 第一次进入则自动加载
     [self.DowntableView.mj_header beginRefreshing];
     
@@ -857,28 +864,37 @@ static NSString * const shopCellReuseID = @"shop";
 //控制头部显示
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     CGFloat offsetY = scrollView.contentOffset.y;
-    self.TopView.frame = CGRectMake(0,  -scrollerToRect, self.view.frame.size.width, self.TopView.height);
     
-    NSLog(@"offsetY == %lf",offsetY);
+    if(scrollView.tag==2000)
+    {
+    NSLog(@"scrollView.tag =%ld  offsetY == %lf",(long)scrollView.tag,offsetY);
+    NSLog(@"self.ZScrollView.height = %f",self.ZScrollView.height);
     if (offsetY > 0 && offsetY < self.TopView.height) {
         scrollerToRect = offsetY;
-//        self.TopView.frame = CGRectMake(0,  -scrollerToRect, self.view.frame.size.width, self.TopView.height);
-        self.bottomView.frame = CGRectMake(0, self.TopView.bottom, self.view.width, self.view.bounds.size.height - self.TopView.height + offsetY+5);
-        if (offsetY>self.TopView.height) {
-            self.bottomView.frame = CGRectMake(0, self.TopView.bottom, self.view.width, self.view.bounds.size.height - self.TopView.height + offsetY+5);
+        
+        if (offsetY>120) {
+            self.TopView.frame = CGRectMake(0,  -125, self.view.frame.size.width, self.TopView.height);
+            self.DowntableView.frame = CGRectMake(0, 60, self.view.width, SCREENH_HEIGHT-kNavAndTabHeight-45);
+            return;
+            self.DowntableView.scrollEnabled=YES;
+            self.ZScrollView.scrollEnabled=NO;
+            
+        }else
+        {
+            self.TopView.frame = CGRectMake(0,  -scrollerToRect, self.view.frame.size.width, self.TopView.height);
+            self.DowntableView.frame = CGRectMake(0, self.TopView.bottom+5, self.view.width, self.ZScrollView.height - self.TopView.height + offsetY+5);
+            self.DowntableView.scrollEnabled=NO;
+            self.ZScrollView.scrollEnabled=YES;
         }
         
-        self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight) ;
-//        self.collectionView.frame = CGRectMake(0, self.subView.bottom, self.view.bounds.size.width, self.view.bounds.size.height - self.subView.height + offsetY);
-        self.DowntableView.scrollEnabled=YES;
-        self.ZScrollView.scrollEnabled=NO;
+//        self.DowntableView.scrollEnabled=YES;
+//        self.ZScrollView.scrollEnabled=NO;
     }else if(offsetY<=0) {
-        self.TopView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.TopView.height);
-        self.bottomView.frame = CGRectMake(0, self.TopView.bottom+8, self.view.width, self.ZScrollView.height - self.TopView.bottom+5);
-        self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, SCREENH_HEIGHT+90-kNavAndTabHeight) ;
+        self.TopView.frame = CGRectMake(0,  -scrollerToRect, self.view.frame.size.width, self.TopView.height);
+        self.DowntableView.frame = CGRectMake(0, self.TopView.bottom, self.view.width, self.ZScrollView.height - self.TopView.height + offsetY+5);
         self.DowntableView.scrollEnabled=NO;
-        self.ZScrollView.scrollEnabled=YES;
     }else{
+    }
     }
 }
 
@@ -886,12 +902,12 @@ static NSString * const shopCellReuseID = @"shop";
 
 #pragma mark -------- Tableview -------
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;
+    return self.VideoDictList.count;
 }
 //4、设置组数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
 
-    return self.VideoDictList.count;
+    return 1;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -899,9 +915,14 @@ static NSString * const shopCellReuseID = @"shop";
     if (cell == nil) {
         cell = [[homeOneTableViewCell alloc] init];
     }
-    NSDictionary * dict=self.VideoDictList[indexPath.section];
+    NSDictionary * dict=self.VideoDictList[indexPath.row];
     videoFenleiMode * model=[videoFenleiMode yy_modelWithDictionary:dict];
     cell.model=model;
+    cell.tag=indexPath.row;
+    cell.touchIndex = ^(NSInteger item, VideoRankMode * _Nonnull Cellmodel) {
+    
+        [self getVideoInfo:[NSString stringWithFormat:@"%f",Cellmodel.id]];
+    };
     return cell;
 }
 
@@ -912,7 +933,7 @@ static NSString * const shopCellReuseID = @"shop";
 //设置间隔高度
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
-    return 0.f;
+    return 240.f;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if (section == 0) {
@@ -925,9 +946,17 @@ static NSString * const shopCellReuseID = @"shop";
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     //自定义间隔view，可以不写默认用系统的
-    UIView * view_c= [[UIView alloc] init];
-    view_c.frame=CGRectMake(0, 0, 0, 0);
+    hometableHeaderView * view_c= [[hometableHeaderView alloc] init];
+    view_c.frame=CGRectMake(0, 0, SCREEN_WIDTH-30, 240.f);
 //    view_c.backgroundColor=[UIColor colorWithRed:241/255.0 green:242/255.0 blue:240/255.0 alpha:1];
+    if(self.GuanggaoModeA)
+    {
+        view_c.GuanggaoModeA=self.GuanggaoModeA;
+    }
+    if(self.bannerimagesURL.count>0)
+    {
+        view_c.bannerimagesURL=self.bannerimagesURL;
+    }
     view_c.backgroundColor=[UIColor clearColor];
     return view_c;
 }

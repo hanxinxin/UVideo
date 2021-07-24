@@ -43,11 +43,13 @@
     _backgroundView.frame = self.bounds;
     _progressView.frame = CGRectMake(0, 0, 0, trackHeight);
     _trackContView.frame = CGRectMake(_setting.progressInset, _setting.progressInset,trackWidth, trackHeight);
+//    _trackContView.frame = CGRectMake(_setting.progressInset, _setting.progressInset,self.width, trackHeight);
     _thumbView.frame=CGRectMake(0, 0, thumbSizeValue, thumbSizeValue);
 }
 
 - (void)initData {
-    trackWidth = self.frame.size.width - 2*_setting.progressInset;
+//    trackWidth = self.frame.size.width - 2*_setting.progressInset;
+    trackWidth = self.frame.size.width ;
     trackHeight = self.frame.size.height - 2*_setting.progressInset;
     
     if(_setting.layoutDirection == YTSliderLayoutDirectionHorizontal) {
@@ -91,6 +93,7 @@
     self.backgroundView.frame = self.bounds;
     self.progressView.frame = CGRectMake(0, 0, 0, trackHeight);
     self.trackContView.frame = CGRectMake(_setting.progressInset, _setting.progressInset,trackWidth, trackHeight);
+//    _trackContView.frame = CGRectMake(_setting.progressInset, _setting.progressInset,self.width, trackHeight);
     self.thumbView.frame = CGRectMake(0, 0, thumbSizeValue, thumbSizeValue);
     
     
@@ -239,8 +242,8 @@
 
 - (UIView *)trackContView {
     if(!_trackContView) {
-        _trackContView = [[UIView alloc]initWithFrame:CGRectMake(_setting.progressInset, _setting.progressInset,trackWidth, trackHeight)];
-        
+        _trackContView = [[UIView alloc]initWithFrame:CGRectMake(_setting.progressInset, _setting.progressInset,self.width, trackHeight)];
+//        _trackContView.backgroundColor=[UIColor redColor];
     }
     return _trackContView;
 }

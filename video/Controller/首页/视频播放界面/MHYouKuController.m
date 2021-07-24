@@ -36,6 +36,7 @@
 #import "TestWebViewController.h"
 #import "GuanggaoMode.h"
 #import "FankuiViewController.h"
+#import "OfflineViewController.h"
 
 @interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate ,UITextFieldDelegate, MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate,KJPlayerDelegate,KJPlayerBaseViewDelegate,KJPlayerBaseViewDelegate,YTSliderViewDelegate,MHYouKuCommentControllerDelegate>
 {
@@ -311,11 +312,12 @@
 //                    [DYModelMaker DY_makeModelWithDictionary:video_soruce modelKeyword:@"Video" modelName:@"videosource"];
                     
                     NSLog(@"model.tail_duration= %f   model.front_duration = %f",model.tail_duration,model.front_duration);
+                    
                     self.player.videoURL = [NSURL URLWithString:model.url];
                     self.DangqianUrl=model.url;
                     self.DQtail_duration=model.tail_duration;
                     self.DQfront_duration=model.front_duration;
-                    
+                    NSLog(@"DQtail_duration  === %f",self.DQtail_duration);
                     NSArray * qualities = [dataArr objectForKey:@"qualities"];
                     NSArray * subtitles = [dataArr objectForKey:@"subtitles"];
                     
@@ -554,7 +556,7 @@
         self.playerView.isHiddenBackButton=NO;
         self.playerView.smallScreenHiddenBackButton = NO;
         self.playerView.backButton.hidden=NO;
-        [self.player setVideoGravity:KJPlayerVideoGravityResizeAspectFill];///设置屏幕样式
+        [self.player setVideoGravity:KJPlayerVideoGravityResizeAspect];///设置屏幕样式
     }else{
         self.hiddenNavBar=NO;
         self.playerView.isHiddenBackButton=YES;
@@ -620,12 +622,20 @@
     player.playerView.TimeTotal.text=[NSString stringWithFormat:@"%@/%@",qstring,hstring];
 //    player.playerView.bottomHYSlider.currentSliderValue=time;
     player.playerView.bottomHYSlider.currentPercent=(time/self.player.totalTime);
-    if(time>self.DQtail_duration)
+    if(time>(self.DQtail_duration))
     {
         if(self.DQtail_duration!=0)
         {
 //            self.player.kVideoAdvanceAndReverse(self.DQtail_duration, nil);
             NSLog(@"要进入下一集");
+            if(self.xuanjiSelectIndex<self.Zvideomodel.video_fragment_list.count)
+            {
+                [self.player kj_displayHintText:@"跳过片头，自动播放" time:3 position:KJPlayerHintPositionLeftBottom];
+                self.xuanjiSelectIndex+=1;
+                [self tempsAction:self.QXDSelectIndex];
+                self.JiLutime=0;
+                self.OldJiLutime=0;
+            }
         }
     }
     if(time<self.DQfront_duration)
@@ -929,7 +939,15 @@
 }
 -(void)huancunBtn:(UIButton*)sender
 {
-    
+    OfflineViewController * avc = [[OfflineViewController alloc] init];
+    [self pushRootNav:avc animated:YES];
+//    // 缓存
+//        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//
+//        HXBaseNavgationController* nav =(HXBaseNavgationController*)delegate.window.rootViewController;
+//        NSArray * arraynav = nav.viewControllers;
+//        UITabBarController* tabViewController=(UITabBarController *)arraynav[0];
+//        tabViewController.selectedIndex = 3;
 }
 #pragma mark -  初始化数据
 

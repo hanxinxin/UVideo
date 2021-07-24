@@ -18,33 +18,34 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         [self addslider];
 
-        });
+//        });
     
 }
 -(void)addslider
 {
-//    self.backgroundColor=[UIColor lightGrayColor];
     YTSliderSetting *setting_h = [YTSliderSetting defaultSetting];
 //    _Slider = [[YTSliderView alloc]initWithFrame:CGRectMake(self.leftLabel.left, self.leftLabel.bottom+5, self.bfbLabel.left-10, 10.0f) setting:setting_h];
-    _Slider = [[YTSliderView alloc]initWithFrame:CGRectMake(self.leftLabel.left, self.leftLabel.bottom+5, 300, 10.0f) setting:setting_h];
+//    _Slider = [[YTSliderView alloc]initWithFrame:self.left_downView.bounds setting:setting_h];
+    _Slider = [[YTSliderView alloc]initWithFrame:self.left_downView.bounds];
     _Slider.tag = 2000;
     _Slider.delegate = self;
 //    _Slider.anchorPercent=0.2;
-    _Slider.currentPercent=0.2;  /// value 百分比
+    _Slider.currentPercent=0.01;  /// value 百分比
 //    _Slider.sumValue=10;
     _Slider.thumbView.userInteractionEnabled=NO;
     [self addSubview:_Slider];
-//        [_Slider mas_makeConstraints:^(MASConstraintMaker *make) {
+        [_Slider mas_makeConstraints:^(MASConstraintMaker *make) {
 //            make.left.equalTo(self.leftLabel);
 //            make.top.equalTo(self.leftLabel.mas_bottom).offset(5);
 //            make.right.equalTo(self.rightLabel).offset(-20);
-//            
+//
 //            make.width.mas_equalTo(self.bfbLabel.left).offset(-10);
 //            make.height.mas_equalTo(10.0f);
-//        }];
+            make.left.right.top.bottom.equalTo(self.left_downView);
+        }];
 }
 #pragma mark - delegate
 - (void)sliderTouchBegin:(float)value {

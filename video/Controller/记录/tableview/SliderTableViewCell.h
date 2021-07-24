@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *leftLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rightLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bfbLabel;
+@property (weak, nonatomic) IBOutlet UIView *left_downView;
 @property(nonatomic,strong)YTSliderView* Slider;
 @end
 

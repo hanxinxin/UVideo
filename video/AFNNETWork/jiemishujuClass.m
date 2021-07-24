@@ -26,12 +26,12 @@
                         encoding:NSUTF8StringEncoding
                          error:&error2];
         NSString * aeskey = [AES createUuid];
-        NSLog(@"随机key aeskey = %@",aeskey);
+//        NSLog(@"随机key aeskey = %@",aeskey);
         NSString *datastring = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         NSString * aesstring =  [AES AES256_Encrypt:aeskey encryptString:datastring giv:@"abcdefghijklmnop"];
         NSString *RSAjiami = [RSA encryptString:aeskey publicKey:contentInUTF82];
-        NSLog(@"AES string = %@",aesstring);
-        NSLog(@"RSAjiami = %@",RSAjiami);
+//        NSLog(@"AES string = %@",aesstring);
+//        NSLog(@"RSAjiami = %@",RSAjiami);
         NSString * jiamiPinJie = [NSString stringWithFormat:@"%@.%@",aesstring,RSAjiami];
     return jiamiPinJie;
 }

@@ -16,7 +16,7 @@
 #import "GuanggaoMode.h"
 NS_ASSUME_NONNULL_BEGIN
 
-@interface hometableHeaderView : UIView
+@interface hometableHeaderView : UITableViewHeaderFooterView
 @property (nonatomic, strong)MSCycleScrollView *cycleScrollView;
 
 

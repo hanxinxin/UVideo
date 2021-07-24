@@ -154,6 +154,7 @@ static dispatch_once_t onceToken;
 //控件载体位置和尺寸发生变化
 - (void)kj_basePlayerViewChange:(NSNotification*)notification{
     CGRect rect = [notification.userInfo[kPlayerBaseViewChangeKey] CGRectValue];
+    
     SEL sel = NSSelectorFromString(@"kj_displayPictureWithSize:");
     if ([self respondsToSelector:sel]) {
         ((void(*)(id, SEL, CGSize))(void*)objc_msgSend)((id)self, sel, rect.size);

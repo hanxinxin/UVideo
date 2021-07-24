@@ -18,7 +18,11 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
-    [self addslider];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [self addslider];
+
+        });
+    
 }
 -(void)addslider
 {
@@ -33,12 +37,14 @@
 //    _Slider.sumValue=10;
     _Slider.thumbView.userInteractionEnabled=NO;
     [self addSubview:_Slider];
-        [_Slider mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self.leftLabel);
-            make.top.equalTo(self.leftLabel.mas_bottom).offset(5);
-            make.width.mas_equalTo(self.bfbLabel.left).offset(-10);
-            make.height.mas_equalTo(10.0f);
-        }];
+//        [_Slider mas_makeConstraints:^(MASConstraintMaker *make) {
+//            make.left.equalTo(self.leftLabel);
+//            make.top.equalTo(self.leftLabel.mas_bottom).offset(5);
+//            make.right.equalTo(self.rightLabel).offset(-20);
+//            
+//            make.width.mas_equalTo(self.bfbLabel.left).offset(-10);
+//            make.height.mas_equalTo(10.0f);
+//        }];
 }
 #pragma mark - delegate
 - (void)sliderTouchBegin:(float)value {

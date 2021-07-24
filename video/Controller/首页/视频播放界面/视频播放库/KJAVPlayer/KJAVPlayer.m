@@ -225,7 +225,19 @@ static NSString * const kTimeControlStatus = @"timeControlStatus";
     if (CGSizeEqualToSize(size, self.playerLayer.frame.size)) {
         return;
     }
-    self.playerLayer.frame = CGRectMake(0, 0, size.width, size.height);
+    if(kIs_iPhoneX)
+    {
+        if(size.width>=800)
+        {
+            size.width-=kTopBarSafeHeight*2;
+            self.playerLayer.frame = CGRectMake(kTopBarSafeHeight, 0, size.width, size.height);
+        }else{
+        
+        self.playerLayer.frame = CGRectMake(0, 0, size.width, size.height);
+        }
+    }else{
+        self.playerLayer.frame = CGRectMake(0, 0, size.width, size.height);
+    }
 }
 /// 销毁播放（名字不能乱改，KJCache当中有使用）
 - (void)kj_destroyPlayer{

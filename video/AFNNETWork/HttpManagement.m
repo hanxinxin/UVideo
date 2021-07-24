@@ -249,14 +249,14 @@ return timeString;
         }else{
             dictStr=[NSString stringWithFormat:@"%@&%@=%@",dictStr,key,ValueDecode];
         }
-        NSLog(@"key = %@ , value = %@   ValueDecode=  %@",key,Value,ValueDecode);
+//        NSLog(@"key = %@ , value = %@   ValueDecode=  %@",key,Value,ValueDecode);
     }
     
     NSString* pinjieStr=[NSString stringWithFormat:@"%@-%@-%@",usertoken,dictStr,timestamp];
-    NSLog(@"签名 拼接后字符串  = %@",pinjieStr);
+//    NSLog(@"签名 拼接后字符串  = %@",pinjieStr);
 //    NSString * md5Str1=[NSString md5To32bit:pinjieStr];
     NSString * md5Str=[[pinjieStr lowercaseString] md5String];  ////转为 小写后再 md5加密
-    NSLog(@"md5Str = %@",md5Str);
+//    NSLog(@"md5Str = %@",md5Str);
     return md5Str;
 }
 

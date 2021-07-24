@@ -69,6 +69,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 @property (nonatomic, assign) NSInteger TopSelectIndex;  //// 当前选中的头列表
 
 @property (nonatomic, assign) NSInteger SXpage;///筛选 page
+@property (nonatomic, strong) VDHomeOneViewController* OneVc ;
 @end
 
 @implementation HomeViewController
@@ -668,10 +669,13 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 //        {
 //            vc = [VDViewController new];
 //        }
-        VDHomeOneViewController*vc = [[VDHomeOneViewController alloc] init];
-        vc.SelectIndex=index;
-        vc.FenleiMode =model;
-        return vc;
+        if(self.OneVc==nil)
+        {
+        self.OneVc = [[VDHomeOneViewController alloc] init];
+        self.OneVc.SelectIndex=index;
+        self.OneVc.FenleiMode =model;
+        }
+        return self.OneVc;
     }else{
         VDxfViewController *vc = [[VDxfViewController alloc] init];
         if(!vc)

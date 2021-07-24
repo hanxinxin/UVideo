@@ -305,18 +305,17 @@
                 {
                     NSDictionary  * dataArr = [dict objectForKey:@"data"];
                     NSDictionary * video_soruce = [dataArr objectForKey:@"video_soruce"];
+                    NSLog(@"dataArr === %@",dataArr);
                     VideoVideosource*model=[VideoVideosource yy_modelWithDictionary:video_soruce];
 //                    //直接放到网络请求结果调用，生成模型后删除就行，结果打印在控制台
 //                    [DYModelMaker DY_makeModelWithDictionary:video_soruce modelKeyword:@"Video" modelName:@"videosource"];
+                    
+                    NSLog(@"model.tail_duration= %f   model.front_duration = %f",model.tail_duration,model.front_duration);
                     self.player.videoURL = [NSURL URLWithString:model.url];
                     self.DangqianUrl=model.url;
                     self.DQtail_duration=model.tail_duration;
                     self.DQfront_duration=model.front_duration;
-                    self.player.kVideoSkipTime(^(KJPlayerVideoSkipState skipState) {
-                        if (skipState == KJPlayerVideoSkipStateHead) {
-                            [self.player kj_displayHintText:@"跳过片头，自动播放" time:2 position:KJPlayerHintPositionLeftBottom];
-                        }
-                    }, self.DQfront_duration, self.DQtail_duration);
+                    
                     NSArray * qualities = [dataArr objectForKey:@"qualities"];
                     NSArray * subtitles = [dataArr objectForKey:@"subtitles"];
                     
@@ -490,6 +489,7 @@
         // 1是 弹幕  2是 静音
       if(selectIndex==1)
       {
+          [UHud showHudWithStatus:@"敬请期待"];
 //          self.player.playerView.danmubottomView.hidden=NO;
 //          (void)bringSubviewToFront:(UIView *)view;
          
@@ -532,7 +532,11 @@
         [weakself.player kj_displayHintText:@"试看时间已到，请缴费～" time:0 position:KJPlayerHintPositionBottom];
     }, 0);
     
-    
+//    self.player.kVideoSkipTime(^(KJPlayerVideoSkipState skipState) {
+//        if (skipState == KJPlayerVideoSkipStateHead) {
+//            [self.player kj_displayHintText:@"跳过片头，自动播放" time:2 position:KJPlayerHintPositionLeftBottom];
+//        }
+//    }, self.DQfront_duration, self.DQtail_duration);
     //注册、接收通知
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updatefullItemClick:)name:@"fullItemClick"object:nil];
    
@@ -550,14 +554,14 @@
         self.playerView.isHiddenBackButton=NO;
         self.playerView.smallScreenHiddenBackButton = NO;
         self.playerView.backButton.hidden=NO;
-        [self.player setVideoGravity:KJPlayerVideoGravityResizeAspect];///设置屏幕样式
+        [self.player setVideoGravity:KJPlayerVideoGravityResizeAspectFill];///设置屏幕样式
     }else{
         self.hiddenNavBar=NO;
         self.playerView.isHiddenBackButton=YES;
         self.playerView.smallScreenHiddenBackButton = YES;
         self.playerView.backButton.hidden=YES;
     }
-    
+    NSLog(@"player width = %f  height = %f",self.playerView.width,self.playerView.height);
 }
 - (void)tempsAction:(NSInteger)index{
 //    if(index>=1)
@@ -616,15 +620,24 @@
     player.playerView.TimeTotal.text=[NSString stringWithFormat:@"%@/%@",qstring,hstring];
 //    player.playerView.bottomHYSlider.currentSliderValue=time;
     player.playerView.bottomHYSlider.currentPercent=(time/self.player.totalTime);
+    if(time>self.DQtail_duration)
+    {
+        if(self.DQtail_duration!=0)
+        {
+//            self.player.kVideoAdvanceAndReverse(self.DQtail_duration, nil);
+            NSLog(@"要进入下一集");
+        }
+    }
+    if(time<self.DQfront_duration)
+    {
+        if(self.DQfront_duration!=0)
+        {
+            NSLog(@"跳过片头");
+            [self.player kj_displayHintText:@"跳过片头，自动播放" time:2 position:KJPlayerHintPositionLeftBottom];
+            self.player.kVideoAdvanceAndReverse(self.DQfront_duration, nil);
+        }
+    }
     
-//    if(self.DQtail_duration!=0)
-//    {
-//
-//    }
-//    if(self.DQfront_duration!=0)
-//    {
-//
-//    }
     if((int)time != 0)
     {
         if(((int)time)%10==0)

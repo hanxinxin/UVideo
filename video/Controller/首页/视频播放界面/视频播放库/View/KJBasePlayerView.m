@@ -99,13 +99,13 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     self.vbLayer.position = CGPointMake(self.width/2, self.height/2);
     [self.hintTextLayer setValue:@(self.screenState) forKey:@"screenState"];
     self.topView.frame = CGRectMake(kTopBarSafeHeight, 0, self.width-(kTopBarSafeHeight+kBottomSafeHeight), self.operationViewHeight);
-    self.backButton.frame=CGRectMake(kTopBarSafeHeight*2, 5, self.topView.width-(kTopBarSafeHeight*2+kBottomSafeHeight), self.operationViewHeight - 20);
-    self.bottomView.frame = CGRectMake(kTopBarSafeHeight, self.height-self.operationViewHeight, self.width-(kTopBarSafeHeight+kBottomSafeHeight), self.operationViewHeight);
+    self.backButton.frame=CGRectMake(kTopBarSafeHeight, 5, self.topView.width-(kTopBarSafeHeight*2+kBottomSafeHeight), self.operationViewHeight - 20);
+    self.bottomView.frame = CGRectMake(kTopBarSafeHeight, self.height-self.operationViewHeight, self.width-(kTopBarSafeHeight*2), self.operationViewHeight);
     self.danmubottomView.frame = CGRectMake(kTopBarSafeHeight, self.height-self.operationViewHeight, self.width-(kTopBarSafeHeight+kBottomSafeHeight), self.operationViewHeight);
-    self.lockButton.frame = CGRectMake(kIs_iPhoneX?kNavBarAndStatusBarHeight:10, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
+    self.lockButton.frame = CGRectMake(kIs_iPhoneX?kTopBarSafeHeight:10, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
     self.centerPlayButton.frame = CGRectMake((self.width-kCenterPlayWidth)/2, (self.height-kCenterPlayWidth)/2, kCenterPlayWidth, kCenterPlayWidth);
     
-    self.bottomHYSlider.frame = CGRectMake(kTopBarSafeHeight, self.bottomView.height-20, self.bottomView.width-(kTopBarSafeHeight+kBottomSafeHeight), 10);
+    self.bottomHYSlider.frame = CGRectMake(0, self.bottomView.height-20, self.bottomView.width, 10);
     self.TimeTotal.frame = CGRectMake(kTopBarSafeHeight, self.bottomView.height-35, self.bottomView.width-(kTopBarSafeHeight+kBottomSafeHeight), 15);
 }
 

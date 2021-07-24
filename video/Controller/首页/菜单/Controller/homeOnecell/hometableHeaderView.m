@@ -9,6 +9,26 @@
 @interface hometableHeaderView ()<MSCycleScrollViewDelegate>
 @end
 @implementation hometableHeaderView
+
+-(instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier
+
+{
+
+    if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
+
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.3 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+          [self addScrollviewLB];
+    
+            });
+        [self getGuanggao_data];
+
+    }
+
+    return self;
+
+}
+
+
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame: frame]) {
         

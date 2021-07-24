@@ -369,6 +369,10 @@ static NSString * const shopCellReuseID = @"shop";
 //    self.downtableview.separatorStyle=UITableViewCellSeparatorStyleNone;
     // 注册cell
     [self.DowntableView registerNib:[UINib nibWithNibName:NSStringFromClass([homeOneTableViewCell class]) bundle:nil] forCellReuseIdentifier:homeOneTableViewCellID];
+    
+    //代码创建 注册方式
+
+    [self.DowntableView registerClass:[hometableHeaderView class] forHeaderFooterViewReuseIdentifier:@"sectionHeader"];
     // 为瀑布流控件添加下拉加载和上拉加载
     self.DowntableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
         [self getheaderData1];
@@ -911,10 +915,19 @@ static NSString * const shopCellReuseID = @"shop";
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+//    NSString * CellstrID = [NSString stringWithFormat:@"tableCellID%ld",indexPath.row];
     homeOneTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:homeOneTableViewCellID];
     if (cell == nil) {
         cell = [[homeOneTableViewCell alloc] init];
     }
+    
+//    NSString *CellIdentifier = [NSString stringWithFormat:@"Cell%ld%ld", (long)indexPath.section, (long)indexPath.row];//以indexPath来唯一确定cell
+//    homeOneTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier]; //出列可重用的cell
+//        if (cell == nil) {
+//            cell = [[homeOneTableViewCell alloc] init];
+//        }
+    
+    
     NSDictionary * dict=self.VideoDictList[indexPath.row];
     videoFenleiMode * model=[videoFenleiMode yy_modelWithDictionary:dict];
     cell.model=model;
@@ -946,7 +959,10 @@ static NSString * const shopCellReuseID = @"shop";
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     //自定义间隔view，可以不写默认用系统的
-    hometableHeaderView * view_c= [[hometableHeaderView alloc] init];
+//    hometableHeaderView * view_c= [[hometableHeaderView alloc] init];
+    static NSString *reuseId = @"sectionHeader";
+
+    hometableHeaderView *view_c = (hometableHeaderView *)[tableView dequeueReusableHeaderFooterViewWithIdentifier:reuseId];
     view_c.frame=CGRectMake(0, 0, SCREEN_WIDTH-30, 240.f);
 //    view_c.backgroundColor=[UIColor colorWithRed:241/255.0 green:242/255.0 blue:240/255.0 alpha:1];
     if(self.GuanggaoModeA)

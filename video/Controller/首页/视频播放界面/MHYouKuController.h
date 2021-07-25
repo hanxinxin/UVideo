@@ -18,5 +18,7 @@
 
 @property(nonatomic,strong)VideoRankMode* Vmodel;
 @property(nonatomic,strong)ZVideoMode*Zvideomodel;
-
+/////  播放时间记录
+@property(nonatomic,assign)NSTimeInterval JiLutime;
+@property(nonatomic,assign)NSTimeInterval OldJiLutime;
 @end

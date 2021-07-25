@@ -721,6 +721,7 @@
 -(void)pushViewControllerVideo:(ZVideoMode*)mode{
     MHYouKuController *avc = [[MHYouKuController alloc] init];
     avc.Zvideomodel= mode;
+//    avc.OldJiLutime=
     [self pushRootNav:avc animated:YES];
 }
 

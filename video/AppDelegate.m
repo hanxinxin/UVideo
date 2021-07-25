@@ -13,7 +13,8 @@
 #import "menberViewController.h"
 #import "jiluViewController.h"
 #import "BaseWindow.h"
-
+#import "LBLaunchImageAdView.h"
+#import "NSObject+LBLaunchImage.h"
 
 
 
@@ -67,18 +68,6 @@
         }
     
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:0.f], NSForegroundColorAttributeName: [UIColor blackColor]} forState:UIControlStateNormal];
-           
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.tabBar=[self tabBarController];
-    self.tabBar.delegate=self;
-    self.nav = [self roottabbar];
-    [self.window setRootViewController:self.nav];
-    [self.window makeKeyAndVisible];
-    
-//    [self.window setRootViewController:[self tabBarController]];
-//    [self.window makeKeyAndVisible];
-    
-//    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     //   使用NSUserDefaults来判断程序是否第一次启动
     NSUserDefaults *TimeOfBootCount = [NSUserDefaults standardUserDefaults];
@@ -119,11 +108,78 @@
             }
         }
     }
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.tabBar=[self tabBarController];
+    self.tabBar.delegate=self;
+    self.nav = [self roottabbar];
+    
+    /* FullScreenAdType 全屏广告
+     * LogoAdType 带logo的广告类似网易广告，值得注意的是启动图片必须带logo图
+     * localAdImgName  本地图片名字
+     */
+    __weak typeof(self) weakSelf = self;
+    [NSObject makeLBLaunchImageAdView:^(LBLaunchImageAdView *imgAdView) {
+        imgAdView.frame=self.window.bounds;
+        //设置广告的类型
+        imgAdView.getLBlaunchImageAdViewType(FullScreenAdType);
+        //设置本地启动图片
+        imgAdView.localAdImgName = @"lcaunBg";
+        imgAdView.adTime=3;
+//        imgAdView.imgUrl
+//        imgAdView.imgUrl = @"https://hbimg.huabanimg.com/5e7d8c4bdf276d2f96b90f4f6e4f1b0fa681dacc2c584e-OgArEz_fw658";
+        //自定义跳过按钮
+        imgAdView.skipBtn.backgroundColor = [UIColor clearColor];
+        //各种点击事件的回调
+        imgAdView.clickBlock = ^(clickType type){
+            switch (type) {
+                case clickAdType:{
+                    NSLog(@"点击广告回调");
+//                    [self setWindowUpdate];
+                }
+                    break;
+                case skipAdType:{
+                    NSLog(@"点击跳过回调");
+                    [weakSelf setWindowUpdate];
+                }
+                    break;
+                case overtimeAdType:{
+                    NSLog(@"倒计时完成后的回调");
+                    [weakSelf setWindowUpdate];
+                }
+                    break;
+                default:
+                    break;
+            }
+        };
+       
+    }];
+    
+    
+    
+    
+    
+    
+    
+//    [self.window setRootViewController:[self tabBarController]];
+//    [self.window makeKeyAndVisible];
+    
+//    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    
     
     
     
     return YES;
 }
+
+
+-(void)setWindowUpdate
+{
+    
+    [self.window setRootViewController:self.nav];
+    [self.window makeKeyAndVisible];
+}
+
+
 // 获取当前时间戳
 - (NSString *)getCurrentTimestamp {
 NSDate *date = [NSDate dateWithTimeIntervalSinceNow:0]; // 获取当前时间0秒后的时间

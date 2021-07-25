@@ -8,11 +8,13 @@
 
 #import "LBLaunchImageAdView.h"
 #import "UIImageView+WebCache.h"
-#import "FLAnimatedImageView+WebCache.h"
+#import "FLAnimatedImageView.h"
+#import "FLAnimatedImage.h"
+
 
 #define mainHeight      [[UIScreen mainScreen] bounds].size.height
 #define mainWidth       [[UIScreen mainScreen] bounds].size.width
-#define KIsiPhoneXs ((int)((mainHeight/mainWidth)*100) == 216)?YES:NO
+//#define KIsiPhoneXs ((int)((mainHeight/mainWidth)*100) == 216)?YES:NO
 #define IMGURL @"IMGURL"
 #define ISCLICKADVIEW @"ISCLICKADVIEW"
 #define ADVERTURL @"ADVERTURL"
@@ -38,19 +40,19 @@
 
 #pragma mark - 点击广告
 - (void)activiTap:(UITapGestureRecognizer*)recognizer{
-//    _isClick = @"1";
-//    [self startcloseAnimation];
+    _isClick = @"1";
+    [self startcloseAnimation];
 }
 
 #pragma mark - 开启关闭动画
 - (void)startcloseAnimation{
+    self.backgroundColor = UIColor.whiteColor;
     CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
     opacityAnimation.duration = 0.5;
     opacityAnimation.fromValue = [NSNumber numberWithFloat:1.0];
     opacityAnimation.toValue = [NSNumber numberWithFloat:0.3];
     opacityAnimation.removedOnCompletion = NO;
     opacityAnimation.fillMode = kCAFillModeForwards;
-    
     [self.aDImgView.layer addAnimation:opacityAnimation forKey:@"animateOpacity"];
     [NSTimer scheduledTimerWithTimeInterval:opacityAnimation.duration
                                      target:self
@@ -72,7 +74,7 @@
     
     if ([_isClick integerValue] == 1) {
         if (self.clickBlock) {//点击广告
-            self.clickBlock(clickAdType);
+            self.clickBlock(clickAdType); 
         }
     }else if([_isClick integerValue] == 2){
         if (self.clickBlock) {//点击跳过
@@ -85,7 +87,6 @@
     }
     self.hidden = YES;
     self.aDImgView.hidden = YES;
-//    [self removeFromSuperview];
 }
 
 - (void)onTimer {
@@ -94,7 +95,7 @@
         countDownTimer = nil;
         [self startcloseAnimation];
     }else{
-        [self.skipBtn setTitle:[NSString stringWithFormat:@"%@ | %@",@(_adTime--),DqLocalizedString(@"skip")] forState:UIControlStateNormal];
+        [self.skipBtn setTitle:[NSString stringWithFormat:@"跳过%@",@(_adTime--)] forState:UIControlStateNormal];
     }
 }
 
@@ -104,18 +105,11 @@
         if ([_localAdImgName rangeOfString:@".gif"].location  != NSNotFound ) {
             _localAdImgName  = [_localAdImgName stringByReplacingOccurrencesOfString:@".gif" withString:@""];
             NSData *gifData = [NSData dataWithContentsOfFile: [[NSBundle mainBundle] pathForResource:_localAdImgName ofType:@"gif"]];
-            UIWebView *webView = [[UIWebView alloc] initWithFrame:self.aDImgView.frame];
-            webView.backgroundColor = [UIColor clearColor];
-            webView.scalesPageToFit = YES;
-            webView.scrollView.scrollEnabled = NO;
-            [webView loadData:gifData MIMEType:@"image/gif" textEncodingName:@"" baseURL:[NSURL URLWithString:@""]];
-            [webView setUserInteractionEnabled:NO];
-            UIButton *clearBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            clearBtn.frame = webView.frame;
-            clearBtn.backgroundColor = [UIColor clearColor];
-            [clearBtn addTarget:self action:@selector(activiTap:) forControlEvents:UIControlEventTouchUpInside];
-            [webView addSubview:clearBtn];
-            [self.aDImgView addSubview:webView];
+            FLAnimatedImage *image = [FLAnimatedImage animatedImageWithGIFData:gifData];
+            FLAnimatedImageView *adImageView = (FLAnimatedImageView *)self.aDImgView;
+            adImageView.contentMode = UIViewContentModeScaleAspectFill;
+            adImageView.clipsToBounds = YES;
+            adImageView.animatedImage = image;
             [self.aDImgView bringSubviewToFront:_skipBtn];
         }else{
             self.aDImgView.image = [UIImage imageNamed:_localAdImgName];
@@ -148,14 +142,16 @@
 
 - (void)addLBlaunchImageAdView:(AdType)adType{
     #pragma mark - iOS开发 强制竖屏。系统KVO 强制竖屏—>适用于支持各种方向屏幕启动时，竖屏展示广告 by:nixs
-    NSNumber * orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
+    NSNumber * orientationTarget = [NSNumber numberWithInt:UIInterfaceOrientationPortrait];
     [[UIDevice currentDevice] setValue:orientationTarget forKey:@"orientation"];
     //倒计时时间
-    _adTime = 5;
-    [[UIApplication sharedApplication].delegate.window makeKeyAndVisible];
-//    NSString *launchImageName = [self getLaunchImage:@"Portrait"];
-     NSString *launchImageName = [self getLaunchImage:@"Landscape"];
+    _adTime = 3;
+    [[self keyWindow] makeKeyAndVisible];
+    NSString *launchImageName = [self getLaunchImage:@"Portrait"];
     UIImage * launchImage = [UIImage imageNamed:launchImageName];
+    if (launchImage == nil) {//没有获取到图片自动获取LaunchScreen.storyboard
+        launchImage = [self imageFromLaunchScreen];
+    }
     self.backgroundColor = [UIColor colorWithPatternImage:launchImage];
     self.frame = CGRectMake(0, 0, mainWidth, mainHeight);
     if (adType == FullScreenAdType) {
@@ -165,28 +161,26 @@
     }
     self.skipBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.skipBtn.frame = CGRectMake(mainWidth - 70, 20, 60, 30);
-    if (KIsiPhoneXs) {
+    if (kIs_iPhoneX) {
         self.skipBtn.frame = CGRectMake(mainWidth - 70, 40, 60, 30);
     }
+    
     self.skipBtn.backgroundColor = [UIColor brownColor];
     self.skipBtn.titleLabel.font = [UIFont systemFontOfSize:14];
     [self.skipBtn addTarget:self action:@selector(skipBtnClick) forControlEvents:UIControlEventTouchUpInside];
     self.skipBtn.layer.cornerRadius = 3;
     self.skipBtn.clipsToBounds = YES;
-
+    self.skipBtn.layer.borderWidth=1;
+    self.skipBtn.layer.borderColor=[UIColor whiteColor].CGColor;
+    self.skipBtn.layer.cornerRadius=15;
+    [self.skipBtn setTitle:[NSString stringWithFormat:@"跳过%@",@(_adTime)] forState:UIControlStateNormal];
     self.aDImgView.tag = 1101;
     [self addSubview:self.aDImgView];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(activiTap:)];
     // 允许用户交互
     self.aDImgView.userInteractionEnabled = YES;
     [self.aDImgView addGestureRecognizer:tap];
-    CABasicAnimation *opacityAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    opacityAnimation.duration = 0.8;
-    opacityAnimation.fromValue = [NSNumber numberWithFloat:0.0];
-    opacityAnimation.toValue = [NSNumber numberWithFloat:0.8];
-    opacityAnimation.fillMode = kCAFillModeForwards;
-    opacityAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseIn];
-    [self.aDImgView.layer addAnimation:opacityAnimation forKey:@"animateOpacity"];
+
     if ([self isImgCache].length > 0) {
         [_aDImgView sd_setImageWithURL:[NSURL URLWithString:[self isImgCache]] placeholderImage:nil];
     }
@@ -198,17 +192,14 @@
     countDownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(onTimer) userInfo:nil repeats:YES];
     UIViewController *vc = [UIViewController new];
     [vc.view addSubview:self];
-    [UIApplication sharedApplication].delegate.window.rootViewController = vc;
+    [self keyWindow].rootViewController = vc;
 }
 
-/*
- *viewOrientation 屏幕方向
- */
+
+
 - (NSString *)getLaunchImage:(NSString *)viewOrientation{
     //获取启动图片
-    CGSize viewSize = [UIApplication sharedApplication].delegate.window.bounds.size;
-    //横屏请设置成 @"Landscape"|Portrait
-//    NSString *viewOrientation = @"Portrait";
+    CGSize viewSize = [self keyWindow].bounds.size;
     __block NSString *launchImageName = nil;
     NSArray* imagesDict = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"UILaunchImages"];
     [imagesDict enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
@@ -245,6 +236,61 @@
     return [isClick boolValue];
 }
 
+
+-(UIImage *)imageFromLaunchScreen{
+    NSString *UILaunchStoryboardName = [[[NSBundle mainBundle] infoDictionary] valueForKey:@"UILaunchStoryboardName"];
+    if(UILaunchStoryboardName == nil){
+        return nil;
+    }
+    UIViewController *LaunchScreenSb = [[UIStoryboard storyboardWithName:UILaunchStoryboardName bundle:nil] instantiateInitialViewController];
+    if(LaunchScreenSb){
+        UIView * view = LaunchScreenSb.view;
+        // 加入到UIWindow后，LaunchScreenSb.view的safeAreaInsets在刘海屏机型才正常。
+        UIWindow *containerWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        containerWindow.backgroundColor = UIColor.whiteColor;
+        view.frame = containerWindow.bounds;
+        [containerWindow addSubview:view];
+        [containerWindow layoutIfNeeded];
+        UIImage *image = [self imageFromView:view];
+        containerWindow = nil;
+        return image;
+    }
+    return nil;
+}
+
+-(UIImage*)imageFromView:(UIView*)view{
+    //fix bug:https://github.com/CoderZhuXH/XHLaunchAd/issues/203
+    if (CGRectIsEmpty(view.frame)) {
+        return nil;
+    }
+    CGSize size = view.bounds.size;
+    //参数1:表示区域大小 参数2:如果需要显示半透明效果,需要传NO,否则传YES 参数3:屏幕密度
+    UIGraphicsBeginImageContextWithOptions(size, NO, [UIScreen mainScreen].scale);
+    if ([view respondsToSelector:@selector(drawViewHierarchyInRect:afterScreenUpdates:)]) {
+        [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    }else{
+        [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    }
+    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
+-(UIWindow*)keyWindow
+{
+    UIWindow *foundWindow = nil;
+    NSArray *windows = [[UIApplication sharedApplication] windows];
+    for (UIWindow *window in windows) {
+        if (window.isKeyWindow) {
+            foundWindow = window;
+            break;
+        }
+    }
+    if (foundWindow == nil) {
+        foundWindow = [UIApplication sharedApplication].delegate.window;
+    }
+    return foundWindow;
+}
 
 
 @end

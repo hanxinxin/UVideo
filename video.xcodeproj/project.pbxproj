@@ -141,8 +141,6 @@
 		8A82F131264FA07E004AAF40 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F12B264FA07E004AAF40 /* SVProgressHUD.m */; };
 		8A82F132264FA07E004AAF40 /* SVIndefiniteAnimatedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F12C264FA07E004AAF40 /* SVIndefiniteAnimatedView.m */; };
 		8A82F133264FA07E004AAF40 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8A82F12D264FA07E004AAF40 /* SVProgressHUD.bundle */; };
-		8A82F13C264FA128004AAF40 /* NSObject+LBLaunchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F138264FA128004AAF40 /* NSObject+LBLaunchImage.m */; };
-		8A82F13D264FA128004AAF40 /* LBLaunchImageAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F139264FA128004AAF40 /* LBLaunchImageAdView.m */; };
 		8A82F14F264FC457004AAF40 /* hxpushViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F14E264FC456004AAF40 /* hxpushViewController.m */; };
 		8A82F15A264FC663004AAF40 /* ZjiluViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F159264FC663004AAF40 /* ZjiluViewController.m */; };
 		8A82F161264FCBE4004AAF40 /* FAQViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F160264FCBE4004AAF40 /* FAQViewController.m */; };
@@ -386,6 +384,8 @@
 		8AFDD3C925F8C890006B1384 /* UINavigationItem+margin.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFDD3C325F8C890006B1384 /* UINavigationItem+margin.m */; };
 		9792FDBEE349A1F396C1A91C /* Pods_videoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CDD8569E28FE264C3A7197E /* Pods_videoUITests.framework */; };
 		B8E2EE2BDCC03881E2FCE49F /* Pods_video.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBF2112B39442592AE6774A /* Pods_video.framework */; };
+		FA268C4426AD46CE00D5BA26 /* LBLaunchImageAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA268C4026AD46CD00D5BA26 /* LBLaunchImageAdView.m */; };
+		FA268C4526AD46CE00D5BA26 /* NSObject+LBLaunchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = FA268C4326AD46CE00D5BA26 /* NSObject+LBLaunchImage.m */; };
 		FA75823226496DB300778A63 /* CZCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA75823026496DB300778A63 /* CZCollectionViewCell.m */; };
 		FA75823326496DB300778A63 /* CZCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA75823126496DB300778A63 /* CZCollectionViewCell.xib */; };
 		FA75823726497CC400778A63 /* vipHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA75823626497CC400778A63 /* vipHeaderView.m */; };
@@ -749,10 +749,6 @@
 		8A82F12C264FA07E004AAF40 /* SVIndefiniteAnimatedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVIndefiniteAnimatedView.m; sourceTree = "<group>"; };
 		8A82F12D264FA07E004AAF40 /* SVProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SVProgressHUD.bundle; sourceTree = "<group>"; };
 		8A82F12E264FA07E004AAF40 /* SVProgressAnimatedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVProgressAnimatedView.h; sourceTree = "<group>"; };
-		8A82F138264FA128004AAF40 /* NSObject+LBLaunchImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LBLaunchImage.m"; sourceTree = "<group>"; };
-		8A82F139264FA128004AAF40 /* LBLaunchImageAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBLaunchImageAdView.m; sourceTree = "<group>"; };
-		8A82F13A264FA128004AAF40 /* NSObject+LBLaunchImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LBLaunchImage.h"; sourceTree = "<group>"; };
-		8A82F13B264FA128004AAF40 /* LBLaunchImageAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBLaunchImageAdView.h; sourceTree = "<group>"; };
 		8A82F14D264FC456004AAF40 /* hxpushViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hxpushViewController.h; sourceTree = "<group>"; };
 		8A82F14E264FC456004AAF40 /* hxpushViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hxpushViewController.m; sourceTree = "<group>"; };
 		8A82F158264FC663004AAF40 /* ZjiluViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZjiluViewController.h; sourceTree = "<group>"; };
@@ -1233,6 +1229,10 @@
 		9FBF2112B39442592AE6774A /* Pods_video.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_video.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDB779BAE76A606270E1CAE2 /* Pods-videoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoUITests.release.xcconfig"; path = "Target Support Files/Pods-videoUITests/Pods-videoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F73B990338CDDC2E58EF812B /* Pods-videoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoUITests.debug.xcconfig"; path = "Target Support Files/Pods-videoUITests/Pods-videoUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		FA268C4026AD46CD00D5BA26 /* LBLaunchImageAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBLaunchImageAdView.m; sourceTree = "<group>"; };
+		FA268C4126AD46CD00D5BA26 /* NSObject+LBLaunchImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LBLaunchImage.h"; sourceTree = "<group>"; };
+		FA268C4226AD46CD00D5BA26 /* LBLaunchImageAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBLaunchImageAdView.h; sourceTree = "<group>"; };
+		FA268C4326AD46CE00D5BA26 /* NSObject+LBLaunchImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LBLaunchImage.m"; sourceTree = "<group>"; };
 		FA75822F26496DB300778A63 /* CZCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCollectionViewCell.h; sourceTree = "<group>"; };
 		FA75823026496DB300778A63 /* CZCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCollectionViewCell.m; sourceTree = "<group>"; };
 		FA75823126496DB300778A63 /* CZCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -2187,10 +2187,10 @@
 		8A82F137264FA128004AAF40 /* LBLaunchImageAd */ = {
 			isa = PBXGroup;
 			children = (
-				8A82F138264FA128004AAF40 /* NSObject+LBLaunchImage.m */,
-				8A82F139264FA128004AAF40 /* LBLaunchImageAdView.m */,
-				8A82F13A264FA128004AAF40 /* NSObject+LBLaunchImage.h */,
-				8A82F13B264FA128004AAF40 /* LBLaunchImageAdView.h */,
+				FA268C4226AD46CD00D5BA26 /* LBLaunchImageAdView.h */,
+				FA268C4026AD46CD00D5BA26 /* LBLaunchImageAdView.m */,
+				FA268C4126AD46CD00D5BA26 /* NSObject+LBLaunchImage.h */,
+				FA268C4326AD46CE00D5BA26 /* NSObject+LBLaunchImage.m */,
 			);
 			path = LBLaunchImageAd;
 			sourceTree = "<group>";
@@ -4321,6 +4321,7 @@
 				FA9B2EDC267F8C2E00C149B9 /* Paymentmethodlist.m in Sources */,
 				8A95C315265A5C7B00A6D144 /* KJLoadingPlayerVC.m in Sources */,
 				8A8BC3A625FC6F9E0028173C /* UIViewController+MHHUD.m in Sources */,
+				FA268C4526AD46CE00D5BA26 /* NSObject+LBLaunchImage.m in Sources */,
 				8A9C562925F8A10000EFA410 /* UIImage+BetterFace.m in Sources */,
 				FA984FA82674AEDF0014DCA8 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				8AFDD3C525F8C890006B1384 /* HXBaseNavgationController.m in Sources */,
@@ -4487,6 +4488,7 @@
 				8A9C54B725F7837E00EFA410 /* main.m in Sources */,
 				8A9C559425F89F0C00EFA410 /* UIViewController+CYLTabBarControllerExtention.m in Sources */,
 				8A95C311265A5C7B00A6D144 /* KJChangeSourceVC.m in Sources */,
+				FA268C4426AD46CE00D5BA26 /* LBLaunchImageAdView.m in Sources */,
 				FAA6DEF92675C66700DE5E7C /* ZGQTableViewCell.m in Sources */,
 				8A8BC19B25F9C7500028173C /* LLSearchView.m in Sources */,
 				8A95C2FA265A5C7B00A6D144 /* KJGCDTimer.m in Sources */,
@@ -4522,7 +4524,6 @@
 				8AE0C4CF266A54BA0084248D /* PanCollectionViewCell.m in Sources */,
 				FA993BB626774A2700C6F298 /* NSObject+DYModelArchive.m in Sources */,
 				8A39303225FCD86A00E7331B /* MHDivider.m in Sources */,
-				8A82F13D264FA128004AAF40 /* LBLaunchImageAdView.m in Sources */,
 				8A39314425FCDFCE00E7331B /* MHTopicManager.m in Sources */,
 				FA984FAC2674AEDF0014DCA8 /* UIWebView+AFNetworking.m in Sources */,
 				8A95C307265A5C7B00A6D144 /* KJDetailPlayerVC.m in Sources */,
@@ -4541,7 +4542,6 @@
 				8A8BC1C125FA135A0028173C /* JRWaterFallLayout.m in Sources */,
 				FA7C8DD52680DE0700B1A022 /* msgInfoView.m in Sources */,
 				8A8BC23F25FB3F770028173C /* MSCollectionViewCell.m in Sources */,
-				8A82F13C264FA128004AAF40 /* NSObject+LBLaunchImage.m in Sources */,
 				8A9C561825F8A10000EFA410 /* UIColor+HEX.m in Sources */,
 				8A82F11D264FA00D004AAF40 /* UHud.m in Sources */,
 				8A8BC2EE25FC6ED10028173C /* MHYouKuBottomToolBar.m in Sources */,

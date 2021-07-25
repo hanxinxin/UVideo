@@ -949,12 +949,17 @@
 //    view.alpha=0.7;
     view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
     view.hidden=YES;
-    view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
+    view.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT);
 //    view.bottomView.layer.cornerRadius=10;
     UIRectCorner corners = UIRectCornerTopRight | UIRectCornerTopLeft;
     [view.bottomView setBorderWithCornerRadius:10 borderWidth:1 borderColor:[UIColor whiteColor] type:corners];
     [self.view addSubview:view];
     self.kfView=view;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//        view.bottomView.frame=CGRectMake(0, self.kfView.height-360, 0, 360);
+        self.kfView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavBarAndStatusBarHeight);
+        self.kfView.bottomView.frame=CGRectMake(0, self.kfView.height-360, SCREEN_WIDTH, 360);
+        });
     __weak menberViewController * weakSelf = self;
     self.kfView.touchIndex = ^(NSInteger Index) {
         
@@ -972,20 +977,39 @@
 {
     
     
-    [UIView animateWithDuration:0.7 animations:^{
-        self.kfView.bottomView.hidden=NO;
+//    [UIView animateWithDuration:0.7 animations:^{
+//        self.kfView.bottomView.hidden=NO;
+//        self.kfView.hidden=NO;
+//        self.kfView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+//    } completion:^(BOOL finished) {
+//
+//    }];
+    [UIView animateWithDuration:0.5 animations:^{
+//        self.kfView.bottomView.hidden=NO;
+//        self.kfView.hidden=NO;
+//        self.kfView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavBarAndStatusBarHeight);
+//        self.kfView.bottomView.frame=CGRectMake(0, self.kfView.height-360, SCREEN_WIDTH, 360);
         self.kfView.hidden=NO;
-        self.kfView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+        self.kfView.alpha=1.0;
     } completion:^(BOOL finished) {
-        
+        self.kfView.alpha=1.0;
     }];
 }
 -(void)HidkfView
 {
     
+//    [UIView animateWithDuration:0.5 animations:^{
+//        self.kfView.bottomView.hidden=YES;
+//        self.kfView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+//    } completion:^(BOOL finished) {
+//        self.kfView.hidden=YES;
+//    }];
     [UIView animateWithDuration:0.5 animations:^{
-        self.kfView.bottomView.hidden=YES;
-        self.kfView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+//        self.kfView.bottomView.hidden=YES;
+//        self.kfView.frame=CGRectMake(0, 0, 0,SCREENH_HEIGHT );
+//        self.kfView.bottomView.frame=CGRectMake(0, self.kfView.height-360, 0, 360);
+//        self.kfView.hidden=YES;
+        self.kfView.alpha=0.0;
     } completion:^(BOOL finished) {
         self.kfView.hidden=YES;
     }];

@@ -1,8 +1,7 @@
 
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
-platform :ios, '9.0' #增加的内容
-
+platform :ios, '10.0' #增加的内容
 #source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 target 'video' do
@@ -178,11 +177,6 @@ pod 'UAProgressView', '~> 0.1.4'
 
 #P2P 视频加速
 
-#pod 'SocketRocket', '~> 0.5'
-#pod 'CocoaLumberjack', '~> 3.7'
-#pod "GCDWebServer", '~> 3.5'
-#pod 'CocoaAsyncSocket', '~> 7.6'
-#pod 'PINCache', '~> 3.0'
 
 
 pod 'pop'

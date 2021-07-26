@@ -146,8 +146,8 @@
 @property (nonatomic , strong) NSMutableArray *PinglunList;
 
 /////  播放时间记录
-@property(nonatomic,assign)NSTimeInterval JiLutime;
-@property(nonatomic,assign)NSTimeInterval OldJiLutime;
+//@property(nonatomic,assign)NSTimeInterval JiLutime;
+//@property(nonatomic,assign)NSTimeInterval OldJiLutime;
 @property(nonatomic,assign)BOOL qxdQieHuan;
 /////  当前播放的URL
 @property(nonatomic,assign)NSString * DangqianUrl;
@@ -622,7 +622,7 @@
     player.playerView.TimeTotal.text=[NSString stringWithFormat:@"%@/%@",qstring,hstring];
 //    player.playerView.bottomHYSlider.currentSliderValue=time;
     player.playerView.bottomHYSlider.currentPercent=(time/self.player.totalTime);
-    if(time>(self.DQtail_duration))
+    if(time>(self.DQtail_duration-2))
     {
         if(self.DQtail_duration!=0)
         {
@@ -997,10 +997,16 @@
     self.statusBarTextIsWhite=NO;
     self.statusBarBackgroundColor=[UIColor blackColor];
     self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
-    UIBarButtonItem *rightitem = [[UIBarButtonItem alloc] initWithCustomView:self.btn];
     
-    self.navigationItem.rightBarButtonItem = rightitem;
-    self.navigationController.navigationBar.tintColor = RGB(68,68,68);
+    ///7.26日隐藏
+//    UIBarButtonItem *rightitem = [[UIBarButtonItem alloc] initWithCustomView:self.btn];
+//
+//    self.navigationItem.rightBarButtonItem = rightitem;
+//    self.navigationController.navigationBar.tintColor = RGB(68,68,68);
+    
+    
+    
+    
 //    self.hiddenNavBar=YES;
 //    [self updateNavigationBarAppearance];
 }
@@ -1273,13 +1279,13 @@
     
     // 详情点击事件
 //    __weak typeof(self) weakSelf = self;
-    [self.Clarity setClarityCallBack:^(NSInteger index) {
-        
+    [self.Clarity setClarityCallBack:^(NSIndexPath *indexPath) {
+        NSInteger index = indexPath.item;
         NSLog(@"清晰度选择 = %ld",index);
         if( self.QXDSelectIndex!=index)
         {
             NSNumber * qxd=self.qualitieslist[index];
-        if([qxd intValue]==4)
+        if([qxd intValue]==3 || [qxd intValue]==4)
         {
             //////会员才能看蓝光
             if([vip_expired_time_loca intValue]!=0)
@@ -1299,6 +1305,18 @@
                 }
             }else{
                 [self showmenberViewTS];
+            }
+        }else if([qxd intValue]==2 )
+        {
+            if([usertoken isEqualToString:@""])
+            {
+//                [ ];
+                [self.Clarity.collectionView1 deselectItemAtIndexPath:indexPath animated:NO];
+                LoginViewController * avc = [[LoginViewController alloc] init];
+                [self pushRootNav:avc animated:YES];
+            }else{
+                self.QXDSelectIndex=index;
+                [self tempsAction:index];
             }
         }else{
             self.QXDSelectIndex=index;

@@ -203,6 +203,19 @@
             cell.toptitle.text=@"VIP会员";
             cell.toptitle.textColor=RGB(255, 136, 0);
         }
+    }else if(self.titleNumberarray.count==4){
+        if(indexPath.item==0)
+        {
+            cell.toptitle.text=@"游客";
+            cell.toptitle.textColor=RGB(102, 102, 102);
+        }else if(indexPath.item==1)
+        {
+            cell.toptitle.text=@"注册会员";
+            cell.toptitle.textColor=RGB(102, 102, 102);
+        }else{
+            cell.toptitle.text=@"VIP会员";
+            cell.toptitle.textColor=RGB(255, 136, 0);
+        }
     }
     
     
@@ -212,9 +225,42 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"选择第%ld素材",indexPath.item);
-    self.selectIndex=indexPath.item;
+    
     [self.collectionView1 reloadData];
-    !self.ClarityCallBack ? :self.ClarityCallBack(indexPath.item);
+    NSNumber * qxd=self.titleNumberarray[indexPath.item];
+    if([qxd intValue]==3 || [qxd intValue]==4)
+    {
+        //////会员才能看蓝光
+        if([vip_expired_time_loca intValue]!=0)
+        {
+            NSString * vipStr=[vip_expired_time_loca stringValue];
+            NSString * dqStr=[self gs_getCurrentTimeBySecond11];
+            NSDate * timeStampToDate1 = [NSDate dateWithTimeIntervalSince1970:[dqStr doubleValue]];
+            NSDate * timeStampToDate2 = [NSDate dateWithTimeIntervalSince1970:[vipStr doubleValue]];
+            NSLog(@"[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]=====   %d",[self compareOneDay11:timeStampToDate1 withAnotherDay:timeStampToDate2]);
+            if([self compareOneDay11:timeStampToDate1 withAnotherDay:timeStampToDate2]!=1)/////   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
+            {
+                
+                self.selectIndex=indexPath.item;
+            }else{
+                
+//                [self.collectionView1 reloadData];
+            }
+        }else{
+//            [self.collectionView1 reloadData];
+        }
+    }else if([qxd intValue]==2 )
+    {
+        if([usertoken isEqualToString:@""])
+        {
+            [self.collectionView1 reloadData];
+        }else{
+            self.selectIndex=indexPath.item;
+        }
+    }else{
+        self.selectIndex=indexPath.item;
+    }
+    !self.ClarityCallBack ? :self.ClarityCallBack(indexPath);
 }
 
 #pragma mark - WSLWaterFlowLayoutDelegate
@@ -248,6 +294,40 @@
     }
     return UIEdgeInsetsMake(6, 6, 6, 6);
 }
+/////   10位时间戳
+- (NSString *)gs_getCurrentTimeBySecond11 {
 
+    double currentTime =  [[NSDate date] timeIntervalSince1970];
 
+    NSString *strTime = [NSString stringWithFormat:@"%.0f",currentTime];
+
+    return strTime;
+
+}
+///   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
+- (int)compareOneDay11:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay
+{
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *oneDayStr = [dateFormatter stringFromDate:oneDay];
+    NSString *anotherDayStr = [dateFormatter stringFromDate:anotherDay];
+    NSDate *dateA = [dateFormatter dateFromString:oneDayStr];
+    NSDate *dateB = [dateFormatter dateFromString:anotherDayStr];
+    NSComparisonResult result = [dateA compare:dateB];
+    NSLog(@"oneDay : %@, anotherDay : %@", oneDay, anotherDay);
+    if (result == NSOrderedDescending) {
+        //在指定时间前面 过了指定时间 过期
+        NSLog(@"oneDay  is in the future");
+        return 1;
+    }
+    else if (result == NSOrderedAscending){
+        //没过指定时间 没过期
+        //NSLog(@"Date1 is in the past");
+        return -1;
+    }
+    //刚好时间一样.
+    //NSLog(@"Both dates are the same");
+    return 0;
+    
+}
 @end

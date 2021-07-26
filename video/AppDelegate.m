@@ -133,8 +133,11 @@
         imgAdView.clickBlock = ^(clickType type){
             switch (type) {
                 case clickAdType:{
-                    NSLog(@"点击广告回调");
-//                    [self setWindowUpdate];
+                    NSLog(@"点击广告回调 ");
+//                    if(imgAdView.adTime==0)
+//                    {
+                        [self setWindowUpdate];
+//                    }
                 }
                     break;
                 case skipAdType:{
@@ -199,13 +202,14 @@ return timeString;
     menberViewController * tabBarVC3 = [[menberViewController alloc] init];
     [tabBarVC3 setTabBarItemWithTitle:@"充值" titleUnSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil] titleSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil] unselectImage:[UIImage imageNamed:@"menber"] selectImage:[UIImage imageNamed:@"menber"] imageSize:CGSizeMake(55, 55)];
     
-    OfflineViewController * tabBarVC4 = [[OfflineViewController alloc] init];
-    [tabBarVC4 setTabBarItemWithTitle:@"离线" titleUnSelectStyle:nil titleSelectStyle:nil unselectImage:[UIImage imageNamed:@"lixian_image"] selectImage:[UIImage imageNamed:@"lixian_select_image"] imageSize:CGSizeMake(30, 30)];
+//    OfflineViewController * tabBarVC4 = [[OfflineViewController alloc] init];
+//    [tabBarVC4 setTabBarItemWithTitle:@"离线" titleUnSelectStyle:nil titleSelectStyle:nil unselectImage:[UIImage imageNamed:@"lixian_image"] selectImage:[UIImage imageNamed:@"lixian_select_image"] imageSize:CGSizeMake(30, 30)];
     
     MyViewController * tabBarVC5 = [[MyViewController alloc] init];
     [tabBarVC5 setTabBarItemWithTitle:@"我的" titleUnSelectStyle:nil titleSelectStyle:nil unselectImage:[UIImage imageNamed:@"my_image"] selectImage:[UIImage imageNamed:@"my_select_image"] imageSize:CGSizeMake(30, 30)];
     
-    tabBarC.viewControllers = @[[tabBarVC1 addNav],[tabBarVC2 addNav],[tabBarVC3 addNav],[tabBarVC4 addNav],[tabBarVC5 addNav]];
+//    tabBarC.viewControllers = @[[tabBarVC1 addNav],[tabBarVC2 addNav],[tabBarVC3 addNav],[tabBarVC4 addNav],[tabBarVC5 addNav]];
+    tabBarC.viewControllers = @[[tabBarVC1 addNav],[tabBarVC2 addNav],[tabBarVC3 addNav],[tabBarVC5 addNav]];
     
     //去掉tabBar顶部黑色线条
 

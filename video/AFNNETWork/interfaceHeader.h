@@ -33,8 +33,8 @@
 #define expired_time_loca [[NSUserDefaults standardUserDefaults] valueForKey:@"expired_time"]
 #define vip_expired_time_loca [[NSUserDefaults standardUserDefaults] valueForKey:@"vip_expired_time"]
 //  服务器地址
-//#define FWQURL @"http://192.168.1.8:8012" ///局域网地址
-#define FWQURL @"http://51.79.223.179:8012" ///公网地址
+#define FWQURL @"https://api-h5.uvod.tv" ///正式服务器地址
+//#define FWQURL @"http://51.79.223.179:8012" ///公网地址
 /////  POST 请求
 #define  zhuceURL @"/passport/signup" //通过用户名、密码以及图形验证码注册应用账号
 

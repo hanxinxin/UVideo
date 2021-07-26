@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface ClarityView : UIView
 /** 详情按钮回调 **/
-@property (nonatomic,copy) void(^ClarityCallBack)(NSInteger index);
+@property (nonatomic,copy) void(^ClarityCallBack)(NSIndexPath * indexPath);
 
 
 @property (nonatomic, weak) UICollectionView *collectionView1;

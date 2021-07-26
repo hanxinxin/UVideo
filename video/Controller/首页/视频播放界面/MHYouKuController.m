@@ -146,8 +146,8 @@
 @property (nonatomic , strong) NSMutableArray *PinglunList;
 
 /////  播放时间记录
-@property(nonatomic,assign)NSTimeInterval JiLutime;
-@property(nonatomic,assign)NSTimeInterval OldJiLutime;
+//@property(nonatomic,assign)NSTimeInterval JiLutime;
+//@property(nonatomic,assign)NSTimeInterval OldJiLutime;
 @property(nonatomic,assign)BOOL qxdQieHuan;
 /////  当前播放的URL
 @property(nonatomic,assign)NSString * DangqianUrl;

@@ -106,9 +106,13 @@
 //#import "SUConstant.h"
 #import "MHInline.h"
 #import "MHConstant.h"
+
+///7.27日添加
+//p2p加速
+#import <SwarmCloudSDK/SwarmCloudSDK.h>
+
+
 ////////////   3.14日添加 头文件
-
-
 
 
 #ifdef DEBUG

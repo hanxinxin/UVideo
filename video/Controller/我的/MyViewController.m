@@ -87,7 +87,17 @@
             [self updateHeaderViwe];
         }else{
             NSString * message = [dict objectForKey:@"message"];
-            [UHud showHudWithStatus:message delay:2.f];
+            NSNumber * error = [dict objectForKey:@"error"];
+            if([error intValue]!=21)
+            {
+                [UHud showTXTWithStatus:message delay:2.f];
+            }else
+            {
+                if(![usertoken isEqualToString:@""])
+                {
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            }
             NSUserDefaults *TimeOfBootCount = [NSUserDefaults standardUserDefaults];
             [TimeOfBootCount setValue:@"" forKey:@"UserToken"];
             [TimeOfBootCount setValue:@"" forKey:@"Userrole"];
@@ -203,7 +213,17 @@
                     [self updateHeaderViwe];
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
-                    [UHud showTXTWithStatus:message delay:2.f];
+                    NSNumber * error = [dict objectForKey:@"error"];
+                    if([error intValue]!=21)
+                    {
+                        [UHud showTXTWithStatus:message delay:2.f];
+                    }else
+                    {
+                        if(![usertoken isEqualToString:@""])
+                        {
+                            [UHud showTXTWithStatus:message delay:2.f];
+                        }
+                    }
                     NSUserDefaults *TimeOfBootCount = [NSUserDefaults standardUserDefaults];
                     [TimeOfBootCount setValue:@"" forKey:@"UserToken"];
                     [TimeOfBootCount setValue:@"" forKey:@"Userrole"];
@@ -598,7 +618,17 @@
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
                     [SVProgressHUD dismiss];
-                    [UHud showTXTWithStatus:message delay:2.f];
+                    NSNumber * error = [dict objectForKey:@"error"];
+                    if([error intValue]!=21)
+                    {
+                        [UHud showTXTWithStatus:message delay:2.f];
+                    }else
+                    {
+                        if(![usertoken isEqualToString:@""])
+                        {
+                            [UHud showTXTWithStatus:message delay:2.f];
+                        }
+                    }
                 }
         }else{
             NSError * error = (NSError *)objc;

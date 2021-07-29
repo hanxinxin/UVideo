@@ -157,11 +157,7 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
 /** tableView */
 //@property (nonatomic , strong) ZqwHorizontalTableView *tableView;
 @property (nonatomic , strong) NSMutableArray *topArray;
-/** 选集分列表 */
-@property (nonatomic , strong) NSMutableArray *fenList;
-@property (nonatomic , assign) NSInteger xuanjiSelect;
 
-@property (nonatomic , assign) NSInteger xuanzhongVideoItem;
 
 @end
 
@@ -569,7 +565,35 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
         [self.collectionView reloadData];
     }
 }
-
+-(void)updateCollView
+{
+    // 记录选中的Item
+    self.anthologyItem.item +=1;
+    self.selectXJindex=(self.xuanjiSelect*20+self.selectXJindex+1);
+    [self.XJcollectionView reloadData];
+    [self.collectionView reloadData];
+    
+    if (self.delegate && [self.delegate respondsToSelector:@selector(anthologyHeaderView:mediaBaseId:)]) {
+//            MHYouKuAnthology *anthology = self.anthologyItem.anthologys[indexPath.item];
+        NSArray * arr = self.fenList[self.xuanjiSelect];
+        if(self.anthologyItem.item<=(arr.count-1))
+        {
+            MHYouKuAnthology *anthology = arr[self.anthologyItem.item];
+            [self.delegate anthologyHeaderView:self mediaBaseId:anthology.mediabase_id];
+        }else{
+            if(self.xuanjiSelect<(self.fenList.count-1))
+            {
+                self.xuanjiSelect+=1;
+                NSArray * arr = self.fenList[self.xuanjiSelect+1];
+                MHYouKuAnthology *anthology = arr[0];
+                [self.delegate anthologyHeaderView:self mediaBaseId:anthology.mediabase_id];
+            }else{
+                NSLog(@"没有更多集数");
+            }
+        }
+        
+    }
+}
 
 - (void)collectionView:(UICollectionView *)collectionView
        willDisplayCell:(UICollectionViewCell *)cell

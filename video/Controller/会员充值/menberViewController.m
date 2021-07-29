@@ -152,7 +152,17 @@
                     }
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
-                    [UHud showTXTWithStatus:message delay:2.f];
+                    NSNumber * error = [dict objectForKey:@"error"];
+                    if([error intValue]!=21)
+                    {
+                        [UHud showTXTWithStatus:message delay:2.f];
+                    }else
+                    {
+                        if(![usertoken isEqualToString:@""])
+                        {
+                            [UHud showTXTWithStatus:message delay:2.f];
+                        }
+                    }
                 }
             } failure:^(NSError * _Nullable error) {
                 [UHud hideLoadHud];
@@ -191,12 +201,28 @@
                         
                         self.collectionView.frame=CGRectMake(20, self.Topview.bottom+8, SCREEN_WIDTH-40, ceilf((self.moneyArray.count/2.0))*95);
                         [self.collectionView reloadData];
+                        self.downtableview.frame=CGRectMake(20, self.collectionView.bottom+10, SCREEN_WIDTH-40, (self.PayArray.count+2)*50+(self.PayArray.count+1)*10);
+                        [self.downtableview reloadData];
+                        self.menberLabel.frame=CGRectMake(20, self.downtableview.bottom+8, SCREEN_WIDTH-40, 40);
+                        
+                        self.menbercollectionView.frame=CGRectMake(20, self.menberLabel.bottom, SCREEN_WIDTH-40, 210);
+                        [self.menbercollectionView reloadData];
+                        self.ConfirmPlayBtn.frame=CGRectMake(20, self.menbercollectionView.bottom+25, SCREEN_WIDTH-40, 44);
                     }
-                    
                     }
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
-                    [UHud showTXTWithStatus:message delay:2.f];
+                    NSNumber * error = [dict objectForKey:@"error"];
+                    if([error intValue]!=21)
+                    {
+                        [UHud showTXTWithStatus:message delay:2.f];
+                    }else
+                    {
+                        if(![usertoken isEqualToString:@""])
+                        {
+                            [UHud showTXTWithStatus:message delay:2.f];
+                        }
+                    }
                 }
             } failure:^(NSError * _Nullable error) {
                 [UHud hideLoadHud];
@@ -241,7 +267,17 @@
 //                    }
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
-                    [UHud showTXTWithStatus:message delay:2.f];
+                    NSNumber * error = [dict objectForKey:@"error"];
+                    if([error intValue]!=21)
+                    {
+                        [UHud showTXTWithStatus:message delay:2.f];
+                    }else
+                    {
+                        if(![usertoken isEqualToString:@""])
+                        {
+                            [UHud showTXTWithStatus:message delay:2.f];
+                        }
+                    }
                 }
             } failure:^(NSError * _Nullable error) {
                 [UHud hideLoadHud];
@@ -316,7 +352,17 @@
             [self updateHeaderViwe];
         }else{
             NSString * message = [dict objectForKey:@"message"];
-            [UHud showHudWithStatus:message delay:2.f];
+            NSNumber * error = [dict objectForKey:@"error"];
+            if([error intValue]!=21)
+            {
+                [UHud showTXTWithStatus:message delay:2.f];
+            }else
+            {
+                if(![usertoken isEqualToString:@""])
+                {
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            }
             [self.ScrollView.mj_header endRefreshing];
             [self updateHeaderViwe];
         }
@@ -703,7 +749,7 @@
         return CGSizeMake((self.collectionView.width-30)/2, 76);
     }else if(waterFlowLayout.tag==3001)
     {
-        return CGSizeMake((self.menbercollectionView.width-15)/3, 82);
+        return CGSizeMake((self.menbercollectionView.width-20)/3, 82);
     }
     return CGSizeMake(0, 0);
 }
@@ -1082,7 +1128,17 @@
             [UHud showTXTWithStatus:@"充值成功" delay:2.f];
         }else{
             NSString * message = [dict objectForKey:@"message"];
-            [UHud showTXTWithStatus:message delay:2.f];
+            NSNumber * error = [dict objectForKey:@"error"];
+            if([error intValue]!=21)
+            {
+                [UHud showTXTWithStatus:message delay:2.f];
+            }else
+            {
+                if(![usertoken isEqualToString:@""])
+                {
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            }
         }
 
     } failure:^(NSError * _Nullable error) {
@@ -1312,7 +1368,17 @@
             
         }else{
             NSString * message = [dict objectForKey:@"message"];
-            [UHud showTXTWithStatus:message delay:2.f];
+            NSNumber * error = [dict objectForKey:@"error"];
+            if([error intValue]!=21)
+            {
+                [UHud showTXTWithStatus:message delay:2.f];
+            }else
+            {
+                if(![usertoken isEqualToString:@""])
+                {
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            }
         }
 
     } failure:^(NSError * _Nullable error) {

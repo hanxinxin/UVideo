@@ -105,8 +105,9 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     self.lockButton.frame = CGRectMake(kIs_iPhoneX?kTopBarSafeHeight:10, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
     self.centerPlayButton.frame = CGRectMake((self.width-kCenterPlayWidth)/2, (self.height-kCenterPlayWidth)/2, kCenterPlayWidth, kCenterPlayWidth);
     
-    self.bottomHYSlider.frame = CGRectMake(0, self.bottomView.height-20, self.bottomView.width, 10);
-    self.TimeTotal.frame = CGRectMake(0, self.bottomView.height-35, self.bottomView.width-(kTopBarSafeHeight+kBottomSafeHeight), 15);
+
+    self.bottomHYSlider.frame = CGRectMake(0, self.bottomView.height-12, self.bottomView.width, 12);
+    self.TimeTotal.frame = CGRectMake(0, self.bottomView.height-28, self.bottomView.width-(kTopBarSafeHeight+kBottomSafeHeight), 15);
 }
 
 -(void)kj_changeFrameShuPing
@@ -123,8 +124,9 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     self.lockButton.frame = CGRectMake(10, (self.height-kLockWidth)/2, kLockWidth, kLockWidth);
     self.centerPlayButton.frame = CGRectMake((self.width-kCenterPlayWidth)/2, (self.height-kCenterPlayWidth)/2, kCenterPlayWidth, kCenterPlayWidth);
     self.danmubottomView.frame= CGRectMake(0, self.height-self.operationViewHeight, self.width, self.operationViewHeight);
-    self.bottomHYSlider.frame = CGRectMake(0, self.bottomView.height-7, self.bottomView.width, 8);
-    self.TimeTotal.frame = CGRectMake(0, self.bottomView.height-35, self.bottomView.width, 15);
+
+    self.bottomHYSlider.frame = CGRectMake(0, self.bottomView.height-11, self.bottomView.width, 12);
+    self.TimeTotal.frame = CGRectMake(0, self.bottomView.height-28, self.bottomView.width, 15);
 }
 
 #pragma mark - getter
@@ -503,18 +505,31 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
         setting_h.backgroundColor = RGBA(51, 51, 51, 0.8);
         setting_h.progressColor = RGBA(20, 155, 236, 1);
         setting_h.thumbBorderColor = RGBA(255, 255, 255, 1);
-        _bottomHYSlider = [[YTSliderView alloc]initWithFrame:CGRectMake(0, self.bottomView.height-10, self.bottomView.width, 8) setting:setting_h];
+
+        _bottomHYSlider = [[YTSliderView alloc]initWithFrame:CGRectMake(0, self.bottomView.height-14, self.bottomView.width, 12) setting:setting_h];
         _bottomHYSlider.tag = 2000;
         _bottomHYSlider.delegate = self;
     }
     return _bottomHYSlider;
 }
+
+-(void)ytSliderView:(YTSliderView *)view didChangePercent:(CGFloat)percent
+{
+    NSLog(@"percent=== %f",percent);
+    
+    if (self.SliderTouch) {
+        self.SliderTouch(self,percent);
+    }
+}
+
+
 -(UILabel*)TimeTotal
 {
     
     if(!_TimeTotal)
     {
-        _TimeTotal = [[UILabel alloc]initWithFrame:CGRectMake(5, _bottomView.height-23, _bottomView.width-5, 15)];
+
+        _TimeTotal = [[UILabel alloc]initWithFrame:CGRectMake(0, self.bottomView.height-28, self.bottomView.width, 15)];
         _TimeTotal.textColor=[UIColor whiteColor];
         _TimeTotal.text = @"00:00";
         _TimeTotal.textAlignment=NSTextAlignmentLeft;
@@ -533,5 +548,9 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     }
     return _danmubottomView;
 }
+
+
+
+
 
 @end

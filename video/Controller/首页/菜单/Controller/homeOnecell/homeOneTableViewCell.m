@@ -136,7 +136,17 @@ static NSString * const shopCellReuseID = @"shop";
                     
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
-                    [UHud showTXTWithStatus:message delay:2.f];
+                    NSNumber * error = [dict objectForKey:@"error"];
+                    if([error intValue]!=21)
+                    {
+                        [UHud showTXTWithStatus:message delay:2.f];
+                    }else
+                    {
+                        if(![usertoken isEqualToString:@""])
+                        {
+                            [UHud showTXTWithStatus:message delay:2.f];
+                        }
+                    }
                 }
         
         // 停止刷新
@@ -225,7 +235,17 @@ static NSString * const shopCellReuseID = @"shop";
                     
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
-                    [UHud showTXTWithStatus:message delay:2.f];
+                    NSNumber * error = [dict objectForKey:@"error"];
+                    if([error intValue]!=21)
+                    {
+                        [UHud showTXTWithStatus:message delay:2.f];
+                    }else
+                    {
+                        if(![usertoken isEqualToString:@""])
+                        {
+                            [UHud showTXTWithStatus:message delay:2.f];
+                        }
+                    }
                 }
 //        [self pushViewControllerVideo];
             } failure:^(NSError * _Nullable error) {

@@ -436,8 +436,10 @@
 #pragma mark - WSLWaterFlowLayoutDelegate
 //返回每个item大小
 - (CGSize)waterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-        return CGSizeMake((self.collectionView.width-15*4)/3, 156);
+
+    CGFloat wid=(self.collectionView.width-50)/3;
+    CGFloat hei=wid/3*4 + 50;
+        return CGSizeMake(wid, hei);
 }
 
 /** 列数*/
@@ -446,7 +448,7 @@
 }
 /** 列间距*/
 -(CGFloat)columnMarginInWaterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout{
-    return 15;
+    return 13;
 }
 /** 行间距*/
 -(CGFloat)rowMarginInWaterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout{
@@ -455,7 +457,8 @@
 /** 边缘之间的间距*/
 -(UIEdgeInsets)edgeInsetInWaterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout{
     
-    return UIEdgeInsetsMake(15, 15, 15, 15);
+
+    return UIEdgeInsetsMake(0, 10, 0, 10);
 }
 
 #pragma mark - UITableViewDataSource -

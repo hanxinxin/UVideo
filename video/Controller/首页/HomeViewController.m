@@ -232,13 +232,14 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 //                [self.VideofenleiList addObject:model];
                 NSDictionary * dictM = category_list[i];
                 NSNumber*show=[dictM objectForKey:@"show"];
+                NSNumber*pid=[dictM objectForKey:@"pid"];
                 if([show intValue]==1)
                 {
                     ///以前默认展示8个 全部展示
-//                    if(i<=8)
-//                    {
+                    if([pid intValue]==0)
+                    {
                         [self.VideoDictList addObject:dictM];
-//                    }
+                    }
                 }
             }
             
@@ -248,7 +249,17 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
             }
         }else{
             NSString * message = [dict objectForKey:@"message"];
-            [UHud showTXTWithStatus:message delay:2.f];
+            NSNumber * error = [dict objectForKey:@"error"];
+            if([error intValue]!=21)
+            {
+                [UHud showTXTWithStatus:message delay:2.f];
+            }else
+            {
+                if(![usertoken isEqualToString:@""])
+                {
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            }
         }
 
     } failure:^(NSError * _Nullable error) {
@@ -319,7 +330,17 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
             
         }else{
             NSString * message = [dict objectForKey:@"message"];
-            [UHud showTXTWithStatus:message delay:2.f];
+            NSNumber * error = [dict objectForKey:@"error"];
+            if([error intValue]!=21)
+            {
+                [UHud showTXTWithStatus:message delay:2.f];
+            }else
+            {
+                if(![usertoken isEqualToString:@""])
+                {
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            }
             [self.collectionView.mj_header endRefreshing];
             // 刷新数据
             [self.collectionView reloadData];
@@ -396,7 +417,17 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
             
         }else{
             NSString * message = [dict objectForKey:@"message"];
-            [UHud showTXTWithStatus:message delay:2.f];
+            NSNumber * error = [dict objectForKey:@"error"];
+            if([error intValue]!=21)
+            {
+                [UHud showTXTWithStatus:message delay:2.f];
+            }else
+            {
+                if(![usertoken isEqualToString:@""])
+                {
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            }
             [self.collectionView.mj_footer endRefreshing];
             // 刷新数据
             [self.collectionView reloadData];
@@ -475,7 +506,17 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
                     
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
-                    [UHud showTXTWithStatus:message delay:2.f];
+                    NSNumber * error = [dict objectForKey:@"error"];
+                    if([error intValue]!=21)
+                    {
+                        [UHud showTXTWithStatus:message delay:2.f];
+                    }else
+                    {
+                        if(![usertoken isEqualToString:@""])
+                        {
+                            [UHud showTXTWithStatus:message delay:2.f];
+                        }
+                    }
                     // 刷新数据
                     [self.collectionView reloadData];
                 }
@@ -869,7 +910,17 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
             NSString * message = [dict objectForKey:@"message"];
 //            [UHud showHUDToView:self.view text:message];
 //            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
-            [UHud showTXTWithStatus:message delay:2.f];
+            NSNumber * error = [dict objectForKey:@"error"];
+            if([error intValue]!=21)
+            {
+                [UHud showTXTWithStatus:message delay:2.f];
+            }else
+            {
+                if(![usertoken isEqualToString:@""])
+                {
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            }
         }
 
     } failure:^(NSError * _Nullable error) {
@@ -993,7 +1044,17 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
                     
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
-                    [UHud showTXTWithStatus:message delay:2.f];
+                    NSNumber * error = [dict objectForKey:@"error"];
+                    if([error intValue]!=21)
+                    {
+                        [UHud showTXTWithStatus:message delay:2.f];
+                    }else
+                    {
+                        if(![usertoken isEqualToString:@""])
+                        {
+                            [UHud showTXTWithStatus:message delay:2.f];
+                        }
+                    }
                 }
 //        [self pushViewControllerVideo];
             } failure:^(NSError * _Nullable error) {

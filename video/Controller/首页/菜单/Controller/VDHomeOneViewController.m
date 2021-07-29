@@ -170,7 +170,17 @@ static NSString * const shopCellReuseID = @"shop";
             }
         }else{
             NSString * message = [dict objectForKey:@"message"];
-            [UHud showTXTWithStatus:message delay:2.f];
+            NSNumber * error = [dict objectForKey:@"error"];
+            if([error intValue]!=21)
+            {
+                [UHud showTXTWithStatus:message delay:2.f];
+            }else
+            {
+                if(![usertoken isEqualToString:@""])
+                {
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            }
         }
 
     } failure:^(NSError * _Nullable error) {
@@ -206,7 +216,17 @@ static NSString * const shopCellReuseID = @"shop";
             NSString * message = [dict objectForKey:@"message"];
 //            [UHud showHUDToView:self.view text:message];
 //            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
-            [UHud showTXTWithStatus:message delay:2.f];
+            NSNumber * error = [dict objectForKey:@"error"];
+            if([error intValue]!=21)
+            {
+                [UHud showTXTWithStatus:message delay:2.f];
+            }else
+            {
+                if(![usertoken isEqualToString:@""])
+                {
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            }
         }
 
     } failure:^(NSError * _Nullable error) {
@@ -244,13 +264,14 @@ static NSString * const shopCellReuseID = @"shop";
 //                [self.VideofenleiList addObject:model];
                 NSDictionary * dictM = category_list[i];
                 NSNumber*show=[dictM objectForKey:@"show"];
+                NSNumber*pid=[dictM objectForKey:@"pid"];
                 if([show intValue]==1)
                 {
                     ///以前默认展示8个 全部展示
-//                    if(i<=8)
-//                    {
+                    if([pid intValue]==0)
+                    {
                         [self.VideoDictList addObject:dictM];
-//                    }
+                    }
                 }
             }
             
@@ -262,9 +283,19 @@ static NSString * const shopCellReuseID = @"shop";
             [self.DowntableView.mj_header endRefreshing];
         }else{
             NSString * message = [dict objectForKey:@"message"];
-            [UHud showTXTWithStatus:message delay:2.f];
-            // 第一次进入则自动加载
-            [self.DowntableView.mj_header endRefreshing];
+            NSNumber * error = [dict objectForKey:@"error"];
+            if([error intValue]!=21)
+            {
+                
+                [UHud showTXTWithStatus:message delay:2.f];
+            }else
+            {
+                if(![usertoken isEqualToString:@""])
+                {
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            }
+            
         }
 
     } failure:^(NSError * _Nullable error) {
@@ -545,7 +576,17 @@ static NSString * const shopCellReuseID = @"shop";
                     
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
-                    [UHud showTXTWithStatus:message delay:2.f];
+                    NSNumber * error = [dict objectForKey:@"error"];
+                    if([error intValue]!=21)
+                    {
+                        [UHud showTXTWithStatus:message delay:2.f];
+                    }else
+                    {
+                        if(![usertoken isEqualToString:@""])
+                        {
+                            [UHud showTXTWithStatus:message delay:2.f];
+                        }
+                    }
                 }
         
         // 停止刷新
@@ -619,7 +660,17 @@ static NSString * const shopCellReuseID = @"shop";
                    
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
-                    [UHud showTXTWithStatus:message delay:2.f];
+                    NSNumber * error = [dict objectForKey:@"error"];
+                    if([error intValue]!=21)
+                    {
+                        [UHud showTXTWithStatus:message delay:2.f];
+                    }else
+                    {
+                        if(![usertoken isEqualToString:@""])
+                        {
+                            [UHud showTXTWithStatus:message delay:2.f];
+                        }
+                    }
                 }
         
         // 停止刷新
@@ -748,7 +799,17 @@ static NSString * const shopCellReuseID = @"shop";
                     
                 }else{
                     NSString * message = [dict objectForKey:@"message"];
-                    [UHud showTXTWithStatus:message delay:2.f];
+                    NSNumber * error = [dict objectForKey:@"error"];
+                    if([error intValue]!=21)
+                    {
+                        [UHud showTXTWithStatus:message delay:2.f];
+                    }else
+                    {
+                        if(![usertoken isEqualToString:@""])
+                        {
+                            [UHud showTXTWithStatus:message delay:2.f];
+                        }
+                    }
                 }
 //        [self pushViewControllerVideo];
             } failure:^(NSError * _Nullable error) {

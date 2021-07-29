@@ -32,6 +32,11 @@
 #define avatar_loca [[NSUserDefaults standardUserDefaults] valueForKey:@"avatar"]
 #define expired_time_loca [[NSUserDefaults standardUserDefaults] valueForKey:@"expired_time"]
 #define vip_expired_time_loca [[NSUserDefaults standardUserDefaults] valueForKey:@"vip_expired_time"]
+
+
+#define YOUR_TOKEN @"gmOV7nJWg"
+
+
 //  服务器地址
 #define FWQURL @"https://api-h5.uvod.tv" ///正式环境
 //#define FWQURL @"http://51.79.223.179:8012" ///公网地址

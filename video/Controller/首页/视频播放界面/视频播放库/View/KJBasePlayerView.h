@@ -18,8 +18,13 @@
 #import "KJPlayerButton.h"
 #import "hxplayerDanmuView.h"
 
-
+typedef void(^KJBasePlayerViewBlock)(KJBasePlayerView * _Nullable view,CGFloat percent);
 NS_ASSUME_NONNULL_BEGIN
+
+///
+typedef void(^kVideoSlider)(KJBasePlayerView *view,CGFloat percent); //1为头像
+
+
 /* 控件位置和大小发生改变信息通知 */
 extern NSString *kPlayerBaseViewChangeNotification;
 /* 控件位置和大小发生改变key */
@@ -64,6 +69,9 @@ extern NSString *kPlayerBaseViewChangeKey;
 /* 提示文字面板属性，默认最大宽度250px */
 @property (nonatomic,copy,readonly) void (^kVideoHintTextInfo)(void(^)(KJPlayerHintInfo *info));
 
+/* 滑动控件block */
+//@property (nonatomic,copy,readonly) void (^kVideoSlider)(void(^)(KJBasePlayerView *view,CGFloat percent));
+
 #pragma mark - 控件
 /* 快进快退进度控件 */
 @property (nonatomic,strong) KJPlayerFastLayer *fastLayer;
@@ -96,7 +104,7 @@ extern NSString *kPlayerBaseViewChangeKey;
 @property (nonatomic,strong) hxplayerDanmuView *danmubottomView;
 
 
-
+@property (nonatomic,copy) KJBasePlayerViewBlock SliderTouch;
 #pragma mark - method
 /* 隐藏操作面板，是否隐藏返回按钮 */
 - (void)kj_hiddenOperationView;

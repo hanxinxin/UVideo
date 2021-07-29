@@ -22,7 +22,11 @@
 
 
 @interface MHYouKuAnthologyHeaderView : UITableViewHeaderFooterView
+/** 选集分列表 */
+@property (nonatomic , strong) NSMutableArray *fenList;
+@property (nonatomic , assign) NSInteger xuanjiSelect;
 
+@property (nonatomic , assign) NSInteger xuanzhongVideoItem;
 + (instancetype)anthologyHeaderView;
 
 /** head */
@@ -38,4 +42,6 @@
 /** 选集  delegate 使用 因为做了分组，所以要整合下再发送*/
 @property (nonatomic , assign) NSInteger selectXJindex;
 
+
+- (void)updateCollView;
 @end

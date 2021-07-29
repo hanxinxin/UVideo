@@ -266,7 +266,17 @@
             NSString * message = [dict objectForKey:@"message"];
 //            [UHud showHUDToView:self.view text:message];
 //            [SVProgressHUD mh_showAlertViewWithTitle:@"提示" message:message confirmTitle:@"确认"];
-            [UHud showTXTWithStatus:message delay:2.f];
+            NSNumber * error = [dict objectForKey:@"error"];
+            if([error intValue]!=21)
+            {
+                [UHud showTXTWithStatus:message delay:2.f];
+            }else
+            {
+                if(![usertoken isEqualToString:@""])
+                {
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            }
         }
 
     } failure:^(NSError * _Nullable error) {

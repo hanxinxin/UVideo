@@ -51,8 +51,8 @@
 
 
 
-//@property(nonatomic,strong)KJIJKPlayer *player;
-//@property(nonatomic,strong)KJBasePlayerView *basePlayerView;
+@property(nonatomic,strong)KJIJKPlayer *GuangGaoplayer;
+@property(nonatomic,strong)KJBasePlayerView *GuangGaoPlayerView;
 //@property(nonatomic,strong)NSArray *temps;
 
 @property (nonatomic ,strong) UIButton *btn;//缓存按钮
@@ -153,6 +153,9 @@
 @property(nonatomic,assign)NSString * DangqianUrl;
 @property (nonatomic, assign) double DQtail_duration; //片尾时间
 @property (nonatomic, assign) double DQfront_duration;//片头时间
+
+
+@property (nonatomic, assign)BOOL isHiddenHomeIndicator;
 @end
 
 @implementation MHYouKuController
@@ -165,7 +168,7 @@
 }
 ///隐藏底部横条
 -(BOOL)prefersHomeIndicatorAutoHidden {
-    return YES;
+    return self.isHiddenHomeIndicator;
 }
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -177,6 +180,9 @@
         [self.player kj_play];
 //        _player = nil;
     }
+    
+    
+    
     
 }
 
@@ -210,6 +216,10 @@
             [self.player kj_stop];
             _player = nil;
         }
+        if (_GuangGaoplayer) {
+            [self.GuangGaoplayer kj_stop];
+            _GuangGaoplayer = nil;
+        }
     }
 }
 - (void)didMoveToParentViewController:(UIViewController*)parent
@@ -221,6 +231,10 @@
         if (_player) {
             [self.player kj_stop];
             _player = nil;
+        }
+        if (_GuangGaoplayer) {
+            [self.GuangGaoplayer kj_stop];
+            _GuangGaoplayer = nil;
         }
     }
 }
@@ -252,14 +266,53 @@
     ///加载提示框
     [self addmenberViewM];
     
-    
+    [self getVideoGuanggao_data];
     /// 键盘
 //    [self addNoticeForKeyboard];
 }
-
+-(void)setGuanggaoView
+{
+    KJBasePlayerView *backview = [[KJBasePlayerView alloc]initWithFrame:CGRectMake(0, PLAYER_STATUSBAR_NAVIGATION_HEIGHT, self.view.frame.size.width, self.view.frame.size.width*9/16.)];
+    self.GuangGaoPlayerView = backview;
+    [self.view addSubview:backview];
+    backview.delegate = self;
+    backview.gestureType = KJPlayerGestureTypeAll;
+    PLAYER_WEAKSELF;
+    backview.kVideoClickButtonBack = ^(KJBasePlayerView *view){
+        if (view.isFullScreen) {
+            view.isFullScreen = NO;
+        }else{
+            [weakself.player kj_stop];
+            [weakself.navigationController setNavigationBarHidden:NO animated:YES];
+            [weakself.navigationController popViewControllerAnimated:YES];
+        }
+    };
+    backview.kVideoChangeScreenState = ^(KJPlayerVideoScreenState state) {
+        if (state == KJPlayerVideoScreenStateFullScreen) {
+            [weakself.navigationController setNavigationBarHidden:YES animated:YES];
+        }else{
+            [weakself.navigationController setNavigationBarHidden:NO animated:YES];
+        }
+    };
+    
+    KJIJKPlayer *player = [[KJIJKPlayer alloc]init];
+    self.GuangGaoplayer = player;
+    player.placeholder = [UIImage imageNamed:@"20ea53a47eb0447883ed186d9f11e410"];
+    player.playerView = backview;
+    player.cacheTime = 5;
+    player.delegate = self;
+    player.kVideoTotalTime = ^(NSTimeInterval time) {
+        
+    };
+    player.kVideoSize = ^(CGSize size) {
+        NSLog(@"%.2f,%.2f",size.width,size.height);
+    };
+    
+//    self.player.videoURL = [NSURL URLWithString:self.temps[sender.tag-520]];
+}
 -(void)SetData
 {
-    
+    self.isHiddenHomeIndicator=NO;
     self.qualitieslist=[[NSArray alloc] init];
     self.subtitleslist=[[NSArray alloc] init];
     self.PinglunList=[NSMutableArray arrayWithCapacity:0];
@@ -295,7 +348,8 @@
         @"video_id":[NSString stringWithFormat:@"%@",video_id],
         @"video_fragment_id":[NSString stringWithFormat:@"%@",video_fragment_id],
         @"quality":[NSString stringWithFormat:@"%@",quality],};
-    
+    self.DQtail_duration=0;
+    self.DQfront_duration=0;
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_sourceurl] Dictionary:dict success:^(id  _Nullable responseObject) {
         //        NSLog(@"post responseObject == %@",responseObject);
 //        [UHud hideLoadHudForView:self.view];
@@ -313,11 +367,30 @@
                     
                     NSLog(@"model.tail_duration= %f   model.front_duration = %f",model.tail_duration,model.front_duration);
                     
-                    self.player.videoURL = [NSURL URLWithString:model.url];
+                    
+//                    // 必须先在 p2pConfig 设置 channelIdPrefix ，才能自定义 channelId ! 与其他平台互通需要构造相同的 channelIdPrefix 。
+//                    SWCP2pConfig *config = [SWCP2pConfig defaultConfiguration];
+//                    config.channelIdPrefix = video_id;
+//                    [[SWCP2pEngine sharedInstance] startWithToken:YOUR_TOKEN andP2pConfig:config];
+//                    // 如果m3u8里的ts是相对地址需要设置segmentId
+//                    [SWCP2pEngine sharedInstance].segmentIdForHls = ^NSString * _Nonnull(NSString * _Nonnull streamId, NSNumber * _Nonnull sn, NSString * _Nonnull segmentUrl, SWCRange byteRange) {
+//                        return [NSString stringWithFormat:@"%@", sn];
+//                    };
+//                    NSString *videoId = [Utils extractVideoIdFromUrl:originalUrl];            // extractVideoIdFromUrl 需要自己定义，可以抽取url中的视频ID作为结果返回
+//                    NSURL *parsedUrl = [[SWCP2pEngine sharedInstance] parseStreamURL:originalUrl withVideoId:videoId];
+                    
+                    
+                    ///7.27日屏蔽
+//                    self.player.videoURL = [NSURL URLWithString:model.url];
                     self.DangqianUrl=model.url;
                     self.DQtail_duration=model.tail_duration;
                     self.DQfront_duration=model.front_duration;
+                    NSLog(@"DQfront_duration  === %f",self.DQfront_duration);
                     NSLog(@"DQtail_duration  === %f",self.DQtail_duration);
+                    NSURL *originalUrl = [NSURL URLWithString:model.url];
+                    NSURL *parsedUrl = [[SWCP2pEngine sharedInstance] parseStreamURL:originalUrl];
+//                    NSURL *parsedUrl =[[SWCP2pEngine sharedInstance]parseStreamURL:originalUrl withVideoId:video_id];
+                    self.player.videoURL = parsedUrl;
                     NSArray * qualities = [dataArr objectForKey:@"qualities"];
                     NSArray * subtitles = [dataArr objectForKey:@"subtitles"];
                     
@@ -393,6 +466,57 @@
     
     
 }
+
+-(void)getVideoGuanggao_data
+{
+//    PC-首页-轮播图底下     pc-home-banner-below
+//    PC-播放页-侧边-上部    pc-play-side-top
+//    PC-播放页-侧边-下部    pc-play-side-bottom
+//    PC-播放页-播放器底下    pc-play-player-below
+//    PC-播放页-播放器      pc-play-player
+//    移动-首页-轮播图底下   mobile-home-banner-below
+//    移动-播放页-播放器    mobile-play-player
+//    PC-筛选页-右边       pc-filter-right
+//    NSDictionary *dict =@{@"symbol":@"mobile-play-player",
+//                          @"result":@"1",
+//    };
+    
+        NSDictionary *dict =@{@"symbol":@"mobile-play-player",
+                              @"result":@"1",
+        };
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,guanggaoGDurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary * datadict = [dict objectForKey:@"data"];
+            NSDictionary * dataAD = [datadict objectForKey:@"ad"];
+//            [DYModelMaker DY_makeModelWithDictionary:dataAD modelKeyword:@"Guanggao" modelName:@"Mode"];
+            GuanggaoMode * VideoGGmodel=[GuanggaoMode yy_modelWithDictionary:dataAD];
+//            NSString * urlstr = [dataAD objectForKey:@"source"];
+            if(VideoGGmodel)
+            {
+//                self.GGimageview.yy_imageURL=[NSURL URLWithString:self.GuanggaoModeA.source];
+                NSLog(@"有视频广告");
+            }
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showTXTWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+    
+    
+}
+
+
+
 /////更新播放历史 定时 10秒轮一次，更新观看历史
 -(void)Post_updateHistory
 {
@@ -467,7 +591,7 @@
 //        }
     };
     backview.kVideoChangeScreenState = ^(KJPlayerVideoScreenState state) {
-      
+        
         NSLog(@"pingmu == %lu",(unsigned long)state);
     };
     /// 播放按钮点击事件
@@ -518,7 +642,16 @@
           
       }
     };
+    
 
+    
+    self.playerView.SliderTouch = ^(KJBasePlayerView * _Nullable view, CGFloat percent) {
+      
+        weakself.player.playerView.bottomHYSlider.currentPercent=percent;
+        NSTimeInterval Slidertime=self.player.totalTime*percent;
+        weakself.player.kVideoAdvanceAndReverse(Slidertime, nil);
+    };
+    
 //
     KJAVPlayer *player = [[KJAVPlayer alloc]init];
     self.player = player;
@@ -557,11 +690,23 @@
         self.playerView.smallScreenHiddenBackButton = NO;
         self.playerView.backButton.hidden=NO;
         [self.player setVideoGravity:KJPlayerVideoGravityResizeAspect];///设置屏幕样式
+        
+        self.isHiddenHomeIndicator=YES;
+        
     }else{
         self.hiddenNavBar=NO;
         self.playerView.isHiddenBackButton=YES;
         self.playerView.smallScreenHiddenBackButton = YES;
         self.playerView.backButton.hidden=YES;
+        
+        self.isHiddenHomeIndicator=NO;
+//        setNeedsUpdateOfHomeIndicatorAutoHidden
+        
+    }
+    if (@available(iOS 11.0, *)) {
+        [self setNeedsUpdateOfHomeIndicatorAutoHidden];
+    } else {
+        // Fallback on earlier versions
     }
     NSLog(@"player width = %f  height = %f",self.playerView.width,self.playerView.height);
 }
@@ -616,25 +761,38 @@
 }
 /* 播放进度 */
 - (void)kj_player:(KJBasePlayer*)player currentTime:(NSTimeInterval)time{
+    static int tgFalg=0;
 //    NSLog(@"播放进度 == %f   self.player.totalTime= %d",fmod(time,60.0),(int)fmod(self.player.totalTime,60.0));
     NSString * qstring = [NSString stringWithFormat:@"%d:%d",(int)time/60,(int)fmodl(time,60.0)];
     NSString * hstring = [NSString stringWithFormat:@"%d:%d",(int)self.player.totalTime/60,(int)fmod(self.player.totalTime,60.0)];
     player.playerView.TimeTotal.text=[NSString stringWithFormat:@"%@/%@",qstring,hstring];
 //    player.playerView.bottomHYSlider.currentSliderValue=time;
     player.playerView.bottomHYSlider.currentPercent=(time/self.player.totalTime);
-    if(time>(self.DQtail_duration-2))
+//    NSLog(@"time ======== %.f",time);
+//    NSLog(@"currentTime ======== %.f",self.player.currentTime);
+    if(time>(self.DQtail_duration))
     {
         if(self.DQtail_duration!=0)
         {
 //            self.player.kVideoAdvanceAndReverse(self.DQtail_duration, nil);
-            NSLog(@"要进入下一集");
-            if(self.xuanjiSelectIndex<self.Zvideomodel.video_fragment_list.count)
+            if(self.player.currentTime>(self.DQtail_duration)) /// 再次确认当前播放时间
             {
-                [self.player kj_displayHintText:@"跳过片头，自动播放" time:3 position:KJPlayerHintPositionLeftBottom];
-                self.xuanjiSelectIndex+=1;
-                [self tempsAction:self.QXDSelectIndex];
-                self.JiLutime=0;
-                self.OldJiLutime=0;
+                if((self.xuanjiSelectIndex+1)<self.Zvideomodel.video_fragment_list.count)
+                {
+                    NSLog(@"要进入下一集");
+                    if(tgFalg==1)
+                    {
+                        [self.player kj_displayHintText:@"跳过片头，自动播放" time:3 position:KJPlayerHintPositionLeftBottom];
+        //                self.JiLutime=0;
+        //                self.OldJiLutime=0;
+        //                self.xuanjiSelectIndex+=1;
+        //                [self.anthologyHeaderView updateCollView];
+        //                [self tempsAction:self.QXDSelectIndex];
+                        [self.anthologyHeaderView updateCollView];
+                        tgFalg=0;
+                    }
+                   
+                }
             }
         }
     }
@@ -642,9 +800,14 @@
     {
         if(self.DQfront_duration!=0)
         {
-            NSLog(@"跳过片头");
-            [self.player kj_displayHintText:@"跳过片头，自动播放" time:2 position:KJPlayerHintPositionLeftBottom];
-            self.player.kVideoAdvanceAndReverse(self.DQfront_duration, nil);
+            if(tgFalg==0)
+            {
+                NSLog(@"跳过片头");
+    //            self.DQfront_duration=0;
+                [self.player kj_displayHintText:@"跳过片头，自动播放" time:2 position:KJPlayerHintPositionLeftBottom];
+                self.player.kVideoAdvanceAndReverse(self.DQfront_duration, nil);
+                tgFalg+=1;
+            }
         }
     }
     

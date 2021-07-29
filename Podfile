@@ -5,7 +5,8 @@ platform :ios, '10.0' #增加的内容
 #source 'https://mirrors.tuna.tsinghua.edu.cn/git/CocoaPods/Specs.git'
 
 target 'video' do
-  use_frameworks!
+#  use_frameworks!
+   use_frameworks! # Add this if you are targeting iOS 8+ or using Swift
 
 pod 'SDWebImage' , '~> 4.3.3'
 pod 'FLAnimatedImage'
@@ -176,7 +177,11 @@ pod 'UAProgressView', '~> 0.1.4'
 
 
 #P2P 视频加速
-
+pod 'SocketRocket'
+pod 'CocoaLumberjack'
+pod "GCDWebServer"
+pod 'CocoaAsyncSocket'
+pod 'PINCache'
 
 
 pod 'pop'

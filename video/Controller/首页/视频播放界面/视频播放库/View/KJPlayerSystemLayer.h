@@ -1,11 +1,9 @@
 //
 //  KJPlayerSystemLayer.h
-//  KJPlayerDemo
+//  video
 //
-//  Created by 杨科军 on 2021/2/21.
-//  Copyright © 2021 杨科军. All rights reserved.
-//  https://github.com/yangKJ/KJPlayerDemo
-//  音量亮度系统控件
+//  Created by nian on 2021/7/29.
+//
 
 #import <QuartzCore/QuartzCore.h>
 #import "KJPlayerType.h"

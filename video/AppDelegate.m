@@ -15,14 +15,17 @@
 #import "BaseWindow.h"
 #import "LBLaunchImageAdView.h"
 #import "NSObject+LBLaunchImage.h"
-
-
-
 #import "CMHHTTPService.h"
 #import "IQKeyboardManager.h"
 #if defined(DEBUG)||defined(_DEBUG)
 #import "JPFPSStatus.h"
 #endif
+
+
+
+
+
+
 
 
 
@@ -54,7 +57,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-
+    [self getGuanggao_data];
     if (@available(iOS 11.0, *)) {
 
             UITableView.appearance.estimatedRowHeight = 0;
@@ -108,24 +111,41 @@
             }
         }
     }
+//    P2P视频加速
+    SWCP2pConfig *config = [SWCP2pConfig defaultConfiguration];
+        [[SWCP2pEngine sharedInstance] startWithToken:YOUR_TOKEN andP2pConfig:config];
+//    [[SWCP2pEngine sharedInstance] startWithToken:YOUR_TOKEN andP2pConfig:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didReceiveMsg:) name:kP2pEngineDidReceiveStatistics object:nil];
+     
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     self.tabBar=[self tabBarController];
     self.tabBar.delegate=self;
     self.nav = [self roottabbar];
     
+//    mobile-startup  //启动图广告
+    
     /* FullScreenAdType 全屏广告
      * LogoAdType 带logo的广告类似网易广告，值得注意的是启动图片必须带logo图
      * localAdImgName  本地图片名字
      */
+    NSData*SaveData=[[NSUserDefaults standardUserDefaults] objectForKey:@"GuanggaoModeA"];
+    
     __weak typeof(self) weakSelf = self;
     [NSObject makeLBLaunchImageAdView:^(LBLaunchImageAdView *imgAdView) {
         imgAdView.frame=self.window.bounds;
         //设置广告的类型
         imgAdView.getLBlaunchImageAdViewType(FullScreenAdType);
-        //设置本地启动图片
-        imgAdView.localAdImgName = @"lcaunBg";
+        
         imgAdView.adTime=3;
-//        imgAdView.imgUrl
+        if(SaveData){
+        NSDictionary * dict=[self dictionaryForJsonData:SaveData];
+            GuanggaoMode  *modeSave=[GuanggaoMode yy_modelWithDictionary:dict];
+            imgAdView.imgUrl=modeSave.source;
+        }else{
+            //设置本地启动图片
+            imgAdView.localAdImgName = @"lcaunBg";
+        }
 //        imgAdView.imgUrl = @"https://hbimg.huabanimg.com/5e7d8c4bdf276d2f96b90f4f6e4f1b0fa681dacc2c584e-OgArEz_fw658";
         //自定义跳过按钮
         imgAdView.skipBtn.backgroundColor = [UIColor clearColor];
@@ -174,7 +194,10 @@
     return YES;
 }
 
-
+- (void)didReceiveMsg:(NSNotification *)note {
+//    NSDictionary *dict = (NSDictionary *)note.object;
+//    NSLog(@"didReceiveMsg====  %@", dict);
+}
 -(void)setWindowUpdate
 {
     
@@ -200,7 +223,7 @@ return timeString;
     jiluViewController * tabBarVC2 = [[jiluViewController alloc] init];
     [tabBarVC2 setTabBarItemWithTitle:@"记录" titleUnSelectStyle:nil titleSelectStyle:nil unselectImage:[UIImage imageNamed:@"jilu_image"] selectImage:[UIImage imageNamed:@"jilu_select_image"] imageSize:CGSizeMake(30, 30)];
     menberViewController * tabBarVC3 = [[menberViewController alloc] init];
-    [tabBarVC3 setTabBarItemWithTitle:@"充值" titleUnSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil] titleSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil] unselectImage:[UIImage imageNamed:@"menber"] selectImage:[UIImage imageNamed:@"menber"] imageSize:CGSizeMake(55, 55)];
+    [tabBarVC3 setTabBarItemWithTitle:@"充值" titleUnSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil] titleSelectStyle:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor colorWithRed:255/255.0 green:136/255.0 blue:0/255.0 alpha:1.0], NSForegroundColorAttributeName,nil] unselectImage:[UIImage imageNamed:@"menber"] selectImage:[UIImage imageNamed:@"menber"] imageSize:CGSizeMake(40, 40)];//调整图标大小  CGSizeMake(55, 55)  
     
 //    OfflineViewController * tabBarVC4 = [[OfflineViewController alloc] init];
 //    [tabBarVC4 setTabBarItemWithTitle:@"离线" titleUnSelectStyle:nil titleSelectStyle:nil unselectImage:[UIImage imageNamed:@"lixian_image"] selectImage:[UIImage imageNamed:@"lixian_select_image"] imageSize:CGSizeMake(30, 30)];
@@ -428,5 +451,83 @@ return timeString;
     [YYWebImageManager sharedManager].headers = header;
 }
 
+
+
+-(void)getGuanggao_data
+{
+//    PC-首页-轮播图底下     pc-home-banner-below
+//    PC-播放页-侧边-上部    pc-play-side-top
+//    PC-播放页-侧边-下部    pc-play-side-bottom
+//    PC-播放页-播放器底下    pc-play-player-below
+//    PC-播放页-播放器      pc-play-player
+//    移动-首页-轮播图底下   mobile-home-banner-below
+//    移动-播放页-播放器    mobile-play-player
+//    PC-筛选页-右边       pc-filter-right
+//    NSDictionary *dict =@{@"symbol":@"mobile-play-player",
+//                          @"result":@"1",
+//    };
+    
+        NSDictionary *dict =@{@"symbol":@"mobile-startup",
+                              @"result":@"1",
+        };
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,guanggaoGDurl] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary * datadict = [dict objectForKey:@"data"];
+            NSDictionary * dataAD = [datadict objectForKey:@"ad"];
+//            [DYModelMaker DY_makeModelWithDictionary:dataAD modelKeyword:@"Guanggao" modelName:@"Mode"];
+            if(![dataAD isKindOfClass:[NSNull class]]){
+            self.GuanggaoModeA=[GuanggaoMode yy_modelWithDictionary:dataAD];
+//            NSString * urlstr = [dataAD objectForKey:@"source"];
+            if(self.GuanggaoModeA)
+            {
+//                self.GGimageview.yy_imageURL=[NSURL URLWithString:self.GuanggaoModeA.source];
+                NSData * SaveData=[self.GuanggaoModeA yy_modelToJSONData];
+                [[NSUserDefaults standardUserDefaults] setObject:SaveData forKey:@"GuanggaoModeA"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+            }
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            NSNumber * error = [dict objectForKey:@"error"];
+            if([error intValue]!=21)
+            {
+                [UHud showTXTWithStatus:message delay:2.f];
+            }else
+            {
+                if(![usertoken isEqualToString:@""])
+                {
+                    [UHud showTXTWithStatus:message delay:2.f];
+                }
+            }
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+    
+    
+}
+
+
+/** 将二进制数据转换成字典*/
+
+- (NSDictionary *)dictionaryForJsonData:(NSData *)jsonData
+{
+    if (![jsonData isKindOfClass:[NSData class]] || jsonData.length < 1) {
+        return nil;
+    }
+    id jsonObj = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingAllowFragments error:nil];
+    if (![jsonObj isKindOfClass:[NSDictionary class]]) {
+        return nil;
+    }
+    return [NSDictionary dictionaryWithDictionary:(NSDictionary *)jsonObj];
+}
 
 @end

@@ -37,7 +37,8 @@
 #import "GuanggaoMode.h"
 #import "FankuiViewController.h"
 #import "OfflineViewController.h"
-
+#import "XMPlayer.h"
+#import "AppDelegate.h"
 @interface MHYouKuController ()<UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate ,UITextFieldDelegate, MHCommentCellDelegate ,MHTopicHeaderViewDelegate,MHYouKuBottomToolBarDelegate,MHYouKuTopicControllerDelegate,MHYouKuAnthologyHeaderViewDelegate,MHYouKuCommentHeaderViewDelegate , MHYouKuInputPanelViewDelegate,KJPlayerDelegate,KJPlayerBaseViewDelegate,KJPlayerBaseViewDelegate,YTSliderViewDelegate,MHYouKuCommentControllerDelegate>
 {
     NSDictionary *keyboardInfo;
@@ -173,7 +174,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+    // 支持 横屏 竖屏
+//    AppDelegateOrientationMaskLandscape;
      self.fd_prefersNavigationBarHidden = YES;
     
     if (_player) {
@@ -267,48 +269,39 @@
     [self addmenberViewM];
     
     [self getVideoGuanggao_data];
+    [self setGuanggaoView];
     /// 键盘
 //    [self addNoticeForKeyboard];
 }
 -(void)setGuanggaoView
 {
-    KJBasePlayerView *backview = [[KJBasePlayerView alloc]initWithFrame:CGRectMake(0, PLAYER_STATUSBAR_NAVIGATION_HEIGHT, self.view.frame.size.width, self.view.frame.size.width*9/16.)];
-    self.GuangGaoPlayerView = backview;
-    [self.view addSubview:backview];
-    backview.delegate = self;
-    backview.gestureType = KJPlayerGestureTypeAll;
-    PLAYER_WEAKSELF;
-    backview.kVideoClickButtonBack = ^(KJBasePlayerView *view){
-        if (view.isFullScreen) {
-            view.isFullScreen = NO;
-        }else{
-            [weakself.player kj_stop];
-            [weakself.navigationController setNavigationBarHidden:NO animated:YES];
-            [weakself.navigationController popViewControllerAnimated:YES];
-        }
-    };
-    backview.kVideoChangeScreenState = ^(KJPlayerVideoScreenState state) {
-        if (state == KJPlayerVideoScreenStateFullScreen) {
-            [weakself.navigationController setNavigationBarHidden:YES animated:YES];
-        }else{
-            [weakself.navigationController setNavigationBarHidden:NO animated:YES];
-        }
-    };
+//    CGFloat palyerW = [UIScreen mainScreen].bounds.size.width;
+    XMPlayerView *playerView = [[XMPlayerView alloc] init];
+    playerView.frame = self.playerView.frame;
+    playerView.playerViewType = XMPlayerViewAiqiyiVideoType;
+    playerView.videoURL = [NSURL URLWithString:@"https://mp4.vjshi.com/2018-03-30/1f36dd9819eeef0bc508414494d34ad9.mp4"];
+    [self.view addSubview:playerView];
+    [playerView show];
     
-    KJIJKPlayer *player = [[KJIJKPlayer alloc]init];
-    self.GuangGaoplayer = player;
-    player.placeholder = [UIImage imageNamed:@"20ea53a47eb0447883ed186d9f11e410"];
-    player.playerView = backview;
-    player.cacheTime = 5;
-    player.delegate = self;
-    player.kVideoTotalTime = ^(NSTimeInterval time) {
-        
-    };
-    player.kVideoSize = ^(CGSize size) {
-        NSLog(@"%.2f,%.2f",size.width,size.height);
-    };
-    
+    // 监听屏幕旋转方向
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(orientationHandler)
+                                                 name:UIDeviceOrientationDidChangeNotification
+                                               object:nil
+     ];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+        [playerView tapAction];
+        });
 //    self.player.videoURL = [NSURL URLWithString:self.temps[sender.tag-520]];
+}
+// 屏幕旋转处理
+- (void)orientationHandler {
+    
+    if ([UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeLeft || [UIDevice currentDevice].orientation == UIDeviceOrientationLandscapeRight) {
+        PopGestureRecognizerCancel
+    }else if ([UIDevice currentDevice].orientation == UIDeviceOrientationPortrait) {
+        PopGestureRecognizerOpen
+    }
 }
 -(void)SetData
 {

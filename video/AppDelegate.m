@@ -33,7 +33,6 @@
 /// 用户数据 只读
 @property (nonatomic, readwrite, strong) MHAccount *account;
 
-@property(nonatomic,assign) UIInterfaceOrientationMask rotateOrientation;
 @end
 
 @implementation AppDelegate

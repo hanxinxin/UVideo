@@ -17,6 +17,10 @@
 @property (strong, nonatomic) UINavigationController * nav;
 @property (strong, nonatomic) UITabBarController *tabBar;
 
+
+
+@property(nonatomic,assign) UIInterfaceOrientationMask rotateOrientation;
+
 @property (nonatomic, strong)GuanggaoMode*GuanggaoModeA;//广告图获取model
 /**
  *  用户数据 只读

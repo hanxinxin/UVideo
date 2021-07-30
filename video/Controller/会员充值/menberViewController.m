@@ -201,13 +201,14 @@
                         
                         self.collectionView.frame=CGRectMake(20, self.Topview.bottom+8, SCREEN_WIDTH-40, ceilf((self.moneyArray.count/2.0))*95);
                         [self.collectionView reloadData];
-                        self.downtableview.frame=CGRectMake(20, self.collectionView.bottom+10, SCREEN_WIDTH-40, (self.PayArray.count+2)*50+(self.PayArray.count+1)*10);
+                        self.downtableview.frame=CGRectMake(20, self.collectionView.bottom+2, SCREEN_WIDTH-40, (self.PayArray.count+2)*50+(self.PayArray.count+1)*10);
                         [self.downtableview reloadData];
                         self.menberLabel.frame=CGRectMake(20, self.downtableview.bottom+8, SCREEN_WIDTH-40, 40);
                         
                         self.menbercollectionView.frame=CGRectMake(20, self.menberLabel.bottom, SCREEN_WIDTH-40, 210);
                         [self.menbercollectionView reloadData];
                         self.ConfirmPlayBtn.frame=CGRectMake(20, self.menbercollectionView.bottom+25, SCREEN_WIDTH-40, 44);
+                        self->ScrollView.contentSize = CGSizeMake( self.view.bounds.size.width, self.ConfirmPlayBtn.bottom+30);
                     }
                     }
                 }else{
@@ -497,7 +498,7 @@
 //    NSArray * iamgearr = [NSArray arrayWithObjects:@"",@"paypal",@"zhifubao",@"wximage",@"yhkimage",@"",nil];
 //    [_imagearray addObject:iamgearr];
     self.downtableview=[[UITableView alloc] init];
-    self.downtableview.frame=CGRectMake(20, self.collectionView.bottom+10, SCREEN_WIDTH-40, (self.PayArray.count+2)*50+(self.PayArray.count+1)*10);
+    self.downtableview.frame=CGRectMake(20, self.collectionView.bottom+2, SCREEN_WIDTH-40, (self.PayArray.count+2)*50+(self.PayArray.count+1)*10);
     self.downtableview.backgroundColor=[UIColor clearColor];
     self.downtableview.delegate=self;
     self.downtableview.dataSource=self;
@@ -921,7 +922,7 @@
 //行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    return 50;
+    return 45;
 }
 //设置间隔高度
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

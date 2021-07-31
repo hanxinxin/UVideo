@@ -406,6 +406,8 @@
 		FA7C8DD72680DE1800B1A022 /* msgInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7C8DD62680DE1800B1A022 /* msgInfoView.xib */; };
 		FA80AD90266CC7B700BF28D8 /* hxplayerDanmuView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA80AD8F266CC7B700BF28D8 /* hxplayerDanmuView.m */; };
 		FA80AD92266CC82400BF28D8 /* hxplayerDanmuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA80AD91266CC82400BF28D8 /* hxplayerDanmuView.xib */; };
+		FA8495F926B596B200B61B66 /* TopLeftLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8495F826B596B200B61B66 /* TopLeftLabel.m */; };
+		FA8495FC26B596F300B61B66 /* UILabel+VerticalAlign.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8495FB26B596F300B61B66 /* UILabel+VerticalAlign.m */; };
 		FA8A03912667D0BE00B41281 /* iphoneClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8A03902667D0BE00B41281 /* iphoneClass.m */; };
 		FA8A03952667D78300B41281 /* menberViewTS.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8A03942667D78300B41281 /* menberViewTS.m */; };
 		FA8A03972667D79000B41281 /* menberViewTS.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8A03962667D79000B41281 /* menberViewTS.xib */; };
@@ -1314,6 +1316,10 @@
 		FA80AD8E266CC7B700BF28D8 /* hxplayerDanmuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hxplayerDanmuView.h; sourceTree = "<group>"; };
 		FA80AD8F266CC7B700BF28D8 /* hxplayerDanmuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hxplayerDanmuView.m; sourceTree = "<group>"; };
 		FA80AD91266CC82400BF28D8 /* hxplayerDanmuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = hxplayerDanmuView.xib; sourceTree = "<group>"; };
+		FA8495F726B596B200B61B66 /* TopLeftLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TopLeftLabel.h; sourceTree = "<group>"; };
+		FA8495F826B596B200B61B66 /* TopLeftLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TopLeftLabel.m; sourceTree = "<group>"; };
+		FA8495FA26B596F300B61B66 /* UILabel+VerticalAlign.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UILabel+VerticalAlign.h"; sourceTree = "<group>"; };
+		FA8495FB26B596F300B61B66 /* UILabel+VerticalAlign.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UILabel+VerticalAlign.m"; sourceTree = "<group>"; };
 		FA8A038F2667D0BE00B41281 /* iphoneClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iphoneClass.h; sourceTree = "<group>"; };
 		FA8A03902667D0BE00B41281 /* iphoneClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iphoneClass.m; sourceTree = "<group>"; };
 		FA8A03932667D78300B41281 /* menberViewTS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menberViewTS.h; sourceTree = "<group>"; };
@@ -2409,8 +2415,12 @@
 			children = (
 				8A8BC1C725FA13850028173C /* JRShopCell.h */,
 				8A8BC1C625FA13850028173C /* JRShopCell.m */,
-				8A8BC1C825FA13850028173C /* Model */,
 				8A8BC1CF25FA13850028173C /* JRShopCell.xib */,
+				8A8BC1C825FA13850028173C /* Model */,
+				FA8495F726B596B200B61B66 /* TopLeftLabel.h */,
+				FA8495F826B596B200B61B66 /* TopLeftLabel.m */,
+				FA8495FA26B596F300B61B66 /* UILabel+VerticalAlign.h */,
+				FA8495FB26B596F300B61B66 /* UILabel+VerticalAlign.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -4752,6 +4762,7 @@
 				8A39306125FCD91A00E7331B /* CMHURLParameters.m in Sources */,
 				8ACAEAA92643F2390091EEFE /* YZYHorizListView.m in Sources */,
 				8A8BC2F825FC6ED10028173C /* MHYouKuAnthologyItem.m in Sources */,
+				FA8495F926B596B200B61B66 /* TopLeftLabel.m in Sources */,
 				FA949CC5264AC92A00498EB6 /* zhanghuInfoViewController.m in Sources */,
 				FA9B2ED0267F41B100C149B9 /* FKTextTableViewCell.m in Sources */,
 				8A39306025FCD91A00E7331B /* CMHHTTPService.m in Sources */,
@@ -4938,6 +4949,7 @@
 				8A39306425FCD91A00E7331B /* CMHControllerHelper.m in Sources */,
 				FA7C8DCF268065E700B1A022 /* vipcardcategorylistModel.m in Sources */,
 				8A8BC19925F9C7500028173C /* LLSearchResultDoubleViewCell.m in Sources */,
+				FA8495FC26B596F300B61B66 /* UILabel+VerticalAlign.m in Sources */,
 				8A272485264E883500B033BB /* XGpasswordViewController.m in Sources */,
 				8AE1A0F72670E89200922103 /* AES.m in Sources */,
 				8A9C563125F8A10000EFA410 /* UIImage+Alpha.m in Sources */,

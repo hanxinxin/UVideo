@@ -19,7 +19,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title=@"修改密码";
+    self.title=@"修改昵称";
     self.hiddenLeftBtn=YES;
     self.statusBarTextIsWhite=NO;
     self.statusBarBackgroundColor=[UIColor blackColor];

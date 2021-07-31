@@ -6,12 +6,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "TopLeftLabel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *ImageView;
-@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet TopLeftLabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *infoLabel;
 
 @end

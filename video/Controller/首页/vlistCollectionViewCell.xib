@@ -24,7 +24,7 @@
                             <constraint firstAttribute="height" constant="130" id="x0R-k7-PDh"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大主宰" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBo-ee-bRS">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="大主宰" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eBo-ee-bRS" customClass="TopLeftLabel">
                         <rect key="frame" x="0.0" y="130" width="110" height="46"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="46" id="EML-LP-pvf"/>

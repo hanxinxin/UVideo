@@ -269,7 +269,7 @@
     [self.ZtopView.layer addSublayer:gl];
     [self.view addSubview:self.ZtopView];
     topHeaderView *view = [[[NSBundle mainBundle]loadNibNamed:@"topHeaderView" owner:self options:nil]objectAtIndex:0];
-    view.alpha=0.7;
+    view.alpha=1;
     view.frame=CGRectMake(20, 10, SCREEN_WIDTH-40, 180);
     view.layer.cornerRadius=6;
     view.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.20].CGColor;

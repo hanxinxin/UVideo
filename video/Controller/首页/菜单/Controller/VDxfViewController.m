@@ -106,7 +106,8 @@ static NSString * const shopCellReuseID = @"shop";
     
     
     ///包含瀑布流view
-    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 175+70, self.ZScrollView.width, self.ZScrollView.height-175-70)];
+//    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 175+70, self.ZScrollView.width, self.ZScrollView.height-175-70)];
+    UIView * view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.ZScrollView.width, self.ZScrollView.height)];
     view.backgroundColor=[UIColor whiteColor];
     
     [self.ZScrollView addSubview:view];
@@ -117,13 +118,13 @@ static NSString * const shopCellReuseID = @"shop";
     // 设置当前页码为0
     self.currentPage = 0;
     //加载轮播图
-    [self addScrollviewLB];
+//    [self addScrollviewLB];
     // 初始化瀑布流view
     [self setupCollectionView1];
 //    [self setupCollectionView2];
-    [self getbannerData];
+//    [self getbannerData];
 //    [self getmenuData];
-    [self getGuanggao_data];
+//    [self getGuanggao_data];
 }
 -(void)getGuanggao_data
 {
@@ -311,7 +312,7 @@ static NSString * const shopCellReuseID = @"shop";
     collectionView.backgroundColor = [UIColor whiteColor];
     collectionView.tag=2001;
     // 是否滚动//
-    collectionView.scrollEnabled = NO;
+//    collectionView.scrollEnabled = NO;
     [self.bottomView addSubview:collectionView];
 //    [collectionView mas_makeConstraints:^(MASConstraintMaker *make) {
 //
@@ -339,7 +340,7 @@ static NSString * const shopCellReuseID = @"shop";
             
     }];
     //更新 scrollview 滑动
-    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, self.collectionView1.bottom+240) ;
+//    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, self.collectionView1.bottom+240) ;
 }
 
 -(void)setupCollectionView2
@@ -390,7 +391,7 @@ static NSString * const shopCellReuseID = @"shop";
     //更新 scrollview 滑动
 //    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, self.collectionView2.bottom+kNavAndTabHeight+30) ;
     //更新 scrollview 滑动
-    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, 175+70+self.bottomView.height+10);
+//    self.ZScrollView.contentSize =CGSizeMake(SCREEN_WIDTH, 175+70+self.bottomView.height+10);
 }
 
 
@@ -829,30 +830,29 @@ static NSString * const shopCellReuseID = @"shop";
     if(scrollView.tag==1000)
     {
         
-    CGFloat offsetY = scrollView.contentOffset.y;
-
-    NSLog(@"%lf",offsetY);
-    if (offsetY > 0 && offsetY < self.ZScrollView.height) {
-        scrollerToRect=offsetY;
-        if(offsetY>=220)
-        {
-            self.collectionView1.scrollEnabled = YES;
-            [UIView animateWithDuration:0.5 animations:^{
-                self.bottomView.frame=CGRectMake(0, kNavAndTabHeight+50, self.ZScrollView.width, self.ZScrollView.height) ;
-                self.collectionView1.frame=CGRectMake(0,30,self.bottomView.width, self.bottomView.height) ;
-                }];
-
-
-//            [self.ZScrollView setContentOffset:CGPointMake(0, self.bottomView.bottom+50) animated:YES];
-        }else {
-            self.collectionView1.scrollEnabled = NO;
-            [UIView animateWithDuration:0.5 animations:^{
-            self.bottomView.frame=CGRectMake(0, 175+70, self.ZScrollView.width, self.ZScrollView.height-175-70) ;
-                self.collectionView1.frame=CGRectMake(0,0,self.bottomView.width, self.collectionView1.height+self->scrollerToRect) ;
-            }];
-//            [self.ZScrollView setContentOffset:CGPointMake(0, 230) animated:YES];
-
-        }
+//    CGFloat offsetY = scrollView.contentOffset.y;
+//
+//    NSLog(@"%lf",offsetY);
+//    if (offsetY > 0 && offsetY < self.ZScrollView.height) {
+//        scrollerToRect=offsetY;
+//        if(offsetY>=20)
+//        {
+//            self.collectionView1.scrollEnabled = YES;
+//            [UIView animateWithDuration:0.5 animations:^{
+//                self.bottomView.frame=CGRectMake(0, kNavAndTabHeight+50, self.ZScrollView.width, self.ZScrollView.height) ;
+//                self.collectionView1.frame=CGRectMake(0,30,self.bottomView.width, self.bottomView.height) ;
+//                }];
+//
+//
+////            [self.ZScrollView setContentOffset:CGPointMake(0, self.bottomView.bottom+50) animated:YES];
+//        }else {
+//            self.collectionView1.scrollEnabled = NO;
+//            [UIView animateWithDuration:0.5 animations:^{
+//            self.bottomView.frame=CGRectMake(0, 175+70, self.ZScrollView.width, self.ZScrollView.height-175-70) ;
+//                self.collectionView1.frame=CGRectMake(0,0,self.bottomView.width, self.collectionView1.height+self->scrollerToRect) ;
+//            }];
+//
+//        }
         
       
         
@@ -860,7 +860,7 @@ static NSString * const shopCellReuseID = @"shop";
         
         
         
-    }
+//    }
     }
 }
 

@@ -14,7 +14,9 @@
 #define GBackGroundColor [UIColor colorWithRed:1.000 green:1.000 blue:1.000 alpha:1.000]
 
 //导航栏 属性 标题颜色 标题字体
-#define GNavTextColor [UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0]
+//#define GNavTextColor [UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0]
+#define GNavTextColor [UIColor colorWithRed:51/255.0 green:51/255.0 blue:51/255.0 alpha:1.0]
+
 static int fontSize = 18; ///<导航栏标题文字 字体大小
 #define GNavTextFont (GFONT(fontSize))
 

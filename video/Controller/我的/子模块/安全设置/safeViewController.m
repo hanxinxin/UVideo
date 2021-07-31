@@ -34,7 +34,7 @@
 -(void)Addtableview
 {
     arrtitle=[NSMutableArray arrayWithCapacity:0];
-    [arrtitle addObject:[NSArray arrayWithObjects:@"修改密码",@"修改邮箱登录密码", nil]];
+    [arrtitle addObject:[NSArray arrayWithObjects:@"修改密码",@"忘记密码", nil]];
 //    imagearray=[NSMutableArray arrayWithCapacity:0];
 //    [imagearray addObject:[NSArray arrayWithObjects:@"bofangjilu",@"chongzhijilu",@"zhanghu",@"bangzhu",@"setimage",@"qingli",@"signout", nil]];
     self.downtableview=[[UITableView alloc] init];

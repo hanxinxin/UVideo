@@ -1153,6 +1153,7 @@
     self.statusBarTextIsWhite=NO;
     self.statusBarBackgroundColor=[UIColor blackColor];
     self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
+//    self.title
     
     ///7.26日隐藏
 //    UIBarButtonItem *rightitem = [[UIBarButtonItem alloc] initWithCustomView:self.btn];

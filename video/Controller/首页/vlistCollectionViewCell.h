@@ -6,12 +6,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TopLeftLabel.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface vlistCollectionViewCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *topImage;
-@property (weak, nonatomic) IBOutlet UILabel *downTitle;
+@property (weak, nonatomic) IBOutlet TopLeftLabel *downTitle;
 @property (strong, nonatomic) VideoRankMode * model;
 @end
 

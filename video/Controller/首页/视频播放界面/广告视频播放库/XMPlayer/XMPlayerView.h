@@ -73,5 +73,5 @@ typedef enum {
 
 -(void)tapAction;
 
-
+-(void)hiddenView;
 @end

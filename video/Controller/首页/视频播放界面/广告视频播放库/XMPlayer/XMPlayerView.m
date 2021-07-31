@@ -158,6 +158,15 @@
     }];
 }
 
+-(void)hiddenView
+{
+    // 移除
+    self.refreshView.hidden = YES;
+    self.tempView.hidden = YES;
+    self.BGView.hidden = YES;
+}
+
+
 /**
  初始化
  @return self

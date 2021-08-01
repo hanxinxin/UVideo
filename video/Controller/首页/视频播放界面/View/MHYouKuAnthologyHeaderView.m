@@ -431,7 +431,7 @@ static NSString * const CollcetionCellID = @"VtitleCollectionViewCell";
     [self.bottomSeparate mas_makeConstraints:^(MASConstraintMaker *make) {
         
         make.left.and.right.equalTo(self.contentView);
-        make.height.mas_equalTo(5);
+        make.height.mas_equalTo(0);
         make.bottom.equalTo(self.contentView.mas_bottom).with.offset(0.0f);
         
     }];

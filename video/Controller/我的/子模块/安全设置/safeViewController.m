@@ -34,7 +34,7 @@
 -(void)Addtableview
 {
     arrtitle=[NSMutableArray arrayWithCapacity:0];
-    [arrtitle addObject:[NSArray arrayWithObjects:@"修改密码",@"忘记密码", nil]];
+    [arrtitle addObject:[NSArray arrayWithObjects:@"修改密码",@"邮箱重置密码", nil]];
 //    imagearray=[NSMutableArray arrayWithCapacity:0];
 //    [imagearray addObject:[NSArray arrayWithObjects:@"bofangjilu",@"chongzhijilu",@"zhanghu",@"bangzhu",@"setimage",@"qingli",@"signout", nil]];
     self.downtableview=[[UITableView alloc] init];
@@ -130,8 +130,14 @@
     NSLog(@"index == %ld",indexPath.section);
     if(indexPath.section==0)
     {
-        XGpasswordViewController *avc = [[XGpasswordViewController alloc] init];
-        [self.navigationController pushViewController:avc animated:YES];
+        if(![self StringIsNullOrEmpty:usertoken])
+        {
+            XGpasswordViewController *avc = [[XGpasswordViewController alloc] init];
+            [self.navigationController pushViewController:avc animated:YES];
+        }else{
+            [UHud showTXTWithStatus:@"您还没有登录" delay:2.f];
+        }
+        
     }
     else{
         emailCZViewController *avc = [[emailCZViewController alloc] init];

@@ -411,6 +411,7 @@
 		FA8A03912667D0BE00B41281 /* iphoneClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8A03902667D0BE00B41281 /* iphoneClass.m */; };
 		FA8A03952667D78300B41281 /* menberViewTS.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8A03942667D78300B41281 /* menberViewTS.m */; };
 		FA8A03972667D79000B41281 /* menberViewTS.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8A03962667D79000B41281 /* menberViewTS.xib */; };
+		FA8C6B4E26B659220071B318 /* EmailBDViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8C6B4D26B659220071B318 /* EmailBDViewController.m */; };
 		FA8E71822652A3D50058F02F /* ClarityView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8E71812652A3D50058F02F /* ClarityView.m */; };
 		FA8E71862652A46A0058F02F /* clarityCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8E71842652A46A0058F02F /* clarityCollectionViewCell.m */; };
 		FA8E71872652A46A0058F02F /* clarityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8E71852652A46A0058F02F /* clarityCollectionViewCell.xib */; };
@@ -1325,6 +1326,8 @@
 		FA8A03932667D78300B41281 /* menberViewTS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = menberViewTS.h; sourceTree = "<group>"; };
 		FA8A03942667D78300B41281 /* menberViewTS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = menberViewTS.m; sourceTree = "<group>"; };
 		FA8A03962667D79000B41281 /* menberViewTS.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = menberViewTS.xib; sourceTree = "<group>"; };
+		FA8C6B4C26B659220071B318 /* EmailBDViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EmailBDViewController.h; sourceTree = "<group>"; };
+		FA8C6B4D26B659220071B318 /* EmailBDViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EmailBDViewController.m; sourceTree = "<group>"; };
 		FA8E71802652A3D50058F02F /* ClarityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClarityView.h; sourceTree = "<group>"; };
 		FA8E71812652A3D50058F02F /* ClarityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClarityView.m; sourceTree = "<group>"; };
 		FA8E71832652A46A0058F02F /* clarityCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = clarityCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1745,13 +1748,13 @@
 			path = webView;
 			sourceTree = "<group>";
 		};
-		8A27247B264E847800B033BB /* 邮箱重置 */ = {
+		8A27247B264E847800B033BB /* 邮箱重置密码 */ = {
 			isa = PBXGroup;
 			children = (
 				8A27247C264E850E00B033BB /* emailCZViewController.h */,
 				8A27247D264E850E00B033BB /* emailCZViewController.m */,
 			);
-			path = "邮箱重置";
+			path = "邮箱重置密码";
 			sourceTree = "<group>";
 		};
 		8A272482264E878F00B033BB /* 修改密码 */ = {
@@ -3555,7 +3558,8 @@
 		8ADF898A264D16C200029B05 /* 登录模块 */ = {
 			isa = PBXGroup;
 			children = (
-				8A27247B264E847800B033BB /* 邮箱重置 */,
+				FA8C6B4B26B658EE0071B318 /* 邮箱绑定 */,
+				8A27247B264E847800B033BB /* 邮箱重置密码 */,
 				8ADF898C264D16D800029B05 /* 注册 */,
 				8ADF898B264D16D100029B05 /* 登录 */,
 			);
@@ -3743,6 +3747,15 @@
 				FA8A03902667D0BE00B41281 /* iphoneClass.m */,
 			);
 			path = iphoneClass;
+			sourceTree = "<group>";
+		};
+		FA8C6B4B26B658EE0071B318 /* 邮箱绑定 */ = {
+			isa = PBXGroup;
+			children = (
+				FA8C6B4C26B659220071B318 /* EmailBDViewController.h */,
+				FA8C6B4D26B659220071B318 /* EmailBDViewController.m */,
+			);
+			path = "邮箱绑定";
 			sourceTree = "<group>";
 		};
 		FA8CE96926A3032500B560E8 /* navbar */ = {
@@ -4668,6 +4681,7 @@
 				8AE01B702661EBE00031C82F /* HXtitleLabelView.m in Sources */,
 				8A8BC39A25FC6F9E0028173C /* UIImage+MHOrientation.m in Sources */,
 				FA984FB22674AEDF0014DCA8 /* AFURLRequestSerialization.m in Sources */,
+				FA8C6B4E26B659220071B318 /* EmailBDViewController.m in Sources */,
 				8A82F15A264FC663004AAF40 /* ZjiluViewController.m in Sources */,
 				8AA86DE32685D7A200677623 /* VideoCommentMode.m in Sources */,
 				FAD0F4BE26B44C3D0089BA2A /* XMPlayerView.m in Sources */,

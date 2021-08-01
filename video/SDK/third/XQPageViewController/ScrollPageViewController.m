@@ -237,7 +237,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         [self.navigationController.navigationBar setBackgroundImage:[[UIImage alloc]init]
                                                       forBarMetrics:UIBarMetricsDefault];
         [self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
-    self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
+    self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:0.8];
     self.titleView = [[HomeTitleView alloc] initWithFrame:CGRectMake(0, 0, ScreenWidth - (80+40), 30)];
         self.titleView.backgroundColor=[UIColor whiteColor];
     self.titleView.layer.cornerRadius=15;

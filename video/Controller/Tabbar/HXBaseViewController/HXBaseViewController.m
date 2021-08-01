@@ -551,7 +551,7 @@
 
         [btn setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
 
-        //        [btn setTitleColor:GNavBtnTitleColorNormal forState:UIControlStateNormal];
+                [btn setTitleColor:GNavBtnTitleColorNormal forState:UIControlStateNormal];
         //        [btn setTitleColor:GNavBtnTitleColorSelect forState:UIControlStateHighlighted];
         //        btn.titleLabel.font = GNavBtnTitleFont;
 

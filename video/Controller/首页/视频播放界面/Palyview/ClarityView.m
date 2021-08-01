@@ -20,7 +20,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        [self.titlearray addObject:@"标清·360"];
+        [self.titlearray addObject:@"标清·360P"];
         [self.titlearray addObject:@"高清·480P"];
         [self.titlearray addObject:@"超清·720P"];
         [self.titlearray addObject:@"蓝光·1080P"];
@@ -290,9 +290,9 @@
 /** 边缘之间的间距*/
 -(UIEdgeInsets)edgeInsetInWaterFlowLayout:(WSLWaterFlowLayout *)waterFlowLayout{
     if (waterFlowLayout.flowLayoutStyle == (WSLWaterFlowLayoutStyle)3){
-        return UIEdgeInsetsMake(20, 8, 20, 8);
+        return UIEdgeInsetsMake(20, 0, 20, 0);
     }
-    return UIEdgeInsetsMake(6, 6, 6, 6);
+    return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 /////   10位时间戳
 - (NSString *)gs_getCurrentTimeBySecond11 {

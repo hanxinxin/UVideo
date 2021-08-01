@@ -30,6 +30,10 @@
 //                                                      forBarMetrics:UIBarMetricsDefault];
 //        [self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     self.navBarColor=RGBA(180, 223, 246, 1);
+    
+    
+    //渐变gl  [self convertToImage:view]
+//    [self.navigationController.navigationBar.layer insertSublayer:gl atIndex:0];
 //    self.titleView = [[HomeTitleView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH - (80+40), 30)];
 //        self.titleView.backgroundColor=[UIColor whiteColor];
 //    self.titleView.layer.cornerRadius=15;
@@ -51,8 +55,15 @@
 
         [self addLeft_RightButton];
 }
-
-
+-(UIImage*)convertToImage:(UIView*)viewS{
+    CGSize s = viewS.bounds.size;
+    // 下面方法，第一个参数表示区域大小。第二个参数表示是否是非透明的。如果需要显示半透明效果，需要传NO，否则传YES。第三个参数就是屏幕密度了
+    UIGraphicsBeginImageContextWithOptions(s, NO, [UIScreen mainScreen].scale);
+    [viewS.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage*image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
 -(void)addLeft_RightButton
 {
     //下载按钮

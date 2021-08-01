@@ -131,6 +131,8 @@
 //            [self.Headerview.txImage setImage:[self base64Image:avatar_loca] forState:(UIControlStateNormal)];
 //            @"https://img2.baidu.com/it/u=4087057811,445331467&fm=26&fmt=auto&gp=0.jpg"  测试连接
             [self.Headerview.txImage xr_setButtonImageWithUrl:avatar_loca];
+        }else{
+            [self.Headerview.txImage setImage:[UIImage imageNamed:@"image"] forState:(UIControlStateNormal)];
         }
         if(![self StringIsNullOrEmpty:nickname_loca])
         {
@@ -156,7 +158,7 @@
     
     self.Headerview.nameLabel.frame=CGRectMake(self.Headerview.txImage.left+self.Headerview.txImage.width+8, 20, [self getWidthWithText:self.Headerview.nameLabel.text height:self.Headerview.nameLabel.height font:18.f], 30);
     self.Headerview.vipImage.frame=CGRectMake(self.Headerview.nameLabel.left+self.Headerview.nameLabel.width+2, 20, 62, 34);
-    self.Headerview.vipTime.frame=CGRectMake(self.Headerview.txImage.left+self.Headerview.txImage.width+8, self.Headerview.nameLabel.bottom+8, [self getWidthWithText:self.Headerview.vipTime.text height:self.Headerview.vipTime.height font:15.f], 30);
+    self.Headerview.vipTime.frame=CGRectMake(self.Headerview.txImage.left+self.Headerview.txImage.width+8, self.Headerview.nameLabel.bottom, [self getWidthWithText:self.Headerview.vipTime.text height:self.Headerview.vipTime.height font:15.f], 30);
 }
 
 -(void)addpromptViewM{

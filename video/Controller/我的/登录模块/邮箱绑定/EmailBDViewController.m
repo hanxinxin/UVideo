@@ -1,15 +1,15 @@
 //
-//  emailCZViewController.m
+//  EmailBDViewController.m
 //  video
 //
-//  Created by nian on 2021/5/14.
+//  Created by macbook on 2021/8/1.
 //
 
-#import "emailCZViewController.h"
+#import "EmailBDViewController.h"
 
 //MARK:输入框和键盘之间的间距
 static CGFloat INTERVAL_KEYBOARD = 500;
-@interface emailCZViewController ()<UITextFieldDelegate>
+@interface EmailBDViewController ()<UITextFieldDelegate>
 {
     NSDictionary *keyboardInfo;
     NSString * phrase_id;
@@ -21,19 +21,13 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 @property(nonatomic,assign)NSInteger menuIndex; ///1是用户名注册 2是 邮箱注册
 @end
 
-@implementation emailCZViewController
+@implementation EmailBDViewController
 @synthesize topView;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    if(self.Type==1)
-    {
-        self.title=@"邮箱重置";
-    }else if(self.Type==2)
-    {
-        self.title=@"邮箱设置";
-    }
+    self.title=@"邮箱绑定";
     self.hiddenLeftBtn=YES;
     self.statusBarTextIsWhite=NO;
     self.statusBarBackgroundColor=[UIColor blackColor];
@@ -47,6 +41,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 
     dispatch_after(delayTime, dispatch_get_main_queue(), ^{
         [self addtopview];
+        
     });
     
 }
@@ -55,7 +50,8 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.topImageBg = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.width-125)/2, 40, 125, 50)];
     [self.topImageBg setImage:[UIImage imageNamed:@"kaunchlogo"]];
     [self.view addSubview:self.topImageBg];
-    self.centerView = [[UIView alloc] initWithFrame:CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 226)];
+//    self.centerView = [[UIView alloc] initWithFrame:CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 226)];
+    self.centerView = [[UIView alloc] initWithFrame:CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 176)];
     self.centerView.layer.cornerRadius=6;
     self.centerView.backgroundColor=[UIColor whiteColor];
     self.centerView.layer.shadowColor = [UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:0.16].CGColor;
@@ -73,17 +69,18 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.emailTextfield.layer.borderWidth = 1;
     self.emailTextfield.layer.cornerRadius = 6;
     [self.centerView addSubview:self.emailTextfield];
-    self.passwordTextfield = [[UITextField alloc] initWithFrame:CGRectMake(8, 50+34+16, self.centerView.width-16, 42)];
-    self.passwordTextfield.placeholder=@"请输入密码";
-    self.passwordTextfield.secureTextEntry = YES;
-    self.passwordTextfield.keyboardType=UIKeyboardTypeEmailAddress;
-    self.passwordTextfield.borderStyle=UITextBorderStyleRoundedRect;
-    self.passwordTextfield.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
-    self.passwordTextfield.delegate=self;
-    self.passwordTextfield.layer.borderWidth = 1;
-    self.passwordTextfield.layer.cornerRadius = 6;
-    [self.centerView addSubview:self.passwordTextfield];
-    self.CodeView=[[UIView alloc] initWithFrame:CGRectMake(8, 50+34+16+34+16, self.centerView.width-16, 42)];
+//    self.passwordTextfield = [[UITextField alloc] initWithFrame:CGRectMake(8, 50+34+16, self.centerView.width-16, 42)];
+//    self.passwordTextfield.placeholder=@"请输入密码";
+//    self.passwordTextfield.secureTextEntry = YES;
+//    self.passwordTextfield.keyboardType=UIKeyboardTypeEmailAddress;
+//    self.passwordTextfield.borderStyle=UITextBorderStyleRoundedRect;
+//    self.passwordTextfield.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
+//    self.passwordTextfield.delegate=self;
+//    self.passwordTextfield.layer.borderWidth = 1;
+//    self.passwordTextfield.layer.cornerRadius = 6;
+//    [self.centerView addSubview:self.passwordTextfield];
+//    self.CodeView=[[UIView alloc] initWithFrame:CGRectMake(8, 50+34+16+34+16, self.centerView.width-16, 42)];
+    self.CodeView=[[UIView alloc] initWithFrame:CGRectMake(8, 50+34+16, self.centerView.width-16, 42)];
     self.CodeView.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
     self.CodeView.layer.borderWidth = 1;
     self.CodeView.layer.cornerRadius = 6;
@@ -145,7 +142,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 }
 //-(void)ZC_touch:(id)sender
 //{
-//    
+//
 //}
 
 -(void)getCodeBtn_touch:(id)sender
@@ -187,8 +184,16 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 
 -(void)XG_touch:(id)sender
 {
-    __block emailCZViewController *weakSelf = self;
+//
+    
+        [self PostBangdingEmail];
+    
+    
+}
+-(void)ChongzhiEmail
+{
     [UHud showHUDLoading];
+    __block EmailBDViewController *weakSelf = self;
     NSDictionary * dict =[[NSDictionary alloc] init];
     
         dict =@{@"email":self.emailTextfield.text,@"new_password":self.passwordTextfield.text,@"captcha":self.CodeTextfield.text,@"phrase_id":phrase_id};
@@ -236,6 +241,60 @@ static CGFloat INTERVAL_KEYBOARD = 500;
         [UHud showTXTWithStatus:@"网络错误" delay:2.f];
     }];
 }
+-(void)PostBangdingEmail
+{
+    [UHud showHUDLoading];
+    __block EmailBDViewController *weakSelf = self;
+    NSDictionary * dict =[[NSDictionary alloc] init];
+    dict =@{@"email":self.emailTextfield.text,
+            @"captcha":self.CodeTextfield.text,
+            @"phrase_id":phrase_id};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,bangdingEmail] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary *dictdata=[dict objectForKey:@"data"];
+            NSDictionary *userdata =[dictdata objectForKey:@"user"];
+            NSString * email = [userdata objectForKey:@"email"];
+            NSNumber * vip_expired_time = [userdata objectForKey:@"vip_expired_time"];
+            NSString * nickname = [userdata objectForKey:@"nickname"];
+            NSString * username = [userdata objectForKey:@"username"];
+            NSString * avatar = [userdata objectForKey:@"avatar"];
+            
+            NSDictionary *tokendata =[dictdata objectForKey:@"token"];
+            NSString * token = [tokendata objectForKey:@"token"];
+            NSNumber *expired_time=[tokendata objectForKey:@"expired_time"];
+            [[NSUserDefaults standardUserDefaults] setValue:email forKey:@"UserZH"];
+            [[NSUserDefaults standardUserDefaults] setValue:nickname forKey:@"nickname"];
+            [[NSUserDefaults standardUserDefaults] setValue:username forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults] setValue:avatar forKey:@"avatar"];
+            [[NSUserDefaults standardUserDefaults] setValue:vip_expired_time forKey:@"vip_expired_time"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"UserToken"];
+            [[NSUserDefaults standardUserDefaults] setObject:expired_time forKey:@"expired_time"];
+            
+            [UHud showHudWithStatus:@"修改成功" delay:2.f];
+            dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC));
+
+            dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+                [weakSelf popViewcontroller];
+            });
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showHudWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+}
+
+
 -(void)popViewcontroller
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
@@ -277,7 +336,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     button1.frame = CGRectMake(0,2,(topView.width),38);
     button1.alpha = 1;
     button1.layer.cornerRadius = 10;
-    [button1 setTitle:@"邮箱重置" forState:(UIControlStateNormal)];
+    [button1 setTitle:@"邮箱绑定" forState:(UIControlStateNormal)];
     [button1 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
     button1.selected=YES;
 //    [button1.layer insertSublayer:[self selectLayer:CGRectMake(0, 0, button1.width, button1.height)]atIndex:0];
@@ -312,7 +371,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.CodeView.hidden=YES;
 //    self.centerView.backgroundColor=[UIColor orangeColor];
     
-    self.centerView.frame = CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 210-40);
+    self.centerView.frame = CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 176);
     self.centerView.layer.cornerRadius=6;
     [self setyinying];
 
@@ -332,7 +391,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
         [self.menuBtn2 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
     }
     self.CodeView.hidden=NO;
-    self.centerView.frame = CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 210);
+    self.centerView.frame = CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 176);
 //    self.centerView.backgroundColor=[UIColor grayColor];
     self.centerView.layer.cornerRadius=6;
     [self setyinying];

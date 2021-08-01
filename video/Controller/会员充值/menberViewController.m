@@ -207,8 +207,8 @@
                         
                         self.menbercollectionView.frame=CGRectMake(20, self.menberLabel.bottom, SCREEN_WIDTH-40, 210);
                         [self.menbercollectionView reloadData];
-                        self.ConfirmPlayBtn.frame=CGRectMake(20, self.menbercollectionView.bottom+25, SCREEN_WIDTH-40, 44);
-                        self->ScrollView.contentSize = CGSizeMake( self.view.bounds.size.width, self.ConfirmPlayBtn.bottom+30);
+//                        self.ConfirmPlayBtn.frame=CGRectMake(20, self.menbercollectionView.bottom+25, SCREEN_WIDTH-40, 44);
+                        self->ScrollView.contentSize = CGSizeMake( self.view.bounds.size.width, self.menbercollectionView.bottom+25+30);
                     }
                     }
                 }else{
@@ -575,7 +575,8 @@
 //        });
 //    }];
     UIButton *btn = [[UIButton alloc]init];
-    btn.frame=CGRectMake(20, self.menbercollectionView.bottom+25, SCREEN_WIDTH-40, 44);
+//    btn.frame=CGRectMake(20, self.menbercollectionView.bottom+25, SCREEN_WIDTH-40, 44);
+    btn.frame=CGRectMake(20, SCREENH_HEIGHT-kNavAndTabHeight-44, SCREEN_WIDTH-40, 44);
     [btn setTitle:@"确认支付" forState:(UIControlStateNormal)];
     [btn setTintColor:[UIColor whiteColor]];
     [btn addTarget:self action:@selector(play_Touch:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -589,12 +590,15 @@
 //    glbtn.locations = @[@(0),@(1.0f)];
 //    glbtn.zPosition = -10;
 //    [btn.layer insertSublayer:glbtn atIndex:0];
-    [ScrollView addSubview:btn];
-    self.ConfirmPlayBtn =btn;
+//    [ScrollView addSubview:btn];
+    [self.view bringSubviewToFront:btn];
     
+    self.ConfirmPlayBtn =btn;
+    [self.view insertSubview:self.ConfirmPlayBtn aboveSubview:ScrollView];
+//    [self.view insertSubview:self.ConfirmPlayBtn belowSubview:ScrollView];
 //    ScrollView.contentSize = CGSizeMake( self.view.bounds.size.width, self.ConfirmPlayBtn.height+self.Topview.height+self.collectionView.height+self.menbercollectionView.height+self.downtableview.height+40+40);
 //    NSLog(@"size bottom == %f",self.ConfirmPlayBtn.height+self.Topview.height+self.collectionView.height+self.menbercollectionView.height+self.downtableview.height+40+40);
-    ScrollView.contentSize = CGSizeMake( self.view.bounds.size.width, self.ConfirmPlayBtn.bottom+30);
+    ScrollView.contentSize = CGSizeMake( self.view.bounds.size.width, self.menbercollectionView.bottom+25+30);
     NSLog(@"size bottom == %f",self.ConfirmPlayBtn.bottom+30);
 }
 

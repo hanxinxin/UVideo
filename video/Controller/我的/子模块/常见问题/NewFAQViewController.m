@@ -77,15 +77,28 @@
     self.FAQListArray=[NSMutableArray arrayWithCapacity:0];
     Listarray1=[NSMutableArray arrayWithCapacity:0];
     self.indexItem=0;
-    //下载按钮
-    UIButton *rightItem = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64, 25)];
-    [rightItem setTitle:@" 联系客服" forState:(UIControlStateNormal)];
-    [rightItem setTintColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0]];
-    [rightItem setImage:[UIImage imageNamed:@"helpimage"] forState:UIControlStateNormal];
-    [rightItem addTarget:self action:@selector(right_touch:) forControlEvents:UIControlEventTouchUpInside];
+  
     
-    self.rightBtnV=rightItem;
+    //导航左按钮
+    UIButton * rightBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    rightBtn.frame=CGRectMake(0, 0, 64, 25);
+    [rightBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+
+    [rightBtn addTarget:self action:@selector(right_touch:) forControlEvents:UIControlEventTouchUpInside];
+    [rightBtn setTitle:@"联系客服" forState:UIControlStateNormal];
+    [rightBtn setImage:[UIImage imageNamed:@"helpimage"] forState:UIControlStateNormal];
+    [rightBtn setTitleColor:GNavBtnTitleColorNormal forState:UIControlStateNormal];
+    [rightBtn setTitleColor:GNavBtnTitleColorSelect forState:UIControlStateHighlighted];
+    rightBtn.titleLabel.font = GNavBtnTitleFont;
+
+    [rightBtn sizeToFit];
+
+
+    UIBarButtonItem * rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:rightBtn];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
     
+    
+//    [self setRightStr:@"联系客服"];
     [self addtopview];
     [self Addtableview1];
     [self initnilView];

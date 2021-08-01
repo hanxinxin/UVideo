@@ -7,6 +7,7 @@
 
 #import <UIKit/UIKit.h>
 
+#import "TopLeftLabel.h"
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^topHeaderBlock)(NSInteger touchIndex); //1001 点击头像 1002点击积分  1003 点击VIP按钮
@@ -19,7 +20,7 @@ typedef void(^cellindexBlock)(NSInteger CellIndex);
 
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *vipImage;
-@property (weak, nonatomic) IBOutlet UILabel *vipTime;
+@property (weak, nonatomic) IBOutlet TopLeftLabel *vipTime;
 @property (weak, nonatomic) IBOutlet UILabel *jinbiLabel;
 @property (weak, nonatomic) IBOutlet UIButton *jifenBtn;
 

@@ -1083,13 +1083,30 @@
 }
 - (UIButton *)btn{
     if (!_btn) {
-        self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btn.frame = CGRectMake(0, 0, 50, 44);
+//        self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
+//        _btn.frame = CGRectMake(0, 0, 50, 44);
+//        [_btn setTitle:@"缓存" forState:UIControlStateNormal];
+//        [_btn setImage:[UIImage imageNamed:@"huancun"] forState:UIControlStateNormal];
+//        [_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        [_btn setTitleColor:RGB(68,68,68) forState:(UIControlStateNormal)];
+//        [_btn addTarget:self action:@selector(huancunBtn:) forControlEvents:UIControlEventTouchUpInside];
+        
+        //导航左按钮
+        _btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _btn.frame=CGRectMake(0, 0, 64, 25);
+        [_btn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
+
+        [_btn addTarget:self action:@selector(huancunBtn:) forControlEvents:UIControlEventTouchUpInside];
         [_btn setTitle:@"缓存" forState:UIControlStateNormal];
         [_btn setImage:[UIImage imageNamed:@"huancun"] forState:UIControlStateNormal];
-        [_btn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_btn setTitleColor:RGB(68,68,68) forState:(UIControlStateNormal)];
-        [_btn addTarget:self action:@selector(huancunBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [_btn setTitleColor:GNavBtnTitleColorNormal forState:UIControlStateNormal];
+        [_btn setTitleColor:GNavBtnTitleColorSelect forState:UIControlStateHighlighted];
+        _btn.titleLabel.font = GNavBtnTitleFont;
+
+        [_btn sizeToFit];
+
+
+        
     }
     return _btn;
 }
@@ -1161,6 +1178,9 @@
 //    self.navigationItem.rightBarButtonItem = rightitem;
 //    self.navigationController.navigationBar.tintColor = RGB(68,68,68);
     
+    
+//    UIBarButtonItem * rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.btn];
+//    self.navigationItem.rightBarButtonItem = rightButtonItem;
     
     
     
@@ -1961,7 +1981,7 @@
     }
     
     // 默认高度
-    return 5.0f;
+    return 0.0f;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

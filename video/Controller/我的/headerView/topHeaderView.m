@@ -70,21 +70,21 @@ static NSString * const headerCellReuseID = @"header";
     [self.nameLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.txImage).offset(8);
         make.top.mas_equalTo(20);
-        make.width.mas_equalTo([self getWidthWithText:self.nameLabel.text height:self.nameLabel.height font:17.f]);
-        make.height.mas_equalTo(30);
+        make.width.mas_equalTo([self getWidthWithText:self.nameLabel.text height:self.nameLabel.height font:16.f]);
+        make.height.mas_equalTo(25);
     }];
     
     [self.vipImage mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.nameLabel).offset(2);
         make.top.mas_equalTo(15);
         make.width.mas_equalTo(62);
-        make.height.mas_equalTo(34);
+        make.height.mas_equalTo(25);
     }];
     [self.vipTime mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.txImage).offset(8);
         make.top.equalTo(self.nameLabel);
-        make.width.mas_equalTo([self getWidthWithText:self.vipTime.text height:self.vipTime.height font:15.f]);
-        make.height.mas_equalTo(30);
+        make.width.mas_equalTo([self getWidthWithText:self.vipTime.text height:self.vipTime.height font:14.f]);
+        make.height.mas_equalTo(25);
     }];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.2 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
         self.collectionView.hidden=NO;

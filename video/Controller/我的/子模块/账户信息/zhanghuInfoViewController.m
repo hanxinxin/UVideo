@@ -9,6 +9,7 @@
 #import "infoXGViewController.h"
 #import "XGpasswordViewController.h"
 #import "emailCZViewController.h"
+#import "EmailBDViewController.h"
 
 @interface zhanghuInfoViewController ()<UITableViewDelegate,UITableViewDataSource>
 @property(nonatomic,strong)UIView*ZtopView;
@@ -144,8 +145,8 @@
     {
         if(![self StringIsNullOrEmpty:usertoken])
         {
-            emailCZViewController*avc = [[emailCZViewController alloc] init];
-            avc.Type=2;
+            EmailBDViewController*avc = [[EmailBDViewController alloc] init];
+//            avc.Type=2;
             [self pushRootNav:avc animated:YES];
         }else{
             [UHud showTXTWithStatus:@"您还没有登录" delay:2.f];

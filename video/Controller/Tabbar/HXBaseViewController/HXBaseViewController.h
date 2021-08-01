@@ -22,7 +22,7 @@ static int fontSize = 18; ///<导航栏标题文字 字体大小
 
 //导航 按钮 字体、颜色
 #define GNavBtnTitleFont (GFONT(fontSize - 2))
-#define GNavBtnTitleColorNormal [UIColor whiteColor]
+#define GNavBtnTitleColorNormal [UIColor blackColor]
 #define GNavBtnTitleColorSelect [UIColor colorWithWhite:0.806 alpha:1.000]
 
 //导航栏 颜色

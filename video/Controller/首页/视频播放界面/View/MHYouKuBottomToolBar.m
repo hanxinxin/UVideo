@@ -78,9 +78,11 @@
 
 
     
-    // 分享按钮
+    // 简介按钮
     self.NameBtn = [self _setupButtonWithTitle:@"主演/导演/简介" imageName:@"xialaimage" selectedImageName:@"xialaimage" type:MHYouKuBottomToolBarTypetitle];
     [self.NameBtn showRightSeparate];
+    self.NameBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [self.NameBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
     // 反馈
     self.fankuiBtn = [self _setupButtonWithTitle:@"反馈" imageName:@"fankui" selectedImageName:nil type:MHYouKuBottomToolBarTypeFankui];
     [self.fankuiBtn showRightSeparate];
@@ -190,6 +192,7 @@
         [button setTitle:title forState:UIControlStateNormal];
         [button setTitleColor:MHGlobalBlackTextColor forState:UIControlStateNormal];
         button.titleLabel.font = MHMediumFont(MHPxConvertPt(12.0f));
+        
     }
     
     if (MHStringIsNotEmpty(imageName))
@@ -215,7 +218,6 @@
     
     // 加到view
     [self addSubview:button];
-    
     // 添加到数组里面去
     [self.buttons addObject:button];
 
@@ -238,10 +240,12 @@
 - (void)setOpenVipBtnTitle:(NSString *)title btn:(UIButton*)button
 {
 //    button.titleLabel.textAlignment = NSTextAlignmentLeft;
-    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+//    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    
     [button setTitle:title forState:UIControlStateNormal];
     CGFloat leftlab = [title sizeWithAttributes:@{NSFontAttributeName : button.titleLabel.font}].width;
-    [button setImageEdgeInsets:UIEdgeInsetsMake(0, leftlab + 70, 0, 0)];
-    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 10, 0, 0)];
+    [button setImageEdgeInsets:UIEdgeInsetsMake(0, leftlab + 60, 0, 0)];
+    button.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [button setTitleEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 0)];
 }
 @end

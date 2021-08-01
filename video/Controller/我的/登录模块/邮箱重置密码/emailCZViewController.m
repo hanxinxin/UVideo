@@ -1,21 +1,18 @@
 //
-//  LoginViewController.m
+//  emailCZViewController.m
 //  video
 //
-//  Created by nian on 2021/5/13.
+//  Created by nian on 2021/5/14.
 //
 
-#import "LoginViewController.h"
-#import "ZCViewController.h"
 #import "emailCZViewController.h"
+
 //MARK:输入框和键盘之间的间距
 static CGFloat INTERVAL_KEYBOARD = 500;
-@interface LoginViewController ()<UITextFieldDelegate>
+@interface emailCZViewController ()<UITextFieldDelegate>
 {
     NSDictionary *keyboardInfo;
-    
     NSString * phrase_id;
-    NSString * captcha_data;
 }
 @property(nonatomic,strong)UIView*topView;
 @property(nonatomic,strong)UIButton *menuBtn1;
@@ -24,36 +21,19 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 @property(nonatomic,assign)NSInteger menuIndex; ///1是用户名注册 2是 邮箱注册
 @end
 
-@implementation LoginViewController
+@implementation emailCZViewController
 @synthesize topView;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    https://www.jianshu.com/p/0754833349a1   //添加三面阴影的方法
     
-    
-    self.title=@"登录";
     self.hiddenLeftBtn=YES;
     self.statusBarTextIsWhite=NO;
     self.statusBarBackgroundColor=[UIColor blackColor];
     self.navBarColor=[UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1];
     
-    //下载按钮
-//    UIButton *rightItem = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 64, 25)];
-//    [rightItem setTitle:@"忘记密码" forState:(UIControlStateNormal)];
-//    [rightItem setTintColor:[UIColor blackColor]];
-//    [rightItem.titleLabel setTextColor:[UIColor blackColor]];
-//    [rightItem addTarget:self action:@selector(right_touch:) forControlEvents:UIControlEventTouchUpInside];
-    
-//    self.rightBtnV=rightItem;
-//    [self.navigationItem.rightBarButtonItem setTintColor:[UIColor blackColor]];
-    [self setRightStr:@"忘记密码"];
-    
-    //// 初始化数据
-    self.menuIndex = 2; //初始值 为2 [self touchOne:nil];会修改为1
     phrase_id=@"";
-    captcha_data=@"";
 //    加载UI
     [self InitUI];
     [self addNoticeForKeyboard];
@@ -61,32 +41,15 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 
     dispatch_after(delayTime, dispatch_get_main_queue(), ^{
         [self addtopview];
-        
-        [self TuXingCodeBtn_touch:nil];
-        
+        if(self.Type==1)
+        {
+            self.title=@"邮箱重置密码";
+        }else if(self.Type==2)
+        {
+            self.title=@"邮箱绑定";
+        }
     });
-  
-    [self touchOne:nil];
     
-    
-
-}
-
--(void)rightBtnClick
-{
-    NSLog(@"点击了 右侧按钮  ");
-    emailCZViewController *avc = [[emailCZViewController alloc] init];
-    avc.Type=1;
-    [self.navigationController pushViewController:avc animated:YES];
-}
-
--(void)right_touch:(id)sender
-{
-
-    emailCZViewController *avc = [[emailCZViewController alloc] init];
-    avc.Type=1;
-    [self.navigationController pushViewController:avc animated:YES];
-
 }
 
 -(void)InitUI{
@@ -100,13 +63,11 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     self.centerView.layer.shadowOffset = CGSizeMake(0,0);
     self.centerView.layer.shadowRadius = 6;
     self.centerView.layer.shadowOpacity = 0.9;
-    
-    
+    [self setyinying];
     [self.view addSubview:self.centerView];
     self.emailTextfield = [[UITextField alloc] initWithFrame:CGRectMake(8, 50, self.centerView.width-16, 42)];
-    
     self.emailTextfield.placeholder=@"请输入邮箱";
-    self.emailTextfield.keyboardType=UIKeyboardTypeDefault;
+    self.emailTextfield.keyboardType=UIKeyboardTypeEmailAddress;
     self.emailTextfield.borderStyle=UITextBorderStyleRoundedRect;
     self.emailTextfield.layer.borderColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:1.0].CGColor;
     self.emailTextfield.delegate=self;
@@ -136,7 +97,6 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     [self.CodeView addSubview:self.CodeTextfield];
     
     self.getCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.CodeTextfield.right-8, 6, 100, 30)];
-    self.getCodeBtn.hidden=YES;
     self.getCodeBtn.layer.cornerRadius = 4;
     self.getCodeBtn.backgroundColor=[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0];
     [self.getCodeBtn setTitle:@"验证码" forState:(UIControlStateNormal)];
@@ -144,75 +104,50 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     [self.getCodeBtn addTarget:self action:@selector(getCodeBtn_touch:) forControlEvents:(UIControlEventTouchUpInside)];
     [self.getCodeBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
     [self.CodeView addSubview:self.getCodeBtn];
-    self.TuXingCodeBtn = [[UIButton alloc] initWithFrame:CGRectMake(self.CodeTextfield.right-8, 6, 100, 30)];
-    self.TuXingCodeBtn.hidden=NO;
-    self.TuXingCodeBtn.layer.cornerRadius = 4;
-    self.TuXingCodeBtn.backgroundColor=[UIColor whiteColor];
-//    [self.TuXingCodeBtn setTitle:@"验证码" forState:(UIControlStateNormal)];
-//    [self.TuXingCodeBtn setImage:[captcha_data isEqualToString:@""]?[UIImage imageNamed:@"image"]:[self base64Image:captcha_data] forState:(UIControlStateNormal)];
-    [self.TuXingCodeBtn addTarget:self action:@selector(TuXingCodeBtn_touch:) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.TuXingCodeBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-    [self.CodeView addSubview:self.TuXingCodeBtn];
     
-    self.backBtn = [[UIButton alloc] init];
-    self.backBtn.frame = CGRectMake(30,self.centerView.bottom+15,((self.view.width-68)/2)-5,46);
-    self.backBtn.alpha = 1;
-    self.backBtn.layer.cornerRadius = 10;
-    self.backBtn.backgroundColor=RGB(20, 155, 236);
-    [self.backBtn setTitle:@"注册账号" forState:(UIControlStateNormal)];
-    [self.backBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
-    [self.backBtn addTarget:self action:@selector(back_touch:) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.view addSubview:self.backBtn];
+//    self.backBtn = [[UIButton alloc] init];
+//    self.backBtn.frame = CGRectMake(30,self.centerView.bottom+15,((self.view.width-68)/2)-1,46);
+//    self.backBtn.alpha = 1;
+//    self.backBtn.layer.cornerRadius = 10;
+//    self.backBtn.backgroundColor=RGB(220,240,251);
+//    [self.backBtn setTitle:@"返回登录" forState:(UIControlStateNormal)];
+//    [self.backBtn setTitleColor:[UIColor blueColor] forState:(UIControlStateNormal)];
+//    [self.backBtn addTarget:self action:@selector(back_touch:) forControlEvents:(UIControlEventTouchUpInside)];
+//    [self.view addSubview:self.backBtn];
+//
+//    self.ZCBtn= [[UIButton alloc] init];
+//    self.ZCBtn.frame = CGRectMake((self.view.width-68)/2+30,self.centerView.bottom+15,((self.view.width-68)/2)-1,46);
+//    self.ZCBtn.alpha = 1;
+//    self.ZCBtn.layer.cornerRadius = 10;
+//    self.ZCBtn.backgroundColor=RGB(168,222,242);
+//    [self.ZCBtn setTitle:@"立即重置" forState:(UIControlStateNormal)];
+//    [self.ZCBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+////    [button1.layer insertSublayer:[self selectLayer:CGRectMake(0, 0, button1.width, button1.height)]atIndex:0];
+//    [self.ZCBtn addTarget:self action:@selector(ZC_touch:) forControlEvents:(UIControlEventTouchUpInside)];
+//    [self.view addSubview:self.ZCBtn];
     
-    self.LoginBtn= [[UIButton alloc] init];
-    self.LoginBtn.frame = CGRectMake(self.backBtn.right+10,self.centerView.bottom+15,((self.view.width-68)/2)-5,46);
-    self.LoginBtn.alpha = 1;
-    self.LoginBtn.layer.cornerRadius = 10;
-    self.LoginBtn.backgroundColor=RGB(20, 155, 236);
-    [self.LoginBtn setTitle:@"立即登录" forState:(UIControlStateNormal)];
-    [self.LoginBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
+    self.XGBtn= [[UIButton alloc] init];
+    self.XGBtn.frame = CGRectMake(self.centerView.left,self.centerView.bottom+20,self.centerView.width,46);
+    self.XGBtn.alpha = 1;
+    self.XGBtn.layer.cornerRadius = 10;
+    self.XGBtn.backgroundColor=RGB(20, 155, 236);
+    [self.XGBtn setTitle:@"确认修改" forState:(UIControlStateNormal)];
+    [self.XGBtn setTitleColor:[UIColor whiteColor] forState:(UIControlStateNormal)];
 //    [button1.layer insertSublayer:[self selectLayer:CGRectMake(0, 0, button1.width, button1.height)]atIndex:0];
-    [self.LoginBtn addTarget:self action:@selector(Login_touch:) forControlEvents:(UIControlEventTouchUpInside)];
-    [self.view addSubview:self.LoginBtn];
-    
-
+    [self.XGBtn addTarget:self action:@selector(XG_touch:) forControlEvents:(UIControlEventTouchUpInside)];
+    [self.view addSubview:self.XGBtn];
     
     
 }
 
 -(void)back_touch:(id)sender
 {
-    ZCViewController * avc = [[ZCViewController alloc] init];
-    [self pushRootNav:avc animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
--(void)TuXingCodeBtn_touch:(id)sender
-{
-    [UHud showHUDLoading];
-    self->phrase_id=@"";///每次点击获取验证码把上次的缓存清空
-    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,tuxingYZMurl] Dictionary:nil success:^(id  _Nullable responseObject) {
-        //        NSLog(@"post responseObject == %@",responseObject);
-//        [UHud hideLoadHudForView:self.view];
-        [UHud hideLoadHud];
-                NSDictionary *dict=(NSDictionary *)responseObject;
-                NSNumber * code = [dict objectForKey:@"error"];
-                if([code intValue]==0)
-                {
-                    NSDictionary *dictdata =[dict objectForKey:@"data"];
-                    self->phrase_id=[dictdata objectForKey:@"phrase_id"];
-                    self->captcha_data=[dictdata objectForKey:@"captcha_data"];
-                    [self updatetuxingBtn];
-//                    [UHud showSuccessWithStatus:@"获取成功" delay:2.f];
-//                }else if([code intValue]==20){
-                }else{
-                    NSString * message = [dict objectForKey:@"message"];
-                    [UHud showTXTWithStatus:message delay:2.f];
-                }
-            } failure:^(NSError * _Nullable error) {
-                [UHud hideLoadHud];
-                NSLog(@"shareManager error == %@",error);
-                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
-            }];
-}
+//-(void)ZC_touch:(id)sender
+//{
+//    
+//}
 
 -(void)getCodeBtn_touch:(id)sender
 {
@@ -249,92 +184,127 @@ static CGFloat INTERVAL_KEYBOARD = 500;
         [UHud showTXTWithStatus:@"请输入正确的邮箱" delay:2.f];
     }
 }
--(void)updatetuxingBtn
+
+
+-(void)XG_touch:(id)sender
 {
-    [self.TuXingCodeBtn setImage:[captcha_data isEqualToString:@""]?[UIImage imageNamed:@"image"]:[self base64Image:captcha_data] forState:(UIControlStateNormal)];
+//
+//    if(self.Type==1)
+//    {
+        [self ChongzhiEmail];
+//    }else if(self.Type==2)
+//    {
+//        [self BangdingEmail];
+//    }
+    
+    
 }
--(void)Login_touch:(id)sender
+-(void)ChongzhiEmail
 {
-    __block LoginViewController *weakSelf = self;
-    if(self.emailTextfield.text.length>0)
-    {
-        if(self.passwordTextfield.text.length>0)
+    [UHud showHUDLoading];
+    __block emailCZViewController *weakSelf = self;
+    NSDictionary * dict =[[NSDictionary alloc] init];
+    
+        dict =@{@"email":self.emailTextfield.text,@"new_password":self.passwordTextfield.text,@"captcha":self.CodeTextfield.text,@"phrase_id":phrase_id};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,resetemaliPW] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
         {
-            if(self.CodeTextfield.text.length>0)
-            {
-                if(![phrase_id isEqualToString:@""])
-                {
-                    [UHud showHUDLoading];
-                    NSDictionary * dict =[[NSDictionary alloc] init];
-                    if(self.menuIndex==1)
-                    {
-                        dict =@{@"username":self.emailTextfield.text,@"password":self.passwordTextfield.text,@"captcha":self.CodeTextfield.text,@"phrase_id":phrase_id};
-                    }else if(self.menuIndex==2)
-                    {
-                        dict =@{@"username":self.emailTextfield.text,@"password":self.passwordTextfield.text,@"captcha":self.CodeTextfield.text,@"phrase_id":phrase_id};
-                    }
-                    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,loginURL] Dictionary:dict success:^(id  _Nullable responseObject) {
-                //        NSLog(@"post responseObject == %@",responseObject);
-                        [UHud hideLoadHud];
-                        NSDictionary *dict=(NSDictionary *)responseObject;
-                        NSNumber * code = [dict objectForKey:@"error"];
-                        if([code intValue]==0)
-                        {
-                            NSDictionary *dictdata=[dict objectForKey:@"data"];
-                            NSDictionary *userdata =[dictdata objectForKey:@"user"];
-                            NSString * email = [userdata objectForKey:@"email"];
-                            NSNumber * vip_expired_time = [userdata objectForKey:@"vip_expired_time"];
-                            NSString * nickname = [userdata objectForKey:@"nickname"];
-                            NSString * username = [userdata objectForKey:@"username"];
-                            NSString * avatar = [userdata objectForKey:@"avatar"];
-                            
-                            NSDictionary *tokendata =[dictdata objectForKey:@"token"];
-                            NSString * token = [tokendata objectForKey:@"token"];
-                            NSNumber *expired_time=[tokendata objectForKey:@"expired_time"];
-                            [[NSUserDefaults standardUserDefaults] setValue:email forKey:@"UserZH"];
-                            [[NSUserDefaults standardUserDefaults] setValue:nickname forKey:@"nickname"];
-                            [[NSUserDefaults standardUserDefaults] setValue:username forKey:@"username"];
-                            [[NSUserDefaults standardUserDefaults] setValue:avatar forKey:@"avatar"];
-                            [[NSUserDefaults standardUserDefaults] setValue:vip_expired_time forKey:@"vip_expired_time"];
-                            
-                            [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"UserToken"];
-                            [[NSUserDefaults standardUserDefaults] setObject:expired_time forKey:@"expired_time"];
-                            
-                            [UHud showHudWithStatus:@"登录成功" delay:2.f];
-                            dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC));
+            NSDictionary *dictdata=[dict objectForKey:@"data"];
+            NSDictionary *userdata =[dictdata objectForKey:@"user"];
+            NSString * email = [userdata objectForKey:@"email"];
+            NSNumber * vip_expired_time = [userdata objectForKey:@"vip_expired_time"];
+            NSString * nickname = [userdata objectForKey:@"nickname"];
+            NSString * username = [userdata objectForKey:@"username"];
+            NSString * avatar = [userdata objectForKey:@"avatar"];
+            
+            NSDictionary *tokendata =[dictdata objectForKey:@"token"];
+            NSString * token = [tokendata objectForKey:@"token"];
+            NSNumber *expired_time=[tokendata objectForKey:@"expired_time"];
+            [[NSUserDefaults standardUserDefaults] setValue:email forKey:@"UserZH"];
+            [[NSUserDefaults standardUserDefaults] setValue:nickname forKey:@"nickname"];
+            [[NSUserDefaults standardUserDefaults] setValue:username forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults] setValue:avatar forKey:@"avatar"];
+            [[NSUserDefaults standardUserDefaults] setValue:vip_expired_time forKey:@"vip_expired_time"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"UserToken"];
+            [[NSUserDefaults standardUserDefaults] setObject:expired_time forKey:@"expired_time"];
+            
+            [UHud showHudWithStatus:@"重置成功" delay:2.f];
+            dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC));
 
-                            dispatch_after(delayTime, dispatch_get_main_queue(), ^{
-                                [weakSelf popViewcontroller];
-                            });
-                        }else{
-                            NSString * message = [dict objectForKey:@"message"];
-                            [UHud showHudWithStatus:message delay:2.f];
-                        }
-
-                    } failure:^(NSError * _Nullable error) {
-                        [UHud hideLoadHud];
-                        NSLog(@"shareManager error == %@",error);
-                        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
-                    }];
-                }else{
-                    [UHud showTXTWithStatus:@"没有获取验证码" delay:2.f];
-                }
-            }else{
-                [UHud showTXTWithStatus:@"验证码长度不能为空" delay:2.f];
-            }
+            dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+                [weakSelf popViewcontroller];
+            });
         }else{
-            [UHud showTXTWithStatus:@"密码长度不能为空" delay:2.f];
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showHudWithStatus:message delay:2.f];
         }
-    }else{
-        [UHud showTXTWithStatus:@"邮箱长度不能为空" delay:2.f];
-    }
-    
-    
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
 }
+-(void)BangdingEmail
+{
+    [UHud showHUDLoading];
+    __block emailCZViewController *weakSelf = self;
+    NSDictionary * dict =[[NSDictionary alloc] init];
+    dict =@{@"email":self.emailTextfield.text,@"new_password":self.passwordTextfield.text,@"captcha":self.CodeTextfield.text,@"phrase_id":phrase_id};
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,bangdingEmail] Dictionary:dict success:^(id  _Nullable responseObject) {
+//        NSLog(@"post responseObject == %@",responseObject);
+        [UHud hideLoadHud];
+        NSDictionary *dict=(NSDictionary *)responseObject;
+        NSNumber * code = [dict objectForKey:@"error"];
+        if([code intValue]==0)
+        {
+            NSDictionary *dictdata=[dict objectForKey:@"data"];
+            NSDictionary *userdata =[dictdata objectForKey:@"user"];
+            NSString * email = [userdata objectForKey:@"email"];
+            NSNumber * vip_expired_time = [userdata objectForKey:@"vip_expired_time"];
+            NSString * nickname = [userdata objectForKey:@"nickname"];
+            NSString * username = [userdata objectForKey:@"username"];
+            NSString * avatar = [userdata objectForKey:@"avatar"];
+            
+            NSDictionary *tokendata =[dictdata objectForKey:@"token"];
+            NSString * token = [tokendata objectForKey:@"token"];
+            NSNumber *expired_time=[tokendata objectForKey:@"expired_time"];
+            [[NSUserDefaults standardUserDefaults] setValue:email forKey:@"UserZH"];
+            [[NSUserDefaults standardUserDefaults] setValue:nickname forKey:@"nickname"];
+            [[NSUserDefaults standardUserDefaults] setValue:username forKey:@"username"];
+            [[NSUserDefaults standardUserDefaults] setValue:avatar forKey:@"avatar"];
+            [[NSUserDefaults standardUserDefaults] setValue:vip_expired_time forKey:@"vip_expired_time"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:token forKey:@"UserToken"];
+            [[NSUserDefaults standardUserDefaults] setObject:expired_time forKey:@"expired_time"];
+            
+            [UHud showHudWithStatus:@"重置成功" delay:2.f];
+            dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC));
+
+            dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+                [weakSelf popViewcontroller];
+            });
+        }else{
+            NSString * message = [dict objectForKey:@"message"];
+            [UHud showHudWithStatus:message delay:2.f];
+        }
+
+    } failure:^(NSError * _Nullable error) {
+        [UHud hideLoadHud];
+        NSLog(@"shareManager error == %@",error);
+        [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+    }];
+}
+
 
 -(void)popViewcontroller
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 - (void)verifyEvent
 {
@@ -363,20 +333,17 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     }
 }
 
-
-
 -(void)addtopview
 {
-    
+    self.menuIndex = 1;
     topView=[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.centerView.width, 40)];
-    
     topView.backgroundColor=[UIColor clearColor];
     [self.centerView addSubview:topView];
     UIButton *button1 = [[UIButton alloc] init];
-    button1.frame = CGRectMake(0,2,((topView.width-2)/2)-1,38);
+    button1.frame = CGRectMake(0,2,(topView.width),38);
     button1.alpha = 1;
     button1.layer.cornerRadius = 10;
-    [button1 setTitle:@"用户名登录" forState:(UIControlStateNormal)];
+    [button1 setTitle:@"邮箱重置密码" forState:(UIControlStateNormal)];
     [button1 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
     button1.selected=YES;
 //    [button1.layer insertSublayer:[self selectLayer:CGRectMake(0, 0, button1.width, button1.height)]atIndex:0];
@@ -388,71 +355,62 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     button2.frame = CGRectMake(button1.right+1,2,((topView.width-2)/2)-1,38);
     button2.alpha = 1;
     button2.layer.cornerRadius = 10;
-    [button2 setTitle:@"邮箱登录" forState:(UIControlStateNormal)];
+    [button2 setTitle:@"" forState:(UIControlStateNormal)];
     [button2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
     button2.selected=NO;
 //    [button2.layer insertSublayer:[self NormalLayer:CGRectMake(0, 0, button2.width, button2.height)]atIndex:0];
     [button2 addTarget:self action:@selector(touchTwo:) forControlEvents:(UIControlEventTouchUpInside)];
     [topView addSubview:button2];
     self.menuBtn2=button2;
-    
+    self.menuBtn2.hidden=YES;///// 不需要这个按钮  屏蔽
+    [self touchTwo:nil];
 }
 -(void)touchOne:(id)sender
 {
-  
-    
-    if(self.menuIndex==2)
+    /*
+    if(self.menuBtn1.selected==NO)
     {
-
+//        [self.menuBtn1.layer insertSublayer:[self selectLayer:CGRectMake(0, 0, self.menuBtn1.width, self.menuBtn1.height)]atIndex:0];
+//        [self.menuBtn2.layer insertSublayer:[self NormalLayer:CGRectMake(0, 0, self.menuBtn2.width, self.menuBtn2.height)]atIndex:0];
         [self.menuBtn1 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
         [self.menuBtn2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
-        self.getCodeBtn.hidden=YES;
-        self.TuXingCodeBtn.hidden=NO;
-        self.CodeView.hidden=NO;
-    //    self.centerView.backgroundColor=[UIColor orangeColor];
-//        self.centerView.frame = CGRectMake(30, 252, self.view.width-60, 210-40);
-        self.centerView.frame = CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 210);
-        [self setyinying];
-
-        self.backBtn.frame = CGRectMake(30,self.centerView.bottom+15,((self.view.width-68)/2)-5,46);
-        self.LoginBtn.frame = CGRectMake(self.backBtn.right+10,self.centerView.bottom+15,((self.view.width-68)/2)-5,46);
     }
+    self.CodeView.hidden=YES;
+//    self.centerView.backgroundColor=[UIColor orangeColor];
+    
+    self.centerView.frame = CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 210-40);
+    self.centerView.layer.cornerRadius=6;
+    [self setyinying];
 
-    [self setBorderWithView:self.menuBtn1 top:NO left:NO bottom:YES right:NO borderColor:RGB(20, 155, 236) borderWidth:0.5];
-    [self setBorderWithView:self.menuBtn2 top:NO left:NO bottom:YES right:NO borderColor:RGB(255, 255, 255) borderWidth:0.5];
-    self.emailTextfield.placeholder=@"请输入用户名";
-    self.menuIndex=1;
+//    [self setBorderWithView:self.menuBtn1 top:NO left:NO bottom:YES right:NO borderColor:RGB(20, 155, 236) borderWidth:0.5];
+//    [self setBorderWithView:self.menuBtn2 top:NO left:NO bottom:YES right:NO borderColor:RGB(255, 255, 255) borderWidth:0.5];
+    self.emailTextfield.placeholder=@"请输入邮箱";
+    self.menuIndex = 1;
     self.menuBtn1.selected=YES;
     self.menuBtn2.selected=NO;
+     */
 }
 -(void)touchTwo:(id)sender
 {
-   
-    
-    if(self.menuIndex==1)
+    if(self.menuBtn2.selected==NO)
     {
-
+        
         [self.menuBtn1 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
         [self.menuBtn2 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
-//        self.getCodeBtn.hidden=NO;
-        self.getCodeBtn.hidden=YES;
-        self.TuXingCodeBtn.hidden=NO;
-        self.CodeView.hidden=NO;
-        
-        self.centerView.frame = CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 210);
-        [self setyinying];
-
-        self.backBtn.frame = CGRectMake(30,self.centerView.bottom+15,((self.view.width-68)/2)-5,46);
-        self.LoginBtn.frame = CGRectMake(self.backBtn.right+10,self.centerView.bottom+15,((self.view.width-68)/2)-5,46);
     }
+    self.CodeView.hidden=NO;
+    self.centerView.frame = CGRectMake(30, self.topImageBg.bottom+60, self.view.width-60, 210);
+//    self.centerView.backgroundColor=[UIColor grayColor];
+    self.centerView.layer.cornerRadius=6;
+    [self setyinying];
     
     
     [self setBorderWithView:self.menuBtn2 top:NO left:NO bottom:YES right:NO borderColor:RGB(20, 155, 236) borderWidth:0.5];
     [self setBorderWithView:self.menuBtn1 top:NO left:NO bottom:YES right:NO borderColor:RGB(255, 255, 255) borderWidth:0.5];
     self.emailTextfield.placeholder=@"请输入邮箱";
+    self.menuIndex = 2;
     self.menuBtn1.selected=NO;
     self.menuBtn2.selected=YES;
-    self.menuIndex=2;
 }
 -(CAGradientLayer*)selectLayer:(CGRect)frame
 {
@@ -476,8 +434,6 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     gl.locations = @[@(0),@(1.0f)];
     return gl;
 }
-
-
 - (void)setBorderWithView:(UIView *)view top:(BOOL)top left:(BOOL)left bottom:(BOOL)bottom right:(BOOL)right borderColor:(UIColor *)color borderWidth:(CGFloat)width
 {
     if (top) {
@@ -523,6 +479,12 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 
 
 
+
+
+
+
+
+
 #pragma mark - 键盘通知
 - (void)addNoticeForKeyboard {
     
@@ -541,8 +503,8 @@ static CGFloat INTERVAL_KEYBOARD = 500;
     CGFloat kbHeight = [[notification.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue].size.height;
     
     //计算出键盘顶端到inputTextView panel底端的距离(加上自定义的缓冲距离INTERVAL_KEYBOARD)
-    NSLog(@"%f      =    %f ",(self.LoginBtn.bottom+kbHeight+40),SCREENH_HEIGHT);
-    CGFloat offset = (self.LoginBtn.bottom+kbHeight+40) - (SCREENH_HEIGHT);
+    NSLog(@"%f      =    %f ",(self.XGBtn.bottom+kbHeight+40),SCREENH_HEIGHT);
+    CGFloat offset = (self.XGBtn.bottom+kbHeight+40) - (SCREENH_HEIGHT);
     
     // 取得键盘的动画时间，这样可以在视图上移的时候更连贯
     double duration = [[notification.userInfo objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
@@ -555,11 +517,6 @@ static CGFloat INTERVAL_KEYBOARD = 500;
         }];
     }
 }
-
-
-
-
-
 
 ///键盘消失事件
 - (void) keyboardWillHide:(NSNotification *)notify {
@@ -647,8 +604,6 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     [self.view endEditing:YES];
 }
-
-
 
 
 

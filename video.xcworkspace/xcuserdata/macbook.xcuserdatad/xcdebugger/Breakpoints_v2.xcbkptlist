@@ -128,7 +128,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "345"
             endingLineNumber = "345"
-            landmarkName = "-TitleTouch:"
+            landmarkName = "-historyBtnEvent"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -144,7 +144,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "349"
             endingLineNumber = "349"
-            landmarkName = "-btnTouch:"
+            landmarkName = "-TitleTouch:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -225,6 +225,38 @@
             startingLineNumber = "322"
             endingLineNumber = "322"
             landmarkName = "-kj_stop"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "82A4CC73-B086-4C5D-8785-E0A6A5B01B6E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "video/Controller/&#x6211;&#x7684;/&#x767b;&#x5f55;&#x6a21;&#x5757;/&#x90ae;&#x7bb1;&#x7ed1;&#x5b9a;/EmailBDViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "259"
+            endingLineNumber = "259"
+            landmarkName = "-PostBangdingEmail"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7721A452-6D55-40D6-88E6-6B6D2F3139E2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "video/Controller/&#x6211;&#x7684;/&#x767b;&#x5f55;&#x6a21;&#x5757;/&#x90ae;&#x7bb1;&#x7ed1;&#x5b9a;/EmailBDViewController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "262"
+            endingLineNumber = "262"
+            landmarkName = "-PostBangdingEmail"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

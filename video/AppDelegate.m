@@ -68,7 +68,7 @@
             UITableView.appearance.contentInsetAdjustmentBehavior = UIScrollViewContentInsetAdjustmentNever;
 
         }
-    
+    [[UINavigationBar appearance] setTintColor:[UIColor blackColor]];//返回按钮的箭头颜色
     [[UIBarButtonItem appearance] setTitleTextAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:0.f], NSForegroundColorAttributeName: [UIColor blackColor]} forState:UIControlStateNormal];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     //   使用NSUserDefaults来判断程序是否第一次启动

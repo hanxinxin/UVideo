@@ -112,7 +112,7 @@ static char BlankViewKey;
         }
         else if(blankPageType == EaseBlankEmptyData)
         {
-            _monkeyView.image = [UIImage imageNamed:@"image"];
+            _monkeyView.image = [UIImage imageNamed:@"Uloding"];
             _titleLabel.text = DqLocalizedString(@"no_data");
         }
         

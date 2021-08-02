@@ -70,6 +70,13 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 
 @property (nonatomic, assign) NSInteger SXpage;///筛选 page
 @property (nonatomic, strong) VDHomeOneViewController* OneVc ;
+
+////
+@property (nonatomic, strong) UIView *tapView;
+@property (nonatomic, strong) UILabel *countLabel;
+@property (nonatomic, strong) UILabel *numLabel;
+@property (nonatomic, strong) UIImageView *tapImageView;
+
 @end
 
 @implementation HomeViewController
@@ -195,7 +202,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
         //注册、接收通知
 
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(UpdateV:) name:@"notificationVUP"object:nil];
-    
+    [self creatTapImageView];
 }
 
 -(void)UpdateV:(NSNotification *)noti
@@ -849,7 +856,17 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     }else{
         self.tittleView.alpha = 1;
     }
+        
+        if (scrollView.contentOffset.y > 200) {
+            self.tapView.hidden = NO;
+
+        }else{
+            self.tapView.hidden = YES;
+
+        }
     }
+    
+    
 }
 -(UIView *)tittleView{
     if (!_tittleView) {
@@ -1070,4 +1087,133 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     avc.Zvideomodel= mode;
     [self pushRootNav:avc animated:YES];
 }
+
+
+
+
+
+
+
+
+
+- (void)creatTapImageView {
+    
+
+    self.tapView = [[UIView alloc] initWithFrame:CGRectMake(self.view.width - 55, SCREENH_HEIGHT -kNavAndTabHeight -100, 35, 35)];
+
+    [self.view addSubview:_tapView];
+
+    [self.view bringSubviewToFront:_tapView];
+
+    _tapView.backgroundColor = RGBA(51, 51, 51, 0.6);
+
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoTopView:)];
+
+    _tapView.hidden = YES;
+
+    [_tapView addGestureRecognizer:tapGesture];
+
+    _tapView.layer.masksToBounds = YES;
+
+    _tapView.layer.cornerRadius = 4;
+
+    _tapView.layer.borderWidth = 0;
+
+    _tapView.layer.borderColor = RGB(215,215,215).CGColor;
+    [self.view bringSubviewToFront:_tapView];
+    
+    [self.view insertSubview:self.tapView aboveSubview:self.collectionView];
+    
+
+//    self.countLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 50, 20)];
+//
+//    [self.tapView addSubview:_countLabel];
+//
+//    _countLabel.textAlignment = NSTextAlignmentCenter;
+//
+//    _countLabel.text = @"";
+//
+//    _countLabel.font = Font(14);
+//
+//    _countLabel.textColor = RGB(120, 120, 120);
+//
+//
+//
+//    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(7, 25, 36, 1)];
+//
+//    [_tapView addSubview:line];
+//
+//    line.backgroundColor = RGB(215,215,215);
+//
+//    line.backgroundColor = [UIColor blackColor];
+//
+//    self.numLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 25, 50, 20)];
+//
+//    [self.tapView addSubview:_numLabel];
+//
+//    _numLabel.textAlignment = NSTextAlignmentCenter;
+//
+//    _numLabel.text = @"";
+//
+//    _numLabel.font = Font(14);
+//
+//    _numLabel.textColor = RGB(120, 120, 120);
+
+    
+
+    self.tapImageView = [[UIImageView alloc] initWithFrame:CGRectMake((self.tapView.width-20)/2, (self.tapView.height-18)/2, 20, 18)];
+
+    _tapImageView.image = [UIImage imageNamed:@"zhidingImage"];
+
+    [_tapView addSubview:_tapImageView];
+
+    
+
+}
+
+- (void)gotoTopView:(UITapGestureRecognizer *)gesture {
+//    [self.ZScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    [self.collectionView setContentOffset:CGPointMake(0, 0) animated:YES];
+
+
+
+}
+//开始拖动
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    
+
+    self.tapImageView.hidden = YES;
+
+    
+
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+
+    self.tapImageView.hidden = NO;
+
+    
+
+}
+
+
+//
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+//
+//
+//    if (scrollView.contentOffset.y > 200) {
+//        self.tapView.hidden = NO;
+//
+//    }else{
+//        self.tapView.hidden = YES;
+//
+//    }
+//
+//
+//
+//}
+
+
 @end

@@ -142,6 +142,9 @@ static NSString * const shopCellReuseID = @"shop";
     [self getbannerData];
 //    [self getmenuData];
     [self getGuanggao_data];
+    
+    
+    [self creatTapImageView];
 }
 -(void)getGuanggao_data
 {
@@ -926,42 +929,42 @@ static NSString * const shopCellReuseID = @"shop";
 
 
 
-//控制头部显示
--(void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    CGFloat offsetY = scrollView.contentOffset.y;
-    
-    if(scrollView.tag==2000)
-    {
-    NSLog(@"scrollView.tag =%ld  offsetY == %lf",(long)scrollView.tag,offsetY);
-    NSLog(@"self.ZScrollView.height = %f",self.ZScrollView.height);
-    if (offsetY > 0 && offsetY < self.TopView.height) {
-        scrollerToRect = offsetY;
-        
-        if (offsetY>120) {
-            self.TopView.frame = CGRectMake(0,  -125, self.view.frame.size.width, self.TopView.height);
-            self.DowntableView.frame = CGRectMake(0, 60, self.view.width, SCREENH_HEIGHT-kNavAndTabHeight-45);
-            return;
-            self.DowntableView.scrollEnabled=YES;
-            self.ZScrollView.scrollEnabled=NO;
-            
-        }else
-        {
-            self.TopView.frame = CGRectMake(0,  -scrollerToRect, self.view.frame.size.width, self.TopView.height);
-            self.DowntableView.frame = CGRectMake(0, self.TopView.bottom+5, self.view.width, self.ZScrollView.height - self.TopView.height + offsetY+5);
-            self.DowntableView.scrollEnabled=NO;
-            self.ZScrollView.scrollEnabled=YES;
-        }
-        
-//        self.DowntableView.scrollEnabled=YES;
-//        self.ZScrollView.scrollEnabled=NO;
-    }else if(offsetY<=0) {
-        self.TopView.frame = CGRectMake(0,  -scrollerToRect, self.view.frame.size.width, self.TopView.height);
-        self.DowntableView.frame = CGRectMake(0, self.TopView.bottom, self.view.width, self.ZScrollView.height - self.TopView.height + offsetY+5);
-        self.DowntableView.scrollEnabled=NO;
-    }else{
-    }
-    }
-}
+////控制头部显示
+//-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+//    CGFloat offsetY = scrollView.contentOffset.y;
+//
+//    if(scrollView.tag==2000)
+//    {
+//    NSLog(@"scrollView.tag =%ld  offsetY == %lf",(long)scrollView.tag,offsetY);
+//    NSLog(@"self.ZScrollView.height = %f",self.ZScrollView.height);
+//    if (offsetY > 0 && offsetY < self.TopView.height) {
+//        scrollerToRect = offsetY;
+//
+//        if (offsetY>120) {
+//            self.TopView.frame = CGRectMake(0,  -125, self.view.frame.size.width, self.TopView.height);
+//            self.DowntableView.frame = CGRectMake(0, 60, self.view.width, SCREENH_HEIGHT-kNavAndTabHeight-45);
+//            return;
+//            self.DowntableView.scrollEnabled=YES;
+//            self.ZScrollView.scrollEnabled=NO;
+//
+//        }else
+//        {
+//            self.TopView.frame = CGRectMake(0,  -scrollerToRect, self.view.frame.size.width, self.TopView.height);
+//            self.DowntableView.frame = CGRectMake(0, self.TopView.bottom+5, self.view.width, self.ZScrollView.height - self.TopView.height + offsetY+5);
+//            self.DowntableView.scrollEnabled=NO;
+//            self.ZScrollView.scrollEnabled=YES;
+//        }
+//
+////        self.DowntableView.scrollEnabled=YES;
+////        self.ZScrollView.scrollEnabled=NO;
+//    }else if(offsetY<=0) {
+//        self.TopView.frame = CGRectMake(0,  -scrollerToRect, self.view.frame.size.width, self.TopView.height);
+//        self.DowntableView.frame = CGRectMake(0, self.TopView.bottom, self.view.width, self.ZScrollView.height - self.TopView.height + offsetY+5);
+//        self.DowntableView.scrollEnabled=NO;
+//    }else{
+//    }
+//    }
+//}
 
 
 
@@ -1047,6 +1050,123 @@ static NSString * const shopCellReuseID = @"shop";
 
 
 
+- (void)creatTapImageView {
+    
 
+    self.tapView = [[UIView alloc] initWithFrame:CGRectMake(self.view.width - 55, SCREENH_HEIGHT -kNavAndTabHeight -100, 35, 35)];
+
+    [self.view addSubview:_tapView];
+
+    [self.view bringSubviewToFront:_tapView];
+
+    _tapView.backgroundColor = RGBA(51, 51, 51, 0.6);
+
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(gotoTopView:)];
+
+    _tapView.hidden = YES;
+
+    [_tapView addGestureRecognizer:tapGesture];
+
+    _tapView.layer.masksToBounds = YES;
+
+    _tapView.layer.cornerRadius = 4;
+
+    _tapView.layer.borderWidth = 0;
+
+    _tapView.layer.borderColor = RGB(215,215,215).CGColor;
+    [self.view bringSubviewToFront:_tapView];
+    
+    [self.view insertSubview:self.tapView aboveSubview:self.ZScrollView];
+    
+
+//    self.countLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 5, 50, 20)];
+//
+//    [self.tapView addSubview:_countLabel];
+//
+//    _countLabel.textAlignment = NSTextAlignmentCenter;
+//
+//    _countLabel.text = @"";
+//
+//    _countLabel.font = Font(14);
+//
+//    _countLabel.textColor = RGB(120, 120, 120);
+//
+//
+//
+//    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(7, 25, 36, 1)];
+//
+//    [_tapView addSubview:line];
+//
+//    line.backgroundColor = RGB(215,215,215);
+//
+//    line.backgroundColor = [UIColor blackColor];
+//
+//    self.numLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 25, 50, 20)];
+//
+//    [self.tapView addSubview:_numLabel];
+//
+//    _numLabel.textAlignment = NSTextAlignmentCenter;
+//
+//    _numLabel.text = @"";
+//
+//    _numLabel.font = Font(14);
+//
+//    _numLabel.textColor = RGB(120, 120, 120);
+
+    
+
+    self.tapImageView = [[UIImageView alloc] initWithFrame:CGRectMake((self.tapView.width-20)/2, (self.tapView.height-18)/2, 20, 18)];
+
+    _tapImageView.image = [UIImage imageNamed:@"zhidingImage"];
+
+    [_tapView addSubview:_tapImageView];
+
+    
+
+}
+
+- (void)gotoTopView:(UITapGestureRecognizer *)gesture {
+//    [self.ZScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    [self.DowntableView setContentOffset:CGPointMake(0, 0) animated:YES];
+
+
+
+}
+//开始拖动
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+    
+
+    self.tapImageView.hidden = YES;
+
+    
+
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    
+
+    self.tapImageView.hidden = NO;
+
+    
+
+}
+
+
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    
+
+    if (scrollView.contentOffset.y > 200) {
+        self.tapView.hidden = NO;
+
+    }else{
+        self.tapView.hidden = YES;
+
+    }
+
+    
+
+}
 
 @end

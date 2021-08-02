@@ -149,7 +149,7 @@
     //导航背景颜色
     UIColor * navBarColor = [_navBarColor copy];
     self.navBarColor = navBarColor;
-
+//    [self.navigationController.navigationBar setShadowImage:[UIImage imageNamed:@"NavbarBG"]];
     self.navBarTranslucent = _navBarTranslucent;
     //状态栏设置
     self.hiddenStatusBar = _hiddenStatusBar;
@@ -199,7 +199,6 @@
 //    self.navigationController.navigationBar.tintColor=[UIColor blackColor];
     //导航背景颜色
     self.navBarColor = GNavBgColor;
-
     self.navBarTranslucent = YES;
 
     //状态栏设置
@@ -349,22 +348,26 @@
 
         //设置导航栏背景图片为一个空的image，这样就透明了
         [navBar setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
-
+        
         //去掉透明后导航栏下边的黑边
         [navBar setShadowImage:[[UIImage alloc] init]];
         //        navBar.layer.masksToBounds = YES;// 去掉横线（没有这一行代码导航栏的最下面还会有一个横线）
 
     }
     else {
-        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.edgesForExtendedLayout = UIRectEdgeAll;
         //    如果不想让其他页面的导航栏变为透明 需要重置
-        [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-        [navBar setShadowImage:nil];
+//        [navBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+//        [navBar setShadowImage:nil];
+        [navBar setBackgroundImage:[UIImage imageNamed:@"NavbarBG"] forBarMetrics:UIBarMetricsDefault];
+        [navBar setShadowImage:[[UIImage alloc] init]];
 
     }
 
 
 }
+
+
 
 #pragma mark- 属性设置
 - (void)setHiddenLeftBtn:(BOOL)hiddenLeftBtn {

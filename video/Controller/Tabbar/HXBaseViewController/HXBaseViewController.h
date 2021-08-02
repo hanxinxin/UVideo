@@ -26,7 +26,8 @@ static int fontSize = 18; ///<导航栏标题文字 字体大小
 #define GNavBtnTitleColorSelect [UIColor colorWithWhite:0.806 alpha:1.000]
 
 //导航栏 颜色
-#define GNavBgColor [UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1]
+//#define GNavBgColor [UIColor colorWithRed:176/255.0 green:221/255.0 blue:247/255.0 alpha:1]
+#define GNavBgColor [UIColor whiteColor]
 
 //默认导航 返回 按钮图标 名称
 #define GNavBackImageName @"leftImage_White" //修改返回图标，通过 backImage

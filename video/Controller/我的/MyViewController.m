@@ -52,7 +52,13 @@
 //    dispatch_after(delayTime, dispatch_get_main_queue(), ^{
 //        [UHud hideLoadHudForView:nil];
 //    });
+    
+    //这里的timg就是那张叶子图Image("NavbarBG")
+       
+//    [self.navigationController.navigationBar setBackgroundImage:[ UIImage imageNamed:@"NavbarBG"] forBarMetrics:UIBarMetricsDefault];
+//    [self.navigationController.navigationBar setShadowImage:[ UIImage imageNamed:@"NavbarBG"]];
 }
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -132,7 +138,7 @@
 //            @"https://img2.baidu.com/it/u=4087057811,445331467&fm=26&fmt=auto&gp=0.jpg"  测试连接
             [self.Headerview.txImage xr_setButtonImageWithUrl:avatar_loca];
         }else{
-            [self.Headerview.txImage setImage:[UIImage imageNamed:@"image"] forState:(UIControlStateNormal)];
+            [self.Headerview.txImage setImage:[UIImage imageNamed:@"Uloding"] forState:(UIControlStateNormal)];
         }
         if(![self StringIsNullOrEmpty:nickname_loca])
         {

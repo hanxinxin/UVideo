@@ -18,6 +18,7 @@
 #import "customerInfoMode.h"
 #import "vipcardcategorylistModel.h"
 
+#import "UIButton+WebCache.h"
 #import "menberJSCollectionViewCell.h"
 
 #define CZCollectionViewCellID @"CZCollectionViewCell"
@@ -382,7 +383,10 @@
     {
         if(![self StringIsNullOrEmpty:avatar_loca])
         {
-            [self.Topview.txImage setImage:[self base64Image:avatar_loca] forState:(UIControlStateNormal)];
+//            [self.Topview.txImage setImage:[self base64Image:avatar_loca] forState:(UIControlStateNormal)];
+            [self.Topview.txImage xr_setButtonImageWithUrl:avatar_loca];
+        }else{
+            [self.Topview.txImage setImage:[UIImage imageNamed:@"Uloding"] forState:(UIControlStateNormal)];
         }
         if(![self StringIsNullOrEmpty:nickname_loca])
         {

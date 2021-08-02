@@ -30,6 +30,8 @@
 //                                                      forBarMetrics:UIBarMetricsDefault];
 //        [self.navigationController.navigationBar setShadowImage:[[UIImage alloc]init]];
     self.navBarColor=RGBA(180, 223, 246, 1);
+    [self setNavBarTranslucent:NO];
+//    [self.navigationController.navigationBar setBackgroundImage:[self imageWithColor:RGBA(20, 155, 236, 1)] forBarMetrics: UIBarMetricsDefault];
     
     
     //渐变gl  [self convertToImage:view]
@@ -54,6 +56,23 @@
 //    self.navigationItem.titleView = _titleView;
 
         [self addLeft_RightButton];
+}
+- (UIImage *)imageWithColor:(UIColor *)color {
+
+    //创建1像素区域并开始绘图
+    CGRect rect = CGRectMake(0, 0, 1, 1);
+    UIGraphicsBeginImageContext(rect.size);
+
+    //创建画板并填充颜色和区域
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+
+    //从画板上获取图片并关闭图片绘图
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+
+    return image;
 }
 -(UIImage*)convertToImage:(UIView*)viewS{
     CGSize s = viewS.bounds.size;

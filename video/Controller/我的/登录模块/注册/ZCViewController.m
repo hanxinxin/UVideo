@@ -185,7 +185,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 }
 -(void)updatetuxingBtn
 {
-    [self.TuXingCodeBtn setImage:[captcha_data isEqualToString:@""]?[UIImage imageNamed:@"image"]:[self base64Image:captcha_data] forState:(UIControlStateNormal)];
+    [self.TuXingCodeBtn setImage:[captcha_data isEqualToString:@""]?[UIImage imageNamed:@"Uloding"]:[self base64Image:captcha_data] forState:(UIControlStateNormal)];
 }
 -(void)getCodeBtn_touch:(id)sender
 {

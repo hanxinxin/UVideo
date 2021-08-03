@@ -404,6 +404,7 @@
 		FA7C8DD22680D64200B1A022 /* MessageInfoMode.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7C8DD12680D64200B1A022 /* MessageInfoMode.m */; };
 		FA7C8DD52680DE0700B1A022 /* msgInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7C8DD42680DE0700B1A022 /* msgInfoView.m */; };
 		FA7C8DD72680DE1800B1A022 /* msgInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7C8DD62680DE1800B1A022 /* msgInfoView.xib */; };
+		FA7FB98126B9701F00B7EE91 /* YYAnimatedImageView+ImageShow.m in Sources */ = {isa = PBXBuildFile; fileRef = FA7FB98026B9701F00B7EE91 /* YYAnimatedImageView+ImageShow.m */; };
 		FA80AD90266CC7B700BF28D8 /* hxplayerDanmuView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA80AD8F266CC7B700BF28D8 /* hxplayerDanmuView.m */; };
 		FA80AD92266CC82400BF28D8 /* hxplayerDanmuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA80AD91266CC82400BF28D8 /* hxplayerDanmuView.xib */; };
 		FA8495F926B596B200B61B66 /* TopLeftLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8495F826B596B200B61B66 /* TopLeftLabel.m */; };
@@ -1314,6 +1315,8 @@
 		FA7C8DD32680DE0700B1A022 /* msgInfoView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = msgInfoView.h; sourceTree = "<group>"; };
 		FA7C8DD42680DE0700B1A022 /* msgInfoView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = msgInfoView.m; sourceTree = "<group>"; };
 		FA7C8DD62680DE1800B1A022 /* msgInfoView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = msgInfoView.xib; sourceTree = "<group>"; };
+		FA7FB97F26B9701F00B7EE91 /* YYAnimatedImageView+ImageShow.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "YYAnimatedImageView+ImageShow.h"; sourceTree = "<group>"; };
+		FA7FB98026B9701F00B7EE91 /* YYAnimatedImageView+ImageShow.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "YYAnimatedImageView+ImageShow.m"; sourceTree = "<group>"; };
 		FA80AD8E266CC7B700BF28D8 /* hxplayerDanmuView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = hxplayerDanmuView.h; sourceTree = "<group>"; };
 		FA80AD8F266CC7B700BF28D8 /* hxplayerDanmuView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = hxplayerDanmuView.m; sourceTree = "<group>"; };
 		FA80AD91266CC82400BF28D8 /* hxplayerDanmuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = hxplayerDanmuView.xib; sourceTree = "<group>"; };
@@ -3428,6 +3431,7 @@
 		8A9C563C25F8A17B00EFA410 /* custom */ = {
 			isa = PBXGroup;
 			children = (
+				FA7FB97E26B9700300B7EE91 /* YYAnimatedImageViewC */,
 				FA993BAD26774A1200C6F298 /* ios模型自动生成工具 */,
 				FAA6DEFB2675C77500DE5E7C /* 图片剪切 */,
 				FAA6DEF32675C66700DE5E7C /* 底部选择框 */,
@@ -3728,6 +3732,15 @@
 				FA8A03962667D79000B41281 /* menberViewTS.xib */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		FA7FB97E26B9700300B7EE91 /* YYAnimatedImageViewC */ = {
+			isa = PBXGroup;
+			children = (
+				FA7FB97F26B9701F00B7EE91 /* YYAnimatedImageView+ImageShow.h */,
+				FA7FB98026B9701F00B7EE91 /* YYAnimatedImageView+ImageShow.m */,
+			);
+			path = YYAnimatedImageViewC;
 			sourceTree = "<group>";
 		};
 		FA80AD8D266CC7A900BF28D8 /* hxView */ = {
@@ -4568,6 +4581,7 @@
 				8AE01BB826625E560031C82F /* KFView.m in Sources */,
 				8AE01B8B266252A90031C82F /* PWView.m in Sources */,
 				8A95C2F9265A5C7B00A6D144 /* KJBasePlayer.m in Sources */,
+				FA7FB98126B9701F00B7EE91 /* YYAnimatedImageView+ImageShow.m in Sources */,
 				8A95C309265A5C7B00A6D144 /* KJListPlayerVC.m in Sources */,
 				8AA0B85326B2D041009BFA4C /* KJPlayerHintTextLayer.m in Sources */,
 				FA7A80732678DE7F001B62AA /* VDxfViewController.m in Sources */,

@@ -17,7 +17,8 @@ typedef enum {
     XMPlayerViewAiqiyiVideoType = 1,  // 爱奇艺视频
     XMPlayerViewTwoSynVideoType = 2,  // 两个同步视频
 } XMPlayerViewType;
-
+typedef void(^XMPlayerViewTimeBlock)(float timecount); //
+typedef void(^XMPlayerViewTiaoGuoBlock)(NSInteger index);
 @interface XMPlayerView : UIView
 
 /**
@@ -66,6 +67,18 @@ typedef enum {
 
 @property (nonatomic, assign) XMPlayerViewType playerViewType;
 
+@property (nonatomic,copy) XMPlayerViewTimeBlock timecountBlock;
+@property (nonatomic,copy) XMPlayerViewTiaoGuoBlock touchBlock;
+
+@property (nonatomic,strong) UIButton* TG_guanggaoBtn;
+
+///播放状态  暂停和开始
+@property (nonatomic, assign) BOOL isPlayAndPause;
+// 播放
+- (void)play;
+
+// 暂停
+- (void)pause;
 /**
  设置地址
  */
@@ -73,5 +86,6 @@ typedef enum {
 
 -(void)tapAction;
 
+///隐藏 进度条 其他所有按钮 除暂停播放按钮
 -(void)hiddenView;
 @end

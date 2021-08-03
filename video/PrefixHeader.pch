@@ -88,6 +88,7 @@
 #import "UIScrollView+CMHRefresh.h"
 #import "YYCache+CMHHelper.h"
 #import "SAMKeychain+CMHUtil.h"
+#import "YYAnimatedImageView+ImageShow.h"
 // UIKit
 #import "MHButton.h"
 

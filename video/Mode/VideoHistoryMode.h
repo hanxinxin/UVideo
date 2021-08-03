@@ -14,8 +14,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface VideoHistoryMode : NSObject
 @property (nonatomic, assign) double video_comment;
-@property (nonatomic, assign) double video_duration;
+@property (nonatomic, assign) double video_fragment_id;
 @property (nonatomic, assign) double video_appreciate;
+@property (nonatomic, assign) double video_duration;
 @property (nonatomic, copy) NSString *video_state;
 @property (nonatomic, assign) double create_time;
 @property (nonatomic, assign) double video_favorite;
@@ -42,6 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) double video_parent_category_id;
 @property (nonatomic, copy) NSString *last_fragment_symbol;
 @end
+
+
+
 
 NS_ASSUME_NONNULL_END
 

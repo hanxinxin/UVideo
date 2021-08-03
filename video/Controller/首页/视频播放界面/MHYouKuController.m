@@ -52,9 +52,12 @@
 
 
 
-@property(nonatomic,strong)KJIJKPlayer *GuangGaoplayer;
-@property(nonatomic,strong)KJBasePlayerView *GuangGaoPlayerView;
+//@property(nonatomic,strong)KJIJKPlayer *GuangGaoplayer;
+//@property(nonatomic,strong)KJBasePlayerView *GuangGaoPlayerView;
 //@property(nonatomic,strong)NSArray *temps;
+
+@property(nonatomic,strong)XMPlayerView*GuangGaoplayerView;
+
 
 @property (nonatomic ,strong) UIButton *btn;//缓存按钮
 
@@ -157,6 +160,11 @@
 
 
 @property (nonatomic, assign)BOOL isHiddenHomeIndicator;
+
+
+@property(nonatomic,assign)NSString * guanggaoVideoURL;
+@property (nonatomic, strong)GuanggaoMode*GuanggaoVideoMode;
+
 @end
 
 @implementation MHYouKuController
@@ -218,9 +226,9 @@
             [self.player kj_stop];
             _player = nil;
         }
-        if (_GuangGaoplayer) {
-            [self.GuangGaoplayer kj_stop];
-            _GuangGaoplayer = nil;
+        if (self.GuangGaoplayerView) {
+            [self.GuangGaoplayerView pause];
+            self.GuangGaoplayerView = nil;
         }
     }
 }
@@ -234,9 +242,9 @@
             [self.player kj_stop];
             _player = nil;
         }
-        if (_GuangGaoplayer) {
-            [self.GuangGaoplayer kj_stop];
-            _GuangGaoplayer = nil;
+        if (self.GuangGaoplayerView) {
+            [self.GuangGaoplayerView pause];
+            self.GuangGaoplayerView = nil;
         }
     }
 }
@@ -246,6 +254,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self getVideoGuanggao_data];
+    
+    
+    
     [self SetData];
     // 初始化
     [self _setup];
@@ -264,12 +277,13 @@
     
 //    ///设置 playerView
     [self setPlayerView];
-    
+    //// 加载 广告视频播放器
+    [self setGuanggaoView];
     ///加载提示框
     [self addmenberViewM];
     
-    [self getVideoGuanggao_data];
-    [self setGuanggaoView];
+    
+    
     /// 键盘
 //    [self addNoticeForKeyboard];
 }
@@ -279,20 +293,67 @@
     XMPlayerView *playerView = [[XMPlayerView alloc] init];
     playerView.frame = self.playerView.frame;
     playerView.playerViewType = XMPlayerViewAiqiyiVideoType;
-    playerView.videoURL = [NSURL URLWithString:@"https://mp4.vjshi.com/2018-03-30/1f36dd9819eeef0bc508414494d34ad9.mp4"];
+//    playerView.videoURL = [NSURL URLWithString:@"https://mp4.vjshi.com/2018-03-30/1f36dd9819eeef0bc508414494d34ad9.mp4"];
     [self.view addSubview:playerView];
+    self.GuangGaoplayerView=playerView;
     [playerView show];
-    
+    [playerView hiddenView];
     // 监听屏幕旋转方向
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(orientationHandler)
                                                  name:UIDeviceOrientationDidChangeNotification
                                                object:nil
      ];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-        [playerView tapAction];
-        });
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//        [playerView tapAction];
+//        });
 //    self.player.videoURL = [NSURL URLWithString:self.temps[sender.tag-520]];
+    __weak typeof(self) weakSelf = self;
+    self.GuangGaoplayerView.timecountBlock = ^(float timecount) {
+        NSLog(@"timecount== %f",timecount);
+//        self.GuangGaoplayerView.
+        if((int)timecount == (int)self.GuanggaoVideoMode.duration)
+        {
+            [weakSelf.GuangGaoplayerView tapAction];
+            [weakSelf.player kj_play];
+        }
+    };
+    self.GuangGaoplayerView.touchBlock = ^(NSInteger index) {
+        if(index==0)
+        {
+            if([usertoken isEqualToString:@""])
+            {
+                [UHud showHudWithStatus:@"请先登录" delay:2.f];
+                LoginViewController * avc = [[LoginViewController alloc] init];
+                [weakSelf pushRootNav:avc animated:YES];
+            }else{
+                
+                //////会员才能看蓝光
+                if([vip_expired_time_loca intValue]!=0)
+                {
+                    NSString * vipStr=[vip_expired_time_loca stringValue];
+                    NSString * dqStr=[weakSelf gs_getCurrentTimeBySecond];
+                    NSDate * timeStampToDate1 = [NSDate dateWithTimeIntervalSince1970:[dqStr doubleValue]];
+                    NSDate * timeStampToDate2 = [NSDate dateWithTimeIntervalSince1970:[vipStr doubleValue]];
+                    NSLog(@"[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]=====   %d",[weakSelf compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]);
+                    if([weakSelf compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]!=1)/////   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
+                    {
+                        
+                        [weakSelf.GuangGaoplayerView tapAction];
+                        [weakSelf.player kj_play];
+                        
+                    }else{
+                        [weakSelf showmenberViewTS];
+                    }
+                }else{
+                    [weakSelf showmenberViewTS];
+                    
+                }
+            }
+            
+        }
+
+    };
 }
 // 屏幕旋转处理
 - (void)orientationHandler {
@@ -384,6 +445,35 @@
                     NSURL *parsedUrl = [[SWCP2pEngine sharedInstance] parseStreamURL:originalUrl];
 //                    NSURL *parsedUrl =[[SWCP2pEngine sharedInstance]parseStreamURL:originalUrl withVideoId:video_id];
                     self.player.videoURL = parsedUrl;
+                    if(self.GuanggaoVideoMode)
+                    {
+                        //////会员才能看蓝光
+                        if([vip_expired_time_loca intValue]!=0)
+                        {
+                            NSString * vipStr=[vip_expired_time_loca stringValue];
+                            NSString * dqStr=[self gs_getCurrentTimeBySecond];
+                            NSDate * timeStampToDate1 = [NSDate dateWithTimeIntervalSince1970:[dqStr doubleValue]];
+                            NSDate * timeStampToDate2 = [NSDate dateWithTimeIntervalSince1970:[vipStr doubleValue]];
+                            NSLog(@"[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]=====   %d",[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]);
+                            if([self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]!=1)/////   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
+                            {
+                                
+                                [self.GuangGaoplayerView tapAction];
+                                [self.player kj_play];
+                                
+                            }else{
+//                                [self showmenberViewTS];
+                            }
+                        }else{
+                            [self.GuangGaoplayerView show];
+                            [self.GuangGaoplayerView setVideoURL:[NSURL URLWithString:self.GuanggaoVideoMode.source]];
+                            [self.GuangGaoplayerView play];
+                            [self.player kj_pause];
+                        }
+                        
+                    }else{
+                        [self.player kj_play];
+                    }
                     NSArray * qualities = [dataArr objectForKey:@"qualities"];
                     NSArray * subtitles = [dataArr objectForKey:@"subtitles"];
                     
@@ -488,9 +578,14 @@
             NSDictionary * dataAD = [datadict objectForKey:@"ad"];
 //            [DYModelMaker DY_makeModelWithDictionary:dataAD modelKeyword:@"Guanggao" modelName:@"Mode"];
             GuanggaoMode * VideoGGmodel=[GuanggaoMode yy_modelWithDictionary:dataAD];
-//            NSString * urlstr = [dataAD objectForKey:@"source"];
+            
             if(VideoGGmodel)
             {
+                self.GuanggaoVideoMode=VideoGGmodel;
+                NSString * urlstr = [dataAD objectForKey:@"source"];
+                self.guanggaoVideoURL=urlstr;
+                self.GuangGaoplayerView.videoURL=[NSURL URLWithString:self.guanggaoVideoURL];
+                [self.GuangGaoplayerView pause];
 //                self.GGimageview.yy_imageURL=[NSURL URLWithString:self.GuanggaoModeA.source];
                 NSLog(@"有视频广告");
             }
@@ -775,7 +870,7 @@
                     NSLog(@"要进入下一集");
                     if(tgFalg==1)
                     {
-                        [self.player kj_displayHintText:@"跳过片头，自动播放" time:3 position:KJPlayerHintPositionLeftBottom];
+                        [self.player kj_displayHintText:@"已跳过片尾，自动播放" time:4 position:KJPlayerHintPositionLeftBottom];
         //                self.JiLutime=0;
         //                self.OldJiLutime=0;
         //                self.xuanjiSelectIndex+=1;
@@ -797,7 +892,7 @@
             {
                 NSLog(@"跳过片头");
     //            self.DQfront_duration=0;
-                [self.player kj_displayHintText:@"跳过片头，自动播放" time:2 position:KJPlayerHintPositionLeftBottom];
+                [self.player kj_displayHintText:@"已跳过片头，自动播放" time:4 position:KJPlayerHintPositionLeftBottom];
                 self.player.kVideoAdvanceAndReverse(self.DQfront_duration, nil);
                 tgFalg+=1;
             }

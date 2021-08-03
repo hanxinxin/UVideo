@@ -505,8 +505,9 @@
                 [self.Listarray2 removeAllObjects];
                 for (int i =0; i<video_history_list.count; i++) {
                     NSDictionary * video_history =video_history_list[i];
-                    VideoHistoryMode* model= [VideoHistoryMode yy_modelWithDictionary:video_history];
+                    
 //                    [DYModelMaker DY_makeModelWithDictionary:video_history modelKeyword:@"Video" modelName:@"historyMode"];
+                    VideoHistoryMode* model= [VideoHistoryMode yy_modelWithDictionary:video_history];
                     [self.Listarray2 addObject:model];
                 }
                 }

@@ -386,7 +386,8 @@
 //            [self.Topview.txImage setImage:[self base64Image:avatar_loca] forState:(UIControlStateNormal)];
             [self.Topview.txImage xr_setButtonImageWithUrl:avatar_loca];
         }else{
-            [self.Topview.txImage setImage:[UIImage imageNamed:@"Uloding"] forState:(UIControlStateNormal)];
+//            [self.Topview.txImage setImage:[UIImage imageNamed:@"Uloding"] forState:(UIControlStateNormal)];
+            [self.Topview.txImage setImage:[UIImage imageNamed:@"image"] forState:(UIControlStateNormal)];
         }
         if(![self StringIsNullOrEmpty:nickname_loca])
         {
@@ -580,7 +581,7 @@
 //    }];
     UIButton *btn = [[UIButton alloc]init];
 //    btn.frame=CGRectMake(20, self.menbercollectionView.bottom+25, SCREEN_WIDTH-40, 44);
-    btn.frame=CGRectMake(20, SCREENH_HEIGHT-kNavAndTabHeight-44, SCREEN_WIDTH-40, 44);
+    btn.frame=CGRectMake(20, SCREENH_HEIGHT-kNavAndTabHeight-45, SCREEN_WIDTH-40, 44);
     [btn setTitle:@"确认支付" forState:(UIControlStateNormal)];
     [btn setTintColor:[UIColor whiteColor]];
     [btn addTarget:self action:@selector(play_Touch:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -623,7 +624,15 @@
 -(void)play_Touch:(id)sender
 {
     NSLog(@"点击了 play");
-    [self postpurchaseVipCardurl];
+    if([usertoken isEqualToString:@""])
+    {
+        [UHud showHudWithStatus:@"请先登录" delay:2.f];
+        LoginViewController * avc = [[LoginViewController alloc] init];
+        [self pushRootNav:avc animated:YES];
+    }else{
+        [self postpurchaseVipCardurl];
+    }
+    
 }
 
 

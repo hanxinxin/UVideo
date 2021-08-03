@@ -151,20 +151,47 @@
     
     [UIView animateWithDuration:0.1 animations:^{
         self.mengbanView.alpha = 0;
-        _saveView.y = HEIGHT;
+        self->_saveView.y = HEIGHT;
     } completion:^(BOOL finished) {
-        _saveView.hidden = YES;
+        self->_saveView.hidden = YES;
         self.mengbanView.hidden = YES;
     }];
 }
 
+-(UIButton*)TG_guanggaoBtn
+{
+    if(!_TG_guanggaoBtn)
+    {
+    // 保存Btn
+    _TG_guanggaoBtn = [[UIButton alloc] init];
+        _TG_guanggaoBtn.frame = CGRectMake(self.width-80, 10, 80, 30);
+        _TG_guanggaoBtn.backgroundColor = [UIColor clearColor];
+    [_TG_guanggaoBtn setTitle:@"跳过广告" forState:UIControlStateNormal];
+    [_TG_guanggaoBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _TG_guanggaoBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_TG_guanggaoBtn addTarget:self action:@selector(tiaoguoGGVideo:) forControlEvents:UIControlEventTouchUpInside];
+    
+    }
+    return _TG_guanggaoBtn;
+}
+-(void)tiaoguoGGVideo:(id)sender
+{
+    NSLog(@"点击了跳过按钮");
+    if(self.touchBlock)
+    {
+        self.touchBlock(0);
+    }
+}
 -(void)hiddenView
 {
     // 移除
     self.refreshView.hidden = YES;
     self.tempView.hidden = YES;
     self.BGView.hidden = YES;
+    self.controlView.hidden=YES;
 }
+
+
 
 
 /**
@@ -288,8 +315,38 @@
     [self.BGView addSubview:refreshView];
     [refreshView startAnimation];
     self.refreshView = refreshView;
+    [self addSubview:self.TG_guanggaoBtn];
+    
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+        [tapGesture setDelaysTouchesBegan:YES];
+        [self addGestureRecognizer:tapGesture];
+    
+        UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleAction:)];
+        [gesture setNumberOfTapsRequired:2];
+        [gesture setDelaysTouchesBegan:YES];
+        [self addGestureRecognizer:gesture];
+    
+    
+    
+    
 }
-
+//单击手势
+- (void)tapAction:(UITapGestureRecognizer*)gesture{
+    if (gesture.state == UIGestureRecognizerStateEnded) {
+//        [self pause];
+        if(self.isPlayAndPause)
+        {
+            [self pause];
+        }else{
+            [self play];
+        }
+    }
+}
+//双击手势
+- (void)doubleAction:(UITapGestureRecognizer*)gesture{
+//    [self pause];
+}
 /**
  加载背景
  */
@@ -460,6 +517,7 @@
 - (void)playerControlViewEvent{
     
     self.controlView = [[XMPlayerControlView alloc] initWithFrame:self.bounds];
+    self.controlView.hidden=YES;
     [self addSubview:self.controlView];
     
     // 事件处理
@@ -1095,6 +1153,14 @@ didFinishDownloadingToURL:(NSURL *)location{
         self.controlView.playTimeLabel.text = [XMPlayerTool getMMSSFromSS:[NSString stringWithFormat:@"%.0f", currentPlayTime]];
         self.controlView.playerSilder.trackValue = currentPlayTime / CMTimeGetSeconds(duration);
     }
+    
+//    currentPlayTime
+//    写一个block  回调时间进度
+    
+    if(self.timecountBlock)
+    {
+        self.timecountBlock(currentPlayTime);
+    }
 }
 - (void)updateVideoSlider2:(float)currentPlayTime{
     
@@ -1201,6 +1267,7 @@ didFinishDownloadingToURL:(NSURL *)location{
     if (self.playerViewType == XMPlayerViewTwoSynVideoType) {
         [self.avPlayer2 play];
     }
+    self.isPlayAndPause=YES;
     [self.avPlayer play];
     // 结束刷新
     [self endAnimation];
@@ -1212,6 +1279,7 @@ didFinishDownloadingToURL:(NSURL *)location{
     if (self.playerViewType == XMPlayerViewTwoSynVideoType) {
         [self.avPlayer2 pause];
     }
+    self.isPlayAndPause=NO;
     [self.avPlayer pause];
 }
 

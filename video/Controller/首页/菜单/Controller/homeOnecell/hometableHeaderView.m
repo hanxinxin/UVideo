@@ -71,7 +71,8 @@
 -(void)setGuanggaoModeA:(GuanggaoMode *)GuanggaoModeA
 {
     _GuanggaoModeA=GuanggaoModeA;
-    self.guanggaoImageView.yy_imageURL=[NSURL URLWithString:_GuanggaoModeA.source];
+//    self.guanggaoImageView.yy_imageURL=[NSURL URLWithString:_GuanggaoModeA.source];
+    self.guanggaoImageView.yy_imageURL=[NSURL URLWithString:@"https://oss.uvod.tv/uvod/ad_poster/6104fead75f42163186643.jpg"];
 }
 -(void)setBannerimagesURL:(NSMutableArray *)bannerimagesURL
 {
@@ -115,7 +116,7 @@
     {
         [imageview setImage:[UIImage imageNamed:@"kthuiyuan"]];
     }
-    
+    imageview.yy_imageURL=[NSURL URLWithString:@"https://oss.uvod.tv/uvod/ad_poster/6104fead75f42163186643.jpg"];
     imageview.userInteractionEnabled = YES;//打开用户交互
     //创建手势识别器对象
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] init];

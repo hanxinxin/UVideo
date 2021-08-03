@@ -169,7 +169,7 @@ static NSString * const shopCellReuseID = @"shop";
             if(self.GuanggaoModeA)
             {
                 [self.DowntableView reloadData];
-//                self.guanggaoImageView.yy_imageURL=[NSURL URLWithString:self.GuanggaoModeA.source];
+                self.guanggaoImageView.yy_imageURL=[NSURL URLWithString:self.GuanggaoModeA.source];
             }
         }else{
             NSString * message = [dict objectForKey:@"message"];

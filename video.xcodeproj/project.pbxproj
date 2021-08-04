@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		5474D0A6172289002C304956 /* Pods_videoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83CD8D4ACCA9DB8AD56FD560 /* Pods_videoTests.framework */; };
+		8A031FC726BAB1C1001B3879 /* VideoplaySetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A031FC626BAB1C1001B3879 /* VideoplaySetView.m */; };
+		8A031FCD26BAB1F2001B3879 /* VideoplaySetView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A031FCC26BAB1F2001B3879 /* VideoplaySetView.xib */; };
 		8A0520F32648D56C00E5188E /* SliderTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0520F12648D56C00E5188E /* SliderTableViewCell.m */; };
 		8A0520F42648D56C00E5188E /* SliderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A0520F22648D56C00E5188E /* SliderTableViewCell.xib */; };
 		8A05210C264919BE00E5188E /* LXTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A05210A264919BE00E5188E /* LXTableViewCell.m */; };
@@ -560,6 +562,9 @@
 		5437873FD7DF35C95396A3BD /* Pods-videoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoTests.debug.xcconfig"; path = "Target Support Files/Pods-videoTests/Pods-videoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		55ABB0CE13DBD1E859581D18 /* Pods-video.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-video.debug.xcconfig"; path = "Target Support Files/Pods-video/Pods-video.debug.xcconfig"; sourceTree = "<group>"; };
 		83CD8D4ACCA9DB8AD56FD560 /* Pods_videoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_videoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A031FC526BAB1C1001B3879 /* VideoplaySetView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoplaySetView.h; sourceTree = "<group>"; };
+		8A031FC626BAB1C1001B3879 /* VideoplaySetView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoplaySetView.m; sourceTree = "<group>"; };
+		8A031FCC26BAB1F2001B3879 /* VideoplaySetView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoplaySetView.xib; sourceTree = "<group>"; };
 		8A0520F02648D56C00E5188E /* SliderTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SliderTableViewCell.h; sourceTree = "<group>"; };
 		8A0520F12648D56C00E5188E /* SliderTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SliderTableViewCell.m; sourceTree = "<group>"; };
 		8A0520F22648D56C00E5188E /* SliderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SliderTableViewCell.xib; sourceTree = "<group>"; };
@@ -1568,6 +1573,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		8A031FC426BAB0B7001B3879 /* 视频播放设置界面 */ = {
+			isa = PBXGroup;
+			children = (
+				8A031FC526BAB1C1001B3879 /* VideoplaySetView.h */,
+				8A031FC626BAB1C1001B3879 /* VideoplaySetView.m */,
+				8A031FCC26BAB1F2001B3879 /* VideoplaySetView.xib */,
+			);
+			path = "视频播放设置界面";
+			sourceTree = "<group>";
+		};
 		8A0520E92648CE3300E5188E /* 滑竿 */ = {
 			isa = PBXGroup;
 			children = (
@@ -2477,6 +2492,7 @@
 		8A8BC2BF25FC6D790028173C /* 视频播放界面 */ = {
 			isa = PBXGroup;
 			children = (
+				8A031FC426BAB0B7001B3879 /* 视频播放设置界面 */,
 				FAD0F47126B44C050089BA2A /* 广告视频播放库 */,
 				FA98047D2684D97100FF6BF9 /* video评论 */,
 				FA80AD8D266CC7A900BF28D8 /* hxView */,
@@ -4427,6 +4443,7 @@
 				8AE01BAF26625D550031C82F /* KFView.xib in Resources */,
 				8AE01B95266252CE0031C82F /* PWView.xib in Resources */,
 				FA92794726763CA20088BA56 /* 问题点.rtf in Resources */,
+				8A031FCD26BAB1F2001B3879 /* VideoplaySetView.xib in Resources */,
 				8AE0C4CD266A54BA0084248D /* PanCollectionViewCell.xib in Resources */,
 				FAD0F4B126B44C3D0089BA2A /* btn_player_quit@3x.png in Resources */,
 				8A3930E225FCDB3800E7331B /* cmh_default_sold_goods@2x.png in Resources */,
@@ -4916,6 +4933,7 @@
 				8A39309025FCDAED00E7331B /* CMHTabBarController.m in Sources */,
 				8A8BC3AA25FC6F9E0028173C /* NSObject+MHAlert.m in Sources */,
 				8AE01B7C2661EDBB0031C82F /* menberJSCollectionViewCell.m in Sources */,
+				8A031FC726BAB1C1001B3879 /* VideoplaySetView.m in Sources */,
 				8AE1A0F82670E89200922103 /* DES.m in Sources */,
 				FAA1EBFF26A5B6C200030146 /* UIButton+WebCache.m in Sources */,
 				FAA6DF142675C77500DE5E7C /* HQEditImageCaptureView.m in Sources */,

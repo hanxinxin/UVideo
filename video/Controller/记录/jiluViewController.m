@@ -385,8 +385,8 @@
                 [self.Listarray1 removeAllObjects];
                 for (int i =0; i<video_favorite_list.count; i++) {
                     NSDictionary * video_Favorite =video_favorite_list[i];
+//                    [DYModelMaker DY_makeModelWithDictionary:video_Favorite modelKeyword:@"Video" modelName:@"FavoriteMode"];
                     VideoFavoriteMode * model=[VideoFavoriteMode yy_modelWithDictionary:video_Favorite];
-//                [DYModelMaker DY_makeModelWithDictionary:video_Favorite modelKeyword:@"Video" modelName:@"FavoriteMode"];
                     [self.Listarray1 addObject:model];
                 }
                 [self.downtableview1 reloadData];
@@ -444,6 +444,7 @@
                 [self removeNilView1];
                 for (int i =0; i<video_favorite_list.count; i++) {
                     NSDictionary * video_Favorite =video_favorite_list[i];
+                    
                     VideoFavoriteMode * model=[VideoFavoriteMode yy_modelWithDictionary:video_Favorite];
                     [self.Listarray1 addObject:model];
                 }
@@ -629,7 +630,10 @@
     
     if(tableView.tag==10001)
     {
-        SCJTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID];
+        NSString *identifier=[NSString stringWithFormat:@"%ld%ld",(long)indexPath.section,(long)indexPath.row];
+        [self.downtableview1 registerNib:[UINib nibWithNibName:NSStringFromClass([SCJTableViewCell class]) bundle:nil] forCellReuseIdentifier:identifier];
+        SCJTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+//        SCJTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID];
         if (cell == nil) {
             cell = [[SCJTableViewCell alloc] init];
         }
@@ -648,7 +652,11 @@
         return cell;
     }else if(tableView.tag==10002)
     {
-        SliderTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID2];
+        NSString *identifier=[NSString stringWithFormat:@"%ld%ld",(long)indexPath.section,(long)indexPath.row];
+        [self.downtableview2 registerNib:[UINib nibWithNibName:NSStringFromClass([SliderTableViewCell class]) bundle:nil] forCellReuseIdentifier:identifier];
+        SliderTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+//        SliderTableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:cellID2];
+        
         if (cell == nil) {
             cell = [[SliderTableViewCell alloc] init];
             
@@ -684,12 +692,24 @@
 //            "create_time": 1234567890,            // 观看时间
 //          }
 //        ]
-        cell.leftLabel.text=mode.video_title;
+//        video_fragment_symbol
+        if([mode.video_fragment_symbol intValue]>1)
+        {
+            cell.leftLabel.text=[NSString stringWithFormat:@"%@ 第%@集",mode.video_title,mode.video_fragment_symbol];
+        }else{
+            cell.leftLabel.text=mode.video_title;
+        }
         cell.rightLabel.text=[self getTimeFromTimestamp:@(mode.create_time)];
-        NSLog(@"播放进度== %@ %%",[NSString stringWithFormat:@"%.f%%",mode.elapsed/mode.video_duration]);
+        NSLog(@"mode.elapsed== %f    mode.video_duration = %f ",mode.elapsed,mode.video_duration);
+        
         if(mode.video_duration!=0)
         {
-        cell.bfbLabel.text=[NSString stringWithFormat:@"%.f%%",mode.elapsed/mode.video_duration];
+            NSLog(@"播放进度== %.f ",mode.elapsed/mode.video_duration*100);
+//            NSDecimalNumber *chufa = [elapsedNum decimalNumberByDividingBy:video_durationNum];
+//            NSDecimalNumber *chufa=[self chuFNumber:[NSString stringWithFormat:@"%.f",mode.elapsed] num2:[NSString stringWithFormat:@"%.f",mode.video_duration]];
+            
+//            [self ChengFNumber:[NSString stringWithFormat:@"%@",chufa] num2:@"100"]
+        cell.bfbLabel.text=[NSString stringWithFormat:@"%.f%%",mode.elapsed/mode.video_duration*100];
         cell.Slider.currentPercent=mode.elapsed/mode.video_duration;  /// value 百分比
         }else
         {
@@ -701,7 +721,26 @@
     }
     return nil;
 }
+//除法
+-(NSDecimalNumber*)chuFNumber:(NSString*)num1 num2:(NSString*)num2
+{
+    //方式1：不进行四舍五入
+    NSDecimalNumber*number1 = [NSDecimalNumber decimalNumberWithString:num1];
+    NSDecimalNumber*number2 = [NSDecimalNumber decimalNumberWithString:num2];
+    NSDecimalNumberHandler * handler = [NSDecimalNumberHandler decimalNumberHandlerWithRoundingMode:NSRoundPlain scale:1 raiseOnExactness:NO raiseOnOverflow:NO raiseOnUnderflow:NO raiseOnDivideByZero:YES];
+    NSDecimalNumber *num = [number1 decimalNumberByDividingBy:number2 withBehavior:handler];
+    return num;
+}
+//乘法
+-(NSDecimalNumber*)ChengFNumber:(NSString*)num1 num2:(NSString*)num2
+{
+    //方式1：不进行四舍五入
+    NSDecimalNumber*number1 = [NSDecimalNumber decimalNumberWithString:num1];
+    NSDecimalNumber*number2 = [NSDecimalNumber decimalNumberWithString:num2];
 
+    NSDecimalNumber *num = [number1 decimalNumberBySubtracting:number2];
+    return num;
+}
 //行高
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if(tableView.tag==10001)
@@ -748,25 +787,28 @@
     {
         NSLog(@"10001index == %ld",indexPath.section);
         VideoFavoriteMode * modell=Listarray1[indexPath.section];
-        [self getVideoInfo:[NSString stringWithFormat:@"%f",modell.video_id]];
+        [self getVideoInfo:[NSString stringWithFormat:@"%f",modell.video_id] D_elapsed:0 video_fragment_id:0];
         
     }else if(tableView.tag==10002)
     {
         NSLog(@"10002index == %ld",indexPath.section);
         
         VideoHistoryMode* model= self.Listarray2[indexPath.section];
-        [self getVideoInfo:[NSString stringWithFormat:@"%f",model.video_id]];
+        [self getVideoInfo:[NSString stringWithFormat:@"%f",model.video_id] D_elapsed:model.elapsed video_fragment_id:model.video_fragment_id];
     }
     
 }
--(void)pushViewControllerVideo:(ZVideoMode*)mode{
+-(void)pushViewControllerVideo:(ZVideoMode*)mode  D_elapsed:(double)elapsed video_fragment_id:(double)video_fragment_id{
     MHYouKuController *avc = [[MHYouKuController alloc] init];
     avc.Zvideomodel= mode;
-//    avc.OldJiLutime=
+    avc.OldJiLutime=elapsed;
+    avc.JiLutime=0;
+    avc.video_fragment_id=video_fragment_id;
+    avc.mediabase_id=[NSString stringWithFormat:@"%.f",video_fragment_id];
     [self pushRootNav:avc animated:YES];
 }
 
--(void)getVideoInfo:(NSString*)videoId
+-(void)getVideoInfo:(NSString*)videoId D_elapsed:(double)elapsed video_fragment_id:(double)video_fragment_id
 {
     [UHud showHUDLoading];
     NSDictionary* dict = @{
@@ -784,7 +826,7 @@
                     // 将数据转模型
                     ZVideoMode *model = [ZVideoMode yy_modelWithDictionary:dataArr];
                     NSLog(@"model  == %@",model);
-                    [self pushViewControllerVideo:model];
+                    [self pushViewControllerVideo:model D_elapsed:elapsed video_fragment_id:video_fragment_id];
                     
                 }else{
                     NSString * message = [dict objectForKey:@"message"];

@@ -88,4 +88,7 @@ typedef void(^XMPlayerViewTiaoGuoBlock)(NSInteger index);
 
 ///隐藏 进度条 其他所有按钮 除暂停播放按钮
 -(void)hiddenView;
+
+//退出播放
+-(void)hiddenPlayerView;
 @end

@@ -331,6 +331,51 @@
     
     
 }
+
+
+
+-(void)hiddenPlayerView
+{
+    UIView *sourceView = [self.sourceImagesContainerView.subviews firstObject];
+    
+    CGRect targetTemp = [self.sourceImagesContainerView convertRect:sourceView.frame toView:self];
+    self.window.windowLevel = UIWindowLevelNormal;//显示状态栏
+    
+    self.drawView = nil;
+    // 移除播放器
+    [self removePlayer];
+    
+        self.tempView.frame = targetTemp;
+        self.backgroundColor = [UIColor clearColor];
+        self.BGView.backgroundColor = [UIColor clearColor];
+        self.alpha = 0;
+        // 移除
+        self.refreshView.hidden = YES;
+        self.tempView.hidden = YES;
+        self.BGView.hidden = YES;
+        self.refreshView = nil;
+        self.tempView = nil;
+        self.drawView = nil;
+        self.hidden = YES;
+        _playerItem = nil;
+        self.playerLayer = nil;
+        
+        [self.backgroundSession invalidateAndCancel];
+        self.backgroundSession = nil;
+        // 停止下载
+        [self.downloadTask suspend];
+        self.downloadTask = nil;
+        
+        [self removeAllSubviews];
+        [self.drawView removeFromSuperview];
+        [self.saveView removeFromSuperview];
+        [self.mengbanView removeFromSuperview];
+        [self.BGView removeFromSuperview];
+        self.saveView = nil;
+        self.drawView = nil;
+        self.BGView = nil;
+        self.window = nil;
+}
 //单击手势
 - (void)tapAction:(UITapGestureRecognizer*)gesture{
     if (gesture.state == UIGestureRecognizerStateEnded) {

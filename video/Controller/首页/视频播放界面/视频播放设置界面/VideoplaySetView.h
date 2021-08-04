@@ -8,7 +8,7 @@
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
+typedef void(^VideoplaySetViewBlock)(NSInteger index); //0 没登录 1 不是会员
 @interface VideoplaySetView : UIView
 @property (weak, nonatomic) IBOutlet UILabel *hmbl_Label;
 @property (weak, nonatomic) IBOutlet UIButton *hmblBtn;
@@ -21,7 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UIButton *pyJianBtn;
 @property (weak, nonatomic) IBOutlet UILabel *tgPTPW_Label;
 @property (weak, nonatomic) IBOutlet UISwitch *tgPTPWSwitch;
+@property (weak, nonatomic) IBOutlet UIButton *tgvipBtn;
 
+
+
+@property (nonatomic,copy) VideoplaySetViewBlock touchIndex;
 @end
 
 NS_ASSUME_NONNULL_END

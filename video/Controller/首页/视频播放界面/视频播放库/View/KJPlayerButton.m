@@ -103,6 +103,7 @@
 //        self.titleLabel.font = [UIFont fontWithName:@"KJPlayerfont" size:self.frame.size.width/5*3];Image("")
         [self setImage:[UIImage imageNamed:@"MMVideoPreviewPlay"] forState:(UIControlStateNormal)];
         [self setImage:[UIImage imageNamed:@"zanting"] forState:(UIControlStateSelected)];
+        
     }
 }
 

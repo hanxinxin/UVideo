@@ -32,6 +32,7 @@
 #define avatar_loca [[NSUserDefaults standardUserDefaults] valueForKey:@"avatar"]
 #define expired_time_loca [[NSUserDefaults standardUserDefaults] valueForKey:@"expired_time"]
 #define vip_expired_time_loca [[NSUserDefaults standardUserDefaults] valueForKey:@"vip_expired_time"]
+#define tiaoguokaiguan_loca [[NSUserDefaults standardUserDefaults] valueForKey:@"tiaoguokaiguan"]
 
 
 #define YOUR_TOKEN @"gmOV7nJWg"

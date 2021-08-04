@@ -182,17 +182,21 @@
         _setVideoView=[[[NSBundle mainBundle]loadNibNamed:@"VideoplaySetView" owner:self options:nil]objectAtIndex:0];
         
     }
-    _setVideoView.alpha=0.8;
-    _setVideoView.frame=CGRectMake(self.playerView.width, 0, 280,self.playerView.height);
-    _setVideoView.hidden=YES;
+    _setVideoView.alpha=0.9;
+    _setVideoView.backgroundColor=RGBA(28, 29, 48, 1);
+    _setVideoView.frame=CGRectMake(self.GuangGaoplayerView.width, 0, 220,self.GuangGaoplayerView.height);
+    _setVideoView.hidden=NO;
     return _setVideoView;
 }
 
 -(void)showsetVideoView
 {
+    NSLog(@"self.GuangGaoplayerView.width-220== %f",self.GuangGaoplayerView.width-220);
+    NSLog(@"self.GuangGaoplayerView.height == %f",self.GuangGaoplayerView.height);
+    self.setVideoView.hidden=NO;
     [UIView animateWithDuration:0.7 animations:^{
-        self.setVideoView.hidden=NO;
-        self.setVideoView.frame=CGRectMake(self.playerView.width-280, 0, 280, self.playerView.height);
+        
+        self.setVideoView.frame=CGRectMake(self.GuangGaoplayerView.width-220, 0, 220, self.GuangGaoplayerView.height);
     } completion:^(BOOL finished) {
         
     }];
@@ -201,7 +205,7 @@
 {
     
     [UIView animateWithDuration:0.5 animations:^{
-        self.setVideoView.frame=CGRectMake(self.playerView.width, 0, 280,self.playerView.height);
+        self.setVideoView.frame=CGRectMake(self.GuangGaoplayerView.width, 0, 220,self.GuangGaoplayerView.height);
     } completion:^(BOOL finished) {
         self.setVideoView.hidden=YES;
     }];
@@ -321,7 +325,18 @@
     
     ///加载video设置view
     [self.view addSubview:self.setVideoView];
-    
+    [self HidsetVideoView];
+    __weak typeof(self) weakSelf = self;
+    self.setVideoView.touchIndex = ^(NSInteger index) {
+      if(index==0)
+      {
+                  LoginViewController * avc = [[LoginViewController alloc] init];
+                  [weakSelf pushRootNav:avc animated:YES];
+      }else if(index==1)
+      {
+          [weakSelf showmenberViewTS];
+      }
+    };
     /// 键盘
 //    [self addNoticeForKeyboard];
 }
@@ -524,8 +539,15 @@
                                 
                             }else{
 //                                [self showmenberViewTS];
+                                [self.GuangGaoplayerView pause];
+                                [self.GuangGaoplayerView show];
+                                [self.GuangGaoplayerView setVideoURL:[NSURL URLWithString:self.GuanggaoVideoMode.source]];
+                                [self.GuangGaoplayerView play];
+                                [self.player kj_pause];
                             }
                         }else{
+//                            [self.GuangGaoplayerView hiddenPlayerView];
+                            [self.GuangGaoplayerView pause];
                             [self.GuangGaoplayerView show];
                             [self.GuangGaoplayerView setVideoURL:[NSURL URLWithString:self.GuanggaoVideoMode.source]];
                             [self.GuangGaoplayerView play];

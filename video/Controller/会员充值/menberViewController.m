@@ -386,8 +386,8 @@
 //            [self.Topview.txImage setImage:[self base64Image:avatar_loca] forState:(UIControlStateNormal)];
             [self.Topview.txImage xr_setButtonImageWithUrl:avatar_loca];
         }else{
-//            [self.Topview.txImage setImage:[UIImage imageNamed:@"Uloding"] forState:(UIControlStateNormal)];
-            [self.Topview.txImage setImage:[UIImage imageNamed:@"image"] forState:(UIControlStateNormal)];
+            [self.Topview.txImage setImage:[UIImage imageNamed:@"videoGBimage"] forState:(UIControlStateNormal)];
+//            [self.Topview.txImage setImage:[UIImage imageNamed:@"image"] forState:(UIControlStateNormal)];
         }
         if(![self StringIsNullOrEmpty:nickname_loca])
         {

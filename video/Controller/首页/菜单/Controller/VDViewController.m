@@ -225,7 +225,7 @@ static NSString * const shopCellReuseID = @"shop";
 -(void)addScrollviewLB
 {
     // 网络加载 --- 创建带标题的图片轮播器
-    MSCycleScrollView *cycleScrollView7 = [MSCycleScrollView cycleViewWithFrame:CGRectMake(15, 10, SCREEN_WIDTH-30, 160) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    MSCycleScrollView *cycleScrollView7 = [MSCycleScrollView cycleViewWithFrame:CGRectMake(15, 10, SCREEN_WIDTH-30, 160) delegate:self placeholderImage:[UIImage imageNamed:@"BannerGBimage"]];
     
     cycleScrollView7.pageDotColor = [UIColor whiteColor];
     cycleScrollView7.currentPageDotColor = [UIColor purpleColor];

@@ -693,7 +693,7 @@
 //          }
 //        ]
 //        video_fragment_symbol
-        if([mode.video_fragment_symbol intValue]>1)
+        if([mode.last_fragment_symbol intValue]>1)
         {
             cell.leftLabel.text=[NSString stringWithFormat:@"%@ 第%@集",mode.video_title,mode.video_fragment_symbol];
         }else{

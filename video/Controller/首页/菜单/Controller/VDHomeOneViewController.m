@@ -316,7 +316,7 @@ static NSString * const shopCellReuseID = @"shop";
 -(void)addScrollviewLB
 {
     // 网络加载 --- 创建带标题的图片轮播器
-    MSCycleScrollView *cycleScrollView7 = [MSCycleScrollView cycleViewWithFrame:CGRectMake(15, 10, SCREEN_WIDTH-30, 160) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    MSCycleScrollView *cycleScrollView7 = [MSCycleScrollView cycleViewWithFrame:CGRectMake(15, 10, SCREEN_WIDTH-30, 160) delegate:self placeholderImage:[UIImage imageNamed:@"BannerGBimage"]];
     
     cycleScrollView7.pageDotColor = [UIColor whiteColor];
     cycleScrollView7.currentPageDotColor = [UIColor purpleColor];
@@ -334,12 +334,8 @@ static NSString * const shopCellReuseID = @"shop";
     
     cycleScrollView7.imageUrls = self.bannerimagesURL;
     
-    /*
-     block监听点击方式
-     cycleScrollView2.clickItemOperationBlock = ^(NSInteger index) {
-     NSLog(@">>>>>  %ld", (long)index);
-     };
-     */
+    
+     
     YYAnimatedImageView * imageview = [[YYAnimatedImageView alloc] initWithFrame:CGRectMake(15, 175, self.bottomView.width-30, 60)];
     imageview.layer.masksToBounds = YES;
     imageview.layer.cornerRadius=8;
@@ -916,13 +912,7 @@ static NSString * const shopCellReuseID = @"shop";
 }
 
 
-#pragma mark - SDCycleScrollViewDelegate
 
-- (void)cycleScrollView:(MSCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index{
-    NSLog(@"---点击了第%ld张图片", (long)index);
-    
-//    [self.navigationController pushViewController:[ViewController new] animated:YES];
-}
 
 
 
@@ -1037,6 +1027,9 @@ static NSString * const shopCellReuseID = @"shop";
     {
         view_c.bannerimagesURL=self.bannerimagesURL;
     }
+    view_c.BannerTouch = ^(MSCycleScrollView * _Nonnull cycleScrollView, bannerMode * _Nonnull banner, NSInteger index) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:banner.url]];
+    };
     view_c.backgroundColor=[UIColor clearColor];
     return view_c;
 }

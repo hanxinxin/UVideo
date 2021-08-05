@@ -138,7 +138,7 @@
 //            @"https://img2.baidu.com/it/u=4087057811,445331467&fm=26&fmt=auto&gp=0.jpg"  测试连接
             [self.Headerview.txImage xr_setButtonImageWithUrl:avatar_loca];
         }else{
-            [self.Headerview.txImage setImage:[UIImage imageNamed:@"Uloding"] forState:(UIControlStateNormal)];
+            [self.Headerview.txImage setImage:[UIImage imageNamed:@"videoGBimage"] forState:(UIControlStateNormal)];
         }
         if(![self StringIsNullOrEmpty:nickname_loca])
         {

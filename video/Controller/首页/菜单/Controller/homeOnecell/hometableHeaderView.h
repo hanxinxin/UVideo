@@ -16,6 +16,9 @@
 #import "GuanggaoMode.h"
 NS_ASSUME_NONNULL_BEGIN
 
+
+typedef void(^hometableHeaderViewBannerBlock)(MSCycleScrollView * cycleScrollView,bannerMode *banner,NSInteger index);
+
 @interface hometableHeaderView : UITableViewHeaderFooterView
 @property (nonatomic, strong)MSCycleScrollView *cycleScrollView;
 
@@ -25,6 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray *bannerimagesmode;///轮播图mode数组
 @property (nonatomic, strong) NSMutableArray *bannerimagesURL;//轮播图url
+
+
+@property (nonatomic,copy) hometableHeaderViewBannerBlock BannerTouch;
 @end
 
 NS_ASSUME_NONNULL_END

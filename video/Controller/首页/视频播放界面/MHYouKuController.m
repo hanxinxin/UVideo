@@ -371,11 +371,6 @@
             }];
             weakSelf.GuangGaoplayerView.frame=weakSelf.playerView.frame;
             weakSelf.setVideoView.frame=CGRectMake(weakSelf.GuangGaoplayerView.width-220, 0, 220, weakSelf.GuangGaoplayerView.height);
-//            [self.topContainer mas_makeConstraints:^(MASConstraintMaker *make) {
-//                make.top.equalTo(self.view).with.offset(0);
-//                make.left.right.equalTo(self.view);
-//                make.height.mas_equalTo(self.view.width*(9.f/16.f));
-//            }];
         }else if(index==1)
         {
             weakSelf.playerView.frame=CGRectMake(0, 0, weakSelf.view.width, weakSelf.view.width*(3.f/4.f));
@@ -435,37 +430,37 @@
         if(index==0)
         {
             ///
-            [weakSelf.GuangGaoplayerView tapAction];
-            [weakSelf.player kj_play];
-//            if([usertoken isEqualToString:@""])
-//            {
-//                [UHud showHudWithStatus:@"请先登录" delay:2.f];
-//                LoginViewController * avc = [[LoginViewController alloc] init];
-//                [weakSelf pushRootNav:avc animated:YES];
-//            }else{
-//
-//                //////会员才能看蓝光
-//                if([vip_expired_time_loca intValue]!=0)
-//                {
-//                    NSString * vipStr=[vip_expired_time_loca stringValue];
-//                    NSString * dqStr=[weakSelf gs_getCurrentTimeBySecond];
-//                    NSDate * timeStampToDate1 = [NSDate dateWithTimeIntervalSince1970:[dqStr doubleValue]];
-//                    NSDate * timeStampToDate2 = [NSDate dateWithTimeIntervalSince1970:[vipStr doubleValue]];
-//                    NSLog(@"[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]=====   %d",[weakSelf compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]);
-//                    if([weakSelf compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]!=1)/////   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
-//                    {
-//
-//                        [weakSelf.GuangGaoplayerView tapAction];
-//                        [weakSelf.player kj_play];
-//
-//                    }else{
-//                        [weakSelf showmenberViewTS];
-//                    }
-//                }else{
-//                    [weakSelf showmenberViewTS];
-//
-//                }
-//            }
+//            [weakSelf.GuangGaoplayerView tapAction];
+//            [weakSelf.player kj_play];
+            if([usertoken isEqualToString:@""])
+            {
+                [UHud showHudWithStatus:@"请先登录" delay:2.f];
+                LoginViewController * avc = [[LoginViewController alloc] init];
+                [weakSelf pushRootNav:avc animated:YES];
+            }else{
+
+                //////会员才能看蓝光
+                if([vip_expired_time_loca intValue]!=0)
+                {
+                    NSString * vipStr=[vip_expired_time_loca stringValue];
+                    NSString * dqStr=[weakSelf gs_getCurrentTimeBySecond];
+                    NSDate * timeStampToDate1 = [NSDate dateWithTimeIntervalSince1970:[dqStr doubleValue]];
+                    NSDate * timeStampToDate2 = [NSDate dateWithTimeIntervalSince1970:[vipStr doubleValue]];
+                    NSLog(@"[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]=====   %d",[weakSelf compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]);
+                    if([weakSelf compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]!=1)/////   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
+                    {
+
+                        [weakSelf.GuangGaoplayerView tapAction];
+                        [weakSelf.player kj_play];
+
+                    }else{
+                        [weakSelf showmenberViewTS];
+                    }
+                }else{
+                    [weakSelf showmenberViewTS];
+
+                }
+            }
             
         }
 

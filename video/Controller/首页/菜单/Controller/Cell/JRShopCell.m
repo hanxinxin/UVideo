@@ -35,7 +35,7 @@
 {
     _shop = shop;
     
-    [self.iconView sd_setImageWithURL:[NSURL URLWithString:shop.pic] placeholderImage:[UIImage imageNamed:@"Uloding"]];
+    [self.iconView sd_setImageWithURL:[NSURL URLWithString:shop.pic] placeholderImage:[UIImage imageNamed:@"videoGBimage"]];
     
     self.iconView.layer.masksToBounds = YES;
     self.iconView.layer.cornerRadius=4;

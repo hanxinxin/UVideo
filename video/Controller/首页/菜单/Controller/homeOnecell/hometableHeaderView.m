@@ -85,7 +85,7 @@
 -(void)addScrollviewLB
 {
     // 网络加载 --- 创建带标题的图片轮播器
-    MSCycleScrollView *cycleScrollView7 = [MSCycleScrollView cycleViewWithFrame:CGRectMake(15, 5, self.width-30, 160) delegate:self placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    MSCycleScrollView *cycleScrollView7 = [MSCycleScrollView cycleViewWithFrame:CGRectMake(15, 5, self.width-30, 160) delegate:self placeholderImage:[UIImage imageNamed:@"BannerGBimage"]];
     
     cycleScrollView7.pageDotColor = [UIColor whiteColor];
     cycleScrollView7.currentPageDotColor = [UIColor purpleColor];
@@ -136,6 +136,25 @@
     [self addSubview:imageview];
     
 }
+
+/**
+ 点击图片回调
+
+ @param cycleScrollView MSCycleScrollView
+ @param index ScrollView当前页面的下标
+ */
+- (void)cycleScrollView:(MSCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index
+{
+    NSLog(@"index  %ld",index);
+    bannerMode *model = self.bannerimagesmode[index];
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:model.url]];
+    if(self.BannerTouch)
+    {
+        self.BannerTouch(cycleScrollView, model, index);
+    }
+}
+
+
 -(void)postWebView:(UITapGestureRecognizer*)tap
 {
     if(self.GuanggaoModeA)

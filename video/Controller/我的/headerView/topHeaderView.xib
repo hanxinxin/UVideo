@@ -58,7 +58,7 @@
                         <constraint firstAttribute="height" constant="60" id="8HH-zp-5i4"/>
                         <constraint firstAttribute="width" constant="60" id="Ylq-ES-2b5"/>
                     </constraints>
-                    <state key="normal" title="Button" image="image"/>
+                    <state key="normal" title="Button" image="videoGBimage"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                             <real key="value" value="0.0"/>
@@ -103,8 +103,8 @@
         </view>
     </objects>
     <resources>
-        <image name="image" width="67.666664123535156" height="58.333332061767578"/>
         <image name="jinbi" width="74" height="40"/>
+        <image name="videoGBimage" width="106" height="137"/>
         <image name="vipimage" width="64" height="34"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -10,6 +10,9 @@
 #import "ZVideoMode.h"
 NS_ASSUME_NONNULL_BEGIN
 typedef void(^homeOneTableViewCellBlock)(NSInteger item,VideoRankMode *Cellmodel); //0为取消  1为确定
+
+
+
 @interface homeOneTableViewCell : UITableViewCell
 /** shopsDS */
 @property (nonatomic, strong) NSMutableArray *shopsDS;

@@ -86,7 +86,7 @@ UIKIT_EXTERN CGFloat const MHGlobalViewInterInset;
  */
 #define MHGlobalUserDefaultAvatar [UIImage imageNamed:@"mh_defaultAvatar"]
 
-#define morenAvatar [UIImage imageNamed:@"Uloding"]
+#define morenAvatar [UIImage imageNamed:@"videoGBimage"]
 
 //// 字体
 /// 苹方常规字体 12

@@ -170,6 +170,9 @@
 
 ////   播放视频设置
 @property (nonatomic, strong)VideoplaySetView*setVideoView;
+
+@property (nonatomic, assign)BOOL isTGPTPW;///跳过片头片尾
+@property (nonatomic, assign)NSInteger humianbiliNumber; //画面比例选择
 @end
 
 @implementation MHYouKuController
@@ -185,14 +188,31 @@
     _setVideoView.alpha=0.9;
     _setVideoView.backgroundColor=RGBA(28, 29, 48, 1);
     _setVideoView.frame=CGRectMake(self.GuangGaoplayerView.width, 0, 220,self.GuangGaoplayerView.height);
+    if(self.humianbiliNumber==0)
+    {
+        _setVideoView.hmblBtn.backgroundColor=RGBA(20, 155, 236, 1);
+        _setVideoView.hmblBtn1.backgroundColor=RGBA(51, 51, 51, 1);
+        _setVideoView.hmblBtn2.backgroundColor=RGBA(51, 51, 51, 1);
+    }else if(self.humianbiliNumber==1)
+    {
+        _setVideoView.hmblBtn.backgroundColor=RGBA(51, 51, 51, 1);
+        _setVideoView.hmblBtn1.backgroundColor=RGBA(20, 155, 236, 1);
+        _setVideoView.hmblBtn2.backgroundColor=RGBA(51, 51, 51, 1);
+    }
+    else if(self.humianbiliNumber==2)
+    {
+        _setVideoView.hmblBtn.backgroundColor=RGBA(51, 51, 51, 1);
+        _setVideoView.hmblBtn1.backgroundColor=RGBA(51, 51, 51, 1);
+        _setVideoView.hmblBtn2.backgroundColor=RGBA(20, 155, 236, 1);
+    }
     _setVideoView.hidden=NO;
     return _setVideoView;
 }
 
 -(void)showsetVideoView
 {
-    NSLog(@"self.GuangGaoplayerView.width-220== %f",self.GuangGaoplayerView.width-220);
-    NSLog(@"self.GuangGaoplayerView.height == %f",self.GuangGaoplayerView.height);
+//    NSLog(@"self.GuangGaoplayerView.width-220== %f",self.GuangGaoplayerView.width-220);
+//    NSLog(@"self.GuangGaoplayerView.height == %f",self.GuangGaoplayerView.height);
     self.setVideoView.hidden=NO;
     [UIView animateWithDuration:0.7 animations:^{
         
@@ -330,13 +350,53 @@
     self.setVideoView.touchIndex = ^(NSInteger index) {
       if(index==0)
       {
-                  LoginViewController * avc = [[LoginViewController alloc] init];
-                  [weakSelf pushRootNav:avc animated:YES];
+          LoginViewController * avc = [[LoginViewController alloc] init];
+          [weakSelf pushRootNav:avc animated:YES];
       }else if(index==1)
       {
           [weakSelf showmenberViewTS];
       }
     };
+    self.setVideoView.SwitchBlock = ^(BOOL SwitchBool) {
+        NSLog(@"片头片尾开启状态   %d",SwitchBool);
+        weakSelf.isTGPTPW=SwitchBool;
+    };
+    
+    self.setVideoView.touchHMBL = ^(NSInteger index) {
+        if(index==0)
+        {
+            weakSelf.playerView.frame=CGRectMake(0, 0, weakSelf.view.width, weakSelf.view.width*(9.f/16.f));
+            [weakSelf.topContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(weakSelf.view.width*(9.f/16.f));
+            }];
+            weakSelf.GuangGaoplayerView.frame=weakSelf.playerView.frame;
+            weakSelf.setVideoView.frame=CGRectMake(weakSelf.GuangGaoplayerView.width-220, 0, 220, weakSelf.GuangGaoplayerView.height);
+//            [self.topContainer mas_makeConstraints:^(MASConstraintMaker *make) {
+//                make.top.equalTo(self.view).with.offset(0);
+//                make.left.right.equalTo(self.view);
+//                make.height.mas_equalTo(self.view.width*(9.f/16.f));
+//            }];
+        }else if(index==1)
+        {
+            weakSelf.playerView.frame=CGRectMake(0, 0, weakSelf.view.width, weakSelf.view.width*(3.f/4.f));
+            [weakSelf.topContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(weakSelf.view.width*(3.f/4.f));
+            }];
+            weakSelf.GuangGaoplayerView.frame=weakSelf.playerView.frame;
+            weakSelf.setVideoView.frame=CGRectMake(weakSelf.GuangGaoplayerView.width-220, 0, 220, weakSelf.GuangGaoplayerView.height);
+        }else if(index==2)
+        {
+            weakSelf.playerView.frame=CGRectMake(0, 0, weakSelf.view.width, weakSelf.view.width*(9.f/16.f));
+            [weakSelf.topContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+                make.height.mas_equalTo(weakSelf.view.width*(9.f/16.f));
+            }];
+            weakSelf.GuangGaoplayerView.frame=weakSelf.playerView.frame;
+            weakSelf.setVideoView.frame=CGRectMake(weakSelf.GuangGaoplayerView.width-220, 0, 220, weakSelf.GuangGaoplayerView.height);
+        }
+        weakSelf.humianbiliNumber=index;
+    };
+    
+//
     /// 键盘
 //    [self addNoticeForKeyboard];
 }
@@ -426,6 +486,8 @@
     self.qualitieslist=[[NSArray alloc] init];
     self.subtitleslist=[[NSArray alloc] init];
     self.PinglunList=[NSMutableArray arrayWithCapacity:0];
+    self.isTGPTPW=[[NSUserDefaults standardUserDefaults] valueForKey:@"tiaoguokaiguan"];
+    self.humianbiliNumber=[[[NSUserDefaults standardUserDefaults] valueForKey:@"Huamianbili"]intValue];
     self.QXDSelectIndex=0;
 //    self.xuanjiSelectIndex=0;
     self.pagepinglun=1;
@@ -732,7 +794,21 @@
 -(void)setPlayerView
 {
     
+    PLAYER_WEAKSELF;
     KJBasePlayerView *backview = [[KJBasePlayerView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, self.view.width*(9.f/16.f))];
+    if(self.humianbiliNumber==0)
+    {
+        weakself.playerView.frame=CGRectMake(0, 0, weakself.view.width, weakself.view.width*(9.f/16.f));
+    }else if(self.humianbiliNumber==1)
+    {
+        weakself.playerView.frame=CGRectMake(0, 0, weakself.view.width, weakself.view.width*(3.f/4.f));
+        
+    }else if(self.humianbiliNumber==2)
+    {
+        weakself.playerView.frame=CGRectMake(0, 0, weakself.view.width, weakself.view.width*(9.f/16.f));
+        
+    }
+    
 //    KJBasePlayerView *backview = [[KJBasePlayerView alloc]initWithFrame:CGRectMake(0, kStatusBarHeight, SCREEN_WIDTH, SCREENH_HEIGHT)];
     [self.view addSubview:backview];
 //    [self.topContainer addSubview:backview];
@@ -750,7 +826,6 @@
         VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
         [backview.backButton setTitle:modelL.title forState:(UIControlStateNormal)];
     }
-    PLAYER_WEAKSELF;
     backview.kVideoClickButtonBack = ^(KJBasePlayerView *view){
 //        if (view.isFullScreen) {
            
@@ -950,47 +1025,53 @@
     player.playerView.bottomHYSlider.currentPercent=(time/self.player.totalTime);
 //    NSLog(@"time ======== %.f",time);
 //    NSLog(@"currentTime ======== %.f",self.player.currentTime);
-    if(time>(self.DQtail_duration))
+    if(self.isTGPTPW==YES)  ///片头片尾开关状态
     {
-        if(self.DQtail_duration!=0)
+        if(time>(self.DQtail_duration))
         {
-//            self.player.kVideoAdvanceAndReverse(self.DQtail_duration, nil);
-            if(self.player.currentTime>(self.DQtail_duration)) /// 再次确认当前播放时间
+            if(self.DQtail_duration!=0)
             {
-                if((self.xuanjiSelectIndex+1)<self.Zvideomodel.video_fragment_list.count)
+    //            self.player.kVideoAdvanceAndReverse(self.DQtail_duration, nil);
+                if(self.player.currentTime>(self.DQtail_duration)) /// 再次确认当前播放时间
                 {
-                    NSLog(@"要进入下一集");
-                    if(tgFalg==1)
+                    if((self.xuanjiSelectIndex+1)<self.Zvideomodel.video_fragment_list.count)
                     {
-                        [self.player kj_displayHintText:@"已跳过片尾，自动播放" time:4 position:KJPlayerHintPositionLeftBottom];
-        //                self.JiLutime=0;
-        //                self.OldJiLutime=0;
-        //                self.xuanjiSelectIndex+=1;
-        //                [self.anthologyHeaderView updateCollView];
-        //                [self tempsAction:self.QXDSelectIndex];
-                        [self.anthologyHeaderView updateCollView];
-                        tgFalg=0;
+                        NSLog(@"要进入下一集");
+                        if(tgFalg==1)
+                        {
+                            [self.player kj_displayHintText:@"已跳过片尾，自动播放" time:4 position:KJPlayerHintPositionLeftBottom];
+            //                self.JiLutime=0;
+            //                self.OldJiLutime=0;
+            //                self.xuanjiSelectIndex+=1;
+            //                [self.anthologyHeaderView updateCollView];
+            //                [self tempsAction:self.QXDSelectIndex];
+                            [self.anthologyHeaderView updateCollView];
+                            tgFalg=0;
+                        }
+                       
                     }
-                   
                 }
             }
         }
     }
-    if(time<self.DQfront_duration)
+    
+    if(self.isTGPTPW==YES)  ///片头片尾开关状态
     {
-        if(self.DQfront_duration!=0)
+        if(time<self.DQfront_duration)
         {
-            if(tgFalg==0)
+            if(self.DQfront_duration!=0)
             {
-                NSLog(@"跳过片头");
-    //            self.DQfront_duration=0;
-                [self.player kj_displayHintText:@"已跳过片头，自动播放" time:4 position:KJPlayerHintPositionLeftBottom];
-                self.player.kVideoAdvanceAndReverse(self.DQfront_duration, nil);
-                tgFalg+=1;
+                if(tgFalg==0)
+                {
+                    NSLog(@"跳过片头");
+        //            self.DQfront_duration=0;
+                    [self.player kj_displayHintText:@"已跳过片头，自动播放" time:4 position:KJPlayerHintPositionLeftBottom];
+                    self.player.kVideoAdvanceAndReverse(self.DQfront_duration, nil);
+                    tgFalg+=1;
+                }
             }
         }
     }
-    
     if((int)time != 0)
     {
         if(((int)time)%30==0)
@@ -1023,6 +1104,7 @@
         }else{
             [view kj_displayOperationView];
         }
+        [self HidsetVideoView];
     }else{
         if ([self.player isPlaying]) {
             [self.player kj_pause];

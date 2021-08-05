@@ -9,6 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 typedef void(^VideoplaySetViewBlock)(NSInteger index); //0 没登录 1 不是会员
+
+typedef void(^VideoplaySetViewSwitchBlock)(BOOL SwitchBool);  ///片头片尾开关按钮
+typedef void(^VideoplaySetViewHMBLBlock)(NSInteger index); //0 默认 1 4:3 2 16:9
 @interface VideoplaySetView : UIView
 @property (weak, nonatomic) IBOutlet UILabel *hmbl_Label;
 @property (weak, nonatomic) IBOutlet UIButton *hmblBtn;
@@ -26,6 +29,8 @@ typedef void(^VideoplaySetViewBlock)(NSInteger index); //0 没登录 1 不是会
 
 
 @property (nonatomic,copy) VideoplaySetViewBlock touchIndex;
+@property (nonatomic,copy) VideoplaySetViewSwitchBlock SwitchBlock;
+@property (nonatomic,copy) VideoplaySetViewHMBLBlock touchHMBL;
 @end
 
 NS_ASSUME_NONNULL_END

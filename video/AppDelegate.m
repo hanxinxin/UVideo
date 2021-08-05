@@ -108,6 +108,8 @@
                 [TimeOfBootCount setValue:@(0) forKey:@"expired_time"];
                 [TimeOfBootCount setValue:@(0) forKey:@"vip_expired_time"];
                 [TimeOfBootCount setValue:@(0) forKey:@"tiaoguokaiguan"];
+                [TimeOfBootCount setValue:@(0) forKey:@"Huamianbili"];
+                
             }
         }
     }

@@ -30,6 +30,7 @@
     self.hmblBtn1.layer.borderWidth=1;
     self.hmblBtn1.layer.borderColor=[UIColor whiteColor].CGColor;
     self.hmblBtn2.frame=CGRectMake(self.hmblBtn1.right+5, self.hmbl_Label.bottom, 60, 26);
+    self.hmblBtn2.hidden=YES;
     self.hmblBtn2.layer.cornerRadius=4;
     self.hmblBtn2.layer.borderWidth=1;
     self.hmblBtn2.layer.borderColor=[UIColor whiteColor].CGColor;
@@ -47,16 +48,51 @@
     self.tgPTPW_Label.frame=CGRectMake(20, self.hmblBtn.bottom, [self getWidthWithText:@"跳过片头/片尾" height:26 font:14.f], 26);
     self.tgPTPWSwitch.frame=CGRectMake(20, self.tgPTPW_Label.bottom, 49, 31);
     self.tgvipBtn.frame=CGRectMake(self.tgPTPW_Label.right, self.hmblBtn.bottom, 26, 22);
-    
+    NSInteger humianbiliNumber=[[[NSUserDefaults standardUserDefaults] valueForKey:@"Huamianbili"]intValue];
+    if(humianbiliNumber==0)
+    {
+        [self Hmbl_touch:nil];
+    }else if(humianbiliNumber==1)
+    {
+        [self Hmbl1_touch:nil];
+    }
+    else if(humianbiliNumber==2)
+    {
+        [self Hmbl2_touch:nil];
+    }
     
 }
 
 
 - (IBAction)Hmbl_touch:(id)sender {
+    self.hmblBtn.backgroundColor=RGBA(20, 155, 236, 1);
+    self.hmblBtn1.backgroundColor=RGBA(51, 51, 51, 1);
+    self.hmblBtn2.backgroundColor=RGBA(51, 51, 51, 1);
+    [[NSUserDefaults standardUserDefaults] setValue:@(0) forKey:@"Huamianbili"];
+    if(self.touchHMBL)
+    {
+        self.touchHMBL(0);
+    }
 }
 - (IBAction)Hmbl1_touch:(id)sender {
+    self.hmblBtn.backgroundColor=RGBA(51, 51, 51, 1);
+    self.hmblBtn1.backgroundColor=RGBA(20, 155, 236, 1);
+    self.hmblBtn2.backgroundColor=RGBA(51, 51, 51, 1);
+    [[NSUserDefaults standardUserDefaults] setValue:@(1) forKey:@"Huamianbili"];
+    if(self.touchHMBL)
+    {
+        self.touchHMBL(1);
+    }
 }
 - (IBAction)Hmbl2_touch:(id)sender {
+    self.hmblBtn.backgroundColor=RGBA(51, 51, 51, 1);
+    self.hmblBtn1.backgroundColor=RGBA(51, 51, 51, 1);
+    self.hmblBtn2.backgroundColor=RGBA(20, 155, 236, 1);
+    [[NSUserDefaults standardUserDefaults] setValue:@(2) forKey:@"Huamianbili"];
+    if(self.touchHMBL)
+    {
+        self.touchHMBL(2);
+    }
 }
 - (IBAction)zimu_touch:(id)sender {
 }
@@ -93,17 +129,39 @@
             {
                 self.tgPTPWSwitch.on=YES;
                 [[NSUserDefaults standardUserDefaults] setValue:@(1) forKey:@"tiaoguokaiguan"];
+                if(self.SwitchBlock)
+                {
+                    self.SwitchBlock(YES);
+                }
             }else{
                 self.tgPTPWSwitch.on=NO;
                 [[NSUserDefaults standardUserDefaults] setValue:@(0) forKey:@"tiaoguokaiguan"];
+                if(self.SwitchBlock)
+                {
+                    self.SwitchBlock(NO);
+                }
             }
+            
+                
         }else{
+            self.tgPTPWSwitch.on=NO;
+            [[NSUserDefaults standardUserDefaults] setValue:@(0) forKey:@"tiaoguokaiguan"];
+            if(self.SwitchBlock)
+            {
+                self.SwitchBlock(NO);
+            }
             if(self.touchIndex)
             {
                 self.touchIndex(1);
             }
         }
     }else{
+        self.tgPTPWSwitch.on=NO;
+        [[NSUserDefaults standardUserDefaults] setValue:@(0) forKey:@"tiaoguokaiguan"];
+        if(self.SwitchBlock)
+        {
+            self.SwitchBlock(NO);
+        }
         if(self.touchIndex)
         {
             self.touchIndex(1);

@@ -128,6 +128,10 @@
 		8A39314325FCDFCE00E7331B /* MHTopicFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A39313725FCDFCC00E7331B /* MHTopicFrame.m */; };
 		8A39314425FCDFCE00E7331B /* MHTopicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A39313A25FCDFCD00E7331B /* MHTopicManager.m */; };
 		8A39314525FCDFCE00E7331B /* MHUserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A39313C25FCDFCD00E7331B /* MHUserInfoController.m */; };
+		8A77611C26BD506A00B7BB81 /* XLCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A77611426BD506A00B7BB81 /* XLCardCell.m */; };
+		8A77611D26BD506A00B7BB81 /* XLCardSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A77611626BD506A00B7BB81 /* XLCardSwitch.m */; };
+		8A77611E26BD506A00B7BB81 /* XLCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A77611A26BD506A00B7BB81 /* XLCardModel.m */; };
+		8A77611F26BD506A00B7BB81 /* XLCardSwitchFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A77611B26BD506A00B7BB81 /* XLCardSwitchFlowLayout.m */; };
 		8A82F0E2264F59FA004AAF40 /* ShapeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F0E1264F59FA004AAF40 /* ShapeView.m */; };
 		8A82F0EF264F7FA6004AAF40 /* BaseTabbarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F0E8264F7FA6004AAF40 /* BaseTabbarViewController.m */; };
 		8A82F0F0264F7FA6004AAF40 /* BaseNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A82F0E9264F7FA6004AAF40 /* BaseNavigationController.m */; };
@@ -772,6 +776,14 @@
 		8A39313A25FCDFCD00E7331B /* MHTopicManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTopicManager.m; sourceTree = "<group>"; };
 		8A39313C25FCDFCD00E7331B /* MHUserInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHUserInfoController.m; sourceTree = "<group>"; };
 		8A39313D25FCDFCD00E7331B /* MHUserInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHUserInfoController.h; sourceTree = "<group>"; };
+		8A77611426BD506A00B7BB81 /* XLCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLCardCell.m; sourceTree = "<group>"; };
+		8A77611526BD506A00B7BB81 /* XLCardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLCardModel.h; sourceTree = "<group>"; };
+		8A77611626BD506A00B7BB81 /* XLCardSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLCardSwitch.m; sourceTree = "<group>"; };
+		8A77611726BD506A00B7BB81 /* XLCardSwitchFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLCardSwitchFlowLayout.h; sourceTree = "<group>"; };
+		8A77611826BD506A00B7BB81 /* XLCardCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLCardCell.h; sourceTree = "<group>"; };
+		8A77611926BD506A00B7BB81 /* XLCardSwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLCardSwitch.h; sourceTree = "<group>"; };
+		8A77611A26BD506A00B7BB81 /* XLCardModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLCardModel.m; sourceTree = "<group>"; };
+		8A77611B26BD506A00B7BB81 /* XLCardSwitchFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLCardSwitchFlowLayout.m; sourceTree = "<group>"; };
 		8A82F0E0264F59FA004AAF40 /* ShapeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShapeView.h; sourceTree = "<group>"; };
 		8A82F0E1264F59FA004AAF40 /* ShapeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShapeView.m; sourceTree = "<group>"; };
 		8A82F0E8264F7FA6004AAF40 /* BaseTabbarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTabbarViewController.m; sourceTree = "<group>"; };
@@ -2182,6 +2194,29 @@
 				8A39313D25FCDFCD00E7331B /* MHUserInfoController.h */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		8A77611226BD505400B7BB81 /* Card样式 */ = {
+			isa = PBXGroup;
+			children = (
+				8A77611326BD506A00B7BB81 /* XLCardSwitch */,
+			);
+			path = "Card样式";
+			sourceTree = "<group>";
+		};
+		8A77611326BD506A00B7BB81 /* XLCardSwitch */ = {
+			isa = PBXGroup;
+			children = (
+				8A77611526BD506A00B7BB81 /* XLCardModel.h */,
+				8A77611A26BD506A00B7BB81 /* XLCardModel.m */,
+				8A77611926BD506A00B7BB81 /* XLCardSwitch.h */,
+				8A77611626BD506A00B7BB81 /* XLCardSwitch.m */,
+				8A77611826BD506A00B7BB81 /* XLCardCell.h */,
+				8A77611426BD506A00B7BB81 /* XLCardCell.m */,
+				8A77611726BD506A00B7BB81 /* XLCardSwitchFlowLayout.h */,
+				8A77611B26BD506A00B7BB81 /* XLCardSwitchFlowLayout.m */,
+			);
+			path = XLCardSwitch;
 			sourceTree = "<group>";
 		};
 		8A82F0DF264F59D9004AAF40 /* view */ = {
@@ -4014,6 +4049,7 @@
 		FA9FBAA42647815200E4F27E /* 会员充值 */ = {
 			isa = PBXGroup;
 			children = (
+				8A77611226BD505400B7BB81 /* Card样式 */,
 				FA75823426497C9E00778A63 /* view */,
 				FA75822E26496D4A00778A63 /* Cell */,
 				FA9FBAA52647819700E4F27E /* menberViewController.h */,
@@ -4633,6 +4669,7 @@
 				8A95C30B265A5C7B00A6D144 /* KJMidiPlayerVC.m in Sources */,
 				8A39313E25FCDFCE00E7331B /* MHCommentReply.m in Sources */,
 				8AA0B84D26B2D041009BFA4C /* KJBasePlayerView.m in Sources */,
+				8A77611D26BD506A00B7BB81 /* XLCardSwitch.m in Sources */,
 				8A82F0F1264F7FA6004AAF40 /* BaseWindow.m in Sources */,
 				FAD0F4A926B44C3D0089BA2A /* XMPlayerTool.m in Sources */,
 				8A9C567925F8A24E00EFA410 /* OfflineViewController.m in Sources */,
@@ -4662,6 +4699,7 @@
 				FAF4063A26A9B569001706F1 /* homeOneTableViewCell.m in Sources */,
 				8A8BC38725FC6F9E0028173C /* ViewPagerController.m in Sources */,
 				8A8BC2F125FC6ED10028173C /* MHYouKuAnthologyHeaderView.m in Sources */,
+				8A77611E26BD506A00B7BB81 /* XLCardModel.m in Sources */,
 				FA993BA92676EF0200C6F298 /* bannerMode.m in Sources */,
 				FA984FAB2674AEDF0014DCA8 /* UIActivityIndicatorView+AFNetworking.m in Sources */,
 				8A8BC39525FC6F9E0028173C /* UIImage+MHCrop.m in Sources */,
@@ -4959,6 +4997,7 @@
 				8AFDD3C625F8C890006B1384 /* NSString+GetImageFromBundle.m in Sources */,
 				8A82F132264FA07E004AAF40 /* SVIndefiniteAnimatedView.m in Sources */,
 				8A39306525FCD91A00E7331B /* YYCache+CMHHelper.m in Sources */,
+				8A77611F26BD506A00B7BB81 /* XLCardSwitchFlowLayout.m in Sources */,
 				FAD0F4A626B44C3D0089BA2A /* XMCGSize.m in Sources */,
 				8A1421A6268DEB180038D99D /* JXBWebViewNetworkInterceptor.m in Sources */,
 				8A8BC17725F8F73F0028173C /* ScrollPageViewController.m in Sources */,
@@ -4985,6 +5024,7 @@
 				8A82F116264F9E77004AAF40 /* LaunchModel.m in Sources */,
 				8A39303325FCD86A00E7331B /* MHNavigationController.m in Sources */,
 				8A8BC2F525FC6ED10028173C /* MHYouKuCommentToolBar.m in Sources */,
+				8A77611C26BD506A00B7BB81 /* XLCardCell.m in Sources */,
 				8A1421E3268F05800038D99D /* VideoFavoriteMode.m in Sources */,
 				FAA6DF132675C77500DE5E7C /* HQEditImageEditView.m in Sources */,
 				8A8BC17925F8F73F0028173C /* LXReorderableCollectionViewFlowLayout.m in Sources */,

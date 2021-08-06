@@ -20,10 +20,12 @@
 
 #import "UIButton+WebCache.h"
 #import "menberJSCollectionViewCell.h"
+#import "XLCardSwitch.h"
+
 
 #define CZCollectionViewCellID @"CZCollectionViewCell"
 #define MBCollectionViewCellID @"menberJSCollectionViewCell"
-@interface menberViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDelegate,UITableViewDataSource,WSLWaterFlowLayoutDelegate,UITextFieldDelegate>
+@interface menberViewController ()<UICollectionViewDataSource,UICollectionViewDelegate,UITableViewDelegate,UITableViewDataSource,WSLWaterFlowLayoutDelegate,UITextFieldDelegate,XLCardSwitchDelegate>
 {
     NSDictionary *keyboardInfo;
 }
@@ -50,6 +52,7 @@
 @property (strong, nonatomic) PlayWTView*playwtView;
 
 
+@property (nonatomic, strong) XLCardSwitch *cardSwitch;
 @end
 
 @implementation menberViewController
@@ -199,8 +202,12 @@
                             [self.moneyArray addObject:model];
                             
                         }
-                        
-                        self.collectionView.frame=CGRectMake(20, self.Topview.bottom+8, SCREEN_WIDTH-40, ceilf((self.moneyArray.count/2.0))*95);
+                        //设置卡片数据源
+                        self.cardSwitch.models = self.moneyArray;
+                        self.collectionView.hidden=YES;
+//                        self.collectionView.frame=CGRectMake(20, self.Topview.bottom+8, SCREEN_WIDTH-40, ceilf((self.moneyArray.count/2.0))*95);
+                        self.collectionView.frame=CGRectMake(20, self.Topview.bottom+8, SCREEN_WIDTH-40, 135);
+                        self.cardSwitch.frame=CGRectMake(20, self.Topview.bottom+8, SCREEN_WIDTH-40, 135);
                         [self.collectionView reloadData];
                         self.downtableview.frame=CGRectMake(20, self.collectionView.bottom+2, SCREEN_WIDTH-40, (self.PayArray.count+2)*50+(self.PayArray.count+1)*10);
                         [self.downtableview reloadData];
@@ -464,7 +471,7 @@
     // 是否滚动//
     collectionView.scrollEnabled = NO;
     [ScrollView addSubview:collectionView];
-
+    self.collectionView.hidden=YES;
     self.collectionView = collectionView;
     
     // 注册cell
@@ -485,6 +492,27 @@
 //
 //        });
 //    }];
+    [self addCardSwitch];
+}
+
+- (void)addCardSwitch {
+    //初始化
+    self.cardSwitch = [[XLCardSwitch alloc] initWithFrame:self.collectionView.bounds];
+    //设置代理方法
+    self.cardSwitch.delegate = self;
+    //分页切换
+    self.cardSwitch.pagingEnabled = false;
+    [ScrollView addSubview:self.cardSwitch];
+}
+#pragma mark CardSwitchDelegate
+- (void)cardSwitchDidClickAtIndex:(NSInteger)index {
+    NSLog(@"点击了：%zd",index);
+//    [self configImageViewOfIndex:index];
+}
+
+- (void)cardSwitchDidScrollToIndex:(NSInteger)index {
+    NSLog(@"滚动到了击了：%zd",index);
+//    [self configImageViewOfIndex:index];
 }
 
 -(void)getDataList_header

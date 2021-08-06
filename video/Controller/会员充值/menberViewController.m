@@ -501,18 +501,20 @@
     //设置代理方法
     self.cardSwitch.delegate = self;
     //分页切换
-    self.cardSwitch.pagingEnabled = false;
+    self.cardSwitch.pagingEnabled = YES;
     [ScrollView addSubview:self.cardSwitch];
 }
 #pragma mark CardSwitchDelegate
 - (void)cardSwitchDidClickAtIndex:(NSInteger)index {
     NSLog(@"点击了：%zd",index);
 //    [self configImageViewOfIndex:index];
+    _moneyselect = index;
 }
 
 - (void)cardSwitchDidScrollToIndex:(NSInteger)index {
     NSLog(@"滚动到了击了：%zd",index);
 //    [self configImageViewOfIndex:index];
+    _moneyselect = index;
 }
 
 -(void)getDataList_header

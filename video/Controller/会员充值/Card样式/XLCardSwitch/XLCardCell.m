@@ -46,7 +46,7 @@
     self.centerView.frame=CGRectMake(0, self.toptitle.bottom, self.bounds.size.width, self.bounds.size.height-20);
 //    self.centerView.backgroundColor=[UIColor clearColor];
     self.centerView.backgroundColor=RGBA(208, 164, 135, 1);
-    self.centerView.layer.cornerRadius=6;
+    self.centerView.layer.cornerRadius=8;
     [self addSubview:self.centerView];
     
     
@@ -55,7 +55,7 @@
     self.BGimageView.contentMode = UIViewContentModeScaleToFill;
     [self.BGimageView setImage:[UIImage imageNamed:@"menberVipBG"]];
     self.BGimageView.layer.masksToBounds = true;
-    self.BGimageView.layer.cornerRadius=6;
+    self.BGimageView.layer.cornerRadius=8;
     [self.centerView addSubview:self.BGimageView];
     
 
@@ -97,6 +97,88 @@
        self.CYJpriceLabel.attributedText = attribtStr;
 
     self.CXJpriceLabel.text=[NSString stringWithFormat:@"$%@",model.discounted_price];
+    
+        if ([model.name isEqualToString:@"月卡"]) {
+            self.centerView.backgroundColor=RGBA(218, 177, 111, 1);
+            CAGradientLayer *gl = [CAGradientLayer layer];
+            gl.frame = self.centerView.bounds;
+            gl.cornerRadius = 8;
+            gl.startPoint = CGPointMake(0.1508081704378128, 0.05238793417811394);
+            gl.endPoint = CGPointMake(0.7005797028541565, 1);
+            gl.colors = @[(__bridge id)[UIColor colorWithRed:241/255.0 green:222/255.0 blue:175/255.0 alpha:1.0].CGColor,(__bridge id)[UIColor colorWithRed:218/255.0 green:177/255.0 blue:111/255.0 alpha:1.0].CGColor];
+            gl.locations = @[@(0),@(1.0f)];
+            [self.centerView.layer insertSublayer:gl atIndex:0];
+            self.CTimeLabel.textColor=rgba(141, 107, 54, 1);
+            self.CYJpriceLabel.textColor=rgba(141, 107, 54, 1);
+            self.CXJpriceLabel.textColor=rgba(141, 107, 54, 1);
+        }else if ([model.name isEqualToString:@"季卡"]) {
+            self.centerView.backgroundColor=RGBA(208, 164, 135, 1);
+            CAGradientLayer *gl = [CAGradientLayer layer];
+            gl.frame = self.centerView.bounds;
+            gl.cornerRadius = 8;
+            gl.startPoint = CGPointMake(0.1508081704378128, 0.05238793417811394);
+            gl.endPoint = CGPointMake(0.7005797028541565, 1);
+            gl.colors = @[(__bridge id)[UIColor colorWithRed:243/255.0 green:231/255.0 blue:227/255.0 alpha:1.0].CGColor,(__bridge id)[UIColor colorWithRed:208/255.0 green:164/255.0 blue:135/255.0 alpha:1.0].CGColor];
+            gl.locations = @[@(0),@(1.0f)];
+            [self.centerView.layer insertSublayer:gl atIndex:0];
+            self.CTimeLabel.textColor=rgba(155, 96, 57, 1);
+            self.CYJpriceLabel.textColor=rgba(155, 96, 57, 1);
+            self.CXJpriceLabel.textColor=rgba(155, 96, 57, 1);
+        }else if ([model.name isEqualToString:@"年卡"]) {
+            self.centerView.backgroundColor=RGBA(208, 164, 135, 1);
+            CAGradientLayer *gl = [CAGradientLayer layer];
+            gl.frame = self.centerView.bounds;
+            gl.cornerRadius = 8;
+            gl.startPoint = CGPointMake(0.1508081704378128, 0.05238793417811394);
+            gl.endPoint = CGPointMake(0.7005797028541565, 1);
+            gl.colors = @[(__bridge id)[UIColor colorWithRed:243/255.0 green:231/255.0 blue:227/255.0 alpha:1.0].CGColor,(__bridge id)[UIColor colorWithRed:208/255.0 green:164/255.0 blue:135/255.0 alpha:1.0].CGColor];
+            gl.locations = @[@(0),@(1.0f)];
+            [self.centerView.layer insertSublayer:gl atIndex:0];
+            self.CTimeLabel.textColor=rgba(155, 96, 57, 1);
+            self.CYJpriceLabel.textColor=rgba(155, 96, 57, 1);
+            self.CXJpriceLabel.textColor=rgba(155, 96, 57, 1);
+        }else if ([model.name isEqualToString:@"情侣季卡"]) {
+            self.centerView.backgroundColor=RGBA(35, 35, 35, 1);
+            CAGradientLayer *gl = [CAGradientLayer layer];
+            gl.frame = self.centerView.bounds;
+            gl.cornerRadius = 8;
+            gl.startPoint = CGPointMake(0.1508081704378128, 0.05238793417811394);
+            gl.endPoint = CGPointMake(0.7005797028541565, 1);
+            gl.colors = @[(__bridge id)[UIColor colorWithRed:116/255.0 green:115/255.0 blue:115/255.0 alpha:1.0].CGColor,(__bridge id)[UIColor colorWithRed:35/255.0 green:35/255.0 blue:35/255.0 alpha:1.0].CGColor];
+            gl.locations = @[@(0),@(1.0f)];
+            [self.centerView.layer insertSublayer:gl atIndex:0];
+            self.CTimeLabel.textColor=RGBA(227, 195, 136, 1);
+            self.CYJpriceLabel.textColor=RGBA(227, 195, 136, 1);
+            self.CXJpriceLabel.textColor=RGBA(227, 195, 136, 1);
+        }else if ([model.name isEqualToString:@"情侣年卡"]) {
+            self.centerView.backgroundColor=RGBA(35, 35, 35, 1);
+            CAGradientLayer *gl = [CAGradientLayer layer];
+            gl.frame = self.centerView.bounds;
+            gl.cornerRadius = 8;
+            gl.startPoint = CGPointMake(0.1508081704378128, 0.05238793417811394);
+            gl.endPoint = CGPointMake(0.7005797028541565, 1);
+            gl.colors = @[(__bridge id)[UIColor colorWithRed:116/255.0 green:115/255.0 blue:115/255.0 alpha:1.0].CGColor,(__bridge id)[UIColor colorWithRed:35/255.0 green:35/255.0 blue:35/255.0 alpha:1.0].CGColor];
+            gl.locations = @[@(0),@(1.0f)];
+            [self.centerView.layer insertSublayer:gl atIndex:0];
+            self.CTimeLabel.textColor=RGBA(227, 195, 136, 1);
+            self.CYJpriceLabel.textColor=RGBA(227, 195, 136, 1);
+            self.CXJpriceLabel.textColor=RGBA(227, 195, 136, 1);
+        }else if ([model.name isEqualToString:@"家庭年卡"]) {
+            self.centerView.backgroundColor=RGBA(35, 35, 35, 1);
+            CAGradientLayer *gl = [CAGradientLayer layer];
+            gl.frame = self.centerView.bounds;
+            gl.cornerRadius = 8;
+            gl.startPoint = CGPointMake(0.1508081704378128, 0.05238793417811394);
+            gl.endPoint = CGPointMake(0.7005797028541565, 1);
+            gl.colors = @[(__bridge id)[UIColor colorWithRed:243/255.0 green:231/255.0 blue:227/255.0 alpha:1.0].CGColor,(__bridge id)[UIColor colorWithRed:208/255.0 green:164/255.0 blue:135/255.0 alpha:1.0].CGColor];
+            gl.locations = @[@(0),@(1.0f)];
+            [self.centerView.layer insertSublayer:gl atIndex:0];
+            self.CTimeLabel.textColor=rgba(155, 96, 57, 1);
+            self.CYJpriceLabel.textColor=rgba(155, 96, 57, 1);
+            self.CXJpriceLabel.textColor=rgba(155, 96, 57, 1);
+        }
+    
+    self.centerView.layer.cornerRadius=8;
 }
 
 

@@ -53,7 +53,7 @@
     self.collectionView = [[UICollectionView alloc] initWithFrame:self.bounds collectionViewLayout:flowLayout];
     self.collectionView.showsHorizontalScrollIndicator = false;
     self.collectionView.backgroundColor = [UIColor clearColor];
-    [self.collectionView registerClass:[XLCardCell class] forCellWithReuseIdentifier:@"XLCardCell"];
+//    [self.collectionView registerClass:[XLCardCell class] forCellWithReuseIdentifier:@"XLCardCell"];
     self.collectionView.userInteractionEnabled = true;
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -140,7 +140,8 @@
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString* cellId = @"XLCardCell";
+    NSString* cellId = [NSString stringWithFormat:@"XLCardCell%ld%ld",indexPath.section,indexPath.item];
+    [self.collectionView registerClass:[XLCardCell class] forCellWithReuseIdentifier:cellId];
     XLCardCell* card = [collectionView dequeueReusableCellWithReuseIdentifier:cellId forIndexPath:indexPath];
     card.model = self.models[indexPath.row];
     return  card;

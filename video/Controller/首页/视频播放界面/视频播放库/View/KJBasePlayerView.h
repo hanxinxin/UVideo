@@ -17,6 +17,7 @@
 #import "KJPlayerOperationView.h"
 #import "KJPlayerButton.h"
 #import "hxplayerDanmuView.h"
+#import "VideoplaySetView.h"
 
 typedef void(^KJBasePlayerViewBlock)(KJBasePlayerView * _Nullable view,CGFloat percent);
 NS_ASSUME_NONNULL_BEGIN
@@ -103,6 +104,8 @@ extern NSString *kPlayerBaseViewChangeKey;
 /* 底部操作面板 */
 @property (nonatomic,strong) hxplayerDanmuView *danmubottomView;
 
+////   播放视频设置
+@property (nonatomic,strong)VideoplaySetView*setVideoView;
 
 @property (nonatomic,copy) KJBasePlayerViewBlock SliderTouch;
 #pragma mark - method
@@ -113,6 +116,8 @@ extern NSString *kPlayerBaseViewChangeKey;
 /* 取消收起操作面板，可用于滑动滑杆时刻不自动隐藏 */
 - (void)kj_cancelHiddenOperationView;
 
+-(void)showsetVideoView;
+-(void)HidsetVideoView;
 @end
 
 NS_ASSUME_NONNULL_END

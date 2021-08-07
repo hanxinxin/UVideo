@@ -51,14 +51,23 @@
     NSInteger humianbiliNumber=[[[NSUserDefaults standardUserDefaults] valueForKey:@"Huamianbili"]intValue];
     if(humianbiliNumber==0)
     {
-        [self Hmbl_touch:nil];
+        self.hmblBtn.backgroundColor=RGBA(20, 155, 236, 1);
+        self.hmblBtn1.backgroundColor=RGBA(51, 51, 51, 1);
+        self.hmblBtn2.backgroundColor=RGBA(51, 51, 51, 1);
+//        [[NSUserDefaults standardUserDefaults] setValue:@(0) forKey:@"Huamianbili"];
     }else if(humianbiliNumber==1)
     {
-        [self Hmbl1_touch:nil];
+        self.hmblBtn.backgroundColor=RGBA(51, 51, 51, 1);
+        self.hmblBtn1.backgroundColor=RGBA(20, 155, 236, 1);
+        self.hmblBtn2.backgroundColor=RGBA(51, 51, 51, 1);
+//        [[NSUserDefaults standardUserDefaults] setValue:@(1) forKey:@"Huamianbili"];
     }
     else if(humianbiliNumber==2)
     {
-        [self Hmbl2_touch:nil];
+        self.hmblBtn.backgroundColor=RGBA(51, 51, 51, 1);
+        self.hmblBtn1.backgroundColor=RGBA(51, 51, 51, 1);
+        self.hmblBtn2.backgroundColor=RGBA(20, 155, 236, 1);
+//        [[NSUserDefaults standardUserDefaults] setValue:@(2) forKey:@"Huamianbili"];
     }
     
 }

@@ -59,6 +59,8 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     [self.bottomView addSubview:self.bottomHYSlider];
     [self.bottomView addSubview:self.TimeTotal];
     [self addSubview:self.danmubottomView];
+    [self addSubview:self.setVideoView];
+    [self HidsetVideoView];
     self.smallScreenHiddenBackButton = YES;
     self.displayOperation = YES;
     [self kj_hiddenOperationView];
@@ -108,6 +110,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
 
     self.bottomHYSlider.frame = CGRectMake(0, self.bottomView.height-12, self.bottomView.width, 12);
     self.TimeTotal.frame = CGRectMake(0, self.bottomView.height-28, self.bottomView.width-(kTopBarSafeHeight+kBottomSafeHeight), 15);
+    self.setVideoView.frame=CGRectMake(self.width, 0, 220,self.height);
 }
 
 -(void)kj_changeFrameShuPing
@@ -127,8 +130,44 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
 
     self.bottomHYSlider.frame = CGRectMake(0, self.bottomView.height-11, self.bottomView.width, 12);
     self.TimeTotal.frame = CGRectMake(0, self.bottomView.height-28, self.bottomView.width, 15);
+    self.setVideoView.frame=CGRectMake(self.width, 0, 220,self.height);
 }
-
+-(void)showsetVideoView
+{
+    NSLog(@"%f  %f   %f %f",self.width-220, 0, 220, self.height);
+//    NSLog(@"self.GuangGaoplayerView.height == %f",self.GuangGaoplayerView.height);
+    self.setVideoView.hidden=NO;
+//    if(!self.isFullScreen)
+//    {
+        [UIView animateWithDuration:0.7 animations:^{
+            
+            self.setVideoView.frame=CGRectMake(self.width-220, 0, 220, self.height);
+        } completion:^(BOOL finished) {
+            
+        }];
+//    }else{
+//        NSLog(@"横屏111    %f, %f",[UIScreen mainScreen].bounds.size.height,[UIScreen mainScreen].bounds.size.width);
+//    }
+}
+-(void)HidsetVideoView
+{
+//    if(!self.playerView.isFullScreen)
+//    {
+    [UIView animateWithDuration:0.5 animations:^{
+        self.setVideoView.frame=CGRectMake(self.width, 0, 220,self.height);
+    } completion:^(BOOL finished) {
+        self.setVideoView.hidden=YES;
+    }];
+//    }else{
+//        NSLog(@"横屏222    %f, %f",[UIScreen mainScreen].bounds.size.height,[UIScreen mainScreen].bounds.size.width);
+//        [UIView animateWithDuration:0.5 animations:^{
+//
+//            self.setVideoView.frame=CGRectMake([UIScreen mainScreen].bounds.size.width, 0, 220, [UIScreen mainScreen].bounds.size.height);
+//        } completion:^(BOOL finished) {
+//
+//        }];
+//    }
+}
 #pragma mark - getter
 - (void (^)(void(^)(KJPlayerHintInfo*)))kVideoHintTextInfo{
     return ^(void(^xxblock)(KJPlayerHintInfo*)){
@@ -551,6 +590,38 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
 
 
 
+-(VideoplaySetView*)setVideoView
+{
+    if(!_setVideoView)
+    {
+        _setVideoView=[[[NSBundle mainBundle]loadNibNamed:@"VideoplaySetView" owner:self options:nil]objectAtIndex:0];
+    
+    _setVideoView.alpha=0.9;
+    _setVideoView.backgroundColor=RGBA(28, 29, 48, 1);
+    _setVideoView.frame=CGRectMake(self.width, 0, 220,self.height);
+    NSInteger humianbiliNumber=[[[NSUserDefaults standardUserDefaults] valueForKey:@"Huamianbili"]intValue];
+    if(humianbiliNumber==0)
+    {
+        _setVideoView.hmblBtn.backgroundColor=RGBA(20, 155, 236, 1);
+        _setVideoView.hmblBtn1.backgroundColor=RGBA(51, 51, 51, 1);
+        _setVideoView.hmblBtn2.backgroundColor=RGBA(51, 51, 51, 1);
+    }else if(humianbiliNumber==1)
+    {
+        _setVideoView.hmblBtn.backgroundColor=RGBA(51, 51, 51, 1);
+        _setVideoView.hmblBtn1.backgroundColor=RGBA(20, 155, 236, 1);
+        _setVideoView.hmblBtn2.backgroundColor=RGBA(51, 51, 51, 1);
+    }
+    else if(humianbiliNumber==2)
+    {
+        _setVideoView.hmblBtn.backgroundColor=RGBA(51, 51, 51, 1);
+        _setVideoView.hmblBtn1.backgroundColor=RGBA(51, 51, 51, 1);
+        _setVideoView.hmblBtn2.backgroundColor=RGBA(20, 155, 236, 1);
+    }
+    _setVideoView.hidden=NO;
+        
+    }
+    return _setVideoView;
+}
 
 
 @end

@@ -168,8 +168,6 @@
 @property (nonatomic, strong)GuanggaoMode*GuanggaoVideoMode;
 
 
-////   播放视频设置
-@property (nonatomic, strong)VideoplaySetView*setVideoView;
 
 @property (nonatomic, assign)BOOL isTGPTPW;///跳过片头片尾
 @property (nonatomic, assign)NSInteger humianbiliNumber; //画面比例选择
@@ -178,58 +176,8 @@
 @implementation MHYouKuController
 
 
--(VideoplaySetView*)setVideoView
-{
-    if(!_setVideoView)
-    {
-        _setVideoView=[[[NSBundle mainBundle]loadNibNamed:@"VideoplaySetView" owner:self options:nil]objectAtIndex:0];
-        
-    }
-    _setVideoView.alpha=0.9;
-    _setVideoView.backgroundColor=RGBA(28, 29, 48, 1);
-    _setVideoView.frame=CGRectMake(self.GuangGaoplayerView.width, 0, 220,self.GuangGaoplayerView.height);
-    if(self.humianbiliNumber==0)
-    {
-        _setVideoView.hmblBtn.backgroundColor=RGBA(20, 155, 236, 1);
-        _setVideoView.hmblBtn1.backgroundColor=RGBA(51, 51, 51, 1);
-        _setVideoView.hmblBtn2.backgroundColor=RGBA(51, 51, 51, 1);
-    }else if(self.humianbiliNumber==1)
-    {
-        _setVideoView.hmblBtn.backgroundColor=RGBA(51, 51, 51, 1);
-        _setVideoView.hmblBtn1.backgroundColor=RGBA(20, 155, 236, 1);
-        _setVideoView.hmblBtn2.backgroundColor=RGBA(51, 51, 51, 1);
-    }
-    else if(self.humianbiliNumber==2)
-    {
-        _setVideoView.hmblBtn.backgroundColor=RGBA(51, 51, 51, 1);
-        _setVideoView.hmblBtn1.backgroundColor=RGBA(51, 51, 51, 1);
-        _setVideoView.hmblBtn2.backgroundColor=RGBA(20, 155, 236, 1);
-    }
-    _setVideoView.hidden=NO;
-    return _setVideoView;
-}
 
--(void)showsetVideoView
-{
-//    NSLog(@"self.GuangGaoplayerView.width-220== %f",self.GuangGaoplayerView.width-220);
-//    NSLog(@"self.GuangGaoplayerView.height == %f",self.GuangGaoplayerView.height);
-    self.setVideoView.hidden=NO;
-    [UIView animateWithDuration:0.7 animations:^{
-        
-        self.setVideoView.frame=CGRectMake(self.GuangGaoplayerView.width-220, 0, 220, self.GuangGaoplayerView.height);
-    } completion:^(BOOL finished) {
-        
-    }];
-}
--(void)HidsetVideoView
-{
-    
-    [UIView animateWithDuration:0.5 animations:^{
-        self.setVideoView.frame=CGRectMake(self.GuangGaoplayerView.width, 0, 220,self.GuangGaoplayerView.height);
-    } completion:^(BOOL finished) {
-        self.setVideoView.hidden=YES;
-    }];
-}
+
 - (void)dealloc
 {
     MHDealloc;
@@ -344,10 +292,10 @@
     [self addmenberViewM];
     
     ///加载video设置view
-    [self.view addSubview:self.setVideoView];
-    [self HidsetVideoView];
+//    [self.view addSubview:self.setVideoView];
+//    [self HidsetVideoView];
     __weak typeof(self) weakSelf = self;
-    self.setVideoView.touchIndex = ^(NSInteger index) {
+    self.playerView.setVideoView.touchIndex = ^(NSInteger index) {
       if(index==0)
       {
           LoginViewController * avc = [[LoginViewController alloc] init];
@@ -357,43 +305,49 @@
           [weakSelf showmenberViewTS];
       }
     };
-    self.setVideoView.SwitchBlock = ^(BOOL SwitchBool) {
+    self.playerView.setVideoView.SwitchBlock = ^(BOOL SwitchBool) {
         NSLog(@"片头片尾开启状态   %d",SwitchBool);
         weakSelf.isTGPTPW=SwitchBool;
     };
     
-    self.setVideoView.touchHMBL = ^(NSInteger index) {
-        if(index==0)
-        {
-            weakSelf.playerView.frame=CGRectMake(0, 0, weakSelf.view.width, weakSelf.view.width*(9.f/16.f));
-            [weakSelf.topContainer mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(weakSelf.view.width*(9.f/16.f));
-            }];
-            weakSelf.GuangGaoplayerView.frame=weakSelf.playerView.frame;
-            weakSelf.setVideoView.frame=CGRectMake(weakSelf.GuangGaoplayerView.width-220, 0, 220, weakSelf.GuangGaoplayerView.height);
-        }else if(index==1)
-        {
-            weakSelf.playerView.frame=CGRectMake(0, 0, weakSelf.view.width, weakSelf.view.width*(3.f/4.f));
-            [weakSelf.topContainer mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(weakSelf.view.width*(3.f/4.f));
-            }];
-            weakSelf.GuangGaoplayerView.frame=weakSelf.playerView.frame;
-            weakSelf.setVideoView.frame=CGRectMake(weakSelf.GuangGaoplayerView.width-220, 0, 220, weakSelf.GuangGaoplayerView.height);
-        }else if(index==2)
-        {
-            weakSelf.playerView.frame=CGRectMake(0, 0, weakSelf.view.width, weakSelf.view.width*(9.f/16.f));
-            [weakSelf.topContainer mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.height.mas_equalTo(weakSelf.view.width*(9.f/16.f));
-            }];
-            weakSelf.GuangGaoplayerView.frame=weakSelf.playerView.frame;
-            weakSelf.setVideoView.frame=CGRectMake(weakSelf.GuangGaoplayerView.width-220, 0, 220, weakSelf.GuangGaoplayerView.height);
-        }
+    self.playerView.setVideoView.touchHMBL = ^(NSInteger index) {
+        [weakSelf setupdateViewI:index];
         weakSelf.humianbiliNumber=index;
     };
     
-//
+    [weakSelf setupdateViewI:weakSelf.humianbiliNumber];
     /// 键盘
 //    [self addNoticeForKeyboard];
+}
+
+-(void)setupdateViewI:(NSInteger)index
+{
+    __weak typeof(self) weakSelf = self;
+    if(index==0)
+    {
+        weakSelf.playerView.frame=CGRectMake(0, 0, weakSelf.view.width, weakSelf.view.width*(9.f/16.f));
+        [weakSelf.topContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(weakSelf.view.width*(9.f/16.f));
+        }];
+        weakSelf.GuangGaoplayerView.frame=weakSelf.playerView.frame;
+//        weakSelf.setVideoView.frame=CGRectMake(weakSelf.GuangGaoplayerView.width-220, 0, 220, weakSelf.GuangGaoplayerView.height);
+    }else if(index==1)
+    {
+        weakSelf.playerView.frame=CGRectMake(0, 0, weakSelf.view.width, weakSelf.view.width*(3.f/4.f));
+        [weakSelf.topContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(weakSelf.view.width*(3.f/4.f));
+        }];
+        weakSelf.GuangGaoplayerView.frame=weakSelf.playerView.frame;
+//        weakSelf.setVideoView.frame=CGRectMake(weakSelf.GuangGaoplayerView.width-220, 0, 220, weakSelf.GuangGaoplayerView.height);
+    }else if(index==2)
+    {
+        weakSelf.playerView.frame=CGRectMake(0, 0, weakSelf.view.width, weakSelf.view.width*(9.f/16.f));
+        [weakSelf.topContainer mas_updateConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_equalTo(weakSelf.view.width*(9.f/16.f));
+        }];
+        weakSelf.GuangGaoplayerView.frame=weakSelf.playerView.frame;
+//        weakSelf.setVideoView.frame=CGRectMake(weakSelf.GuangGaoplayerView.width-220, 0, 220, weakSelf.GuangGaoplayerView.height);
+    }
 }
 -(void)setGuanggaoView
 {
@@ -430,37 +384,37 @@
         if(index==0)
         {
             ///
-//            [weakSelf.GuangGaoplayerView tapAction];
-//            [weakSelf.player kj_play];
-            if([usertoken isEqualToString:@""])
-            {
-                [UHud showHudWithStatus:@"请先登录" delay:2.f];
-                LoginViewController * avc = [[LoginViewController alloc] init];
-                [weakSelf pushRootNav:avc animated:YES];
-            }else{
-
-                //////会员才能看蓝光
-                if([vip_expired_time_loca intValue]!=0)
-                {
-                    NSString * vipStr=[vip_expired_time_loca stringValue];
-                    NSString * dqStr=[weakSelf gs_getCurrentTimeBySecond];
-                    NSDate * timeStampToDate1 = [NSDate dateWithTimeIntervalSince1970:[dqStr doubleValue]];
-                    NSDate * timeStampToDate2 = [NSDate dateWithTimeIntervalSince1970:[vipStr doubleValue]];
-                    NSLog(@"[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]=====   %d",[weakSelf compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]);
-                    if([weakSelf compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]!=1)/////   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
-                    {
-
-                        [weakSelf.GuangGaoplayerView tapAction];
-                        [weakSelf.player kj_play];
-
-                    }else{
-                        [weakSelf showmenberViewTS];
-                    }
-                }else{
-                    [weakSelf showmenberViewTS];
-
-                }
-            }
+            [weakSelf.GuangGaoplayerView tapAction];
+            [weakSelf.player kj_play];
+//            if([usertoken isEqualToString:@""])
+//            {
+//                [UHud showHudWithStatus:@"请先登录" delay:2.f];
+//                LoginViewController * avc = [[LoginViewController alloc] init];
+//                [weakSelf pushRootNav:avc animated:YES];
+//            }else{
+//
+//                //////会员才能看蓝光
+//                if([vip_expired_time_loca intValue]!=0)
+//                {
+//                    NSString * vipStr=[vip_expired_time_loca stringValue];
+//                    NSString * dqStr=[weakSelf gs_getCurrentTimeBySecond];
+//                    NSDate * timeStampToDate1 = [NSDate dateWithTimeIntervalSince1970:[dqStr doubleValue]];
+//                    NSDate * timeStampToDate2 = [NSDate dateWithTimeIntervalSince1970:[vipStr doubleValue]];
+//                    NSLog(@"[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]=====   %d",[weakSelf compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]);
+//                    if([weakSelf compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]!=1)/////   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
+//                    {
+//
+//                        [weakSelf.GuangGaoplayerView tapAction];
+//                        [weakSelf.player kj_play];
+//
+//                    }else{
+//                        [weakSelf showmenberViewTS];
+//                    }
+//                }else{
+//                    [weakSelf showmenberViewTS];
+//
+//                }
+//            }
             
         }
 
@@ -791,18 +745,18 @@
     
     PLAYER_WEAKSELF;
     KJBasePlayerView *backview = [[KJBasePlayerView alloc]initWithFrame:CGRectMake(0, 0, self.view.width, self.view.width*(9.f/16.f))];
-    if(self.humianbiliNumber==0)
-    {
-        weakself.playerView.frame=CGRectMake(0, 0, weakself.view.width, weakself.view.width*(9.f/16.f));
-    }else if(self.humianbiliNumber==1)
-    {
-        weakself.playerView.frame=CGRectMake(0, 0, weakself.view.width, weakself.view.width*(3.f/4.f));
-        
-    }else if(self.humianbiliNumber==2)
-    {
-        weakself.playerView.frame=CGRectMake(0, 0, weakself.view.width, weakself.view.width*(9.f/16.f));
-        
-    }
+//    if(self.humianbiliNumber==0)
+//    {
+//        weakself.playerView.frame=CGRectMake(0, 0, weakself.view.width, weakself.view.width*(9.f/16.f));
+//    }else if(self.humianbiliNumber==1)
+//    {
+//        weakself.playerView.frame=CGRectMake(0, 0, weakself.view.width, weakself.view.width*(3.f/4.f));
+//
+//    }else if(self.humianbiliNumber==2)
+//    {
+//        weakself.playerView.frame=CGRectMake(0, 0, weakself.view.width, weakself.view.width*(9.f/16.f));
+//
+//    }
     
 //    KJBasePlayerView *backview = [[KJBasePlayerView alloc]initWithFrame:CGRectMake(0, kStatusBarHeight, SCREEN_WIDTH, SCREENH_HEIGHT)];
     [self.view addSubview:backview];
@@ -877,7 +831,7 @@
 //              self.player.playerView.bottomView.hidden=NO;
 //          }
           
-          [self showsetVideoView];
+          [self.playerView showsetVideoView];
       }else if(selectIndex==2)
       {
           if(self.player.muted==YES)
@@ -1099,7 +1053,7 @@
         }else{
             [view kj_displayOperationView];
         }
-        [self HidsetVideoView];
+        [self.playerView HidsetVideoView];
     }else{
         if ([self.player isPlaying]) {
             [self.player kj_pause];

@@ -429,6 +429,7 @@
             }];
 }
 -(void)pushViewControllerVideo:(ZVideoMode*)mode{
+    [UHud hideLoadHud];
     MHYouKuController *avc = [[MHYouKuController alloc] init];
     avc.Zvideomodel= mode;
     [self pushRootNav:avc animated:YES];

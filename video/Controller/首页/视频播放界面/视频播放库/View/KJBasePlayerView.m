@@ -60,6 +60,7 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     [self.bottomView addSubview:self.TimeTotal];
     [self addSubview:self.danmubottomView];
     [self addSubview:self.setVideoView];
+//    [self bringSubviewToFront:self.setVideoView];
     [self HidsetVideoView];
     self.smallScreenHiddenBackButton = YES;
     self.displayOperation = YES;
@@ -134,8 +135,11 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
 }
 -(void)showsetVideoView
 {
-    NSLog(@"%f  %f   %f %f",self.width-220, 0, 220, self.height);
+    NSLog(@"%f  %f   %f %ld",self.width-220.f, 0.f, 220.f, (long)self.height);
 //    NSLog(@"self.GuangGaoplayerView.height == %f",self.GuangGaoplayerView.height);
+    
+    [self addSubview:self.setVideoView];
+//    [self insertSubview:self.setVideoView belowSubview:self.bottomView];
     self.setVideoView.hidden=NO;
 //    if(!self.isFullScreen)
 //    {

@@ -395,6 +395,7 @@
 		B8E2EE2BDCC03881E2FCE49F /* Pods_video.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBF2112B39442592AE6774A /* Pods_video.framework */; };
 		FA268C4426AD46CE00D5BA26 /* LBLaunchImageAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA268C4026AD46CD00D5BA26 /* LBLaunchImageAdView.m */; };
 		FA268C4526AD46CE00D5BA26 /* NSObject+LBLaunchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = FA268C4326AD46CE00D5BA26 /* NSObject+LBLaunchImage.m */; };
+		FA383BD926C2C223005D9C07 /* zdyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA383BD826C2C223005D9C07 /* zdyTableViewCell.m */; };
 		FA75823226496DB300778A63 /* CZCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA75823026496DB300778A63 /* CZCollectionViewCell.m */; };
 		FA75823326496DB300778A63 /* CZCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA75823126496DB300778A63 /* CZCollectionViewCell.xib */; };
 		FA75823726497CC400778A63 /* vipHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA75823626497CC400778A63 /* vipHeaderView.m */; };
@@ -1305,6 +1306,8 @@
 		FA268C4126AD46CD00D5BA26 /* NSObject+LBLaunchImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LBLaunchImage.h"; sourceTree = "<group>"; };
 		FA268C4226AD46CD00D5BA26 /* LBLaunchImageAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBLaunchImageAdView.h; sourceTree = "<group>"; };
 		FA268C4326AD46CE00D5BA26 /* NSObject+LBLaunchImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LBLaunchImage.m"; sourceTree = "<group>"; };
+		FA383BD726C2C223005D9C07 /* zdyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zdyTableViewCell.h; sourceTree = "<group>"; };
+		FA383BD826C2C223005D9C07 /* zdyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zdyTableViewCell.m; sourceTree = "<group>"; };
 		FA75822F26496DB300778A63 /* CZCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCollectionViewCell.h; sourceTree = "<group>"; };
 		FA75823026496DB300778A63 /* CZCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCollectionViewCell.m; sourceTree = "<group>"; };
 		FA75823126496DB300778A63 /* CZCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -4033,6 +4036,8 @@
 				FA9B2ED2267F44B300C149B9 /* FKnumberTableViewCell.h */,
 				FA9B2ED3267F44B300C149B9 /* FKnumberTableViewCell.m */,
 				FA9B2ED4267F44B300C149B9 /* FKnumberTableViewCell.xib */,
+				FA383BD726C2C223005D9C07 /* zdyTableViewCell.h */,
+				FA383BD826C2C223005D9C07 /* zdyTableViewCell.m */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -4203,32 +4208,32 @@
 		FAD0F47226B44C3C0089BA2A /* XMPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				FAD0F47326B44C3C0089BA2A /* XMDrawView.h */,
-				FAD0F47426B44C3C0089BA2A /* XMBaseTools.h */,
-				FAD0F47626B44C3C0089BA2A /* XMCGSize.m */,
-				FAD0F47926B44C3C0089BA2A /* XMPlayerTool.m */,
-				FAD0F47A26B44C3C0089BA2A /* UIView+Extension.h */,
-				FAD0F47B26B44C3C0089BA2A /* XMPlayerControlView.h */,
-				FAD0F47C26B44C3C0089BA2A /* XMCircleProgressLayer.m */,
-				FAD0F47D26B44C3C0089BA2A /* XMRefreshView.h */,
-				FAD0F47E26B44C3C0089BA2A /* XMPlayerView.h */,
-				FAD0F47F26B44C3C0089BA2A /* XMPlayerSilder.h */,
-				FAD0F48026B44C3C0089BA2A /* XMTextHUD.h */,
-				FAD0F48126B44C3C0089BA2A /* XMBaseTools.m */,
-				FAD0F48226B44C3C0089BA2A /* XMDrawView.m */,
-				FAD0F48326B44C3C0089BA2A /* XMPlayerTool.h */,
-				FAD0F48426B44C3C0089BA2A /* XMWaves.h */,
-				FAD0F48526B44C3C0089BA2A /* XMProgress.h */,
 				FAD0F48626B44C3C0089BA2A /* XMPlayer.h */,
+				FAD0F48426B44C3C0089BA2A /* XMWaves.h */,
+				FAD0F47326B44C3C0089BA2A /* XMDrawView.h */,
+				FAD0F48226B44C3C0089BA2A /* XMDrawView.m */,
+				FAD0F48526B44C3C0089BA2A /* XMProgress.h */,
+				FAD0F47426B44C3C0089BA2A /* XMBaseTools.h */,
+				FAD0F48126B44C3C0089BA2A /* XMBaseTools.m */,
+				FAD0F47926B44C3C0089BA2A /* XMPlayerTool.m */,
+				FAD0F48326B44C3C0089BA2A /* XMPlayerTool.h */,
 				FAD0F48726B44C3C0089BA2A /* XMCGSize.h */,
+				FAD0F47626B44C3C0089BA2A /* XMCGSize.m */,
+				FAD0F47D26B44C3C0089BA2A /* XMRefreshView.h */,
 				FAD0F48826B44C3C0089BA2A /* XMRefreshView.m */,
-				FAD0F48926B44C3C0089BA2A /* Resource */,
-				FAD0F49626B44C3C0089BA2A /* XMCircleProgressLayer.h */,
-				FAD0F49726B44C3C0089BA2A /* XMPlayerControlView.m */,
+				FAD0F47A26B44C3C0089BA2A /* UIView+Extension.h */,
 				FAD0F49826B44C3C0089BA2A /* UIView+Extension.m */,
-				FAD0F49926B44C3C0089BA2A /* XMTextHUD.m */,
-				FAD0F49A26B44C3C0089BA2A /* XMPlayerSilder.m */,
+				FAD0F47B26B44C3C0089BA2A /* XMPlayerControlView.h */,
+				FAD0F49726B44C3C0089BA2A /* XMPlayerControlView.m */,
+				FAD0F49626B44C3C0089BA2A /* XMCircleProgressLayer.h */,
+				FAD0F47C26B44C3C0089BA2A /* XMCircleProgressLayer.m */,
+				FAD0F47E26B44C3C0089BA2A /* XMPlayerView.h */,
 				FAD0F49B26B44C3C0089BA2A /* XMPlayerView.m */,
+				FAD0F47F26B44C3C0089BA2A /* XMPlayerSilder.h */,
+				FAD0F49A26B44C3C0089BA2A /* XMPlayerSilder.m */,
+				FAD0F48026B44C3C0089BA2A /* XMTextHUD.h */,
+				FAD0F49926B44C3C0089BA2A /* XMTextHUD.m */,
+				FAD0F48926B44C3C0089BA2A /* Resource */,
 			);
 			path = XMPlayer;
 			sourceTree = "<group>";
@@ -4959,6 +4964,7 @@
 				8A8BC17425F8F73F0028173C /* EditCollectionViewCell.m in Sources */,
 				8A8BC39E25FC6F9E0028173C /* UIView+MHExtension.m in Sources */,
 				8A8BC37F25FC6F9E0028173C /* YYWeakProxy.m in Sources */,
+				FA383BD926C2C223005D9C07 /* zdyTableViewCell.m in Sources */,
 				8A3930D625FCDB3800E7331B /* CMHEmptyDataView.m in Sources */,
 				8AA0B85426B2D041009BFA4C /* KJPlayerButton.m in Sources */,
 				8A8BC39325FC6F9E0028173C /* MHAccount.m in Sources */,

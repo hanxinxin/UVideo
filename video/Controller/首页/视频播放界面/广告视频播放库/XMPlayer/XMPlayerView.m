@@ -165,7 +165,7 @@
     // 保存Btn
     _TG_guanggaoBtn = [[UIButton alloc] init];
         _TG_guanggaoBtn.frame = CGRectMake(self.width-80, 10, 80, 30);
-        _TG_guanggaoBtn.backgroundColor = [UIColor clearColor];
+        _TG_guanggaoBtn.backgroundColor = RGBA(51,51,51,0.4);
     [_TG_guanggaoBtn setTitle:@"跳过广告" forState:UIControlStateNormal];
     [_TG_guanggaoBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _TG_guanggaoBtn.titleLabel.font = [UIFont systemFontOfSize:16];
@@ -318,9 +318,9 @@
     [self addSubview:self.TG_guanggaoBtn];
     
     
-    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
-        [tapGesture setDelaysTouchesBegan:YES];
-        [self addGestureRecognizer:tapGesture];
+//    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
+//        [tapGesture setDelaysTouchesBegan:YES];
+//        [self addGestureRecognizer:tapGesture];
     
         UITapGestureRecognizer *gesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleAction:)];
         [gesture setNumberOfTapsRequired:2];

@@ -9,7 +9,9 @@
 #import "FKTextTableViewCell.h"
 #import "FKnumberTableViewCell.h"
 #import "feedbacktypeMode.h"
+#import "zdyTableViewCell.h"
 
+#define cellID1 @"zdyTableViewCell"
 #define cellID2 @"FKTextTableViewCell"
 #define cellID3 @"FKnumberTableViewCell"
 @interface FankuiViewController  ()<UITableViewDelegate,UITableViewDataSource,ZGQActionSheetViewDelegate,UITextViewDelegate,UIGestureRecognizerDelegate>
@@ -77,7 +79,7 @@
 {
 
     self.downtableview=[[UITableView alloc] init];
-    self.downtableview.frame=CGRectMake(20, 0, SCREEN_WIDTH-40, SCREENH_HEIGHT-kNavBarAndStatusBarHeight);
+    self.downtableview.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavBarAndStatusBarHeight);
     self.downtableview.backgroundColor=[UIColor clearColor];
     self.downtableview.delegate=self;
     self.downtableview.dataSource=self;
@@ -86,11 +88,13 @@
     self.downtableview.separatorStyle=UITableViewCellSeparatorStyleNone;
 
     [self.view addSubview:self.downtableview];
+//
+    [self.downtableview registerClass:[zdyTableViewCell class] forCellReuseIdentifier:cellID1];
     [self.downtableview registerNib:[UINib nibWithNibName:NSStringFromClass([FKTextTableViewCell class]) bundle:nil] forCellReuseIdentifier:cellID2];
     [self.downtableview registerNib:[UINib nibWithNibName:NSStringFromClass([FKnumberTableViewCell class]) bundle:nil] forCellReuseIdentifier:cellID3];
     
     self.XGBtn= [[UIButton alloc] init];
-    self.XGBtn.frame = CGRectMake(0,self.downtableview.height-90,self.downtableview.width,50);
+    self.XGBtn.frame = CGRectMake(15,self.downtableview.height-90,self.downtableview.width-30,50);
     self.XGBtn.alpha = 1;
     self.XGBtn.layer.cornerRadius = 10;
     self.XGBtn.backgroundColor=RGBA(20, 155, 236, 1);
@@ -197,9 +201,9 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section==0){
-        UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"cellID"];
+        zdyTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID1];
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"cellID"];
+            cell = [[zdyTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID1];
         }
         UIView *lbl = [[UIView alloc] init]; //定义一个label用于显示cell之间的分割线（未使用系统自带的分割线），也可以用view来画分割线
         lbl.frame = CGRectMake(cell.frame.origin.x + 10, 0, self.view.width-1, 1);

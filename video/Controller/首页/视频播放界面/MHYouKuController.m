@@ -237,6 +237,7 @@
         }
         if (self.GuangGaoplayerView) {
             [self.GuangGaoplayerView pause];
+            [self.GuangGaoplayerView tapAction];
             self.GuangGaoplayerView = nil;
         }
     }
@@ -253,6 +254,7 @@
         }
         if (self.GuangGaoplayerView) {
             [self.GuangGaoplayerView pause];
+            [self.GuangGaoplayerView tapAction];
             self.GuangGaoplayerView = nil;
         }
     }
@@ -386,16 +388,12 @@
             ///
 //            [weakSelf.GuangGaoplayerView tapAction];
 //            [weakSelf.player kj_play];
-            if([usertoken isEqualToString:@""])
-            {
-                [UHud showHudWithStatus:@"请先登录" delay:2.f];
-                LoginViewController * avc = [[LoginViewController alloc] init];
-                [weakSelf pushRootNav:avc animated:YES];
-            }else{
-
+            
+            
                 //////会员才能看蓝光
                 if([vip_expired_time_loca intValue]!=0)
                 {
+                    
                     NSString * vipStr=[vip_expired_time_loca stringValue];
                     NSString * dqStr=[weakSelf gs_getCurrentTimeBySecond];
                     NSDate * timeStampToDate1 = [NSDate dateWithTimeIntervalSince1970:[dqStr doubleValue]];
@@ -411,10 +409,11 @@
                         [weakSelf showmenberViewTS];
                     }
                 }else{
+                    
                     [weakSelf showmenberViewTS];
 
                 }
-            }
+            
             
         }
 
@@ -1109,7 +1108,8 @@
 //    view.alpha=0.7;
     view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
     view.hidden=YES;
-    view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
+    view.alpha=0;
+    view.frame=CGRectMake(0, 0, 0, SCREENH_HEIGHT);
 //    view.bottomview.layer.cornerRadius=10;
     UIRectCorner corners = UIRectCornerTopRight | UIRectCornerTopLeft;
     [view.bottomview setBorderWithCornerRadius:10 borderWidth:1 borderColor:[UIColor whiteColor] type:corners];
@@ -1117,6 +1117,11 @@
     view.cancelBtn.layer.cornerRadius=6;
     [self.view addSubview:view];
     self.menberView=view;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//        view.bottomView.frame=CGRectMake(0, self.kfView.height-360, 0, 360);
+        self.menberView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+        self.menberView.bottomview.frame=CGRectMake(0, self.menberView.height-360, SCREEN_WIDTH, 360);
+        });
     __weak MHYouKuController * weakSelf = self;
     self.menberView.touchIndex = ^(NSInteger Index) {
         
@@ -1125,6 +1130,12 @@
         {
             
         }else if(Index==1){
+            if([usertoken isEqualToString:@""])
+            {
+                [UHud showHudWithStatus:@"请先登录" delay:2.f];
+                LoginViewController * avc = [[LoginViewController alloc] init];
+                [weakSelf pushRootNav:avc animated:YES];
+            }else{
             // 充值
                 AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
                 
@@ -1134,6 +1145,7 @@
                 tabViewController.selectedIndex = 2;
             
             [weakSelf.navigationController popViewControllerAnimated:YES];
+            }
         }
         [weakSelf HidmenberViewTS];
     };
@@ -1143,9 +1155,11 @@
 {
     
     [UIView animateWithDuration:0.7 animations:^{
-        self.menberView.bottomview.hidden=NO;
+//        self.menberView.bottomview.hidden=NO;
+//        self.menberView.hidden=NO;
+//        self.menberView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavBarAndStatusBarHeight);
         self.menberView.hidden=NO;
-        self.menberView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavBarAndStatusBarHeight);
+        self.menberView.alpha=1.0;
     } completion:^(BOOL finished) {
         
     }];
@@ -1154,8 +1168,9 @@
 {
     
     [UIView animateWithDuration:0.5 animations:^{
-        self.menberView.bottomview.hidden=YES;
-        self.menberView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+//        self.menberView.bottomview.hidden=YES;
+//        self.menberView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+        self.menberView.alpha=0.0;
     } completion:^(BOOL finished) {
         self.menberView.hidden=YES;
     }];

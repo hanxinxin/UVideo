@@ -109,8 +109,8 @@ NSString *kPlayerBaseViewChangeKey = @"kPlayerBaseViewKey";
     self.centerPlayButton.frame = CGRectMake((self.width-kCenterPlayWidth)/2, (self.height-kCenterPlayWidth)/2, kCenterPlayWidth, kCenterPlayWidth);
     
 
-    self.bottomHYSlider.frame = CGRectMake(0, self.bottomView.height-12, self.bottomView.width, 12);
-    self.TimeTotal.frame = CGRectMake(0, self.bottomView.height-28, self.bottomView.width-(kTopBarSafeHeight+kBottomSafeHeight), 15);
+    self.bottomHYSlider.frame = CGRectMake(0, self.bottomView.height-24, self.bottomView.width, 12);
+    self.TimeTotal.frame = CGRectMake(0, self.bottomView.height-40, self.bottomView.width-(kTopBarSafeHeight+kBottomSafeHeight), 15);
     self.setVideoView.frame=CGRectMake(self.width, 0, 220,self.height);
 }
 

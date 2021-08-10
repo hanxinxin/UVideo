@@ -1,13 +1,14 @@
 //
-//  FKnumberTableViewCell.m
+//  zdyTableViewCell.m
 //  video
 //
-//  Created by macbook on 2021/6/20.
+//  Created by macbook on 2021/8/10.
 //
 
-#import "FKnumberTableViewCell.h"
+#import "zdyTableViewCell.h"
+
 static CGFloat kCell_margin = 15;
-@implementation FKnumberTableViewCell
+@implementation zdyTableViewCell
 - (void)setFrame:(CGRect)frame {
     frame.origin.x += kCell_margin;
 

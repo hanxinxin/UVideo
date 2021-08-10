@@ -187,7 +187,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 }
 -(void)TuXingCodeBtn_touch:(id)sender
 {
-    [UHud showHUDLoading];
+//    [UHud showHUDLoading];
     self->phrase_id=@"";///每次点击获取验证码把上次的缓存清空
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,tuxingYZMurl] Dictionary:nil success:^(id  _Nullable responseObject) {
         //        NSLog(@"post responseObject == %@",responseObject);

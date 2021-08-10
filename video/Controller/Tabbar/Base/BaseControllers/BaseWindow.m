@@ -151,7 +151,7 @@
                                         CYLTabBarItemSelectedImage : @"jiluselect",
                                         };
         threeTabBarItemsAttributes = @{
-                                       CYLTabBarItemTitle :@"充值",
+                                       CYLTabBarItemTitle :@"VIP",
                                        CYLTabBarItemImage : @"menber",
                                        CYLTabBarItemSelectedImage : @"menber",
                                        };

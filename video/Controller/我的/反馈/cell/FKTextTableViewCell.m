@@ -6,12 +6,20 @@
 //
 
 #import "FKTextTableViewCell.h"
+
+static CGFloat kCell_margin = 15;
 @interface FKTextTableViewCell ()<UITextViewDelegate>
 
 @end
 
 @implementation FKTextTableViewCell
+- (void)setFrame:(CGRect)frame {
+    frame.origin.x += kCell_margin;
 
+    frame.size.width -= 2 * kCell_margin;
+
+    [super setFrame:frame];
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code

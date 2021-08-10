@@ -171,8 +171,10 @@
     promptbottomView *view = [[[NSBundle mainBundle]loadNibNamed:@"promptbottomView" owner:self options:nil]objectAtIndex:0];
 //    view.alpha=0.7;
     view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
+    view.alpha=0.0;
     view.hidden=YES;
-    view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
+//    view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
+    view.frame=CGRectMake(0, 0, 0, SCREENH_HEIGHT);
 //    view.bottomview.layer.cornerRadius=10;
     UIRectCorner corners = UIRectCornerTopRight | UIRectCornerTopLeft;
     [view.bottomview setBorderWithCornerRadius:10 borderWidth:1 borderColor:[UIColor whiteColor] type:corners];
@@ -180,6 +182,11 @@
     view.cancelBtn.layer.cornerRadius=6;
     [self.view addSubview:view];
     self.promptView=view;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//        view.bottomView.frame=CGRectMake(0, self.kfView.height-360, 0, 360);
+        self.promptView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+        self.promptView.bottomview.frame=CGRectMake(0, self.promptView.height-360, SCREEN_WIDTH, 360);
+        });
     __weak MyViewController * weakSelf = self;
     self.promptView.touchIndex = ^(NSInteger Index) {
         
@@ -570,9 +577,11 @@
 {
     
     [UIView animateWithDuration:0.7 animations:^{
-        self.promptView.bottomview.hidden=NO;
+//        self.promptView.bottomview.hidden=NO;
+//        self.promptView.hidden=NO;
+//        self.promptView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
         self.promptView.hidden=NO;
-        self.promptView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+        self.promptView.alpha=1.0;
     } completion:^(BOOL finished) {
         
     }];
@@ -581,8 +590,9 @@
 {
     
     [UIView animateWithDuration:0.5 animations:^{
-        self.promptView.bottomview.hidden=YES;
-        self.promptView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+//        self.promptView.bottomview.hidden=YES;
+//        self.promptView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+        self.promptView.alpha=0.0;
     } completion:^(BOOL finished) {
         self.promptView.hidden=YES;
     }];

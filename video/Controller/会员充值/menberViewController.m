@@ -100,7 +100,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.title=@"充值";
+    self.title=@"VIP";
     [self addScrollView];
     [self addTopView];
     [self setupCollectionView];
@@ -611,7 +611,7 @@
 //    }];
     UIButton *btn = [[UIButton alloc]init];
 //    btn.frame=CGRectMake(20, self.menbercollectionView.bottom+25, SCREEN_WIDTH-40, 44);
-    btn.frame=CGRectMake(20, SCREENH_HEIGHT-kNavAndTabHeight-45, SCREEN_WIDTH-40, 44);
+    btn.frame=CGRectMake(20, SCREENH_HEIGHT-kNavAndTabHeight-48, SCREEN_WIDTH-40, 44);
     [btn setTitle:@"确认支付" forState:(UIControlStateNormal)];
     [btn setTintColor:[UIColor whiteColor]];
     [btn addTarget:self action:@selector(play_Touch:) forControlEvents:(UIControlEventTouchUpInside)];
@@ -1013,10 +1013,10 @@
 //        cell.textLabel.text = model.name;
         if([model.symbol isEqualToString:@"paypal"])
         {
-            
+
         }else if([model.symbol isEqualToString:@"alipay"])
         {
-            
+
         }else if([model.symbol isEqualToString:@"vip-card"])
         {
             [self showkmPlay];
@@ -1051,7 +1051,7 @@
     self.kfView=view;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
 //        view.bottomView.frame=CGRectMake(0, self.kfView.height-360, 0, 360);
-        self.kfView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavBarAndStatusBarHeight);
+        self.kfView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
         self.kfView.bottomView.frame=CGRectMake(0, self.kfView.height-360, SCREEN_WIDTH, 360);
         });
     __weak menberViewController * weakSelf = self;
@@ -1113,7 +1113,8 @@
 //    view.alpha=0.7;
     view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
     view.hidden=YES;
-    view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
+    view.alpha=0;
+    view.frame=CGRectMake(0, 0, 0, SCREENH_HEIGHT);
 //    view.bottomView.layer.cornerRadius=10;
     UIRectCorner corners = UIRectCornerTopRight | UIRectCornerTopLeft;
     [view.bottomView setBorderWithCornerRadius:10 borderWidth:1 borderColor:[UIColor whiteColor] type:corners];
@@ -1121,6 +1122,11 @@
     view.PWText.returnKeyType =UIReturnKeyDone;
     [self.view addSubview:view];
     self.kmPlayView=view;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//        view.bottomView.frame=CGRectMake(0, self.kfView.height-360, 0, 360);
+        self.kmPlayView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+        self.kmPlayView.bottomView.frame=CGRectMake(0, self.kmPlayView.height-360, SCREEN_WIDTH, 360);
+        });
     __weak menberViewController * weakSelf = self;
     self.kmPlayView.touchIndex = ^(NSInteger Index, NSString * _Nonnull pwStr) {
         
@@ -1199,9 +1205,11 @@
 {
     
     [UIView animateWithDuration:0.7 animations:^{
-        self.kmPlayView.bottomView.hidden=NO;
+//        self.kmPlayView.bottomView.hidden=NO;
+//        self.kmPlayView.hidden=NO;
+//        self.kmPlayView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
         self.kmPlayView.hidden=NO;
-        self.kmPlayView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+        self.kmPlayView.alpha=1.0;
     } completion:^(BOOL finished) {
         
     }];
@@ -1210,17 +1218,19 @@
 {
     
     [UIView animateWithDuration:0.5 animations:^{
-        self.kmPlayView.bottomView.hidden=YES;
-        self.kmPlayView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+//        self.kmPlayView.bottomView.hidden=YES;
+//        self.kmPlayView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+        self.kmPlayView.alpha=0.0;
     } completion:^(BOOL finished) {
         self.kmPlayView.hidden=YES;
     }];
 }
 -(void)addCZViewM{
     chongzhiView *view = [[[NSBundle mainBundle]loadNibNamed:@"chongzhiView" owner:self options:nil]objectAtIndex:0];
-//    view.alpha=0.7;
+//
     view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
     view.hidden=YES;
+    view.alpha=0;
     view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
     [view.titleBtn setBackgroundColor:[UIColor clearColor]];
     [view.titleBtn setTitle:@"充值失败，请返回重试" forState:(UIControlStateNormal)];
@@ -1236,6 +1246,11 @@
     [view.bottomView setBorderWithCornerRadius:10 borderWidth:1 borderColor:[UIColor whiteColor] type:corners];
     [self.view addSubview:view];
     self.czView=view;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//        view.bottomView.frame=CGRectMake(0, self.kfView.height-360, 0, 360);
+        self.czView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+        self.czView.bottomView.frame=CGRectMake(0, self.czView.height-360, SCREEN_WIDTH, 360);
+        });
     __weak menberViewController * weakSelf = self;
     self.czView.touchIndex = ^(NSInteger Index) {
         
@@ -1257,9 +1272,11 @@
     self.czView.centerBtn.selected=selectbool;
     self.czView.okBtn.selected=selectbool;
     [UIView animateWithDuration:0.7 animations:^{
-        self.czView.bottomView.hidden=NO;
+//        self.czView.bottomView.hidden=NO;
+//        self.czView.hidden=NO;
+//        self.czView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
         self.czView.hidden=NO;
-        self.czView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+        self.czView.alpha=1.0;
     } completion:^(BOOL finished) {
         
     }];
@@ -1268,8 +1285,9 @@
 {
     
     [UIView animateWithDuration:0.5 animations:^{
-        self.czView.bottomView.hidden=YES;
-        self.czView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+//        self.czView.bottomView.hidden=YES;
+//        self.czView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+        self.czView.alpha=0;
     } completion:^(BOOL finished) {
         self.czView.hidden=YES;
     }];
@@ -1279,12 +1297,18 @@
 //    view.alpha=0.7;
     view.backgroundColor = [UIColor colorWithRed:0.1f green:0.1f blue:0.1f alpha:0.8];
     view.hidden=YES;
+    view.alpha=0;
     view.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH, 0);
 //    view.bottomView.layer.cornerRadius=10;
     UIRectCorner corners = UIRectCornerTopRight | UIRectCornerTopLeft;
     [view.bottomView setBorderWithCornerRadius:10 borderWidth:1 borderColor:[UIColor whiteColor] type:corners];
     [self.view addSubview:view];
     self.playwtView=view;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//        view.bottomView.frame=CGRectMake(0, self.kfView.height-360, 0, 360);
+        self.playwtView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+        self.playwtView.bottomView.frame=CGRectMake(0, self.playwtView.height-360, SCREEN_WIDTH, 360);
+        });
     __weak menberViewController * weakSelf = self;
     self.playwtView.touchIndex = ^(NSInteger Index) {
         
@@ -1303,9 +1327,11 @@
 {
     
     [UIView animateWithDuration:0.7 animations:^{
-        self.playwtView.bottomView.hidden=NO;
+//        self.playwtView.bottomView.hidden=NO;
+//        self.playwtView.hidden=NO;
+//        self.playwtView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
         self.playwtView.hidden=NO;
-        self.playwtView.frame=CGRectMake(0, 0, SCREEN_WIDTH, SCREENH_HEIGHT-kNavAndTabHeight);
+        self.playwtView.alpha=1.0;
     } completion:^(BOOL finished) {
         
     }];
@@ -1314,8 +1340,9 @@
 {
     
     [UIView animateWithDuration:0.5 animations:^{
-        self.playwtView.bottomView.hidden=YES;
-        self.playwtView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+//        self.playwtView.bottomView.hidden=YES;
+//        self.playwtView.frame=CGRectMake(0, SCREENH_HEIGHT, SCREEN_WIDTH,0 );
+        self.playwtView.alpha=0;
     } completion:^(BOOL finished) {
         self.playwtView.hidden=YES;
     }];

@@ -393,6 +393,7 @@
 		8AFDD3C925F8C890006B1384 /* UINavigationItem+margin.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AFDD3C325F8C890006B1384 /* UINavigationItem+margin.m */; };
 		9792FDBEE349A1F396C1A91C /* Pods_videoUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1CDD8569E28FE264C3A7197E /* Pods_videoUITests.framework */; };
 		B8E2EE2BDCC03881E2FCE49F /* Pods_video.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBF2112B39442592AE6774A /* Pods_video.framework */; };
+		FA10C09926C41AA8006A141E /* jlBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA10C09726C41AA7006A141E /* jlBottomView.m */; };
 		FA268C4426AD46CE00D5BA26 /* LBLaunchImageAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA268C4026AD46CD00D5BA26 /* LBLaunchImageAdView.m */; };
 		FA268C4526AD46CE00D5BA26 /* NSObject+LBLaunchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = FA268C4326AD46CE00D5BA26 /* NSObject+LBLaunchImage.m */; };
 		FA383BD926C2C223005D9C07 /* zdyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA383BD826C2C223005D9C07 /* zdyTableViewCell.m */; };
@@ -1302,6 +1303,8 @@
 		9FBF2112B39442592AE6774A /* Pods_video.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_video.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDB779BAE76A606270E1CAE2 /* Pods-videoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoUITests.release.xcconfig"; path = "Target Support Files/Pods-videoUITests/Pods-videoUITests.release.xcconfig"; sourceTree = "<group>"; };
 		F73B990338CDDC2E58EF812B /* Pods-videoUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-videoUITests.debug.xcconfig"; path = "Target Support Files/Pods-videoUITests/Pods-videoUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		FA10C09726C41AA7006A141E /* jlBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jlBottomView.m; sourceTree = "<group>"; };
+		FA10C09826C41AA8006A141E /* jlBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jlBottomView.h; sourceTree = "<group>"; };
 		FA268C4026AD46CD00D5BA26 /* LBLaunchImageAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBLaunchImageAdView.m; sourceTree = "<group>"; };
 		FA268C4126AD46CD00D5BA26 /* NSObject+LBLaunchImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LBLaunchImage.h"; sourceTree = "<group>"; };
 		FA268C4226AD46CD00D5BA26 /* LBLaunchImageAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBLaunchImageAdView.h; sourceTree = "<group>"; };
@@ -3750,6 +3753,15 @@
 			path = "菜单";
 			sourceTree = "<group>";
 		};
+		FA10C09626C41A94006A141E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FA10C09826C41AA8006A141E /* jlBottomView.h */,
+				FA10C09726C41AA7006A141E /* jlBottomView.m */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		FA75822E26496D4A00778A63 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -4090,6 +4102,7 @@
 		FA9FBAB82647D93200E4F27E /* 记录 */ = {
 			isa = PBXGroup;
 			children = (
+				FA10C09626C41A94006A141E /* View */,
 				8A82F157264FC629004AAF40 /* 子记录 */,
 				FA9FBABC2648054600E4F27E /* tableview */,
 				FA9FBAB92647D94C00E4F27E /* jiluViewController.h */,
@@ -4656,6 +4669,7 @@
 				8A8BC39725FC6F9E0028173C /* UIImage+MHExtension.m in Sources */,
 				8A3930D325FCDB3800E7331B /* CMHRefreshHeader.m in Sources */,
 				8A39314325FCDFCE00E7331B /* MHTopicFrame.m in Sources */,
+				FA10C09926C41AA8006A141E /* jlBottomView.m in Sources */,
 				8A8BC39D25FC6F9E0028173C /* UIView+MHFrame.m in Sources */,
 				FA7A807F2679069F001B62AA /* ZVideoMode.m in Sources */,
 				8AA0B86126B2D1FC009BFA4C /* KJPlayerOperationView.m in Sources */,

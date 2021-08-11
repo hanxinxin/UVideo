@@ -36,5 +36,21 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "57F40BE0-BC37-4336-8677-A91CCA754019"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "video/Controller/&#x9996;&#x9875;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x754c;&#x9762;/MHYouKuController.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2549"
+            endingLineNumber = "2549"
+            landmarkName = "-anthologyHeaderView:mediaBaseId:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

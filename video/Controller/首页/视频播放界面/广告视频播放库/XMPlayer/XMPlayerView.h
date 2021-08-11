@@ -71,7 +71,7 @@ typedef void(^XMPlayerViewTiaoGuoBlock)(NSInteger index);
 @property (nonatomic,copy) XMPlayerViewTiaoGuoBlock touchBlock;
 
 @property (nonatomic,strong) UIButton* TG_guanggaoBtn;
-
+@property (nonatomic,strong) UIButton* TG_jingyinBtn;
 ///播放状态  暂停和开始
 @property (nonatomic, assign) BOOL isPlayAndPause;
 // 播放

@@ -41,8 +41,12 @@
        dispatch_async(dispatch_get_main_queue(), ^{
 
           
-
+        if(img)
+        {
            [self setImage:img forState:UIControlStateNormal];
+        }else{
+            [self setImage:[UIImage imageNamed:@"videoGBimage"] forState:UIControlStateNormal];
+        }
 
        });
 

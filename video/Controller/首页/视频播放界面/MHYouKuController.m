@@ -61,7 +61,7 @@
 //@property(nonatomic,strong)NSArray *temps;
 
 @property(nonatomic,strong)XMPlayerView*GuangGaoplayerView;
-
+@property (nonatomic ,assign) BOOL GGBool;//广告播放状态
 
 @property (nonatomic ,strong) UIButton *btn;//缓存按钮
 
@@ -194,11 +194,21 @@
     // 支持 横屏 竖屏
 //    AppDelegateOrientationMaskLandscape;
      self.fd_prefersNavigationBarHidden = YES;
-    
-    if (_player) {
-        [self.player kj_play];
-//        _player = nil;
+    if (self.GuangGaoplayerView) {
+        [self.GuangGaoplayerView play];
+//        if(self.GuangGaoplayerView.isPlayAndPause)
+//        {
+//
+//        }
     }
+    if(!self.GGBool)
+    {
+        if (_player) {
+            [self.player kj_play];
+    //        _player = nil;
+        }
+    }
+   
     
     
     
@@ -218,10 +228,16 @@
 }
 - (void)viewDidDisappear:(BOOL)animated{
     [super viewDidDisappear:animated];
+    if (self.GuangGaoplayerView) {
+        [self.GuangGaoplayerView pause];
+    }
+    if(!self.GGBool)
+    {
     if (_player) {
 //        [self.player kj_stop];
         [self.player kj_pause];
 //        _player = nil;
+    }
     }
 }
 - (void)willMoveToParentViewController:(UIViewController*)parent
@@ -378,6 +394,7 @@
 //        self.GuangGaoplayerView.
         if((int)timecount == (int)self.GuanggaoVideoMode.duration)
         {
+            self.GGBool=NO;
             [weakSelf.GuangGaoplayerView tapAction];
             [weakSelf.player kj_play];
         }
@@ -402,7 +419,9 @@
                     if([weakSelf compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]!=1)/////   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
                     {
 
+                        
                         [weakSelf.GuangGaoplayerView tapAction];
+                        weakSelf.GGBool=NO;
                         [weakSelf.player kj_play];
 
                     }else{
@@ -415,6 +434,9 @@
                 }
             
             
+        }else if(index==1){
+            ///静音按钮
+            NSLog(@"点击了静音按钮   index = %ld",(long)index);
         }
 
     };
@@ -430,6 +452,7 @@
 }
 -(void)SetData
 {
+    
     self.isHiddenHomeIndicator=NO;
     self.qualitieslist=[[NSArray alloc] init];
     self.subtitleslist=[[NSArray alloc] init];
@@ -442,6 +465,7 @@
     self.pagesizepinglun=20;
 //    self.JiLutime=0;
 //    self.OldJiLutime=0;
+    self.GGBool=NO;
     if(self.OldJiLutime!=0)
     {
         self.qxdQieHuan=YES;
@@ -531,6 +555,9 @@
                     NSURL *parsedUrl = [[SWCP2pEngine sharedInstance] parseStreamURL:originalUrl];
 //                    NSURL *parsedUrl =[[SWCP2pEngine sharedInstance]parseStreamURL:originalUrl withVideoId:video_id];
                     self.player.videoURL = parsedUrl;
+                    if(self.qxdQieHuan==YES){
+                        [self.player kj_play];
+                    }else{
                     if(self.GuanggaoVideoMode)
                     {
                         //////会员才能看蓝光
@@ -543,7 +570,7 @@
                             NSLog(@"[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]=====   %d",[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]);
                             if([self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]!=1)/////   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
                             {
-                                
+                                [self.player kj_displayHintText:@"您是VIP会员，已经为您自动过滤广告" time:4 position:KJPlayerHintPositionLeftCenter];
                                 [self.GuangGaoplayerView tapAction];
                                 [self.player kj_play];
                                 
@@ -551,6 +578,7 @@
 //                                [self showmenberViewTS];
                                 [self.GuangGaoplayerView pause];
                                 [self.GuangGaoplayerView show];
+                                self.GGBool=YES;
                                 [self.GuangGaoplayerView setVideoURL:[NSURL URLWithString:self.GuanggaoVideoMode.source]];
                                 [self.GuangGaoplayerView play];
                                 [self.player kj_pause];
@@ -559,6 +587,7 @@
 //                            [self.GuangGaoplayerView hiddenPlayerView];
                             [self.GuangGaoplayerView pause];
                             [self.GuangGaoplayerView show];
+                            self.GGBool=YES;
                             [self.GuangGaoplayerView setVideoURL:[NSURL URLWithString:self.GuanggaoVideoMode.source]];
                             [self.GuangGaoplayerView play];
                             [self.player kj_pause];
@@ -566,6 +595,7 @@
                         
                     }else{
                         [self.player kj_play];
+                    }
                     }
                     NSArray * qualities = [dataArr objectForKey:@"qualities"];
                     NSArray * subtitles = [dataArr objectForKey:@"subtitles"];
@@ -925,7 +955,11 @@
         VideoVideoInfoMode*modelL=[VideoVideoInfoMode yy_modelWithDictionary:_Zvideomodel.video ];
         videofragmentMode*Fmo=[videofragmentMode yy_modelWithDictionary:_Zvideomodel.video_fragment_list[self.xuanjiSelectIndex] ];
             self.qxdQieHuan=YES;
+            NSLog(@"切换时  记录time=== %f",self.JiLutime);
+            if(self.JiLutime>15)
+            {
             self.OldJiLutime=self.JiLutime;
+            }
         [self getplayerMode:[NSString stringWithFormat:@"%f",modelL.id] video_fragment_id:[NSString stringWithFormat:@"%f",Fmo.id] quality:self.qualitieslist[index]];  ///因为调整过数组顺序不能直接用Fmo 的数组
         }
 //    }
@@ -988,6 +1022,7 @@
                         if(tgFalg==1)
                         {
                             [self.player kj_displayHintText:@"已跳过片尾，自动播放" time:4 position:KJPlayerHintPositionLeftBottom];
+                            
             //                self.JiLutime=0;
             //                self.OldJiLutime=0;
             //                self.xuanjiSelectIndex+=1;
@@ -1031,8 +1066,10 @@
             }
         }
     }
-    
-    self.JiLutime=time;
+    if(self.qxdQieHuan==NO)
+    {
+        self.JiLutime=time;
+    }
 }
 /* 缓存进度 */
 - (void)kj_player:(KJBasePlayer*)player loadProgress:(CGFloat)progress{
@@ -1706,24 +1743,24 @@
         if([qxd intValue]==3 || [qxd intValue]==4)
         {
             //////会员才能看蓝光
-            if([vip_expired_time_loca intValue]!=0)
-            {
-                NSString * vipStr=[vip_expired_time_loca stringValue];
-                NSString * dqStr=[self gs_getCurrentTimeBySecond];
-                NSDate * timeStampToDate1 = [NSDate dateWithTimeIntervalSince1970:[dqStr doubleValue]];
-                NSDate * timeStampToDate2 = [NSDate dateWithTimeIntervalSince1970:[vipStr doubleValue]];
-                NSLog(@"[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]=====   %d",[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]);
-                if([self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]!=1)/////   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
-                {
+//            if([vip_expired_time_loca intValue]!=0)
+//            {
+//                NSString * vipStr=[vip_expired_time_loca stringValue];
+//                NSString * dqStr=[self gs_getCurrentTimeBySecond];
+//                NSDate * timeStampToDate1 = [NSDate dateWithTimeIntervalSince1970:[dqStr doubleValue]];
+//                NSDate * timeStampToDate2 = [NSDate dateWithTimeIntervalSince1970:[vipStr doubleValue]];
+//                NSLog(@"[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]=====   %d",[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]);
+//                if([self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]!=1)/////   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
+//                {
                     
                     self.QXDSelectIndex=index;
                     [self tempsAction:index];
-                }else{
-                    [self showmenberViewTS];
-                }
-            }else{
-                [self showmenberViewTS];
-            }
+//                }else{
+//                    [self showmenberViewTS];
+//                }
+//            }else{
+//                [self showmenberViewTS];
+//            }
         }else if([qxd intValue]==2 )
         {
             if([usertoken isEqualToString:@""])

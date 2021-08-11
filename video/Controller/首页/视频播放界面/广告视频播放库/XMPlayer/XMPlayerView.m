@@ -182,6 +182,36 @@
         self.touchBlock(0);
     }
 }
+
+-(UIButton*)TG_jingyinBtn
+{
+    if(!_TG_jingyinBtn)
+    {
+    // 保存Btn
+        _TG_jingyinBtn = [[UIButton alloc] init];
+        _TG_jingyinBtn.frame = CGRectMake(self.width-105, 15, 20, 20);
+        _TG_jingyinBtn.backgroundColor = RGBA(51,51,51,0.4);
+        [_TG_jingyinBtn setTitle:@"" forState:UIControlStateNormal];
+        [_TG_jingyinBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [_TG_jingyinBtn setImage:[UIImage imageNamed:@"jingyinno"] forState:UIControlStateNormal];
+        [_TG_jingyinBtn setImage:[UIImage imageNamed:@"jingyinselect"] forState:UIControlStateSelected];
+        _TG_jingyinBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_TG_jingyinBtn addTarget:self action:@selector(jingyinGGVideo:) forControlEvents:UIControlEventTouchUpInside];
+    
+    }
+    return _TG_jingyinBtn;
+}
+-(void)jingyinGGVideo:(id)sender
+{
+    NSLog(@"点击了静音按钮");
+    self.TG_jingyinBtn.selected=!self.TG_jingyinBtn.selected;
+    self.avPlayer.muted=self.TG_jingyinBtn.selected;
+    if(self.touchBlock)
+    {
+        self.touchBlock(1);
+    }
+}
+
 -(void)hiddenView
 {
     // 移除
@@ -316,7 +346,7 @@
     [refreshView startAnimation];
     self.refreshView = refreshView;
     [self addSubview:self.TG_guanggaoBtn];
-    
+    [self addSubview:self.TG_jingyinBtn];
     
 //    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
 //        [tapGesture setDelaysTouchesBegan:YES];

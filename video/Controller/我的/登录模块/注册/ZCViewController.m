@@ -203,7 +203,7 @@ static CGFloat INTERVAL_KEYBOARD = 500;
                 NSDictionary *dictdata =[dict objectForKey:@"data"];
                 self->phrase_id=[dictdata objectForKey:@"phrase_id"];
                 [self verifyEvent];
-                [UHud showSuccessWithStatus:@"获取成功" delay:2.f];
+//                [UHud showSuccessWithStatus:@"获取成功" delay:2.f];
                 
             }else if([code intValue]==20){
                 NSString * message = [dict objectForKey:@"message"];
@@ -301,7 +301,8 @@ static CGFloat INTERVAL_KEYBOARD = 500;
 
 -(void)popViewcontroller
 {
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 - (void)verifyEvent
 {

@@ -89,7 +89,7 @@
 
     [self.view addSubview:self.downtableview];
 //
-    [self.downtableview registerClass:[zdyTableViewCell class] forCellReuseIdentifier:cellID1];
+    [self.downtableview registerNib:[UINib nibWithNibName:NSStringFromClass([zdyTableViewCell class]) bundle:nil] forCellReuseIdentifier:cellID1];
     [self.downtableview registerNib:[UINib nibWithNibName:NSStringFromClass([FKTextTableViewCell class]) bundle:nil] forCellReuseIdentifier:cellID2];
     [self.downtableview registerNib:[UINib nibWithNibName:NSStringFromClass([FKnumberTableViewCell class]) bundle:nil] forCellReuseIdentifier:cellID3];
     
@@ -201,10 +201,11 @@
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(indexPath.section==0){
+       
         zdyTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellID1];
-        if (cell == nil) {
-            cell = [[zdyTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID1];
-        }
+       if (cell == nil) {
+           cell = [[zdyTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellID1];
+       }
         UIView *lbl = [[UIView alloc] init]; //定义一个label用于显示cell之间的分割线（未使用系统自带的分割线），也可以用view来画分割线
         lbl.frame = CGRectMake(cell.frame.origin.x + 10, 0, self.view.width-1, 1);
         lbl.backgroundColor =  [UIColor colorWithRed:240/255.0 green:241/255.0 blue:242/255.0 alpha:1];
@@ -212,16 +213,16 @@
         //cell选中效果
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         NSLog(@"section==== %ld",(long)indexPath.section);
-        cell.textLabel.text=@"问题分类";
+        cell.textLabel1.text=@"问题分类";
         if(self.titleArray.count>0)
         {
             if(self.typeInt==1001)
             {
                 for (int i =0; i<self.titleArray.count; i++) {
                     feedbacktypeMode*mode=self.titleArray[i];
-                    if([mode.name isEqual:@"求片"])
+                    if([mode.name containsString:@"求片"])
                     {
-                        cell.detailTextLabel.text=mode.name;
+                        cell.detailTextLabel1.text=mode.name;
                         self.selectIndex=i;
                     }
                 }
@@ -229,9 +230,9 @@
             {
                 for (int i =0; i<self.titleArray.count; i++) {
                     feedbacktypeMode*mode=self.titleArray[i];
-                    if([mode.name isEqual:@"BUG报错"])
+                    if([mode.name containsString:@"BUG报错"])
                     {
-                        cell.detailTextLabel.text=mode.name;
+                        cell.detailTextLabel1.text=mode.name;
                         self.selectIndex=i;
                     }
                 }
@@ -239,12 +240,22 @@
             {
                 for (int i =0; i<self.titleArray.count; i++) {
                     feedbacktypeMode*mode=self.titleArray[i];
-                    if([mode.name isEqual:@"优化建议"])
+                    if([mode.name containsString:@"优化建议"])
                     {
-                        cell.detailTextLabel.text=mode.name;
+                        cell.detailTextLabel1.text=mode.name;
                         self.selectIndex=i;
                     }
                 }
+            }else{
+                for (int i =0; i<self.titleArray.count; i++) {
+                    feedbacktypeMode*mode=self.titleArray[i];
+                    if(self.selectIndex==i)
+                    {
+                        cell.detailTextLabel1.text=mode.name;
+                        self.selectIndex=i;
+                    }
+                }
+                
             }
 //            feedbacktypeMode*mode=self.titleArray[self.selectIndex];
 //            cell.detailTextLabel.text=mode.name;
@@ -253,7 +264,8 @@
 
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
      
-        cell.textLabel.textColor = [UIColor darkGrayColor];
+        cell.textLabel1.textColor = [UIColor darkGrayColor];
+        cell.detailTextLabel1.textColor = RGB(169,169,169);
         //    cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
         cell.layer.borderColor = [UIColor colorWithRed:229/255.0 green:229/255.0 blue:229/255.0 alpha:1.0].CGColor;
         cell.layer.borderWidth = 1;
@@ -376,7 +388,7 @@
     if(sheetView.tag==101)
     {
             self.selectIndex=index;
-        
+        self.typeInt=0;
         [self.downtableview reloadData];
     }
    

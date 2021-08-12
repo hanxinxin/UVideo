@@ -173,6 +173,17 @@
 
 
 
+#define Post_emptyVideoFavorite @"/user/emptyVideoFavorite" ///清空用户收藏记录——批量
+//|selected|否|number||是否删除全部 [0=是 1=否]|
+//|ids|否|string||video_fava_ids(如果 selected 为 0 则必须填) 格式: 10,11,12|
+
+#define Post_emptyVideoHistory @"/user/emptyVideoHistory" ///清空用户观看视频的历史记录——批量
+//|参数名|必须|类型|默认值|说明|
+//|:----|:---|:-----|:-----|-----|
+//|selected|否|number||是否删除全部 [0=是 1=否]|
+//|ids|否|string||video_history_ids(如果 selected 为 0 则必须填) 格式: 10,11,12|
+
+
 ///// GET 请求
 
 

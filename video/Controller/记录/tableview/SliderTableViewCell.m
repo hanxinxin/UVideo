@@ -63,10 +63,25 @@
 - (void)sliderTapped:(float)value {
     NSLog(@"jilu滑杆点击====%f", value);
 }
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
 
-    // Configure the view for the selected state
+
+//处理选中背景色问题
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    if (!self.editing) {
+        return;
+    }
+    [super setSelected:selected animated:animated];
+    
+    if (self.editing) {
+        self.contentView.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor clearColor];
+        
+      
+    }
+}
+
+-(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
+    return;
 }
 
 @end

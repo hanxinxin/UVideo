@@ -955,7 +955,7 @@ static NSString * const shopCellReuseID = @"shop";
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     
 
-    self.tapImageView.hidden = YES;
+//    self.tapImageView.hidden = YES;
 
     
 
@@ -964,7 +964,7 @@ static NSString * const shopCellReuseID = @"shop";
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     
 
-    self.tapImageView.hidden = NO;
+//    self.tapImageView.hidden = NO;
 
     
 

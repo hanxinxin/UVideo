@@ -8,7 +8,13 @@
 #import "SCJTableViewCell.h"
 
 @implementation SCJTableViewCell
-
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        
+    }
+    return self;
+}
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -59,10 +65,23 @@
     [testArr removeObjectsInRange:range];
     [NSKeyedArchiver archiveRootObject:testArr toFile:KHistorySearchPath];
 }
+//处理选中背景色问题
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    if (!self.editing) {
+        return;
+    }
     [super setSelected:selected animated:animated];
+    
+    if (self.editing) {
+        self.contentView.backgroundColor = [UIColor clearColor];
+        self.backgroundColor = [UIColor clearColor];
+        
+      
+    }
+}
 
-    // Configure the view for the selected state
+-(void)setHighlighted:(BOOL)highlighted animated:(BOOL)animated{
+    return;
 }
 
 @end

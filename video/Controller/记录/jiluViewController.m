@@ -12,6 +12,7 @@
 #import "VideoHistoryMode.h"
 #import "VideoFavoriteMode.h"
 #import "MHYouKuController.h"
+#import "jlBottomView.h"
 
 
 #define cellID @"cellID"
@@ -41,10 +42,65 @@
 @property (strong, nonatomic) UIView *nilView2;
 @property (strong, nonatomic) UIImageView * nilImageView2;
 @property (strong, nonatomic) UILabel * nilLabel2;
+
+
+////   多选删除
+@property (nonatomic ,strong) NSMutableArray *deleteArray;//删除的数据
+@property (nonatomic ,strong) UIButton *btn;//编辑按钮
+@property (nonatomic ,assign) BOOL isInsertEdit;//tableview编辑方式的判断
+@property (nonatomic ,strong) jlBottomView *bottom_view;//底部视图
+
+
 @end
 
 @implementation jiluViewController
 @synthesize topView,Listarray1,Listarray2;
+
+
+
+- (NSMutableArray *)deleteArray{
+    if (!_deleteArray) {
+        self.deleteArray = [NSMutableArray array];
+    }
+    return _deleteArray;
+}
+
+- (jlBottomView *)bottom_view{
+    if (!_bottom_view) {
+        self.bottom_view = [[jlBottomView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, 375, 50)];
+        _bottom_view.backgroundColor = [UIColor yellowColor];
+        [_bottom_view.deleteBtn addTarget:self action:@selector(deleteData) forControlEvents:UIControlEventTouchUpInside];
+        [_bottom_view.allBtn addTarget:self action:@selector(tapAllBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _bottom_view;
+}
+/**
+ 删除数据方法
+ */
+- (void)deleteData{
+//    if (self.deleteArray.count >0) {
+//        [self.dataArray removeObjectsInArray:self.deleteArray];
+//        [self.tableView reloadData];
+//    }
+    
+}
+
+- (UIButton *)btn{
+    if (!_btn) {
+        self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _btn.frame = CGRectMake(0, 0, 50, 44);
+        [_btn setTitle:@"编辑" forState:UIControlStateNormal];
+        [_btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [_btn addTarget:self action:@selector(tapBtn:) forControlEvents:UIControlEventTouchUpInside];
+    }
+    return _btn;
+}
+
+
+
+
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -780,24 +836,101 @@
     view_c.backgroundColor=[UIColor clearColor];
     return view_c;
 }
-//选中时 调用的方法
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+
+-(NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"删除";
+}
+
+
+-(UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(tableView.tag==10001)
-    {
-        NSLog(@"10001index == %ld",indexPath.section);
-        VideoFavoriteMode * modell=Listarray1[indexPath.section];
-        [self getVideoInfo:[NSString stringWithFormat:@"%f",modell.video_id] D_elapsed:0 video_fragment_id:0];
+    
+    //根据不同状态返回不同编辑模式
+    if (_isInsertEdit) {
         
-    }else if(tableView.tag==10002)
-    {
-        NSLog(@"10002index == %ld",indexPath.section);
+        return UITableViewCellEditingStyleDelete|UITableViewCellEditingStyleInsert;
         
-        VideoHistoryMode* model= self.Listarray2[indexPath.section];
-        [self getVideoInfo:[NSString stringWithFormat:@"%f",model.video_id] D_elapsed:model.elapsed video_fragment_id:model.video_fragment_id];
+    }else{
+        
+        return UITableViewCellEditingStyleDelete;
     }
+}
+
+- (void)tableView:(UITableView*)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath*)indexPath {
+    
+    //左滑删除数据方法
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        if(tableView.tag==10001)
+        {
+            [self.Listarray1 removeObjectAtIndex: indexPath.row];
+            [self.downtableview1 deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            [self.downtableview1 reloadData];
+        }else if(tableView.tag==10002)
+        {
+            [self.Listarray2 removeObjectAtIndex: indexPath.row];
+            [self.downtableview2 deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath]
+                                  withRowAnimation:UITableViewRowAnimationFade];
+            [self.downtableview2 reloadData];
+        }
+        
+        
+    }
+}
+//选中时 调用的方法
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+    //正常状态下，点击cell进入跳转下一页
+    //在编辑模式下点击cell 是选中数据
+    if (self.btn.selected) {
+         NSLog(@"选中");
+        if(tableView.tag==10001)
+        {
+            [self.deleteArray addObject:[self.Listarray1 objectAtIndex:indexPath.row]];
+        }else if(tableView.tag==10002)
+        {
+            [self.deleteArray addObject:[self.Listarray2 objectAtIndex:indexPath.row]];
+        }
+        
+
+    }else{
+        if(tableView.tag==10001)
+        {
+            NSLog(@"10001index == %ld",indexPath.section);
+            VideoFavoriteMode * modell=Listarray1[indexPath.section];
+            [self getVideoInfo:[NSString stringWithFormat:@"%f",modell.video_id] D_elapsed:0 video_fragment_id:0];
+            
+        }else if(tableView.tag==10002)
+        {
+            NSLog(@"10002index == %ld",indexPath.section);
+            
+            VideoHistoryMode* model= self.Listarray2[indexPath.section];
+            [self getVideoInfo:[NSString stringWithFormat:@"%f",model.video_id] D_elapsed:model.elapsed video_fragment_id:model.video_fragment_id];
+        }
+    }
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath  {
+    
+    if (self.btn.selected) {
+        NSLog(@"撤销");
+        if(tableView.tag==10001)
+        {
+            [self.deleteArray removeObject:[self.Listarray1 objectAtIndex:indexPath.row]];
+        }else if(tableView.tag==10002)
+        {
+            [self.deleteArray removeObject:[self.Listarray2 objectAtIndex:indexPath.row]];
+        }
+        
+        
+    }else{
+        NSLog(@"取消跳转");
+    }
+
     
 }
+
+
 -(void)pushViewControllerVideo:(ZVideoMode*)mode  D_elapsed:(double)elapsed video_fragment_id:(double)video_fragment_id{
     MHYouKuController *avc = [[MHYouKuController alloc] init];
     avc.Zvideomodel= mode;
@@ -849,5 +982,131 @@
                 [UHud showTXTWithStatus:@"网络错误" delay:2.f];
             
             }];
+}
+
+
+
+
+
+
+
+
+
+
+
+- (void)tapBtn:(UIButton *)sender{
+    sender.selected = !sender.selected;
+    if (sender.selected) {
+    //点击编辑的时候清空删除数组
+        [self.deleteArray removeAllObjects];
+        [_btn setTitle:@"完成" forState:UIControlStateNormal];
+        _isInsertEdit = YES;//这个时候是全选模式
+        if(self.menuBtn1.selected)
+        {
+            [_downtableview1 setEditing:YES animated:YES];
+        }else{
+            [_downtableview2 setEditing:YES animated:YES];
+        }
+        
+        //如果在全选状态下，点击完成，再次进来的时候需要改变按钮的文字和点击状态
+        if (_bottom_view.allBtn.selected) {
+            _bottom_view.allBtn.selected = !_bottom_view.allBtn.selected;
+            [_bottom_view.allBtn setTitle:@"全选" forState:UIControlStateNormal];
+        }
+        
+            //添加底部视图
+        CGRect frame = self.bottom_view.frame;
+            frame.origin.y -= 50;
+            [UIView animateWithDuration:0.5 animations:^{
+                self.bottom_view.frame = frame;
+                [self.view addSubview:self.bottom_view];
+            }];
+        
+        
+        
+    }else{
+        [_btn setTitle:@"编辑" forState:UIControlStateNormal];
+        _isInsertEdit = NO;
+        if(self.menuBtn1.selected)
+        {
+            [_downtableview1 setEditing:NO animated:YES];
+        }else{
+            [_downtableview2 setEditing:NO animated:YES];
+        }
+        
+        
+        [UIView animateWithDuration:0.5 animations:^{
+            CGPoint point = self.bottom_view.center;
+            point.y      += 50;
+            self.bottom_view.center   = point;
+            
+        } completion:^(BOOL finished) {
+            [self.bottom_view removeFromSuperview];
+        }];
+    }
+}
+
+
+- (void)tapAllBtn:(UIButton *)btn{
+    
+    btn.selected = !btn.selected;
+
+    if (btn.selected) {
+        
+        if(self.menuBtn1.selected)
+        {
+            for (int i = 0; i< self.Listarray1.count; i++) {
+                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+                //全选实现方法
+                [_downtableview1 selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+            }
+        }else{
+            for (int i = 0; i< self.Listarray2.count; i++) {
+                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+                //全选实现方法
+                [_downtableview2 selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+            }
+        }
+        
+        
+        //点击全选的时候需要清除deleteArray里面的数据，防止deleteArray里面的数据和列表数据不一致
+        if (self.deleteArray.count >0) {
+            [self.deleteArray removeAllObjects];
+        }
+        if(self.menuBtn1.selected)
+        {
+            [self.deleteArray addObjectsFromArray:self.Listarray1];
+        }else{
+            [self.deleteArray addObjectsFromArray:self.Listarray2];
+        }
+        
+        [btn setTitle:@"取消" forState:UIControlStateNormal];
+    }else{
+        if(self.menuBtn1.selected)
+        {
+            //取消选中
+            for (int i = 0; i< self.Listarray1.count; i++) {
+                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+                [_downtableview1 deselectRowAtIndexPath:indexPath animated:NO];
+                
+            }
+        }else{
+            //取消选中
+            for (int i = 0; i< self.Listarray2.count; i++) {
+                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+                [_downtableview2 deselectRowAtIndexPath:indexPath animated:NO];
+                
+            }
+        }
+        
+        
+        [btn setTitle:@"全选" forState:UIControlStateNormal];
+        [self.deleteArray removeAllObjects];
+    }
+  
+  
+//    NSLog(@"+++++%ld",self.deleteArray.count);
+//    NSLog(@"===%@",self.deleteArray);
+    
 }
 @end

@@ -19,6 +19,7 @@
 		8A052173264A832E00E5188E /* MsgTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A052171264A832E00E5188E /* MsgTableViewCell.m */; };
 		8A052174264A832E00E5188E /* MsgTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A052172264A832E00E5188E /* MsgTableViewCell.xib */; };
 		8A05217B264A8AC400E5188E /* msgInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A05217A264A8AC400E5188E /* msgInfoViewController.m */; };
+		8A08287326C518A600904FFB /* jlBottomView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A08287226C518A600904FFB /* jlBottomView.m */; };
 		8A142197268DEB180038D99D /* UIProgressView+WKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A14216B268DEB180038D99D /* UIProgressView+WKWebView.m */; };
 		8A142198268DEB180038D99D /* WKWebView+AOP.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A14216C268DEB180038D99D /* WKWebView+AOP.m */; };
 		8A142199268DEB180038D99D /* JXBWKWebView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A142172268DEB180038D99D /* JXBWKWebView.m */; };
@@ -586,6 +587,8 @@
 		8A052172264A832E00E5188E /* MsgTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MsgTableViewCell.xib; sourceTree = "<group>"; };
 		8A052179264A8AC400E5188E /* msgInfoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = msgInfoViewController.h; sourceTree = "<group>"; };
 		8A05217A264A8AC400E5188E /* msgInfoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = msgInfoViewController.m; sourceTree = "<group>"; };
+		8A08287126C518A600904FFB /* jlBottomView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jlBottomView.h; sourceTree = "<group>"; };
+		8A08287226C518A600904FFB /* jlBottomView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = jlBottomView.m; sourceTree = "<group>"; };
 		8A14216B268DEB180038D99D /* UIProgressView+WKWebView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIProgressView+WKWebView.m"; sourceTree = "<group>"; };
 		8A14216C268DEB180038D99D /* WKWebView+AOP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "WKWebView+AOP.m"; sourceTree = "<group>"; };
 		8A14216D268DEB180038D99D /* UIProgressView+WKWebView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIProgressView+WKWebView.h"; sourceTree = "<group>"; };
@@ -1654,6 +1657,16 @@
 				FA7C8DD62680DE1800B1A022 /* msgInfoView.xib */,
 			);
 			path = msgInfo;
+			sourceTree = "<group>";
+		};
+		8A08287026C518A600904FFB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8A08287126C518A600904FFB /* jlBottomView.h */,
+				8A08287226C518A600904FFB /* jlBottomView.m */,
+			);
+			name = View;
+			path = "../../../../../../Downloads/UVideo-main/video/Controller/记录/View";
 			sourceTree = "<group>";
 		};
 		8A142168268DEB170038D99D /* JXBWebKit */ = {
@@ -4093,6 +4106,7 @@
 		FA9FBAB82647D93200E4F27E /* 记录 */ = {
 			isa = PBXGroup;
 			children = (
+				8A08287026C518A600904FFB /* View */,
 				8A82F157264FC629004AAF40 /* 子记录 */,
 				FA9FBABC2648054600E4F27E /* tableview */,
 				FA9FBAB92647D94C00E4F27E /* jiluViewController.h */,
@@ -4684,6 +4698,7 @@
 				8A9C567925F8A24E00EFA410 /* OfflineViewController.m in Sources */,
 				8AA0B84E26B2D041009BFA4C /* KJPlayerLoadingLayer.m in Sources */,
 				8A9C560725F8A10000EFA410 /* UIView+Nib.m in Sources */,
+				8A08287326C518A600904FFB /* jlBottomView.m in Sources */,
 				8A39303125FCD86A00E7331B /* MHTitleRightButton.m in Sources */,
 				8AA0B86226B2D1FC009BFA4C /* KJPlayerStatusLayer.m in Sources */,
 				8A9C559F25F8A0B300EFA410 /* DHGifImageOperation.m in Sources */,

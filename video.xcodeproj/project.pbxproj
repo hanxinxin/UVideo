@@ -128,6 +128,8 @@
 		8A39314325FCDFCE00E7331B /* MHTopicFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A39313725FCDFCC00E7331B /* MHTopicFrame.m */; };
 		8A39314425FCDFCE00E7331B /* MHTopicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A39313A25FCDFCD00E7331B /* MHTopicManager.m */; };
 		8A39314525FCDFCE00E7331B /* MHUserInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A39313C25FCDFCD00E7331B /* MHUserInfoController.m */; };
+		8A7677DC26C4FEBE00D6A4DB /* zdyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A7677DA26C4FEBE00D6A4DB /* zdyTableViewCell.m */; };
+		8A7677DD26C4FEBE00D6A4DB /* zdyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8A7677DB26C4FEBE00D6A4DB /* zdyTableViewCell.xib */; };
 		8A77611C26BD506A00B7BB81 /* XLCardCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A77611426BD506A00B7BB81 /* XLCardCell.m */; };
 		8A77611D26BD506A00B7BB81 /* XLCardSwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A77611626BD506A00B7BB81 /* XLCardSwitch.m */; };
 		8A77611E26BD506A00B7BB81 /* XLCardModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A77611A26BD506A00B7BB81 /* XLCardModel.m */; };
@@ -395,7 +397,6 @@
 		B8E2EE2BDCC03881E2FCE49F /* Pods_video.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FBF2112B39442592AE6774A /* Pods_video.framework */; };
 		FA268C4426AD46CE00D5BA26 /* LBLaunchImageAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA268C4026AD46CD00D5BA26 /* LBLaunchImageAdView.m */; };
 		FA268C4526AD46CE00D5BA26 /* NSObject+LBLaunchImage.m in Sources */ = {isa = PBXBuildFile; fileRef = FA268C4326AD46CE00D5BA26 /* NSObject+LBLaunchImage.m */; };
-		FA383BD926C2C223005D9C07 /* zdyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA383BD826C2C223005D9C07 /* zdyTableViewCell.m */; };
 		FA75823226496DB300778A63 /* CZCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FA75823026496DB300778A63 /* CZCollectionViewCell.m */; };
 		FA75823326496DB300778A63 /* CZCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA75823126496DB300778A63 /* CZCollectionViewCell.xib */; };
 		FA75823726497CC400778A63 /* vipHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA75823626497CC400778A63 /* vipHeaderView.m */; };
@@ -777,6 +778,9 @@
 		8A39313A25FCDFCD00E7331B /* MHTopicManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHTopicManager.m; sourceTree = "<group>"; };
 		8A39313C25FCDFCD00E7331B /* MHUserInfoController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MHUserInfoController.m; sourceTree = "<group>"; };
 		8A39313D25FCDFCD00E7331B /* MHUserInfoController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MHUserInfoController.h; sourceTree = "<group>"; };
+		8A7677D926C4FEBE00D6A4DB /* zdyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zdyTableViewCell.h; sourceTree = "<group>"; };
+		8A7677DA26C4FEBE00D6A4DB /* zdyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zdyTableViewCell.m; sourceTree = "<group>"; };
+		8A7677DB26C4FEBE00D6A4DB /* zdyTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = zdyTableViewCell.xib; sourceTree = "<group>"; };
 		8A77611426BD506A00B7BB81 /* XLCardCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLCardCell.m; sourceTree = "<group>"; };
 		8A77611526BD506A00B7BB81 /* XLCardModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLCardModel.h; sourceTree = "<group>"; };
 		8A77611626BD506A00B7BB81 /* XLCardSwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLCardSwitch.m; sourceTree = "<group>"; };
@@ -1306,8 +1310,6 @@
 		FA268C4126AD46CD00D5BA26 /* NSObject+LBLaunchImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+LBLaunchImage.h"; sourceTree = "<group>"; };
 		FA268C4226AD46CD00D5BA26 /* LBLaunchImageAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBLaunchImageAdView.h; sourceTree = "<group>"; };
 		FA268C4326AD46CE00D5BA26 /* NSObject+LBLaunchImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+LBLaunchImage.m"; sourceTree = "<group>"; };
-		FA383BD726C2C223005D9C07 /* zdyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = zdyTableViewCell.h; sourceTree = "<group>"; };
-		FA383BD826C2C223005D9C07 /* zdyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = zdyTableViewCell.m; sourceTree = "<group>"; };
 		FA75822F26496DB300778A63 /* CZCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CZCollectionViewCell.h; sourceTree = "<group>"; };
 		FA75823026496DB300778A63 /* CZCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CZCollectionViewCell.m; sourceTree = "<group>"; };
 		FA75823126496DB300778A63 /* CZCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CZCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -4036,8 +4038,9 @@
 				FA9B2ED2267F44B300C149B9 /* FKnumberTableViewCell.h */,
 				FA9B2ED3267F44B300C149B9 /* FKnumberTableViewCell.m */,
 				FA9B2ED4267F44B300C149B9 /* FKnumberTableViewCell.xib */,
-				FA383BD726C2C223005D9C07 /* zdyTableViewCell.h */,
-				FA383BD826C2C223005D9C07 /* zdyTableViewCell.m */,
+				8A7677D926C4FEBE00D6A4DB /* zdyTableViewCell.h */,
+				8A7677DA26C4FEBE00D6A4DB /* zdyTableViewCell.m */,
+				8A7677DB26C4FEBE00D6A4DB /* zdyTableViewCell.xib */,
 			);
 			path = cell;
 			sourceTree = "<group>";
@@ -4510,6 +4513,7 @@
 				8A3930E825FCDB3800E7331B /* cmh_default_empty_data_1@3x.png in Resources */,
 				FA9FBAC12648057B00E4F27E /* SCJTableViewCell.xib in Resources */,
 				8A3930E925FCDB3800E7331B /* cmh_default_no_wifi_0@2x.png in Resources */,
+				8A7677DD26C4FEBE00D6A4DB /* zdyTableViewCell.xib in Resources */,
 				8A8BC1D325FA13850028173C /* 0.plist in Resources */,
 				FAD0F4B326B44C3D0089BA2A /* btn_player_slider_thumb@3x.png in Resources */,
 				8A9C565825F8A17B00EFA410 /* GGCustomStepper.bundle in Resources */,
@@ -4964,7 +4968,7 @@
 				8A8BC17425F8F73F0028173C /* EditCollectionViewCell.m in Sources */,
 				8A8BC39E25FC6F9E0028173C /* UIView+MHExtension.m in Sources */,
 				8A8BC37F25FC6F9E0028173C /* YYWeakProxy.m in Sources */,
-				FA383BD926C2C223005D9C07 /* zdyTableViewCell.m in Sources */,
+				8A7677DC26C4FEBE00D6A4DB /* zdyTableViewCell.m in Sources */,
 				8A3930D625FCDB3800E7331B /* CMHEmptyDataView.m in Sources */,
 				8AA0B85426B2D041009BFA4C /* KJPlayerButton.m in Sources */,
 				8A8BC39325FC6F9E0028173C /* MHAccount.m in Sources */,

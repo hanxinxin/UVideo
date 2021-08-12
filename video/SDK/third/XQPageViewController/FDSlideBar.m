@@ -20,8 +20,7 @@ NSInteger const MenuButtonWidth = 50;
 
 @interface FDSlideBar () <FDSlideBarItemDelegate>
 
-@property (strong, nonatomic) UIScrollView *scrollView;
-@property (strong, nonatomic) UIButton *menuButton;
+
 
 @property (strong, nonatomic) NSMutableArray *items;
 @property (strong, nonatomic) UIView *sliderView;

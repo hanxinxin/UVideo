@@ -2,7 +2,7 @@
 //  zdyTableViewCell.m
 //  video
 //
-//  Created by macbook on 2021/8/10.
+//  Created by nian on 2021/8/12.
 //
 
 #import "zdyTableViewCell.h"

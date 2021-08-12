@@ -184,10 +184,17 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     [self.slideBar slideShowMenuCallBack:^(BOOL show) {
         if(self->menuBool==NO)
         {
+            [UIView animateWithDuration:1 animations:^{
+                self.slideBar.menuButton.imageView.transform = CGAffineTransformMakeRotation(-M_PI_2);
+            }];
+           
             [self getShaixuanData];
             [self addcollectionViewMM];
             self->menuBool=!self->menuBool;
         }else{
+            [UIView animateWithDuration:1 animations:^{
+                self.slideBar.menuButton.imageView.transform = CGAffineTransformIdentity;
+            }];
             [self hiddenViewMenu];
             self->menuBool=!self->menuBool;
         }
@@ -899,7 +906,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 
 -(void)getShaixuanData
 {
-    [UHud showHUDLoading];
+//    [UHud showHUDLoading];
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_filterurl] Dictionary:nil success:^(id  _Nullable responseObject) {
 //        NSLog(@"post responseObject == %@",responseObject);
         [UHud hideLoadHud];
@@ -1183,7 +1190,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
     
 
-    self.tapImageView.hidden = YES;
+//    self.tapImageView.hidden = YES;
 
     
 
@@ -1192,7 +1199,7 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     
 
-    self.tapImageView.hidden = NO;
+//    self.tapImageView.hidden = NO;
 
     
 

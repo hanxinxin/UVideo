@@ -427,7 +427,7 @@
 -(void)Addtableview
 {
     arrtitle=[NSMutableArray arrayWithCapacity:0];
-    [arrtitle addObject:[NSArray arrayWithObjects:@"播放记录",@"充值记录",@"账户信息",@"帮助中心",@"安全设置",@"清理缓存",@"退出登录", nil]];
+    [arrtitle addObject:[NSArray arrayWithObjects:@"播放记录",@"充值记录",@"账户信息",@"帮助中心",@"安全设置",@"意见反馈",@"退出登录", nil]];
     imagearray=[NSMutableArray arrayWithCapacity:0];
     [imagearray addObject:[NSArray arrayWithObjects:@"bofangjilu",@"chongzhijilu",@"zhanghu",@"bangzhu",@"setimage",@"qingli",@"signout", nil]];
     
@@ -560,7 +560,11 @@
         safeViewController * avc = [[safeViewController alloc] init];
         [self pushRootNav:avc animated:YES];
     }else if(indexPath.section==5){
-        [UHud showTXTWithStatus:@"敬请期待" delay:2.f];
+//        [UHud showTXTWithStatus:@"敬请期待" delay:2.f];
+        // 求片
+        FankuiViewController * avc = [[FankuiViewController alloc] init];
+        avc.typeInt=1003;
+        [self pushRootNav:avc animated:YES];
     }else if(indexPath.section==(arr.count-1))
     {
         if([usertoken isEqualToString:@""])

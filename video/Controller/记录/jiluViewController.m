@@ -67,13 +67,14 @@
 
 - (jlBottomView *)bottom_view{
     if (!_bottom_view) {
-        self.bottom_view = [[jlBottomView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, 375, 50)];
-        _bottom_view.backgroundColor = [UIColor yellowColor];
+        self.bottom_view = [[jlBottomView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.width, 40)];
+        _bottom_view.backgroundColor = RGB(20, 155, 236);
         [_bottom_view.deleteBtn addTarget:self action:@selector(deleteData) forControlEvents:UIControlEventTouchUpInside];
         [_bottom_view.allBtn addTarget:self action:@selector(tapAllBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _bottom_view;
 }
+
 /**
  删除数据方法
  */
@@ -82,15 +83,28 @@
 //        [self.dataArray removeObjectsInArray:self.deleteArray];
 //        [self.tableView reloadData];
 //    }
-    
+    if(self.menuBtn1.selected==YES)
+    {
+        [self PostVideo_emptyVideoFavorite:self.deleteArray];
+    }else{
+        [self PostVideo_emptyVideoHistory:self.deleteArray];
+    }
 }
 
 - (UIButton *)btn{
     if (!_btn) {
         self.btn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _btn.frame = CGRectMake(0, 0, 50, 44);
+        _btn.frame = CGRectMake(0, 0, 40, 25);
+        [_btn setTitle:@"完成" forState:UIControlStateSelected];
         [_btn setTitle:@"编辑" forState:UIControlStateNormal];
+        
+        _btn.selected=NO;
         [_btn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        [_btn setTitleColor:GNavBtnTitleColorNormal forState:UIControlStateNormal];
+        [_btn setTitleColor:GNavBtnTitleColorSelect forState:UIControlStateHighlighted];
+        _btn.titleLabel.font = GNavBtnTitleFont;
+
+        [_btn sizeToFit];
         [_btn addTarget:self action:@selector(tapBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
     return _btn;
@@ -115,6 +129,14 @@
     self.page2=1;
     Listarray1=[NSMutableArray arrayWithCapacity:0];
     Listarray2=[NSMutableArray arrayWithCapacity:0];
+    
+    ////设置  右侧按钮
+
+    UIBarButtonItem * rightButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.btn];
+    self.navigationItem.rightBarButtonItem = rightButtonItem;
+    
+    
+    
     [self addtopview];
     [self initnilView1];
     [self initnilView2];
@@ -126,6 +148,9 @@
     [self removeNilView1];
     [self removeNilView2];
 }
+
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
@@ -304,6 +329,11 @@
         [self.menuBtn1 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
         [self.menuBtn2 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
     }
+    self.btn.selected=NO;
+    [self setBottomRemove];
+//    _isInsertEdit = NO;
+//    [_downtableview2 setEditing:NO animated:YES];
+    
     self.downtableview1.hidden=NO;
     self.downtableview2.hidden=YES;
     self.menuBtn1.selected=YES;
@@ -325,6 +355,10 @@
         [self.menuBtn1 setTitleColor:[UIColor grayColor] forState:(UIControlStateNormal)];
         [self.menuBtn2 setTitleColor:[UIColor colorWithRed:20/255.0 green:155/255.0 blue:236/255.0 alpha:1.0] forState:(UIControlStateNormal)];
     }
+    self.btn.selected=NO;
+    [self setBottomRemove];
+//    _isInsertEdit = NO;
+//    [_downtableview1 setEditing:NO animated:YES];
     self.downtableview1.hidden=YES;
     self.downtableview2.hidden=NO;
     self.menuBtn1.selected=NO;
@@ -431,6 +465,7 @@
         NSNumber * code = [dict objectForKey:@"error"];
         if([code intValue]==0)
         {
+            [self.Listarray1 removeAllObjects];
             NSDictionary *dictdata =[dict objectForKey:@"data"];
 //            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
             NSArray*video_favorite_list=[dictdata objectForKey:@"video_favorite_list"];
@@ -438,7 +473,6 @@
             if(video_favorite_list.count>0)
             {
                 [self removeNilView1];
-                [self.Listarray1 removeAllObjects];
                 for (int i =0; i<video_favorite_list.count; i++) {
                     NSDictionary * video_Favorite =video_favorite_list[i];
 //                    [DYModelMaker DY_makeModelWithDictionary:video_Favorite modelKeyword:@"Video" modelName:@"FavoriteMode"];
@@ -550,6 +584,7 @@
         NSNumber * code = [dict objectForKey:@"error"];
         if([code intValue]==0)
         {
+            [self.Listarray2 removeAllObjects];
             NSDictionary *dictdata =[dict objectForKey:@"data"];
 //            NSNumber*video_history_total=[dictdata objectForKey:@"video_history_total"];
             NSArray*video_history_list=[dictdata objectForKey:@"video_history_list"];
@@ -559,7 +594,7 @@
 //                if(NULL_TO_NIL(video_history_list))
 //                {
                 [self removeNilView2];
-                [self.Listarray2 removeAllObjects];
+                
                 for (int i =0; i<video_history_list.count; i++) {
                     NSDictionary * video_history =video_history_list[i];
                     
@@ -695,7 +730,7 @@
         }
         VideoFavoriteMode * modell=Listarray1[indexPath.section];
         //cell选中效果
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.shuomingMiaoshu.lineBreakMode = 0;//这句话很重要，不加这句话加上换行符也没用
 //        [cell addBiaoqianLabel:@[@"打斗",@"科技",@"爱情"]];
 
@@ -705,6 +740,11 @@
         cell.shuomingMiaoshu.text=modell.video_description;
         [cell addBiaoqianLabel:@[modell.video_region,modell.video_language]];
         cell.movieTime.hidden=YES;
+        
+        //处理选中背景色问题
+        UIView *backGroundView = [[UIView alloc]init];
+        backGroundView.backgroundColor = [UIColor clearColor];
+        cell.selectedBackgroundView = backGroundView;
         return cell;
     }else if(tableView.tag==10002)
     {
@@ -718,7 +758,7 @@
             
         }
         //cell选中效果
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.layer.borderColor = [UIColor colorWithRed:229/255.0 green:229/255.0 blue:229/255.0 alpha:1.0].CGColor;
         cell.layer.borderWidth = 1;
 //        cell.backgroundColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0];
@@ -772,7 +812,10 @@
             cell.bfbLabel.text=@"0%";
             cell.Slider.currentPercent=0;  /// value 百分比
         }
-        
+        //处理选中背景色问题
+        UIView *backGroundView = [[UIView alloc]init];
+        backGroundView.backgroundColor = [UIColor clearColor];
+        cell.selectedBackgroundView = backGroundView;
         return cell;
     }
     return nil;
@@ -862,16 +905,18 @@
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         if(tableView.tag==10001)
         {
-            [self.Listarray1 removeObjectAtIndex: indexPath.row];
-            [self.downtableview1 deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath]
-                                  withRowAnimation:UITableViewRowAnimationFade];
-            [self.downtableview1 reloadData];
+//            [self.Listarray1 removeObjectAtIndex: indexPath.row];
+//            [self.downtableview1 deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            VideoFavoriteMode * modell=Listarray1[indexPath.section];
+            NSArray * arrayF=@[modell];
+            [self PostVideo_emptyVideoFavorite:arrayF];
         }else if(tableView.tag==10002)
         {
-            [self.Listarray2 removeObjectAtIndex: indexPath.row];
-            [self.downtableview2 deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath]
-                                  withRowAnimation:UITableViewRowAnimationFade];
-            [self.downtableview2 reloadData];
+//            [self.Listarray2 removeObjectAtIndex: indexPath.row];
+//            [self.downtableview2 deleteRowsAtIndexPaths:[NSMutableArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            VideoHistoryMode * modell=Listarray2[indexPath.section];
+            NSArray * arrayH=@[modell];
+            [self PostVideo_emptyVideoHistory:arrayH];
         }
         
         
@@ -887,12 +932,11 @@
         if(tableView.tag==10001)
         {
             [self.deleteArray addObject:[self.Listarray1 objectAtIndex:indexPath.row]];
+            
         }else if(tableView.tag==10002)
         {
             [self.deleteArray addObject:[self.Listarray2 objectAtIndex:indexPath.row]];
         }
-        
-
     }else{
         if(tableView.tag==10001)
         {
@@ -999,13 +1043,14 @@
     if (sender.selected) {
     //点击编辑的时候清空删除数组
         [self.deleteArray removeAllObjects];
-        [_btn setTitle:@"完成" forState:UIControlStateNormal];
         _isInsertEdit = YES;//这个时候是全选模式
         if(self.menuBtn1.selected)
         {
             [_downtableview1 setEditing:YES animated:YES];
+            self.downtableview1.frame=CGRectMake(self.downtableview1.left, self.downtableview1.top, self.downtableview1.width, self.downtableview1.height-45);
         }else{
             [_downtableview2 setEditing:YES animated:YES];
+            self.downtableview2.frame=CGRectMake(self.downtableview2.left, self.downtableview2.top, self.downtableview2.width, self.downtableview2.height-45);
         }
         
         //如果在全选状态下，点击完成，再次进来的时候需要改变按钮的文字和点击状态
@@ -1025,13 +1070,14 @@
         
         
     }else{
-        [_btn setTitle:@"编辑" forState:UIControlStateNormal];
         _isInsertEdit = NO;
         if(self.menuBtn1.selected)
         {
             [_downtableview1 setEditing:NO animated:YES];
+            self.downtableview1.frame=CGRectMake(self.downtableview1.left, self.downtableview1.top, self.downtableview1.width, self.downtableview1.height+45);
         }else{
             [_downtableview2 setEditing:NO animated:YES];
+            self.downtableview2.frame=CGRectMake(self.downtableview2.left, self.downtableview2.top, self.downtableview2.width, self.downtableview2.height+45);
         }
         
         
@@ -1043,10 +1089,34 @@
         } completion:^(BOOL finished) {
             [self.bottom_view removeFromSuperview];
         }];
+        
     }
 }
 
-
+-(void)setBottomRemove
+{
+    
+    if(self.menuBtn1.selected)
+    {
+        [_downtableview1 setEditing:NO animated:YES];
+    }else{
+        [_downtableview2 setEditing:NO animated:YES];
+    }
+    
+    if(_isInsertEdit==YES)
+    {
+    [UIView animateWithDuration:0.5 animations:^{
+        CGPoint point = self.bottom_view.center;
+        point.y      += 50;
+        self.bottom_view.center   = point;
+        
+    } completion:^(BOOL finished) {
+        [self.bottom_view removeFromSuperview];
+    }];
+    }
+    
+    _isInsertEdit = NO;
+}
 - (void)tapAllBtn:(UIButton *)btn{
     
     btn.selected = !btn.selected;
@@ -1056,16 +1126,18 @@
         if(self.menuBtn1.selected)
         {
             for (int i = 0; i< self.Listarray1.count; i++) {
-                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:i];
                 //全选实现方法
                 [_downtableview1 selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
             }
+            
         }else{
             for (int i = 0; i< self.Listarray2.count; i++) {
-                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:i inSection:0];
+                NSIndexPath *indexPath = [NSIndexPath indexPathForItem:0 inSection:i];
                 //全选实现方法
                 [_downtableview2 selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
             }
+            
         }
         
         
@@ -1109,4 +1181,133 @@
 //    NSLog(@"===%@",self.deleteArray);
     
 }
+
+
+
+
+//清空收藏
+-(void)PostVideo_emptyVideoFavorite:(NSArray*)RMarray
+{
+    [UHud showHUDLoading];
+    NSString * Vpjstr=@"";
+    NSMutableDictionary*dict;
+    if(RMarray.count==self.Listarray1.count)
+    {
+        [dict setValue:@"0" forKey:@"selected"];
+    }else{
+        if(RMarray.count==1)
+        {
+            VideoFavoriteMode * modell=RMarray[0];
+            Vpjstr=[NSString stringWithFormat:@"%.f",modell.id];
+        }else{
+            for (int i=0; i<RMarray.count; i++) {
+                VideoFavoriteMode * modell=RMarray[i];
+                if(i==0)
+                {
+                    Vpjstr = [NSString stringWithFormat:@"%.f",modell.id];
+                }else{
+                    Vpjstr = [NSString stringWithFormat:@"%@,%.f", Vpjstr,modell.id];
+                }
+            }
+        }
+        [dict setValue:@"1" forKey:@"selected"];
+        [dict setValue:Vpjstr forKey:@"ids"];
+    }
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,Post_emptyVideoFavorite] Dictionary:dict success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+        [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    // 刷新数据
+                    [self.downtableview1.mj_header beginRefreshing];
+                    
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    NSNumber * error = [dict objectForKey:@"error"];
+                    if([error intValue]!=21)
+                    {
+                        [UHud showTXTWithStatus:message delay:2.f];
+                    }else
+                    {
+                        if(![usertoken isEqualToString:@""])
+                        {
+                            [UHud showTXTWithStatus:message delay:2.f];
+                        }
+                    }
+                }
+//        [self pushViewControllerVideo];
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+            
+            }];
+}
+
+//清空浏览记录
+-(void)PostVideo_emptyVideoHistory:(NSArray*)RMarray
+{
+    [UHud showHUDLoading];
+    NSString * Vpjstr=@"";
+    NSMutableDictionary*dict;
+    if(RMarray.count==self.Listarray2.count)
+    {
+        [dict setValue:@"1" forKey:@"selected"];
+    }else{
+        if(RMarray.count==1)
+        {
+            VideoHistoryMode * modell=RMarray[0];
+            Vpjstr=[NSString stringWithFormat:@"%.f",modell.id];
+        }else{
+            for (int i=0; i<RMarray.count; i++) {
+                VideoHistoryMode * modell=RMarray[i];
+                if(i==0)
+                {
+                    Vpjstr = [NSString stringWithFormat:@"%.f",modell.id];
+                }else{
+                    Vpjstr = [NSString stringWithFormat:@"%@,%.f", Vpjstr,modell.id];
+                }
+            }
+        }
+        [dict setValue:@"0" forKey:@"selected"];
+        [dict setValue:Vpjstr forKey:@"ids"];
+    }
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,Post_emptyVideoHistory] Dictionary:dict success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+        [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+                if([code intValue]==0)
+                {
+                    // 刷新数据
+                    [self.downtableview2.mj_header beginRefreshing];
+                    
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    NSNumber * error = [dict objectForKey:@"error"];
+                    if([error intValue]!=21)
+                    {
+                        [UHud showTXTWithStatus:message delay:2.f];
+                    }else
+                    {
+                        if(![usertoken isEqualToString:@""])
+                        {
+                            [UHud showTXTWithStatus:message delay:2.f];
+                        }
+                    }
+                }
+//        [self pushViewControllerVideo];
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+            
+            }];
+}
+
+
 @end

@@ -625,11 +625,19 @@ static NSString * const shopCellReuseID = @"shop";
     if(collectionView.tag==2001)
     {
         VideoRankMode*Vmodel=self.shopsDS[indexPath.row];
-        [self getVideoInfo:[NSString stringWithFormat:@"%f",Vmodel.id]];
+//        [self getVideoInfo:[NSString stringWithFormat:@"%f",Vmodel.id]];
+        MHYouKuController *avc = [[MHYouKuController alloc] init];
+    //        avc.Zvideomodel= mode;
+        avc.Vmodel=Vmodel;
+        [self pushRootNav:avc animated:YES];
     }else if(collectionView.tag==2002)
     {
         VideoRankMode*Vmodel=self.shopsDY[indexPath.row];
-        [self getVideoInfo:[NSString stringWithFormat:@"%f",Vmodel.id]];
+//        [self getVideoInfo:[NSString stringWithFormat:@"%f",Vmodel.id]];
+        MHYouKuController *avc = [[MHYouKuController alloc] init];
+    //        avc.Zvideomodel= mode;
+        avc.Vmodel=Vmodel;
+        [self pushRootNav:avc animated:YES];
     }
     
 }

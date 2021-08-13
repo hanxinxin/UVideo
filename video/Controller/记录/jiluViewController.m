@@ -69,7 +69,7 @@
     if (!_bottom_view) {
 
         self.bottom_view = [[jlBottomView alloc] initWithFrame:CGRectMake(0, self.view.bounds.size.height, self.view.width, 40)];
-        _bottom_view.backgroundColor = RGB(20, 155, 236);
+        _bottom_view.backgroundColor = RGB(135,206,250);
         [_bottom_view.deleteBtn addTarget:self action:@selector(deleteData) forControlEvents:UIControlEventTouchUpInside];
         [_bottom_view.allBtn addTarget:self action:@selector(tapAllBtn:) forControlEvents:UIControlEventTouchUpInside];
     }
@@ -84,11 +84,16 @@
 //        [self.tableView reloadData];
 //    }
 
+    if(self.deleteArray.count>0)
+    {
     if(self.menuBtn1.selected==YES)
     {
         [self PostVideo_emptyVideoFavorite:self.deleteArray];
     }else{
         [self PostVideo_emptyVideoHistory:self.deleteArray];
+    }
+    }else{
+        [UHud showTXTWithStatus:@"没有选择要删除的记录" delay:2.f];
     }
 }
 
@@ -481,12 +486,11 @@
                     VideoFavoriteMode * model=[VideoFavoriteMode yy_modelWithDictionary:video_Favorite];
                     [self.Listarray1 addObject:model];
                 }
-                [self.downtableview1 reloadData];
             }else{
                 [self addnilView1];
             }
             }
-            
+            [self.downtableview1 reloadData];
         }else{
             
             NSString * message = [dict objectForKey:@"message"];
@@ -607,6 +611,7 @@
                 }
             }else{
                 [self addnilView2];
+                
             }
             [self.downtableview2 reloadData];
         }else{
@@ -1232,14 +1237,14 @@
         }
     }
     [dict setValue:Vpjstr forKey:@"ids"];
-    if(RMarray.count==self.Listarray1.count)
-    {
-        [dict setValue:@"0" forKey:@"selected"];
-    }else{
+//    if(RMarray.count==self.Listarray1.count)
+//    {
+//        [dict setValue:@"0" forKey:@"selected"];
+//    }else{
         
         [dict setValue:@"1" forKey:@"selected"];
         
-    }
+//    }
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,Post_emptyVideoFavorite] Dictionary:dict success:^(id  _Nullable responseObject) {
         //        NSLog(@"post responseObject == %@",responseObject);
 //        [UHud hideLoadHudForView:self.view];
@@ -1296,14 +1301,14 @@
         }
     }
     [dict setValue:Vpjstr forKey:@"ids"];
-    if(RMarray.count==self.Listarray2.count)
-    {
-        [dict setValue:@"0" forKey:@"selected"];
-    }else{
+//    if(RMarray.count==self.Listarray2.count)
+//    {
+//        [dict setValue:@"0" forKey:@"selected"];
+//    }else{
        
         [dict setValue:@"1" forKey:@"selected"];
         
-    }
+//    }
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,Post_emptyVideoHistory] Dictionary:dict success:^(id  _Nullable responseObject) {
         //        NSLog(@"post responseObject == %@",responseObject);
 //        [UHud hideLoadHudForView:self.view];

@@ -23,10 +23,14 @@
 - (UIButton *)allBtn{
     if (!_allBtn) {
         self.allBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        _allBtn.frame = CGRectMake(10, 0, 40, self.bounds.size.height);
+        _allBtn.frame = CGRectMake(10, 0, 60, self.bounds.size.height);
         _allBtn.titleLabel.font = [UIFont systemFontOfSize:16];
+        [_allBtn setImage:[UIImage imageNamed:@"logup_checkbox_off"] forState:UIControlStateNormal];
+        [_allBtn setImage:[UIImage imageNamed:@"logup_checkbox_on"] forState:UIControlStateSelected];
         [_allBtn setTitle:@"全选" forState:UIControlStateNormal];
-        [_allBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+        
+        [_allBtn setTitle:@"取消" forState:UIControlStateSelected];
+        [_allBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     return _allBtn;
 }
@@ -39,7 +43,7 @@
         _readBtn.hidden=YES;
         _readBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [_readBtn setTitle:@"标记已读" forState:UIControlStateNormal];
-        [_readBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [_readBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     return _readBtn;
 }
@@ -50,7 +54,7 @@
         _deleteBtn.frame = CGRectMake(self.bounds.size.width - 50, 0, 40, self.bounds.size.height);
         _deleteBtn.titleLabel.font = [UIFont systemFontOfSize:16];
         [_deleteBtn setTitle:@"删除" forState:UIControlStateNormal];
-        [_deleteBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+        [_deleteBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     }
     return _deleteBtn;
 }

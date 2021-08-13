@@ -390,7 +390,11 @@
 //    MHYouKuController *avc = [[MHYouKuController alloc] init];
 //    [self pushRootNav:avc animated:YES];
     VideoRankMode*Vmodel=self.dataArr[indexPath.row];
-    [self getVideoInfo:[NSString stringWithFormat:@"%f",Vmodel.id]];
+//    [self getVideoInfo:[NSString stringWithFormat:@"%f",Vmodel.id]];
+    MHYouKuController *avc = [[MHYouKuController alloc] init];
+//        avc.Zvideomodel= mode;
+    avc.Vmodel=Vmodel;
+    [self pushRootNav:avc animated:YES];
    
     
 }

@@ -996,7 +996,11 @@ static NSString *const kCellIdentifier = @"HorizCellIdentifier";
     
     VideoRankMode*model=self.SXArray[indexPath.item];
     
-    [self getVideoInfo:[NSString stringWithFormat:@"%f",model.id]];
+//    [self getVideoInfo:[NSString stringWithFormat:@"%f",model.id]];
+    MHYouKuController *avc = [[MHYouKuController alloc] init];
+//        avc.Zvideomodel= mode;
+    avc.Vmodel=model;
+    [self pushRootNav:avc animated:YES];
     
 }
 

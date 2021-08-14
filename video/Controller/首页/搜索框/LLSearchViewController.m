@@ -236,7 +236,7 @@
 -(void)getvideo_rankurlData
 {
 //    NSDictionary * dict = @{@"parent_category_id":@""};
-    [UHud showHUDLoading];
+//    [UHud showHUDLoading];
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,video_rankurl] Dictionary:nil success:^(id  _Nullable responseObject) {
 //        NSLog(@"post responseObject == %@",responseObject);
         [UHud hideLoadHud];

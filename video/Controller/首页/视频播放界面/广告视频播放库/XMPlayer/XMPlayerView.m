@@ -190,7 +190,7 @@
     // 保存Btn
         _TG_jingyinBtn = [[UIButton alloc] init];
         _TG_jingyinBtn.frame = CGRectMake(self.width-105, 15, 20, 20);
-        _TG_jingyinBtn.backgroundColor = RGBA(51,51,51,0.4);
+//        _TG_jingyinBtn.backgroundColor = RGBA(51,51,51,0.4);
         [_TG_jingyinBtn setTitle:@"" forState:UIControlStateNormal];
         [_TG_jingyinBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_TG_jingyinBtn setImage:[UIImage imageNamed:@"jingyinno"] forState:UIControlStateNormal];
@@ -345,8 +345,7 @@
     [self.BGView addSubview:refreshView];
     [refreshView startAnimation];
     self.refreshView = refreshView;
-    [self addSubview:self.TG_guanggaoBtn];
-    [self addSubview:self.TG_jingyinBtn];
+   
     
 //    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)];
 //        [tapGesture setDelaysTouchesBegan:YES];
@@ -357,6 +356,15 @@
         [gesture setDelaysTouchesBegan:YES];
         [self addGestureRecognizer:gesture];
     
+    
+    [self addSubview:self.TG_guanggaoBtn];
+    [self addSubview:self.TG_jingyinBtn];
+    UITapGestureRecognizer *tapGesture11 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tiaoguoGGVideo:)];
+            [tapGesture11 setDelaysTouchesBegan:YES];
+            [self.TG_guanggaoBtn addGestureRecognizer:tapGesture11];
+    UITapGestureRecognizer *tapGesture22 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(jingyinGGVideo:)];
+            [tapGesture22 setDelaysTouchesBegan:YES];
+            [self.TG_jingyinBtn addGestureRecognizer:tapGesture22];
     
     
     
@@ -432,7 +440,7 @@
     
     // 设置背景View
     UIView *BGView = [[UIView alloc] init];
-    BGView.backgroundColor = [UIColor blackColor];
+    BGView.backgroundColor = [UIColor redColor];
     BGView.center = self.window.center;
     BGView.bounds = self.window.bounds;
     self.center = CGPointMake(BGView.bounds.size.width * 0.5, BGView.bounds.size.height * 0.5);

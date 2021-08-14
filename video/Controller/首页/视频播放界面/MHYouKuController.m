@@ -451,7 +451,7 @@
 //        self.GuangGaoplayerView.
         if((int)timecount == (int)self.GuanggaoVideoMode.duration)
         {
-            self.GGBool=NO;
+            weakSelf.GGBool=NO;
             [weakSelf.GuangGaoplayerView tapAction];
             [weakSelf.player kj_play];
         }
@@ -613,7 +613,44 @@
 //                    NSURL *parsedUrl =[[SWCP2pEngine sharedInstance]parseStreamURL:originalUrl withVideoId:video_id];
                     self.player.videoURL = parsedUrl;
                     if(self.qxdQieHuan==YES){
-                        [self.player kj_play];
+                            if(self.GuanggaoVideoMode)
+                            {
+                                //////会员才能看蓝光
+                                if([vip_expired_time_loca intValue]!=0)
+                                {
+                                    NSString * vipStr=[vip_expired_time_loca stringValue];
+                                    NSString * dqStr=[self gs_getCurrentTimeBySecond];
+                                    NSDate * timeStampToDate1 = [NSDate dateWithTimeIntervalSince1970:[dqStr doubleValue]];
+                                    NSDate * timeStampToDate2 = [NSDate dateWithTimeIntervalSince1970:[vipStr doubleValue]];
+                                    NSLog(@"[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]=====   %d",[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]);
+                                    if([self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]!=1)/////   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
+                                    {
+                                        [self.player kj_displayHintText:@"您是VIP会员，已经为您自动过滤广告" time:4 position:KJPlayerHintPositionLeftCenter];
+                                        [self.GuangGaoplayerView tapAction];
+                                        [self.player kj_play];
+                                        
+                                    }else{
+        //                                [self showmenberViewTS];
+                                        [self.GuangGaoplayerView pause];
+                                        [self.GuangGaoplayerView show];
+                                        self.GGBool=YES;
+                                        [self.GuangGaoplayerView setVideoURL:[NSURL URLWithString:self.GuanggaoVideoMode.source]];
+                                        [self.GuangGaoplayerView play];
+                                        [self.player kj_pause];
+                                    }
+                                }else{
+        //                            [self.GuangGaoplayerView hiddenPlayerView];
+                                    [self.GuangGaoplayerView pause];
+                                    [self.GuangGaoplayerView show];
+                                    self.GGBool=YES;
+                                    [self.GuangGaoplayerView setVideoURL:[NSURL URLWithString:self.GuanggaoVideoMode.source]];
+                                    [self.GuangGaoplayerView play];
+                                    [self.player kj_pause];
+                                }
+
+                            }else{
+                                [self.player kj_play];
+                            }
                     }else{
                     if(self.GuanggaoVideoMode)
                     {
@@ -649,7 +686,7 @@
                             [self.GuangGaoplayerView play];
                             [self.player kj_pause];
                         }
-                        
+
                     }else{
                         [self.player kj_play];
                     }
@@ -1800,24 +1837,24 @@
         if([qxd intValue]==3 || [qxd intValue]==4)
         {
             //////会员才能看蓝光
-//            if([vip_expired_time_loca intValue]!=0)
-//            {
-//                NSString * vipStr=[vip_expired_time_loca stringValue];
-//                NSString * dqStr=[self gs_getCurrentTimeBySecond];
-//                NSDate * timeStampToDate1 = [NSDate dateWithTimeIntervalSince1970:[dqStr doubleValue]];
-//                NSDate * timeStampToDate2 = [NSDate dateWithTimeIntervalSince1970:[vipStr doubleValue]];
-//                NSLog(@"[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]=====   %d",[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]);
-//                if([self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]!=1)/////   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
-//                {
+            if([vip_expired_time_loca intValue]!=0)
+            {
+                NSString * vipStr=[vip_expired_time_loca stringValue];
+                NSString * dqStr=[self gs_getCurrentTimeBySecond];
+                NSDate * timeStampToDate1 = [NSDate dateWithTimeIntervalSince1970:[dqStr doubleValue]];
+                NSDate * timeStampToDate2 = [NSDate dateWithTimeIntervalSince1970:[vipStr doubleValue]];
+                NSLog(@"[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]=====   %d",[self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]);
+                if([self compareOneDay:timeStampToDate1 withAnotherDay:timeStampToDate2]!=1)/////   时间对比  返回1 - 过期, 0 - 相等, -1 - 没过期
+                {
                     
                     self.QXDSelectIndex=index;
                     [self tempsAction:index];
-//                }else{
-//                    [self showmenberViewTS];
-//                }
-//            }else{
-//                [self showmenberViewTS];
-//            }
+                }else{
+                    [self showmenberViewTS];
+                }
+            }else{
+                [self showmenberViewTS];
+            }
         }else if([qxd intValue]==2 )
         {
             if([usertoken isEqualToString:@""])
@@ -2600,6 +2637,8 @@
     
     if(self.xuanjiSelectIndex!=anthologyHeaderView.selectXJindex)
     {
+//        self.GGBool=NO;
+//        [self.GuangGaoplayerView tapAction];
         self.xuanjiSelectIndex=anthologyHeaderView.selectXJindex;
         [self tempsAction:self.QXDSelectIndex];
         self.JiLutime=0;

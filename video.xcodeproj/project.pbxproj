@@ -427,7 +427,6 @@
 		FA8E71872652A46A0058F02F /* clarityCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA8E71852652A46A0058F02F /* clarityCollectionViewCell.xib */; };
 		FA8E718D2652BF450058F02F /* ZqwHorizontalTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA8E718C2652BF450058F02F /* ZqwHorizontalTableView.m */; };
 		FA911E4F2671178E002B6D6D /* jiemishujuClass.m in Sources */ = {isa = PBXBuildFile; fileRef = FA911E4E2671178E002B6D6D /* jiemishujuClass.m */; };
-		FA92794726763CA20088BA56 /* 问题点.rtf in Resources */ = {isa = PBXBuildFile; fileRef = FA92794626763CA20088BA56 /* 问题点.rtf */; };
 		FA936FAA265944EA00067614 /* HJCornerRadius.m in Sources */ = {isa = PBXBuildFile; fileRef = FA936FA9265944EA00067614 /* HJCornerRadius.m */; };
 		FA949CBD264AC76E00498EB6 /* safeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CBC264AC76E00498EB6 /* safeViewController.m */; };
 		FA949CC2264AC90800498EB6 /* chongzhiListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FA949CC1264AC90800498EB6 /* chongzhiListViewController.m */; };
@@ -1369,7 +1368,6 @@
 		FA8E718C2652BF450058F02F /* ZqwHorizontalTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZqwHorizontalTableView.m; sourceTree = "<group>"; };
 		FA911E4D2671178E002B6D6D /* jiemishujuClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = jiemishujuClass.h; sourceTree = "<group>"; };
 		FA911E4E2671178E002B6D6D /* jiemishujuClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = jiemishujuClass.m; sourceTree = "<group>"; };
-		FA92794626763CA20088BA56 /* 问题点.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = "问题点.rtf"; sourceTree = SOURCE_ROOT; };
 		FA936FA8265944EA00067614 /* HJCornerRadius.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HJCornerRadius.h; sourceTree = "<group>"; };
 		FA936FA9265944EA00067614 /* HJCornerRadius.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HJCornerRadius.m; sourceTree = "<group>"; };
 		FA949CBB264AC76E00498EB6 /* safeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = safeViewController.h; sourceTree = "<group>"; };
@@ -3201,7 +3199,6 @@
 		8A9C54A325F7837B00EFA410 /* video */ = {
 			isa = PBXGroup;
 			children = (
-				FA92794626763CA20088BA56 /* 问题点.rtf */,
 				8A82F113264F9E5E004AAF40 /* Mode */,
 				8A82F10C264F9DDB004AAF40 /* AFNNETWork */,
 				8A9C550625F85D1000EFA410 /* Controller */,
@@ -4503,7 +4500,6 @@
 				8A82F133264FA07E004AAF40 /* SVProgressHUD.bundle in Resources */,
 				8AE01BAF26625D550031C82F /* KFView.xib in Resources */,
 				8AE01B95266252CE0031C82F /* PWView.xib in Resources */,
-				FA92794726763CA20088BA56 /* 问题点.rtf in Resources */,
 				8A031FCD26BAB1F2001B3879 /* VideoplaySetView.xib in Resources */,
 				8AE0C4CD266A54BA0084248D /* PanCollectionViewCell.xib in Resources */,
 				FAD0F4B126B44C3D0089BA2A /* btn_player_quit@3x.png in Resources */,
@@ -5245,7 +5241,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = UK5CCXA22Q;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5262,7 +5258,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.U.videoN;
@@ -5278,7 +5274,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = UK5CCXA22Q;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5295,7 +5291,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.4;
+				MARKETING_VERSION = 1.0.5;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.U.videoN;

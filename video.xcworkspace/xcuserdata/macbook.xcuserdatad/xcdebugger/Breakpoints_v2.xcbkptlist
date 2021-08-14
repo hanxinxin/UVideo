@@ -8,7 +8,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "B35F83FD-C5D9-4051-A249-7C9F69536F85"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/Controller/&#x9996;&#x9875;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x754c;&#x9762;/Palyview/&#x6a2a;&#x5411;tableview/ZqwHorizontalTableView.m"
@@ -24,7 +24,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "A5CE62CA-DC8D-4BC1-B907-3F99AC1C3071"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/Controller/&#x9996;&#x9875;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x754c;&#x9762;/Palyview/&#x6a2a;&#x5411;tableview/ZqwHorizontalTableView.m"
@@ -40,7 +40,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "D075B340-4A48-41C2-92CF-FAB082668169"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/Controller/&#x9996;&#x9875;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x754c;&#x9762;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x5e93;/Core/KJRotateManager.m"
@@ -88,7 +88,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "44C3013E-DE6D-4187-A1AB-063A45469AD1"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/SDK/custom/&#x6ed1;&#x7aff;/HYSlider.m"
@@ -104,7 +104,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "AFD33907-FE32-4D87-A1F3-699D26379B3D"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/Mode/videoFenleiMode.m"
@@ -120,7 +120,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "08862FC3-AC50-450D-988A-6E12CF022961"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/SDK/third/XQPageViewController/ScrollPageViewController.m"
@@ -136,7 +136,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "1785C9F5-648F-44BF-A2D4-BCEE8ABAEA12"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/SDK/third/XQPageViewController/ScrollPageViewController.m"
@@ -152,7 +152,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "72D8BDFA-4D6F-458F-A4E7-3B89B2DED664"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/Controller/&#x6211;&#x7684;/&#x5b50;&#x6a21;&#x5757;/&#x5e38;&#x89c1;&#x95ee;&#x9898;/FAQViewController.m"
@@ -168,7 +168,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "5F679720-52A6-4999-A525-8E867215812A"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/Controller/&#x9996;&#x9875;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x754c;&#x9762;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x5e93;/KJAVPlayer/KJAVPlayer.m"
@@ -184,7 +184,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "3EB06435-7A39-4201-8FAD-BE078A6ABF2F"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/Controller/&#x9996;&#x9875;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x754c;&#x9762;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x5e93;/KJIJKPlayer/KJIJKPlayer.m"
@@ -200,7 +200,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "77910CE6-B886-4883-8025-2530B136BB79"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/Controller/&#x9996;&#x9875;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x754c;&#x9762;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x5e93;/KJIJKPlayer/KJIJKPlayer.m"
@@ -216,7 +216,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "C10CD586-2963-4113-98F4-AD7B3F78C122"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/Controller/&#x9996;&#x9875;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x754c;&#x9762;/&#x89c6;&#x9891;&#x64ad;&#x653e;&#x5e93;/KJIJKPlayer/KJIJKPlayer.m"
@@ -232,7 +232,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "82A4CC73-B086-4C5D-8785-E0A6A5B01B6E"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/Controller/&#x6211;&#x7684;/&#x767b;&#x5f55;&#x6a21;&#x5757;/&#x90ae;&#x7bb1;&#x7ed1;&#x5b9a;/EmailBDViewController.m"
@@ -248,7 +248,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "7721A452-6D55-40D6-88E6-6B6D2F3139E2"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/Controller/&#x6211;&#x7684;/&#x767b;&#x5f55;&#x6a21;&#x5757;/&#x90ae;&#x7bb1;&#x7ed1;&#x5b9a;/EmailBDViewController.m"
@@ -264,7 +264,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "CA5AACE3-31F7-4C57-B3F2-B2C970B5E294"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/Controller/&#x8bb0;&#x5f55;/jiluViewController.m"
@@ -274,45 +274,13 @@
             endingLineNumber = "1243"
             landmarkName = "-PostVideo_emptyVideoFavorite:"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "CA5AACE3-31F7-4C57-B3F2-B2C970B5E294 - cd3a6d15b7647934"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[jiluViewController PostVideo_emptyVideoFavorite:]"
-                  moduleName = "video"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macbook/Desktop/Video%E9%A1%B9%E7%9B%AE/UVideo/video/Controller/%E8%AE%B0%E5%BD%95/jiluViewController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1243"
-                  endingLineNumber = "1243"
-                  offsetFromSymbolStart = "871">
-               </Location>
-               <Location
-                  uuid = "CA5AACE3-31F7-4C57-B3F2-B2C970B5E294 - 97834a124939002f"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__51-[jiluViewController PostVideo_emptyVideoFavorite:]_block_invoke"
-                  moduleName = "video"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macbook/Desktop/Video%E9%A1%B9%E7%9B%AE/UVideo/video/Controller/%E8%AE%B0%E5%BD%95/jiluViewController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1246"
-                  endingLineNumber = "1246"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "1E988122-F2C2-4629-9A7E-F43A884C2248"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/Controller/&#x8bb0;&#x5f55;/jiluViewController.m"
@@ -328,7 +296,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "636E209D-26CD-4BC8-9AFB-997B48DD84D3"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "video/Controller/&#x8bb0;&#x5f55;/jiluViewController.m"
@@ -337,54 +305,6 @@
             startingLineNumber = "1307"
             endingLineNumber = "1307"
             landmarkName = "-PostVideo_emptyVideoHistory:"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "636E209D-26CD-4BC8-9AFB-997B48DD84D3 - be96279f299bee4b"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[jiluViewController PostVideo_emptyVideoHistory:]"
-                  moduleName = "video"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macbook/Desktop/Video%E9%A1%B9%E7%9B%AE/UVideo/video/Controller/%E8%AE%B0%E5%BD%95/jiluViewController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1307"
-                  endingLineNumber = "1307"
-                  offsetFromSymbolStart = "871">
-               </Location>
-               <Location
-                  uuid = "636E209D-26CD-4BC8-9AFB-997B48DD84D3 - 5b50c64770417587"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__50-[jiluViewController PostVideo_emptyVideoHistory:]_block_invoke"
-                  moduleName = "video"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/macbook/Desktop/Video%E9%A1%B9%E7%9B%AE/UVideo/video/Controller/%E8%AE%B0%E5%BD%95/jiluViewController.m"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1310"
-                  endingLineNumber = "1310"
-                  offsetFromSymbolStart = "44">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "277E6F95-E9BF-455A-B0B2-E5A8B8801A6E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "video/Controller/&#x8bb0;&#x5f55;/jiluViewController.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "986"
-            endingLineNumber = "986"
-            landmarkName = "-tableView:didDeselectRowAtIndexPath:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

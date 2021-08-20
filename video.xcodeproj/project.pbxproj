@@ -447,7 +447,6 @@
 		FA984FA92674AEDF0014DCA8 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984F8E2674AEDF0014DCA8 /* UIImageView+AFNetworking.m */; };
 		FA984FAA2674AEDF0014DCA8 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984F912674AEDF0014DCA8 /* UIButton+AFNetworking.m */; };
 		FA984FAB2674AEDF0014DCA8 /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984F922674AEDF0014DCA8 /* UIActivityIndicatorView+AFNetworking.m */; };
-		FA984FAC2674AEDF0014DCA8 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984F932674AEDF0014DCA8 /* UIWebView+AFNetworking.m */; };
 		FA984FAD2674AEDF0014DCA8 /* AFAutoPurgingImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984F942674AEDF0014DCA8 /* AFAutoPurgingImageCache.m */; };
 		FA984FAE2674AEDF0014DCA8 /* AFImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984F962674AEDF0014DCA8 /* AFImageDownloader.m */; };
 		FA984FAF2674AEDF0014DCA8 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = FA984F9C2674AEDF0014DCA8 /* AFURLResponseSerialization.m */; };
@@ -1398,7 +1397,6 @@
 		FA984F872674AEDF0014DCA8 /* AFImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFImageDownloader.h; sourceTree = "<group>"; };
 		FA984F882674AEDF0014DCA8 /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFNetworkActivityIndicatorManager.m; sourceTree = "<group>"; };
 		FA984F892674AEDF0014DCA8 /* AFAutoPurgingImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFAutoPurgingImageCache.h; sourceTree = "<group>"; };
-		FA984F8A2674AEDF0014DCA8 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
 		FA984F8B2674AEDF0014DCA8 /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
 		FA984F8C2674AEDF0014DCA8 /* UIImage+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+AFNetworking.h"; sourceTree = "<group>"; };
 		FA984F8D2674AEDF0014DCA8 /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
@@ -1407,7 +1405,6 @@
 		FA984F902674AEDF0014DCA8 /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
 		FA984F912674AEDF0014DCA8 /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+AFNetworking.m"; sourceTree = "<group>"; };
 		FA984F922674AEDF0014DCA8 /* UIActivityIndicatorView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActivityIndicatorView+AFNetworking.m"; sourceTree = "<group>"; };
-		FA984F932674AEDF0014DCA8 /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
 		FA984F942674AEDF0014DCA8 /* AFAutoPurgingImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFAutoPurgingImageCache.m; sourceTree = "<group>"; };
 		FA984F952674AEDF0014DCA8 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
 		FA984F962674AEDF0014DCA8 /* AFImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFImageDownloader.m; sourceTree = "<group>"; };
@@ -3939,7 +3936,6 @@
 				FA984F872674AEDF0014DCA8 /* AFImageDownloader.h */,
 				FA984F882674AEDF0014DCA8 /* AFNetworkActivityIndicatorManager.m */,
 				FA984F892674AEDF0014DCA8 /* AFAutoPurgingImageCache.h */,
-				FA984F8A2674AEDF0014DCA8 /* UIWebView+AFNetworking.h */,
 				FA984F8B2674AEDF0014DCA8 /* UIActivityIndicatorView+AFNetworking.h */,
 				FA984F8C2674AEDF0014DCA8 /* UIImage+AFNetworking.h */,
 				FA984F8D2674AEDF0014DCA8 /* UIProgressView+AFNetworking.h */,
@@ -3948,7 +3944,6 @@
 				FA984F902674AEDF0014DCA8 /* UIRefreshControl+AFNetworking.h */,
 				FA984F912674AEDF0014DCA8 /* UIButton+AFNetworking.m */,
 				FA984F922674AEDF0014DCA8 /* UIActivityIndicatorView+AFNetworking.m */,
-				FA984F932674AEDF0014DCA8 /* UIWebView+AFNetworking.m */,
 				FA984F942674AEDF0014DCA8 /* AFAutoPurgingImageCache.m */,
 				FA984F952674AEDF0014DCA8 /* AFNetworkActivityIndicatorManager.h */,
 				FA984F962674AEDF0014DCA8 /* AFImageDownloader.m */,
@@ -4865,7 +4860,6 @@
 				FA993BB626774A2700C6F298 /* NSObject+DYModelArchive.m in Sources */,
 				8A39303225FCD86A00E7331B /* MHDivider.m in Sources */,
 				8A39314425FCDFCE00E7331B /* MHTopicManager.m in Sources */,
-				FA984FAC2674AEDF0014DCA8 /* UIWebView+AFNetworking.m in Sources */,
 				8A95C307265A5C7B00A6D144 /* KJDetailPlayerVC.m in Sources */,
 				8A8BC39625FC6F9E0028173C /* UIImage+MHSnap.m in Sources */,
 				8A9C561C25F8A10000EFA410 /* UIColor+Modify.m in Sources */,
@@ -5227,7 +5221,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = UK5CCXA22Q;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5244,7 +5238,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.9;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.U.videoN;
@@ -5260,7 +5254,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = UK5CCXA22Q;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5277,7 +5271,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.7;
+				MARKETING_VERSION = 1.0.9;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.U.videoN;

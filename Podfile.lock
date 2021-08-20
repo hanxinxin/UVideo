@@ -5,19 +5,19 @@ PODS:
   - BGFMDB/BG (2.0.12):
     - BGFMDB/FMDB
   - BGFMDB/FMDB (2.0.12)
-  - BlocksKit (2.2.5):
-    - BlocksKit/All (= 2.2.5)
-  - BlocksKit/All (2.2.5):
+  - BlocksKit (2.2.6):
+    - BlocksKit/All (= 2.2.6)
+  - BlocksKit/All (2.2.6):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
     - BlocksKit/MessageUI
     - BlocksKit/UIKit
-  - BlocksKit/Core (2.2.5)
-  - BlocksKit/DynamicDelegate (2.2.5)
-  - BlocksKit/MessageUI (2.2.5):
+  - BlocksKit/Core (2.2.6)
+  - BlocksKit/DynamicDelegate (2.2.6)
+  - BlocksKit/MessageUI (2.2.6):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
-  - BlocksKit/UIKit (2.2.5):
+  - BlocksKit/UIKit (2.2.6):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
   - CHTCollectionViewWaterfallLayout (0.9.6):
@@ -101,7 +101,7 @@ PODS:
 
 DEPENDENCIES:
   - BGFMDB (= 2.0.12)
-  - BlocksKit (= 2.2.5)
+  - BlocksKit (from `https://github.com/LDXu/BlocksKit.git`, branch `v2.5`)
   - CHTCollectionViewWaterfallLayout (= 0.9.6)
   - CocoaAsyncSocket
   - CocoaLumberjack
@@ -149,7 +149,6 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - BGFMDB
-    - BlocksKit
     - CHTCollectionViewWaterfallLayout
     - CocoaAsyncSocket
     - CocoaLumberjack
@@ -192,9 +191,19 @@ SPEC REPOS:
     - YZDisplayViewController
     - ZYCornerRadius
 
+EXTERNAL SOURCES:
+  BlocksKit:
+    :branch: v2.5
+    :git: https://github.com/LDXu/BlocksKit.git
+
+CHECKOUT OPTIONS:
+  BlocksKit:
+    :commit: 88803228322fc50299ee67036485b9e63a2ff82a
+    :git: https://github.com/LDXu/BlocksKit.git
+
 SPEC CHECKSUMS:
   BGFMDB: cd5e468218d4c7345862d814d313c0888db3a66a
-  BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  BlocksKit: be379dd86c687e4e19f596fc7e8126ea63498034
   CHTCollectionViewWaterfallLayout: f4dab06db57b36dcf29e802594175acc76c56615
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   CocoaLumberjack: b7e05132ff94f6ae4dfa9d5bce9141893a21d9da
@@ -237,6 +246,6 @@ SPEC CHECKSUMS:
   YZDisplayViewController: 621f737a9aa3dfbc95a901e89e5e7c4b2ea6ef79
   ZYCornerRadius: f0af817be7805b5c63d793042ca7a03f81e14069
 
-PODFILE CHECKSUM: fc0cab172f9e442e86e6ed3ffcb5d88df0eb6856
+PODFILE CHECKSUM: 55a8eba0af3da0d96ff33d0082438ccc105216b9
 
 COCOAPODS: 1.9.3

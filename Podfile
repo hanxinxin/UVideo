@@ -124,7 +124,8 @@ pod 'ZYCornerRadius'                    , '1.0.2'
 #pod 'libextobjc'                        , '0.4.1'
 
 # UI block
-pod 'BlocksKit'                         , '2.2.5'
+#pod 'BlocksKit'                         , '2.2.5'
+pod 'BlocksKit', git: 'https://github.com/LDXu/BlocksKit.git', branch: 'v2.5'
 # UICollectionView左对齐布局
 pod 'UICollectionViewLeftAlignedLayout' , '1.0.2'
 

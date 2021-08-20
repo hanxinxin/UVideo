@@ -29,6 +29,12 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>允许此权限才能使用相机功能</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>app 需要你授权才能获取定位</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>NSLocationAlwaysUsageDescription</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>NSLocationWhenInUseUsageDescription</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>允许此权限才能使用相册功能</string>
 	<key>NSPhotoLibraryUsageDescription</key>

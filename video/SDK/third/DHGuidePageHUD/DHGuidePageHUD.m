@@ -7,7 +7,6 @@
 //
 
 #import "DHGuidePageHUD.h"
-#import "DHGifImageOperation.h"
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVKit/AVKit.h>
@@ -57,14 +56,14 @@
         // 添加在引导视图上的多张引导图片
         for (int i=0; i<imageNameArray.count; i++) {
             UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(DDScreenW*i, 0, DDScreenW, DDScreenH)];
-            if ([[DHGifImageOperation dh_contentTypeForImageData:[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:imageNameArray[i] ofType:nil]]] isEqualToString:@"gif"]) {
-                NSData *localData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:imageNameArray[i] ofType:nil]];
-                imageView = (UIImageView *)[[DHGifImageOperation alloc] initWithFrame:imageView.frame gifImageData:localData];
-                [guidePageView addSubview:imageView];
-            } else {
+//            if ([[DHGifImageOperation dh_contentTypeForImageData:[NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:imageNameArray[i] ofType:nil]]] isEqualToString:@"gif"]) {
+//                NSData *localData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:imageNameArray[i] ofType:nil]];
+//                imageView = (UIImageView *)[[DHGifImageOperation alloc] initWithFrame:imageView.frame gifImageData:localData];
+//                [guidePageView addSubview:imageView];
+//            } else {
                 imageView.image = [UIImage imageNamed:imageNameArray[i]];
                 [guidePageView addSubview:imageView];
-            }
+//            }
             
             // 设置在最后一张图片上显示进入体验按钮
             if (i == imageNameArray.count-1 && isHidden == NO) {

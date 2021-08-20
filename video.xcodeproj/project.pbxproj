@@ -291,7 +291,6 @@
 		8A9C559325F89F0C00EFA410 /* CYLPlusButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C558E25F89F0C00EFA410 /* CYLPlusButton.m */; };
 		8A9C559425F89F0C00EFA410 /* UIViewController+CYLTabBarControllerExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C558F25F89F0C00EFA410 /* UIViewController+CYLTabBarControllerExtention.m */; };
 		8A9C559E25F8A0B300EFA410 /* GuideImage.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 8A9C559925F8A0B300EFA410 /* GuideImage.bundle */; };
-		8A9C559F25F8A0B300EFA410 /* DHGifImageOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C559A25F8A0B300EFA410 /* DHGifImageOperation.m */; };
 		8A9C55A025F8A0B300EFA410 /* DHGuidePageHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C559D25F8A0B300EFA410 /* DHGuidePageHUD.m */; };
 		8A9C560725F8A10000EFA410 /* UIView+Nib.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C55A625F8A0FF00EFA410 /* UIView+Nib.m */; };
 		8A9C560825F8A10000EFA410 /* UIView+CustomBorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A9C55A825F8A0FF00EFA410 /* UIView+CustomBorder.m */; };
@@ -1106,9 +1105,7 @@
 		8A9C558F25F89F0C00EFA410 /* UIViewController+CYLTabBarControllerExtention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+CYLTabBarControllerExtention.m"; sourceTree = "<group>"; };
 		8A9C559025F89F0C00EFA410 /* CYLTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYLTabBarController.h; sourceTree = "<group>"; };
 		8A9C559925F8A0B300EFA410 /* GuideImage.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GuideImage.bundle; sourceTree = "<group>"; };
-		8A9C559A25F8A0B300EFA410 /* DHGifImageOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHGifImageOperation.m; sourceTree = "<group>"; };
 		8A9C559B25F8A0B300EFA410 /* DHGuidePageHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHGuidePageHUD.h; sourceTree = "<group>"; };
-		8A9C559C25F8A0B300EFA410 /* DHGifImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DHGifImageOperation.h; sourceTree = "<group>"; };
 		8A9C559D25F8A0B300EFA410 /* DHGuidePageHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DHGuidePageHUD.m; sourceTree = "<group>"; };
 		8A9C55A625F8A0FF00EFA410 /* UIView+Nib.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Nib.m"; sourceTree = "<group>"; };
 		8A9C55A725F8A0FF00EFA410 /* UIView+Shake.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shake.h"; sourceTree = "<group>"; };
@@ -3315,7 +3312,6 @@
 			isa = PBXGroup;
 			children = (
 				FAA1EBFC26A5B6A400030146 /* button(WebCache) */,
-				FA8CE96926A3032500B560E8 /* navbar */,
 				8A142168268DEB170038D99D /* JXBWebKit */,
 				8A8BC16625F8F73E0028173C /* XQPageViewController */,
 				8A9C559825F8A0B300EFA410 /* DHGuidePageHUD */,
@@ -3344,9 +3340,7 @@
 			isa = PBXGroup;
 			children = (
 				8A9C559925F8A0B300EFA410 /* GuideImage.bundle */,
-				8A9C559A25F8A0B300EFA410 /* DHGifImageOperation.m */,
 				8A9C559B25F8A0B300EFA410 /* DHGuidePageHUD.h */,
-				8A9C559C25F8A0B300EFA410 /* DHGifImageOperation.h */,
 				8A9C559D25F8A0B300EFA410 /* DHGuidePageHUD.m */,
 			);
 			path = DHGuidePageHUD;
@@ -3838,13 +3832,6 @@
 				FA8C6B4D26B659220071B318 /* EmailBDViewController.m */,
 			);
 			path = "邮箱绑定";
-			sourceTree = "<group>";
-		};
-		FA8CE96926A3032500B560E8 /* navbar */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = navbar;
 			sourceTree = "<group>";
 		};
 		FA8E717F2652A35E0058F02F /* Palyview */ = {
@@ -4699,7 +4686,6 @@
 				8A9C560725F8A10000EFA410 /* UIView+Nib.m in Sources */,
 				8A39303125FCD86A00E7331B /* MHTitleRightButton.m in Sources */,
 				8AA0B86226B2D1FC009BFA4C /* KJPlayerStatusLayer.m in Sources */,
-				8A9C559F25F8A0B300EFA410 /* DHGifImageOperation.m in Sources */,
 				8A8BC17825F8F73F0028173C /* FDSlideBarItem.m in Sources */,
 				8A8BC2F325FC6ED10028173C /* MHYouKuCommentButton.m in Sources */,
 				8A95C317265A5C7B00A6D144 /* KJIJKPlayer.m in Sources */,
@@ -5241,7 +5227,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = UK5CCXA22Q;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5258,7 +5244,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.7;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.U.videoN;
@@ -5274,7 +5260,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 7;
 				DEVELOPMENT_TEAM = UK5CCXA22Q;
 				EXCLUDED_ARCHS = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5291,7 +5277,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.5;
+				MARKETING_VERSION = 1.0.7;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.U.videoN;

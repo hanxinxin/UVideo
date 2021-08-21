@@ -148,7 +148,7 @@
                             [self.PayArray addObject:model];
                             
                         }
-                        self.downtableview.frame=CGRectMake(20, self.collectionView.bottom+10, SCREEN_WIDTH-40, (self.PayArray.count+2)*50+(self.PayArray.count+2)*10);
+                        self.downtableview.frame=CGRectMake(20, self.collectionView.bottom+10, SCREEN_WIDTH-40, (self.PayArray.count+1)*50+(self.PayArray.count+1)*10);
                         [self.downtableview reloadData];
                         [self setupCollectionViewMenber];
                     }
@@ -204,12 +204,16 @@
                         }
                         //设置卡片数据源
                         self.cardSwitch.models = self.moneyArray;
+                        if(self.moneyArray.count>1)
+                        {
+                            self.cardSwitch.selectedIndex=1;
+                        }
                         self.collectionView.hidden=YES;
 //                        self.collectionView.frame=CGRectMake(20, self.Topview.bottom+8, SCREEN_WIDTH-40, ceilf((self.moneyArray.count/2.0))*95);
                         self.collectionView.frame=CGRectMake(20, self.Topview.bottom+8, SCREEN_WIDTH-40, 135);
                         self.cardSwitch.frame=CGRectMake(20, self.Topview.bottom+8, SCREEN_WIDTH-40, 135);
                         [self.collectionView reloadData];
-                        self.downtableview.frame=CGRectMake(20, self.collectionView.bottom+2, SCREEN_WIDTH-40, (self.PayArray.count+2)*50+(self.PayArray.count+1)*10);
+                        self.downtableview.frame=CGRectMake(20, self.collectionView.bottom+2, SCREEN_WIDTH-40, (self.PayArray.count+1)*50+(self.PayArray.count)*10);
                         [self.downtableview reloadData];
                         self.menberLabel.frame=CGRectMake(20, self.downtableview.bottom+8, SCREEN_WIDTH-40, 40);
                         
@@ -253,6 +257,7 @@
             Paymentmethodlist *modelB = self.PayArray[_tableviewselect-1];
             NSDictionary *dict=@{@"vip_card_category_id":[NSString stringWithFormat:@"%.f",modelA.id],
                          @"payment_method_id":[NSString stringWithFormat:@"%.f",modelB.id],
+                                 @"platfrom":@"4",
             };
     [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"%@%@",FWQURL,purchaseVipCardurl] Dictionary:dict success:^(id  _Nullable responseObject) {
         //        NSLog(@"post responseObject == %@",responseObject);
@@ -500,6 +505,7 @@
     self.cardSwitch = [[XLCardSwitch alloc] initWithFrame:self.collectionView.bounds];
     //设置代理方法
     self.cardSwitch.delegate = self;
+    
     //分页切换
     self.cardSwitch.pagingEnabled = YES;
     [ScrollView addSubview:self.cardSwitch];
@@ -533,7 +539,7 @@
 //    NSArray * iamgearr = [NSArray arrayWithObjects:@"",@"paypal",@"zhifubao",@"wximage",@"yhkimage",@"",nil];
 //    [_imagearray addObject:iamgearr];
     self.downtableview=[[UITableView alloc] init];
-    self.downtableview.frame=CGRectMake(20, self.collectionView.bottom+2, SCREEN_WIDTH-40, (self.PayArray.count+2)*50+(self.PayArray.count+1)*10);
+    self.downtableview.frame=CGRectMake(20, self.collectionView.bottom+2, SCREEN_WIDTH-40, (self.PayArray.count+1)*50+(self.PayArray.count)*10);
     self.downtableview.backgroundColor=[UIColor clearColor];
     self.downtableview.delegate=self;
     self.downtableview.dataSource=self;
@@ -866,7 +872,7 @@
 //4、设置组数
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
     
-    return self.PayArray.count+2;
+    return self.PayArray.count+1;
 }
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -882,42 +888,44 @@
     {
         cell.textLabel.text = @"选择支付方式";
         cell.textLabel.textAlignment=NSTextAlignmentLeft;
-    }else if(indexPath.section==(self.PayArray.count+1))
-    {
-        UIView *lbl = [[UIView alloc] init]; //定义一个label用于显示cell之间的分割线（未使用系统自带的分割线），也可以用view来画分割线
-        lbl.frame = CGRectMake(cell.frame.origin.x + 10, 0, self.view.width-1, 1);
-        lbl.backgroundColor =  [UIColor colorWithRed:240/255.0 green:241/255.0 blue:242/255.0 alpha:1];
-        [cell.contentView addSubview:lbl];
-        //cell选中效果
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-            cell.textLabel.text =@"联系客服";
-            cell.imageView.image=[UIImage imageNamed:@"kefu_image"];
-        
-//        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.icon]];
-//        NSLog(@"section==== %ld",(long)indexPath.section);
-        
-        cell.backgroundColor = [UIColor whiteColor];
-
-//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
-        cell.textLabel.textColor = [UIColor darkGrayColor];
-        //    cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        cell.layer.borderWidth = 1;
-//            cell.layer.shadowColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:0.30].CGColor;
-//        cell.layer.shadowOffset = CGSizeMake(2,3);
-//        cell.layer.shadowRadius = 6;
-//        cell.layer.shadowOpacity = 1;
-        cell.layer.cornerRadius = 8;
-        if(_tableviewselect==indexPath.section)
-        {
-            
-            cell.layer.borderColor = RGBA(255, 136, 0, 1).CGColor;
-        }else{
-            cell.layer.borderColor = [UIColor colorWithRed:229/255.0 green:229/255.0 blue:229/255.0 alpha:1.0].CGColor;
-
-        
-        }
-    }else{
+    }
+//        else if(indexPath.section==(self.PayArray.count+1))
+//    {
+//        UIView *lbl = [[UIView alloc] init]; //定义一个label用于显示cell之间的分割线（未使用系统自带的分割线），也可以用view来画分割线
+//        lbl.frame = CGRectMake(cell.frame.origin.x + 10, 0, self.view.width-1, 1);
+//        lbl.backgroundColor =  [UIColor colorWithRed:240/255.0 green:241/255.0 blue:242/255.0 alpha:1];
+//        [cell.contentView addSubview:lbl];
+//        //cell选中效果
+//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//
+//            cell.textLabel.text =@"联系客服";
+//            cell.imageView.image=[UIImage imageNamed:@"kefu_image"];
+//
+////        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.icon]];
+////        NSLog(@"section==== %ld",(long)indexPath.section);
+//
+//        cell.backgroundColor = [UIColor whiteColor];
+//
+////        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator; //显示最右边的箭头
+//        cell.textLabel.textColor = [UIColor darkGrayColor];
+//        //    cell.separatorInset = UIEdgeInsetsMake(0, 0, 0, 0);
+//        cell.layer.borderWidth = 1;
+////            cell.layer.shadowColor = [UIColor colorWithRed:203/255.0 green:203/255.0 blue:203/255.0 alpha:0.30].CGColor;
+////        cell.layer.shadowOffset = CGSizeMake(2,3);
+////        cell.layer.shadowRadius = 6;
+////        cell.layer.shadowOpacity = 1;
+//        cell.layer.cornerRadius = 8;
+//        if(_tableviewselect==indexPath.section)
+//        {
+//
+//            cell.layer.borderColor = RGBA(255, 136, 0, 1).CGColor;
+//        }else{
+//            cell.layer.borderColor = [UIColor colorWithRed:229/255.0 green:229/255.0 blue:229/255.0 alpha:1.0].CGColor;
+//
+//
+//        }
+//    }
+        else{
         UIView *lbl = [[UIView alloc] init]; //定义一个label用于显示cell之间的分割线（未使用系统自带的分割线），也可以用view来画分割线
         lbl.frame = CGRectMake(cell.frame.origin.x + 10, 0, self.view.width-1, 1);
         lbl.backgroundColor =  [UIColor colorWithRed:240/255.0 green:241/255.0 blue:242/255.0 alpha:1];
@@ -929,17 +937,26 @@
         Paymentmethodlist *model = self.PayArray[indexPath.section-1];
         cell.textLabel.text=@"";
 //        cell.textLabel.text = model.name;
-        if([model.symbol isEqualToString:@"paypal"])
-        {
-            cell.imageView.image=[UIImage imageNamed:@"paypal"];
-        }else if([model.symbol isEqualToString:@"alipay"])
-        {
-            cell.imageView.image=[UIImage imageNamed:@"zhifubao"];
-        }else if([model.symbol isEqualToString:@"vip-card"])
-        {
-            cell.textLabel.text =@"卡密支付";
-            cell.imageView.image=[UIImage imageNamed:@"yhkimage"];
-        }
+            if(![model.icon isEqualToString:@""])
+            {
+                [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.icon]];
+//                cell.imageView.image=[UIImage imageNamed:@"paypal"];
+            }else{
+                if([model.symbol isEqualToString:@"paypal"])
+                {
+                    cell.imageView.image=[UIImage imageNamed:@"paypal"];
+                }else if([model.symbol isEqualToString:@"alipay"])
+                {
+                    cell.imageView.image=[UIImage imageNamed:@"zhifubao"];
+                }else if([model.symbol isEqualToString:@"wechat"])
+                {
+                    cell.imageView.image=[UIImage imageNamed:@"wximage"];
+                }else if([model.symbol isEqualToString:@"vip-card"])
+                {
+                    cell.textLabel.text =@"卡密支付";
+                    cell.imageView.image=[UIImage imageNamed:@"yhkimage"];
+                }
+            }
 //        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:model.icon]];
         
         cell.backgroundColor = [UIColor whiteColor];
@@ -1029,6 +1046,8 @@
 //            [self showkfView];
         _tableviewselect=indexPath.section;
         [self.downtableview reloadData];
+    }else{
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];// 取消选中
     }
     
 }

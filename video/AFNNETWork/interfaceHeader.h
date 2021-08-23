@@ -37,9 +37,11 @@
 
 #define YOUR_TOKEN @"gmOV7nJWg"
 
-
+#define Get_fuwuqiURL @"app/getApiUrl"   ////获取服务器地址
 //  服务器地址
-#define FWQURL @"https://api-h5.uvod.tv" ///正式环境
+//现修改为  网络获取
+#define FWQURL [[NSUserDefaults standardUserDefaults] valueForKey:@"LocaFWQURL"]
+//#define FWQURL @"https://api-h5.uvod.tv" ///正式环境
 //#define FWQURL @"http://51.79.223.179:8012" ///公网地址
 /////  POST 请求
 #define  zhuceURL @"/passport/signup" //通过用户名、密码以及图形验证码注册应用账号

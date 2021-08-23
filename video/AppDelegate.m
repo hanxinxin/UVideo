@@ -109,6 +109,7 @@
                 [TimeOfBootCount setValue:@(0) forKey:@"vip_expired_time"];
                 [TimeOfBootCount setValue:@(0) forKey:@"tiaoguokaiguan"];
                 [TimeOfBootCount setValue:@(0) forKey:@"Huamianbili"];
+                [TimeOfBootCount setValue:@"" forKey:@"LocaFWQURL"];
                 
             }
         }
@@ -191,6 +192,8 @@
 //    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     
     
+//    获取服务器地址  没有获取到的话默认为  测试地址
+    [self getFUWUQIURL];
     
     
     return YES;
@@ -531,5 +534,53 @@ return timeString;
     }
     return [NSDictionary dictionaryWithDictionary:(NSDictionary *)jsonObj];
 }
+
+
+
+
+
+
+
+
+-(void)getFUWUQIURL
+{
+    [[HttpManagement shareManager] PostNewWork:[NSString stringWithFormat:@"https://api-h5.uvod.tv/%@",Get_fuwuqiURL] Dictionary:nil success:^(id  _Nullable responseObject) {
+        //        NSLog(@"post responseObject == %@",responseObject);
+//        [UHud hideLoadHudForView:self.view];
+        [UHud hideLoadHud];
+                NSDictionary *dict=(NSDictionary *)responseObject;
+                NSNumber * code = [dict objectForKey:@"error"];
+        
+                if([code intValue]==0)
+                {
+                    NSDictionary *dictdata =[dict objectForKey:@"data"];
+                    NSString *URLStr= [dictdata objectForKey:@"api_url"];
+                    if(URLStr)
+                    {
+                        [[NSUserDefaults standardUserDefaults] setValue:URLStr forKey:@"LocaFWQURL"];
+                    }
+                }else{
+                    NSString * message = [dict objectForKey:@"message"];
+                    NSNumber * error = [dict objectForKey:@"error"];
+                    if([error intValue]!=21)
+                    {
+                        [UHud showTXTWithStatus:message delay:2.f];
+                    }else
+                    {
+                        if(![usertoken isEqualToString:@""])
+                        {
+                            [UHud showTXTWithStatus:message delay:2.f];
+                        }
+                    }
+                }
+            } failure:^(NSError * _Nullable error) {
+                [UHud hideLoadHud];
+                
+                NSLog(@"shareManager error == %@",error);
+                [UHud showTXTWithStatus:@"网络错误" delay:2.f];
+            }];
+}
+
+
 
 @end
